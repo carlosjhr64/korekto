@@ -1,0 +1,9 @@
+#! ruby
+require 'test/unit'
+require 'korekto'
+
+class TestKorekto < Test::Unit::TestCase
+  def test_korekto
+    # TODO
+  end
+end

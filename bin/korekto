@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require 'help_parser'
+
+OPTIONS = HelpParser['0.0.210206', <<HELP]
+Usage:
+  korekto [:options+]
+Options:
+ -h --help
+ -v --version
+HELP
+
+require 'korekto'
+KOREKTO.main
