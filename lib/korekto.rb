@@ -1,6 +1,6 @@
 module Korekto
   VERSION = '0.0.210207'
-  RULES = []
+  SYNTAX = []
   STATEMENTS = []
 
   class << self
@@ -23,7 +23,7 @@ module Korekto
       when /^\s*#/ # comment
         false
       when /^\s*!(.*)$/ # rule
-        RULES.push $1.strip
+        SYNTAX.push $1.strip
         false
       when /^(::[A-Z]\w+)#(.*)$/
         eval <<~EVAL
@@ -39,16 +39,16 @@ module Korekto
 
     def valid?
       valid = true
-      RULES.each do |rule|
-        raise 'false' unless @line.instance_eval(rule)
+      SYNTAX.each do |rule|
+        raise 'syntax' unless @line.instance_eval(rule)
       rescue
         msg = $!.message
         puts "-:#{@line_number}:0:#{msg}:#{rule}"
-        if msg=='false'
+        if msg=='sytax'
           valid = false
           break
         else
-          RULES.delete rule # bad rule
+          SYNTAX.delete rule # bad rule
         end
       end
       return valid

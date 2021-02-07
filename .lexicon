@@ -14,10 +14,10 @@ push
 puts
 raise
 rule
-RULES
 statement
 STATEMENTS
 strip
 sub
+SYNTAX
 valid
 VERSION
