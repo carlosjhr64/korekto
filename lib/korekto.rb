@@ -22,7 +22,7 @@ module Korekto
       case @line
       when /^\s*#/ # comment
         false
-      when /^\s*!(.*)$/ # rule
+      when /^!(.*)$/ # rule
         SYNTAX.push $1.strip
         false
       when /^(::[A-Z]\w+)#(.*)$/

@@ -10,6 +10,8 @@ A general proof checker.
 
 ## SYNOPSIS:
 ```korekto
+# Imports
+< BOOTSTRAP.md
 # Ruby Monkey Patches
 ::Array#blp(k,m) = (m==0)?self<<k:(k==last)?self[0..-2]:self<<k
 ::Array#bli      = inject([]){|a,km| a.blp(*km)}
@@ -20,6 +22,7 @@ A general proof checker.
 # Syntax
 ! balanced? '(){}[]'
 ! length < 66
+! not match? '^\s*[<:!]'
 # Statements
 This is }bad{. # syntax: balanced? '(){}[]'
 This is {good}.
