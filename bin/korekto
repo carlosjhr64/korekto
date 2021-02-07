@@ -3,11 +3,24 @@ require 'help_parser'
 
 OPTIONS = HelpParser['0.0.210207', <<HELP]
 Usage:
-  korekto [:options+]
+  korekto [:options]
 Options:
  -h --help
  -v --version
+ --init      \tInstalls the korecto neovim ruby plugin
+# Example usage:
+#   cat README.md | korekto
+#   korekto < README.md
 HELP
+
+if OPTIONS.init?
+  require 'fileutils'
+  dest = File.expand_path '~/.config/nvim'
+  src = File.join File.dirname(__dir__), 'rplugin'
+  FileUtils.cp_r src, dest
+  system "nvim -c ':UpdateRemotePlugins|:quit' > /dev/null"
+  exit
+end
 
 require 'korekto'
 Korekto.main
