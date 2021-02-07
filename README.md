@@ -8,30 +8,22 @@
 
 A general proof checker.
 
+## INSTALL:
+```shell
+$ gem install korekto
+$ korekto --install
+```
 ## SYNOPSIS:
 ```korekto
 # Imports
 < BOOTSTRAP.md
-# Ruby Monkey Patches
-::Array#blp(k,m) = (m==0)?self<<k:(k==last)?self[0..-2]:self<<k
-::Array#bli      = inject([]){|a,km| a.blp(*km)}
-::Array#blm(g)   = map{|c| g.index(c).divmod(2)}
-::Array#bls(g)   = select{|c| g.include?(c)}
-::String#balance(g)   = chars.bls(g).blm(g).bli
-::String#balanced?(g) = balance(g).empty?
-# Syntax
-! balanced? '(){}[]'
-! length < 66
-! not match? '^\s*[<:!]'
 # Statements
 This is }bad{. # syntax: balanced? '(){}[]'
 This is {good}.
 Too long a line.  Want to keep statements at under 66 characters long. # syntax: length < 66
 ```
-## INSTALL:
-```shell
-$ gem install korekto
-```
+See also [BOOTSTRAP.md](BOOTSTRAP.md).
+
 ## LICENSE:
 
 Copyright 2021 carlosjhr64

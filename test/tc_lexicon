@@ -5,7 +5,7 @@ require 'colorize'
 
 class TestLexicon < Test::Unit::TestCase
   def test_dictionary
-    system('fish', '-c', %q(cat README.md lib/**.rb | egrep -o '\w+' | sort -u | spell > tmp/dictionary))
+    system('fish', '-c', %q(cat *.md lib/**.rb | egrep -o '\w+' | sort -u | spell > tmp/dictionary))
     diff = `colordiff .dictionary tmp/dictionary`.strip
     flunk 'Dictionary changed:'.colorize(:blue)+"\n"+diff unless diff.empty?
   end
