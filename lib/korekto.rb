@@ -51,8 +51,8 @@ class Korekto
       raise 'syntax' unless @line.instance_eval(rule)
     rescue
       msg = $!.message
-      puts "#{@filename || '-'}:#{@line_number}:0:#{msg}:#{rule}"
-      if msg=='sytax'
+      puts "#{@filename || '-'}:#{@line_number}:0:!:#{msg}:#{rule}"
+      if msg=='syntax'
         valid = false
         break
       else
@@ -62,13 +62,24 @@ class Korekto
     return valid
   end
 
+  def accepted?
+    if STATEMENTS.include? @line
+      puts "#{@filename || '-'}:#{@line_number}:0::restatement:"
+      STATEMENTS.delete @line
+      return true
+    end
+    puts "#{@filename || '-'}:#{@line_number}:0::pass:"
+    return true
+  end
+
   def parse(lines)
     while @line = lines.shift
       @line_number += 1
       next unless active?
       next unless statement?
       @line.sub!(/\s*#.*$/,'') # strip out the comment
-      STATEMENTS.push @line if valid?
+      next unless valid?
+      STATEMENTS.push @line if accepted?
     end
   end
 

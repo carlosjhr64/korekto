@@ -18,9 +18,10 @@ $ korekto --install
 # Imports
 < BOOTSTRAP.md
 # Statements
-This is }bad{. # syntax: balanced? '(){}[]'
-This is {good}.
-Too long a line.  Want to keep statements at under 66 characters long. # syntax: length < 66
+This is }bad{.	#! syntax: balanced? '(){}[]'
+This is {good}.	# pass
+This is {good}.	# restatement
+Too long a line.  Want to keep statements at under 66 characters long.	#! syntax: length < 66
 ```
 See also [BOOTSTRAP.md](BOOTSTRAP.md).
 
