@@ -1,19 +1,27 @@
 # korekto
 
-* [VERSION 0.0.210206](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 0.0.210207](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
 ## DESCRIPTION:
 
-TODO
-
-TODO
+A general proof checker.
 
 ## SYNOPSIS:
-
-TODO
-
+```korekto
+::Array#blp(k,m) = (m==0)?self<<k:(k==last)?self[0..-2]:self<<k
+::Array#bli      = inject([]){|a,km| a.blp(*km)}
+::Array#blm(g)   = map{|c| g.index(c).divmod(2)}
+::Array#bls(g)   = select{|c| g.include?(c)}
+::String#balance(g)   = chars.bls(g).blm(g).bli
+::String#balanced?(g) = balance(g).empty?
+! balanced? '(){}[]'
+! length < 66
+This is }bad{. # false: balanced? '(){}[]'
+This is {good}.
+Toooooo Loooooooooong Aaaaaaaaaaa Liiiiiiiiineeeeeeeeeeeeeeeeeeeeee # false: length < 66
+```
 ## INSTALL:
 ```shell
 $ gem install korekto
