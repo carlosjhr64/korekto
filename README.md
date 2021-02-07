@@ -20,7 +20,7 @@ A general proof checker.
 ! length < 66
 This is }bad{. # false: balanced? '(){}[]'
 This is {good}.
-Toooooo Loooooooooong Aaaaaaaaaaa Liiiiiiiiineeeeeeeeeeeeeeeeeeeeee # false: length < 66
+Too long a line.  Want to keep statements at under 66 characters long. # false: length < 66
 ```
 ## INSTALL:
 ```shell
