@@ -25,7 +25,7 @@ class Korekto
 
   def statement?
     case @line
-    when /^<\s*(.*)$/
+    when /^<\s*(.*)$/ # import
       filename = $1.strip
       Korekto.new(filename).run
     when /^\s*#/ # comment
@@ -33,7 +33,7 @@ class Korekto
     when /^!(.*)$/ # rule
       SYNTAX.push $1.strip
       false
-    when /^(::[A-Z]\w+)#(.*)$/
+    when /^(::[A-Z]\w+)#(.*)$/ # patch
       eval <<~EVAL
         class #{$1}
           def #{$2}
@@ -51,9 +51,9 @@ class Korekto
       raise 'syntax' unless @line.instance_eval(rule)
     rescue
       msg = $!.message
+      SYNTAX.delete(rule) unless msg=='syntax' # bad rule
       puts "#{@filename}:#{@line_number}:0:!:#{msg}:#{rule}"
       valid = false
-      SYNTAX.delete(rule) unless msg=='syntax' # bad rule
       break
     end
     return valid
