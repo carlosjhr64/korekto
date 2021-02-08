@@ -1,4 +1,7 @@
 class Korekto
+  class KorektoError < Exception
+  end
+
   VERSION = '0.0.210208'
   SYNTAX = []
   STATEMENTS = []
@@ -28,15 +31,18 @@ class Korekto
     when /^<\s*(.*)$/ # import
       filename = $1.strip
       Korekto.new(filename).run
+      false
     when /^\s*#/ # comment
       false
     when /^!(.*)$/ # rule
       SYNTAX.push $1.strip
       false
-    when /^(::[A-Z]\w+)#(.*)$/ # patch
+    when /^(::[A-Z]\w+)#(\w+)(.*)$/ # patch
+      klass,method,definition = $1,$2,$3
+      raise "overides: #{klass}##{method}" if eval(klass).method_defined? method
       eval <<~EVAL
-        class #{$1}
-          def #{$2}
+        class #{klass}
+          def #{method}#{definition}
         end
       EVAL
       false
@@ -45,40 +51,38 @@ class Korekto
     end
   end
 
-  def valid?
-    valid = true
+  def syntax_checker
     SYNTAX.each do |rule|
-      raise 'syntax' unless @line.instance_eval(rule)
+      raise KorektoError, "syntax: #{rule}" unless @line.instance_eval(rule)
     rescue
-      msg = $!.message
-      SYNTAX.delete(rule) unless msg=='syntax' # bad rule
-      puts "#{@filename}:#{@line_number}:0:!:#{msg}:#{rule}"
-      valid = false
-      break
+      raise "#{$!.class}: #{rule}"
     end
-    return valid
   end
 
-  def accepted?
-    if STATEMENTS.include? @line
-      puts "#{@filename}:#{@line_number}:0::restatement:"
-      return true
-    end
-    puts "#{@filename}:#{@line_number}:0::pass:"
-    return true
+  def get_acceptance_code
+    return 'restatement' if STATEMENTS.include? @line
+    return 'pass'
   end
 
   def parse(lines)
     while @line = lines.shift
-      @line_number += 1
-      next unless active?
-      next unless statement?
-      @line.sub!(/#.*$/,'') # strip out the comment
-      @line.strip!
-      next unless valid?
-      next unless accepted?
-      STATEMENTS.delete @line
-      STATEMENTS.push @line
+      begin
+        @line_number += 1
+        next unless active?
+        next unless statement?
+        @line.sub!(/#.*$/,'') # strip out the comment
+        @line.strip!
+        syntax_checker
+        code = get_acceptance_code
+        STATEMENTS.delete @line
+        STATEMENTS.push @line
+        puts "#{@filename}:#{@line_number}:0::#{code}"
+      rescue KorektoError
+        puts "#{@filename}:#{@line_number}:0:!:#{$!.message}"
+      rescue
+        puts "#{@filename}:#{@line_number}:0:?:#{$!.message}"
+        exit
+      end
     end
   end
 
