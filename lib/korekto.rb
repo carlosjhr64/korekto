@@ -1,9 +1,9 @@
 class Korekto
-  VERSION = '0.0.210207'
+  VERSION = '0.0.210208'
   SYNTAX = []
   STATEMENTS = []
 
-  def initialize(filename=nil)
+  def initialize(filename='-')
     @filename = filename
     @active = false
     @line_number = 0
@@ -51,24 +51,20 @@ class Korekto
       raise 'syntax' unless @line.instance_eval(rule)
     rescue
       msg = $!.message
-      puts "#{@filename || '-'}:#{@line_number}:0:!:#{msg}:#{rule}"
-      if msg=='syntax'
-        valid = false
-        break
-      else
-        SYNTAX.delete rule # bad rule
-      end
+      puts "#{@filename}:#{@line_number}:0:!:#{msg}:#{rule}"
+      valid = false
+      SYNTAX.delete(rule) unless msg=='syntax' # bad rule
+      break
     end
     return valid
   end
 
   def accepted?
     if STATEMENTS.include? @line
-      puts "#{@filename || '-'}:#{@line_number}:0::restatement:"
-      STATEMENTS.delete @line
+      puts "#{@filename}:#{@line_number}:0::restatement:"
       return true
     end
-    puts "#{@filename || '-'}:#{@line_number}:0::pass:"
+    puts "#{@filename}:#{@line_number}:0::pass:"
     return true
   end
 
@@ -79,15 +75,17 @@ class Korekto
       next unless statement?
       @line.sub!(/\s*#.*$/,'') # strip out the comment
       next unless valid?
-      STATEMENTS.push @line if accepted?
+      next unless accepted?
+      STATEMENTS.delete @line
+      STATEMENTS.push @line
     end
   end
 
   def run
-    if @filename
-      parse IO.readlines(@filename, chomp: true)
-    else
+    if @filename=='-'
       parse $stdin.readlines(chomp: true)
+    else
+      parse IO.readlines(@filename, chomp: true)
     end
   end
 end
