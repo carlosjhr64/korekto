@@ -73,7 +73,8 @@ class Korekto
       @line_number += 1
       next unless active?
       next unless statement?
-      @line.sub!(/\s*#.*$/,'') # strip out the comment
+      @line.sub!(/#.*$/,'') # strip out the comment
+      @line.strip!
       next unless valid?
       next unless accepted?
       STATEMENTS.delete @line
