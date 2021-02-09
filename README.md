@@ -17,6 +17,9 @@ $ korekto --install
 ```korekto
 # Imports
 < BOOTSTRAP.md
+# Syntax
+! balanced? '(){}[]'
+! length < 66
 # Statements
 This is }bad{.	#! syntax: balanced? '(){}[]'
 This is {good}.	#P1 Pass
@@ -24,6 +27,9 @@ This is {good}.	#P1 Pass
 This is {good}.	#P1 Restatement
 [This](is)also{ok}.	#P2 Pass also
 Too long a line.  Want to keep statements at under 66 characters long.	#! syntax: length < 66
+# Axioms(Acceptance Patterns)
+/^(\w+) = \1$/	#A3 Reflexive Axiom
+ABC = ABC	#X4/A3 By aXiom
 ```
 See also [BOOTSTRAP.md](BOOTSTRAP.md).
 

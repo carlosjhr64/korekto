@@ -7,7 +7,4 @@
 ::Array#bls(g)   = select{|c| g.include?(c)}
 ::String#balance(g)   = chars.bls(g).blm(g).bli
 ::String#balanced?(g) = balance(g).empty?
-# Syntax
-! balanced? '(){}[]'
-! length < 66
 ```

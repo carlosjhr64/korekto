@@ -49,7 +49,7 @@ class Korekto
     when /^! (\w.*)$/ # rule
       SYNTAX.push $1.strip
       false
-    when /^(?<statement>.*)\s#(?<code>[A-Z](\d+(:[A-Z]\d+(,[A-Z]\d+)*)?)?)( (?<title>[A-Z][\w\s]*\w))?$/
+    when %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[A-Z]\d+(,[A-Z]\d+)*)?)?)( (?<title>[A-Z][\w\s]*\w))?$}
       # Valid statements must end with commentary like #X101:Y12,Z80  Statement title
       @statement,@code,@title = $~[:statement].strip,$~[:code],$~[:title]
       true
@@ -70,14 +70,17 @@ class Korekto
     end
   end
 
-  def set_statement(code)
+  def set_statement(code,support=nil,title=nil)
     n = STATEMENTS.length + 1
     @code = "#{code}#{n}"
+    @code += "/#{support}" if support
+    @title = title if title and not @title
     code_title = (@title)? "#{@code} #{@title}" : @code
     STATEMENTS[@statement] = code_title
   end
 
   def set_acceptance_code
+    heap = true
     if code_title = STATEMENTS[@statement]
       # Restatement
       @code,title = code_title.split(' ',2)
@@ -88,9 +91,30 @@ class Korekto
       when /^P/
         # Premise
         set_statement('P')
+      when /^A/
+        heap = false # Axioms are statement about statements
+        raise "TODO: Axiom ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
+        set_statement('A')
+      when /^X/
+        # by aXiom
+        axiom, code = STATEMENTS.detect do |statement, code|
+          next unless code[0]=='A' # an Axiom
+          case statement
+          when %r{^/.*/$}
+            Regexp.new(statement[1...-1]).match?(@statement)
+          else
+            raise "TODO: Axiom ~ #{statement}"
+          end
+        end
+        raise KorektoError, "does not match any axiom" unless axiom
+        set_statement('X',*code.split(' ',2)) # TODO: supporting Axiom
       else
         raise "Statement type #{@code} not supported."
       end
+    end
+    if heap
+      HEAP.unshift @statement
+      HEAP.pop if HEAP.length > HEAP_LIMIT
     end
   end
 
@@ -102,8 +126,6 @@ class Korekto
         next unless statement?
         syntax_checker
         set_acceptance_code
-        HEAP.unshift @statement
-        HEAP.pop if HEAP.length > HEAP_LIMIT
         puts "#{@filename}:#{@line_number}:0:#{@code}:#{@title}"
       rescue KorektoError
         puts "#{@filename}:#{@line_number}:0:!:#{$!.message}"
