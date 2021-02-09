@@ -52,6 +52,7 @@ rule
 run
 set_acceptance_code
 set_cursor
+set_statement
 shift
 split
 statement

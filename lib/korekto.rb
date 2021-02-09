@@ -70,6 +70,13 @@ class Korekto
     end
   end
 
+  def set_statement(code)
+    n = STATEMENTS.length + 1
+    @code = "#{code}#{n}"
+    code_title = (@title)? "#{@code} #{@title}" : @code
+    STATEMENTS[@statement] = code_title
+  end
+
   def set_acceptance_code
     if code_title = STATEMENTS[@statement]
       # Restatement
@@ -77,11 +84,13 @@ class Korekto
       # Use the restatement commentary if given:
       @title=title unless @title
     else
-      # Pass
-      n = STATEMENTS.length + 1
-      @code = "P#{n}"
-      code_title = (@title)? "#{@code} #{@title}" : @code
-      STATEMENTS[@statement] = code_title
+      case @code
+      when /^P/
+        # Premise
+        set_statement('P')
+      else
+        raise "Statement type #{@code} not supported."
+      end
     end
   end
 
