@@ -19,8 +19,10 @@ $ korekto --install
 < BOOTSTRAP.md
 # Statements
 This is }bad{.	#! syntax: balanced? '(){}[]'
-This is {good}.	#P Pass
-This is {good}.	#R Restament
+This is {good}.	#P1 Pass
+[This](is)also{ok}.	#P2 Pass also
+This is {good}.	#P1 Restatement
+[This](is)also{ok}.	#P2 Pass also
 Too long a line.  Want to keep statements at under 66 characters long.	#! syntax: length < 66
 ```
 See also [BOOTSTRAP.md](BOOTSTRAP.md).

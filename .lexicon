@@ -4,10 +4,10 @@ buf
 chomp
 class
 code
+code_title
 command
 command_output
 definition
-delete
 each
 empty
 eval
@@ -18,13 +18,15 @@ filename
 fn
 get_current_buf
 get_current_win
-include
+HEAP
+HEAP_LIMIT
 initialize
 instance_eval
 IO
 klass
 Korekto
 KorektoError
+length
 line
 lines
 map
@@ -39,6 +41,7 @@ nvim
 parse
 plug
 plugin
+pop
 push
 puts
 raise
@@ -59,6 +62,7 @@ SYNTAX
 syntax_checker
 title
 to_i
+unshift
 validation
 validations
 VERSION

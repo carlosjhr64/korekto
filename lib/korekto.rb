@@ -4,7 +4,9 @@ class Korekto
 
   VERSION = '0.0.210209'
   SYNTAX = []
-  STATEMENTS = []
+  STATEMENTS = {}
+  HEAP = []
+  HEAP_LIMIT = 13
 
   def initialize(filename='-')
     @filename = filename
@@ -69,10 +71,17 @@ class Korekto
   end
 
   def set_acceptance_code
-    if STATEMENTS.include? @statement
-      @code = 'R'
+    if code_title = STATEMENTS[@statement]
+      # Restatement
+      @code,title = code_title.split(' ',2)
+      # Use the restatement commentary if given:
+      @title=title unless @title
     else
-      @code = 'P'
+      # Pass
+      n = STATEMENTS.length + 1
+      @code = "P#{n}"
+      code_title = (@title)? "#{@code} #{@title}" : @code
+      STATEMENTS[@statement] = code_title
     end
   end
 
@@ -84,8 +93,8 @@ class Korekto
         next unless statement?
         syntax_checker
         set_acceptance_code
-        STATEMENTS.delete @statement
-        STATEMENTS.push @statement
+        HEAP.unshift @statement
+        HEAP.pop if HEAP.length > HEAP_LIMIT
         puts "#{@filename}:#{@line_number}:0:#{@code}:#{@title}"
       rescue KorektoError
         puts "#{@filename}:#{@line_number}:0:!:#{$!.message}"
