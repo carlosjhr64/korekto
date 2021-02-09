@@ -9,6 +9,5 @@
 ::String#balanced?(g) = balance(g).empty?
 # Syntax
 ! balanced? '(){}[]'
-! not match? '^\s*[<:!]'
 ! length < 66
 ```

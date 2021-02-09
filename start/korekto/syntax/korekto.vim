@@ -1,9 +1,9 @@
-syntax match Comment /^#\s.\+$/
-syntax match Fail    /\s#!\s.\+$/
-syntax match Pass    /\s#\s.\+$/
-syntax match Syntax  /^!.\+$/
-syntax match Patch   /^:.\+$/
-syntax match Import  /^<.\+$/
+syntax match Comment /# [^#]\+$/
+syntax match Fail    /\s#! \w[^#]*$/
+syntax match Pass    /\s#[A-Z][^#]*$/
+syntax match Syntax  /^! \w.\+$/
+syntax match Patch   /^::[A-Z]\w\+#\w\+[^=]\+=.\+$/
+syntax match Import  /^< [A-Za-z\-\.]\+$/
 highlight Comment ctermfg=darkblue
 highlight Fail    ctermfg=darkred
 highlight Pass    ctermfg=darkgreen

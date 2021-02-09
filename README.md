@@ -1,6 +1,6 @@
 # korekto
 
-* [VERSION 0.0.210208](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 0.0.210209](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -19,8 +19,8 @@ $ korekto --install
 < BOOTSTRAP.md
 # Statements
 This is }bad{.	#! syntax: balanced? '(){}[]'
-This is {good}.	# pass
-This is {good}.	# restatement
+This is {good}.	#P Pass
+This is {good}.	#R Restament
 Too long a line.  Want to keep statements at under 66 characters long.	#! syntax: length < 66
 ```
 See also [BOOTSTRAP.md](BOOTSTRAP.md).

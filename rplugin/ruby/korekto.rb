@@ -7,25 +7,22 @@ Neovim.plugin do |plug|
         fields = validation.split(':',5)
         n = fields[1].to_i
         if n > 0
-          fn,status,msg = fields[0],fields[3],fields[4]
-          if status=='?'
+          fn,code,title = fields[0],fields[3],fields[4]
+          if code=='?'
             nvim.get_current_win.set_cursor([n,0]) if fn=='-'
-            nvim.command "echom '#{fn}: #{msg}'"
+            nvim.command "echom '#{fn}: #{title}'"
           elsif fn=='-'
             line = buf[n].sub(/#.*$/,'').rstrip
-            line << "\t#"
-            unless status.empty?
-              line << status
-              if move # to first error
-                move = false
-                nvim.get_current_win.set_cursor([n,0])
-              end
-            end
-            line << ' '
-            line << msg
+            line << "\t##{code}"
+            line << " #{title}" unless title==''
             buf[n] = line unless line == buf[n]
+            # move onto first error:
+            if move and code=='!'
+              move = false
+              nvim.get_current_win.set_cursor([n,0])
+            end
           else
-            nvim.command "echom '#{fn}: #{msg}'"
+            nvim.command "echom '#{fn}: #{title}'"
           end
         end
       end

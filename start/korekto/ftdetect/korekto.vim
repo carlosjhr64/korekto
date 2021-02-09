@@ -1,1 +1,1 @@
-autocmd BufRead,BufNewFile *.krt set filetype=korekto
+autocmd BufRead,BufNewFile *.korekto set filetype=korekto

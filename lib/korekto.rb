@@ -2,7 +2,7 @@ class Korekto
   class KorektoError < Exception
   end
 
-  VERSION = '0.0.210208'
+  VERSION = '0.0.210209'
   SYNTAX = []
   STATEMENTS = []
 
@@ -10,11 +10,12 @@ class Korekto
     @filename = filename
     @active = false
     @line_number = 0
+    @statement = @code = @title = nil
   end
 
   def active?
     case @line
-    when /^```korekto\s*$/
+    when /^```korekto$/
       raise 'unexpected fence' if @active
       @active = true
       false
@@ -28,16 +29,13 @@ class Korekto
 
   def statement?
     case @line
-    when /^<\s*(.*)$/ # import
+    when /^\s*#/ # comment
+      false
+    when %r{^< ([/\w\-.]+)$} # import
       filename = $1.strip
       Korekto.new(filename).run
       false
-    when /^\s*#/ # comment
-      false
-    when /^!(.*)$/ # rule
-      SYNTAX.push $1.strip
-      false
-    when /^(::[A-Z]\w+)#(\w+)(.*)$/ # patch
+    when /^(::[A-Z]\w+)#(\w+)([^=]*=.+)$/ # patch
       klass,method,definition = $1,$2,$3
       raise "overides: #{klass}##{method}" if eval(klass).method_defined? method
       eval <<~EVAL
@@ -46,22 +44,36 @@ class Korekto
         end
       EVAL
       false
-    else
+    when /^! (\w.*)$/ # rule
+      SYNTAX.push $1.strip
+      false
+    when /^(?<statement>.*)\s#(?<code>[A-Z](\d+(:[A-Z]\d+(,[A-Z]\d+)*)?)?)( (?<title>[A-Z][\w\s]*\w))?$/
+      # Valid statements must end with commentary like #X101:Y12,Z80  Statement title
+      @statement,@code,@title = $~[:statement].strip,$~[:code],$~[:title]
       true
+    when /^(.*)\s#! (\w[^#]*)$/
+      # Some exception in statement
+      @statement,@code,@title = $1.strip,'!',$2
+      true
+    else
+      raise 'unrecognized korekto line'
     end
   end
 
   def syntax_checker
     SYNTAX.each do |rule|
-      raise KorektoError, "syntax: #{rule}" unless @line.instance_eval(rule)
+      raise KorektoError, "syntax: #{rule}" unless @statement.instance_eval(rule)
     rescue
       raise "#{$!.class}: #{rule}"
     end
   end
 
-  def get_acceptance_code
-    return 'restatement' if STATEMENTS.include? @line
-    return 'pass'
+  def set_acceptance_code
+    if STATEMENTS.include? @statement
+      @code = 'R'
+    else
+      @code = 'P'
+    end
   end
 
   def parse(lines)
@@ -70,13 +82,11 @@ class Korekto
         @line_number += 1
         next unless active?
         next unless statement?
-        @line.sub!(/#.*$/,'') # strip out the comment
-        @line.strip!
         syntax_checker
-        code = get_acceptance_code
-        STATEMENTS.delete @line
-        STATEMENTS.push @line
-        puts "#{@filename}:#{@line_number}:0::#{code}"
+        set_acceptance_code
+        STATEMENTS.delete @statement
+        STATEMENTS.push @statement
+        puts "#{@filename}:#{@line_number}:0:#{@code}:#{@title}"
       rescue KorektoError
         puts "#{@filename}:#{@line_number}:0:!:#{$!.message}"
       rescue

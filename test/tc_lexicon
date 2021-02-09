@@ -11,7 +11,7 @@ class TestLexicon < Test::Unit::TestCase
   end
 
   def test_lexicon
-    system %q(ruby-parse lib | egrep -o ':\w+' | sort -u | egrep -o '\w+' > tmp/lexicon)
+    system %q(ruby-parse lib rplugin/ruby | egrep -o ':\w+' | sort -u | egrep -o '\w+' > tmp/lexicon)
     diff = `colordiff .lexicon tmp/lexicon`.strip
     flunk 'Code lexicon changed:'.colorize(:blue)+"\n"+diff unless diff.empty?
   end
