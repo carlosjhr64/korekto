@@ -8,6 +8,7 @@ Options:
  -h --help
  -v --version
  --install   \tInstalls the korecto neovim ruby plugin
+ --fast      \tSkips slow validations
 # Example usage:
 #   cat README.md | korekto
 #   korekto < README.md

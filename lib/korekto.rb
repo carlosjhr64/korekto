@@ -103,13 +103,21 @@ class Korekto
     end
   end
 
+  def assert_not_provable
+    raise KorektoError, 'tautology' if tautology?
+    raise KorektoError, 'inferable' if inferable?
+  end
+
   def definition
+    raise KorektoError, 'nothing was undefined' if SYMBOLS.undefined(@statement).empty?
+    assert_not_provable unless OPTIONS.fast?
     SYMBOLS.define @statement
     set_statement('D')
   end
 
   def postulate
     all_defined
+    assert_not_provable unless OPTIONS.fast?
     set_statement('P')
   end
 
@@ -118,6 +126,10 @@ class Korekto
     @heap = false # Axioms are statements about single statements
     StatementToRegexp[@statement] = Regexp.new(@statement[1...-1])
     set_statement('A')
+  end
+
+  def tautology?
+    STATEMENTS.type('A').any?{|statement, code| StatementToRegexp[statement].match? @statement}
   end
 
   def tautology
@@ -138,10 +150,14 @@ class Korekto
     set_statement('I')
   end
 
-  def conclusion
-    all_defined
+  def inferable?
+    mapping,*_ = infer
+    not mapping.nil?
+  end
+
+  def infer
     mapping = nil
-    s1,s2,s3 = nil,nil,@statement
+    s1,s2,s3=nil,nil,@statement
     HEAP_COMBOS.each do |i,j|
       s1,s2 = HEAP[i],HEAP[j]
       compound = [s1,s2,s3].join("\n")
@@ -150,6 +166,12 @@ class Korekto
       end
       break if mapping
     end
+    return mapping, s1, s2
+  end
+
+  def conclusion
+    all_defined
+    mapping,s1,s2 = infer
     raise KorektoError, "does not match any inference" unless mapping
     cm,title = STATEMENTS[mapping].split(' ',2)
     c1,_ = STATEMENTS[s1].split(' ',2); c1,_ = c1.split('/', 2)

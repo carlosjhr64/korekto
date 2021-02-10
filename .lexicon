@@ -4,6 +4,8 @@ _2
 a
 active
 all_defined
+any
+assert_not_provable
 axiom
 bsearch
 buf
@@ -31,6 +33,7 @@ empty
 eval
 Exception
 exit
+fast
 fields
 filename
 fn
@@ -42,6 +45,8 @@ HEAP_LIMIT
 i
 ij
 ij_kl
+infer
+inferable
 inference
 initialize
 inject
@@ -68,7 +73,9 @@ msg
 n
 Neovim
 new
+nil
 nvim
+OPTIONS
 parse
 plug
 plugin
