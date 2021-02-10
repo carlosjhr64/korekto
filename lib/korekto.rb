@@ -87,67 +87,89 @@ class Korekto
     STATEMENTS[@statement] = code_title
   end
 
+  def postulate
+    set_statement('P')
+  end
+
+  def axiom
+    raise "TODO: Axiom ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
+    @heap = false # Axioms are statements about single statements
+    set_statement('A')
+  end
+
+  def tautology
+    axiom, code = STATEMENTS.detect do |statement, code|
+      next unless code[0]=='A' # Axiom
+      case statement
+      when %r{^/.*/$}
+        Regexp.new(statement[1...-1]).match?(@statement)
+      else
+        raise "TODO: Axiom ~ #{statement}"
+      end
+    end
+    raise KorektoError, "does not match any axiom" unless axiom
+    set_statement('T',*code.split(' ',2)) # TODO: supporting Axiom
+  end
+
+  def inference
+    @heap = false # Inference are statements about compound statements
+    raise "TODO: Inference ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
+    set_statement('I')
+  end
+
+  def conclusion
+    mapping = nil
+    s1,s2,s3 = nil,nil,@statement
+    HEAP_COMBOS.each do |i,j|
+      s1,s2 = HEAP[i],HEAP[j]
+      compound = [s1,s2,s3].join("\n")
+      mapping, code = STATEMENTS.detect do |statement, code|
+        next unless code[0]=='I' # Mapping
+        case statement
+        when %r{^/.*/$}
+          Regexp.new(statement[1...-1]).match?(compound)
+        else
+          raise "TODO: Mapping ~ #{statement}"
+        end
+      end
+      break if mapping
+    end
+    raise KorektoError, "does not match any mapping" unless mapping
+    cm,title = STATEMENTS[mapping].split(' ',2)
+    c1,_ = STATEMENTS[s1].split(' ',2)
+    c2,_ = STATEMENTS[s2].split(' ',2)
+    support = [cm,c1,c2].join(',')
+    set_statement('C', support, title)
+  end
+
+  def restatement
+    code_title = STATEMENTS[@statement]
+    @code,title = code_title.split(' ',2)
+    # Use the restatement commentary if given:
+    @title=title unless @title
+  end
+
   def set_acceptance_code
-    heap = true
-    if code_title = STATEMENTS[@statement]
-      # Restatement
-      @code,title = code_title.split(' ',2)
-      # Use the restatement commentary if given:
-      @title=title unless @title
+    @heap = true
+    if STATEMENTS.key? @statement
+      restatement
     else
-      case @code
-      when /^P/
-        # Premise
-        set_statement('P')
-      when /^A/
-        heap = false # Axioms are statements about single statements
-        raise "TODO: Axiom ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
-        set_statement('A')
-      when /^X/
-        # by aXiom
-        axiom, code = STATEMENTS.detect do |statement, code|
-          next unless code[0]=='A' # Axiom
-          case statement
-          when %r{^/.*/$}
-            Regexp.new(statement[1...-1]).match?(@statement)
-          else
-            raise "TODO: Axiom ~ #{statement}"
-          end
-        end
-        raise KorektoError, "does not match any axiom" unless axiom
-        set_statement('X',*code.split(' ',2)) # TODO: supporting Axiom
-      when /^M/
-        heap = false # Mappings are statements about compound statements
-        raise "TODO: Mapping ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
-        set_statement('M')
-      when /^C/
-        mapping = nil
-        s1,s2,s3 = nil,nil,@statement
-        HEAP_COMBOS.each do |i,j|
-          s1,s2 = HEAP[i],HEAP[j]
-          compound = [s1,s2,s3].join("\n")
-          mapping, code = STATEMENTS.detect do |statement, code|
-            next unless code[0]=='M' # Mapping
-            case statement
-            when %r{^/.*/$}
-              Regexp.new(statement[1...-1]).match?(compound)
-            else
-              raise "TODO: Mapping ~ #{statement}"
-            end
-          end
-          break if mapping
-        end
-        raise KorektoError, "does not match any mapping" unless mapping
-        cm,title = STATEMENTS[mapping].split(' ',2)
-        c1,_ = STATEMENTS[s1].split(' ',2)
-        c2,_ = STATEMENTS[s2].split(' ',2)
-        support = [cm,c1,c2].join(',')
-        set_statement('C', support, title)
+      case @code[0]
+      when 'P'
+        postulate
+      when 'A'
+        axiom
+      when 'T'
+        tautology
+      when 'I'
+        inference
+      when 'C'
+        conclusion
       else
         raise "Statement type #{@code} not supported."
       end
     end
-    if heap
+    if @heap
       HEAP.unshift @statement
       HEAP.pop if HEAP.length > HEAP_LIMIT
     end
