@@ -1,12 +1,20 @@
 class Korekto
+  VERSION = '0.0.210210'
+
   class KorektoError < Exception
   end
 
-  VERSION = '0.0.210209'
   SYNTAX = []
+
   STATEMENTS = {}
+
   HEAP = []
   HEAP_LIMIT = 13
+  # [[1, 2], [2, 1], [1, 3], [3, 1], [2, 3], [3, 2], [1, 4], [4, 1],...
+  HEAP_COMBOS = (0...HEAP_LIMIT).to_a.combination(2)
+    .sort{|ij, kl| ij[0]**2 + ij[1]**2 <=> kl[0]**2 + kl[1]**2}
+    .map{|i, j| [[i,j], [j,i]]}
+    .inject([]){|a, ij_kl| a<<ij_kl[0]; a<<ij_kl[1]}
 
   def initialize(filename='-')
     @filename = filename
@@ -70,7 +78,7 @@ class Korekto
     end
   end
 
-  def set_statement(code,support=nil,title=nil)
+  def set_statement(code, support=nil, title=nil)
     n = STATEMENTS.length + 1
     @code = "#{code}#{n}"
     @code += "/#{support}" if support
@@ -92,13 +100,13 @@ class Korekto
         # Premise
         set_statement('P')
       when /^A/
-        heap = false # Axioms are statement about statements
+        heap = false # Axioms are statements about single statements
         raise "TODO: Axiom ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
         set_statement('A')
       when /^X/
         # by aXiom
         axiom, code = STATEMENTS.detect do |statement, code|
-          next unless code[0]=='A' # an Axiom
+          next unless code[0]=='A' # Axiom
           case statement
           when %r{^/.*/$}
             Regexp.new(statement[1...-1]).match?(@statement)
@@ -108,6 +116,33 @@ class Korekto
         end
         raise KorektoError, "does not match any axiom" unless axiom
         set_statement('X',*code.split(' ',2)) # TODO: supporting Axiom
+      when /^M/
+        heap = false # Mappings are statements about compound statements
+        raise "TODO: Mapping ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
+        set_statement('M')
+      when /^C/
+        mapping = nil
+        s1,s2,s3 = nil,nil,@statement
+        HEAP_COMBOS.each do |i,j|
+          s1,s2 = HEAP[i],HEAP[j]
+          compound = [s1,s2,s3].join("\n")
+          mapping, code = STATEMENTS.detect do |statement, code|
+            next unless code[0]=='M' # Mapping
+            case statement
+            when %r{^/.*/$}
+              Regexp.new(statement[1...-1]).match?(compound)
+            else
+              raise "TODO: Mapping ~ #{statement}"
+            end
+          end
+          break if mapping
+        end
+        raise KorektoError, "does not match any mapping" unless mapping
+        cm,title = STATEMENTS[mapping].split(' ',2)
+        c1,_ = STATEMENTS[s1].split(' ',2)
+        c2,_ = STATEMENTS[s2].split(' ',2)
+        support = [cm,c1,c2].join(',')
+        set_statement('C', support, title)
       else
         raise "Statement type #{@code} not supported."
       end
