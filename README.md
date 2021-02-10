@@ -29,7 +29,7 @@ This is {good}.	#P1 Restatement
 Too long a line.  Want to keep statements at under 66 characters long.	#! syntax: length < 66
 # Axioms(Acceptance Patterns)
 /^(\w+) = \1$/	#A3 Reflexive axiom
-ABC = ABC	#T4/A3 By aXiom
+ABC = ABC	#T4/A3 Reflexive axiom
 X	#P5
 X->Y	#P6
 /(\w+)\n\1->(\w+)\n\2/	#I7 Modus ponem

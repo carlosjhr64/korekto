@@ -1,9 +1,11 @@
 _
 0
+_2
 a
 active
 axiom
 buf
+c
 c1
 c2
 chomp
@@ -78,6 +80,7 @@ run
 s1
 s2
 s3
+select
 set_acceptance_code
 set_cursor
 set_statement
@@ -86,6 +89,7 @@ sort
 split
 statement
 STATEMENTS
+StatementToRegexp
 strip
 sub
 support
@@ -95,6 +99,7 @@ tautology
 title
 to_a
 to_i
+type
 unshift
 validation
 validations

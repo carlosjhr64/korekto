@@ -7,6 +7,8 @@ class Korekto
   SYNTAX = []
 
   STATEMENTS = {}
+  def STATEMENTS.type(c) = select{_2[0]==c}
+  StatementToRegexp = {}
 
   HEAP = []
   HEAP_LIMIT = 13
@@ -94,26 +96,22 @@ class Korekto
   def axiom
     raise "TODO: Axiom ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
     @heap = false # Axioms are statements about single statements
+    StatementToRegexp[@statement] = Regexp.new(@statement[1...-1])
     set_statement('A')
   end
 
   def tautology
-    axiom, code = STATEMENTS.detect do |statement, code|
-      next unless code[0]=='A' # Axiom
-      case statement
-      when %r{^/.*/$}
-        Regexp.new(statement[1...-1]).match?(@statement)
-      else
-        raise "TODO: Axiom ~ #{statement}"
-      end
+    axiom, code = STATEMENTS.type('A').detect do |statement, code|
+      StatementToRegexp[statement].match? @statement
     end
     raise KorektoError, "does not match any axiom" unless axiom
-    set_statement('T',*code.split(' ',2)) # TODO: supporting Axiom
+    set_statement('T',*code.split(' ',2))
   end
 
   def inference
-    @heap = false # Inference are statements about compound statements
     raise "TODO: Inference ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
+    @heap = false # Inference are statements about compound statements
+    StatementToRegexp[@statement] = Regexp.new(@statement[1...-1])
     set_statement('I')
   end
 
@@ -123,14 +121,8 @@ class Korekto
     HEAP_COMBOS.each do |i,j|
       s1,s2 = HEAP[i],HEAP[j]
       compound = [s1,s2,s3].join("\n")
-      mapping, code = STATEMENTS.detect do |statement, code|
-        next unless code[0]=='I' # Mapping
-        case statement
-        when %r{^/.*/$}
-          Regexp.new(statement[1...-1]).match?(compound)
-        else
-          raise "TODO: Mapping ~ #{statement}"
-        end
+      mapping, code = STATEMENTS.type('I').detect do |statement, code|
+        StatementToRegexp[statement].match? compound
       end
       break if mapping
     end
