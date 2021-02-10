@@ -3,11 +3,14 @@ _
 _2
 a
 active
+all_defined
 axiom
+bsearch
 buf
 c
 c1
 c2
+chars
 chomp
 class
 cm
@@ -17,7 +20,9 @@ combination
 command
 command_output
 compound
+concat
 conclusion
+d
 definition
 detect
 each
@@ -39,6 +44,7 @@ ij_kl
 inference
 initialize
 inject
+inspect
 instance_eval
 IO
 j
@@ -57,7 +63,6 @@ match
 message
 method
 method_defined
-move
 n
 Neovim
 new
@@ -93,6 +98,7 @@ StatementToRegexp
 strip
 sub
 support
+SYMBOLS
 SYNTAX
 syntax_checker
 tautology
@@ -100,6 +106,8 @@ title
 to_a
 to_i
 type
+u
+uniq
 unshift
 validation
 validations

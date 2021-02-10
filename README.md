@@ -21,22 +21,11 @@ $ korekto --install
 ! balanced? '(){}[]'
 ! length < 66
 # Statements
-{[(This is all ok and good.)]}	#D1
-This is {good}.	#P2 Pass
-[This](is)also{ok}.	#P3 Pass also
-This is {good}.	#P2 Restatement
-[This](is)also{ok}.	#P3 Pass also
-# Axioms(Acceptance Patterns)
-/^(\w+) = \1$/	#A4 Reflexive axiom
-T = T	#D5
-{A,B,C}	#D6 A B C Exist
-ABC = ABC	#T7/A4 Reflexive axiom
-{X,Y}	#D8
-X	#P9
-T->T	#D10
-X->Y	#P11
-/(\w+)\n\1->(\w+)\n\2/	#I12 Modus ponem
-Y	#C13/I12,P9,P11 Modus ponem
+/^([\d\+]+)=([\d\+]+)\n\1=([\d\+]+)\n\2=\3$/	#I1 Subtitution
+/^(\w+)=\1$/	#A2 Reflection
+2=1+1	#D3 Two
+2=2	#T4/A2 Reflection
+1+1=2	#C5/I1,D3,T4 Subtitution
 ```
 See also [BOOTSTRAP.md](BOOTSTRAP.md).
 

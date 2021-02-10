@@ -122,7 +122,9 @@ class Korekto
       StatementToRegexp[statement].match? @statement
     end
     raise KorektoError, "does not match any axiom" unless axiom
-    set_statement('T',*code.split(' ',2))
+    support,title = code.split(' ', 2)
+    support,_ = support.split('/', 2)
+    set_statement('T', support, title)
   end
 
   def inference
@@ -144,10 +146,10 @@ class Korekto
       end
       break if mapping
     end
-    raise KorektoError, "does not match any mapping" unless mapping
+    raise KorektoError, "does not match any inference" unless mapping
     cm,title = STATEMENTS[mapping].split(' ',2)
-    c1,_ = STATEMENTS[s1].split(' ',2)
-    c2,_ = STATEMENTS[s2].split(' ',2)
+    c1,_ = STATEMENTS[s1].split(' ',2); c1,_ = c1.split('/', 2)
+    c2,_ = STATEMENTS[s2].split(' ',2); c2,_ = c2.split('/', 2)
     support = [cm,c1,c2].join(',')
     set_statement('C', support, title)
   end
