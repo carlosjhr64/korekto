@@ -19,6 +19,12 @@ class Korekto
     .inject([]){|a, ij_kl| a<<ij_kl[0]; a<<ij_kl[1]}
 
   SYMBOLS = []
+  def SYMBOLS.undefined(statement)
+    statement.chars.uniq.select{|c| not bsearch{|d|c<=>d}}
+  end
+  def SYMBOLS.define(statement)
+    concat statement.chars.uniq.sort; uniq!; sort!
+  end
 
   def initialize(filename='-')
     @filename = filename
@@ -92,15 +98,13 @@ class Korekto
   end
 
   def all_defined
-    if u = @statement.chars.uniq.detect{|c| not SYMBOLS.bsearch{|d|c<=>d}}
-      raise KorektoError, "undefined: #{u}"
+    unless (u = SYMBOLS.undefined(@statement)).empty?
+      raise KorektoError, "undefined: #{u.join(' ')}"
     end
   end
 
   def definition
-    SYMBOLS.concat @statement.chars.uniq.sort
-    SYMBOLS.uniq!
-    SYMBOLS.sort!
+    SYMBOLS.define @statement
     set_statement('D')
   end
 

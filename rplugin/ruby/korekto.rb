@@ -3,6 +3,7 @@ Neovim.plugin do |plug|
     validations = nvim.command_output('w !korekto').strip.split("\n").map(&:strip)
     unless validations.empty?
       buf = nvim.get_current_buf
+      msg = 'OK'
       while validation = validations.shift
         fields = validation.split(':',5)
         n = fields[1].to_i
@@ -12,7 +13,7 @@ Neovim.plugin do |plug|
             # move onto error if on page
             nvim.get_current_win.set_cursor([n,0]) if fn=='-'
             # echo error message
-            nvim.command "echom #{title.inspect}"
+            msg = title
             # and stop.
             break
           elsif fn=='-'
@@ -23,6 +24,7 @@ Neovim.plugin do |plug|
           end
         end
       end
+      nvim.command "echom #{msg.inspect}"
     end
   end
 end

@@ -23,6 +23,7 @@ compound
 concat
 conclusion
 d
+define
 definition
 detect
 each
@@ -63,6 +64,7 @@ match
 message
 method
 method_defined
+msg
 n
 Neovim
 new
@@ -107,6 +109,7 @@ to_a
 to_i
 type
 u
+undefined
 uniq
 unshift
 validation
