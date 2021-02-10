@@ -71,10 +71,6 @@ class Korekto
       # Valid statements must end with commentary like #X101:Y12,Z80  Statement title
       @statement,@code,@title = $~[:statement].strip,$~[:code],$~[:title]
       true
-    when /^(.*)\s#! (\w[^#]*)$/
-      # Some exception in statement
-      @statement,@code,@title = $1.strip,'!',$2
-      true
     else
       raise 'unrecognized korekto line'
     end
