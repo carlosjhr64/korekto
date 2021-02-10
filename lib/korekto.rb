@@ -18,6 +18,8 @@ class Korekto
     .map{|i, j| [[i,j], [j,i]]}
     .inject([]){|a, ij_kl| a<<ij_kl[0]; a<<ij_kl[1]}
 
+  SYMBOLS = []
+
   def initialize(filename='-')
     @filename = filename
     @active = false
@@ -89,7 +91,21 @@ class Korekto
     STATEMENTS[@statement] = code_title
   end
 
+  def all_defined
+    if u = @statement.chars.uniq.detect{|c| not SYMBOLS.bsearch{|d|c<=>d}}
+      raise KorektoError, "undefined: #{u}"
+    end
+  end
+
+  def definition
+    SYMBOLS.concat @statement.chars.uniq.sort
+    SYMBOLS.uniq!
+    SYMBOLS.sort!
+    set_statement('D')
+  end
+
   def postulate
+    all_defined
     set_statement('P')
   end
 
@@ -101,6 +117,7 @@ class Korekto
   end
 
   def tautology
+    all_defined
     axiom, code = STATEMENTS.type('A').detect do |statement, code|
       StatementToRegexp[statement].match? @statement
     end
@@ -116,6 +133,7 @@ class Korekto
   end
 
   def conclusion
+    all_defined
     mapping = nil
     s1,s2,s3 = nil,nil,@statement
     HEAP_COMBOS.each do |i,j|
@@ -147,6 +165,8 @@ class Korekto
       restatement
     else
       case @code[0]
+      when 'D'
+        definition
       when 'P'
         postulate
       when 'A'

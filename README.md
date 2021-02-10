@@ -21,19 +21,22 @@ $ korekto --install
 ! balanced? '(){}[]'
 ! length < 66
 # Statements
-This is }bad{.	#! syntax: balanced? '(){}[]'
-This is {good}.	#P1 Pass
-[This](is)also{ok}.	#P2 Pass also
-This is {good}.	#P1 Restatement
-[This](is)also{ok}.	#P2 Pass also
-Too long a line.  Want to keep statements at under 66 characters long.	#! syntax: length < 66
+{[(This is all ok and good.)]}	#D1
+This is {good}.	#P2 Pass
+[This](is)also{ok}.	#P3 Pass also
+This is {good}.	#P2 Restatement
+[This](is)also{ok}.	#P3 Pass also
 # Axioms(Acceptance Patterns)
-/^(\w+) = \1$/	#A3 Reflexive axiom
-ABC = ABC	#T4/A3 Reflexive axiom
-X	#P5
-X->Y	#P6
-/(\w+)\n\1->(\w+)\n\2/	#I7 Modus ponem
-Y	#C8/I7,P5,P6 Modus ponem
+/^(\w+) = \1$/	#A4 Reflexive axiom
+T = T	#D5
+{A,B,C}	#D6 A B C Exist
+ABC = ABC	#T7/A4 Reflexive axiom
+{X,Y}	#D8
+X	#P9
+T->T	#D10
+X->Y	#P11
+/(\w+)\n\1->(\w+)\n\2/	#I12 Modus ponem
+Y	#C13/I12,P9,P11 Modus ponem
 ```
 See also [BOOTSTRAP.md](BOOTSTRAP.md).
 
