@@ -1,8 +1,54 @@
 class Korekto
-  VERSION = '0.0.210210'
+  VERSION = '0.0.210211'
 
   class KorektoError < Exception
   end
+
+  class Symbols
+    def to_a
+      @a
+    end
+
+    def initialize
+      @a = []
+    end
+
+    def insert(w)
+      if index = @a.bsearch_index{|c| c >= w}
+        @a.insert(index, w)  unless w == @a.fetch(index)
+      else
+        @a.push w
+      end
+    end
+
+    def undefined(statement)
+      undefined,chars = [],statement.chars
+      while w = chars.shift
+        if w==':'
+          while c = chars.shift
+            break(chars.unshift c) if c=~/\W/
+            w<<c
+          end
+        end
+        undefined.push w unless @a.bsearch{|c| w <=> c}
+      end
+      return undefined
+    end
+
+    def define!(statement)
+      chars = statement.chars
+      while w = chars.shift
+        if w==':'
+          while c = chars.shift
+            break(chars.unshift c) if c=~/\W/
+            w<<c
+          end
+        end
+        insert(w)
+      end
+    end
+  end
+  SYMBOLS = Symbols.new
 
   SYNTAX = []
 
@@ -18,13 +64,6 @@ class Korekto
     .map{|i, j| [[i,j], [j,i]]}
     .inject([]){|a, ij_kl| a<<ij_kl[0]; a<<ij_kl[1]}
 
-  SYMBOLS = []
-  def SYMBOLS.undefined(statement)
-    statement.chars.uniq.select{|c| not bsearch{|d|c<=>d}}
-  end
-  def SYMBOLS.define(statement)
-    concat statement.chars.uniq.sort; uniq!; sort!
-  end
 
   def initialize(filename='-')
     @filename = filename
@@ -107,7 +146,7 @@ class Korekto
   def definition
     raise KorektoError, 'nothing was undefined' if SYMBOLS.undefined(@statement).empty?
     assert_not_provable unless OPTIONS.fast?
-    SYMBOLS.define @statement
+    SYMBOLS.define! @statement
     set_statement('D')
   end
 

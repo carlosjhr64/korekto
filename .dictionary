@@ -4,7 +4,6 @@ blp
 bls
 bsearch
 carlosjhr
-concat
 divmod
 eval
 EVAL
@@ -27,6 +26,5 @@ stdin
 sublicense
 Subtitution
 TODO
-uniq
 unshift
 www

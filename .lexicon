@@ -8,6 +8,7 @@ any
 assert_not_provable
 axiom
 bsearch
+bsearch_index
 buf
 c
 c1
@@ -22,9 +23,7 @@ combination
 command
 command_output
 compound
-concat
 conclusion
-d
 define
 definition
 detect
@@ -34,6 +33,7 @@ eval
 Exception
 exit
 fast
+fetch
 fields
 filename
 fn
@@ -45,11 +45,13 @@ HEAP_LIMIT
 i
 ij
 ij_kl
+index
 infer
 inferable
 inference
 initialize
 inject
+insert
 inspect
 instance_eval
 IO
@@ -107,6 +109,7 @@ StatementToRegexp
 strip
 sub
 support
+Symbols
 SYMBOLS
 SYNTAX
 syntax_checker
@@ -117,8 +120,8 @@ to_i
 type
 u
 undefined
-uniq
 unshift
 validation
 validations
 VERSION
+w
