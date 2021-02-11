@@ -1,7 +1,7 @@
 syntax match Comment /# [^#]\+$/
 syntax match Fail    /\s#! \w[^#]*$/
 syntax match Pass    /\s#[A-Z][^#]*$/
-syntax match Syntax  /^! \w.\+$/
+syntax match Syntax  /^[?] \w.\+$/
 syntax match Patch   /^::[A-Z]\w\+#\w\+[^=]\+=.\+$/
 syntax match Import  /^< [A-Za-z\-\.]\+$/
 highlight Comment ctermfg=darkblue

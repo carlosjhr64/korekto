@@ -18,8 +18,8 @@ $ korekto --install
 # Imports
 < BOOTSTRAP.md
 # Syntax
-! balanced? '(){}[]'
-! length < 66
+? balanced? '(){}[]'
+? length < 66
 # Statements
 /^([\d\+]+)=([\d\+]+)\n\1=([\d\+]+)\n\2=\3$/	#I1 Subtitution
 /^(\w+)=\1$/	#A2 Reflection

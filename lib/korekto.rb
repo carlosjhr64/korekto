@@ -103,7 +103,7 @@ class Korekto
         end
       EVAL
       false
-    when /^! (\w.*)$/ # rule
+    when /^[?] (\w.*)$/ # rule
       SYNTAX.push $1.strip
       false
     when %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[A-Z]\d+(,[A-Z]\d+)*)?)?)( (?<title>[A-Z][\w\s]*\w))?$}
