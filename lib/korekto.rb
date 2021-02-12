@@ -2,6 +2,7 @@ require 'korekto/symbols'
 require 'korekto/syntax'
 require 'korekto/statement_to_regexp'
 require 'korekto/heap'
+require 'korekto/statement'
 require 'korekto/statements'
 
 class Korekto
@@ -93,13 +94,12 @@ class Korekto
         next unless active?
         next if preprocess?
         if md = FORMAT.match(@line)
-          statement,code,title = md[:statement].strip,md[:code],md[:title]
-          code,title = STATEMENTS.add(statement, code, title)
+          code,title = STATEMENTS.add(md[:statement].strip, md[:code], md[:title])
           puts "#{@filename}:#{line_number}:0:#{code}:#{title}"
         else
           raise 'unrecognized korekto line'
         end
-      rescue Statements::Error
+      rescue Statement::Error
         puts "#{@filename}:#{line_number}:0:!:#{$!.message}"
       rescue
         puts "#{@filename}:#{line_number}:0:?:#{$!.message}"
