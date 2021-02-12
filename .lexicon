@@ -25,6 +25,7 @@ command_output
 compound
 conclusion
 define
+defined
 definition
 detect
 each
@@ -39,6 +40,7 @@ filename
 fn
 get_current_buf
 get_current_win
+has_key
 HEAP
 HEAP_COMBOS
 HEAP_LIMIT
@@ -65,6 +67,7 @@ KorektoError
 length
 line
 lines
+LOGIC
 map
 mapping
 match
@@ -73,12 +76,15 @@ method
 method_defined
 msg
 n
+name
 Neovim
 new
 nil
 nvim
 OPTIONS
 parse
+pattern
+PATTERN
 plug
 plugin
 pop
@@ -118,10 +124,14 @@ title
 to_a
 to_i
 type
+TYPE
+types
 u
 undefined
 unshift
 validation
 validations
+variable
+variables
 VERSION
 w

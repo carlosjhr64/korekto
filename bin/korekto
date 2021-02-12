@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'help_parser'
 
-OPTIONS = HelpParser['0.0.210211', <<HELP]
+OPTIONS = HelpParser['0.0.210212', <<HELP]
 Usage:
   korekto [:options]
 Options:

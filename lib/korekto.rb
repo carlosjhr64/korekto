@@ -1,5 +1,5 @@
 class Korekto
-  VERSION = '0.0.210211'
+  VERSION = '0.0.210212'
 
   class KorektoError < Exception
   end
@@ -35,6 +35,10 @@ class Korekto
       return undefined
     end
 
+    def defined?(w)
+      @a.bsearch{|c| w <=> c} ? true : false
+    end
+
     def define!(statement)
       chars = statement.chars
       while w = chars.shift
@@ -51,6 +55,11 @@ class Korekto
   SYMBOLS = Symbols.new
 
   SYNTAX = []
+
+  # TODO:
+  LOGIC = {}
+  TYPE = {}
+  PATTERN = {}
 
   STATEMENTS = {}
   def STATEMENTS.type(c) = select{_2[0]==c}
@@ -86,6 +95,23 @@ class Korekto
     end
   end
 
+  # TODO:
+  def pattern(name, pattern)
+    raise "name #{name} in use" if PATTERN.has_key? name
+    PATTERN[name] = Regexp.new(pattern)
+  end
+
+  # TODO:
+  def types(name, variables)
+    pattern = PATTERN[name]
+    raise "name #{name} not defined" unless pattern
+    variables.each do |variable|
+      raise "variable #{variable} in use" if TYPE.has_key? variable
+      raise "variable #{variable} in pattern #{name}: #{pattern.inspect}" if pattern.match? variable
+      TYPE[variable] = name
+    end
+  end
+
   def statement?
     case @line
     when /^\s*#/ # comment
@@ -103,9 +129,15 @@ class Korekto
         end
       EVAL
       false
-    when /^[?] (\w.*)$/ # rule
+    when /^[?] (\w.*)$/
       SYNTAX.push $1.strip
       false
+    when %r{^! (\p{L}|:\w+)/(.*)/$}
+      # TODO:
+      pattern($1, $2)
+    when /^! (\p{L}|:\w+){\p{L}( \p{L})*}$/
+      # TODO:
+      types($1, $2.split)
     when %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[A-Z]\d+(,[A-Z]\d+)*)?)?)( (?<title>[A-Z][\w\s]*\w))?$}
       # Valid statements must end with commentary like #X101:Y12,Z80  Statement title
       @statement,@code,@title = $~[:statement].strip,$~[:code],$~[:title]
