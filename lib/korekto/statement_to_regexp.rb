@@ -11,14 +11,14 @@ class Korekto
     def s2r(s)
       case s
       when %r{^/(.*)/$}
-        @h[s] = Regexp.new($1) # memoize
+        Regexp.new($1) # memoize
       else
         raise "unrecognized pattern case: #{s.inspect}"
       end
     end
 
     def [](s)
-      @h[s] || s2r(s)
+      @h[s] ||= s2r(s)
     end
   end
 end
