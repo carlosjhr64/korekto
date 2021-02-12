@@ -3,6 +3,7 @@ _
 _2
 a
 active
+add
 all_defined
 any
 assert_not_provable
@@ -20,6 +21,7 @@ cm
 code
 code_title
 combination
+combos
 command
 command_output
 compound
@@ -41,9 +43,8 @@ fn
 get_current_buf
 get_current_win
 has_key
+Heap
 HEAP
-HEAP_COMBOS
-HEAP_LIMIT
 i
 ij
 ij_kl
@@ -65,6 +66,7 @@ klass
 Korekto
 KorektoError
 length
+limit
 line
 lines
 LOGIC

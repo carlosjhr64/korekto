@@ -2,6 +2,7 @@ require 'korekto/symbols'
 require 'korekto/statements'
 require 'korekto/syntax'
 require 'korekto/statement_to_regexp'
+require 'korekto/heap'
 
 class Korekto
   VERSION = '0.0.210212'
@@ -13,20 +14,12 @@ class Korekto
   SYNTAX     = Syntax.new
   STATEMENTS = Statements.new
   S2R        = StatementToRegexp.new
+  HEAP       = Heap.new(13)
 
   # TODO:
   LOGIC = {}
   TYPE = {}
   PATTERN = {}
-
-  HEAP = []
-  HEAP_LIMIT = 13
-  # [[1, 2], [2, 1], [1, 3], [3, 1], [2, 3], [3, 2], [1, 4], [4, 1],...
-  HEAP_COMBOS = (0...HEAP_LIMIT).to_a.combination(2)
-    .sort{|ij, kl| ij[0]**2 + ij[1]**2 <=> kl[0]**2 + kl[1]**2}
-    .map{|i, j| [[i,j], [j,i]]}
-    .inject([]){|a, ij_kl| a<<ij_kl[0]; a<<ij_kl[1]}
-
 
   def initialize(filename='-')
     @filename = filename
@@ -177,8 +170,7 @@ class Korekto
   def infer
     mapping = nil
     s1,s2,s3=nil,nil,@statement
-    HEAP_COMBOS.each do |i,j|
-      s1,s2 = HEAP[i],HEAP[j]
+    HEAP.combos do |s1, s2|
       compound = [s1,s2,s3].join("\n")
       mapping, code = STATEMENTS.type('I').detect do |statement, code|
         S2R[statement].match? compound
@@ -228,10 +220,7 @@ class Korekto
         raise "Statement type #{@code} not supported."
       end
     end
-    if @heap
-      HEAP.unshift @statement
-      HEAP.pop if HEAP.length > HEAP_LIMIT
-    end
+    HEAP.add @statement if @heap
   end
 
   def parse(lines)
