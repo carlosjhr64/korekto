@@ -1,4 +1,7 @@
 require 'korekto/symbols'
+require 'korekto/statements'
+require 'korekto/syntax'
+require 'korekto/statement_to_regexp'
 
 class Korekto
   VERSION = '0.0.210212'
@@ -6,18 +9,15 @@ class Korekto
   class KorektoError < Exception
   end
 
-  SYMBOLS = Symbols.new
-
-  SYNTAX = []
+  SYMBOLS    = Symbols.new
+  SYNTAX     = Syntax.new
+  STATEMENTS = Statements.new
+  S2R        = StatementToRegexp.new
 
   # TODO:
   LOGIC = {}
   TYPE = {}
   PATTERN = {}
-
-  STATEMENTS = {}
-  def STATEMENTS.type(c) = select{_2[0]==c}
-  StatementToRegexp = {}
 
   HEAP = []
   HEAP_LIMIT = 13
@@ -143,20 +143,19 @@ class Korekto
   end
 
   def axiom
-    raise "TODO: Axiom ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
+    S2R[@statement] # memoize/register
     @heap = false # Axioms are statements about single statements
-    StatementToRegexp[@statement] = Regexp.new(@statement[1...-1])
     set_statement('A')
   end
 
   def tautology?
-    STATEMENTS.type('A').any?{|statement, code| StatementToRegexp[statement].match? @statement}
+    STATEMENTS.type('A').any?{|statement, code| S2R[statement].match? @statement}
   end
 
   def tautology
     all_defined
     axiom, code = STATEMENTS.type('A').detect do |statement, code|
-      StatementToRegexp[statement].match? @statement
+      S2R[statement].match? @statement
     end
     raise KorektoError, "does not match any axiom" unless axiom
     support,title = code.split(' ', 2)
@@ -165,9 +164,8 @@ class Korekto
   end
 
   def inference
-    raise "TODO: Inference ~ #{@statement}" unless @statement[0]=='/' and @statement[-1]=='/'
+    S2R[@statement]
     @heap = false # Inference are statements about compound statements
-    StatementToRegexp[@statement] = Regexp.new(@statement[1...-1])
     set_statement('I')
   end
 
@@ -183,7 +181,7 @@ class Korekto
       s1,s2 = HEAP[i],HEAP[j]
       compound = [s1,s2,s3].join("\n")
       mapping, code = STATEMENTS.type('I').detect do |statement, code|
-        StatementToRegexp[statement].match? compound
+        S2R[statement].match? compound
       end
       break if mapping
     end
