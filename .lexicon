@@ -67,6 +67,7 @@ limit
 line
 line_number
 lines
+Main
 map
 match
 md
@@ -110,6 +111,7 @@ shift
 sort
 split
 statement
+Statement
 Statements
 STATEMENTS
 StatementToRegexp

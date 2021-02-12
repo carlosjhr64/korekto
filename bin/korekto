@@ -26,4 +26,4 @@ if OPTIONS.install?
 end
 
 require 'korekto'
-Korekto.new.run
+Korekto.run
