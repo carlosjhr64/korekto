@@ -3,16 +3,18 @@ require 'help_parser'
 
 OPTIONS = HelpParser['0.0.210212', <<HELP]
 Usage:
-  korekto [:options]
+  korekto [:options+]
 Options:
  -h --help
  -v --version
+ -V --verbose
  --install   \tInstalls the korecto neovim ruby plugin
- --fast      \tSkips slow validations
 # Example usage:
 #   cat README.md | korekto
 #   korekto < README.md
 HELP
+# TODO: not sure if I want this:
+#--fast      \tSkips slow validations
 
 if OPTIONS.install?
   require 'fileutils'

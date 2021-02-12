@@ -1,3 +1,5 @@
+attr
+backtrace
 bli
 blm
 blp
@@ -14,15 +16,17 @@ inferable
 klass
 korekto
 Korekto
-KorektoError
 md
 memoize
 MERCHANTABILITY
 NONINFRINGEMENT
 overides
+preprocess
 readlines
 rubygems
+RuntimeError
 StatementToRegexp
+stderr
 stdin
 sublicense
 Subtitution
