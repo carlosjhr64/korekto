@@ -1,39 +1,43 @@
 module Korekto
 class Statement
   class Error < RuntimeError; end
-
-  S2R     = StatementToRegexp.new
-  HEAP    = Heap.new(13)
-  SYMBOLS = Symbols.new
-
-=begin
-       @statement,@code,@title = 
-       syntax_check
-       @heap = true
-       #set_acceptance_code
-       HEAP.add @statement if @heap
-       return @code, @title
-=end
-
-  attr_reader :statement,:code,:title
-  def initialize(statement, code, title=nil)
-    @statement,@code,@title = statement,code,title
+  S2R = StatementToRegexp.new
+  attr_reader :code,:title,:context
+  def initialize(statement, code, title, context)
+    @statement,@code,@title,@context,@heap = statement,code,title,context,true
+    @statement.freeze
     syntax_check
-    @heap = true
     set_acceptance_code
-    HEAP.add @statement if @heap
+    @code.freeze; @title.freeze
+    @context.heap.add self if @heap
+  end
+
+  def type
+    @code[0]
+  end
+
+  def to_s
+    @statement
+  end
+
+  def to_str
+    @statement
+  end
+
+  def match?(statement)
+    S2R[@statement].match? statement
   end
 
   private
 
   def set_statement(code, support=nil, title=nil)
-    @code = "#{code}#{ Korekto::Main::STATEMENTS.length + 1 }"
+    @code = "#{code}#{ @context.length + 1 }"
     @code += "/#{support}" if support
-    @title = title if title and not @title
+    @title ||= title
   end
 
   def syntax_check
-    Korekto::Main::SYNTAX.each do |rule|
+    @context.syntax.each do |rule|
       raise Error, "syntax: #{rule}" unless @statement.instance_eval(rule)
     rescue
       raise "#{$!.class}: #{rule}"
@@ -41,7 +45,7 @@ class Statement
   end
 
   def set_acceptance_code
-    case @code[0]
+    case @code[0] # type
     when 'D'
       definition
     when 'P'
@@ -55,14 +59,14 @@ class Statement
     when 'C'
       conclusion
     else
-      raise "Statement type #{@code} not supported."
+      raise "statement type #{@code[0]} not defined"
     end
   end
 
 =begin
     # TODO: not sure I want this
     def tautology?
-      type('A').any?{|statement, code| S2R[statement].match? @statement}
+      @context.type('A').any?{|statement| statement.match? @statement}
     end
 
     def inferable?
@@ -77,14 +81,14 @@ class Statement
 =end
 
   def definition
-    raise Error, 'nothing was undefined' if SYMBOLS.undefined(@statement).empty?
+    raise Error, 'nothing was undefined' if @context.symbols.undefined(@statement).empty?
 #   assert_not_provable unless OPTIONS.fast?
-    SYMBOLS.define! @statement
+    @context.symbols.define! @statement
     set_statement('D')
   end
 
   def all_defined
-    unless (u = SYMBOLS.undefined(@statement)).empty?
+    unless (u = @context.symbols.undefined(@statement)).empty?
       raise Error, "undefined: #{u.join(' ')}"
     end
   end
@@ -103,17 +107,17 @@ class Statement
 
   def tautology
     all_defined
-    axiom, code = Korekto::Main::STATEMENTS.type('A').detect do |statement, code|
-      S2R[statement].match? @statement
+    axiom = @context.type('A').detect do |statement|
+      statement.match? @statement
     end
     raise Error, "does not match any axiom" unless axiom
-    support,title = code.split(' ', 2)
+    support,title = axiom.code.split(' ', 2)
     support,_ = support.split('/', 2)
     set_statement('T', support, title)
   end
 
   def inference
-    S2R[@statement]
+    S2R[@statement] # memoize/register
     @heap = false # Inference are statements about compound statements
     set_statement('I')
   end
@@ -122,18 +126,18 @@ class Statement
     all_defined
     inference,s1,s2 = infer
     raise Error, "does not match any inference" unless inference
-    cm,title = Korekto::Main::STATEMENTS[inference].split(' ',2)
-    c1,_ = Korekto::Main::STATEMENTS[s1].split(' ',2); c1,_ = c1.split('/', 2)
-    c2,_ = Korekto::Main::STATEMENTS[s2].split(' ',2); c2,_ = c2.split('/', 2)
+    cm,title = inference.code.split(' ',2)
+    c1,_ = s1.code.split(' ',2); c1,_ = c1.split('/', 2)
+    c2,_ = s2.code.split(' ',2); c2,_ = c2.split('/', 2)
     support = [cm,c1,c2].join(',')
     set_statement('C', support, title)
   end
 
   def infer
-    HEAP.combos do |s1, s2|
+    @context.heap.combos do |s1, s2|
       compound = [s1,s2,@statement].join("\n")
-      Korekto::Main::STATEMENTS.type('I').each do |inference, code|
-        return inference,s1,s2 if S2R[inference].match?(compound)
+      @context.type('I').each do |inference|
+        return inference,s1,s2 if inference.match?(compound)
       end
     end
     return nil

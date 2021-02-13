@@ -1,36 +1,30 @@
 module Korekto
 class Statements
+  attr_reader :heap,:symbols,:syntax
   def initialize
-    @h = {}
+    @statements = []
+    @heap = Heap.new(13)
+    @symbols = Symbols.new
+    @syntax = Syntax.new
   end
 
   def type(c)
-    @h.select{_2[0]==c}
+    @statements.select{_1.type==c}
   end
 
   def length
-    @h.length
-  end
-
-  def key?(statement)
-    @h.key?(statement)
-  end
-
-  def [](statement)
-    @h[statement]
+    @statements.length
   end
 
   def add(statement, code, title)
-    if code_title = @h[statement]
-      # Restatement
-      code,_ = code_title.split(' ', 2)
-      title ||=_
+    if restatement = @statements.detect{_1.to_s==statement}
+      code,_ = restatement.code
+      title ||= restatement.title
       return code, title
     end
-    statement = Statement.new(statement, code, title)
-    statement,code,title = statement.statement,statement.code,statement.title
-    code_title = (title)? "#{code} #{title}" : code
-    @h[statement]=code_title
+    statement = Statement.new(statement, code, title, self)
+    @statements.push statement
+    return statement.code, statement.title
   end
 end
 end

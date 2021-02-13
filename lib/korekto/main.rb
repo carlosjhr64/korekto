@@ -9,6 +9,8 @@ class Main
   M_FENCE = /^```\s*$/
   M_COMMENT_LINE = /^\s*#/
 
+  STATEMENTS = Statements.new
+
   def initialize(filename='-')
     @filename = filename
     @line,@active = nil,false
@@ -62,7 +64,6 @@ class Main
     EVAL
   end
 
-  SYNTAX = Syntax.new
   def preprocess?
     case @line
     when MD_FILENAME
@@ -70,7 +71,7 @@ class Main
     when MD_KLASS_METHOD_DEFINITION
       patch($~[:klass],$~[:method],$~[:definition])
     when MD_RULE
-      SYNTAX.push $~[:rule].strip
+      STATEMENTS.syntax.push $~[:rule].strip
 =begin
     when %r{^! (\p{L}|:\w+)/(.*)/$}
       # TODO:
@@ -85,7 +86,6 @@ class Main
     true
   end
 
-  STATEMENTS = Statements.new
   def parse(lines)
     line_number = 0
     while @line = lines.shift

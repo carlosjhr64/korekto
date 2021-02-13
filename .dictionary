@@ -4,7 +4,6 @@ bli
 blm
 blp
 bls
-bsearch
 carlosjhr
 divmod
 eval
@@ -30,6 +29,7 @@ RuntimeError
 StatementToRegexp
 stderr
 stdin
+str
 sublicense
 Subtitution
 TODO
