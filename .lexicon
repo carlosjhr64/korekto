@@ -105,7 +105,6 @@ RuntimeError
 s
 s1
 s2
-s2r
 S2R
 select
 set_acceptance_code
@@ -118,7 +117,6 @@ statement
 Statement
 statements
 Statements
-StatementToRegexp
 strip
 sub
 support

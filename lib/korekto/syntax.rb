@@ -5,6 +5,7 @@ class Syntax
   end
 
   def push(s)
+    ''.instance_eval(s) # ensure it'll eval on string
     @a.push(s)
   end
 

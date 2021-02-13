@@ -18,7 +18,6 @@ korekto
 Korekto
 KOREKTO
 md
-memoize
 MERCHANTABILITY
 NONINFRINGEMENT
 overides
@@ -26,7 +25,6 @@ preprocess
 readlines
 rubygems
 RuntimeError
-StatementToRegexp
 stderr
 stdin
 str
