@@ -19,7 +19,10 @@ class Heap
   end
 
   def combos
-    @combos.each{|i,j| yield(@a[i], @a[j])}
+    @combos.each do |i,j|
+      next if [i,j].max >= @a.length
+      yield(@a[i], @a[j])
+    end
   end
 end
 end
