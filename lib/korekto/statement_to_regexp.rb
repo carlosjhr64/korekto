@@ -4,10 +4,6 @@ class StatementToRegexp
     @h = {}
   end
 
-  def to_h
-    @h
-  end
-
   def s2r(s)
     case s
     when %r{^/(.*)/$}

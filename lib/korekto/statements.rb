@@ -4,10 +4,6 @@ class Statements
     @h = {}
   end
 
-  def to_h
-    @h
-  end
-
   def type(c)
     @h.select{_2[0]==c}
   end

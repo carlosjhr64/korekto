@@ -4,10 +4,6 @@ class Syntax
     @a = []
   end
 
-  def to_a
-    @a
-  end
-
   def push(s)
     @a.push(s)
   end
