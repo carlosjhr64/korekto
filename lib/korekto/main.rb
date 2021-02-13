@@ -9,10 +9,8 @@ class Main
   M_FENCE = /^```\s*$/
   M_COMMENT_LINE = /^\s*#/
 
-  STATEMENTS = Statements.new
-
-  def initialize(filename='-')
-    @filename = filename
+  def initialize(filename='-', statements: Statements.new)
+    @filename,@statements = filename,statements
     @line,@active = nil,false
   end
 
@@ -67,11 +65,11 @@ class Main
   def preprocess?
     case @line
     when MD_FILENAME
-      Main.new($~[:filename].strip).run
+      Main.new($~[:filename].strip, statements:@statements).run
     when MD_KLASS_METHOD_DEFINITION
       patch($~[:klass],$~[:method],$~[:definition])
     when MD_RULE
-      STATEMENTS.syntax.push $~[:rule].strip
+      @statements.syntax.push $~[:rule].strip
 =begin
     when %r{^! (\p{L}|:\w+)/(.*)/$}
       # TODO:
@@ -94,7 +92,7 @@ class Main
         next unless active?
         next if preprocess?
         if md = MD_STATEMENT_CODE_TITLE.match(@line)
-          code,title = STATEMENTS.add(md[:statement].strip, md[:code], md[:title])
+          code,title = @statements.add(md[:statement].strip, md[:code], md[:title])
           puts "#{@filename}:#{line_number}:0:#{code}:#{title}"
         else
           raise 'unrecognized korekto line'
