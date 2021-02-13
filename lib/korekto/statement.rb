@@ -1,12 +1,12 @@
 module Korekto
 class Statement
   class Error < RuntimeError; end
-  S2R = StatementToRegexp.new
   attr_reader :code,:title,:context
   def initialize(statement, code, title, context)
-    @statement,@code,@title,@context,@heap = statement,code,title,context,true
+    @statement,@code,@title,@context = statement,code,title,context
     @statement.freeze
     syntax_check
+    @heap,@regexp = true,nil
     set_acceptance_code
     @code.freeze; @title.freeze
     @context.heap.add self if @heap
@@ -25,7 +25,7 @@ class Statement
   end
 
   def match?(statement)
-    S2R[@statement].match? statement
+    @regexp.match? statement
   end
 
   private
@@ -100,7 +100,7 @@ class Statement
   end
 
   def axiom
-    S2R[@statement] # memoize/register
+    @regexp = S2R[@statement]
     @heap = false # Axioms are statements about single statements
     set_statement('A')
   end
@@ -117,7 +117,7 @@ class Statement
   end
 
   def inference
-    S2R[@statement] # memoize/register
+    @regexp = S2R[@statement]
     @heap = false # Inference are statements about compound statements
     set_statement('I')
   end

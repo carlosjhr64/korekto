@@ -1,20 +1,12 @@
 module Korekto
-class StatementToRegexp
-  def initialize
-    @h = {}
-  end
-
-  def s2r(s)
-    case s
+class S2R
+  def self.[](statement)
+    case statement
     when %r{^/(.*)/$}
-      Regexp.new($1) # memoize
+      Regexp.new($1)
     else
-      raise "unrecognized pattern case: #{s.inspect}"
+      raise "unrecognized pattern case: #{statement.inspect}"
     end
-  end
-
-  def [](s)
-    @h[s] ||= s2r(s)
   end
 end
 end
