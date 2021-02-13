@@ -1,23 +1,7 @@
 module Korekto
 class Symbols
   def initialize
-    @a = []
-  end
-
-  def to_a
-    @a
-  end
-
-  def insert(w)
-    if index = @a.bsearch_index{|c| c >= w}
-      @a.insert(index, w)  unless w == @a.fetch(index)
-    else
-      @a.push w
-    end
-  end
-
-  def defined?(w)
-    @a.bsearch{|c| w <=> c} ? true : false
+    @a = Hash.new
   end
 
   def undefined(statement)
@@ -29,7 +13,7 @@ class Symbols
           w<<c
         end
       end
-      undefined.push w unless @a.bsearch{|c| w <=> c}
+      undefined.push w unless @a.include? w
     end
     return undefined
   end
@@ -43,7 +27,7 @@ class Symbols
           w<<c
         end
       end
-      insert(w)
+      @a[w]=nil
     end
   end
 end
