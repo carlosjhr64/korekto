@@ -7,7 +7,7 @@ require 'korekto/statements'
 require 'korekto/main'
 
 module Korekto
-  VERSION = '0.0.210212'
+  VERSION = '0.0.210213'
   def Korekto.run = Korekto::Main.new.run
 end
 # Requires:

@@ -39,7 +39,6 @@ fetch
 fields
 filename
 fn
-FORMAT
 get_current_buf
 get_current_win
 Heap
@@ -70,10 +69,17 @@ lines
 Main
 map
 match
+M_COMMENT_LINE
 md
+MD_FILENAME
+MD_KLASS_METHOD_DEFINITION
+MD_RULE
+MD_STATEMENT_CODE_TITLE
 message
 method
 method_defined
+M_FENCE
+M_FENCE_KOREKTO
 msg
 n
 Neovim
