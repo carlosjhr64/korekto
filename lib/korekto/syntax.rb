@@ -5,7 +5,9 @@ class Syntax
   end
 
   def push(s)
-    ''.instance_eval(s) # ensure it'll eval on string
+    # ensure it'll eval on string and returns boolean
+    b = ''.instance_eval(s)
+    raise 'syntax rule must eval boolean' unless b==!!b
     @a.push(s)
   end
 
