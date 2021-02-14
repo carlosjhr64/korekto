@@ -22,5 +22,3 @@ class Heap
   end
 end
 end
-# Requires:
-# `ruby`

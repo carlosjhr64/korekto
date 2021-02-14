@@ -32,5 +32,3 @@ class Symbols
   end
 end
 end
-# Requires:
-# `ruby`
