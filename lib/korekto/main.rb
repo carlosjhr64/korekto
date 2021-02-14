@@ -4,6 +4,8 @@ class Main
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
   MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)#(?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
   MD_RULE = /^[?] (?<rule>\w.*)$/
+  MD_TYPE_PATTERN = %r{^! (?<type>\p{L}|:\w+)/(?<patter>.*)/$}
+  MD_TYPE_VARIABLES = /^! (\p{L}|:\w+){\p{L}( \p{L})*}$/
 
   M_FENCE_KOREKTO = /^```korekto$/
   M_FENCE = /^```\s*$/
@@ -14,21 +16,14 @@ class Main
     @line,@active = nil,false
   end
 
-=begin
-  # TODO:
-  LOGIC = {}
-  TYPE = {}
   PATTERN = {}
-
-
-  # TODO:
-  def pattern(name, pattern)
+  def type_pattern(name, pattern)
     raise "name #{name} in use" if PATTERN.has_key? name
     PATTERN[name] = Regexp.new(pattern)
   end
 
-  # TODO:
-  def types(name, variables)
+  TYPE = {}
+  def type_variables(name, variables)
     pattern = PATTERN[name]
     raise "name #{name} not defined" unless pattern
     variables.each do |variable|
@@ -37,7 +32,6 @@ class Main
       TYPE[variable] = name
     end
   end
-=end
 
   def active?
     case @line
@@ -70,14 +64,10 @@ class Main
       patch($~[:klass],$~[:method],$~[:definition])
     when MD_RULE
       @statements.syntax.push $~[:rule].strip
-=begin
-    when %r{^! (\p{L}|:\w+)/(.*)/$}
-      # TODO:
-      pattern($1, $2)
-    when /^! (\p{L}|:\w+){\p{L}( \p{L})*}$/
-      # TODO:
-      types($1, $2.split)
-=end
+    when MD_TYPE_PATTERN
+      type_pattern($~[:type], $~[:pattern])
+    when MD_TYPE_VARIABLES
+      type_variables($~[:type], $~[:variables].split)
     else
       return false
     end

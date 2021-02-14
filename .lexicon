@@ -41,6 +41,7 @@ freeze
 get_current_buf
 get_current_win
 Hash
+has_key
 heap
 Heap
 i
@@ -74,6 +75,8 @@ MD_FILENAME
 MD_KLASS_METHOD_DEFINITION
 MD_RULE
 MD_STATEMENT_CODE_TITLE
+MD_TYPE_PATTERN
+MD_TYPE_VARIABLES
 message
 method
 method_defined
@@ -81,11 +84,14 @@ M_FENCE
 M_FENCE_KOREKTO
 msg
 n
+name
 Neovim
 new
 nvim
 parse
 patch
+pattern
+PATTERN
 plug
 plugin
 pop
@@ -107,6 +113,7 @@ RuntimeError
 s
 s1
 s2
+s2r
 S2R
 select
 set_acceptance_code
@@ -134,10 +141,15 @@ to_i
 to_s
 to_str
 type
+TYPE
+type_pattern
+type_variables
 u
 undefined
 unshift
 validation
 validations
+variable
+variables
 VERSION
 w

@@ -4,11 +4,12 @@ require 'korekto/s2r'
 
 class TestS2R < Test::Unit::TestCase
   def test_s2r
-    regexp = Korekto::S2R['/^match$/']
+    s2r = Korekto::S2R.new
+    regexp = s2r['/^match$/']
     assert_equal Regexp, regexp.class
     assert_equal '/^match$/', regexp.inspect
     assert_raises(RuntimeError) do
-      Korekto::S2R['wut wut wut']
+      s2r['wut wut wut']
     end
   end
 end

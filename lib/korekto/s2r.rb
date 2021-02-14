@@ -1,6 +1,9 @@
 module Korekto
 class S2R
-  def self.[](statement)
+  def initialize
+  end
+
+  def [](statement)
     case statement
     when %r{^/(.*)/$}
       Regexp.new($1)

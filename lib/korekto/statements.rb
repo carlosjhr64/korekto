@@ -1,11 +1,12 @@
 module Korekto
 class Statements
-  attr_reader :heap,:symbols,:syntax
+  attr_reader :heap,:symbols,:syntax,:s2r
   def initialize
     @statements = []
     @heap = Heap.new(13)
     @symbols = Symbols.new
     @syntax = Syntax.new
+    @s2r = S2R.new
   end
 
   def type(c)

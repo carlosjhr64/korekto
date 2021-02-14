@@ -91,7 +91,7 @@ class Statement
   end
 
   def axiom
-    @regexp = S2R[@statement]
+    @regexp = @context.s2r[@statement]
     @heap = false # Axioms are statements about single statements
     set_statement('A')
   end
@@ -108,7 +108,7 @@ class Statement
   end
 
   def inference
-    @regexp = S2R[@statement]
+    @regexp = @context.s2r[@statement]
     @heap = false # Inference are statements about compound statements
     set_statement('I')
   end
