@@ -1,0 +1,14 @@
+#! ruby
+require 'test/unit'
+require 'korekto/s2r'
+
+class TestS2R < Test::Unit::TestCase
+  def test_s2r
+    regexp = Korekto::S2R['/^match$/']
+    assert_equal Regexp, regexp.class
+    assert_equal '/^match$/', regexp.inspect
+    assert_raises(RuntimeError) do
+      Korekto::S2R['wut wut wut']
+    end
+  end
+end

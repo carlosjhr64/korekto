@@ -1,0 +1,24 @@
+#! ruby
+require 'test/unit'
+require 'korekto/syntax'
+
+class TestSymbols < Test::Unit::TestCase
+  def test_sytax
+    a,syntax = [],Korekto::Syntax.new
+    syntax.push 'length < 120'
+    syntax.each{a<<_1}
+    assert_equal ['length < 120'], a
+    error = assert_raises(RuntimeError) do
+      syntax.push 'length'
+    end
+    assert_equal 'syntax rule must eval boolean', error.message
+    error = assert_raises(NameError) do
+      syntax.push 'leNgTh < 120'
+    end
+    assert error.message.start_with?('undefined local variable or method')
+    syntax.push 'is_a? String'
+    syntax.each do |test|
+      assert 'ABC'.instance_eval(test)
+    end
+  end
+end

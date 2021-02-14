@@ -1,0 +1,14 @@
+#! ruby
+require 'test/unit'
+require 'korekto/symbols'
+
+class TestSymbols < Test::Unit::TestCase
+  def test_symbols
+    symbols = Korekto::Symbols.new
+    symbols.define! 'abbba abc a:xyz a'
+    u = symbols.undefined 'abcdexyz:xyz'
+    assert_equal ['d','e','x','y','z'], u
+    u = symbols.undefined 'abc:xyz:abc'
+    assert_equal [':abc'], u
+  end
+end
