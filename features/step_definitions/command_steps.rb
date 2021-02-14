@@ -27,8 +27,8 @@ Then %r/Then stdout is '([^']*)'/ do |string|
   end
 end
 
-Then %r/Then stdout is "([^"]*)"/ do |string|
-  unless @stdout == string
+Then %r/Then stdout is ("[^"]*")/ do |string|
+  unless @stdout.inspect == string
     raise "stdout: Expectected '#{string}'. Got '#{@stdout}'"
   end
 end
