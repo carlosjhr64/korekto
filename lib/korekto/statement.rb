@@ -6,27 +6,18 @@ class Statement
     @statement,@code,@title,@context = statement,code,title,context
     @statement.freeze
     syntax_check
-    @heap,@regexp = true,nil
+    @heap,@defines,@regexp = true,false,nil
     set_acceptance_code
-    @code.freeze; @title.freeze
-    @context.heap.add self if @heap
+    @code.freeze; @title.freeze; @heap.freeze; @defines.freeze
   end
 
-  def type
-    @code[0]
-  end
-
-  def to_s
-    @statement
-  end
-
-  def to_str
-    @statement
-  end
-
-  def match?(statement)
-    @regexp.match? statement
-  end
+  def heap?             = @heap
+  def defines?          = @defines
+  def type              = @code[0]
+  def to_s              = @statement
+  def to_str            = @statement
+  def match?(statement) = @regexp.match?(statement)
+  def chars             = @statement.chars
 
   private
 
@@ -83,7 +74,7 @@ class Statement
   def definition
     raise Error, 'nothing was undefined' if @context.symbols.undefined(@statement).empty?
 #   assert_not_provable unless OPTIONS.fast?
-    @context.symbols.define! @statement
+    @defines = true
     set_statement('D')
   end
 

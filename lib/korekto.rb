@@ -1,5 +1,5 @@
 module Korekto
-  VERSION = '0.0.210213'
+  VERSION = '0.0.210214'
   require 'korekto/symbols'
   require 'korekto/syntax'
   require 'korekto/statement_to_regexp'

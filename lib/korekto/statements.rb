@@ -24,6 +24,8 @@ class Statements
     end
     statement = Statement.new(statement, code, title, self)
     @statements.push statement
+    @heap.add statement if statement.heap?
+    @symbols.define! statement if statement.defines?
     return statement.code, statement.title
   end
 end
