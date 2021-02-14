@@ -1,15 +1,27 @@
 #! ruby
 require 'test/unit'
+require 'korekto/symbols'
 require 'korekto/s2r'
 
 class TestS2R < Test::Unit::TestCase
   def test_s2r
     s2r = Korekto::S2R.new
+
+    # literally spelling out the regexp
     regexp = s2r['/^match$/']
     assert_equal Regexp, regexp.class
     assert_equal '/^match$/', regexp.inspect
-    assert_raises(RuntimeError) do
-      s2r['wut wut wut']
-    end
+
+    # using variable pattern translations, straight pass
+    regexp = s2r['a=a']
+    assert_equal Regexp, regexp.class
+    assert_equal '/^a=a$/', regexp.inspect
+
+    # using variable pattern translations, a => \w
+    s2r.t2p[':Variable'] = '\w'
+    s2r.v2t['a'] = ':Variable'
+    regexp = s2r['a=a']
+    assert_equal Regexp, regexp.class
+    assert_equal '/^(\w)=\1$/', regexp.inspect
   end
 end

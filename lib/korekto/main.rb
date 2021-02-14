@@ -16,20 +16,19 @@ class Main
     @line,@active = nil,false
   end
 
-  PATTERN = {}
-  def type_pattern(name, pattern)
-    raise "name #{name} in use" if PATTERN.has_key? name
-    PATTERN[name] = Regexp.new(pattern)
+  def type_pattern(type, pattern)
+    t2p = @statements.s2r.t2p
+    raise "name #{name} in use" if t2p.has_key? type
+    t2p[type] = Regexp.new(pattern)
   end
 
-  TYPE = {}
-  def type_variables(name, variables)
-    pattern = PATTERN[name]
-    raise "name #{name} not defined" unless pattern
+  def type_variables(type, variables)
+    v2t,t2p = @statements.s2r.v2t,@statements.s2r.t2p
+    pattern = t2p[type]
+    raise "type #{type} not defined" unless pattern
     variables.each do |variable|
-      raise "variable #{variable} in use" if TYPE.has_key? variable
-      raise "variable #{variable} in pattern #{name}: #{pattern.inspect}" if pattern.match? variable
-      TYPE[variable] = name
+      raise "variable #{variable} in use" if v2t.has_key? variable
+      v2t[variable] = type
     end
   end
 
