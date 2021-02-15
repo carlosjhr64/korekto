@@ -26,9 +26,9 @@ class Statements
     statement = Statement.new(statement, code, title, self)
     @statements.push statement
     case statement.type
-    when 'A','I'
+    when 'A','I','E'
       @symbols.define! statement, @s2r.v2t
-    when 'D'
+    when 'D','X'
       @symbols.define! statement
       @heap.add statement
     when 'P','T','C'

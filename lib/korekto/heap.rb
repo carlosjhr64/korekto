@@ -20,5 +20,9 @@ class Heap
       yield(@a[i], @a[j])
     end
   end
+
+  def each
+    @a.each{yield _1}
+  end
 end
 end

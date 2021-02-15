@@ -33,6 +33,7 @@ each
 empty
 Error
 eval
+existential
 exit
 fields
 filename
@@ -54,6 +55,8 @@ initialize
 inject
 inspect
 instance_eval
+instantiate
+instantiation
 IO
 j
 join

@@ -47,6 +47,10 @@ class Statement
       inference
     when 'C'
       conclusion
+    when 'E'
+      existential
+    when 'X'
+      instantiation
     else
       raise "statement type #{@code[0]} not defined"
     end
@@ -124,6 +128,31 @@ class Statement
       compound = [s1,s2,@statement].join("\n")
       @context.type('I').each do |inference|
         return inference,s1,s2 if inference.match?(compound)
+      end
+    end
+    return nil
+  end
+
+  def existential
+    @regexp = @context.s2r[@statement]
+    set_statement('E')
+  end
+
+  def instantiation
+    raise Error, 'nothing to instantiate' if @context.symbols.undefined(@statement).empty?
+    existential,s1 = instantiate
+    raise Error, 'does not match any existential' unless existential
+    cm,title = existential.code,existential.title
+    c1,_ = s1.code; c1,_ = c1.split('/',2)
+    support = [cm,c1].join(',')
+    set_statement('X', support, title)
+  end
+
+  def instantiate
+    @context.heap.each do |s|
+      compound = [s,@statement].join("\n")
+      @context.type('E').each do |existential|
+        return existential,s if existential.match?(compound)
       end
     end
     return nil
