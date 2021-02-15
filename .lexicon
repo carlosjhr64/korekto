@@ -45,6 +45,7 @@ Hash
 has_key
 heap
 Heap
+heap_search
 i
 ij
 ij_kl
@@ -55,7 +56,6 @@ initialize
 inject
 inspect
 instance_eval
-instantiate
 instantiation
 IO
 j
@@ -71,6 +71,7 @@ line_number
 lines
 Main
 map
+mapping
 match
 max
 M_COMMENT_LINE
@@ -110,12 +111,14 @@ regexp
 Regexp
 require
 restatement
+result
 rstrip
 Ruby30
 rule
 run
 RuntimeError
 s
+s0
 s1
 s2
 s2r

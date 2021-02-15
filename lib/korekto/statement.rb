@@ -51,6 +51,10 @@ class Statement
       existential
     when 'X'
       instantiation
+    when 'M'
+      mapping
+    when 'R'
+      result
     else
       raise "statement type #{@code[0]} not defined"
     end
@@ -140,7 +144,7 @@ class Statement
 
   def instantiation
     raise Error, 'nothing to instantiate' if @context.symbols.undefined(@statement).empty?
-    existential,s1 = instantiate
+    existential,s1 = heap_search('E')
     raise Error, 'does not match any existential' unless existential
     cm,title = existential.code,existential.title
     c1,_ = s1.code; c1,_ = c1.split('/',2)
@@ -148,14 +152,29 @@ class Statement
     set_statement('X', support, title)
   end
 
-  def instantiate
-    @context.heap.each do |s|
-      compound = [s,@statement].join("\n")
-      @context.type('E').each do |existential|
-        return existential,s if existential.match?(compound)
+  def heap_search(type)
+    @context.heap.each do |s1|
+      compound = [s1,@statement].join("\n")
+      @context.type(type).each do |s0|
+        return s0,s1 if s0.match?(compound)
       end
     end
     return nil
+  end
+
+  def mapping
+    @regexp = @context.s2r[@statement]
+    set_statement('M')
+  end
+
+  def result
+    all_defined
+    mapping,s1 = heap_search('M')
+    raise Error, 'does not match any mapping' unless mapping
+    cm,title = mapping.code,mapping.title
+    c1,_ = s1.code; c1,_ = c1.split('/',2)
+    support = [cm,c1].join(',')
+    set_statement('R', support, title)
   end
 end
 end
