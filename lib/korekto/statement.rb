@@ -1,18 +1,16 @@
 module Korekto
 class Statement
   class Error < RuntimeError; end
-  attr_reader :code,:title,:context
+  attr_reader :code,:title,:context,:regexp
   def initialize(statement, code, title, context)
     @statement,@code,@title,@context = statement,code,title,context
     @statement.freeze
     syntax_check
-    @heap,@defines,@regexp = true,false,nil
+    @regexp = nil
     set_acceptance_code
-    @code.freeze; @title.freeze; @heap.freeze; @defines.freeze
+    @code.freeze; @title.freeze; @regexp.freeze
   end
 
-  def heap?             = @heap
-  def defines?          = @defines
   def type              = @code[0]
   def to_s              = @statement
   def to_str            = @statement
@@ -74,7 +72,6 @@ class Statement
   def definition
     raise Error, 'nothing was undefined' if @context.symbols.undefined(@statement).empty?
 #   assert_not_provable unless OPTIONS.fast?
-    @defines = true
     set_statement('D')
   end
 
@@ -92,7 +89,6 @@ class Statement
 
   def axiom
     @regexp = @context.s2r[@statement]
-    @heap = false # Axioms are statements about single statements
     set_statement('A')
   end
 
@@ -102,14 +98,13 @@ class Statement
       statement.match? @statement
     end
     raise Error, "does not match any axiom" unless axiom
-    support,title = axiom.code.split(' ', 2)
+    support,title = axiom.code,axiom.title
     support,_ = support.split('/', 2)
     set_statement('T', support, title)
   end
 
   def inference
     @regexp = @context.s2r[@statement]
-    @heap = false # Inference are statements about compound statements
     set_statement('I')
   end
 
@@ -117,9 +112,9 @@ class Statement
     all_defined
     inference,s1,s2 = infer
     raise Error, "does not match any inference" unless inference
-    cm,title = inference.code.split(' ',2)
-    c1,_ = s1.code.split(' ',2); c1,_ = c1.split('/', 2)
-    c2,_ = s2.code.split(' ',2); c2,_ = c2.split('/', 2)
+    cm,title = inference.code,inference.title
+    c1,_ = s1.code; c1,_ = c1.split('/', 2)
+    c2,_ = s2.code; c2,_ = c2.split('/', 2)
     support = [cm,c1,c2].join(',')
     set_statement('C', support, title)
   end

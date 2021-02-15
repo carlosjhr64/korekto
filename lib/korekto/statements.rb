@@ -25,8 +25,15 @@ class Statements
     end
     statement = Statement.new(statement, code, title, self)
     @statements.push statement
-    @heap.add statement if statement.heap?
-    @symbols.define! statement if statement.defines?
+    case statement.type
+    when 'A','I'
+      @symbols.define! statement, @s2r.v2t
+    when 'D'
+      @symbols.define! statement
+      @heap.add statement
+    when 'P','T','C'
+      @heap.add statement
+    end
     return statement.code, statement.title
   end
 end

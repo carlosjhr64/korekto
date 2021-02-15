@@ -4,8 +4,8 @@ class Main
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
   MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)#(?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
   MD_RULE = /^[?] (?<rule>\w.*)$/
-  MD_TYPE_PATTERN = %r{^! (?<type>\p{L}|:\w+)/(?<patter>.*)/$}
-  MD_TYPE_VARIABLES = /^! (\p{L}|:\w+){\p{L}( \p{L})*}$/
+  MD_TYPE_PATTERN = %r{^! (?<type>\p{L}|:\w+)\s*/(?<pattern>.*)/$}
+  MD_TYPE_VARIABLES = /^! (?<type>\p{L}|:\w+)\s*\{(?<variables>\p{Graph}( \p{Graph})*)\}$/
 
   M_FENCE_KOREKTO = /^```korekto$/
   M_FENCE = /^```\s*$/
@@ -19,7 +19,7 @@ class Main
   def type_pattern(type, pattern)
     t2p = @statements.s2r.t2p
     raise "name #{name} in use" if t2p.has_key? type
-    t2p[type] = Regexp.new(pattern)
+    t2p[type] = pattern
   end
 
   def type_variables(type, variables)

@@ -1,5 +1,5 @@
 module Korekto
-  VERSION = '0.0.210214'
+  VERSION = '0.0.210215'
   require 'korekto/symbols'
   require 'korekto/syntax'
   require 'korekto/s2r'

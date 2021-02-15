@@ -1,4 +1,4 @@
-@abc
+@simple
 Feature: simple
 
 ```korekto

@@ -27,7 +27,6 @@ conclusion
 context
 count
 define
-defines
 definition
 detect
 each
@@ -58,6 +57,7 @@ instance_eval
 IO
 j
 join
+key
 kl
 klass
 Korekto
@@ -103,6 +103,7 @@ puts
 quote
 raise
 readlines
+regexp
 Regexp
 require
 restatement
@@ -122,6 +123,7 @@ set_acceptance_code
 set_cursor
 set_statement
 shift
+skip
 sort
 split
 statement

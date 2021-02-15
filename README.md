@@ -1,6 +1,6 @@
 # korekto
 
-* [VERSION 0.0.210214](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 0.0.210215](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -17,21 +17,27 @@ $ korekto --install
 ```korekto
 # Imports
 < BOOTSTRAP.md
-# Syntax
-? balanced? '(){}[]'
-? length < 66
+# Type patterns and variables
+! V /\w/
+! V {u v w}
+! :NL /\n/
+! :NL {;}
+# Acceptance pattern
+u;:if u, :then v;v	#I1 Modus Ponem
 # Statements
-/^([\d\+]+)=([\d\+]+)\n\1=([\d\+]+)\n\2=\3$/	#I1 Subtitution
-/^(\w+)=\1$/	#A2 Reflection
-2=1+1	#D3 Two
-2=2	#T4/A2 Reflection
-1+1=2	#C5/I1,D3,T4 Subtitution
+S{s,t}	#D2 Statements
+s	#P3
+:if s, :then t	#P4
+t	#C5/I1,P3,P4 Modus Ponem
 ```
 See also [BOOTSTRAP.md](BOOTSTRAP.md).
 
+This is a total rewrite of my initial attempt at a proof checker, [ulpc](https://www.github.com/carlosjhr64/ulpc).
+Still working on it, but it's much improved and simplified.
+
 ## LICENSE:
 
-Copyright 2021 carlosjhr64
+Copyright 2021 CarlosJHR64
 
 Permission is hereby granted, free of charge,
 to any person obtaining a copy of this software and
