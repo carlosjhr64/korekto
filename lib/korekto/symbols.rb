@@ -26,7 +26,7 @@ class Symbols
   end
 
   def define!(statement, skip={})
-    Symbols.each(statement){|w| @a[w]=nil unless skip.key?(w)}
+    Symbols.each(statement){|w| @a[w]=nil unless skip.include? w}
   end
 end
 end
