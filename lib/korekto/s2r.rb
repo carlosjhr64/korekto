@@ -13,12 +13,16 @@ class S2R
       pattern,count,seen = '^',0,{}
       Korekto::Symbols.each(Regexp.quote(statement)) do |v|
         if type = @v2t[v]
-          if n=seen[v]
-            pattern << '\\'+n
+          if type==':nl'
+            pattern << @t2p[type]
           else
-            count += 1
-            seen[v]=count.to_s
-            pattern << '('+@t2p[type]+')'
+            if n=seen[v]
+              pattern << '\\'+n
+            else
+              count += 1
+              seen[v]=count.to_s
+              pattern << '('+@t2p[type]+')'
+            end
           end
         else
           pattern << v

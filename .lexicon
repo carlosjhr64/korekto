@@ -42,6 +42,7 @@ fn
 freeze
 get_current_buf
 get_current_win
+gsub
 Hash
 has_key
 heap
@@ -91,6 +92,8 @@ msg
 n
 Neovim
 new
+newlines_count
+nl
 nvim
 parse
 patch
@@ -121,6 +124,7 @@ s1
 s2
 s2r
 S2R
+scan
 seen
 select
 set_acceptance_code

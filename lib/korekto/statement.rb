@@ -94,8 +94,13 @@ class Statement
     set_statement('P')
   end
 
+  def newlines_count(n)
+    raise Error, "expected #{n} newlines" unless n==@regexp.inspect.gsub('\\\\','').scan('\\n').length
+  end
+
   def axiom
     @regexp = @context.s2r[@statement]
+    newlines_count(0)
     set_statement('A')
   end
 
@@ -112,6 +117,7 @@ class Statement
 
   def inference
     @regexp = @context.s2r[@statement]
+    newlines_count(2)
     set_statement('I')
   end
 
@@ -138,6 +144,7 @@ class Statement
 
   def existential
     @regexp = @context.s2r[@statement]
+    newlines_count(1)
     set_statement('E')
   end
 
@@ -163,6 +170,7 @@ class Statement
 
   def mapping
     @regexp = @context.s2r[@statement]
+    newlines_count(1)
     set_statement('M')
   end
 

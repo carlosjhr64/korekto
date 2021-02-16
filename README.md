@@ -20,8 +20,8 @@ $ korekto --install
 # Type patterns and variables
 ! V /\w/
 ! V {u v w}
-! :NL /\n/
-! :NL {;}
+! :nl /\n/
+! :nl {;}
 # Acceptance pattern
 u;:if u, :then v;v	#I1 Modus Ponem
 # Statements

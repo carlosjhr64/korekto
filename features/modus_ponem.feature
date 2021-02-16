@@ -4,13 +4,13 @@ Feature: modus_ponem
 ```korekto
 ! V /\w/
 ! V {u v w}
-! :NL /\n/
-! :NL {;}
-u;:if[u,v];v  #I Modus Ponem
-S{s,t}        #D Statements
-s             #P
-:if[s,t]      #P
-t             #C
+! :nl /\n/
+! :nl {;}
+u;:if[u,v];v	#I1 Modus Ponem
+S{s,t}	#D2 Statements
+s	#P3
+:if[s,t]	#P4
+t	#C5/I1,P3,P4 Modus Ponem
 ```
 
   Background:
