@@ -88,7 +88,6 @@ M_FENCE
 M_FENCE_KOREKTO
 msg
 n
-name
 Neovim
 new
 nvim

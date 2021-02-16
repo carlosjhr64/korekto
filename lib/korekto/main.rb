@@ -18,16 +18,16 @@ class Main
 
   def type_pattern(type, pattern)
     t2p = @statements.s2r.t2p
-    raise "name #{name} in use" if t2p.has_key? type
+    raise Error, "type #{type} in use" if t2p.has_key? type
     t2p[type] = pattern
   end
 
   def type_variables(type, variables)
     v2t,t2p = @statements.s2r.v2t,@statements.s2r.t2p
     pattern = t2p[type]
-    raise "type #{type} not defined" unless pattern
+    raise Error, "type #{type} not defined" unless pattern
     variables.each do |variable|
-      raise "variable #{variable} in use" if v2t.has_key? variable
+      raise Error, "variable #{variable} in use" if v2t.has_key? variable
       v2t[variable] = type
     end
   end
@@ -35,7 +35,7 @@ class Main
   def active?
     case @line
     when M_FENCE_KOREKTO
-      raise 'unexpected fence' if @active
+      raise Error, 'unexpected fence' if @active
       @active = true
       false
     when M_FENCE
@@ -47,7 +47,7 @@ class Main
   end
 
   def patch(klass, method, definition)
-    raise "overides: #{klass}##{method}" if eval(klass).method_defined? method
+    raise Error, "overrides: #{klass}##{method}" if eval(klass).method_defined? method
     eval <<~EVAL
       class #{klass}
         def #{method}#{definition}
@@ -84,14 +84,15 @@ class Main
           code,title = @statements.add(md[:statement].strip, md[:code], md[:title])
           puts "#{@filename}:#{line_number}:0:#{code}:#{title}"
         else
-          raise 'unrecognized korekto line'
+          raise Error, 'unrecognized korekto line'
         end
-      rescue Statement::Error
+      rescue Error
         puts "#{@filename}:#{line_number}:0:!:#{$!.message}"
+        exit 65
       rescue
         puts "#{@filename}:#{line_number}:0:?:#{$!.message}"
-        $stderr.puts $!.backtrace if $VERBOSE
-        exit
+        $stderr.puts $!.backtrace
+        exit 1
       end
     end
   end

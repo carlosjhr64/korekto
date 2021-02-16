@@ -18,7 +18,7 @@ N{0,1,2,3,...}	#D3
   Background:
     * Given command "korekto"
 
-  Scenario: Exitential Instantiation
+  Scenario: Existential Instantiation
     * Given option "< features/existential_instantiation.feature"
     * When we run command
     * Then exit status is "0"

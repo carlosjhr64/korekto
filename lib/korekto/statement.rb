@@ -1,6 +1,5 @@
 module Korekto
 class Statement
-  class Error < RuntimeError; end
   attr_reader :code,:title,:context,:regexp
   def initialize(statement, code, title, context)
     @statement,@code,@title,@context = statement,code,title,context

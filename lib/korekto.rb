@@ -1,5 +1,6 @@
 module Korekto
   VERSION = '0.0.210216'
+  class Error < RuntimeError; end
   require 'korekto/symbols'
   require 'korekto/syntax'
   require 'korekto/s2r'
