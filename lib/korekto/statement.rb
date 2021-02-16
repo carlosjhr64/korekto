@@ -27,8 +27,8 @@ class Statement
   def syntax_check
     @context.syntax.each do |rule|
       raise Error, "syntax: #{rule}" unless @statement.instance_eval(rule)
-    rescue
-      raise "#{$!.class}: #{rule}"
+    rescue # other than Korekto::Error < Exception
+      raise Error, "#{$!.class}: #{rule}"
     end
   end
 
@@ -55,7 +55,7 @@ class Statement
     when 'R'
       result
     else
-      raise "statement type #{@code[0]} not implemented"
+      raise Error, "statement type #{@code[0]} not implemented"
     end
   end
 

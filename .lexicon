@@ -33,6 +33,7 @@ each
 empty
 Error
 eval
+Exception
 existential
 exit
 fields
@@ -114,7 +115,6 @@ rstrip
 Ruby30
 rule
 run
-RuntimeError
 s
 s0
 s1

@@ -7,8 +7,10 @@ class Syntax
   def push(s)
     # ensure it'll eval on string and returns boolean
     b = ''.instance_eval(s)
-    raise 'syntax rule must eval boolean' unless b==!!b
+    raise Error, 'syntax rule must eval boolean' unless b==!!b
     @a.push(s)
+  rescue
+    raise Error, "#{$!.class}: #{s}"
   end
 
   def each

@@ -1,5 +1,8 @@
 #! ruby
 require 'test/unit'
+module Korekto
+  class Error < Exception; end
+end
 require 'korekto/syntax'
 
 class TestSymbols < Test::Unit::TestCase
@@ -8,14 +11,14 @@ class TestSymbols < Test::Unit::TestCase
     syntax.push 'length < 120'
     syntax.each{a<<_1}
     assert_equal ['length < 120'], a
-    error = assert_raises(RuntimeError) do
+    error = assert_raises(Korekto::Error) do
       syntax.push 'length'
     end
     assert_equal 'syntax rule must eval boolean', error.message
-    error = assert_raises(NameError) do
+    error = assert_raises(Korekto::Error) do
       syntax.push 'leNgTh < 120'
     end
-    assert error.message.start_with?('undefined local variable or method')
+    assert_equal 'NameError: leNgTh < 120', error.message
     syntax.push 'is_a? String'
     syntax.each do |test|
       assert 'ABC'.instance_eval(test)

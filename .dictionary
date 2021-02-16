@@ -28,7 +28,6 @@ Ponem
 preprocess
 readlines
 rubygems
-RuntimeError
 stderr
 stdin
 str
