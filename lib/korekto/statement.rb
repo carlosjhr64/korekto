@@ -56,7 +56,7 @@ class Statement
     when 'R'
       result
     else
-      raise "statement type #{@code[0]} not defined"
+      raise "statement type #{@code[0]} not implemented"
     end
   end
 
