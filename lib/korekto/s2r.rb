@@ -24,6 +24,7 @@ class S2R
           pattern << v
         end
       end
+      raise Error, 'pattern with no captures' if count < 1
       pattern << '$'
       Regexp.new(pattern)
     end

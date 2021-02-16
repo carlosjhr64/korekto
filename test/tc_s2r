@@ -1,5 +1,8 @@
 #! ruby
 require 'test/unit'
+module Korekto
+  class Error < Exception; end
+end
 require 'korekto/symbols'
 require 'korekto/s2r'
 
@@ -13,9 +16,10 @@ class TestS2R < Test::Unit::TestCase
     assert_equal '/^match$/', regexp.inspect
 
     # using variable pattern translations, straight pass
-    regexp = s2r['a=a']
-    assert_equal Regexp, regexp.class
-    assert_equal '/^a=a$/', regexp.inspect
+    error = assert_raises(Korekto::Error) do
+      regexp = s2r['a=a']
+    end
+    assert_equal 'pattern with no captures', error.message
 
     # using variable pattern translations, a => \w
     s2r.t2p[':Variable'] = '\w'
