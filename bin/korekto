@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'help_parser'
 
-OPTIONS = HelpParser['0.0.210215', <<HELP]
+OPTIONS = HelpParser['0.0.210216', <<HELP]
 Usage:
   korekto [:options+]
 Options:
@@ -18,6 +18,12 @@ HELP
 
 if OPTIONS.install?
   require 'fileutils'
+  # pack
+  dest = File.expand_path '~/.local/share/nvim/site/pack/korekto'
+  FileUtils.mkdir_p dest
+  src = File.join File.dirname(__dir__), 'start'
+  FileUtils.cp_r src, dest
+  # rplugin
   dest = File.expand_path '~/.config/nvim'
   src = File.join File.dirname(__dir__), 'rplugin'
   FileUtils.cp_r src, dest
