@@ -10,3 +10,4 @@ highlight Pass    ctermfg=darkgreen
 highlight Syntax  ctermfg=darkmagenta
 highlight Patch   ctermfg=darkgrey
 highlight Import  ctermfg=darkyellow
+setlocal tabstop=23
