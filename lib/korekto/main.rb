@@ -1,6 +1,6 @@
 module Korekto
 class Main
-  MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[A-Z]\d+(,[A-Z]\d+)*)?)?)( (?<title>[A-Z][\w\s]*\w))?$}
+  MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[A-Z]\d+\S*)?)?)( (?<title>[A-Z][\w\s]*\w))?$}
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
   MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)#(?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
   MD_RULE = /^[?] (?<rule>\S.*)$/
@@ -85,7 +85,11 @@ class Main
         next unless active?
         next if preprocess?
         if md = MD_STATEMENT_CODE_TITLE.match(@line)
-          code,title = @statements.add(md[:statement].strip, md[:code], md[:title])
+          code,title = @statements.add(md[:statement].strip,
+                                       md[:code],
+                                       md[:title],
+                                       @filename,
+                                       line_number)
           puts "#{@filename}:#{line_number}:#{code}:#{title}"
         else
           raise Error, 'unrecognized korekto line'

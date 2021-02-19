@@ -17,7 +17,7 @@ class Statements
     @statements.length
   end
 
-  def add(statement, code, title)
+  def add(statement,code,title,filename,line_number)
     if restatement = @statements.detect{_1.to_s==statement}
       case restatement.type
       when 'D','X','P','T','C','R'
@@ -29,7 +29,7 @@ class Statements
       title ||= restatement.title
       return code, title
     end
-    statement = Statement.new(statement, code, title, self)
+    statement = Statement.new(statement,code,title,filename,line_number,self)
     @statements.push statement
     case statement.type
     when 'A','I','E','M'

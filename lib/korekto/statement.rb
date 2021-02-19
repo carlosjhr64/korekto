@@ -1,9 +1,10 @@
 module Korekto
 class Statement
-  attr_reader :code,:title,:context,:regexp
-  def initialize(statement, code, title, context)
-    @statement,@code,@title,@context = statement,code,title,context
-    @statement.freeze
+  attr_reader :code,:title,:regexp,:filename,:line_number
+  def initialize(statement,code,title,filename,line_number,context)
+    @statement,@code,@title,@line_number,@context = statement,code,title,line_number,context
+    @filename = File.basename(filename,'.*')
+    @statement.freeze; @filename.freeze; @line_number.freeze
     syntax_check
     @regexp = nil
     set_acceptance_code
@@ -19,7 +20,7 @@ class Statement
   private
 
   def set_statement(code, support=nil, title=nil)
-    @code = "#{code}#{ @context.length + 1 }"
+    @code = "#{code}#{@line_number}"
     @code += "/#{support}" if support
     @title ||= title
   end
@@ -112,6 +113,7 @@ class Statement
     raise Error, "does not match any axiom" unless axiom
     support,title = axiom.code,axiom.title
     support,_ = support.split('/', 2)
+    support += '.'+axiom.filename unless axiom.filename=='-'
     set_statement('T', support, title)
   end
 
@@ -126,8 +128,11 @@ class Statement
     inference,s1,s2 = infer
     raise Error, "does not match any inference" unless inference
     cm,title = inference.code,inference.title
+    cm += '.'+inference.filename unless inference.filename=='-'
     c1,_ = s1.code; c1,_ = c1.split('/', 2)
+    c1 += '.'+s1.filename unless s1.filename=='-'
     c2,_ = s2.code; c2,_ = c2.split('/', 2)
+    c2 += '.'+s2.filename unless s2.filename=='-'
     support = [cm,c1,c2].join(',')
     set_statement('C', support, title)
   end
@@ -153,7 +158,9 @@ class Statement
     existential,s1 = heap_search('E')
     raise Error, 'does not match any existential' unless existential
     cm,title = existential.code,existential.title
+    cm += '.'+existential.filename unless existential.filename=='-'
     c1,_ = s1.code; c1,_ = c1.split('/',2)
+    c1 += '.'+s1.filename unless s1.filename=='-'
     support = [cm,c1].join(',')
     set_statement('X', support, title)
   end
@@ -179,7 +186,9 @@ class Statement
     mapping,s1 = heap_search('M')
     raise Error, 'does not match any mapping' unless mapping
     cm,title = mapping.code,mapping.title
+    cm += '.'+mapping.filename unless mapping.filename=='-'
     c1,_ = s1.code; c1,_ = c1.split('/',2)
+    c1 += '.'+s1.filename unless s1.filename=='-'
     support = [cm,c1].join(',')
     set_statement('R', support, title)
   end

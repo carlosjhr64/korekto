@@ -23,12 +23,12 @@ $ korekto --install
 ! :nl /\n/
 ! :nl {;}
 # Acceptance pattern
-u;:if u, :then v;v	#I1 Modus Ponem
+u;:if u, :then v;v	#I26 Modus Ponem
 # Statements
-S{s,t}	#D2 Statements
-s	#P3
-:if s, :then t	#P4
-t	#C5/I1,P3,P4 Modus Ponem
+S{s,t}	#D28 Statements
+s	#P29
+:if s, :then t	#P30
+t	#C31/I26,P29,P30 Modus Ponem
 ```
 See also [BOOTSTRAP.md](BOOTSTRAP.md).
 

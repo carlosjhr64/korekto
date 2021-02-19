@@ -6,10 +6,10 @@ Feature: mapping_result
 ! W {w}
 ! :nl /\n/
 ! :nl {;}
-w+w;2w	#M1
-N{a}	#D2
-a+a	#P3
-2a	#R4/M1,P3
+w+w;2w	#M9
+N{a}	#D10
+a+a	#P11
+2a	#R12/M9,P11
 ```
 
   Background:
@@ -20,4 +20,4 @@ a+a	#P3
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "-:9:M1:\n-:10:D2:\n-:11:P3:\n-:12:R4/M1,P3:"
+    * Then stdout is "-:9:M9:\n-:10:D10:\n-:11:P11:\n-:12:R12/M9,P11:"

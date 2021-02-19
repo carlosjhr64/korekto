@@ -6,11 +6,11 @@ Feature: modus_ponem
 ! V {u v w}
 ! :nl /\n/
 ! :nl {;}
-u;:if[u,v];v	#I1 Modus Ponem
-S{s,t}	#D2 Statements
-s	#P3
-:if[s,t]	#P4
-t	#C5/I1,P3,P4 Modus Ponem
+u;:if[u,v];v	#I9 Modus Ponem
+S{s,t}	#D10 Statements
+s	#P11
+:if[s,t]	#P12
+t	#C13/I9,P11,P12 Modus Ponem
 ```
 
   Background:
@@ -21,4 +21,4 @@ t	#C5/I1,P3,P4 Modus Ponem
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "-:9:I1:Modus Ponem\n-:10:D2:Statements\n-:11:P3:\n-:12:P4:\n-:13:C5/I1,P3,P4:Modus Ponem"
+    * Then stdout is "-:9:I9:Modus Ponem\n-:10:D10:Statements\n-:11:P11:\n-:12:P12:\n-:13:C13/I9,P11,P12:Modus Ponem"

@@ -8,6 +8,7 @@ attr_reader
 axiom
 b
 backtrace
+basename
 buf
 c
 c1
@@ -36,6 +37,7 @@ Exception
 existential
 exit
 fields
+File
 filename
 fn
 freeze
