@@ -19,6 +19,12 @@ class Statements
 
   def add(statement, code, title)
     if restatement = @statements.detect{_1.to_s==statement}
+      case restatement.type
+      when 'D','X','P','T','C','R'
+        @heap.add restatement
+      else
+        raise 'restatement'
+      end
       code,_ = restatement.code
       title ||= restatement.title
       return code, title
