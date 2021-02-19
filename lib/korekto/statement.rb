@@ -105,16 +105,23 @@ class Statement
     set_statement('A')
   end
 
+  def support(*s)
+    support = []
+    s.each do |s|
+      c = s.code.split('/',2)[0]
+      c += '.'+s.filename unless s.filename=='-'
+      support.push(c)
+    end
+    return support.join(',')
+  end
+
   def tautology
     all_defined
     axiom = @context.type('A').detect do |statement|
       statement.match? @statement
     end
     raise Error, "does not match any axiom" unless axiom
-    support,title = axiom.code,axiom.title
-    support,_ = support.split('/', 2)
-    support += '.'+axiom.filename unless axiom.filename=='-'
-    set_statement('T', support, title)
+    set_statement('T', support(axiom), axiom.title)
   end
 
   def inference
@@ -123,18 +130,12 @@ class Statement
     set_statement('I')
   end
 
+
   def conclusion
     all_defined
     inference,s1,s2 = infer
     raise Error, "does not match any inference" unless inference
-    cm,title = inference.code,inference.title
-    cm += '.'+inference.filename unless inference.filename=='-'
-    c1,_ = s1.code; c1,_ = c1.split('/', 2)
-    c1 += '.'+s1.filename unless s1.filename=='-'
-    c2,_ = s2.code; c2,_ = c2.split('/', 2)
-    c2 += '.'+s2.filename unless s2.filename=='-'
-    support = [cm,c1,c2].join(',')
-    set_statement('C', support, title)
+    set_statement('C', support(inference,s1,s2), inference.title)
   end
 
   def infer
@@ -157,12 +158,7 @@ class Statement
     raise Error, 'nothing to instantiate' if @context.symbols.undefined(@statement).empty?
     existential,s1 = heap_search('E')
     raise Error, 'does not match any existential' unless existential
-    cm,title = existential.code,existential.title
-    cm += '.'+existential.filename unless existential.filename=='-'
-    c1,_ = s1.code; c1,_ = c1.split('/',2)
-    c1 += '.'+s1.filename unless s1.filename=='-'
-    support = [cm,c1].join(',')
-    set_statement('X', support, title)
+    set_statement('X', support(existential,s1), existential.title)
   end
 
   def heap_search(type)
@@ -185,12 +181,7 @@ class Statement
     all_defined
     mapping,s1 = heap_search('M')
     raise Error, 'does not match any mapping' unless mapping
-    cm,title = mapping.code,mapping.title
-    cm += '.'+mapping.filename unless mapping.filename=='-'
-    c1,_ = s1.code; c1,_ = c1.split('/',2)
-    c1 += '.'+s1.filename unless s1.filename=='-'
-    support = [cm,c1].join(',')
-    set_statement('R', support, title)
+    set_statement('R', support(mapping,s1), mapping.title)
   end
 end
 end
