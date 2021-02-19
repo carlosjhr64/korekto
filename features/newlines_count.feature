@@ -28,4 +28,4 @@ t	#C5/I1,P3,P4 Modus Ponem
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:9:0:!:expected 2 newlines"
+    * Then stdout is "-:9:!:expected 2 newlines"

@@ -32,4 +32,4 @@ BACA   #C
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "-:5:0:A1:\n-:6:0:I2:\n-:7:0:D3:\n-:8:0:T4/A1:\n-:9:0:T5/A1:\n-:10:0:C6/I2,T4,T5:"
+    * Then stdout is "-:5:A1:\n-:6:I2:\n-:7:D3:\n-:8:T4/A1:\n-:9:T5/A1:\n-:10:C6/I2,T4,T5:"

@@ -22,7 +22,7 @@ class Symbols
     Symbols.each(statement) do |w|
       undefined.push w unless @a.include? w
     end
-    return undefined
+    return undefined.uniq
   end
 
   def define!(statement, skip={})

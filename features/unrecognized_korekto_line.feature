@@ -14,4 +14,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:5:0:!:unrecognized korekto line"
+    * Then stdout is "-:5:!:unrecognized korekto line"

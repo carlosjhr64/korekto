@@ -11,8 +11,9 @@ class Main
   M_FENCE = /^```\s*$/
   M_COMMENT_LINE = /^\s*#/
 
-  def initialize(filename='-', statements: Statements.new)
-    @filename,@statements = filename,statements
+  def initialize(filename='-', statements: Statements.new, imports: [])
+    @filename,@statements,@imports = filename,statements,imports
+    @imports.push @filename
     @line,@active = nil,false
   end
 
@@ -58,7 +59,10 @@ class Main
   def preprocess?
     case @line
     when MD_FILENAME
-      Main.new($~[:filename].strip, statements:@statements).run
+      filename = $~[:filename].strip
+      unless @imports.include? filename
+        Main.new(filename, statements:@statements, imports:@imports).run
+      end
     when MD_KLASS_METHOD_DEFINITION
       patch($~[:klass],$~[:method],$~[:definition])
     when MD_RULE
@@ -82,15 +86,15 @@ class Main
         next if preprocess?
         if md = MD_STATEMENT_CODE_TITLE.match(@line)
           code,title = @statements.add(md[:statement].strip, md[:code], md[:title])
-          puts "#{@filename}:#{line_number}:0:#{code}:#{title}"
+          puts "#{@filename}:#{line_number}:#{code}:#{title}"
         else
           raise Error, 'unrecognized korekto line'
         end
       rescue Error
-        puts "#{@filename}:#{line_number}:0:!:#{$!.message}"
+        puts "#{@filename}:#{line_number}:!:#{$!.message}"
         exit 65
       rescue
-        puts "#{@filename}:#{line_number}:0:?:#{$!.message}"
+        puts "#{@filename}:#{line_number}:?:#{$!.message}"
         $stderr.puts $!.backtrace
         exit 1
       end

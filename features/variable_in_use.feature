@@ -17,4 +17,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:8:0:!:variable a in use"
+    * Then stdout is "-:8:!:variable a in use"

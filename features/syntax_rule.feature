@@ -15,4 +15,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:6:0:!:syntax: length < 7"
+    * Then stdout is "-:6:!:syntax: length < 7"

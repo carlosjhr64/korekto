@@ -15,4 +15,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:6:0:!:RuntimeError: raise 'No!' if self=='Cacahuates!'; true"
+    * Then stdout is "-:6:!:RuntimeError: raise 'No!' if self=='Cacahuates!'; true"

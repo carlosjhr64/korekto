@@ -5,15 +5,15 @@ Neovim.plugin do |plug|
       buf = nvim.get_current_buf
       msg = 'OK'
       while validation = validations.shift
-        fields = validation.split(':',5)
+        fields = validation.split(':',4)
         n = fields[1].to_i
         if n > 0
-          fn,code,title = fields[0],fields[3],fields[4]
+          fn,ln,code,title = fields
           if code=='?' or code=='!'
             # move onto error if on page
             nvim.get_current_win.set_cursor([n,0]) if fn=='-'
             # echo error message
-            msg = title
+            msg = "#{fn}:#{ln}: #{title}"
             # and stop.
             break
           elsif fn=='-'

@@ -14,4 +14,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:5:0:!:statement type Z not implemented"
+    * Then stdout is "-:5:!:statement type Z not implemented"

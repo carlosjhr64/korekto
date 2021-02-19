@@ -20,4 +20,4 @@ a+a	#P3
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "-:9:0:M1:\n-:10:0:D2:\n-:11:0:P3:\n-:12:0:R4/M1,P3:"
+    * Then stdout is "-:9:M1:\n-:10:D2:\n-:11:P3:\n-:12:R4/M1,P3:"
