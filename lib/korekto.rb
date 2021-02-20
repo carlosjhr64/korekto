@@ -1,5 +1,5 @@
 module Korekto
-  VERSION = '0.0.210219'
+  VERSION = '0.0.210220'
   class Error < Exception; end
   require 'korekto/symbols'
   require 'korekto/syntax'
