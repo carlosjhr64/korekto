@@ -79,11 +79,11 @@ The accepted statement must be in the heap(typically the last 13 statements).
 ```korekto
 /^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M80 A and B then A good with B
 ```
-### `R` if for Result
+### `R` is for Result
 
 `R` statements are those that matched any preceding `M` statements
 in combination with one previous statement in the heap(typically the last 13 statements).
-The must not have any undefined symbols
+It must not have any undefined symbols.
 ```korekto
 :meat :good :with :pudding	#R88/M80,C72 A and B then A good with B
 ```
