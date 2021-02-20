@@ -2,7 +2,7 @@
 
 * [VERSION 0.0.210220](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
-* [rubygems](https://rubygems.org/gems/korekto)
+* TODO: rubygems
 
 ## DESCRIPTION:
 
@@ -34,6 +34,8 @@ See also [BOOTSTRAP.md](BOOTSTRAP.md).
 
 This is a total rewrite of my initial attempt at a proof checker, [ulpc](https://www.github.com/carlosjhr64/ulpc).
 Still working on it, but it's much improved and simplified.
+
+## [MORE](examples/index.md)
 
 ## LICENSE:
 
