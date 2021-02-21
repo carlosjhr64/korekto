@@ -18,7 +18,7 @@
 (2)=(a^2)/(b^2)	#R18/M6.Algebra,R17
 (a^2)=(2)(b^2)	#R19/M7.Algebra,R18
 a^2=2(b^2)	#R20/M52.Bootstrap,R19 Unmark raised logogram
-:Int[b^2]	#R21/M6.Integer,R13 Wut int
+:Int[b^2]	#R21/M6.Integer,R13
 :Even[2(b^2)]	#R22/M7.Integer,R21
 :Even[a^2]	#C23/I30.Bootstrap,R20,R22 Substitution
 :Even[a]	#R24/M5.Integer,C23
@@ -31,7 +31,7 @@ a=2c	#R29/M35.Bootstrap,X27 Independantly true
 2(b^2)=(2c)^2	#R31/M24.Bootstrap,C30
 2(b^2)=4(c^2)	#R32/M8.Algebra,R31
 b^2=2(c^2)	#R33/M9.Algebra,R32
-:Int[c^2]	#R34/M6.Integer,R28 Wut int
+:Int[c^2]	#R34/M6.Integer,R28
 :Even[2(c^2)]	#R35/M7.Integer,R34
 :Even[b^2]	#C36/I30.Bootstrap,R33,R35 Substitution
 :Even[b]	#R37/M5.Integer,C36
