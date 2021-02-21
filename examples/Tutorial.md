@@ -93,8 +93,11 @@ It must not have any undefined symbols.
 they yield `X`(instantiation) statements.
 They are used to instantiate new symbols in some context.
 ```korekto
-/^:\w+ :good :with (:\w+)\n:\w+ :also :good :with \1$/	#E96 Also good with
+/^:\w+ :good :with (:\w+)\n:\w+ :also :good :with \1$/	#E96 Also good with 1
 ```
+If the title(in the comment section) includes a number,
+it should be the expected number of instantiations(up to 9).
+
 ### `X` if for Instantiation
 
 `X` statements are results like `R`, but
@@ -102,7 +105,7 @@ are a consequence of an `E` existential statement, and
 must introduce at least one new symbol.
 ```korekto
 # cherry was added in context of "also good with pudding"
-:cherry :also :good :with :pudding	#X105/E96,R88 Also good with
+:cherry :also :good :with :pudding	#X105/E96,R88 Also good with 1
 ```
 ## Statements table
 
