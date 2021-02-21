@@ -155,9 +155,13 @@ class Statement
   end
 
   def instantiation
-    raise Error, 'nothing to instantiate' if @context.symbols.undefined(@statement).empty?
+    undefined = @context.symbols.undefined(@statement)
+    raise Error, 'nothing to instantiate' if undefined.empty?
     existential,s1 = heap_search('E')
     raise Error, 'does not match any existential' unless existential
+    if n = existential.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
+      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
+    end
     set_statement('X', support(existential,s1), existential.title)
   end
 
