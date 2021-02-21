@@ -4,5 +4,5 @@
   * [Statement type](Tutorial.md#Statement-types)
   * [Statements table](Tutorial.md#Statements-table)
 * Examples
-	* TODO: Sqrt(2) is irrational! (Classic Proof)
+	* [Sqrt(2) is irrational! (Classic Proof)](Sqrt2.md)
 	* TODO: Dxx

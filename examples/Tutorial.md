@@ -105,7 +105,7 @@ are a consequence of an `E` existential statement, and
 must introduce at least one new symbol.
 ```korekto
 # cherry was added in context of "also good with pudding"
-:cherry :also :good :with :pudding	#X105/E96,R88 Also good with 1
+:cherry :also :good :with :pudding	#X108/E96,R88 Also good with 1
 ```
 ## Statements table
 
