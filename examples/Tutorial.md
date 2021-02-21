@@ -25,22 +25,22 @@ the pattern translation feature `Korekto` provides.
 `D` statements are used to introduce new symbols.
 It must introduce at least one new symbol.
 ```korekto
-N={1,2,3,4,5,6,7,8,9,...}	#D28 Natural numbers
-S={:pudding,:meat,:good,...}	#D29 Statements
+N={1,2,3,4,5,6,7,8,9,...}	#D1 Natural numbers
+S={:pudding,:meat,:good,...}	#D2 Statements
 ```
 ### `A` is for Axiom
 
 `A` statements are acceptance patterns on single statements.
 They recognize tautologies.
 ```korekto
-/^(\w)=\1$/	#A36 Reflection
+/^(\w)=\1$/	#A3 Reflection
 ```
 ### `T` is for Tautology
 
 `T` statements are those that match any preceding `A` statements.
 They must not have any undefined symbols.
 ```korekto
-4=4	#T43/A36 Reflection
+4=4	#T4/A3 Reflection
 ```
 ### `I` is for Inference
 
@@ -51,16 +51,16 @@ the size of the list of statements,
 `Korekto` requires that the correct combination be found in the last 13 statements.
 Restatement of previous results are allowed so as to add old statements into the search heap.
 ```korekto
-/^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I54 Modus Ponem
-/^(:\w+)\n(:\w+)\n\1&\2$/	#I55 Synthesis
+/^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I5 Modus Ponem
+/^(:\w+)\n(:\w+)\n\1&\2$/	#I6 Synthesis
 ```
 ### `P` is for Postulate
 
 `P` statements are used to introduce new facts(underivable from previous statements).
 It cannot have any undefined symbols.
 ```korekto
-:if :meat :then :pudding	#P62 How can you have any pudding
-:meat	#P63 You did have your meat
+:if :meat :then :pudding	#P7 How can you have any pudding
+:meat	#P8 You did have your meat
 ```
 ### `C` is for Conclusion
 
@@ -68,8 +68,8 @@ It cannot have any undefined symbols.
 in combination with two previous statements in the heap(typically the last 13 statements).
 They must not have any undefined symbols.
 ```korekto
-:pudding	#C71/I54,P62,P63 Modus Ponem You can have pudding
-:meat&:pudding	#C72/I55,P63,C71 Synthesis You can have both
+:pudding	#C9/I5,P7,P8 Modus Ponem You can have pudding
+:meat&:pudding	#C10/I6,P8,C9 Synthesis You can have both
 ```
 ### `M` is for Mapping
 
@@ -77,7 +77,7 @@ They must not have any undefined symbols.
 one previously accepted statement and the one being validated.
 The accepted statement must be in the heap(typically the last 13 statements).
 ```korekto
-/^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M80 A and B then A good with B
+/^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M11 A and B then A good with B
 ```
 ### `R` is for Result
 
@@ -85,7 +85,7 @@ The accepted statement must be in the heap(typically the last 13 statements).
 in combination with one previous statement in the heap(typically the last 13 statements).
 It must not have any undefined symbols.
 ```korekto
-:meat :good :with :pudding	#R88/M80,C72 A and B then A good with B
+:meat :good :with :pudding	#R12/M11,C10 A and B then A good with B
 ```
 ### `E` is for Existential
 
@@ -93,7 +93,7 @@ It must not have any undefined symbols.
 they yield `X`(instantiation) statements.
 They are used to instantiate new symbols in some context.
 ```korekto
-/^:\w+ :good :with (:\w+)\n:\w+ :also :good :with \1$/	#E96 Also good with 1
+/^:\w+ :good :with (:\w+)\n:\w+ :also :good :with \1$/	#E13 Also good with 1
 ```
 If the title(in the comment section) includes a number,
 it should be the expected number of instantiations(up to 9).
@@ -105,7 +105,7 @@ are a consequence of an `E` existential statement, and
 must introduce at least one new symbol.
 ```korekto
 # cherry was added in context of "also good with pudding"
-:cherry :also :good :with :pudding	#X108/E96,R88 Also good with 1
+:cherry :also :good :with :pudding	#X14/E13,R12 Also good with 1
 ```
 ## Statements table
 

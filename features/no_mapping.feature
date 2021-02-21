@@ -2,7 +2,7 @@
 Feature: no_mapping
 
 ```korekto
-{a}	#D5
+{a}	#D1
 a #R
 Does not get here #D
 ```
@@ -15,4 +15,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:5:D5:\n-:6:!:does not match any mapping"
+    * Then stdout is "-:5:D1:\n-:6:!:does not match any mapping"

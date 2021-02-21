@@ -2,12 +2,12 @@
 Feature: simple
 
 ```korekto
-/^(\w)(\w\w)\2\1$/	#A5
-/^ABABAA\nCABABC\nBACA$/	#I6
-{A B C}	#D7
-ABABAA	#T8/A5
-CABABC	#T9/A5
-BACA	#C10/I6,T8,T9
+/^(\w)(\w\w)\2\1$/	#A1
+/^ABABAA\nCABABC\nBACA$/	#I2
+{A B C}	#D3
+ABABAA	#T4/A1
+CABABC	#T5/A1
+BACA	#C6/I2,T4,T5
 ```
 
   Background:
@@ -32,4 +32,4 @@ BACA	#C10/I6,T8,T9
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "-:5:A5:\n-:6:I6:\n-:7:D7:\n-:8:T8/A5:\n-:9:T9/A5:\n-:10:C10/I6,T8,T9:"
+    * Then stdout is "-:5:A1:\n-:6:I2:\n-:7:D3:\n-:8:T4/A1:\n-:9:T5/A1:\n-:10:C6/I2,T4,T5:"

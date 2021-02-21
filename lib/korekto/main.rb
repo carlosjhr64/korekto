@@ -78,18 +78,19 @@ class Main
   end
 
   def parse(lines)
-    line_number = 0
+    statement_number = line_number = 0
     while @line = lines.shift
       begin
         line_number += 1
         next unless active?
         next if preprocess?
         if md = MD_STATEMENT_CODE_TITLE.match(@line)
+          statement_number += 1
           code,title = @statements.add(md[:statement].strip,
                                        md[:code],
                                        md[:title],
                                        @filename,
-                                       line_number)
+                                       statement_number)
           puts "#{@filename}:#{line_number}:#{code}:#{title}"
         else
           raise Error, 'unrecognized korekto line'

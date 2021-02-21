@@ -21,33 +21,33 @@
 ! :Digits {I J K}
 # Logic
 # Equality
-a=b;b=a	#M24
-a=b;a;b	#I25 Equally true
-a=b;b;a	#I26 Equally true
-a=b;c(a)d;c(b)d	#I27 Substitution
-a=b;c(b)d;c(a)d	#I28 Substitution
-a=b;c[a]d;c[b]d	#I29 Substitution
-a=b;c[b]d;c[a]d	#I30 Substitution
-a=b;c{a}d;c{b}d	#I31 Substitution
-a=b;c{b}d;c{a}d	#I32 Substitution
-A=a;cAb;c(a)b	#I33 Substitution
+a=b;b=a	#M1
+a=b;a;b	#I2 Equally true
+a=b;b;a	#I3 Equally true
+a=b;c(a)d;c(b)d	#I4 Substitution
+a=b;c(b)d;c(a)d	#I5 Substitution
+a=b;c[a]d;c[b]d	#I6 Substitution
+a=b;c[b]d;c[a]d	#I7 Substitution
+a=b;c{a}d;c{b}d	#I8 Substitution
+a=b;c{b}d;c{a}d	#I9 Substitution
+A=a;cAb;c(a)b	#I10 Substitution
 # And
-(a)&(b);b	#M35 Independantly true
-(a)&(b);a	#M36 Independantly true
-((a)&(b))&((c)&(d));a	#M37 Independantly true
-((a)&(b))&((c)&(d));b	#M38 Independantly true
-((a)&(b))&((c)&(d));c	#M39 Independantly true
-((a)&(b))&((c)&(d));d	#M40 Independantly true
+(a)&(b);b	#M11 Independantly true
+(a)&(b);a	#M12 Independantly true
+((a)&(b))&((c)&(d));a	#M13 Independantly true
+((a)&(b))&((c)&(d));b	#M14 Independantly true
+((a)&(b))&((c)&(d));c	#M15 Independantly true
+((a)&(b))&((c)&(d));d	#M16 Independantly true
 # Exist
-:Exist[A]{B|aBb};(A[C])&(aCb)	#E42 E1
-:Exist[A]{B,C|aBbCcBdCe};((A[D])&(A[E]))&(aDbEcDdEe)	#E43 E2
+:Exist[A]{B|aBb};(A[C])&(aCb)	#E17 E1
+:Exist[A]{B,C|aBbCcBdCe};((A[D])&(A[E]))&(aDbEcDdEe)	#E18 E2
 # Proofing
-:ASSUMPTION=a;a	#M45 By assumption
-c;:Not[c];:CONTRADICTION	#I46 Implied contradiction
-:CONTRADICTION;:ASSUMPTION=a;:Not[a]	#I47 Negate the assumption
+:ASSUMPTION=a;a	#M19 By assumption
+c;:Not[c];:CONTRADICTION	#I20 Implied contradiction
+:CONTRADICTION;:ASSUMPTION=a;:Not[a]	#I21 Negate the assumption
 # Marks
-aAb;a(A)b	#M49 Mark
+aAb;a(A)b	#M22 Mark
 # Unmarks
-a(A)b;aAb	#M51 Unmark
-a(A^I)b(B)c;aA^IbBc	#M52 Unmark
+a(A)b;aAb	#M23 Unmark
+a(A^I)b(B)c;aA^IbBc	#M24 Unmark
 ```

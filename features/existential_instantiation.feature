@@ -8,11 +8,11 @@ Feature: existential_instantiation
 ! P {s t}
 ! :nl /\n/
 ! :nl {;}
-:Exist[X,sxt];:and[X{u},sut]	#E11 E1
-f(x)=x*x	#D12
-N{0,1,2,3,...}	#D13
-:Exist[N,f(x)=0]	#P14
-:and[N{n},f(n)=0]	#X15/E11,P14 E1
+:Exist[X,sxt];:and[X{u},sut]	#E1 E1
+f(x)=x*x	#D2
+N{0,1,2,3,...}	#D3
+:Exist[N,f(x)=0]	#P4
+:and[N{n},f(n)=0]	#X5/E1,P4 E1
 ```
 
   Background:
@@ -23,4 +23,4 @@ N{0,1,2,3,...}	#D13
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "-:11:E11:E1\n-:12:D12:\n-:13:D13:\n-:14:P14:\n-:15:X15/E11,P14:E1"
+    * Then stdout is "-:11:E1:E1\n-:12:D2:\n-:13:D3:\n-:14:P4:\n-:15:X5/E1,P4:E1"

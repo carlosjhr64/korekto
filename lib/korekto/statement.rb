@@ -1,10 +1,10 @@
 module Korekto
 class Statement
-  attr_reader :code,:title,:regexp,:filename,:line_number
-  def initialize(statement,code,title,filename,line_number,context)
-    @statement,@code,@title,@line_number,@context = statement,code,title,line_number,context
+  attr_reader :code,:title,:regexp,:filename,:statement_number
+  def initialize(statement,code,title,filename,statement_number,context)
+    @statement,@code,@title,@statement_number,@context = statement,code,title,statement_number,context
     @filename = File.basename(filename,'.*')
-    @statement.freeze; @filename.freeze; @line_number.freeze
+    @statement.freeze; @filename.freeze; @statement_number.freeze
     syntax_check
     @regexp = nil
     set_acceptance_code
@@ -20,7 +20,7 @@ class Statement
   private
 
   def set_statement(code, support=nil, title=nil)
-    @code = "#{code}#{@line_number}"
+    @code = "#{code}#{@statement_number}"
     @code += "/#{support}" if support
     @title ||= title
   end

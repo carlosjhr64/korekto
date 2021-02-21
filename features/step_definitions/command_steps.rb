@@ -29,7 +29,7 @@ end
 
 Then %r/Then stdout is ("[^"]*")/ do |string|
   unless @stdout.inspect == string
-    raise "stdout: Expectected '#{string}'. Got '#{@stdout}'"
+    raise "stdout: Expectected '#{string}'. Got '#{@stdout.inspect}'"
   end
 end
 
