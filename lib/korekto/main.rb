@@ -1,6 +1,6 @@
 module Korekto
 class Main
-  MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[\w,.]+)?)?)( (?<title>[A-Z].*\S))?$}
+  MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[\w,.]+)?)?)( (?<title>\S.*\S))?$}
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
   MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)#(?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
   MD_RULE = /^[?] (?<rule>\S.*)$/

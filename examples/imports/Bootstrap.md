@@ -13,15 +13,16 @@
 # Patterns
 ! :nl /\n/
 ! :nl {;}
-! :Glob /.*/
+! :Glob /\S*/
 ! :Glob {a b c d e}
 ! :Logogram /\p{L}|\d+|:\w+/
 ! :Logogram {A B C D E}
 ! :Digits /\d+/
 ! :Digits {I J K}
-# Logic
+! :Bound /[\p{L}\w\^]+/
+! :Bound {s t u v}
 # Equality
-a=b;b=a	#M1
+a=b;b=a	#M1 Commutative
 a=b;a;b	#I2 Equally true
 a=b;b;a	#I3 Equally true
 a=b;c(a)d;c(b)d	#I4 Substitution
@@ -39,15 +40,15 @@ A=a;cAb;c(a)b	#I10 Substitution
 ((a)&(b))&((c)&(d));c	#M15 Independantly true
 ((a)&(b))&((c)&(d));d	#M16 Independantly true
 # Exist
-:Exist[A]{B|aBb};(A[C])&(aCb)	#E17 E1
-:Exist[A]{B,C|aBbCcBdCe};((A[D])&(A[E]))&(aDbEcDdEe)	#E18 E2
+:Exist[A]{B|aBb};(A[C])&(aCb)	#E17 Existential(1)
+:Exist[A]{B,C|aBbCcBdCe};((A[D])&(A[E]))&(aDbEcDdEe)	#E18 Existential(2)
 # Proofing
 :ASSUMPTION=a;a	#M19 By assumption
 c;:Not[c];:CONTRADICTION	#I20 Implied contradiction
-:CONTRADICTION;:ASSUMPTION=a;:Not[a]	#I21 Negate the assumption
-# Marks
-aAb;a(A)b	#M22 Mark
-# Unmarks
-a(A)b;aAb	#M23 Unmark
-a(A^I)b(B)c;aA^IbBc	#M24 Unmark
+:ASSUMPTION=a;:CONTRADICTION;:Not[a]	#I21 Negate the assumption
+# Mark
+aAb;a(A)b	#M22 Mark one
+# Unmark
+a(s)b;asb	#M23 Unmark one
+a(s)b(t)c;asbtc	#M24 Unmark two
 ```

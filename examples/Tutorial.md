@@ -68,8 +68,8 @@ It cannot have any undefined symbols.
 in combination with two previous statements in the heap(typically the last 13 statements).
 They must not have any undefined symbols.
 ```korekto
-:pudding	#C9/I5,P7,P8 Modus Ponem You can have pudding
-:meat&:pudding	#C10/I6,P8,C9 Synthesis You can have both
+:pudding	#C9/I5,P7,P8 Modus Ponem
+:meat&:pudding	#C10/I6,P8,C9 Synthesis
 ```
 ### `M` is for Mapping
 

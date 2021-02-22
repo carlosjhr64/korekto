@@ -22,7 +22,7 @@ class Statement
   def set_statement(code, support=nil, title=nil)
     @code = "#{code}#{@statement_number}"
     @code += "/#{support}" if support
-    @title ||= title
+    @title = title if title
   end
 
   def syntax_check
@@ -109,7 +109,7 @@ class Statement
     support = []
     s.each do |s|
       c = s.code.split('/',2)[0]
-      c += '.'+s.filename unless s.filename=='-'
+      c = s.filename+'.'+c unless s.filename=='-'
       support.push(c)
     end
     return support.join(',')
