@@ -6,7 +6,7 @@
   * [Statements table](Tutorial.md#Statements-table)
   * [Patterns](Tutorial.md#Patterns)
   * [Syntax](Tutorial.md#Syntax)
-  * [Monkey patching](Tutorial.md#Monkey-patching)
+  * [Monkey patches](Tutorial.md#Monkey-patches)
 * Examples
 	* [Sqrt(2) is irrational! (Classic Proof)](Sqrt2.md)
 	* TODO: Dxx
