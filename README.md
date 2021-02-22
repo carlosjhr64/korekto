@@ -1,6 +1,6 @@
 # korekto
 
-* [VERSION 0.0.210221](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 0.0.210222](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * TODO: rubygems
 
@@ -10,7 +10,7 @@ A general proof checker.
 
 ## INSTALL:
 ```shell
-$ gem install korekto
+$ gem install korekto # TODO 
 $ korekto --install
 ```
 ## SYNOPSIS:
