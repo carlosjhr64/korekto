@@ -1,12 +1,26 @@
 # Tutorial
 
-* [Statement types](#Statement types)
-* [Statements table](#Statements table)
-
 ## Intro
 
-Hello! How are you doing?
-OK, this section TODO.
+`Korekto` is not a proof assistant.
+Think of `Korekto` the same way as unit testing in `Ruby`.
+You write out your proof and for each statement there is a test.
+
+I meant `Korekto` to read markdown files with `Korekto` code fenced.
+
+    # Markdown file with fenced Korekto
+    ```korekto
+    # This is a Korekto comment
+    ```
+`Korekto` can be run on this tutorial:
+```shell
+$ korekto < examples/Tutorial.md
+```
+Also, in `neovim` you can run the command `Korekto`.
+It will check you work and move the cursor to the first error it finds.
+It will also automate many of the statement comments.
+You only need to give the statement type,
+`Korekto` completes the comment.
 
 ## Statement types
 
@@ -15,7 +29,7 @@ the words used to describe the statement types
 (Definition, Postulate, Axiom, Tautology, ...),
 be aware that the statement types
 have a very specific meaning in the `Korekto` code.
-Also I'm using literal Regexp
+Also I'm using literal `Regexp`
 in the patterns in the following examples,
 but one should best use
 the pattern translation feature `Korekto` provides.
@@ -140,8 +154,84 @@ whereas "Yes!" mean it must have at least one undefined symbol.
 |  E   | Existential   | Yes       | Yes     | X      | 1        | -    | -         |
 |  X   | Instantiation | Yes!      | No      | -      | -        | 1    | E         |
 
-In my beta testing I have come across some possible new useful statement types.
 Currently `Korekto` expects all patterns to capture,
-although no checking is done if a literal Regexp is given.
-Also, currently `korekto` blindly defines all symbols in the pattern,
-so really preferable not to use the literal Regexp.
+although no checking is done if a literal `Regexp` is given.
+Also, `korekto` blindly defines all symbols in a literal `Regexp`,
+so it's preferable not to use the literal `Regexp`.
+
+## Patterns
+
+Rather than using literal `Regexp`,
+one can write easily readable patterns to be translated into `Regexp`.
+You'll want to first define your newline pattern `/\n/`.
+I like to use `;` for the newline pattern.
+This should be named `:nl`, as `Korekto` will know not to do a capture on this one.
+```korekto
+! :nl /\n/
+! :nl {;}
+```
+The bang `!` at the start of a line tells `Korekto` it's a pattern definition.
+Pattern definitions have the following form:
+```ruby
+%r{^! (?<type>\p{L}|:\w+)\s*/(?<pattern>.*)/$}
+/^! (?<type>\p{L}|:\w+)\s*\{(?<variables>\p{Graph}( \p{Graph})*)\}$/
+```
+So if you want to capture a number into pattern variables(i,j,k), you could write:
+```korekto
+! :Number /\d+/
+! :Number {i j k}
+```
+A Reflection axiom like `#A3` above can then be rewritten for numbers as:
+```korekto
+i=i	#A15 Reflection
+```
+Although you'll probably want to make a Reflection axiom a bit more general than for just numbers.
+Demonstrating the use of `!:nl {;}`, map `#M11` above could be rewritten as follows:
+```korekto
+! :KeyWord /:\w+/
+! :KeyWord {A B}
+A&B;A :good :with B	#M16 If A and B, then A good with B.
+```
+## Syntax
+
+You can have `Korekto` reject a statement right away
+should it fail some test in the statement's String value.
+The test is `instance_eval` on the String itself.
+For example, to reject statements longer than 65 characters,
+you can write:
+```korekto
+? length < 66
+```
+Lines starting with question mark `?`
+tells `Korekto` to `intance_eval` the `ruby` code on the string.
+If the eval returns `true` it proceeds, else it's an error.
+
+## Monkey patches
+
+Because Syntax rules can go beyond what a simple `Regexp` can do,
+you can monkey patch in `ruby` code your rule.
+For example, balanced parenthesis is not at all trivial.
+Here's my monkey patch and test for balanced parenthesis:
+```korekto
+# Ruby Monkey Patches
+::Array#blp(k,m) = (m==0)?self<<k:(k==last)?self[0..-2]:self<<k
+::Array#bli = inject([]){|a,km| a.blp(*km)}
+::Array#blm(g) = map{|c| g.index(c).divmod(2)}
+::Array#bls(g) = select{|c| g.include?(c)}
+::String#balance(g) = chars.bls(g).blm(g).bli
+::String#balanced?(g) = balance(g).empty?
+# Syntax
+? balanced? '(){}[]'
+```
+The `balanced?` method translates to `ruby` as:
+```ruby
+# Monkey patching String
+class String
+  # It's a ruby 3 end-less method definition
+  def balanced?(g) = balance(g).empty?
+end
+```
+It was quite a challenge to write the algorithm entirely in this form.
+Can you see how it works? Me neither, and I wrote it! LOL.
+
+Anyways, hope that's enough to get you started.
