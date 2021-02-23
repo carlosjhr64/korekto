@@ -19,7 +19,7 @@ class Statements
   def add(statement,code,title,filename,statement_number)
     if restatement = @statements.detect{_1.to_s==statement}
       case restatement.type
-      when 'D','X','P','T','C','R'
+      when 'D','X','S','P','T','C','R'
         @heap.add restatement
       else
         raise 'restatement'
@@ -31,9 +31,9 @@ class Statements
     statement = Statement.new(statement,code,title,filename,statement_number,self)
     @statements.push statement
     case statement.type
-    when 'A','I','E','M'
+    when 'A','I','E','M','L'
       @symbols.define! statement
-    when 'D','X'
+    when 'D','X','S'
       @symbols.define! statement
       @heap.add statement
     when 'P','T','C','R'

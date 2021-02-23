@@ -39,6 +39,10 @@ class Statement
       definition
     when 'P'
       postulate
+    when 'L'
+      let
+    when 'S'
+      set
     when 'A'
       axiom
     when 'T'
@@ -99,6 +103,12 @@ class Statement
     raise Error, "expected #{n} newlines" unless n==@regexp.inspect.gsub('\\\\','').scan('\\n').length
   end
 
+  def let
+    @regexp = @context.symbols.s2r(@statement)
+    newlines_count(0)
+    set_statement('L')
+  end
+
   def axiom
     @regexp = @context.symbols.s2r(@statement)
     newlines_count(0)
@@ -113,6 +123,19 @@ class Statement
       support.push(c)
     end
     return support.join(',')
+  end
+
+  def set
+    undefined = @context.symbols.undefined(@statement)
+    raise Error, 'nothing to instantiate' if undefined.empty?
+    let = @context.type('L').detect do |statement|
+      statement.match? @statement
+    end
+    raise Error, "does not match any let" unless let
+    if n = let.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
+      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
+    end
+    set_statement('S', support(let), let.title)
   end
 
   def tautology

@@ -66,6 +66,7 @@ kl
 klass
 Korekto
 length
+let
 limit
 line
 line_number
@@ -129,6 +130,7 @@ s2r
 scan
 seen
 select
+set
 set_acceptance_code
 set_cursor
 set_scanner
