@@ -4,6 +4,7 @@ class S2R
   def initialize
     @t2p = {}
     @v2t = {}
+    @scanner = /:\w+|./
   end
 
   def [](statement)
@@ -11,7 +12,7 @@ class S2R
       Regexp.new(statement[1..-2])
     else
       pattern,count,seen = '^',0,{}
-      Korekto::Symbols.each(Regexp.quote(statement)) do |v|
+      Regexp.quote(statement).scan(@scanner) do |v|
         if type = @v2t[v]
           if type==':nl'
             pattern << @t2p[type]

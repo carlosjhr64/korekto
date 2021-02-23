@@ -9,9 +9,9 @@ axiom
 b
 backtrace
 basename
+blk
 buf
 c
-chars
 chomp
 class
 code
@@ -41,7 +41,6 @@ freeze
 get_current_buf
 get_current_win
 gsub
-Hash
 has_key
 heap
 Heap
@@ -109,6 +108,7 @@ puts
 quote
 raise
 readlines
+regex
 regexp
 Regexp
 require

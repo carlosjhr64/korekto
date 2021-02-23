@@ -15,7 +15,7 @@ class Statement
   def to_s              = @statement
   def to_str            = @statement
   def match?(statement) = @regexp.match?(statement)
-  def chars             = @statement.chars
+  def scan(regex, &blk) = @statement.scan(regex, &blk)
 
   private
 
