@@ -121,6 +121,20 @@ must introduce at least one new symbol.
 # cherry was added in context of "also good with pudding"
 :cherry :also :good :with :pudding	#X14/E13,R12 Also good with 1
 ```
+### `L` is for Let
+`L` statements are just like `A` in that they're patterns on single statements.
+But `L` statement yield statements that can instantiate new symbols.
+The number of symbols that can be introduced is set in the comment title.
+```korekto
+/^:let :there :be (:\w+)$/	#L15 Let 1
+```
+### `S` is for Set
+`S` statements are just like `T` statements
+expect that they're validated by `L` statements and
+can bring in new symbols.
+```korekto
+:let :there :be :light	#S16/L15 Let 1
+```
 ## Statements table
 
 I created these two tables of statement types which differ only in its sorting.
@@ -187,14 +201,14 @@ So if you want to capture a number into pattern variables(i,j,k), you could writ
 ```
 A Reflection axiom like `#A3` above can then be rewritten for numbers as:
 ```korekto
-i=i	#A15 Reflection
+i=i	#A17 Reflection
 ```
 Although you'll probably want to make a Reflection axiom a bit more general than for just numbers.
 Demonstrating the use of `!:nl {;}`, map `#M11` above could be rewritten as follows:
 ```korekto
 ! :KeyWord /:\w+/
 ! :KeyWord {A B}
-A&B;A :good :with B	#M16 If A and B, then A good with B.
+A&B;A :good :with B	#M18 If A and B, then A good with B.
 ```
 ## Syntax
 
