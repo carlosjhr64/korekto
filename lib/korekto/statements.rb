@@ -1,12 +1,11 @@
 module Korekto
 class Statements
-  attr_reader :heap,:symbols,:syntax,:s2r
+  attr_reader :heap,:symbols,:syntax
   def initialize
     @statements = []
     @heap = Heap.new(13)
     @symbols = Symbols.new
     @syntax = Syntax.new
-    @s2r = S2R.new
   end
 
   def type(c)
@@ -33,7 +32,7 @@ class Statements
     @statements.push statement
     case statement.type
     when 'A','I','E','M'
-      @symbols.define! statement, @s2r.v2t
+      @symbols.define! statement
     when 'D','X'
       @symbols.define! statement
       @heap.add statement

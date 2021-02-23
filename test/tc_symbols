@@ -2,13 +2,48 @@
 require 'test/unit'
 require 'korekto/symbols'
 
+# Mockups
+module Korekto
+class Error < Exception; end
+class Statement < String
+  def initialize(string)
+    super
+  end
+  def regexp
+    nil
+  end
+end
+end
+
 class TestSymbols < Test::Unit::TestCase
   def test_symbols
     symbols = Korekto::Symbols.new
-    symbols.define! 'abbba abc a:xyz a'
-    u = symbols.undefined 'abcdexyz:xyz'
+    symbols.define! Korekto::Statement.new('abbba abc a:xyz a')
+    u = symbols.undefined Korekto::Statement.new('abcdexyz:xyz')
     assert_equal ['d','e','x','y','z'], u
-    u = symbols.undefined 'abc:xyz:abc'
+    u = symbols.undefined Korekto::Statement.new('abc:xyz:abc')
     assert_equal [':abc'], u
+  end
+
+  def test_s2r
+    symbols = Korekto::Symbols.new
+
+    # literally spelling out the regexp
+    regexp = symbols.s2r Korekto::Statement.new('/^match$/')
+    assert_equal Regexp, regexp.class
+    assert_equal '/^match$/', regexp.inspect
+
+    # using variable pattern translations, straight pass
+    error = assert_raises(Korekto::Error) do
+      regexp = symbols.s2r Korekto::Statement.new('a=a')
+    end
+    assert_equal 'pattern with no captures', error.message
+
+    # using variable pattern translations, a => \w
+    symbols.t2p[':Variable'] = '\w'
+    symbols.v2t['a'] = ':Variable'
+    regexp = symbols.s2r Korekto::Statement.new('a=a')
+    assert_equal Regexp, regexp.class
+    assert_equal '/^(\w)=\1$/', regexp.inspect
   end
 end

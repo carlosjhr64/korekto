@@ -100,7 +100,7 @@ class Statement
   end
 
   def axiom
-    @regexp = @context.s2r[@statement]
+    @regexp = @context.symbols.s2r(@statement)
     newlines_count(0)
     set_statement('A')
   end
@@ -125,7 +125,7 @@ class Statement
   end
 
   def inference
-    @regexp = @context.s2r[@statement]
+    @regexp = @context.symbols.s2r(@statement)
     newlines_count(2)
     set_statement('I')
   end
@@ -149,7 +149,7 @@ class Statement
   end
 
   def existential
-    @regexp = @context.s2r[@statement]
+    @regexp = @context.symbols.s2r(@statement)
     newlines_count(1)
     set_statement('E')
   end
@@ -176,7 +176,7 @@ class Statement
   end
 
   def mapping
-    @regexp = @context.s2r[@statement]
+    @regexp = @context.symbols.s2r(@statement)
     newlines_count(1)
     set_statement('M')
   end

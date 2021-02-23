@@ -123,7 +123,6 @@ s0
 s1
 s2
 s2r
-S2R
 scan
 seen
 select
@@ -131,7 +130,6 @@ set_acceptance_code
 set_cursor
 set_statement
 shift
-skip
 sort
 split
 statement

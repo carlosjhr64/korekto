@@ -18,13 +18,13 @@ class Main
   end
 
   def type_pattern(type, pattern)
-    t2p = @statements.s2r.t2p
+    t2p = @statements.symbols.t2p
     raise Error, "type #{type} in use" if t2p.has_key? type
     t2p[type] = pattern
   end
 
   def type_variables(type, variables)
-    v2t,t2p = @statements.s2r.v2t,@statements.s2r.t2p
+    v2t,t2p = @statements.symbols.v2t,@statements.symbols.t2p
     pattern = t2p[type]
     raise Error, "type #{type} not defined" unless pattern
     variables.each do |variable|

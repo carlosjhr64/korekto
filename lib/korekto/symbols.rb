@@ -1,7 +1,10 @@
 module Korekto
 class Symbols
+  attr_reader :t2p, :v2t
   def initialize
-    @h = {}
+    @h   = {}
+    @t2p = {}
+    @v2t = {}
     @scanner = /:\w+|./
   end
 
@@ -13,8 +16,40 @@ class Symbols
     return undefined.uniq
   end
 
-  def define!(statement, skip={})
-    statement.scan(@scanner){|w| @h[w]=nil unless skip.include? w}
+  def define!(statement)
+    if statement.regexp
+      statement.scan(@scanner){|w| @h[w]=nil unless @v2t.include? w}
+    else
+      statement.scan(@scanner){|w| @h[w]=nil}
+    end
+  end
+
+  def s2r(statement)
+    if statement[0]=='/' and statement[-1]=='/'
+      Regexp.new(statement[1..-2])
+    else
+      pattern,count,seen = '^',0,{}
+      Regexp.quote(statement).scan(@scanner) do |v|
+        if type = @v2t[v]
+          if type==':nl'
+            pattern << @t2p[type]
+          else
+            if n=seen[v]
+              pattern << '\\'+n
+            else
+              count += 1
+              seen[v]=count.to_s
+              pattern << '('+@t2p[type]+')'
+            end
+          end
+        else
+          pattern << v
+        end
+      end
+      raise Error, 'pattern with no captures' if count < 1
+      pattern << '$'
+      Regexp.new(pattern)
+    end
   end
 end
 end

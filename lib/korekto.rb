@@ -3,7 +3,6 @@ module Korekto
   class Error < Exception; end
   require 'korekto/symbols'
   require 'korekto/syntax'
-  require 'korekto/s2r'
   require 'korekto/heap'
   require 'korekto/statement'
   require 'korekto/statements'
