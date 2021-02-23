@@ -60,6 +60,8 @@ instantiation
 IO
 j
 join
+key
+key_value
 kl
 klass
 Korekto
@@ -77,6 +79,7 @@ max
 M_COMMENT_LINE
 md
 MD_FILENAME
+MD_KEY_VALUE
 MD_KLASS_METHOD_DEFINITION
 MD_RULE
 MD_STATEMENT_CODE_TITLE
@@ -128,6 +131,7 @@ seen
 select
 set_acceptance_code
 set_cursor
+set_scanner
 set_statement
 shift
 sort
@@ -163,6 +167,7 @@ v
 v2t
 validation
 validations
+value
 variable
 variables
 VERSION

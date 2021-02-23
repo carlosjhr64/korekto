@@ -1,11 +1,12 @@
 module Korekto
 class Main
-  MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[\w,.]+)?)?)( (?<title>\S.*\S))?$}
+  MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(/[\w,.]+)?)?)( (?<title>\S.*?\S))?$}
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
   MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)#(?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
   MD_RULE = /^[?] (?<rule>\S.*)$/
   MD_TYPE_PATTERN = %r{^! (?<type>\p{L}|:\w+)\s*/(?<pattern>.*)/$}
   MD_TYPE_VARIABLES = /^! (?<type>\p{L}|:\w+)\s*\{(?<variables>\p{Graph}( \p{Graph})*)\}$/
+  MD_KEY_VALUE = /^! (?<key>\w+):\s*'(?<value>.*)'$/
 
   M_FENCE_KOREKTO = /^```korekto$/
   M_FENCE = /^```\s*$/
@@ -56,6 +57,15 @@ class Main
     EVAL
   end
 
+  def key_value(key, value)
+    case key
+    when 'scanner'
+      @statements.symbols.set_scanner value
+    else
+      raise Error, "Key '#{key}' not implemented"
+    end
+  end
+
   def preprocess?
     case @line
     when MD_FILENAME
@@ -71,6 +81,8 @@ class Main
       type_pattern($~[:type], $~[:pattern])
     when MD_TYPE_VARIABLES
       type_variables($~[:type], $~[:variables].split)
+    when MD_KEY_VALUE
+      key_value($~[:key], $~[:value])
     else
       return false
     end

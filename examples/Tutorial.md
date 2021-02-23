@@ -134,7 +134,9 @@ whereas "Yes!" mean it must have at least one undefined symbol.
 |  E   | Existential   | Yes       | Yes     | X      | 1        | -    | -         |
 |  M   | Mapping       | Yes       | Yes     | R      | 1        | -    | -         |
 |  A   | Axiom         | Yes       | Yes     | T      | 0        | -    | -         |
+|  L   | Let           | Yes       | Yes     | S      | 0        | -    | -         |
 |  D   | Definition    | Yes!      | No      | -      | -        | -    | -         |
+|  S   | Set           | Yes!      | No      | -      | -        | -    | L         |
 |  X   | Instantiation | Yes!      | No      | -      | -        | 1    | E         |
 |  R   | Result        | No        | No      | -      | -        | 1    | M         |
 |  C   | Conclusion    | No        | No      | -      | -        | 2    | I         |
@@ -145,6 +147,8 @@ whereas "Yes!" mean it must have at least one undefined symbol.
 |:----:|:--------------|:----------|:--------|:------:|:--------:|:----:|:---------:|
 |  D   | Definition    | Yes!      | No      | -      | -        | -    | -         |
 |  P   | Postulate     | No        | No      | -      | -        | -    | -         |
+|  L   | Let           | Yes       | Yes     | S      | 0        | -    | -         |
+|  S   | Set           | Yes!      | No      | -      | -        | -    | L         |
 |  A   | Axiom         | Yes       | Yes     | T      | 0        | -    | -         |
 |  T   | Tautology     | No        | No      | -      | -        | -    | A         |
 |  M   | Mapping       | Yes       | Yes     | R      | 1        | -    | -         |

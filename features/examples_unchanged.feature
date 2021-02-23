@@ -12,7 +12,7 @@ Feature: examples_unchanged
   Scenario: Tutorial
     * Given option "< examples/Tutorial.md"
     * When we run command
-    * Then digest is "c77e1275a6293d0d518a945b867c2de9"
+    * Then digest is "e4dcb6d2bf1597a225e684f1abf8b9e1"
 
   Scenario: Algebra
     * Given option "< examples/imports/Algebra.md"
