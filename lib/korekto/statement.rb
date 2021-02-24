@@ -58,23 +58,6 @@ class Statement
     end
   end
 
-=begin
-    # TODO: not sure I want this
-    def tautology?
-      @context.type('A').any?{|statement| statement.match? @statement}
-    end
-
-    def inferable?
-      mapping,*_ = infer
-      not mapping.nil?
-    end
-
-    def assert_not_provable
-      raise Error, 'tautology' if tautology?
-      raise Error, 'inferable' if inferable?
-    end
-=end
-
   # Helper functions
  
   def set_statement(support=nil, title=nil)
@@ -145,13 +128,11 @@ class Statement
 
   def definition
     get_undefined
-#   assert_not_provable unless OPTIONS.fast?
     set_statement
   end
 
   def postulate
     all_defined
-#   assert_not_provable unless OPTIONS.fast?
     set_statement
   end
 

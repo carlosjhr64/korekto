@@ -13,8 +13,6 @@ Options:
 #   cat README.md | korekto
 #   korekto < README.md
 HELP
-# TODO: not sure if I want this:
-#--fast      \tSkips slow validations
 
 if OPTIONS.install?
   require 'fileutils'
