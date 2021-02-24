@@ -40,23 +40,23 @@ class Statement
     when 'P'
       postulate
     when 'L'
-      let
+      pattern_type(0)
     when 'S'
       set
     when 'A'
-      axiom
+      pattern_type(0)
     when 'T'
       tautology
     when 'I'
-      inference
+      pattern_type(2)
     when 'C'
       conclusion
     when 'E'
-      existential
+      pattern_type(1)
     when 'X'
       instantiation
     when 'M'
-      mapping
+      pattern_type(1)
     when 'R'
       result
     else
@@ -103,16 +103,14 @@ class Statement
     raise Error, "expected #{n} newlines" unless n==@regexp.inspect.gsub('\\\\','').scan('\\n').length
   end
 
-  def let
+  def set_regexp
     @regexp = @context.symbols.s2r(@statement)
-    newlines_count(0)
-    set_statement('L')
   end
 
-  def axiom
-    @regexp = @context.symbols.s2r(@statement)
-    newlines_count(0)
-    set_statement('A')
+  def pattern_type(nl)
+    set_regexp
+    newlines_count(nl)
+    set_statement(@code[0])
   end
 
   def support(*s)
@@ -147,13 +145,6 @@ class Statement
     set_statement('T', support(axiom), axiom.title)
   end
 
-  def inference
-    @regexp = @context.symbols.s2r(@statement)
-    newlines_count(2)
-    set_statement('I')
-  end
-
-
   def conclusion
     all_defined
     inference,s1,s2 = infer
@@ -169,12 +160,6 @@ class Statement
       end
     end
     return nil
-  end
-
-  def existential
-    @regexp = @context.symbols.s2r(@statement)
-    newlines_count(1)
-    set_statement('E')
   end
 
   def instantiation
@@ -196,12 +181,6 @@ class Statement
       end
     end
     return nil
-  end
-
-  def mapping
-    @regexp = @context.symbols.s2r(@statement)
-    newlines_count(1)
-    set_statement('M')
   end
 
   def result

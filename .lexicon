@@ -100,6 +100,7 @@ nvim
 parse
 patch
 pattern
+pattern_type
 plug
 plugin
 pop
@@ -132,6 +133,7 @@ select
 set
 set_acceptance_code
 set_cursor
+set_regexp
 set_scanner
 set_statement
 shift
