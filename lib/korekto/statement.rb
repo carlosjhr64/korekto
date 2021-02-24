@@ -129,12 +129,17 @@ class Statement
     return undefined
   end
 
-  def set
-    undefined = get_undefined
-    let = @context.type('L').detect do |statement|
+  def detect_statement(type)
+    statement = @context.type(type).detect do |statement|
       statement.match? @statement
     end
-    raise Error, "does not match any let" unless let
+    raise Error, "does not match any '#{type}' statement" unless statement
+    return statement
+  end
+
+  def set
+    undefined = get_undefined
+    let = detect_statement('L')
     if n = let.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
       raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
     end
@@ -153,10 +158,7 @@ class Statement
 
   def tautology
     all_defined
-    axiom = @context.type('A').detect do |statement|
-      statement.match? @statement
-    end
-    raise Error, "does not match any axiom" unless axiom
+    axiom = detect_statement('A')
     set_statement(support(axiom), axiom.title)
   end
 
@@ -176,7 +178,6 @@ class Statement
     end
     return nil
   end
-
 
   def heap_search(type)
     @context.heap.each do |s1|

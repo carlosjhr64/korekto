@@ -26,6 +26,7 @@ count
 define
 definition
 detect
+detect_statement
 each
 empty
 Error
