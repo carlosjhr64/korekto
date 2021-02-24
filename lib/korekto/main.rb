@@ -8,7 +8,6 @@ class Main
   MD_TYPE_VARIABLES = /^! (?<type>\p{L}|:\w+)\s*\{(?<variables>\p{Graph}( \p{Graph})*)\}$/
   MD_KEY_VALUE = /^! (?<key>\w+):\s*'(?<value>.*)'$/
 
-  M_FENCE_KOREKTO = /^```korekto$/
   M_FENCE = /^```\s*$/
   M_COMMENT_LINE = /^\s*#/
 
@@ -16,6 +15,7 @@ class Main
     @filename,@statements,@imports = filename,statements,imports
     @imports.push @filename
     @line,@active = nil,false
+    @m_fence_korekto = /^```korekto$/
   end
 
   def type_pattern(type, pattern)
@@ -36,7 +36,7 @@ class Main
 
   def active?
     case @line
-    when M_FENCE_KOREKTO
+    when @m_fence_korekto
       raise Error, 'unexpected fence' if @active
       @active = true
       false
@@ -61,6 +61,8 @@ class Main
     case key
     when 'scanner'
       @statements.symbols.set_scanner value
+    when 'fence'
+      @m_fence_korekto = Regexp.new "^```#{value}$"
     else
       raise Error, "Key '#{key}' not implemented"
     end

@@ -90,7 +90,6 @@ message
 method
 method_defined
 M_FENCE
-M_FENCE_KOREKTO
 msg
 n
 Neovim

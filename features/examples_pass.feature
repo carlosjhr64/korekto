@@ -4,6 +4,12 @@ Feature: examples_pass
   Background:
     * Given command "korekto"
 
+  Scenario: ABC
+    * Given option "< examples/ABC.md"
+    * When we run command
+    * Then exit status is "0"
+    * Then stderr is ""
+
   Scenario: Sqrt2
     * Given option "< examples/Sqrt2.md"
     * When we run command

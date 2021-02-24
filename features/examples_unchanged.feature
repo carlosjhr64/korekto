@@ -5,6 +5,11 @@ Feature: examples_unchanged
     * Given command "korekto"
 
   Scenario: Sqrt2
+    * Given option "< examples/ABC.md"
+    * When we run command
+    * Then digest is "67d0a71d971941663a93ebb24c46d3cc"
+
+  Scenario: Sqrt2
     * Given option "< examples/Sqrt2.md"
     * When we run command
     * Then digest is "163f0688422536440130c99896954896"
