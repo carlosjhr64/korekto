@@ -47,13 +47,13 @@ gsub
 has_key
 heap
 Heap
+heap_combos_search
 heap_search
 i
 ij
 ij_kl
 imports
 include
-infer
 inference
 initialize
 inject

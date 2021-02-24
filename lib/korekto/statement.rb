@@ -110,14 +110,14 @@ class Statement
     return statement
   end
 
-  def infer
+  def heap_combos_search(type)
     @context.heap.combos do |s1, s2|
       compound = [s1,s2,@statement].join("\n")
-      @context.type('I').each do |inference|
+      @context.type(type).each do |inference|
         return inference,s1,s2 if inference.match?(compound)
       end
     end
-    raise Error, "does not match any 'I' statement"
+    raise Error, "does not match any '#{type}' statement"
   end
 
   def heap_search(type)
@@ -170,7 +170,7 @@ class Statement
 
   def conclusion
     all_defined
-    inference,s1,s2 = infer
+    inference,s1,s2 = heap_combos_search('I')
     set_statement(support(inference,s1,s2), inference.title)
   end
 
