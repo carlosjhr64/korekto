@@ -2,7 +2,8 @@
 Feature: nothing_instantiated
 
 ```korekto
-{abc}	#D1
+/^.abc.\nc\wb$/	#E1 E1
+{abc}	#D2
 cab #X
 Does not get here #D
 ```
@@ -15,4 +16,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:5:D1:\n-:6:!:nothing was undefined"
+    * Then stdout is "-:5:E1:E1\n-:6:D2:\n-:7:!:nothing was undefined"

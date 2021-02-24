@@ -42,7 +42,6 @@ fn
 freeze
 get_current_buf
 get_current_win
-get_undefined
 gsub
 has_key
 heap

@@ -72,12 +72,6 @@ class Statement
     end
   end
 
-  def get_undefined
-    undefined = @context.symbols.undefined(@statement)
-    raise Error, 'nothing was undefined' if undefined.empty?
-    return undefined
-  end
-
   def newlines_count(n)
     raise Error, "expected #{n} newlines" unless n==@regexp.inspect.gsub('\\\\','').scan('\\n').length
   end
@@ -96,7 +90,9 @@ class Statement
     return support.join(',')
   end
 
-  def expected_instantiations(title, undefined)
+  def expected_instantiations(title=@title)
+    undefined = @context.symbols.undefined(@statement)
+    raise Error, 'nothing was undefined' if undefined.empty?
     if n = title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
       raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
     end
@@ -132,40 +128,27 @@ class Statement
 
   # Statement type processing
 
-  def definition
-    expected_instantiations(@title, get_undefined)
-    set_statement
-  end
-
-  def postulate
-    all_defined
-    set_statement
-  end
-
   def pattern_type(nl)
     set_regexp
     newlines_count(nl)
     set_statement
   end
 
+  def definition
+    expected_instantiations
+    set_statement
+  end
+
   def set
-    undefined = get_undefined
     let = detect_statement('L')
-    expected_instantiations(let.title, undefined)
+    expected_instantiations(let.title)
     set_statement(support(let), let.title)
   end
 
   def instantiation
-    undefined = get_undefined
     existential,s1 = heap_search('E')
-    expected_instantiations(existential.title, undefined)
+    expected_instantiations(existential.title)
     set_statement(support(existential,s1), existential.title)
-  end
-
-  def tautology
-    all_defined
-    axiom = detect_statement('A')
-    set_statement(support(axiom), axiom.title)
   end
 
   def conclusion
@@ -178,6 +161,17 @@ class Statement
     all_defined
     mapping,s1 = heap_search('M')
     set_statement(support(mapping,s1), mapping.title)
+  end
+
+  def tautology
+    all_defined
+    axiom = detect_statement('A')
+    set_statement(support(axiom), axiom.title)
+  end
+
+  def postulate
+    all_defined
+    set_statement
   end
 end
 end

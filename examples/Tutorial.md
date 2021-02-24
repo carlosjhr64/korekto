@@ -42,6 +42,9 @@ It must introduce at least one new symbol.
 N={1,2,3,4,5,6,7,8,9,...}	#D1 Natural numbers
 S={:pudding,:meat,:good,...}	#D2 Statements
 ```
+You can specify the number of symbols to be defined in the comment title, but
+it's not required.
+
 ### `A` is for Axiom
 
 `A` statements are acceptance patterns on single statements.
