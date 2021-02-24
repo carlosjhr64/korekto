@@ -127,7 +127,7 @@ class Statement
         return s0,s1 if s0.match?(compound)
       end
     end
-    return nil
+    raise Error, "does not match any '#{type}' statement"
   end
 
   # Statement type processing
@@ -148,7 +148,6 @@ class Statement
     set_statement
   end
 
-
   def set
     undefined = get_undefined
     let = detect_statement('L')
@@ -159,7 +158,6 @@ class Statement
   def instantiation
     undefined = get_undefined
     existential,s1 = heap_search('E')
-    raise Error, 'does not match any existential' unless existential
     expected_instantiations(existential, undefined)
     set_statement(support(existential,s1), existential.title)
   end
@@ -180,7 +178,6 @@ class Statement
   def result
     all_defined
     mapping,s1 = heap_search('M')
-    raise Error, 'does not match any mapping' unless mapping
     set_statement(support(mapping,s1), mapping.title)
   end
 end
