@@ -96,8 +96,8 @@ class Statement
     return support.join(',')
   end
 
-  def expected_instantiations(statement, undefined)
-    if n = statement.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
+  def expected_instantiations(title, undefined)
+    if n = title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
       raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
     end
   end
@@ -133,7 +133,7 @@ class Statement
   # Statement type processing
 
   def definition
-    get_undefined
+    expected_instantiations(@title, get_undefined)
     set_statement
   end
 
@@ -151,14 +151,14 @@ class Statement
   def set
     undefined = get_undefined
     let = detect_statement('L')
-    expected_instantiations(let, undefined)
+    expected_instantiations(let.title, undefined)
     set_statement(support(let), let.title)
   end
 
   def instantiation
     undefined = get_undefined
     existential,s1 = heap_search('E')
-    expected_instantiations(existential, undefined)
+    expected_instantiations(existential.title, undefined)
     set_statement(support(existential,s1), existential.title)
   end
 
