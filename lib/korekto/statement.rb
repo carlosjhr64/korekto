@@ -19,8 +19,8 @@ class Statement
 
   private
 
-  def set_statement(code, support=nil, title=nil)
-    @code = "#{code}#{@statement_number}"
+  def set_statement(support=nil, title=nil)
+    @code = "#{@code[0]}#{@statement_number}"
     @code += "/#{support}" if support
     @title = title if title
   end
@@ -84,7 +84,7 @@ class Statement
   def definition
     raise Error, 'nothing was undefined' if @context.symbols.undefined(@statement).empty?
 #   assert_not_provable unless OPTIONS.fast?
-    set_statement('D')
+    set_statement
   end
 
   def all_defined
@@ -96,7 +96,7 @@ class Statement
   def postulate
     all_defined
 #   assert_not_provable unless OPTIONS.fast?
-    set_statement('P')
+    set_statement
   end
 
   def newlines_count(n)
@@ -110,7 +110,7 @@ class Statement
   def pattern_type(nl)
     set_regexp
     newlines_count(nl)
-    set_statement(@code[0])
+    set_statement
   end
 
   def support(*s)
@@ -133,7 +133,7 @@ class Statement
     if n = let.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
       raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
     end
-    set_statement('S', support(let), let.title)
+    set_statement(support(let), let.title)
   end
 
   def tautology
@@ -142,14 +142,14 @@ class Statement
       statement.match? @statement
     end
     raise Error, "does not match any axiom" unless axiom
-    set_statement('T', support(axiom), axiom.title)
+    set_statement(support(axiom), axiom.title)
   end
 
   def conclusion
     all_defined
     inference,s1,s2 = infer
     raise Error, "does not match any inference" unless inference
-    set_statement('C', support(inference,s1,s2), inference.title)
+    set_statement(support(inference,s1,s2), inference.title)
   end
 
   def infer
@@ -170,7 +170,7 @@ class Statement
     if n = existential.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
       raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
     end
-    set_statement('X', support(existential,s1), existential.title)
+    set_statement(support(existential,s1), existential.title)
   end
 
   def heap_search(type)
@@ -187,7 +187,7 @@ class Statement
     all_defined
     mapping,s1 = heap_search('M')
     raise Error, 'does not match any mapping' unless mapping
-    set_statement('R', support(mapping,s1), mapping.title)
+    set_statement(support(mapping,s1), mapping.title)
   end
 end
 end
