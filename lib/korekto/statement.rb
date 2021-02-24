@@ -96,6 +96,12 @@ class Statement
     return support.join(',')
   end
 
+  def expected_instantiations(statement, undefined)
+    if n = statement.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
+      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
+    end
+  end
+
   def detect_statement(type)
     statement = @context.type(type).detect do |statement|
       statement.match? @statement
@@ -142,12 +148,11 @@ class Statement
     set_statement
   end
 
+
   def set
     undefined = get_undefined
     let = detect_statement('L')
-    if n = let.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
-      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
-    end
+    expected_instantiations(let, undefined)
     set_statement(support(let), let.title)
   end
 
@@ -155,9 +160,7 @@ class Statement
     undefined = get_undefined
     existential,s1 = heap_search('E')
     raise Error, 'does not match any existential' unless existential
-    if n = existential.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
-      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
-    end
+    expected_instantiations(existential, undefined)
     set_statement(support(existential,s1), existential.title)
   end
 
