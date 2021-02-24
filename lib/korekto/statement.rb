@@ -123,9 +123,14 @@ class Statement
     return support.join(',')
   end
 
-  def set
+  def get_undefined
     undefined = @context.symbols.undefined(@statement)
     raise Error, 'nothing to instantiate' if undefined.empty?
+    return undefined
+  end
+
+  def set
+    undefined = get_undefined
     let = @context.type('L').detect do |statement|
       statement.match? @statement
     end
@@ -134,6 +139,16 @@ class Statement
       raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
     end
     set_statement(support(let), let.title)
+  end
+
+  def instantiation
+    undefined = get_undefined
+    existential,s1 = heap_search('E')
+    raise Error, 'does not match any existential' unless existential
+    if n = existential.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
+      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
+    end
+    set_statement(support(existential,s1), existential.title)
   end
 
   def tautology
@@ -162,16 +177,6 @@ class Statement
     return nil
   end
 
-  def instantiation
-    undefined = @context.symbols.undefined(@statement)
-    raise Error, 'nothing to instantiate' if undefined.empty?
-    existential,s1 = heap_search('E')
-    raise Error, 'does not match any existential' unless existential
-    if n = existential.title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
-      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
-    end
-    set_statement(support(existential,s1), existential.title)
-  end
 
   def heap_search(type)
     @context.heap.each do |s1|
