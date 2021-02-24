@@ -15,4 +15,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:5:D1:\n-:6:!:nothing to instantiate"
+    * Then stdout is "-:5:D1:\n-:6:!:nothing was undefined"

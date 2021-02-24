@@ -19,12 +19,6 @@ class Statement
 
   private
 
-  def set_statement(support=nil, title=nil)
-    @code = "#{@code[0]}#{@statement_number}"
-    @code += "/#{support}" if support
-    @title = title if title
-  end
-
   def syntax_check
     @context.syntax.each do |rule|
       raise Error, "syntax: #{rule}" unless @statement.instance_eval(rule)
@@ -81,10 +75,12 @@ class Statement
     end
 =end
 
-  def definition
-    raise Error, 'nothing was undefined' if @context.symbols.undefined(@statement).empty?
-#   assert_not_provable unless OPTIONS.fast?
-    set_statement
+  # Helper functions
+ 
+  def set_statement(support=nil, title=nil)
+    @code = "#{@code[0]}#{@statement_number}"
+    @code += "/#{support}" if support
+    @title = title if title
   end
 
   def all_defined
@@ -93,10 +89,10 @@ class Statement
     end
   end
 
-  def postulate
-    all_defined
-#   assert_not_provable unless OPTIONS.fast?
-    set_statement
+  def get_undefined
+    undefined = @context.symbols.undefined(@statement)
+    raise Error, 'nothing was undefined' if undefined.empty?
+    return undefined
   end
 
   def newlines_count(n)
@@ -105,12 +101,6 @@ class Statement
 
   def set_regexp
     @regexp = @context.symbols.s2r(@statement)
-  end
-
-  def pattern_type(nl)
-    set_regexp
-    newlines_count(nl)
-    set_statement
   end
 
   def support(*s)
@@ -123,18 +113,52 @@ class Statement
     return support.join(',')
   end
 
-  def get_undefined
-    undefined = @context.symbols.undefined(@statement)
-    raise Error, 'nothing to instantiate' if undefined.empty?
-    return undefined
-  end
-
   def detect_statement(type)
     statement = @context.type(type).detect do |statement|
       statement.match? @statement
     end
     raise Error, "does not match any '#{type}' statement" unless statement
     return statement
+  end
+
+  def infer
+    @context.heap.combos do |s1, s2|
+      compound = [s1,s2,@statement].join("\n")
+      @context.type('I').each do |inference|
+        return inference,s1,s2 if inference.match?(compound)
+      end
+    end
+    return nil
+  end
+
+  def heap_search(type)
+    @context.heap.each do |s1|
+      compound = [s1,@statement].join("\n")
+      @context.type(type).each do |s0|
+        return s0,s1 if s0.match?(compound)
+      end
+    end
+    return nil
+  end
+
+  # Statement type processing
+
+  def definition
+    get_undefined
+#   assert_not_provable unless OPTIONS.fast?
+    set_statement
+  end
+
+  def postulate
+    all_defined
+#   assert_not_provable unless OPTIONS.fast?
+    set_statement
+  end
+
+  def pattern_type(nl)
+    set_regexp
+    newlines_count(nl)
+    set_statement
   end
 
   def set
@@ -167,26 +191,6 @@ class Statement
     inference,s1,s2 = infer
     raise Error, "does not match any inference" unless inference
     set_statement(support(inference,s1,s2), inference.title)
-  end
-
-  def infer
-    @context.heap.combos do |s1, s2|
-      compound = [s1,s2,@statement].join("\n")
-      @context.type('I').each do |inference|
-        return inference,s1,s2 if inference.match?(compound)
-      end
-    end
-    return nil
-  end
-
-  def heap_search(type)
-    @context.heap.each do |s1|
-      compound = [s1,@statement].join("\n")
-      @context.type(type).each do |s0|
-        return s0,s1 if s0.match?(compound)
-      end
-    end
-    return nil
   end
 
   def result
