@@ -117,7 +117,7 @@ class Statement
         return inference,s1,s2 if inference.match?(compound)
       end
     end
-    return nil
+    raise Error, "does not match any 'I' statement"
   end
 
   def heap_search(type)
@@ -171,7 +171,6 @@ class Statement
   def conclusion
     all_defined
     inference,s1,s2 = infer
-    raise Error, "does not match any inference" unless inference
     set_statement(support(inference,s1,s2), inference.title)
   end
 
