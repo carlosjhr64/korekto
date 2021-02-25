@@ -29,48 +29,59 @@ class Statement
 
   def set_acceptance_code
     case @code[0] # type
-    when 'D'
-      definition
     when 'P'
       postulate
-    when 'L'
-      pattern_type(0)
-    when 'S'
-      set
-    when 'A'
-      pattern_type(0)
-    when 'T'
-      tautology
-    when 'I'
-      pattern_type(2)
+    when 'D'
+      definition
     when 'C'
       conclusion
-    when 'E'
-      pattern_type(1)
     when 'X'
       instantiation
-    when 'M'
-      pattern_type(1)
     when 'R'
       result
+    when 'S'
+      set
+    when 'T'
+      tautology
+    when 'A', 'L'
+      # Axiom=>Tautoloty, Let=>Set,
+      pattern_type(0)
+    when 'M', 'E'
+      # Map=>Result, Existential=>Instantiation(X)
+      pattern_type(1)
+    when 'I'
+      # Inference=>Conclusion
+      pattern_type(2)
     else
       raise Error, "statement type #{@code[0]} not implemented"
     end
   end
 
-  # Helper functions
- 
+  # Common helper
+
   def set_statement(support=nil, title=nil)
     @code = "#{@code[0]}#{@statement_number}"
     @code += "/#{support}" if support
     @title = title if title
   end
 
+  # Defined/Undefined
+
   def all_defined
     unless (u = @context.symbols.undefined(@statement)).empty?
       raise Error, "undefined: #{u.join(' ')}"
     end
   end
+
+  def expected_instantiations(title=@title)
+    undefined = @context.symbols.undefined(@statement)
+    raise Error, 'nothing was undefined' if undefined.empty?
+    if n = title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
+      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
+    end
+  end
+
+  # Pattern helpers
 
   def newlines_count(n)
     raise Error, "expected #{n} newlines" unless n==@regexp.inspect.gsub('\\\\','').scan('\\n').length
@@ -80,6 +91,8 @@ class Statement
     @regexp = @context.symbols.s2r(@statement)
   end
 
+  # Searches
+
   def support(*s)
     support = []
     s.each do |s|
@@ -88,14 +101,6 @@ class Statement
       support.push(c)
     end
     return support.join(',')
-  end
-
-  def expected_instantiations(title=@title)
-    undefined = @context.symbols.undefined(@statement)
-    raise Error, 'nothing was undefined' if undefined.empty?
-    if n = title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
-      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
-    end
   end
 
   def detect_statement(type)
@@ -134,15 +139,22 @@ class Statement
     set_statement
   end
 
-  def definition
-    expected_instantiations
-    set_statement
+  def tautology
+    all_defined
+    axiom = detect_statement('A')
+    set_statement(support(axiom), axiom.title)
   end
 
   def set
     let = detect_statement('L')
     expected_instantiations(let.title)
     set_statement(support(let), let.title)
+  end
+
+  def result
+    all_defined
+    mapping,s1 = heap_search('M')
+    set_statement(support(mapping,s1), mapping.title)
   end
 
   def instantiation
@@ -157,16 +169,9 @@ class Statement
     set_statement(support(inference,s1,s2), inference.title)
   end
 
-  def result
-    all_defined
-    mapping,s1 = heap_search('M')
-    set_statement(support(mapping,s1), mapping.title)
-  end
-
-  def tautology
-    all_defined
-    axiom = detect_statement('A')
-    set_statement(support(axiom), axiom.title)
+  def definition
+    expected_instantiations
+    set_statement
   end
 
   def postulate

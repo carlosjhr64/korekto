@@ -16,6 +16,7 @@ gsub
 https
 ij
 instantiation
+Instantiation
 instantiations
 klass
 KLASS
@@ -34,6 +35,7 @@ stderr
 stdin
 str
 sublicense
+Tautoloty
 TODO
 ulpc
 uniq
