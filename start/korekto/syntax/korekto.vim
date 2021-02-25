@@ -1,4 +1,4 @@
-syntax match Comment /# [^#]\+$/
+syntax match Comment /^\s*#.\+$/
 syntax match Pass    /\s#[A-Z][^#]*$/
 syntax match Syntax  /^[?] \w.\+$/
 syntax match Patch   /^::[A-Z]\w\+#\w\+[^=]\+=.\+$/

@@ -4,8 +4,8 @@ class Main
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
   MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)#(?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
   MD_RULE = /^[?] (?<rule>\S.*)$/
-  MD_TYPE_PATTERN = %r{^! (?<type>\p{L}|:\w+)\s*/(?<pattern>.*)/$}
-  MD_TYPE_VARIABLES = /^! (?<type>\p{L}|:\w+)\s*\{(?<variables>\p{Graph}( \p{Graph})*)\}$/
+  MD_TYPE_PATTERN = %r{^! (?<type>\S+)\s*/(?<pattern>.*)/$}
+  MD_TYPE_VARIABLES = /^! (?<type>\S+)\s*\{(?<variables>\S+( \S+)*)\}$/
   MD_KEY_VALUE = /^! (?<key>\w+):\s*'(?<value>.*)'$/
 
   M_FENCE = /^```\s*$/
