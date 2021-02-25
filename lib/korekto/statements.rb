@@ -17,7 +17,7 @@ class Statements
   end
 
   def add(statement,code,title,filename,statement_number)
-    if restatement = @statements.detect{_1.to_s==statement}
+    if restatement = @statements.detect{_1.type==code[0] and _1.to_s==statement}
       case restatement.type
       when 'D','X','S','P','T','C','R'
         @heap.add restatement
