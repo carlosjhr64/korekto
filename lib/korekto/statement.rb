@@ -78,7 +78,7 @@ class Statement
   # Defined/Undefined
 
   def expected_instantiations(title)
-    undefined = @context.symbols.undefined(@statement)
+    undefined = @context.symbols.undefined(self)
     if n = title&.match(/\d/)&.to_s&.to_i
       raise Error, "expected #{n} undefined: #{undefined.join(' ')}" unless n==undefined.length
     else

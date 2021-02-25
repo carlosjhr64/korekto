@@ -15,16 +15,16 @@ class Symbols
   def undefined(statement)
     undefined = []
     statement.scan(@scanner) do |w|
+      next if statement.regexp and @v2t.include? w
       undefined.push w unless @h.include? w
     end
     return undefined.uniq
   end
 
   def define!(statement)
-    if statement.regexp
-      statement.scan(@scanner){|w| @h[w]=nil unless @v2t.include? w}
-    else
-      statement.scan(@scanner){|w| @h[w]=nil}
+    statement.scan(@scanner) do |w|
+      next if statement.regexp and @v2t.include? w
+      @h[w]=nil
     end
   end
 
