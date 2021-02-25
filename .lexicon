@@ -3,7 +3,6 @@ _1
 a
 active
 add
-all_defined
 attr_reader
 axiom
 b
@@ -164,7 +163,6 @@ to_str
 type
 type_pattern
 type_variables
-u
 undefined
 uniq
 unshift

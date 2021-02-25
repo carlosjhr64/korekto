@@ -23,4 +23,4 @@ N{0,1,2,3,...}	#D3
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:11:E1:E1\n-:12:D2:\n-:13:D3:\n-:14:P4:\n-:15:!:expected 1 instantiations, got: n m"
+    * Then stdout is "-:11:E1:E1\n-:12:D2:\n-:13:D3:\n-:14:P4:\n-:15:!:expected 1 undefined: n m"

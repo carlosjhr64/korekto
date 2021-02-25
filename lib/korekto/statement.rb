@@ -67,17 +67,12 @@ class Statement
 
   # Defined/Undefined
 
-  def all_defined
-    unless (u = @context.symbols.undefined(@statement)).empty?
-      raise Error, "undefined: #{u.join(' ')}"
-    end
-  end
-
-  def expected_instantiations(title=@title)
+  def expected_instantiations(title)
     undefined = @context.symbols.undefined(@statement)
-    raise Error, 'nothing was undefined' if undefined.empty?
-    if n = title&.match(/\d/)&.to_s&.to_i and not n==undefined.length
-      raise Error, "expected #{n} instantiations, got: #{undefined.join(' ')}"
+    if n = title&.match(/\d/)&.to_s&.to_i
+      raise Error, "expected #{n} undefined: #{undefined.join(' ')}" unless n==undefined.length
+    else
+      raise Error, 'nothing was undefined' if undefined.empty?
     end
   end
 
@@ -140,7 +135,7 @@ class Statement
   end
 
   def tautology
-    all_defined
+    expected_instantiations('0')
     axiom = detect_statement('A')
     set_statement(support(axiom), axiom.title)
   end
@@ -152,7 +147,7 @@ class Statement
   end
 
   def result
-    all_defined
+    expected_instantiations('0')
     mapping,s1 = heap_search('M')
     set_statement(support(mapping,s1), mapping.title)
   end
@@ -164,18 +159,18 @@ class Statement
   end
 
   def conclusion
-    all_defined
+    expected_instantiations('0')
     inference,s1,s2 = heap_combos_search('I')
     set_statement(support(inference,s1,s2), inference.title)
   end
 
   def definition
-    expected_instantiations
+    expected_instantiations(@title)
     set_statement
   end
 
   def postulate
-    all_defined
+    expected_instantiations('0')
     set_statement
   end
 end
