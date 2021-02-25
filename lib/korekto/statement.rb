@@ -65,6 +65,16 @@ class Statement
     @title = title if title
   end
 
+  def support(*s)
+    support = []
+    s.each do |s|
+      c = s.code.split('/',2)[0]
+      c = s.filename+'.'+c unless s.filename=='-'
+      support.push(c)
+    end
+    return support.join(',')
+  end
+
   # Defined/Undefined
 
   def expected_instantiations(title)
@@ -87,16 +97,6 @@ class Statement
   end
 
   # Searches
-
-  def support(*s)
-    support = []
-    s.each do |s|
-      c = s.code.split('/',2)[0]
-      c = s.filename+'.'+c unless s.filename=='-'
-      support.push(c)
-    end
-    return support.join(',')
-  end
 
   def detect_statement(type)
     statement = @context.type(type).detect do |statement|
