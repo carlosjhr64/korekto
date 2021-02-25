@@ -9,3 +9,4 @@ highlight Syntax  ctermfg=darkmagenta
 highlight Patch   ctermfg=darkgrey
 highlight Import  ctermfg=darkyellow
 setlocal tabstop=23
+map <F7> :Korekto<CR>
