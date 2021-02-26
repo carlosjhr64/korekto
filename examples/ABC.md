@@ -12,25 +12,26 @@ Not fully implemented but just enough for the demonstration song.
 /^T:".*" %$/	#L2
 /^M:\d+/\d+ %$/	#A3
 /^C:".*" %$/	#L4
-/^K:\w %$/	#A5
-/^\|:(\w+ \w+)(\|\w+ \w+)*\| %$/	#A6
-/^(\w+ \w+)(\|\w+ \w+)*:\| %$/	#A7
+/^K:[A-G] %$/	#A5
+/^\|:[A-Ga-g\d]+ [A-Ga-g\d]+(\|[A-Ga-g\d]+ [A-Ga-g\d]+)*\| %$/	#A6
+/^[A-Ga-g\d]+ [A-Ga-g\d]+(\|[A-Ga-g\d]+ [A-Ga-g\d]+)*:\| %$/	#A7
 # And the allowed symbols:
-0123456789	#D8
-ABCDEFG	#D9
-abcdefg	#D10
+XTMCK |/:%	#D8
+0123456789	#D9
+ABCDEFG	#D10
+abcdefg	#D11
 # Finally, redefine the fence:
 ! fence: 'abc'
 ```
 Now the song in ABC notation:
 ```abc
-X:1 %	#T11/A1
-T:"Speed the Plough" %	#S12/L2
-M:4/4 %	#T13/A3
-C:"Trad." %	#S14/L4
-K:G %	#T15/A5
-|:GABc dedB|dedB dedB|c2ec B2dB|c2A2 A2BA| %	#T16/A6
-  GABc dedB|dedB dedB|c2ec B2dB|A2F2 G4:| %	#T17/A7
-|:g2gf gdBd|g2f2 e2d2|c2ec B2dB|c2A2 A2df| %	#T18/A6
-  g2gf g2Bd|g2f2 e2d2|c2ec B2dB|A2F2 G4:| %	#T19/A7
+X:1 %	#T12/A1
+T:"Speed the Plough" %	#S13/L2
+M:4/4 %	#T14/A3
+C:"Trad." %	#S15/L4
+K:G %	#T16/A5
+|:GABc dedB|dedB dedB|c2ec B2dB|c2A2 A2BA| %	#T17/A6
+  GABc dedB|dedB dedB|c2ec B2dB|A2F2 G4:| %	#T18/A7
+|:g2gf gdBd|g2f2 e2d2|c2ec B2dB|c2A2 A2df| %	#T19/A6
+  g2gf g2Bd|g2f2 e2d2|c2ec B2dB|A2F2 G4:| %	#T20/A7
 ```

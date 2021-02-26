@@ -16,6 +16,8 @@ class Statement
   def to_str            = @statement
   def match?(statement) = @regexp.match?(statement)
   def scan(regex, &blk) = @statement.scan(regex, &blk)
+  def pattern?          = !@regexp.nil?
+  def literal_regexp?   = @statement[0]=='/' && @statement[-1]=='/'
 
   private
 
@@ -119,7 +121,7 @@ class Statement
 
   def expected_instantiations(title)
     undefined = @context.symbols.undefined(self)
-    if n = title&.match(/\d/)&.to_s&.to_i
+    if n = title&.match(/\d+/)&.to_s&.to_i
       raise Error, "expected #{n} undefined: #{undefined.join(' ')}" unless n==undefined.length
     else
       raise Error, 'nothing was undefined' if undefined.empty?

@@ -73,6 +73,7 @@ limit
 line
 line_number
 lines
+literal_regexp
 ln
 Main
 map
@@ -97,6 +98,7 @@ n
 Neovim
 new
 newlines_count
+nil
 nl
 nvim
 parse

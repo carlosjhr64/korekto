@@ -14,17 +14,23 @@ class Symbols
 
   def undefined(statement)
     undefined = []
-    statement.scan(@scanner) do |w|
-      next if statement.regexp and @v2t.include? w
-      undefined.push w unless @h.include? w
+    if statement.pattern?
+      unless statement.literal_regexp?
+        statement.scan(@scanner){|w| undefined.push(w) unless @v2t.include?(w) or @h.include?(w)}
+      end
+    else
+      statement.scan(@scanner){|w| undefined.push(w) unless @h.include?(w)}
     end
     return undefined.uniq
   end
 
   def define!(statement)
-    statement.scan(@scanner) do |w|
-      next if statement.regexp and @v2t.include? w
-      @h[w]=nil
+    if statement.pattern?
+      unless statement.literal_regexp?
+        statement.scan(@scanner){|w| @h[w]=nil unless @v2t.include?(w) or @h.include?(w)}
+      end
+    else
+      statement.scan(@scanner){|w| @h[w]=nil unless @h.include?(w)}
     end
   end
 

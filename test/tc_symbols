@@ -12,6 +12,12 @@ class Statement < String
   def regexp
     nil
   end
+  def literal_regexp?
+    false
+  end
+  def pattern?
+    false
+  end
 end
 end
 

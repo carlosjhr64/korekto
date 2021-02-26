@@ -7,7 +7,7 @@ Feature: examples_unchanged
   Scenario: Sqrt2
     * Given option "< examples/ABC.md"
     * When we run command
-    * Then digest is "67d0a71d971941663a93ebb24c46d3cc"
+    * Then digest is "3881ffb508b141980d3597d14044ec96"
 
   Scenario: Sqrt2
     * Given option "< examples/Sqrt2.md"
@@ -17,7 +17,7 @@ Feature: examples_unchanged
   Scenario: Tutorial
     * Given option "< examples/Tutorial.md"
     * When we run command
-    * Then digest is "bf765efb29f221332fdc5d09e0a5aedf"
+    * Then digest is "17b20169ab24a553adaae490c631c0d6"
 
   Scenario: Algebra
     * Given option "< examples/imports/Algebra.md"

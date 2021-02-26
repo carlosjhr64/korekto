@@ -39,8 +39,9 @@ the pattern translation feature `Korekto` provides.
 `D` statements are used to introduce new symbols.
 It must introduce at least one new symbol.
 ```korekto
-N={1,2,3,4,5,6,7,8,9,...}	#D1 Natural numbers
-S={:pudding,:meat,:good,...}	#D2 Statements
+{= &}	#D1 5 Symbols including space
+{0 1 2 3 4 5 6 7 8 9}	#D2 10 Numbers
+{:pudding :meat :good :if :then :with :cherry :let :there :be}	#D3 10 Words
 ```
 You can specify the number of symbols to be defined in the comment title, but
 it's not required.
@@ -50,14 +51,14 @@ it's not required.
 `A` statements are acceptance patterns on single statements.
 They recognize tautologies.
 ```korekto
-/^(\w)=\1$/	#A3 Reflection
+/^(\w)=\1$/	#A4 Reflection
 ```
 ### `T` is for Tautology
 
 `T` statements are those that match any preceding `A` statements.
 They must not have any undefined symbols.
 ```korekto
-4=4	#T4/A3 Reflection
+4=4	#T5/A4 Reflection
 ```
 ### `I` is for Inference
 
@@ -68,16 +69,16 @@ the size of the list of statements,
 `Korekto` requires that the correct combination be found in the last 13 statements.
 Restatement of previous results are allowed so as to add old statements into the search heap.
 ```korekto
-/^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I5 Modus Ponem
-/^(:\w+)\n(:\w+)\n\1&\2$/	#I6 Synthesis
+/^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I6 Modus Ponem
+/^(:\w+)\n(:\w+)\n\1&\2$/	#I7 Synthesis
 ```
 ### `P` is for Postulate
 
 `P` statements are used to introduce new facts(underivable from previous statements).
 It cannot have any undefined symbols.
 ```korekto
-:if :meat :then :pudding	#P7 How can you have any pudding
-:meat	#P8 You did have your meat
+:if :meat :then :pudding	#P8 How can you have any pudding
+:meat	#P9 You did have your meat
 ```
 ### `C` is for Conclusion
 
@@ -85,8 +86,8 @@ It cannot have any undefined symbols.
 in combination with two previous statements in the heap(typically the last 13 statements).
 They must not have any undefined symbols.
 ```korekto
-:pudding	#C9/I5,P7,P8 Modus Ponem
-:meat&:pudding	#C10/I6,P8,C9 Synthesis
+:pudding	#C10/I6,P8,P9 Modus Ponem
+:meat&:pudding	#C11/I7,P9,C10 Synthesis
 ```
 ### `M` is for Mapping
 
@@ -94,7 +95,7 @@ They must not have any undefined symbols.
 one previously accepted statement and the one being validated.
 The accepted statement must be in the heap(typically the last 13 statements).
 ```korekto
-/^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M11 A and B then A good with B
+/^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M12 A and B then A good with B
 ```
 ### `R` is for Result
 
@@ -102,7 +103,7 @@ The accepted statement must be in the heap(typically the last 13 statements).
 in combination with one previous statement in the heap(typically the last 13 statements).
 It must not have any undefined symbols.
 ```korekto
-:meat :good :with :pudding	#R12/M11,C10 A and B then A good with B
+:meat :good :with :pudding	#R13/M12,C11 A and B then A good with B
 ```
 ### `E` is for Existential
 
@@ -110,10 +111,10 @@ It must not have any undefined symbols.
 they yield `X`(instantiation) statements.
 They are used to instantiate new symbols in some context.
 ```korekto
-/^:\w+ :good :with (:\w+)\n:\w+ :also :good :with \1$/	#E13 Also good with 1
+/^:\w+ :good :with (:\w+)\n:\w+ :also :good :with \1$/	#E14 Also good with 1
 ```
 If the title(in the comment section) includes a number,
-it should be the expected number of instantiations(up to 9).
+it should be the expected number of instantiations.
 
 ### `X` if for Instantiation
 
@@ -122,21 +123,21 @@ are a consequence of an `E` existential statement, and
 must introduce at least one new symbol.
 ```korekto
 # cherry was added in context of "also good with pudding"
-:cherry :also :good :with :pudding	#X14/E13,R12 Also good with 1
+:cherry :also :good :with :pudding	#X15/E14,R13 Also good with 1
 ```
 ### `L` is for Let
 `L` statements are just like `A` in that they're patterns on single statements.
 But `L` statement yield statements that can instantiate new symbols.
 The number of symbols that can be introduced is set in the comment title.
 ```korekto
-/^:let :there :be (:\w+)$/	#L15 Let 1
+/^:let :there :be (:\w+)$/	#L16 Let 1
 ```
 ### `S` is for Set
 `S` statements are just like `T` statements
 expect that they're validated by `L` statements and
 can bring in new symbols.
 ```korekto
-:let :there :be :light	#S16/L15 Let 1
+:let :there :be :light	#S17/L16 Let 1
 ```
 ## Statements table
 
@@ -177,8 +178,8 @@ whereas "Yes!" mean it must have at least one undefined symbol.
 
 Currently `Korekto` expects all patterns to capture,
 although no checking is done if a literal `Regexp` is given.
-Also, `korekto` blindly defines all symbols in a literal `Regexp`,
-so it's preferable not to use the literal `Regexp`.
+Also, `korekto` will not define any symbols in a literal `Regexp`,
+so it's preferable to use `Patterns` described below.
 
 ## Patterns
 
@@ -204,14 +205,14 @@ So if you want to capture a number into pattern variables(i,j,k), you could writ
 ```
 A Reflection axiom like `#A3` above can then be rewritten for numbers as:
 ```korekto
-i=i	#A17 Reflection
+i=i	#A18 Reflection
 ```
 Although you'll probably want to make a Reflection axiom a bit more general than for just numbers.
 Demonstrating the use of `!:nl {;}`, map `#M11` above could be rewritten as follows:
 ```korekto
 ! :KeyWord /:\w+/
 ! :KeyWord {A B}
-A&B;A :good :with B	#M18 If A and B, then A good with B.
+A&B;A :good :with B	#M19 If A and B, then A good with B.
 ```
 ## Syntax
 
