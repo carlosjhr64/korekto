@@ -1,6 +1,6 @@
 # korekto
 
-* [VERSION 0.0.210225](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 0.0.210226](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * TODO: rubygems
 
