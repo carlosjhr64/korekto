@@ -37,6 +37,7 @@ expected_instantiations
 fields
 File
 filename
+first
 fn
 freeze
 get_current_buf
@@ -164,6 +165,7 @@ type
 type_pattern
 type_variables
 undefined
+undefined_in_pattern
 uniq
 unshift
 v

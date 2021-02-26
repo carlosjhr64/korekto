@@ -75,17 +75,6 @@ class Statement
     return support.join(',')
   end
 
-  # Defined/Undefined
-
-  def expected_instantiations(title)
-    undefined = @context.symbols.undefined(self)
-    if n = title&.match(/\d/)&.to_s&.to_i
-      raise Error, "expected #{n} undefined: #{undefined.join(' ')}" unless n==undefined.length
-    else
-      raise Error, 'nothing was undefined' if undefined.empty?
-    end
-  end
-
   # Pattern helpers
 
   def newlines_count(n)
@@ -126,11 +115,29 @@ class Statement
     raise Error, "does not match any '#{type}' statement"
   end
 
+  # Defined/Undefined
+
+  def expected_instantiations(title)
+    undefined = @context.symbols.undefined(self)
+    if n = title&.match(/\d/)&.to_s&.to_i
+      raise Error, "expected #{n} undefined: #{undefined.join(' ')}" unless n==undefined.length
+    else
+      raise Error, 'nothing was undefined' if undefined.empty?
+    end
+  end
+
+  def undefined_in_pattern
+    @title = @title&.split(':',2)&.first || ''
+    undefined = @context.symbols.undefined(self)
+    @title += ": #{undefined.join(' ')}" unless undefined.empty?
+  end
+
   # Statement type processing
 
   def pattern_type(nl)
     set_regexp
     newlines_count(nl)
+    # TODO: undefined_in_pattern
     set_statement
   end
 
