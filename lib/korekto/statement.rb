@@ -119,9 +119,9 @@ class Statement
 
   # Defined/Undefined
 
-  def expected_instantiations(title)
+  def expected_instantiations(title=nil, n:nil)
     undefined = @context.symbols.undefined(self)
-    if n = title&.match(/\d+/)&.to_s&.to_i
+    if n ||= title&.match(/[1-9]\d*/)&.to_s&.to_i
       raise Error, "expected #{n} undefined: #{undefined.join(' ')}" unless n==undefined.length
     else
       raise Error, 'nothing was undefined' if undefined.empty?
@@ -144,7 +144,7 @@ class Statement
   end
 
   def tautology
-    expected_instantiations('0')
+    expected_instantiations(n:0)
     axiom = detect_statement('A')
     set_statement(support(axiom), axiom.title)
   end
@@ -156,7 +156,7 @@ class Statement
   end
 
   def result
-    expected_instantiations('0')
+    expected_instantiations(n:0)
     mapping,s1 = heap_search('M')
     set_statement(support(mapping,s1), mapping.title)
   end
@@ -168,7 +168,7 @@ class Statement
   end
 
   def conclusion
-    expected_instantiations('0')
+    expected_instantiations(n:0)
     inference,s1,s2 = heap_combos_search('I')
     set_statement(support(inference,s1,s2), inference.title)
   end
@@ -179,7 +179,7 @@ class Statement
   end
 
   def postulate
-    expected_instantiations('0')
+    expected_instantiations(n:0)
     set_statement
   end
 end
