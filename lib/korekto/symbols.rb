@@ -8,9 +8,7 @@ class Symbols
     @scanner = /:\w+|./
   end
 
-  def set_scanner(value)
-    @scanner = Regexp.new(value)
-  end
+  def set_scanner(value) = @scanner=Regexp.new(value)
 
   def undefined(statement)
     undefined = []

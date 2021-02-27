@@ -8,13 +8,8 @@ class Statements
     @syntax = Syntax.new
   end
 
-  def type(c)
-    @statements.select{_1.type==c}
-  end
-
-  def length
-    @statements.length
-  end
+  def type(c) = @statements.select{_1.type==c}
+  def length = @statements.length
 
   def add(statement,code,title,filename,statement_number)
     if restatement = @statements.detect{_1.type==code[0] and _1.to_s==statement}

@@ -21,8 +21,6 @@ class Heap
     end
   end
 
-  def each
-    @a.each{yield _1}
-  end
+  def each = @a.each{yield _1}
 end
 end
