@@ -23,7 +23,7 @@ $ korekto --install
 ! :nl /\n/
 ! :nl {;}
 # Acceptance pattern
-u;:if u, :then v;v	#I1 Modus Ponem
+u;:if u, :then v;v	#I1 Modus Ponem: :if   , :then
 # Statements
 S{s,t}	#D2 Statements
 s	#P3

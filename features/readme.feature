@@ -10,4 +10,4 @@ Feature: readme
     * Then exit status is "0"
     * Then stderr is ""
     * Then stdout matches /Modus Ponem$/
-    * Then digest is "1f81d9d56657ad38a266561168428299"
+    * Then digest is "9e9381ddf7b2d4d291f7ac5e32fbe6bd"

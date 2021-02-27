@@ -64,7 +64,7 @@ class Statement
   def set_statement(support=nil, title=nil)
     @code = "#{@code[0]}#{@statement_number}"
     @code += "/#{support}" if support
-    @title = title if title
+    @title = title.split(':',2).first if title
   end
 
   def support(*s)
@@ -129,9 +129,9 @@ class Statement
   end
 
   def undefined_in_pattern
-    @title = @title&.split(':',2)&.first || ''
+    @title = @title.split(':',2).first if @title
     undefined = @context.symbols.undefined(self)
-    @title += ": #{undefined.join(' ')}" unless undefined.empty?
+    @title = "#{@title}: #{undefined.join(' ')}" unless undefined.empty?
   end
 
   # Statement type processing
@@ -139,7 +139,7 @@ class Statement
   def pattern_type(nl)
     set_regexp
     newlines_count(nl)
-    # TODO: undefined_in_pattern
+    undefined_in_pattern
     set_statement
   end
 
