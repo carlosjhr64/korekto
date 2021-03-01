@@ -1,9 +1,9 @@
 Neovim.plugin do |plug|
   plug.command(:Korekto) do |nvim|
     validations = nvim.command_output('w !korekto').strip.split("\n").map(&:strip)
+    msg = 'OK'
     unless validations.empty?
       buf = nvim.get_current_buf
-      msg = 'OK'
       while validation = validations.shift
         fields = validation.split(':',4)
         n = fields[1].to_i
@@ -24,7 +24,7 @@ Neovim.plugin do |plug|
           end
         end
       end
-      nvim.command "echom #{msg.inspect}"
     end
+    nvim.command "echom #{msg.inspect}"
   end
 end
