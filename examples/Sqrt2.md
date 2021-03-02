@@ -1,7 +1,7 @@
 # [Sqrt(2) is irrational! (Classic Proof)](https://www.youtube.com/watch?v=BhFf0nJ5VOg)
 ```korekto
-< examples/imports/Rational.md
-< examples/imports/Algebra.md
+< imports/Rational.md
+< imports/Algebra.md
 :QED=:Not[:Rat[:Sqrt[2]]]	#D1
 # Need to be able to say, "Were jumping off a building here because we can fly!"
 :ASSUMPTION=:Rat[:Sqrt[2]]	#P2

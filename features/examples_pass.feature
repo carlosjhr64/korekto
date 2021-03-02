@@ -23,25 +23,25 @@ Feature: examples_pass
     * Then stderr is ""
 
   Scenario: Algebra
-    * Given option "< examples/imports/Algebra.md"
+    * Given option "< imports/Algebra.md"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
 
   Scenario: Bootstrap
-    * Given option "< examples/imports/Bootstrap.md"
+    * Given option "< imports/Bootstrap.md"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
 
   Scenario: Integer
-    * Given option "< examples/imports/Integer.md"
+    * Given option "< imports/Integer.md"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
 
   Scenario: Rational
-    * Given option "< examples/imports/Rational.md"
+    * Given option "< imports/Rational.md"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""

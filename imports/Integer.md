@@ -1,6 +1,6 @@
 # Integer
 ```korekto
-< examples/imports/Bootstrap.md
+< imports/Bootstrap.md
 :Even[A]=:Exist[:Int]{i|A=2i}	#A1 Definition of Even: :Even :Int i 2
 :Even[A^I];Even[A]	#M2 Integer power is even iff number is even: ^ n
 :Even[A];Even[A^I]	#M3 Integer power is even iff number is even

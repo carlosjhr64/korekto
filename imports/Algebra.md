@@ -1,6 +1,6 @@
 # Algebra
 ```korekto
-< examples/imports/Bootstrap.md
+< imports/Bootstrap.md
 :Sqrt[A]^2=A	#A1 Square root: :Sqrt ^ 2
 a(:Sqrt[A])^2b;a(A)b	#M2 Sqrt[x]^2=x
 a(A/B)^Ib;a(A^I)/(B^I)b	#M3 Power of ratio: /
