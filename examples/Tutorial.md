@@ -16,7 +16,7 @@ I meant `Korekto` to read markdown files with `Korekto` code fenced.
 ```shell
 $ korekto < examples/Tutorial.md
 ```
-Also, in `neovim` you can run the command `Korekto`.
+Also, in `neovim` you can run the command `Korekto` or press `<F7>`.
 It will check you work and move the cursor to the first error it finds.
 It will also automate many of the statement comments.
 You only need to give the statement type,
@@ -43,8 +43,8 @@ It must introduce at least one new symbol.
 {0 1 2 3 4 5 6 7 8 9}	#D2 10 Numbers
 {:pudding :meat :good :if :then :with :cherry :let :there :be}	#D3 10 Words
 ```
-You can specify the number of symbols to be defined in the comment title, but
-it's not required.
+You can specify the number of symbols to be defined in the comment title,
+but it's not required.
 
 ### `A` is for Axiom
 
@@ -69,7 +69,7 @@ the size of the list of statements,
 `Korekto` requires that the correct combination be found in the last 13 statements.
 Restatement of previous results are allowed so as to add old statements into the search heap.
 ```korekto
-/^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I6 Modus Ponem
+/^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I6 Modus ponen
 /^(:\w+)\n(:\w+)\n\1&\2$/	#I7 Synthesis
 ```
 ### `P` is for Postulate
@@ -86,7 +86,7 @@ It cannot have any undefined symbols.
 in combination with two previous statements in the heap(typically the last 13 statements).
 They must not have any undefined symbols.
 ```korekto
-:pudding	#C10/I6,P8,P9 Modus Ponem
+:pudding	#C10/I6,P8,P9 Modus ponen
 :meat&:pudding	#C11/I7,P9,C10 Synthesis
 ```
 ### `M` is for Mapping
@@ -126,15 +126,17 @@ must introduce at least one new symbol.
 :cherry :also :good :with :pudding	#X15/E14,R13 Also good with 1
 ```
 ### `L` is for Let
+
 `L` statements are just like `A` in that they're patterns on single statements.
 But `L` statement yield statements that can instantiate new symbols.
 The number of symbols that can be introduced is set in the comment title.
 ```korekto
 /^:let :there :be (:\w+)$/	#L16 Let 1
 ```
-### `S` is for Set
+### `S` is for Set(Assignment)
+
 `S` statements are just like `T` statements
-expect that they're validated by `L` statements and
+except that they're validated by `L` statements and
 can bring in new symbols.
 ```korekto
 :let :there :be :light	#S17/L16 Let 1
@@ -144,7 +146,7 @@ can bring in new symbols.
 I created these two tables of statement types which differ only in its sorting.
 I was hoping to show that all statement types are covered.
 Under "Undefined", "Yes" means it may have undefined symbols
-whereas "Yes!" mean it must have at least one undefined symbol.
+whereas "Yes!" means it must have at least one undefined symbol.
 
 | Type | Description   | Undefined | Pattern | Yields | Newlines | Heap | Validator |
 |:----:|:--------------|:----------|:--------|:------:|:--------:|:----:|:---------:|
@@ -178,7 +180,7 @@ whereas "Yes!" mean it must have at least one undefined symbol.
 
 Currently `Korekto` expects all patterns to capture,
 although no checking is done if a literal `Regexp` is given.
-Also, `korekto` will not define any symbols in a literal `Regexp`,
+Also, `Korekto` will not define any symbols in a literal `Regexp`,
 so it's preferable to use `Patterns` described below.
 
 ## Patterns
@@ -187,7 +189,6 @@ Rather than using literal `Regexp`,
 one can write easily readable patterns to be translated into `Regexp`.
 You'll want to first define your newline pattern `/\n/`.
 I like to use `;` for the newline pattern.
-This should be named `:nl`, as `Korekto` will know not to do a capture on this one.
 ```korekto
 ! :nl /\n/
 ! :nl {;}
@@ -195,8 +196,8 @@ This should be named `:nl`, as `Korekto` will know not to do a capture on this o
 The bang `!` at the start of a line tells `Korekto` it's a pattern definition.
 Pattern definitions have the following form:
 ```ruby
-%r{^! (?<type>\p{L}|:\w+)\s*/(?<pattern>.*)/$}
-/^! (?<type>\p{L}|:\w+)\s*\{(?<variables>\p{Graph}( \p{Graph})*)\}$/
+%r{^! (?<type>\S+)\s*/(?<pattern>.*)/$}
+/^! (?<type>\S+)\s*\{(?<variables>\S+( \S+})*)\}$/
 ```
 So if you want to capture a number into pattern variables(i,j,k), you could write:
 ```korekto
@@ -225,7 +226,7 @@ you can write:
 ? length < 66
 ```
 Lines starting with question mark `?`
-tells `Korekto` to `intance_eval` the `ruby` code on the string.
+tells `Korekto` to `instance_eval` the given `ruby` code on the string.
 If the eval returns `true` it proceeds, else it's an error.
 
 ## Monkey patches
@@ -256,4 +257,27 @@ end
 It was quite a challenge to write the algorithm entirely in this form.
 Can you see how it works? Me neither, and I wrote it! LOL.
 
-Anyways, hope that's enough to get you started.
+# Scanner
+
+The default scanner pattern is ':\w+|.'.
+This is good for mostly logographic statements such as found in mathematical formulas:
+```ruby
+':sin[x]^2+:cos[x]^2=1'.scan(/:\w+|./).uniq #=> [":sin", "[", "x", "]", "^", "2", "+", ":cos", "=", "1"]
+```
+You can change the scanner to something else, as shown in the [README](../README.md).
+```korekto
+! scanner: '\w+|\S|\s'
+```
+This is good for natural language:
+```ruby
+'Hello World!'.scan(/\w+|\S|\s/).uniq #=> ["Hello", " ", "World", "!"]
+```
+# Fence
+
+The default fence in a `Markdown` file is `korekto`.
+There may be situations where you'll want `Korekto` to read code fenced as another language,
+as in the [ABC music notation](ABC.md) example.
+You can change the fence to something else, like `abc` for example:
+```korekto
+! fence: 'abc'
+```

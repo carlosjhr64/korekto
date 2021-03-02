@@ -17,7 +17,7 @@ Feature: examples_unchanged
   Scenario: Tutorial
     * Given option "< examples/Tutorial.md | grep '^-:'"
     * When we run command
-    * Then digest is "17b20169ab24a553adaae490c631c0d6"
+    * Then digest is "0d6366ea05d774cd62477f3515cf26e0"
 
   Scenario: Algebra
     * Given option "< imports/Algebra.md | grep '^-:'"

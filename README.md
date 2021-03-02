@@ -41,10 +41,13 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
   * [Patterns](examples/Tutorial.md#Patterns)
   * [Syntax](examples/Tutorial.md#Syntax)
   * [Monkey patches](examples/Tutorial.md#Monkey-patches)
+  * [Scanner](examples/Tutorial.md#Scanner)
+  * [Fence](examples/Tutorial.md#Fence)
+
 * Examples
   * [ABC music notation](examples/ABC.md)
-  * [Sqrt(2) is irrational! (Classic Proof)](examples/Sqrt2.md)
   * [Dx x^x](examples/Dxx.md)
+  * [Sqrt(2) is irrational! (Classic Proof)](examples/Sqrt2.md)
 
 ## LICENSE:
 
