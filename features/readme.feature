@@ -9,5 +9,5 @@ Feature: readme
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout matches /Modus Ponem$/
-    * Then digest is "9e9381ddf7b2d4d291f7ac5e32fbe6bd"
+    * Then stdout matches /:Modus ponens$/
+    * Then digest is "d56762a7daff689d01470c1a81bfeafd"

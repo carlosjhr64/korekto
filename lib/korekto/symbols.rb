@@ -38,17 +38,16 @@ class Symbols
     else
       pattern,count,seen = '^',0,{}
       Regexp.quote(statement).scan(@scanner) do |v|
-        if type = @v2t[v]
-          if type==':nl'
-            pattern << @t2p[type]
+        if n=seen[v]
+          pattern << '\\'+n
+        elsif type = @v2t[v]
+          regex = @t2p[type]
+          if regex=='\n'
+            pattern << regex
           else
-            if n=seen[v]
-              pattern << '\\'+n
-            else
-              count += 1
-              seen[v]=count.to_s
-              pattern << '('+@t2p[type]+')'
-            end
+            count += 1
+            seen[v]=count.to_s
+            pattern << '('+regex+')'
           end
         else
           pattern << v

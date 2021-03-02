@@ -15,27 +15,36 @@ $ korekto --install
 ```
 ## SYNOPSIS:
 ```korekto
-# Imports
-< BOOTSTRAP.md
-# Type patterns and variables
-! V /\w/
-! V {u v w}
-! :nl /\n/
-! :nl {;}
-# Acceptance pattern
-u;:if u, :then v;v	#I1 Modus Ponem: :if   , :then
-# Statements
-S{s,t}	#D2 Statements
-s	#P3
-:if s, :then t	#P4
-t	#C5/I1,P3,P4 Modus Ponem
+# Patterns
+! scanner: '\w+|\S|\s'
+! Newline /\n/
+! Newline {;}
+! Variables /\w+/
+! Variables {V W}
+# Acceptance patterns
+There might be V.	#L1 Let 1 animal be: There   might be .
+If I see V, then I'll probably see W.;I see V.;I'll probably see W.	#I2 Modus ponens: If I see , then ' ll probably
+# Argument
+There might be Cows.	#S3/L1 Let 1 animal be
+There might be Chickens.	#S4/L1 Let 1 animal be
+If I see Cows, then I'll probably see Chickens.	#P5
+I see Cows.	#P6
+I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 ```
-See also [BOOTSTRAP.md](BOOTSTRAP.md).
 
-This is a total rewrite of my initial attempt at a proof checker, [ulpc](https://www.github.com/carlosjhr64/ulpc).
-Still working on it, but it's much improved and simplified.
+## MORE
 
-## [MORE](examples/index.md)
+* Tutorial
+  * [Intro](examples/Tutorial.md)
+  * [Statement types](examples/Tutorial.md#Statement-types)
+  * [Statements table](examples/Tutorial.md#Statements-table)
+  * [Patterns](examples/Tutorial.md#Patterns)
+  * [Syntax](examples/Tutorial.md#Syntax)
+  * [Monkey patches](examples/Tutorial.md#Monkey-patches)
+* Examples
+  * [ABC music notation](examples/ABC.md)
+  * [Sqrt(2) is irrational! (Classic Proof)](examples/Sqrt2.md)
+  * [Dx x^x](examples/Dxx.md)
 
 ## LICENSE:
 
