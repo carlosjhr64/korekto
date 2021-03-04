@@ -50,6 +50,9 @@ class Symbols
             pattern << '('+regex+')'
           end
         else
+          # To avoid collisions with back-references,
+          # isolate digit in square brackets:
+          '0123456789'.include?(_=v[0]) and v[0]='['+_+']'
           pattern << v
         end
       end

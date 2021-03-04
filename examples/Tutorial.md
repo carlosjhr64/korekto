@@ -22,6 +22,16 @@ It will also automate many of the statement comments.
 You only need to give the statement type,
 `Korekto` completes the comment.
 
+Keep in mind that as powerfull as `Regexp` can be,
+you'll run into weaknesses in the `Regexp` engine.
+There will be times when the simple pattern generator can't create the test you want, and
+you'll consider using a literal `Regexp`.
+And some test may not be possible...
+the current concensus is that `Regexp` is not turing complete.
+So you may consider using `instance_eval` and the monkey patch options.
+You'll be going down the rabbit hole of trying to create a proof assistant for your project...
+CONSIDER YOURSELF WARNED!
+
 ## Statement types
 
 Although I tried to match the normal semantics of

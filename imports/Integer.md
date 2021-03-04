@@ -1,13 +1,9 @@
 # Integer
 ```korekto
-< imports/Bootstrap.md
-:Even[A]=:Exist[:Int]{i|A=2i}	#A1 Definition of Even: :Even :Int i 2
-:Even[A^I];Even[A]	#M2 Integer power is even iff number is even: ^ n
-:Even[A];Even[A^I]	#M3 Integer power is even iff number is even
-:Int[A];:Int[A^2]	#M4 Integers closed under multiplication
-:Int[a];:Even[2(a)]	#M5 Even numbers have a factor of two
-:Even[A];:Even[B];:CF[A,B][2]	#I6 Even numbers have a factor of two: :CF
-:CF[A,B][I];:GCF[A,B]>=I	#M7 GCF is gte any CF: :GCF >
-a>=2;a>1	#M8 Two is more than one: 1
-:GCF[A,B]>1;:Not[:GCF[A,B]=1]	#M9 More than one is not one
+< imports/Natural.md
+# Integer
+:Int[I-J]	#A47 Type Int: :Int -
+:Even[A]=:Exist[:Int]{i|A=2i}	#A48 Even has factor two: :Even i
+:Even[A];:Even[B];:CF[A,B][2]	#I49 Even numbers have common factor two
+:Int[a];:Even[2a]	#M50 Integer with factor of two is even
 ```
