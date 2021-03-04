@@ -45,6 +45,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
   * [Monkey patches](examples/Tutorial.md#Monkey-patches)
   * [Scanner](examples/Tutorial.md#Scanner)
   * [Fence](examples/Tutorial.md#Fence)
+  * [Save and Restore](examples/Tutorial.md#Save-and-Restore)
 
 * Examples
   * [ABC music notation](examples/ABC.md)

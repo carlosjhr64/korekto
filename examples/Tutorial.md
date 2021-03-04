@@ -331,6 +331,21 @@ You can change the fence to something else, like `abc` for example:
 ```korekto
 ! fence: 'abc'
 ```
+# Save and Restore
+
+There are times when you'll want to go on a side track in your proof, but
+then go back to some prior point discarding the side track...
+maybe to demonstrate a dead end.
+You can use `! save: '<key>'` and `! restore '<key>'` to do that:
+```korekto
+! save: 'backup'
+# Go on to say whatever nonsense...
+# ...then go back the to saved point as if nothing said.
+! restore: 'backup'
+```
+After the `restore`, then statement numbers will continue to increment normally, but
+the statements made after the `save` are gone.
+
 # Final thoughts
 
 I hope this gives you enough to get started.
