@@ -7,6 +7,8 @@ attr_reader
 axiom
 b
 backtrace
+backup
+BACKUPS
 basename
 blk
 buf
@@ -26,6 +28,7 @@ define
 definition
 detect
 detect_statement
+dump
 each
 empty
 Error
@@ -75,9 +78,11 @@ line_number
 lines
 literal_regexp
 ln
+load
 Main
 map
 mapping
+Marshal
 match
 max
 M_COMMENT_LINE

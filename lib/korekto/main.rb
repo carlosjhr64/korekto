@@ -11,6 +11,8 @@ class Main
   M_FENCE = /^```\s*$/
   M_COMMENT_LINE = /^\s*#/
 
+  BACKUPS = {}
+
   def initialize(filename='-', statements: Statements.new, imports: [])
     @filename,@statements,@imports = filename,statements,imports
     @imports.push @filename
@@ -63,8 +65,16 @@ class Main
       @statements.symbols.set_scanner value
     when 'fence'
       @m_fence_korekto = Regexp.new "^```#{value}$"
+    when 'save'
+      BACKUPS[value] = Marshal.dump(@statements)
+    when 'restore'
+      if backup = BACKUPS[value]
+        @statements = Marshal.load(backup)
+      else
+        raise Error, "nothing saved as '#{value}'"
+      end
     else
-      raise Error, "Key '#{key}' not implemented"
+      raise Error, "key '#{key}' not implemented"
     end
   end
 
