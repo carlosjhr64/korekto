@@ -36,8 +36,8 @@ $ korekto < examples/Tutorial.md
 -:266:M19:If A and B, then A good with B.
 ```
 Also, in `neovim` you can run the command `Korekto` or press `<F7>`.
-It will check you work and move the cursor to the first error it finds.
-It will also automate many of the statement comments.
+It will check your work and move the cursor to the first error it finds.
+It will also automate many of the statement's comments.
 You only need to give the statement type,
 `Korekto` completes the comment.
 
@@ -149,7 +149,7 @@ It must not have any undefined symbols.
 they yield `X`(instantiation) statements.
 They are used to instantiate new symbols in some context.
 ```korekto
-#A :good :with B;C :also :good :with B
+# A :good :with B;C :also :good :with B
 /^:\w+ :good :with (:\w+)\n:\w+ :also :good :with \1$/	#E14 Also good with 1
 ```
 `E` statements may introduce new symbols themselves.
