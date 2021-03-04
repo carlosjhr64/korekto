@@ -1,4 +1,5 @@
 # Calculus
+imports: [Algebra](Algebra.md)
 ```korekto
 < imports/Algebra.md
 # Calculus

@@ -1,4 +1,5 @@
 # Logic
+imports: [Syntax](Syntax.md)
 ```korekto
 < imports/Syntax.md
 ### Logic ###

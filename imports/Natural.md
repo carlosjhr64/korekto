@@ -1,4 +1,5 @@
 # Natural
+imports: [Logic](Logic.md)
 ```korekto
 < imports/Logic.md
 # Natural

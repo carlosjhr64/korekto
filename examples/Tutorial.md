@@ -15,6 +15,25 @@ I meant `Korekto` to read markdown files with `Korekto` code fenced.
 `Korekto` can be run on this tutorial:
 ```shell
 $ korekto < examples/Tutorial.md
+-:72:D1:5 Symbols including space
+-:73:D2:10 Numbers
+-:74:D3:10 Words
+-:85:A4:Reflection
+-:94:T5/A4:Reflection
+-:106:I6:Modus ponen
+-:108:I7:Synthesis
+-:117:P8:How can you have any pudding?
+-:118:P9:You did have your meat!
+-:126:C10/I6,P8,P9:Modus ponen
+-:127:C11/I7,P9,C10:Synthesis
+-:136:M12:If A and B, then A good with B
+-:144:R13/M12,C11:If A and B, then A good with B
+-:153:E14:Also good with 1
+-:166:X15/E14,R13:Also good with 1
+-:177:L16:Let 1
+-:185:S17/L16:Let 1
+-:259:A18:Reflection
+-:266:M19:If A and B, then A good with B.
 ```
 Also, in `neovim` you can run the command `Korekto` or press `<F7>`.
 It will check you work and move the cursor to the first error it finds.
@@ -22,14 +41,15 @@ It will also automate many of the statement comments.
 You only need to give the statement type,
 `Korekto` completes the comment.
 
-Keep in mind that as powerfull as `Regexp` can be,
+Keep in mind that as powerful as `Regexp` can be,
 you'll run into weaknesses in the `Regexp` engine.
 There will be times when the simple pattern generator can't create the test you want, and
 you'll consider using a literal `Regexp`.
-And some test may not be possible...
-the current concensus is that `Regexp` is not turing complete.
-So you may consider using `instance_eval` and the monkey patch options.
+And some tests may not be possible...
+the current consensus is that `Regexp` is not Turing Complete.
+So you may consider using the `instance_eval` and monkey patch options.
 You'll be going down the rabbit hole of trying to create a proof assistant for your project...
+burying yourself down all the way to first principles.
 CONSIDER YOURSELF WARNED!
 
 ## Statement types
@@ -61,8 +81,11 @@ but it's not required.
 `A` statements are acceptance patterns on single statements.
 They recognize tautologies.
 ```korekto
+# A=A
 /^(\w)=\1$/	#A4 Reflection
 ```
+`A` statements may introduce new symbols.
+
 ### `T` is for Tautology
 
 `T` statements are those that match any preceding `A` statements.
@@ -79,16 +102,20 @@ the size of the list of statements,
 `Korekto` requires that the correct combination be found in the last 13 statements.
 Restatement of previous results are allowed so as to add old statements into the search heap.
 ```korekto
+# :if A :then B;A;B
 /^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I6 Modus ponen
+# A;B;A&B
 /^(:\w+)\n(:\w+)\n\1&\2$/	#I7 Synthesis
 ```
+`I` statements may introduce new symbols.
+
 ### `P` is for Postulate
 
 `P` statements are used to introduce new facts(underivable from previous statements).
 It cannot have any undefined symbols.
 ```korekto
-:if :meat :then :pudding	#P8 How can you have any pudding
-:meat	#P9 You did have your meat
+:if :meat :then :pudding	#P8 How can you have any pudding?
+:meat	#P9 You did have your meat!
 ```
 ### `C` is for Conclusion
 
@@ -105,7 +132,8 @@ They must not have any undefined symbols.
 one previously accepted statement and the one being validated.
 The accepted statement must be in the heap(typically the last 13 statements).
 ```korekto
-/^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M12 A and B then A good with B
+# A&B;A :good :with B
+/^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M12 If A and B, then A good with B
 ```
 ### `R` is for Result
 
@@ -113,7 +141,7 @@ The accepted statement must be in the heap(typically the last 13 statements).
 in combination with one previous statement in the heap(typically the last 13 statements).
 It must not have any undefined symbols.
 ```korekto
-:meat :good :with :pudding	#R13/M12,C11 A and B then A good with B
+:meat :good :with :pudding	#R13/M12,C11 If A and B, then A good with B
 ```
 ### `E` is for Existential
 
@@ -121,8 +149,10 @@ It must not have any undefined symbols.
 they yield `X`(instantiation) statements.
 They are used to instantiate new symbols in some context.
 ```korekto
+#A :good :with B;C :also :good :with B
 /^:\w+ :good :with (:\w+)\n:\w+ :also :good :with \1$/	#E14 Also good with 1
 ```
+`E` statements may introduce new symbols themselves.
 If the title(in the comment section) includes a number,
 it should be the expected number of instantiations.
 
@@ -135,6 +165,9 @@ must introduce at least one new symbol.
 # cherry was added in context of "also good with pudding"
 :cherry :also :good :with :pudding	#X15/E14,R13 Also good with 1
 ```
+If the matching `E` statement for the `X` statement has a number in the title,
+it'll interpret it has the number of instantiations expected.
+
 ### `L` is for Let
 
 `L` statements are just like `A` in that they're patterns on single statements.
@@ -155,6 +188,7 @@ can bring in new symbols.
 
 I created these two tables of statement types which differ only in its sorting.
 I was hoping to show that all statement types are covered.
+:-??
 Under "Undefined", "Yes" means it may have undefined symbols
 whereas "Yes!" means it must have at least one undefined symbol.
 
@@ -192,6 +226,12 @@ Currently `Korekto` expects all patterns to capture,
 although no checking is done if a literal `Regexp` is given.
 Also, `Korekto` will not define any symbols in a literal `Regexp`,
 so it's preferable to use `Patterns` described below.
+
+Some generalities:
+* All pattern statements may introduce new symbols
+* All pattern statements will itemize in the title the new symbols found
+* First number found in the title of an instantiating pattern(E,L) is the expected number of instantiations
+* First number found in the title of a definition statement(D) is the expected number of undefined symbols
 
 ## Patterns
 
@@ -291,3 +331,11 @@ You can change the fence to something else, like `abc` for example:
 ```korekto
 ! fence: 'abc'
 ```
+# Final thoughts
+
+I hope this gives you enough to get started.
+Feel free to contact me for further help.
+As you'll see in all my projects, there are no issues.
+That's because I write perfect code that never breaks,
+with such clear documentation no one ever has any problems.
+:P

@@ -1,4 +1,5 @@
 # Real
+imports: [Rational](Rational.md)
 ```korekto
 < imports/Rational.md
 # Real

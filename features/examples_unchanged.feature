@@ -7,7 +7,7 @@ Feature: examples_unchanged
   Scenario: Tutorial
     * Given option "< examples/Tutorial.md | grep '^-:'"
     * When we run command
-    * Then digest is "cfe03e9ee7a6086513f8525ceaa63249"
+    * Then digest is "446a5f1f8329e1419d7f26726e098c57"
 
   Scenario: ABC
     * Given option "< examples/ABC.md | grep '^-:'"
@@ -17,10 +17,10 @@ Feature: examples_unchanged
   Scenario: Dxx
     * Given option "< examples/Dxx.md | grep '^-:'"
     * When we run command
-    * Then digest is "7b2bdb376bb55aa3580118f6a35279db"
+    * Then digest is "9a914819e2a5f34a62335aa6cdedf973"
 
   Scenario: Sqrt2
     * Given option "< examples/Sqrt2.md | grep '^-:'"
     * When we run command
-    * Then digest is "c58436e84db2c7d5713fcb4141d3d461"
+    * Then digest is "b867abb82c76b3d5c233c27e2326589c"
 

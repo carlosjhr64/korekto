@@ -1,4 +1,5 @@
 # Integer
+imports: [Natural](Natural.md)
 ```korekto
 < imports/Natural.md
 # Integer

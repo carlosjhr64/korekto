@@ -1,4 +1,5 @@
 # Rational
+imports: [Integer](Integer.md)
 ```korekto
 < imports/Integer.md
 # Rational

@@ -10,4 +10,4 @@ Feature: readme
     * Then exit status is "0"
     * Then stderr is ""
     * Then stdout matches /:Modus ponens$/
-    * Then digest is "d56762a7daff689d01470c1a81bfeafd"
+    * Then digest is "3881fc01a844afab191888653037448f"

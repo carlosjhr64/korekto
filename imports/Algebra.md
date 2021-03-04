@@ -1,4 +1,5 @@
 # Algebra
+imports: [Real](Real.md)
 ```korekto
 < imports/Real.md
 # Algebra

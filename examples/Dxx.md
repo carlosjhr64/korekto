@@ -1,4 +1,11 @@
-# [Derivative of x^x](https://www.youtube.com/watch?v=l-iLg07zavc)
+# Derivative of x^x
+
+If you have trouble reading the proof below,
+I recommend viewing blackpenredpen's YouTube video [derivative of x^x](https://www.youtube.com/watch?v=l-iLg07zavc).
+You'll find the patterns validating statements in this proof down this rabbit hole:
+[Calculus](../imports/Calculus.md).
+For ideas on how to set things up down the rabbit hole,
+I recommend Wildberger's YouTube channel [Insights into Mathematics](https://www.youtube.com/c/njwildberger/about).
 ```korekto
 < imports/Calculus.md
 ### Set up ###
