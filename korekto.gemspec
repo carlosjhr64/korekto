@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
 
   s.description = <<DESCRIPTION
 A general proof checker.
+
+Works with neovim(nvim).
 DESCRIPTION
 
   s.summary = <<SUMMARY
