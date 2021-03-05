@@ -54,6 +54,16 @@ class Statement
     when 'I'
       # Inference=>Conclusion
       pattern_type(2)
+    when 'W'
+      ['T','S','R','X','C'].any? do |code|
+        begin
+          @code[0]=code
+          set_acceptance_code
+          true
+        rescue Error
+          false
+        end
+      end or raise Error, 'did not match any statement pattern'
     else
       raise Error, "statement type #{@code[0]} not implemented"
     end
