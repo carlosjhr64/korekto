@@ -64,7 +64,7 @@ in the patterns in the following examples,
 but one should best use
 the pattern translation feature `Korekto` provides.
 
-### `D` is for Definition
+### D is for Definition
 
 `D` statements are used to introduce new symbols.
 It must introduce at least one new symbol.
@@ -76,7 +76,7 @@ It must introduce at least one new symbol.
 You can specify the number of symbols to be defined in the comment title,
 but it's not required.
 
-### `A` is for Axiom
+### A is for Axiom
 
 `A` statements are acceptance patterns on single statements.
 They recognize tautologies.
@@ -86,14 +86,14 @@ They recognize tautologies.
 ```
 `A` statements may introduce new symbols.
 
-### `T` is for Tautology
+### T is for Tautology
 
 `T` statements are those that match any preceding `A` statements.
 They must not have any undefined symbols.
 ```korekto
 4=4	#T5/A4 Reflection
 ```
-### `I` is for Inference
+### I is for Inference
 
 `I` statements are acceptance patterns on three statements:
 two accepted statement and a third to be validated.
@@ -109,7 +109,7 @@ Restatement of previous results are allowed so as to add old statements into the
 ```
 `I` statements may introduce new symbols.
 
-### `P` is for Postulate
+### P is for Postulate
 
 `P` statements are used to introduce new facts(underivable from previous statements).
 It cannot have any undefined symbols.
@@ -117,7 +117,7 @@ It cannot have any undefined symbols.
 :if :meat :then :pudding	#P8 How can you have any pudding?
 :meat	#P9 You did have your meat!
 ```
-### `C` is for Conclusion
+### C is for Conclusion
 
 `C` statements are those that matched any preceding `I` statements
 in combination with two previous statements in the heap(typically the last 13 statements).
@@ -126,7 +126,7 @@ They must not have any undefined symbols.
 :pudding	#C10/I6,P8,P9 Modus ponen
 :meat&:pudding	#C11/I7,P9,C10 Synthesis
 ```
-### `M` is for Mapping
+### M is for Mapping
 
 `M` statements are acceptance patterns on two statements,
 one previously accepted statement and the one being validated.
@@ -135,7 +135,7 @@ The accepted statement must be in the heap(typically the last 13 statements).
 # A&B;A :good :with B
 /^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M12 If A and B, then A good with B
 ```
-### `R` is for Result
+### R is for Result
 
 `R` statements are those that matched any preceding `M` statements
 in combination with one previous statement in the heap(typically the last 13 statements).
@@ -143,7 +143,7 @@ It must not have any undefined symbols.
 ```korekto
 :meat :good :with :pudding	#R13/M12,C11 If A and B, then A good with B
 ```
-### `E` is for Existential
+### E is for Existential
 
 `E` statements are mappings like `M`, but instead of yielding `R`(result) statements,
 they yield `X`(instantiation) statements.
@@ -156,7 +156,7 @@ They are used to instantiate new symbols in some context.
 If the title(in the comment section) includes a number,
 it should be the expected number of instantiations.
 
-### `X` if for Instantiation
+### X is for Instantiation
 
 `X` statements are results like `R`, but
 are a consequence of an `E` existential statement, and
@@ -168,7 +168,7 @@ must introduce at least one new symbol.
 If the matching `E` statement for the `X` statement has a number in the title,
 it'll interpret it has the number of instantiations expected.
 
-### `L` is for Let
+### L is for Let
 
 `L` statements are just like `A` in that they're patterns on single statements.
 But `L` statement yield statements that can instantiate new symbols.
@@ -176,14 +176,24 @@ The number of symbols that can be introduced is set in the comment title.
 ```korekto
 /^:let :there :be (:\w+)$/	#L16 Let 1
 ```
-### `S` is for Set(Assignment)
+### S is for Set(Assignment)
 
 `S` statements are just like `T` statements
 except that they're validated by `L` statements and
 can bring in new symbols.
 ```korekto
 :let :there :be :light	#S17/L16 Let 1
+
 ```
+### W is for Which
+
+Sometimes a statement might be validated by
+either a `M` mapping or an `I` inference,
+but you forget which... so is it `R` or `C`?
+Setting the statement type to `W` tells `Korekto` to test which one works.
+`W` will try in order [`T`,`S`,`R`,`X`,`C`], and
+will go with the first match or raise an error.
+
 ## Statements table
 
 I created these two tables of statement types which differ only in its sorting.

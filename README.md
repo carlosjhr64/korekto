@@ -33,12 +33,24 @@ If I see Cows, then I'll probably see Chickens.	#P5
 I see Cows.	#P6
 I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 ```
-
 ## MORE
 
 * Tutorial
   * [Intro](examples/Tutorial.md)
   * [Statement types](examples/Tutorial.md#Statement-types)
+    * [D is for Definition](examples/Tutorial.md#D-is-for)
+    * [P is for Postulate](examples/Tutorial.md#P-is-for)
+    * [A is for Axiom](examples/Tutorial.md#A-is-for)
+    * [T is for Tautology](examples/Tutorial.md#T-is-for)
+    * [I is for Inference](examples/Tutorial.md#I-is-for)
+    * [C is for Conclusion](examples/Tutorial.md#C-is-for)
+    * [M is for Map](examples/Tutorial.md#M-is-for)
+    * [R is for Result](examples/Tutorial.md#R-is-for)
+    * [E is for Existential](examples/Tutorial.md#E-is-for)
+    * [X is for Instantiation](examples/Tutorial.md#X-is-for)
+    * [L is for Let](examples/Tutorial.md#L-is-for)
+    * [S is for Set/Assignment](examples/Tutorial.md#S-is-for)
+    * [W is for Which](examples/Tutorial.md#W-is-for)
   * [Statements table](examples/Tutorial.md#Statements-table)
   * [Patterns](examples/Tutorial.md#Patterns)
   * [Syntax](examples/Tutorial.md#Syntax)
