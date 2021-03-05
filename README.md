@@ -8,6 +8,8 @@
 
 A general proof checker.
 
+Works with neovim(nvim).
+
 ## INSTALL:
 ```shell
 $ gem install korekto
