@@ -7,7 +7,6 @@ Usage:
 Options:
  -h --help
  -v --version
- -V --verbose
  --install   \tInstalls the korekto neovim ruby plugin
 # Example usage:
 #   cat README.md | korekto

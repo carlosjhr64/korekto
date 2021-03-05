@@ -5,6 +5,8 @@
  (examples\/)|
  (features\/)|
  (History\.)|
+ (imports\/)|
+ (README\.)|
  (test\/)|
  (TODO\.)
 )

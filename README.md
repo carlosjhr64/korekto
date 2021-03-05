@@ -1,8 +1,8 @@
-# korekto
+# Korekto
 
 * [VERSION 0.0.210305](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
-* TODO: rubygems
+* [rubygems](https://rubygems.org/gems/korekto)
 
 ## DESCRIPTION:
 
@@ -10,7 +10,7 @@ A general proof checker.
 
 ## INSTALL:
 ```shell
-$ gem install korekto # TODO 
+$ gem install korekto
 $ korekto --install
 ```
 ## SYNOPSIS:
@@ -64,6 +64,19 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
   * [Dx x^x](examples/Dxx.md)
   * [Sqrt(2) is irrational! (Classic Proof)](examples/Sqrt2.md)
 
+## Help:
+```shell
+$ korekto --help
+Usage:
+  korekto [:options+]
+Options:
+ -h --help
+ -v --version
+ --install   	Installs the korekto neovim ruby plugin
+# Example usage:
+#   cat README.md | korekto
+#   korekto < README.md
+```
 ## LICENSE:
 
 Copyright 2021 CarlosJHR64

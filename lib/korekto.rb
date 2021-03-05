@@ -11,3 +11,4 @@ module Korekto
 end
 # Requires:
 # `ruby`
+# `nvim`
