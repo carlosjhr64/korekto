@@ -176,7 +176,7 @@ The number of symbols that can be introduced is set in the comment title.
 ```korekto
 /^:let :there :be (:\w+)$/	#L16 Let 1
 ```
-### S is for Set(Assignment)
+### S is for Set i.e. Assignment
 
 `S` statements are just like `T` statements
 except that they're validated by `L` statements and

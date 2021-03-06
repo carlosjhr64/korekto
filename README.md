@@ -51,7 +51,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
     * [E is for Existential](examples/Tutorial.md#E-is-for-Existential)
     * [X is for Instantiation](examples/Tutorial.md#X-is-for-Instantiation)
     * [L is for Let](examples/Tutorial.md#L-is-for-Let)
-    * [S is for Set/Assignment](examples/Tutorial.md#S-is-for-Set)
+    * [S is for Set/Assignment](examples/Tutorial.md#S-is-for-Set-i.e.-Assignment)
     * [W is for Which](examples/Tutorial.md#W-is-for-Which)
   * [Statements table](examples/Tutorial.md#Statements-table)
   * [Patterns](examples/Tutorial.md#Patterns)
