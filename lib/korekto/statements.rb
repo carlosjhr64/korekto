@@ -12,12 +12,13 @@ class Statements
   def length = @statements.length
 
   def add(statement,code,title,filename,statement_number)
-    if restatement = @statements.detect{_1.type==code[0] and _1.to_s==statement}
+    c = code[0]; w = c=='W'
+    if restatement = @statements.detect{(w or _1.type==c) and _1.to_s==statement}
       case restatement.type
       when 'D','X','S','P','T','C','R'
         @heap.add restatement
       else
-        raise 'restatement'
+        raise Error, "restatement: #{restatement.code}"
       end
       code,_ = restatement.code
       title ||= restatement.title

@@ -12,3 +12,4 @@ end
 # Requires:
 # `ruby`
 # `nvim`
+# `xdg-open`

@@ -31,7 +31,7 @@ nvim
 ponens
 preprocess
 readlines
-README
+readme
 rubygems
 Sqrt
 stderr
@@ -42,3 +42,4 @@ Tautoloty
 uniq
 unshift
 www
+xdg

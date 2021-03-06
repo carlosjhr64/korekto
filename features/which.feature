@@ -20,6 +20,8 @@ a=3	#W
 2a=23	#W
 1!	#W
 2&3	#W
+3=3 #W Restatement
+A=A #W
 ```
 
   Background:
@@ -28,11 +30,13 @@ a=3	#W
   Scenario: Which
     * Given option "< features/which.feature"
     * When we run command
-    * Then exit status is "0"
+    * Then exit status is "65"
     * Then stderr is ""
     * Then stdout matches /T9.A1.Reflection/
     * Then stdout matches /S10.L3.Let/
     * Then stdout matches /R11.M4,S10/
     * Then stdout matches /X12.E5,S10/
     * Then stdout matches /C13.I2,P7,P8.Conjunction/
-    * Then digest is "29147fb08d4d6a19e33cfbb1d5a216d5"
+    * Then stdout matches /T9.A1.Restatement/
+    * Then stdout matches /!:restatement: A1/
+    * Then digest is "c9efebb70bfc1b35a09feb5ad6536024"
