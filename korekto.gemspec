@@ -39,5 +39,6 @@ start/korekto/syntax/korekto.vim
   s.add_runtime_dependency 'help_parser', '~> 7.0', '>= 7.0.200907'
   s.requirements << 'ruby: ruby 3.0.0p0 (2020-12-25 revision 95aff21468) [x86_64-linux]'
   s.requirements << 'nvim: NVIM v0.4.4'
+  s.requirements << 'xdg-open: xdg-open 1.1.3+'
 
 end
