@@ -183,7 +183,6 @@ except that they're validated by `L` statements and
 can bring in new symbols.
 ```korekto
 :let :there :be :light	#S17/L16 Let 1
-
 ```
 ### W is for Which
 
