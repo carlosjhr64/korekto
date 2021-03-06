@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name     = 'korekto'
-  s.version  = '0.0.210306'
+  s.version  = '1.0.210306'
 
   s.homepage = 'https://github.com/carlosjhr64/korekto'
 
