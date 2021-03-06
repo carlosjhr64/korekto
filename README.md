@@ -75,9 +75,10 @@ Options:
  -h --help
  -v --version
  --install   	Installs the korekto neovim ruby plugin
+ --readme    	Open korekto github page
 # Example usage:
-#   cat README.md | korekto
-#   korekto < README.md
+#   cat MARKDOWN.md | korekto
+#   korekto < MARKDOWN.md
 ```
 ## LICENSE:
 
