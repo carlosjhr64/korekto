@@ -5,7 +5,7 @@ class Statement
     @statement,@code,@title,@statement_number,@context = statement,code,title,statement_number,context
     @filename = File.basename(filename,'.*')
     @statement.freeze; @filename.freeze; @statement_number.freeze
-    syntax_check
+    syntax_check unless @statement[0]=='/' and @statement[-1]=='/' and ['A','L','M','E','I'].include?(@code[0])
     @regexp = nil
     set_acceptance_code
     @code.freeze; @title.freeze; @regexp.freeze

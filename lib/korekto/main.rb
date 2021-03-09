@@ -122,7 +122,7 @@ class Main
       rescue Error
         puts "#{@filename}:#{line_number}:!:#{$!.message}"
         exit 65
-      rescue
+      rescue Exception
         puts "#{@filename}:#{line_number}:?:#{$!.message}"
         $stderr.puts $!.backtrace
         exit 1
