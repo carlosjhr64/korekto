@@ -27,3 +27,9 @@ Feature: examples_pass
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
+
+  Scenario: Squash
+    * Given option "< examples/Squash.md"
+    * When we run command
+    * Then exit status is "0"
+    * Then stderr is ""
