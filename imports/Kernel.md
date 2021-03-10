@@ -1,4 +1,4 @@
-# Syntax
+# Kernel
 ```korekto
 ### Ruby Monkey Patches ###
 ::Array#blp(k,m) = (m==0)?self<<k:(k==last)?self[0..-2]:self<<k

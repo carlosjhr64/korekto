@@ -65,6 +65,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
   * [ABC music notation](examples/ABC.md)
   * [Dx x^x](examples/Dxx.md)
   * [Sqrt(2) is irrational! (Classic Proof)](examples/Sqrt2.md)
+  * [Squash Function](examples/Squash.md)
 
 ## Help:
 ```shell
