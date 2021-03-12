@@ -35,9 +35,9 @@ class TestSymbols < Test::Unit::TestCase
     symbols = Korekto::Symbols.new
 
     # literally spelling out the regexp
-    regexp = symbols.s2r Korekto::Statement.new('/^match$/')
+    regexp = symbols.s2r Korekto::Statement.new('/\Amatch\Z/')
     assert_equal Regexp, regexp.class
-    assert_equal '/^match$/', regexp.inspect
+    assert_equal '/\Amatch\Z/', regexp.inspect
 
     # using variable pattern translations, straight pass
     error = assert_raises(Korekto::Error) do
@@ -50,6 +50,6 @@ class TestSymbols < Test::Unit::TestCase
     symbols.v2t['a'] = ':Variable'
     regexp = symbols.s2r Korekto::Statement.new('a=a')
     assert_equal Regexp, regexp.class
-    assert_equal '/^(\w)=\1$/', regexp.inspect
+    assert_equal '/\A(\w)=\1\Z/', regexp.inspect
   end
 end

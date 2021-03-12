@@ -36,7 +36,7 @@ class Symbols
     if statement[0]=='/' and statement[-1]=='/'
       Regexp.new(statement[1..-2])
     else
-      pattern,count,seen = '^',0,{}
+      pattern,count,seen = '\A',0,{}
       Regexp.quote(statement).scan(@scanner) do |v|
         if n=seen[v]
           pattern << '\\'+n
@@ -57,7 +57,7 @@ class Symbols
         end
       end
       raise Error, 'pattern with no captures' if count < 1
-      pattern << '$'
+      pattern << '\Z'
       Regexp.new(pattern)
     end
   end
