@@ -9,8 +9,8 @@ imports: [Kernel](Kernel.md)
 ! scanner: ':\w+|.'
 ### Patterns ###
 #
-! Newline /\n/
-! Newline {;}
+! .Newline /\n/
+! .Newline {;}
 #
 ! Glob /\S*/
 ! Glob {a b c d e}

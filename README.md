@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 1.0.210310](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 1.1.210312](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -20,8 +20,8 @@ $ korekto --install
 ### Patterns ###
 # 'Hello World!'.scan(/\w+|\S|\s/) #=> ["Hello", " ", "World", "!"]
 ! scanner: '\w+|\S|\s'
-! Newline /\n/
-! Newline {;}
+! .Newline /\n/
+! .Newline {;}
 ! Variables /\w+/
 ! Variables {V W}
 ### Acceptance patterns ###

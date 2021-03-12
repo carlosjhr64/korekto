@@ -4,8 +4,8 @@ Feature: modus_ponem
 ```korekto
 ! V /\w/
 ! V {u v w}
-! :nl /\n/
-! :nl {;}
+! .nl /\n/
+! .nl {;}
 u;:if[u,v];v	#I1 Modus Ponem: :if [ , ]
 S{s,t}	#D2 Statements
 s	#P3

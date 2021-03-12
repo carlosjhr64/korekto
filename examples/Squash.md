@@ -36,8 +36,8 @@ And I switch the fence to `ruby`.
 ? not match?(/\w\-/)
 ### Patterns ###
 ! scanner: ':?\w+:?|.'
-! Newline /\n/
-! Newline {;}
+! .Newline /\n/
+! .Newline {;}
 ! Variable /\w/
 ! Variable {u v w x y z}
 ! Glob /.*/

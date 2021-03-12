@@ -42,7 +42,7 @@ class Symbols
           pattern << '\\'+n
         elsif type = @v2t[v]
           regex = @t2p[type]
-          if regex=='\n'
+          if type[0]=='.'
             pattern << regex
           else
             count += 1

@@ -249,10 +249,11 @@ one can write easily readable patterns to be translated into `Regexp`.
 You'll want to first define your newline pattern `/\n/`.
 I like to use `;` for the newline pattern.
 ```korekto
-! :nl /\n/
-! :nl {;}
+! .nl /\n/
+! .nl {;}
 ```
 The bang `!` at the start of a line tells `Korekto` it's a pattern definition.
+The period at the start of the pattern name means this pattern is not to capture.
 Pattern definitions have the following form:
 ```ruby
 %r{^! (?<type>\S+)\s*/(?<pattern>.*)/$}
@@ -260,8 +261,8 @@ Pattern definitions have the following form:
 ```
 So if you want to capture a number into pattern variables(i,j,k), you could write:
 ```korekto
-! :Number /\d+/
-! :Number {i j k}
+! Number /\d+/
+! Number {i j k}
 ```
 A Reflection axiom like `#A3` above can then be rewritten for numbers as:
 ```korekto
@@ -270,8 +271,8 @@ i=i	#A18 Reflection
 Although you'll probably want to make a Reflection axiom a bit more general than for just numbers.
 Demonstrating the use of `!:nl {;}`, map `#M11` above could be rewritten as follows:
 ```korekto
-! :KeyWord /:\w+/
-! :KeyWord {A B}
+! KeyWord /:\w+/
+! KeyWord {A B}
 A&B;A :good :with B	#M19 If A and B, then A good with B.
 ```
 ## Syntax

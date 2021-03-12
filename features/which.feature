@@ -3,8 +3,8 @@ Feature: which
 
 ```korekto
 ! scanner: '.'
-! Newline /\n/
-! Newline {;}
+! .Newline /\n/
+! .Newline {;}
 ! Variable /\w/
 ! Variable {A B C}
 A=A	#A1 Reflection: =
