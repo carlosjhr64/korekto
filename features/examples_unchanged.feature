@@ -27,5 +27,5 @@ Feature: examples_unchanged
   Scenario: Squash
     * Given option "< examples/Squash.md | grep '^-:'"
     * When we run command
-    * Then digest is "1a5a7d8f29df5080a50c4a0de7bbbfe8"
+    * Then digest is "20407add9020d04a7ba00c866ef32be5"
 

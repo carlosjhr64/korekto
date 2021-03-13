@@ -38,9 +38,13 @@ And I switch the fence to `ruby`.
 ! scanner: ':?\w+:?|.'
 ! .Newline /\n/
 ! .Newline {;}
+! .Open /[({\[]?/
+! .Open {<}
+! .Close /[)}\]]?/
+! .Close {>}
 ! Variable /\w/
 ! Variable {u v w x y z}
-! Glob /.*/
+! Glob /[\S ]*/
 ! Glob {a b c d e f}
 ! fence: 'ruby'
 ```
@@ -52,8 +56,8 @@ I write my acceptance patterns:
 # Equality
 u = a	#L1 Assignment:   =
 # Substitutions
-/^(.+) = (.+)\n(.*)[\(\{\[]?\1[\)\}\]]?(.*)\n\3[\(\{\[]?\2[\)\}\]]?\4$/	#I2 Substitution
-/^(.+) = (.+)\n(.*)[\(\{\[]?\2[\)\}\]]?(.*)\n\3[\(\{\[]?\1[\)\}\]]?\4$/	#I3 Substitution
+a = b;c<a>d;c<b>d	#I2 Substitution
+a = b;c<b>d;c<a>d	#I3 Substitution
 # Logical programming
 QED: a	#A4 What's to be proven: QED:
 QED: a;a;:QED	#I5 Done!: :QED
