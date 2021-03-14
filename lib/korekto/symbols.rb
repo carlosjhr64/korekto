@@ -37,7 +37,7 @@ class Symbols
       Regexp.new(statement[1..-2])
     else
       pattern,count,seen = '\A',0,{}
-      Regexp.quote(statement).scan(@scanner) do |v|
+      statement.scan(@scanner) do |v|
         if n=seen[v]
           pattern << '\\'+n
         elsif type = @v2t[v]
@@ -50,8 +50,9 @@ class Symbols
             pattern << '('+regex+')'
           end
         else
-          # To avoid collisions with back-references,
-          # isolate digit in square brackets:
+          # Escape Regexp specials
+          v = Regexp.quote v
+          # To avoid collisions with back-references, isolate digit in square brackets:
           '0123456789'.include?(_=v[0]) and v[0]='['+_+']'
           pattern << v
         end
