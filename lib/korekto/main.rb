@@ -15,8 +15,9 @@ class Main
 
   def initialize(filename='-', statements: Statements.new, imports: [])
     @filename,@statements,@imports = filename,statements,imports
-    @imports.push @filename
+    @imports.push @filename.freeze
     @line,@active = nil,false
+    @section = File.basename(@filename,'.*')
     @m_fence_korekto = /^```korekto$/
   end
 
@@ -65,6 +66,8 @@ class Main
       @statements.symbols.set_scanner value
     when 'fence'
       @m_fence_korekto = Regexp.new "^```#{value}$"
+    when 'section'
+      @section = value
     when 'save'
       BACKUPS[value] = Marshal.dump(@statements)
     when 'restore'
@@ -113,7 +116,7 @@ class Main
           code,title = @statements.add(md[:statement].strip,
                                        md[:code],
                                        md[:title],
-                                       @filename,
+                                       @section,
                                        statement_number)
           puts "#{@filename}:#{line_number}:#{code}:#{title}"
         else

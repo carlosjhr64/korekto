@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 1.2.210314](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 1.3.210316](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -59,6 +59,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
   * [Monkey patches](examples/Tutorial.md#Monkey-patches)
   * [Scanner](examples/Tutorial.md#Scanner)
   * [Fence](examples/Tutorial.md#Fence)
+  * [Section](examples/Tutorial.md#Section)
   * [Save and Restore](examples/Tutorial.md#Save-and-Restore)
 
 * Examples

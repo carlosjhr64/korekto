@@ -341,6 +341,13 @@ You can change the fence to something else, like `abc` for example:
 ```korekto
 ! fence: 'abc'
 ```
+# Section
+
+The default section is the basename of the file without the extension.
+You can set the section name as follows:
+```korekto
+! section: 'Numbers'
+```
 # Save and Restore
 
 There are times when you'll want to go on a side track in your proof, but

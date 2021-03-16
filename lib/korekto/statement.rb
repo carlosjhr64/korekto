@@ -1,10 +1,10 @@
 module Korekto
 class Statement
-  attr_reader :code,:title,:regexp,:filename,:statement_number
-  def initialize(statement,code,title,filename,statement_number,context)
-    @statement,@code,@title,@statement_number,@context = statement,code,title,statement_number,context
-    @filename = File.basename(filename,'.*')
-    @statement.freeze; @filename.freeze; @statement_number.freeze
+  attr_reader :code,:title,:regexp,:section,:statement_number
+  def initialize(statement,code,title,section,statement_number,context)
+    @statement,@code,@title,@section,@statement_number,@context =
+      statement,code,title,section,statement_number,context
+    @statement.freeze; @section.freeze; @statement_number.freeze
     syntax_check unless @statement[0]=='/' and @statement[-1]=='/' and ['A','L','M','E','I'].include?(@code[0])
     @regexp = nil
     set_acceptance_code
@@ -81,7 +81,7 @@ class Statement
     support = []
     s.each do |s|
       c = s.code.split('/',2)[0]
-      c = s.filename+'.'+c unless s.filename=='-'
+      c = s.section+'.'+c unless s.section=='-'
       support.push(c)
     end
     return support.join(',')
