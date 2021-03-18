@@ -3,9 +3,9 @@ Feature: section
 
 ```korekto
 ! section: 'Anything'
-/.*/	#L1 Let anything!
+/.*/	#L1.Anything Let anything!
 ! section: 'Work'
-Anything?	#S2/Anything.L1 Let anything!
+Anything?	#S2.Work/L1.Anything Let anything!
 ```
 
   Background:
@@ -16,4 +16,4 @@ Anything?	#S2/Anything.L1 Let anything!
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout matches /-:8:S2.Anything.L1:Let anything!/
+    * Then stdout matches /-:8:S2.Work.L1.Anything:Let anything!/

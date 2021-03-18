@@ -73,6 +73,7 @@ class Statement
 
   def set_statement(support=nil, title=nil)
     @code = "#{@code[0]}#{@statement_number}"
+    @code += '.' + @section unless @section=='-'
     @code += "/#{support}" if support
     @title = title.split(':',2).first if title
   end
@@ -81,7 +82,6 @@ class Statement
     support = []
     s.each do |s|
       c = s.code.split('/',2)[0]
-      c = s.section+'.'+c unless s.section=='-'
       support.push(c)
     end
     return support.join(',')

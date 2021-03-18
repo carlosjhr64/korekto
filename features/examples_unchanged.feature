@@ -17,12 +17,12 @@ Feature: examples_unchanged
   Scenario: Dxx
     * Given option "< examples/Dxx.md | grep '^-:'"
     * When we run command
-    * Then digest is "9a914819e2a5f34a62335aa6cdedf973"
+    * Then digest is "ae3da01ca2c92bd5ccebe1ccd9cb1fa0"
 
   Scenario: Sqrt2
     * Given option "< examples/Sqrt2.md | grep '^-:'"
     * When we run command
-    * Then digest is "b867abb82c76b3d5c233c27e2326589c"
+    * Then digest is "ae0f5458623da898c3ea44029334300b"
 
   Scenario: Squash
     * Given option "< examples/Squash.md | grep '^-:'"
