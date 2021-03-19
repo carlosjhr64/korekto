@@ -32,8 +32,8 @@ $ korekto < examples/Tutorial.md
 -:166:X15/E14,R13:Also good with 1
 -:177:L16:Let 1
 -:185:S17/L16:Let 1
--:259:A18:Reflection
--:266:M19:If A and B, then A good with B.
+-:269:A18:Reflection
+-:276:M19:If A and B, then A good with B.
 ```
 Also, in `neovim` you can run the command `Korekto` or press `<F7>`.
 It will check your work and move the cursor to the first error it finds.
@@ -187,7 +187,7 @@ can bring in new symbols.
 ### W is for Which
 
 Sometimes a statement might be validated by
-either a `M` mapping or an `I` inference,
+either an `M` mapping or an `I` inference,
 but you forget which... so is it `R` or `C`?
 Setting the statement type to `W` tells `Korekto` to test which one works.
 `W` will try in order [`T`,`S`,`R`,`X`,`C`], and
@@ -370,4 +370,3 @@ Feel free to contact me for further help.
 As you'll see in all my projects, there are no issues.
 That's because I write perfect code that never breaks,
 with such clear documentation no one ever has any problems.
-:P
