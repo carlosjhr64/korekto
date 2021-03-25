@@ -33,3 +33,10 @@ Feature: examples_pass
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
+
+  Scenario: Computation
+    * Given option "< examples/Computation.md"
+    * When we run command
+    * Then exit status is "65"
+    * Then stderr is ""
+    * Then stdout matches /:!:syntax/

@@ -29,3 +29,8 @@ Feature: examples_unchanged
     * When we run command
     * Then digest is "20407add9020d04a7ba00c866ef32be5"
 
+  Scenario: Computation
+    * Given option "< examples/Computation.md | grep '^-:'"
+    * When we run command
+    * Then digest is "92488b70676d7ef82d73ff9fb5c3dbcb"
+

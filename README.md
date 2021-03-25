@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 1.4.210318](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 1.4.210325](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -64,6 +64,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 
 * Examples
   * [ABC music notation](examples/ABC.md)
+  * [Computation](examples/Computation.md)
   * [Dx x^x](examples/Dxx.md)
   * [Sqrt(2) is irrational! (Classic Proof)](examples/Sqrt2.md)
   * [Squash Function](examples/Squash.md)
