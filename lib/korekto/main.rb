@@ -118,7 +118,9 @@ class Main
                                        md[:title],
                                        @section,
                                        statement_number)
-          puts "#{@filename}:#{line_number}:#{code}:#{title}"
+          if not OPTIONS.edits? or (@filename=='-' and not (md[:code]==code and md[:title]==title))
+            puts "#{@filename}:#{line_number}:#{code}:#{title}"
+          end
         else
           raise Error, 'unrecognized korekto line'
         end

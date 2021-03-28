@@ -1,6 +1,6 @@
 Neovim.plugin do |plug|
   plug.command(:Korekto) do |nvim|
-    validations = nvim.command_output('w !korekto').strip.split("\n").map(&:strip)
+    validations = nvim.command_output('w !korekto --edits').strip.split("\n").map(&:strip)
     msg = 'OK'
     unless validations.empty?
       buf = nvim.get_current_buf

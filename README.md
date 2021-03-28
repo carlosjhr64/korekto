@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 1.4.210326](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 1.5.210328](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -73,10 +73,11 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 ```shell
 $ korekto --help
 Usage:
-  korekto [:options+]
+  korekto [:options]
 Options:
  -h --help
  -v --version
+ --edits     	Show only needed edits
  --install   	Installs the korekto neovim ruby plugin
  --readme    	Open korekto github page
 # Example usage:

@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 require 'help_parser'
 
-OPTIONS = HelpParser['1.4.210326', <<HELP]
+OPTIONS = HelpParser['1.5.210328', <<HELP]
 Usage:
-  korekto [:options+]
+  korekto [:options]
 Options:
  -h --help
  -v --version
+ --edits     \tShow only needed edits
  --install   \tInstalls the korekto neovim ruby plugin
  --readme    \tOpen korekto github page
 # Example usage:
