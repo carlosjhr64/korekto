@@ -108,11 +108,11 @@ Consider: Unsquash[Squash[x]]	#T30/A6 Consider this
 = Log[1/(u - u(1/u))]	#C35/I2,T25,C34 Substitution
 = Log[1/(u - 1)]	#C36/I2,T26,C35 Substitution
   u = 1 + Exp[-x]	#S21/L1 Remember!
-= Log[1/(1 + Exp[-x] - 1)]	#C38/I2,S21,C36 Substitution
-= Log[1/Exp[-x]]	#C39/I2,T27,C38 Substitution
-= Log[Exp[x]]	#C40/I3,T28,C39 Substitution
-= x	#C41/I2,T29,C40 Substitution
-Unsquash[Squash[x]] = x	#C42/I8,T30,C41 Join
+= Log[1/(1 + Exp[-x] - 1)]	#C37/I2,S21,C36 Substitution
+= Log[1/Exp[-x]]	#C38/I2,T27,C37 Substitution
+= Log[Exp[x]]	#C39/I3,T28,C38 Substitution
+= x	#C40/I2,T29,C39 Substitution
+Unsquash[Squash[x]] = x	#C41/I8,T30,C40 Join
    QED: Unsquash[Squash[x]] = x	#T19/A4 Remember!
-:QED	#C44/I5,T19,C42 Done!
+:QED	#C42/I5,T19,C41 Done!
 ```

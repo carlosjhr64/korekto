@@ -11,7 +11,7 @@ class Statements
   def type(c) = @statements.select{_1.type==c}
   def length = @statements.length
 
-  def add(statement,code,title,filename,statement_number)
+  def add(statement,code,title,filename)
     c = code[0]; w = c=='W'
     if restatement = @statements.detect{(w or _1.type==c) and _1.to_s==statement}
       case restatement.type
@@ -24,6 +24,7 @@ class Statements
       title ||= restatement.title
       return code, title
     end
+    statement_number = yield
     statement = Statement.new(statement,code,title,filename,statement_number,self)
     @statements.push statement
     case statement.type

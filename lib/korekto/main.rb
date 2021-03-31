@@ -112,12 +112,10 @@ class Main
         next unless active?
         next if preprocess?
         if md = MD_STATEMENT_CODE_TITLE.match(@line)
-          statement_number += 1
           code,title = @statements.add(md[:statement].strip,
                                        md[:code],
                                        md[:title],
-                                       @section,
-                                       statement_number)
+                                       @section){ statement_number += 1 }
           if not OPTIONS.edits? or (@filename=='-' and not (md[:code]==code and md[:title]==title))
             puts "#{@filename}:#{line_number}:#{code}:#{title}"
           end

@@ -26,5 +26,5 @@ y=x^x	#S3/L11.Logic 1Let
 :Dx[y]=x^x(1:Ln[x]+1)	#C14/I8.Calculus,S3,R13 Substitution
 :Dx[y]=x^x(:Ln[x]+1)	#R15/M9.Calculus,C14 Identity
 :QED=:Dx[y]=x^x(:Ln[x]+1)	#S4/L11.Logic This is what we wanted!
-:QED	#C17/I10.Logic,S4,R15 Equally true
+:QED	#C16/I10.Logic,S4,R15 Equally true
 ```

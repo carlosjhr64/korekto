@@ -41,15 +41,15 @@ b^2=2c^2	#R27/M9.Algebra,R26 Wut
 :Even[b^2]	#C30/I7.Logic,R27,R29 Substitution
 :Even[b]	#R31/M11.Algebra,C30 Even[Even^Int]
 :Even[a]	#R18/M11.Algebra,C17 Integer power of even number is even
-:CF[a,b][2]	#C33/I3.Integer,R18,R31 Even numbers have common factor two
-:GCF[a,b]>=2	#R34/M16.Natural,C33 CGF gte any CF
-:GCF[a,b]>1	#R35/M13.Natural,R34 Two is greater than one
-:Not[:GCF[a,b]=1]	#R36/M15.Logic,R35 Greater than is not equal
+:CF[a,b][2]	#C32/I3.Integer,R18,R31 Even numbers have common factor two
+:GCF[a,b]>=2	#R33/M16.Natural,C32 CGF gte any CF
+:GCF[a,b]>1	#R34/M13.Natural,R33 Two is greater than one
+:Not[:GCF[a,b]=1]	#R35/M15.Logic,R34 Greater than is not equal
 :GCF[a,b]=1	#R9/M23.Logic,X6 Independantly true
-:CONTRADICTION	#C38/I28.Logic,R9,R36 Contradiction
+:CONTRADICTION	#C36/I28.Logic,R9,R35 Contradiction
 :ASSUMPTION=:Rat[:Sqrt[2]]	#P2
 # And after being badly hurt, we admit our mistake.
-:Not[:Rat[:Sqrt[2]]]	#C40/I30.Logic,P2,C38 Negate the assumption
+:Not[:Rat[:Sqrt[2]]]	#C37/I30.Logic,P2,C36 Negate the assumption
 :QED=:Not[:Rat[:Sqrt[2]]]	#S1/L11.Logic Remember this?
-:QED	#C42/I3.Logic,S1,C40 Substitution
+:QED	#C38/I3.Logic,S1,C37 Substitution
 ```
