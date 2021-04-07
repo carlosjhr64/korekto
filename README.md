@@ -14,6 +14,9 @@ Works with neovim(nvim).
 ```shell
 $ gem install korekto
 $ korekto --install
+$ ### And if missing:
+$ sudo dnf install neovim # On Fedora
+$ gem install neovim # Provides neovim-ruby-host
 ```
 ## SYNOPSIS:
 ```korekto
