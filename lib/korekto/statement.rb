@@ -150,7 +150,12 @@ class Statement
     set_regexp
     newlines_count(nl)
     undefined_in_pattern
-    set_statement
+    follows = @context.heap.to_a[0..nl].reverse
+    if @regexp.match? follows.map{_1.to_s}.join("\n")
+      set_statement(support(*follows))
+    else
+      set_statement
+    end
   end
 
   def tautology

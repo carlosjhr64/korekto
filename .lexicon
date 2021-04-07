@@ -44,6 +44,7 @@ File
 filename
 first
 fn
+follows
 freeze
 get_current_buf
 get_current_win
@@ -130,6 +131,7 @@ Regexp
 require
 restatement
 result
+reverse
 rstrip
 Ruby30
 rule

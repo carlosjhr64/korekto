@@ -1,5 +1,5 @@
 module Korekto
-  VERSION = '1.5.210331'
+  VERSION = '1.6.210407'
   class Error < Exception; end
   require 'korekto/symbols'
   require 'korekto/syntax'
@@ -12,4 +12,5 @@ end
 # Requires:
 # `ruby`
 # `nvim`
+# `neovim-ruby-host`
 # `xdg-open`

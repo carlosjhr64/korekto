@@ -7,7 +7,7 @@ Feature: examples_unchanged
   Scenario: Tutorial
     * Given option "< examples/Tutorial.md | grep '^-:'"
     * When we run command
-    * Then digest is "86208d5bc4f22763ed1a85a4a4a2a95d"
+    * Then digest is "7b0b95ac3e229a3d8e9401a5fbb7a192"
 
   Scenario: ABC
     * Given option "< examples/ABC.md | grep '^-:'"

@@ -275,6 +275,14 @@ Demonstrating the use of `!:nl {;}`, map `#M11` above could be rewritten as foll
 ! KeyWord {A B}
 A&B;A :good :with B	#M19 If A and B, then A good with B.
 ```
+# Support for pattern statements
+
+If a pattern statement matches the immediately preceding statements(in the heap),
+the matched statements will be used as support for the pattern statement.
+```korekto
+:x + :x = 2 * :x	#D20
+A + A = 2 * A	#A21/D20
+```
 ## Syntax
 
 You can have `Korekto` reject a statement right away

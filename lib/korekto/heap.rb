@@ -9,6 +9,10 @@ class Heap
     @a = []
   end
 
+  def to_a
+    @a
+  end
+
   def add(s)
     @a.unshift s
     @a.pop if @a.length > @limit

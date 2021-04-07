@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 1.5.210331](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 1.6.210407](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -55,6 +55,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
     * [W is for Which](examples/Tutorial.md#W-is-for-Which)
   * [Statements table](examples/Tutorial.md#Statements-table)
   * [Patterns](examples/Tutorial.md#Patterns)
+  * [Support for pattern statements](examples/Tutorial.md#Support-for-pattern-statements)
   * [Syntax](examples/Tutorial.md#Syntax)
   * [Monkey patches](examples/Tutorial.md#Monkey-patches)
   * [Scanner](examples/Tutorial.md#Scanner)
