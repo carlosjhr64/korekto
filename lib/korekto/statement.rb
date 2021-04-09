@@ -75,7 +75,7 @@ class Statement
     @code = "#{@code[0]}#{@statement_number}"
     @code += '.' + @section unless @section=='-'
     @code += "/#{support}" if support
-    @title = title.split(':',2).first if title
+    @title = title if (title=title&.split(':',2)&.first) and not title.empty?
   end
 
   def support(*s)
