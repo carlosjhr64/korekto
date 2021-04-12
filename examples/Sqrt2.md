@@ -4,8 +4,6 @@ If you have trouble reading the proof below,
 I recommend viewing blackpenredpen's YouTube video [Sqrt(2) is irrational! (Classic Proof)](https://www.youtube.com/watch?v=BhFf0nJ5VOg).
 You'll find the patterns validating statements in this proof down this rabbit hole:
 [Algebra](../imports/Algebra.md).
-For ideas on how to set things up down the rabbit hole,
-I recommend Wildberger's YouTube channel [Insights into Mathematics](https://www.youtube.com/c/njwildberger/about).
 ```korekto
 < imports/Algebra.md
 :QED=:Not[:Rat[:Sqrt[2]]]	#S1/L11.Logic 1Let
