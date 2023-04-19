@@ -1,7 +1,10 @@
+KOREKTO = `which korekto`.strip
+VERSION = `#{KOREKTO} --version`.strip
+
 Neovim.plugin do |plug|
   plug.command(:Korekto) do |nvim|
-    validations = nvim.command_output('w !korekto --edits').strip.split("\n").map(&:strip)
-    msg = 'OK'
+    validations = nvim.command_output("w !#{KOREKTO} --edits").strip.split("\n").map(&:strip)
+    msg = "Korekto! #{VERSION}"
     unless validations.empty?
       buf = nvim.get_current_buf
       while validation = validations.shift

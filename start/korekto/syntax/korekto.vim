@@ -3,7 +3,7 @@ syntax match Sup     /#[A-Z]\d\+\(\.\w\+\)\?\/\S\+/ contained containedin=Type
 syntax match Title   / [^:]\+/ contained containedin=Type
 syntax match Undef   /:[^#]\+$/ contained containedin=Type
 syntax match Type    /\s#[A-Z][^#]\+/ contains=Unsup,Sup,Title,Undef
-syntax match Comment /^\s*#.\+$/
+syntax match Comment /# .\+$/
 syntax match Syntax  /^[?] \S.\+$/
 syntax match Patch   /^::[A-Z]\w\+#\w\+[^=]\+=.\+$/
 syntax match Import  /^< [\/A-Za-z\_\-\.]\+$/
