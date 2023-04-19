@@ -1,57 +1,53 @@
-require 'open3'
-require 'json'
-require 'digest'
-
-Given %r/Given command "([^"]*)"/ do |command|
+Given %r{Given command "([^"]*)"} do |command|
   @command = command
 end
 
-Given %r/Given options? "([^"]*)"/ do |options|
+Given %r{Given options? "([^"]*)"} do |options|
   @options = options
 end
 
-When %r/When we run command/ do
+When %r{When we run command} do
   @stdout, @stderr, @status = Open3.capture3("#{@command} #{@options}")
-  [@stdout, @stderr].each{|_|_.chomp!}
+  [@stdout, @stderr].each(&:chomp!)
 end
 
-Then %r/Then exit status is "(\d+)"/ do |status|
+Then %r{Then exit status is "(\d+)"} do |status|
   unless @status.exitstatus == status.to_i
     raise "Got #{@status} instead of #{status}"
   end
 end
 
-Then %r/Then stdout is '([^']*)'/ do |string|
+Then %r{Then stdout is '([^']*)'} do |string|
   unless @stdout == string
     raise "stdout: Expectected '#{string}'. Got '#{@stdout}'"
   end
 end
 
-Then %r/Then stdout is ("[^"]*")/ do |string|
+Then %r{Then stdout is ("[^"]*")} do |string|
   unless @stdout.inspect == string
-    raise "stdout: Expectected '#{string}'. Got '#{@stdout.inspect}'"
+    raise "stdout: Expectected '#{string}'. Got '#{@stdout}'"
   end
 end
 
-Then %r/Then stderr is "([^"]*)"/ do |string|
+Then %r{Then stderr is "([^"]*)"} do |string|
   unless @stderr == string
     raise "stderr: Expectected '#{string}'. Got '#{@stderr}'"
   end
 end
 
-Then %r/Then stderr is '([^']*)'/ do |string|
+Then %r{Then stderr is '([^']*)'} do |string|
   unless @stderr == string
     raise "stderr: Expectected '#{string}'. Got '#{@stderr}'"
   end
 end
 
-Then %r/Then stdout includes "([^"]*)"/ do |string|
+Then %r{Then stdout includes "([^"]*)"} do |string|
   unless @stdout.include?(string)
     raise "Stdout did not include '#{string}'"
   end
 end
 
-Then %r/Then stderr includes "([^"]*)"/ do |string|
+Then %r{Then stderr includes "([^"]*)"} do |string|
   unless @stderr.include?(string)
     raise "Stderr did not include '#{string}'"
   end
@@ -79,7 +75,7 @@ end
 
 Then %r{Then (\w+) maps to nil} do |k|
   h = JSON.parse @stdout
-  unless h[k]==nil
+  unless h[k].nil?
     raise "#{k} is not nil, it's #{h[k]}"
   end
 end
@@ -108,11 +104,3 @@ Then %r{Then digest is "(.*)"} do |v|
     raise "Digest is not #{v}, it's #{digest}"
   end
 end
-
-=begin
-Then %r// do ||
-  unless == 
-    raise "Error..."
-  end
-end
-=end

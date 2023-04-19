@@ -1,1 +1,4 @@
-ENV['PATH'] = ENV['PATH'].split(':').prepend('./bin').uniq.join(':')
+# Load required libraries and stuff
+require 'open3'
+require 'json'
+require 'digest'

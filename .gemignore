@@ -1,12 +1,14 @@
 ^(
- (\.)|
- (\w+\.gemspec)|
- (cucumber\.)|
- (examples\/)|
- (features\/)|
- (History\.)|
- (imports\/)|
- (README\.)|
- (test\/)|
- (TODO\.)
+  (\.)           |
+  (\w+\.gemspec) |
+  (cucumber\.)   |
+  (examples/)    |
+  (features/)    |
+  (Gemfile)      |
+  (History\.)    |
+  (img/)         |
+  (sig/)         |
+  (test/)        |
+  (tmp/)         |
+  (TODO\.)
 )
