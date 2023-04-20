@@ -46,8 +46,8 @@ class TestHep < Test::Unit::TestCase
 
   def test_heap4
     a,heap = [],Korekto::Heap.new(4)
-    ['A','B','C','D'].each{heap.add _1}
-    heap.combos{a<<"#{_1};#{_2}"}
+    %w[A B C D].each{heap.add _1}
+    heap.combos{|x,y| a<<"#{x};#{y}"}
     assert_equal 12, a.length
     assert_equal a, a.uniq
     assert_equal 'D;C', a.first
@@ -56,8 +56,8 @@ class TestHep < Test::Unit::TestCase
 
   def test_heap13
     a,heap = [],Korekto::Heap.new(13)
-    ['1','2','3','4','5','6','7','8','9','10','11','12','13'].each{heap.add _1}
-    heap.combos{a<<"#{_1};#{_2}"}
+    %w[1 2 3 4 5 6 7 8 9 10 11 12 13].each{heap.add _1}
+    heap.combos{|x,y| a<<"#{x};#{y}"}
     assert_equal 156, a.length
     assert_equal a, a.uniq
     assert_equal '13;12', a.first
