@@ -7,7 +7,7 @@ module Korekto
   require 'korekto/statement'
   require 'korekto/statements'
   require 'korekto/main'
-  def Korekto.run = Korekto::Main.new.run
+  def self.run = Korekto::Main.new.run
 end
 # Requires:
 # `ruby`
