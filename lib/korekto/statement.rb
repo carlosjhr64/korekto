@@ -1,21 +1,26 @@
 module Korekto
 class Statement
   attr_reader :code,:title,:regexp,:section,:statement_number
+
+  # rubocop: disable Metrics/ParameterLists
   def initialize(statement,code,title,section,statement_number,context)
     @statement,@code,@title,@section,@statement_number,@context =
       statement,code,title,section,statement_number,context
     @statement.freeze; @section.freeze; @statement_number.freeze
-    syntax_check unless @statement[0]=='/' and @statement[-1]=='/' and ['A','L','M','E','I'].include?(@code[0])
+    syntax_check unless @statement[0]=='/' &&
+                        @statement[-1]=='/' &&
+                        %w[A L M E I].include?(@code[0])
     @regexp = nil
     set_acceptance_code
     @code.freeze; @title.freeze; @regexp.freeze
   end
+  # rubocop: enable Metrics/ParameterLists
 
   def type              = @code[0]
   def to_s              = @statement
   def to_str            = @statement
   def match?(statement) = @regexp.match?(statement)
-  def scan(regex, &blk) = @statement.scan(regex, &blk)
+  def scan(regex, &) = @statement.scan(regex, &)
   def pattern?          = !@regexp.nil?
   def literal_regexp?   = @statement[0]=='/' && @statement[-1]=='/'
 
@@ -55,14 +60,12 @@ class Statement
       # Inference=>Conclusion
       pattern_type(2)
     when 'W'
-      ['T','S','R','X','C'].any? do |code|
-        begin
-          @code[0]=code
-          set_acceptance_code
-          true
-        rescue Error
-          false
-        end
+      %w[T S R X C].any? do |code|
+        @code[0]=code
+        set_acceptance_code
+        true
+      rescue Error
+        false
       end or raise Error, 'did not match any statement pattern'
     else
       raise Error, "statement type #{@code[0]} not implemented"
@@ -75,7 +78,7 @@ class Statement
     @code = "#{@code[0]}#{@statement_number}"
     @code += '.' + @section unless @section=='-'
     @code += "/#{support}" if support
-    @title = title if (title=title&.split(':',2)&.first) and not title.empty?
+    @title = title if (title=title&.split(':',2)&.first) && !title.empty?
   end
 
   def support(*s)
@@ -84,13 +87,15 @@ class Statement
       c = s.code.split('/',2)[0]
       support.push(c)
     end
-    return support.join(',')
+    support.join(',')
   end
 
   # Pattern helpers
 
   def newlines_count(n)
-    raise Error, "expected #{n} newlines" unless n==@regexp.inspect.gsub('\\\\','').scan('\\n').length
+    unless n==@regexp.inspect.gsub('\\\\','').scan('\\n').length
+      raise Error, "expected #{n} newlines"
+    end
   end
 
   def set_regexp
@@ -104,7 +109,7 @@ class Statement
       statement.match? @statement
     end
     raise Error, "does not match any '#{type}' statement" unless statement
-    return statement
+    statement
   end
 
   def heap_combos_search(type)
@@ -132,9 +137,11 @@ class Statement
   def expected_instantiations(title=nil, n:nil)
     undefined = @context.symbols.undefined(self)
     if n ||= title&.match(/[1-9]\d*/)&.to_s&.to_i
-      raise Error, "expected #{n} undefined: #{undefined.join(' ')}" unless n==undefined.length
-    else
-      raise Error, 'nothing was undefined' if undefined.empty?
+      unless n==undefined.length
+        raise Error, "expected #{n} undefined: #{undefined.join(' ')}"
+      end
+    elsif undefined.empty?
+      raise Error, 'nothing was undefined'
     end
   end
 
@@ -151,7 +158,7 @@ class Statement
     newlines_count(nl)
     undefined_in_pattern
     follows = @context.heap.to_a[0..nl].reverse
-    if @regexp.match? follows.map{_1.to_s}.join("\n")
+    if @regexp.match? follows.map(&:to_s).join("\n")
       set_statement(support(*follows))
     else
       set_statement
