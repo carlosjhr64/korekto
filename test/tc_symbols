@@ -6,9 +6,6 @@ require 'korekto/symbols'
 module Korekto
 class Error < Exception; end
 class Statement < String
-  def initialize(string)
-    super
-  end
   def regexp
     nil
   end
@@ -26,7 +23,7 @@ class TestSymbols < Test::Unit::TestCase
     symbols = Korekto::Symbols.new
     symbols.define! Korekto::Statement.new('abbba abc a:xyz a')
     u = symbols.undefined Korekto::Statement.new('abcdexyz:xyz')
-    assert_equal ['d','e','x','y','z'], u
+    assert_equal %w[d e x y z], u
     u = symbols.undefined Korekto::Statement.new('abc:xyz:abc')
     assert_equal [':abc'], u
   end
