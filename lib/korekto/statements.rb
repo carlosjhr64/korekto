@@ -1,6 +1,7 @@
 module Korekto
 class Statements
   attr_reader :heap,:symbols,:syntax
+
   def initialize
     @statements = []
     @heap = Heap.new(13)
@@ -13,19 +14,19 @@ class Statements
 
   def add(statement,code,title,filename)
     c = code[0]; w = c=='W'
-    if restatement = @statements.detect{(w or _1.type==c) and _1.to_s==statement}
+    if (restatement=@statements.detect{(w || _1.type==c) && _1.to_s==statement})
       case restatement.type
       when 'D','X','S','P','T','C','R'
         @heap.add restatement
       else
         raise Error, "restatement: #{restatement.code}"
       end
-      code,_ = restatement.code
+      code, = restatement.code
       title ||= restatement.title
       return code, title
     end
     statement_number = yield
-    statement = Statement.new(statement,code,title,filename,statement_number,self)
+    statement=Statement.new(statement,code,title,filename,statement_number,self)
     @statements.push statement
     case statement.type
     when 'A','I','E','M','L'
@@ -36,7 +37,7 @@ class Statements
     when 'P','T','C','R'
       @heap.add statement
     end
-    return statement.code, statement.title
+    [statement.code, statement.title]
   end
 end
 end
