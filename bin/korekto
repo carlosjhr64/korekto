@@ -1,18 +1,18 @@
 #!/usr/bin/env ruby
 require 'help_parser'
 
-OPTIONS = HelpParser['1.6.210409', <<HELP]
-Usage:
-  korekto [:options]
-Options:
- -h --help
- -v --version
- --edits     \tShow only needed edits
- --install   \tInstalls the korekto neovim ruby plugin
- --readme    \tOpen korekto github page
-# Example usage:
-#   cat MARKDOWN.md | korekto
-#   korekto < MARKDOWN.md
+OPTIONS = HelpParser['1.6.210409', <<~HELP]
+  Usage:
+    korekto [:options]
+  Options:
+   -h --help
+   -v --version
+   --edits     \tShow only needed edits
+   --install   \tInstalls the korekto neovim ruby plugin
+   --readme    \tOpen korekto github page
+  # Example usage:
+  #   cat MARKDOWN.md | korekto
+  #   korekto < MARKDOWN.md
 HELP
 
 if OPTIONS.install?
