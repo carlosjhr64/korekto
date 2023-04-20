@@ -1,5 +1,6 @@
 module Korekto
 class Main
+  # rubocop: disable Layout/LineLength
   MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)( (?<title>\S.*?\S))?$}
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
   MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)#(?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
@@ -7,6 +8,7 @@ class Main
   MD_TYPE_PATTERN = %r{^! (?<type>\S+)\s*/(?<pattern>.*)/$}
   MD_TYPE_VARIABLES = /^! (?<type>\S+)\s*\{(?<variables>\S+( \S+)*)\}$/
   MD_KEY_VALUE = /^! (?<key>\w+):\s*'(?<value>.*)'$/
+  # rubocop: enable Layout/LineLength
 
   M_FENCE = /^```\s*$/
   M_COMMENT_LINE = /^\s*#/
@@ -23,7 +25,7 @@ class Main
 
   def type_pattern(type, pattern)
     t2p = @statements.symbols.t2p
-    raise Error, "type #{type} in use" if t2p.has_key? type
+    raise Error, "type #{type} in use" if t2p.key? type
     t2p[type] = pattern
   end
 
@@ -32,7 +34,7 @@ class Main
     pattern = t2p[type]
     raise Error, "type #{type} not defined" unless pattern
     variables.each do |variable|
-      raise Error, "variable #{variable} in use" if v2t.has_key? variable
+      raise Error, "variable #{variable} in use" if v2t.key? variable
       v2t[variable] = type
     end
   end
@@ -47,17 +49,25 @@ class Main
       @active = false
       false
     else
-      @active and not M_COMMENT_LINE.match?(@line)
+      @active and !M_COMMENT_LINE.match?(@line)
     end
   end
 
   def patch(klass, method, definition)
-    raise Error, "overrides: #{klass}##{method}" if eval(klass).method_defined? method
+    # rubocop: disable Security/Eval
+    if eval(klass).method_defined? method
+      raise Error, "overrides: #{klass}##{method}"
+    end
+    # rubocop: disable Style/DocumentDynamicEvalDefinition
+    # rubocop: disable Style/EvalWithLocation
     eval <<~EVAL
       class #{klass}
         def #{method}#{definition}
       end
     EVAL
+    # rubocop: enable Style/EvalWithLocation
+    # rubocop: enable Style/DocumentDynamicEvalDefinition
+    # rubocop: enable Security/Eval
   end
 
   def key_value(key, value)
@@ -71,7 +81,7 @@ class Main
     when 'save'
       BACKUPS[value] = Marshal.dump(@statements)
     when 'restore'
-      if backup = BACKUPS[value]
+      if (backup = BACKUPS[value])
         @statements = Marshal.load(backup)
       else
         raise Error, "nothing saved as '#{value}'"
@@ -106,17 +116,18 @@ class Main
 
   def parse(lines)
     statement_number = line_number = 0
-    while @line = lines.shift
+    while (@line = lines.shift)
       begin
         line_number += 1
         next unless active?
         next if preprocess?
-        if md = MD_STATEMENT_CODE_TITLE.match(@line)
+        if (md = MD_STATEMENT_CODE_TITLE.match @line)
           code,title = @statements.add(md[:statement].strip,
                                        md[:code],
                                        md[:title],
                                        @section){ statement_number += 1 }
-          if not OPTIONS.edits? or (@filename=='-' and not (md[:code]==code and md[:title]==title))
+          if !OPTIONS.edits? ||
+             (@filename=='-' && !(md[:code]==code && md[:title]==title))
             puts "#{@filename}:#{line_number}:#{code}:#{title}"
           end
         else
@@ -125,9 +136,9 @@ class Main
       rescue Error
         puts "#{@filename}:#{line_number}:!:#{$!.message}"
         exit 65
-      rescue Exception
+      rescue StandardError
         puts "#{@filename}:#{line_number}:?:#{$!.message}"
-        $stderr.puts $!.backtrace
+        warn $!.backtrace
         exit 1
       end
     end
@@ -137,7 +148,7 @@ class Main
     if @filename=='-'
       parse $stdin.readlines(chomp: true)
     else
-      parse IO.readlines(@filename, chomp: true)
+      parse File.readlines(@filename, chomp: true)
     end
   end
 end

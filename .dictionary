@@ -3,8 +3,10 @@ carlosjhr
 cows
 dirname
 dnf
+documentdynamicevaldefinition
 dxx
 elsif
+evalwithlocation
 fileutils
 github
 gsub
@@ -19,9 +21,9 @@ readme
 regex
 regexp
 rplugin
+rubocop
 rubygems
 src
-stderr
 stdin
 sudo
 tshow
