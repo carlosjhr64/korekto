@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 1.6.210409](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 1.6.231222](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -8,7 +8,7 @@
 
 A general proof checker.
 
-Works with neovim(nvim).
+Works with [neovim](https://github.com/neovim/neovim).
 
 ## INSTALL:
 ```shell
