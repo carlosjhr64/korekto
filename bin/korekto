@@ -1,22 +1,7 @@
 #!/usr/bin/env ruby
 require 'korekto'
-require 'help_parser'
 
-OPTIONS = HelpParser[Korekto::VERSION, <<~HELP]
-  Usage:
-    korekto [:options]
-  Options:
-   -h --help
-   -v --version
-   --edits     \tShow only needed edits
-   --install   \tInstalls the korekto neovim ruby plugin
-   --readme    \tOpen korekto github page
-  # Example usage:
-  #   cat MARKDOWN.md | korekto
-  #   korekto < MARKDOWN.md
-HELP
-
-if OPTIONS.install?
+def do_install
   require 'fileutils'
   # pack
   dest = File.expand_path '~/.local/share/nvim/site/pack/korekto'
@@ -31,9 +16,32 @@ if OPTIONS.install?
   exit
 end
 
-if OPTIONS.readme?
+def spawn_readme
   Process.detach spawn('xdg-open', 'https://www.github.com/carlosjhr64/korekto')
   exit
 end
 
+def handle_options
+  require 'help_parser'
+  options = HelpParser[Korekto::VERSION, <<~HELP]
+    Usage:
+      korekto [:options]
+    Options:
+     -h --help
+     -v --version
+     --edits     \tShow only needed edits
+     --install   \tInstalls the korekto neovim ruby plugin
+     --readme    \tOpen korekto github page
+    # Example usage:
+    #   cat MARKDOWN.md | korekto
+    #   korekto < MARKDOWN.md
+  HELP
+  do_install if options.install?
+  spawn_readme if options.readme?
+  Korekto.edits = options.edits?
+end
+
+unless ARGV.empty? || ((ARGV==['--edits']) && (Korekto.edits=true))
+  handle_options
+end
 Korekto.run

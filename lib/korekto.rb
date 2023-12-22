@@ -1,6 +1,17 @@
 module Korekto
-  VERSION = '1.6.231222'
   class Error < Exception; end
+
+  VERSION = '1.6.231222'
+
+  def self.edits=(value)
+    @@edits = value
+  end
+
+  Korekto.edits = false
+
+  def self.edits?
+    @@edits
+  end
 
   def self.run
     require 'korekto/symbols'

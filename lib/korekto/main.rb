@@ -126,7 +126,7 @@ class Main
                                        md[:code],
                                        md[:title],
                                        @section){ statement_number += 1 }
-          if !OPTIONS.edits? ||
+          if !Korekto.edits? ||
              (@filename=='-' && !(md[:code]==code && md[:title]==title))
             puts "#{@filename}:#{line_number}:#{code}:#{title}"
           end
