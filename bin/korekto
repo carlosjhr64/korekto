@@ -17,7 +17,8 @@ def do_install
 end
 
 def spawn_readme
-  Process.detach spawn('xdg-open', 'https://www.github.com/carlosjhr64/korekto')
+  Process.detach spawn('xdg-open', 'https://www.github.com/carlosjhr64/korekto',
+                       %i[out err] => '/dev/null')
   exit
 end
 
