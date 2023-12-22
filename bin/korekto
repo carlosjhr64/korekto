@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
+require 'korekto'
 require 'help_parser'
 
-OPTIONS = HelpParser['1.6.231222', <<~HELP]
+OPTIONS = HelpParser[Korekto::VERSION, <<~HELP]
   Usage:
     korekto [:options]
   Options:
@@ -29,10 +30,10 @@ if OPTIONS.install?
   system "nvim -c ':UpdateRemotePlugins|:quit' > /dev/null"
   exit
 end
+
 if OPTIONS.readme?
   Process.detach spawn('xdg-open', 'https://www.github.com/carlosjhr64/korekto')
   exit
 end
 
-require 'korekto'
 Korekto.run
