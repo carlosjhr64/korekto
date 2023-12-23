@@ -145,11 +145,8 @@ class Main
   end
 
   def run
-    if @filename=='-'
-      parse $stdin.readlines(chomp: true)
-    else
-      parse File.readlines(@filename, chomp: true)
-    end
+    parse @filename=='-' ? $stdin.readlines(chomp: true) :
+                           File.readlines(@filename, chomp: true)
   end
 end
 end
