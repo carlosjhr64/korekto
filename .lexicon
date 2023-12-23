@@ -21,6 +21,7 @@ combination
 combos
 compound
 conclusion
+const_get
 context
 count
 cp_r
@@ -109,6 +110,7 @@ new
 newlines_count
 nil
 nl
+Object
 options
 out
 parse

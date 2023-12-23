@@ -40,10 +40,10 @@ class Main
   end
 
   def patch(klass, method, definition)
-    # rubocop: disable Security/Eval
-    if eval(klass).method_defined? method
+    if Object.const_get(klass).method_defined?(method)
       raise Error, "overrides: #{klass}##{method}"
     end
+    # rubocop: disable Security/Eval
     # rubocop: disable Style/DocumentDynamicEvalDefinition
     # rubocop: disable Style/EvalWithLocation
     eval <<~EVAL
