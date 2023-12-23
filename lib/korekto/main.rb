@@ -20,7 +20,7 @@ class Main
     @imports.push @filename.freeze
     @line,@active = nil,false
     @section = File.basename(@filename,'.*')
-    @m_fence_korekto = /^```korekto$/
+    @m_fence_korekto = /^```korekto$/ # default fence
   end
 
   def type_pattern(type, pattern)
@@ -84,7 +84,7 @@ class Main
     when 'scanner'
       @statements.symbols.set_scanner value
     when 'fence'
-      @m_fence_korekto = Regexp.new "^```#{value}$"
+      @m_fence_korekto = Regexp.new "^```#{value}$" # user defined fence
     when 'section'
       @section = value
     when 'save'
@@ -135,6 +135,7 @@ class Main
                            File.readlines(@filename, chomp: true)
   end
 
+  # Is the current line a non-comment Korekto line?
   def active?
     case @line
     when @m_fence_korekto
@@ -143,9 +144,8 @@ class Main
       false
     when M_FENCE
       @active = false
-      false
     else
-      @active and !M_COMMENT_LINE.match?(@line)
+      @active && !M_COMMENT_LINE.match?(@line)
     end
   end
 end

@@ -134,6 +134,8 @@ Style/RegexpLiteral:
   Enabled: false
 Style/RescueStandardError:
   Enabled: false
+Style/ReturnNilInPredicateMethodDefinition:
+  Enabled: false
 Style/Semicolon:
   Enabled: false
 Style/SpecialGlobalVars:
