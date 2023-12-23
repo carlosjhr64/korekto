@@ -1,45 +1,48 @@
 Gem::Specification.new do |s|
-
+  ## INFO ##
   s.name     = 'korekto'
-  s.version  = '1.6.210409'
-
+  s.version  = '1.6.231223'
   s.homepage = 'https://github.com/carlosjhr64/korekto'
-
-  s.author   = 'carlosjhr64'
+  s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
-
-  s.date     = '2021-04-09'
+  s.date     = '2023-12-23'
   s.licenses = ['MIT']
-
-  s.description = <<DESCRIPTION
-A general proof checker.
-
-Works with neovim(nvim).
-DESCRIPTION
-
-  s.summary = <<SUMMARY
-A general proof checker.
-SUMMARY
-
+  ## DESCRIPTION ##
+  s.summary  = <<~SUMMARY
+    A general proof checker.
+  SUMMARY
+  s.description = <<~DESCRIPTION
+    A general proof checker.
+    
+    Works with [neovim](https://github.com/neovim/neovim).
+  DESCRIPTION
+  ## FILES ##
   s.require_paths = ['lib']
-  s.files = %w(
-bin/korekto
-lib/korekto.rb
-lib/korekto/heap.rb
-lib/korekto/main.rb
-lib/korekto/statement.rb
-lib/korekto/statements.rb
-lib/korekto/symbols.rb
-lib/korekto/syntax.rb
-rplugin/ruby/korekto.rb
-start/korekto/ftdetect/korekto.vim
-start/korekto/syntax/korekto.vim
-  )
-  s.executables << 'korekto'
-  s.add_runtime_dependency 'help_parser', '~> 7.0', '>= 7.0.200907'
-  s.requirements << 'ruby: ruby 3.0.1p64 (2021-04-05 revision 0fb782ee38) [x86_64-linux]'
-  s.requirements << 'nvim: NVIM v0.4.4'
-  s.requirements << 'neovim-ruby-host: 0.8.1'
-  s.requirements << 'xdg-open: xdg-open 1.1.3+'
-
+  s.files = %w[
+    README.md
+    bin/korekto
+    lib/korekto.rb
+    lib/korekto/heap.rb
+    lib/korekto/main.rb
+    lib/korekto/statement.rb
+    lib/korekto/statements.rb
+    lib/korekto/symbols.rb
+    lib/korekto/syntax.rb
+    rplugin/ruby/korekto.rb
+    start/korekto/ftdetect/korekto.vim
+    start/korekto/syntax/korekto.vim
+  ]
+    s.executables << 'korekto'
+  ## REQUIREMENTS ##
+  s.add_runtime_dependency 'help_parser', '~> 8.2', '>= 8.2.230210'
+  s.add_development_dependency 'colorize', '~> 1.1', '>= 1.1.0'
+  s.add_development_dependency 'cucumber', '~> 9.1', '>= 9.1.0'
+  s.add_development_dependency 'parser', '~> 3.2', '>= 3.2.2'
+  s.add_development_dependency 'rubocop', '~> 1.59', '>= 1.59.0'
+  s.add_development_dependency 'test-unit', '~> 3.6', '>= 3.6.1'
+  s.requirements << 'git: 2.30'
+  s.requirements << 'neovim-ruby-host: 0.9'
+  s.requirements << 'nvim: 0.9'
+  s.requirements << 'ruby: 3.3'
+  s.requirements << 'xdg-open: 1.1'
 end

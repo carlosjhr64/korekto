@@ -1,7 +1,7 @@
 module Korekto
   class Error < Exception; end
 
-  VERSION = '1.6.231222'
+  VERSION = '1.6.231223'
 
   def self.edits=(value)
     @@edits = value
