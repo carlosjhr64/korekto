@@ -4,6 +4,7 @@ a
 active
 add
 any
+ARGV
 attr_reader
 axiom
 b
@@ -31,10 +32,12 @@ detect
 detect_statement
 __dir__
 dirname
+do_install
 dump
 each
 edits
 empty
+err
 Error
 eval
 Exception
@@ -49,6 +52,7 @@ first
 follows
 freeze
 gsub
+handle_options
 heap
 Heap
 heap_combos_search
@@ -106,7 +110,7 @@ newlines_count
 nil
 nl
 options
-OPTIONS
+out
 parse
 patch
 pattern
@@ -130,7 +134,7 @@ require
 restatement
 result
 reverse
-Ruby32
+Ruby33
 rule
 run
 s
@@ -150,6 +154,7 @@ set_statement
 shift
 sort
 spawn
+spawn_readme
 split
 src
 StandardError
