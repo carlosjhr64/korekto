@@ -39,20 +39,6 @@ class Main
     end
   end
 
-  def active?
-    case @line
-    when @m_fence_korekto
-      raise Error, 'unexpected fence' if @active
-      @active = true
-      false
-    when M_FENCE
-      @active = false
-      false
-    else
-      @active and !M_COMMENT_LINE.match?(@line)
-    end
-  end
-
   def patch(klass, method, definition)
     # rubocop: disable Security/Eval
     if eval(klass).method_defined? method
@@ -68,27 +54,6 @@ class Main
     # rubocop: enable Style/EvalWithLocation
     # rubocop: enable Style/DocumentDynamicEvalDefinition
     # rubocop: enable Security/Eval
-  end
-
-  def key_value(key, value)
-    case key
-    when 'scanner'
-      @statements.symbols.set_scanner value
-    when 'fence'
-      @m_fence_korekto = Regexp.new "^```#{value}$"
-    when 'section'
-      @section = value
-    when 'save'
-      BACKUPS[value] = Marshal.dump(@statements)
-    when 'restore'
-      if (backup = BACKUPS[value])
-        @statements = Marshal.load(backup)
-      else
-        raise Error, "nothing saved as '#{value}'"
-      end
-    else
-      raise Error, "key '#{key}' not implemented"
-    end
   end
 
   def preprocess?
@@ -112,6 +77,27 @@ class Main
       return false
     end
     true
+  end
+
+  def key_value(key, value)
+    case key
+    when 'scanner'
+      @statements.symbols.set_scanner value
+    when 'fence'
+      @m_fence_korekto = Regexp.new "^```#{value}$"
+    when 'section'
+      @section = value
+    when 'save'
+      BACKUPS[value] = Marshal.dump(@statements)
+    when 'restore'
+      if (backup = BACKUPS[value])
+        @statements = Marshal.load(backup)
+      else
+        raise Error, "nothing saved as '#{value}'"
+      end
+    else
+      raise Error, "key '#{key}' not implemented"
+    end
   end
 
   def parse(lines)
@@ -147,6 +133,20 @@ class Main
   def run
     parse @filename=='-' ? $stdin.readlines(chomp: true) :
                            File.readlines(@filename, chomp: true)
+  end
+
+  def active?
+    case @line
+    when @m_fence_korekto
+      raise Error, 'unexpected fence' if @active
+      @active = true
+      false
+    when M_FENCE
+      @active = false
+      false
+    else
+      @active and !M_COMMENT_LINE.match?(@line)
+    end
   end
 end
 end
