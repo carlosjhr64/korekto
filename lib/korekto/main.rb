@@ -111,7 +111,10 @@ class Main
           code,title = @statements.add(md[:statement].strip,
                                        md[:code],
                                        md[:title],
-                                       @section){ statement_number += 1 }
+                                       @section
+                                        # Block executes if statement is new.
+                                        # Method recieves the return value.
+                                      ){ statement_number += 1 }
           if !Korekto.edits? ||
              (@filename=='-' && !(md[:code]==code && md[:title]==title))
             puts "#{@filename}:#{line_number}:#{code}:#{title}"
