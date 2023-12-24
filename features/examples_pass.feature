@@ -5,7 +5,7 @@ Feature: examples_pass
     * Given command "korekto"
 
   Scenario: Tutorial
-    * Given option "< examples/Tutorial.md"
+    * Given option "--patch < examples/Tutorial.md"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
@@ -35,7 +35,7 @@ Feature: examples_pass
     * Then stderr is ""
 
   Scenario: Computation
-    * Given option "< examples/Computation.md"
+    * Given option "--patch < examples/Computation.md"
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""

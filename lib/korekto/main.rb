@@ -64,6 +64,10 @@ class Main
         Main.new(filename, statements:@statements, imports:@imports).run
       end
     when MD_KLASS_METHOD_DEFINITION
+      if @filename=='-' && !Korekto.patch?
+        # We'll trust files, but not stdin.
+        raise Error, 'monkey patching not allowed on stdin'
+      end
       patch($~[:klass],$~[:method],$~[:definition])
     when MD_RULE
       @statements.syntax.push $~[:rule].strip

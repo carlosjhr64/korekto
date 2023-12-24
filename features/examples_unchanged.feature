@@ -5,7 +5,7 @@ Feature: examples_unchanged
     * Given command "korekto"
 
   Scenario: Tutorial
-    * Given option "< examples/Tutorial.md | grep '^-:'"
+    * Given option "--patch < examples/Tutorial.md | grep '^-:'"
     * When we run command
     * Then digest is "7b0b95ac3e229a3d8e9401a5fbb7a192"
 
@@ -30,7 +30,7 @@ Feature: examples_unchanged
     * Then digest is "9dd6297dddaf4ebb19df70b0c01ac6c2"
 
   Scenario: Computation
-    * Given option "< examples/Computation.md | grep '^-:'"
+    * Given option "--patch < examples/Computation.md | grep '^-:'"
     * When we run command
     * Then digest is "92488b70676d7ef82d73ff9fb5c3dbcb"
 

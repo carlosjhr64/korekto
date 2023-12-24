@@ -26,11 +26,12 @@ def handle_options
   require 'help_parser'
   options = HelpParser[Korekto::VERSION, <<~HELP]
     Usage:
-      korekto [:options]
+      korekto [:options+]
     Options:
      -h --help
      -v --version
      --edits     \tShow only needed edits
+     --patch     \tAllow monkey patching in stdin
      --install   \tInstalls the korekto neovim ruby plugin
      --readme    \tOpen korekto github page
     # Example usage:
@@ -40,6 +41,7 @@ def handle_options
   do_install if options.install?
   spawn_readme if options.readme?
   Korekto.edits = options.edits?
+  Korekto.patch = options.patch?
 end
 
 unless ARGV.empty? || ((ARGV==['--edits']) && (Korekto.edits=true))

@@ -5,7 +5,7 @@ Feature: tutorial
     * Given command "korekto"
 
   Scenario: README.md
-    * Given option "< examples/Tutorial.md"
+    * Given option "--patch < examples/Tutorial.md"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""

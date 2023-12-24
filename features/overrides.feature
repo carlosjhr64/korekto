@@ -10,7 +10,7 @@ Does not get here #D
     * Given command "korekto"
 
   Scenario: Overrides
-    * Given option "< features/overrides.feature"
+    * Given option "--patch < features/overrides.feature"
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""

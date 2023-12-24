@@ -6,12 +6,18 @@ module Korekto
   def self.edits=(value)
     @@edits = value
   end
-
-  Korekto.edits = false
-
   def self.edits?
     @@edits
   end
+  Korekto.edits = false
+
+  def self.patch=(value)
+    @@patch = value
+  end
+  def self.patch?
+    @@patch
+  end
+  Korekto.patch = false
 
   def self.run
     require 'korekto/symbols'
