@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 1.6.231223](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 1.6.231224](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
