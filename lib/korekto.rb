@@ -19,6 +19,14 @@ module Korekto
   end
   Korekto.patch = false
 
+  def self.heap=(value)
+    @@heap = value
+  end
+  def self.heap
+    @@heap
+  end
+  Korekto.heap = 13
+
   def self.run
     require 'korekto/symbols'
     require 'korekto/syntax'

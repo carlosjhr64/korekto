@@ -4,7 +4,7 @@ class Statements
 
   def initialize
     @statements = []
-    @heap = Heap.new(13)
+    @heap = Heap.new Korekto.heap
     @symbols = Symbols.new
     @syntax = Syntax.new
   end

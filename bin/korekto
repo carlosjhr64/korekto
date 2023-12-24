@@ -34,6 +34,9 @@ def handle_options
      --patch     \tAllow monkey patching in stdin
      --install   \tInstalls the korekto neovim ruby plugin
      --readme    \tOpen korekto github page
+     --heap=SIZE \tSet heap size (default: 13)
+    Types:
+      SIZE    /^\\d+$/
     # Example usage:
     #   cat MARKDOWN.md | korekto
     #   korekto < MARKDOWN.md
@@ -42,6 +45,7 @@ def handle_options
   spawn_readme if options.readme?
   Korekto.edits = options.edits?
   Korekto.patch = options.patch?
+  Korekto.heap = (options.heap || 13).to_i
 end
 
 unless ARGV.empty? || ((ARGV==['--edits']) && (Korekto.edits=true))
