@@ -15,12 +15,11 @@ class Statements
   def add(statement,code,title,filename)
     c = code[0]; w = c=='W'
     if (restatement=@statements.detect{(w || _1.type==c) && _1.to_s==statement})
-      case restatement.type
-      when 'D','X','S','P','T','C','R'
-        @heap.add restatement
-      else
+      unless 'DXSPTCR'.include?(restatement.type)
+        # Only allow heap-able statements to be restated.
         raise Error, "restatement: #{restatement.code}"
       end
+      @heap.add restatement
       code, = restatement.code
       title ||= restatement.title
       return code, title
@@ -28,15 +27,8 @@ class Statements
     statement_number = yield
     statement=Statement.new(statement,code,title,filename,statement_number,self)
     @statements.push statement
-    case statement.type
-    when 'A','I','E','M','L'
-      @symbols.define! statement
-    when 'D','X','S'
-      @symbols.define! statement
-      @heap.add statement
-    when 'P','T','C','R'
-      @heap.add statement
-    end
+    @symbols.define! statement if 'AIEMLDXS'.include?(statement.type)
+    @heap.add statement if 'DXSPTCR'.include?(statement.type)
     [statement.code, statement.title]
   end
 end
