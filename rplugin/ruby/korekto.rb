@@ -3,7 +3,7 @@ VERSION = `#{KOREKTO} --version`.strip
 
 Neovim.plugin do |plug|
   plug.command(:Korekto) do |nvim|
-    validations = nvim.command_output("w !#{KOREKTO} --edits")
+    validations = nvim.command_output("w !#{KOREKTO}")
                   .strip.split("\n").map(&:strip)
     msg = "Korekto! #{VERSION}"
     unless validations.empty?

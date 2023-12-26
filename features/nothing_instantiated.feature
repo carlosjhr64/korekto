@@ -1,5 +1,5 @@
 @nothing_instantiated
-Feature: nothing_instantiated
+Feature: Nothing_instantiated
 
 ```korekto
 /^.abc.\nc\wb$/	#E1 E1
@@ -9,7 +9,7 @@ Does not get here #D
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: No axiom match
     * Given option "< features/nothing_instantiated.feature"

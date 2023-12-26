@@ -1,5 +1,5 @@
 @no_syntax_on_literal
-Feature: on_syntax_on_literal
+Feature: No syntax on literal
 
 ```korekto
 ? !self[0]=='/' and !self[-1]=='/'
@@ -7,7 +7,7 @@ Feature: on_syntax_on_literal
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: No syntax on literal
     * Given option "< features/no_syntax_on_literal.feature"

@@ -1,5 +1,5 @@
 @section
-Feature: section
+Feature: Section
 
 ```korekto
 ! section: 'Anything'
@@ -9,7 +9,7 @@ Anything?	#S2.Work/L1.Anything Let anything!
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Section
     * Given option "< features/section.feature"

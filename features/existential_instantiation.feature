@@ -1,5 +1,5 @@
 @existential_instantiation
-Feature: existential_instantiation
+Feature: Existential instantiation
 
 ```korekto
 ! V /\w/
@@ -16,7 +16,7 @@ N{0,1,2,3,...}	#D3
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Existential 1 Instantiation
     * Given option "< features/existential_instantiation.feature"

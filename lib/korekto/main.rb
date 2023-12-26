@@ -119,7 +119,7 @@ class Main
                                         # Block executes if statement is new.
                                         # Method recieves the return value.
                                       ){ statement_number += 1 }
-          if !Korekto.edits? ||
+          if Korekto.trace? ||
              (@filename=='-' && !(md[:code]==code && md[:title]==title))
             puts "#{@filename}:#{line_number}:#{code}:#{title}"
           end

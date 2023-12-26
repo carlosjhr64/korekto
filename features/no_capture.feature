@@ -1,5 +1,5 @@
 @no_capture
-Feature: no_capture
+Feature: No capture
 
 ```korekto
 ! scanner: '.'
@@ -21,7 +21,7 @@ A(B + C) = AB( + )AC	#W
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: No Capture patterns
     * Given option "< features/no_capture.feature"

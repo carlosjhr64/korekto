@@ -1,5 +1,5 @@
 @no_inference_match
-Feature: no_inference_match
+Feature: No inference match
 
 ```korekto
 {a =}	#D1
@@ -8,7 +8,7 @@ Does not get here #D
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: No inference match
     * Given option "< features/no_inference_match.feature"

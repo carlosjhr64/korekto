@@ -14,7 +14,7 @@ t	#C5/I1,P3,P4 Modus Ponem
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Modus Ponem
     * Given option "< features/modus_ponem.feature"

@@ -1,5 +1,5 @@
 @no_existential_match
-Feature: no_existential_match
+Feature: No existential match
 
 ```korekto
 {abc}	#D1
@@ -7,7 +7,7 @@ axc #X
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: No existential match
     * Given option "< features/no_existential_match.feature"

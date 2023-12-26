@@ -1,8 +1,8 @@
-@examples_unchanged
-Feature: examples_unchanged
+@imports_unchanged
+Feature: Imports unchanged
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Syntax
     * Given option "< imports/Syntax.md | grep '^-:'"

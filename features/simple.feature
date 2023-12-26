@@ -1,5 +1,5 @@
 @simple
-Feature: simple
+Feature: Simple
 
 ```korekto
 /^(\w)(\w\w)\2\1$/	#A1
@@ -11,7 +11,7 @@ BACA	#C6/I2,T4,T5
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: --version
     * Given option "--version"

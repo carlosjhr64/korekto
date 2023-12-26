@@ -9,7 +9,7 @@ A=B	#S
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Let Set Number
     * Given option "< features/let_set_number.feature"

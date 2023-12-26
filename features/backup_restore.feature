@@ -1,5 +1,5 @@
-@simple
-Feature: simple
+@backup_restore
+Feature: Backup and restore
 
 ```korekto
 /(\w)=\1/	#A1
@@ -12,12 +12,11 @@ Feature: simple
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
-  Scenario: --version
+  Scenario: Backup and restore
     * Given option "< features/backup_restore.feature"
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
     * Then stdout is "-:5:A1:\n-:7:A2:\n-:9:A3:Not a restatement\n-:10:!:nothing saved as 'bckup'"
-

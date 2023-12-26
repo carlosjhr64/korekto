@@ -30,7 +30,7 @@ def handle_options
     Options:
      -h --help
      -v --version
-     --edits     \tShow only needed edits
+     --trace     \tShow trace of each line, not just edits and errors
      --patch     \tAllow monkey patching in stdin
      --install   \tInstalls the korekto neovim ruby plugin
      --readme    \tOpen korekto github page
@@ -43,12 +43,10 @@ def handle_options
   HELP
   do_install if options.install?
   spawn_readme if options.readme?
-  Korekto.edits = options.edits?
+  Korekto.trace = options.trace?
   Korekto.patch = options.patch?
-  Korekto.heap = (options.heap || 13).to_i
+  Korekto.heap = options.heap.to_i if options.heap?
 end
 
-unless ARGV.empty? || ((ARGV==['--edits']) && (Korekto.edits=true))
-  handle_options
-end
+handle_options unless ARGV.empty?
 Korekto.run

@@ -1,10 +1,10 @@
 @tutorial
-Feature: tutorial
+Feature: Tutorial
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
-  Scenario: README.md
+  Scenario: Tutorial.md
     * Given option "--patch < examples/Tutorial.md"
     * When we run command
     * Then exit status is "0"

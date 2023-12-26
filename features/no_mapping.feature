@@ -1,5 +1,5 @@
 @no_mapping
-Feature: no_mapping
+Feature: No mapping
 
 ```korekto
 {a}	#D1
@@ -8,7 +8,7 @@ Does not get here #D
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: No mapping
     * Given option "< features/no_mapping.feature"

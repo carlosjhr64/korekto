@@ -2,7 +2,7 @@
 Feature: readme
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: README.md
     * Given option "< README.md"

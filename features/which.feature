@@ -1,5 +1,5 @@
 @which
-Feature: which
+Feature: Which
 
 ```korekto
 ! scanner: '.'
@@ -25,7 +25,7 @@ A=A #W
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Which
     * Given option "< features/which.feature"

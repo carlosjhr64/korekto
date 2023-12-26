@@ -1,5 +1,5 @@
 @regexp_quote_postfix
-Feature: simple
+Feature: Regexp quoate postfix
 
 ```korekto
 ! scanner: '\(\||\|\)|.'
@@ -22,7 +22,7 @@ abc = xyz	#P4
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Regexp quote postfix
     * Given option "< features/regexp_quote_postfix.feature"

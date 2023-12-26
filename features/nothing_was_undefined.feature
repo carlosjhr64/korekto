@@ -1,5 +1,5 @@
 @nothing_was_undefined
-Feature: nothing_was_undefined
+Feature: Nothing was undefined
 
 ```korekto
 ABC	#D1
@@ -8,7 +8,7 @@ Does not get here #D
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Nothing was undefined
     * Given option "< features/nothing_was_undefined.feature"

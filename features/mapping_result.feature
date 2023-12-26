@@ -1,5 +1,5 @@
 @mapping_result
-Feature: mapping_result
+Feature: Mapping result
 
 ```korekto
 ! W /\w+/
@@ -13,7 +13,7 @@ a+a	#P3
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Mapping Result
     * Given option "< features/mapping_result.feature"

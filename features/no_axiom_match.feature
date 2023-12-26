@@ -1,5 +1,5 @@
 @no_axiom_match
-Feature: no_axiom_match
+Feature: No axiom match
 
 ```korekto
 {a =}	#D1
@@ -8,7 +8,7 @@ Does not get here #D
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: No axiom match
     * Given option "< features/no_axiom_match.feature"

@@ -3,13 +3,13 @@ module Korekto
 
   VERSION = '1.6.231226'
 
-  def self.edits=(value)
-    @@edits = value
+  def self.trace=(value)
+    @@trace = value
   end
-  def self.edits?
-    @@edits
+  def self.trace?
+    @@trace
   end
-  Korekto.edits = false
+  Korekto.trace = false
 
   def self.patch=(value)
     @@patch = value

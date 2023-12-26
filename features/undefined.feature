@@ -1,5 +1,5 @@
 @undefined
-Feature: undefined
+Feature: Undefined
 
 ```korekto
 ABC	#D1
@@ -8,7 +8,7 @@ Does not get here #D
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Undefined
     * Given option "< features/undefined.feature"

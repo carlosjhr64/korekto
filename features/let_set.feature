@@ -1,5 +1,5 @@
 @let_set
-Feature: let_set
+Feature: Let/Set
 
 ```korekto
 ! :W /\w/
@@ -9,7 +9,7 @@ A=B	#S2/L1 L2
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Let Set
     * Given option "< features/let_set.feature"

@@ -1,8 +1,8 @@
 @examples_unchanged
-Feature: examples_unchanged
+Feature: Examples unchanged
 
   Background:
-    * Given command "korekto"
+    * Given command "korekto --trace"
 
   Scenario: Tutorial
     * Given option "--patch < examples/Tutorial.md | grep '^-:'"

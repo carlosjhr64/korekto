@@ -1,5 +1,5 @@
-@simple
-Feature: simple
+@edits
+Feature: Edits
 
 ```korekto
 ! scanner: '\w+|.'
@@ -17,8 +17,8 @@ Dog is Mammal	#C5/I1,P3,P4 Wut
   Background:
     * Given command "korekto"
 
-  Scenario: --edits
-    * Given option "--edits < features/edits.feature"
+  Scenario: Edits
+    * Given option "< features/edits.feature"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
