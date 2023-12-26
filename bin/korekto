@@ -34,7 +34,7 @@ def handle_options
      --patch     \tAllow monkey patching in stdin
      --install   \tInstalls the korekto neovim ruby plugin
      --readme    \tOpen korekto github page
-     --heap=SIZE \tSet heap size (default: 13)
+     --heap=SIZE \tSet heap size (default: #{Korekto.heap})
     Types:
       SIZE    /^\\d+$/
     # Example usage:

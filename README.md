@@ -83,7 +83,7 @@ Usage:
 Options:
  -h --help
  -v --version
- --trace       Show trace of each line, not just edits and errors
+ --trace     	Show trace of each line, not just edits and errors
  --patch     	Allow monkey patching in stdin
  --install   	Installs the korekto neovim ruby plugin
  --readme    	Open korekto github page
