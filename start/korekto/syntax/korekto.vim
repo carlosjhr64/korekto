@@ -34,4 +34,5 @@ highlight KorektoBoldItalic ctermfg=darkcyan
 highlight KorektoMinuscule  ctermfg=darkgrey
 "### Additional settings ###
 setlocal tabstop=3
+map <leader><F7> :KorektoPatch<CR>
 map <F7> :Korekto<CR>
