@@ -27,15 +27,7 @@ class Symbols
     undefined
   end
 
-  def define!(statement)
-    if statement.pattern?
-      unless statement.literal_regexp?
-        statement.scan(@scanner){|w| @set<<w unless @v2t.include?(w)}
-      end
-    else
-      statement.scan(@scanner){|w| @set<<w}
-    end
-  end
+  def define!(statement) = undefined(statement).each{|w| @set<<w}
 
   def s2r(statement)
     if statement[0]=='/' && statement[-1]=='/'
