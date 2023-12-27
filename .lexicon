@@ -148,6 +148,7 @@ section
 seen
 select
 set
+Set
 set_acceptance_code
 set_regexp
 set_scanner

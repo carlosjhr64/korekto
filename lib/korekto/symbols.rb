@@ -3,10 +3,10 @@ class Symbols
   attr_reader :t2p, :v2t
 
   def initialize
-    @h   = {}
-    @t2p = {}
-    @v2t = {}
-    @scanner = /:\w+|./
+    @set   = Set.new # Set of Korekto symbols(strings)
+    @v2t = {} # Variable to Type
+    @t2p = {} # Type to Pattern
+    @scanner = /:\w+|./ # Default scanner
   end
 
   # rubocop: disable Naming/AccessorMethodName
@@ -18,11 +18,11 @@ class Symbols
     if statement.pattern?
       unless statement.literal_regexp?
         statement.scan(@scanner) do |w|
-          undefined.push(w) unless @v2t.include?(w) || @h.include?(w)
+          undefined.push(w) unless @v2t.include?(w) || @set.include?(w)
         end
       end
     else
-      statement.scan(@scanner){|w| undefined.push(w) unless @h.include?(w)}
+      statement.scan(@scanner){|w| undefined.push(w) unless @set.include?(w)}
     end
     undefined.uniq
   end
@@ -30,12 +30,10 @@ class Symbols
   def define!(statement)
     if statement.pattern?
       unless statement.literal_regexp?
-        statement.scan(@scanner) do |w|
-          @h[w]=nil unless @v2t.include?(w) || @h.include?(w)
-        end
+        statement.scan(@scanner){|w| @set<<w unless @v2t.include?(w)}
       end
     else
-      statement.scan(@scanner){|w| @h[w]=nil unless @h.include?(w)}
+      statement.scan(@scanner){|w| @set<<w}
     end
   end
 
