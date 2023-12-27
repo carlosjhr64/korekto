@@ -40,7 +40,6 @@ empty
 err
 Error
 eval
-Exception
 existential
 exit
 expand_path
@@ -70,6 +69,7 @@ inspect
 install
 instance_eval
 instantiation
+is_a
 j
 join
 key
@@ -138,6 +138,7 @@ reverse
 Ruby33
 rule
 run
+RuntimeError
 s
 s0
 s1

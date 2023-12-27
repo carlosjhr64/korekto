@@ -4,7 +4,7 @@ require 'korekto/symbols'
 
 # Mockups
 module Korekto
-class Error < Exception; end
+class Error < RuntimeError; end
 class Statement < String
   def regexp
     nil

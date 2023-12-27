@@ -62,8 +62,6 @@ Lint/NestedMethodDefinition:
   Enabled: false
 Lint/OrAssignmentToConstant:
   Enabled: false
-Lint/InheritException:
-  Enabled: false
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
 Lint/UnderscorePrefixedVariableName:
@@ -131,8 +129,6 @@ Style/ParallelAssignment:
 Style/PerlBackrefs:
   Enabled: false
 Style/RegexpLiteral:
-  Enabled: false
-Style/RescueStandardError:
   Enabled: false
 Style/ReturnNilInPredicateMethodDefinition:
   Enabled: false

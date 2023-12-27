@@ -41,7 +41,7 @@ def step_thru_script(fh=$stdin)
     # OK, do it!
     begin
       actual = BINDING.eval(script)
-    rescue
+    rescue StandardError
       actual = $!.message
     ensure
       script = ''

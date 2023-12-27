@@ -28,8 +28,10 @@ class Statement
 
   def syntax_check
     @context.syntax.each do |rule|
-      raise Error, "syntax: #{rule}" unless @statement.instance_eval(rule)
-    rescue # other than Korekto::Error < Exception
+      next if @statement.instance_eval(rule)
+      raise Error, "syntax: #{rule}"
+    rescue StandardError
+      raise if $!.is_a? Error
       raise Error, "#{$!.class}: #{rule}"
     end
   end
@@ -105,11 +107,10 @@ class Statement
   # Searches
 
   def detect_statement(type)
-    statement = @context.type(type).detect do |statement|
-      statement.match? @statement
+    if (statement = @context.type(type).detect{_1.match? @statement})
+      return statement
     end
-    raise Error, "does not match any '#{type}' statement" unless statement
-    statement
+    raise Error, "does not match any '#{type}' statement"
   end
 
   def heap_combos_search(type)

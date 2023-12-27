@@ -10,7 +10,8 @@ class Syntax
     raise Error, 'syntax rule must eval boolean' unless b==!!b
     # rubocop: enable Style/DoubleNegation
     @a.push(s)
-  rescue
+  rescue StandardError
+    raise if $!.is_a? Error
     raise Error, "#{$!.class}: #{s}"
   end
 end

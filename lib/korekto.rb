@@ -1,5 +1,5 @@
 module Korekto
-  class Error < Exception; end
+  class Error < RuntimeError; end
 
   VERSION = '2.0.231227'
 
