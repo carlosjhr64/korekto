@@ -30,35 +30,35 @@ class Symbols
   def define!(statement) = undefined(statement).each{|w| @set<<w}
 
   def s2r(statement)
-    if statement[0]=='/' && statement[-1]=='/'
-      Regexp.new(statement[1..-2])
-    else
-      pattern,count,seen = '\A',0,{}
-      statement.scan(@scanner) do |v|
-        if (n=seen[v])
-          pattern << '\\'+n
-        elsif (type = @v2t[v])
-          regex = @t2p[type]
-          if type[0]=='.'
-            pattern << regex
-          else
-            count += 1
-            seen[v]=count.to_s
-            pattern << '('+regex+')'
-          end
+    return Regexp.new statement[1..-2] if statement[0]=='/' &&
+                                          statement[-1]=='/'
+    pattern,count,seen = '\A',0,{}
+    # Build pattern from statement token by token, v.
+    statement.scan(@scanner) do |v|
+      if (n=seen[v])
+        pattern << '\\'+n
+      elsif (type = @v2t[v])
+        regex = @t2p[type]
+        if type[0]=='.'
+          # No capture patterns start with '.'
+          pattern << regex
         else
-          # Escape Regexp specials
-          v = Regexp.quote v
-          # To avoid collisions with back-references,
-          # isolate digit in square brackets:
-          '0123456789'.include?(_=v[0]) and v[0]='['+_+']'
-          pattern << v
+          count += 1
+          seen[v]=count.to_s
+          pattern << '('+regex+')'
         end
+      else
+        # Escape Regexp specials
+        v = Regexp.quote v
+        # To avoid collisions with back-references,
+        # isolate digit in square brackets:
+        '0123456789'.include?(_=v[0]) and v[0]='['+_+']'
+        pattern << v
       end
-      raise Error, 'pattern with no captures' if count < 1
-      pattern << '\Z'
-      Regexp.new(pattern)
     end
+    raise Error, 'pattern with no captures' if count < 1
+    pattern << '\Z'
+    Regexp.new(pattern)
   end
 end
 end
