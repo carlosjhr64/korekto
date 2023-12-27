@@ -14,17 +14,17 @@ class Symbols
   # rubocop: enable Naming/AccessorMethodName
 
   def undefined(statement)
-    undefined = []
+    undefined = Set.new
     if statement.pattern?
       unless statement.literal_regexp?
         statement.scan(@scanner) do |w|
-          undefined.push(w) unless @v2t.include?(w) || @set.include?(w)
+          undefined<<w unless @v2t.include?(w) || @set.include?(w)
         end
       end
     else
-      statement.scan(@scanner){|w| undefined.push(w) unless @set.include?(w)}
+      statement.scan(@scanner){|w| undefined<<w unless @set.include?(w)}
     end
-    undefined.uniq
+    undefined
   end
 
   def define!(statement)

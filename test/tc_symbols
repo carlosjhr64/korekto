@@ -23,9 +23,9 @@ class TestSymbols < Test::Unit::TestCase
     symbols = Korekto::Symbols.new
     symbols.define! Korekto::Statement.new('abbba abc a:xyz a')
     u = symbols.undefined Korekto::Statement.new('abcdexyz:xyz')
-    assert_equal %w[d e x y z], u
+    assert_equal Set.new(%w[d e x y z]), u
     u = symbols.undefined Korekto::Statement.new('abc:xyz:abc')
-    assert_equal [':abc'], u
+    assert_equal Set[':abc'], u
   end
 
   def test_s2r
