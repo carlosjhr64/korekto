@@ -35,12 +35,6 @@ module Korekto
   end
   Korekto.scrape = false
 
-  def self.scrape
-    require 'korekto/scrape'
-    Korekto.scrape = true
-    Korekto.run
-  end
-
   def self.run
     require 'korekto/symbols'
     require 'korekto/syntax'
