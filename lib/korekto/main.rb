@@ -119,8 +119,13 @@ class Main
                                         # Block executes if statement is new.
                                         # Method recieves the return value.
                                       ){ statement_number += 1 }
-          if Korekto.trace? ||
-             (@filename=='-' && !(md[:code]==code && md[:title]==title))
+          if Korekto.scrape?
+            print @statements.last
+            print "\t##{code}"
+            print " #{title}" unless title.nil? || title.empty?
+            puts
+          elsif Korekto.trace? ||
+                (@filename=='-' && !(md[:code]==code && md[:title]==title))
             puts "#{@filename}:#{line_number}:#{code}:#{title}"
           end
         else

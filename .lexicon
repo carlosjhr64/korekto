@@ -77,6 +77,7 @@ key_value
 kl
 klass
 Korekto
+last
 length
 let
 limit
@@ -119,6 +120,7 @@ pattern_type
 pop
 postulate
 preprocess
+print
 private
 Process
 push
@@ -145,6 +147,7 @@ s1
 s2
 s2r
 scan
+scrape
 section
 seen
 select

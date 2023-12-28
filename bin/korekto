@@ -30,6 +30,7 @@ def handle_options
     Options:
      -h --help
      -v --version
+     --scrape    \tScrape Korekto lines
      --trace     \tShow trace of each line, not just edits and errors
      --patch     \tAllow monkey patching in stdin
      --install   \tInstalls the korekto neovim ruby plugin
@@ -37,15 +38,18 @@ def handle_options
      --heap=SIZE \tSet heap size (default: #{Korekto.heap})
     Types:
       SIZE    /^\\d+$/
+    Exclusive:
+      scrape trace install readme
     # Example usage:
     #   cat MARKDOWN.md | korekto
     #   korekto < MARKDOWN.md
   HELP
   do_install if options.install?
   spawn_readme if options.readme?
-  Korekto.trace = options.trace?
-  Korekto.patch = options.patch?
-  Korekto.heap = options.heap.to_i if options.heap?
+  Korekto.scrape = options.scrape?
+  Korekto.trace  = options.trace?
+  Korekto.patch  = options.patch?
+  Korekto.heap   = options.heap.to_i if options.heap?
 end
 
 handle_options unless ARGV.empty?

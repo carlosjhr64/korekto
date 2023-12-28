@@ -10,7 +10,8 @@ class Statements
   end
 
   def type(c) = @statements.select{_1.type==c}
-  def length = @statements.length
+  def length  = @statements.length
+  def last    = @statements.last
 
   def add(statement,code,title,filename)
     c = code[0]; w = c=='W'
