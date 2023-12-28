@@ -52,7 +52,7 @@ class Statement
     when 'T'
       tautology
     when 'A', 'L'
-      # Axiom=>Tautoloty, Let=>Set,
+      # Axiom=>Tautology, Let=>Set,
       pattern_type(0)
     when 'M', 'E'
       # Map=>Result, Existential=>Instantiation(X)
