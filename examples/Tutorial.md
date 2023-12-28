@@ -75,10 +75,11 @@ the words used to describe the statement types
 (Definition, Postulate, Axiom, Tautology, ...),
 be aware that the statement types
 have a very specific meaning in the `Korekto` code.
-Also I'm using literal `Regexp`
-in the patterns in the following examples,
-but one should best use
-the pattern translation feature `Korekto` provides.
+
+I'll be using literal `Regexp` in the patterns in the following examples,
+but one would normally use the pattern translation feature `Korekto` provides.
+Note that the default scanner pattern is `/:\w+|./`
+which is used to tokenize the statements.
 
 ### D is for Definition
 
@@ -91,6 +92,7 @@ It must introduce at least one new symbol.
 ```
 You can specify the number of symbols to be defined in the comment title,
 but it's not required.
+If you provide it, `Korekto` will ensure the number is correct.
 
 ### A is for Axiom
 
