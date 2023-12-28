@@ -83,6 +83,7 @@ Usage:
 Options:
  -h --help
  -v --version
+ --scrape    	Scrape Korekto lines
  --trace     	Show trace of each line, not just edits and errors
  --patch     	Allow monkey patching in stdin
  --install   	Installs the korekto neovim ruby plugin
@@ -90,6 +91,8 @@ Options:
  --heap=SIZE 	Set heap size (default: 13)
 Types:
   SIZE    /^\d+$/
+Exclusive:
+  scrape trace install readme
 # Example usage:
 #   cat MARKDOWN.md | korekto
 #   korekto < MARKDOWN.md
