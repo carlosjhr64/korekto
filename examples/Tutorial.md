@@ -295,7 +295,7 @@ Demonstrating the use of `!:nl {;}`, map `#M12` above could be rewritten as foll
 ! KeyWord {A B}
 A&B;A :good :with B	#M19 If A and B, then A good with B.
 ```
-# Support for pattern statements
+## Support for pattern statements
 
 If a pattern statement matches the immediately preceding statements(in the heap),
 the matched statements will be used as support for the pattern statement.
@@ -380,7 +380,7 @@ You can set the section name as follows:
 
 There are times when you'll want to go on a side track in your proof, but
 then go back to some prior point discarding the side track...
-maybe to demonstrate a dead end.
+Maybe to demonstrate a dead end.
 You can use `! save: '<key>'` and `! restore '<key>'` to do that:
 ```korekto
 ! save: 'backup'
