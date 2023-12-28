@@ -97,10 +97,12 @@ They must not have any undefined symbols.
 
 `I` statements are acceptance patterns on three statements:
 two accepted statement and a third to be validated.
-Because this entails a search that grows very quickly with
-the size of the list of statements,
-`Korekto` requires that the correct combination be found in the last 13 statements.
-Restatement of previous results are allowed so as to add old statements into the search heap.
+Because this entails a search that grows(O[n²])
+with the size of the list of statements,
+`Korekto` requires that the correct combination
+be found in the last 13 statements(by default to be nice to the reader).
+Restatement of previous results are allowed
+so as to add old statements into the search heap(and remind the reader).
 ```korekto
 # :if A :then B;A;B
 /^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I6 Modus ponen
