@@ -21,6 +21,7 @@ combination
 combos
 compound
 conclusion
+config_nvim
 const_get
 context
 count
@@ -32,6 +33,7 @@ detach
 detect
 detect_statement
 __dir__
+directory
 dirname
 do_install
 dump
@@ -85,6 +87,7 @@ line_number
 lines
 literal_regexp
 load
+local_pack
 Main
 map
 mapping
