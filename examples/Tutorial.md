@@ -131,7 +131,7 @@ so as to add old statements into the search heap(and remind the reader).
 
 ### P is for Postulate
 
-`P` statements are used to introduce new facts(underivable from previous statements).
+`P` statements are used to introduce new facts(not derivable from previous statements).
 It cannot have any undefined symbols.
 ```korekto
 :if :meat :then :pudding	#P8 How can you have any pudding?
@@ -208,7 +208,7 @@ can bring in new symbols.
 
 Sometimes a statement might be validated by
 either an `M` mapping or an `I` inference,
-but you forget which... so is it `R` or `C`?
+but you forget which... So is it `R` or `C`?
 Setting the statement type to `W` tells `Korekto` to test which one works.
 `W` will try in order [`T`,`S`,`R`,`X`,`C`], and
 will go with the first match or raise an error.
