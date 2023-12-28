@@ -15,7 +15,6 @@ Works with [neovim](https://github.com/neovim/neovim).
 $ gem install korekto
 $ korekto --install
 $ ### And if missing:
-$ sudo dnf install neovim # On Fedora
 $ gem install neovim # Provides neovim-ruby-host
 ```
 ## SYNOPSIS:
@@ -38,37 +37,9 @@ If I see Cows, then I'll probably see Chickens.	#P5
 I see Cows.	#P6
 I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 ```
-## MORE
+## Examples
 
-### Tutorial
-
-* [Intro](examples/Tutorial.md)
-* [Statement types](examples/Tutorial.md#Statement-types)
-  * [D is for Definition](examples/Tutorial.md#D-is-for-Definition)
-  * [P is for Postulate](examples/Tutorial.md#P-is-for-Postulate)
-  * [A is for Axiom](examples/Tutorial.md#A-is-for-Axiom)
-  * [T is for Tautology](examples/Tutorial.md#T-is-for-Tautology)
-  * [I is for Inference](examples/Tutorial.md#I-is-for-Inference)
-  * [C is for Conclusion](examples/Tutorial.md#C-is-for-Conclusion)
-  * [M is for Map](examples/Tutorial.md#M-is-for-Map)
-  * [R is for Result](examples/Tutorial.md#R-is-for-Result)
-  * [E is for Existential](examples/Tutorial.md#E-is-for-Existential)
-  * [X is for Instantiation](examples/Tutorial.md#X-is-for-Instantiation)
-  * [L is for Let](examples/Tutorial.md#L-is-for-Let)
-  * [S is for Set ie Assignment](examples/Tutorial.md#S-is-for-Set-ie-Assignment)
-  * [W is for Which](examples/Tutorial.md#W-is-for-Which)
-* [Statements table](examples/Tutorial.md#Statements-table)
-* [Patterns](examples/Tutorial.md#Patterns)
-* [Support for pattern statements](examples/Tutorial.md#Support-for-pattern-statements)
-* [Syntax](examples/Tutorial.md#Syntax)
-* [Monkey patches](examples/Tutorial.md#Monkey-patches)
-* [Scanner](examples/Tutorial.md#Scanner)
-* [Fence](examples/Tutorial.md#Fence)
-* [Section](examples/Tutorial.md#Section)
-* [Save and Restore](examples/Tutorial.md#Save-and-Restore)
-
-### Examples
-
+* [Tutorial](examples/Tutorial.md)
 * [ABC music notation](examples/ABC.md)
 * [Computation](examples/Computation.md)
 * [Dx x^x](examples/Dxx.md)

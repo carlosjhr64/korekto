@@ -1,5 +1,31 @@
 # Tutorial
 
+## Contents
+
+* [Statement types](#Statement-types)
+  * [D is for Definition](#D-is-for-Definition)
+  * [P is for Postulate](#P-is-for-Postulate)
+  * [A is for Axiom](#A-is-for-Axiom)
+  * [T is for Tautology](#T-is-for-Tautology)
+  * [I is for Inference](#I-is-for-Inference)
+  * [C is for Conclusion](#C-is-for-Conclusion)
+  * [M is for Map](#M-is-for-Map)
+  * [R is for Result](#R-is-for-Result)
+  * [E is for Existential](#E-is-for-Existential)
+  * [X is for Instantiation](#X-is-for-Instantiation)
+  * [L is for Let](#L-is-for-Let)
+  * [S is for Set ie Assignment](#S-is-for-Set-ie-Assignment)
+  * [W is for Which](#W-is-for-Which)
+* [Statements table](#Statements-table)
+* [Patterns](#Patterns)
+* [Support for pattern statements](#Support-for-pattern-statements)
+* [Syntax](#Syntax)
+* [Monkey patches](#Monkey-patches)
+* [Scanner](#Scanner)
+* [Fence](#Fence)
+* [Section](#Section)
+* [Save and Restore](#Save-and-Restore)
+
 ## Intro
 
 `Korekto` is not a proof assistant.
