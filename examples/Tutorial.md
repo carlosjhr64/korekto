@@ -276,8 +276,8 @@ The bang `!` at the start of a line tells `Korekto` it's a pattern definition.
 The period at the start of the pattern name means this pattern is not to capture.
 Pattern definitions have the following form:
 ```ruby
-%r{^! (?<type>\S+)\s*/(?<pattern>.*)/$}
-/^! (?<type>\S+)\s*\{(?<variables>\S+( \S+})*)\}$/
+%r{^! (?<type>\S+)\s+/(?<pattern>.*)/$}
+/^! (?<type>\S+)\s+\{(?<variables>\S+( \S+})*)\}$/
 ```
 So if you want to capture a number into pattern variables(i,j,k), you could write:
 ```korekto
@@ -289,7 +289,7 @@ A Reflection axiom like `#A3` above can then be rewritten for numbers as:
 i=i	#A18 Reflection
 ```
 Although you'll probably want to make a Reflection axiom a bit more general than for just numbers.
-Demonstrating the use of `!:nl {;}`, map `#M11` above could be rewritten as follows:
+Demonstrating the use of `!:nl {;}`, map `#M12` above could be rewritten as follows:
 ```korekto
 ! KeyWord /:\w+/
 ! KeyWord {A B}
