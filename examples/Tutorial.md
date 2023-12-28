@@ -42,7 +42,27 @@ I meant `Korekto` to read markdown files with `Korekto` code fenced.
 `Korekto` can be run on this tutorial:
 ```shell
 $ korekto --patch --trace < examples/Tutorial.md
-# TODO: actual trace...
+-:109:D1:5 Symbols including space
+-:110:D2:10 Numbers
+-:111:D3:10 Words
+-:123:A4:Reflection
+-:132:T5/A4:Reflection
+-:146:I6:Modus ponen
+-:148:I7:Synthesis
+-:157:P8:How can you have any pudding?
+-:158:P9:You did have your meat!
+-:166:C10/I6,P8,P9:Modus ponen
+-:167:C11/I7,P9,C10:Synthesis
+-:176:M12:If A and B, then A good with B
+-:184:R13/M12,C11:If A and B, then A good with B
+-:193:E14:Also good with 1
+-:206:X15/E14,R13:Also good with 1
+-:217:L16:Let 1
+-:225:S17/L16:Let 1
+-:309:A18:Reflection
+-:316:M19:If A and B, then A good with B.
+-:323:D20:
+-:324:A21/D20:
 ```
 Also, in `neovim` you can run the command `:Korekto` or press `<F7>`.
 It will check your work and move the cursor to the first error it finds.
