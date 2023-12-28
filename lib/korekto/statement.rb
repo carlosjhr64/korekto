@@ -165,8 +165,8 @@ class Statement
     end
   end
 
-  # A Tautology is an accepted true statement that immediately follows from an
-  # an Axiom rule.  It may not have any undefined terms.
+  # A Tautology is an accepted true statement that immediately follows from
+  # an Axiom rule. It may not have any undefined terms.
   def tautology
     expected_instantiations(n:0)
     axiom = detect_statement('A')
