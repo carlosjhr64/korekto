@@ -4,13 +4,12 @@ class Statement
 
   # rubocop: disable Metrics/ParameterLists
   def initialize(statement,code,title,section,statement_number,context)
-    @statement,@code,@title,@section,@statement_number,@context =
-      statement,code,title,section,statement_number,context
+    @statement,@code,@title,@section,@statement_number,@context,@regexp =
+      statement,code,title,section,statement_number,context,nil
     @statement.freeze; @section.freeze; @statement_number.freeze
     syntax_check unless @statement[0]=='/' &&
                         @statement[-1]=='/' &&
                         %w[A L M E I].include?(@code[0])
-    @regexp = nil
     set_acceptance_code
     @code.freeze; @title.freeze; @regexp.freeze
   end
@@ -20,7 +19,7 @@ class Statement
   def to_s              = @statement
   def to_str            = @statement
   def match?(statement) = @regexp.match?(statement)
-  def scan(regex, &) = @statement.scan(regex, &)
+  def scan(regex, &)    = @statement.scan(regex, &)
   def pattern?          = !@regexp.nil?
   def literal_regexp?   = @statement[0]=='/' && @statement[-1]=='/'
 
