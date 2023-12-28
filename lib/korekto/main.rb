@@ -1,7 +1,7 @@
 module Korekto
 class Main
   # rubocop: disable Layout/LineLength
-  MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)( (?<title>\S.*?\S))?$}
+  MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)(\s+(?<title>[^#]+))?$}
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
   MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)#(?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
   MD_RULE = /^[?] (?<rule>\S.*)$/

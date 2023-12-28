@@ -1,4 +1,5 @@
 # Derivative of x^x
+imports: [Calculus](../imports/Calculus.md)
 
 If you have trouble reading the proof below,
 I recommend viewing blackpenredpen's YouTube video [derivative of x^x](https://www.youtube.com/watch?v=l-iLg07zavc).
