@@ -165,41 +165,53 @@ class Statement
     end
   end
 
+  # A Tautology is an accepted true statement that immediately follows from an
+  # an Axiom rule.  It may not have any undefined terms.
   def tautology
     expected_instantiations(n:0)
     axiom = detect_statement('A')
     set_statement(support(axiom), axiom.title)
   end
 
+  # A Set(Assignment) is an allowed true statement that introduces at least one
+  # term as immediately validated by a matching Let rule.
   def set
     let = detect_statement('L')
     expected_instantiations(let.title)
     set_statement(support(let), let.title)
   end
 
+  # A Result is a derived true statement that follows from a Map rule and
+  # matching true statement.
   def result
     expected_instantiations(n:0)
     mapping,s1 = heap_search('M')
     set_statement(support(mapping,s1), mapping.title)
   end
 
+  # An Instantiation is a derived true statement that introduces at least one
+  # new term as a result of an Existential rule and matching true statement.
   def instantiation
     existential,s1 = heap_search('E')
     expected_instantiations(existential.title)
     set_statement(support(existential,s1), existential.title)
   end
 
+  # A Conclusion is a derived true statement, the result of an Inference rule
+  # that follows from two true statements.
   def conclusion
     expected_instantiations(n:0)
     inference,s1,s2 = heap_combos_search('I')
     set_statement(support(inference,s1,s2), inference.title)
   end
 
+  # A Definition is an assumed true statement that defines at least one term.
   def definition
     expected_instantiations(@title)
     set_statement
   end
 
+  # A Postulate is an assumed true statement with all terms defined.
   def postulate
     expected_instantiations(n:0)
     set_statement
