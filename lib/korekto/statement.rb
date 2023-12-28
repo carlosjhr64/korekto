@@ -82,14 +82,7 @@ class Statement
     @title = title if (title=title&.split(':',2)&.first) && !title.empty?
   end
 
-  def support(*s)
-    support = []
-    s.each do |s|
-      c = s.code.split('/',2)[0]
-      support.push(c)
-    end
-    support.join(',')
-  end
+  def support(*s) = s.inject([]){|a,s| a.push(s.code.split('/',2)[0])}.join(',')
 
   # Pattern helpers
 
