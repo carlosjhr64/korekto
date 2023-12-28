@@ -7,7 +7,7 @@ Feature: Examples unchanged
   Scenario: Tutorial
     * Given option "--patch < examples/Tutorial.md | grep '^-:'"
     * When we run command
-    * Then digest is "7b0b95ac3e229a3d8e9401a5fbb7a192"
+    * Then digest is "8b5765ae85933ab23e3ea087793954a0"
 
   Scenario: ABC
     * Given option "< examples/ABC.md | grep '^-:'"

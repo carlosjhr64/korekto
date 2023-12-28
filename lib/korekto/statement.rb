@@ -106,10 +106,8 @@ class Statement
   # Searches
 
   def detect_statement(type)
-    if (statement = @context.type(type).detect{_1.match? @statement})
-      return statement
-    end
-    raise Error, "does not match any '#{type}' statement"
+    @context.type(type).detect{_1.match? @statement} ||
+      raise(Error, "does not match any '#{type}' statement")
   end
 
   def heap_combos_search(type)
