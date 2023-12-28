@@ -38,44 +38,34 @@ I meant `Korekto` to read markdown files with `Korekto` code fenced.
     ```korekto
     # This is a Korekto comment
     ```
+
 `Korekto` can be run on this tutorial:
 ```shell
-$ korekto < examples/Tutorial.md
--:72:D1:5 Symbols including space
--:73:D2:10 Numbers
--:74:D3:10 Words
--:85:A4:Reflection
--:94:T5/A4:Reflection
--:106:I6:Modus ponen
--:108:I7:Synthesis
--:117:P8:How can you have any pudding?
--:118:P9:You did have your meat!
--:126:C10/I6,P8,P9:Modus ponen
--:127:C11/I7,P9,C10:Synthesis
--:136:M12:If A and B, then A good with B
--:144:R13/M12,C11:If A and B, then A good with B
--:153:E14:Also good with 1
--:166:X15/E14,R13:Also good with 1
--:177:L16:Let 1
--:185:S17/L16:Let 1
--:269:A18:Reflection
--:276:M19:If A and B, then A good with B.
+$ korekto --patch --trace < examples/Tutorial.md
+# TODO: actual trace...
 ```
-Also, in `neovim` you can run the command `Korekto` or press `<F7>`.
+Also, in `neovim` you can run the command `:Korekto` or press `<F7>`.
 It will check your work and move the cursor to the first error it finds.
 It will also automate many of the statement's comments.
 You only need to give the statement type,
 `Korekto` completes the comment.
 
+On this tutorial, you'll need to run `:KorektoPatch` or press `<Leader><F7>`,
+because there's a patch in the file(Monkey Patching).
+It's just a guard rail to ensure you're aware of the patch.
+To find the patch, just press `<F7>` and it'll take you there
+with an error message(monkey patching not allowed).
+
 Keep in mind that as powerful as `Regexp` can be,
 you'll run into weaknesses in the `Regexp` engine.
-There will be times when the simple pattern generator can't create the test you want, and
-you'll consider using a literal `Regexp`.
+There will be times when the simple pattern generator(provided by `Korekto`)
+can't create the test you want, and you'll consider using a literal `Regexp`.
 And some tests may not be possible...
-the current consensus is that `Regexp` is not Turing Complete.
+The current consensus is that `Regexp` is not Turing Complete.
 So you may consider using the `instance_eval` and monkey patch options.
-You'll be going down the rabbit hole of trying to create a proof assistant for your project...
-burying yourself down all the way to first principles.
+You'll be going down the rabbit hole of
+trying to create a proof assistant for your project...
+Burrowing yourself down all the way to first principles.
 CONSIDER YOURSELF WARNED!
 
 ## Statement types
