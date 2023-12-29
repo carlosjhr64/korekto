@@ -8,10 +8,10 @@ You'll find the patterns validating statements in this proof down this rabbit ho
 ```korekto
 < imports/Calculus.md
 ### Set up ###
-:Real[x]	#S1/L2.Real 1Real
-:Partial[:Dx]	#S2/L1.Calculus 1Partial
-y=x^x	#S3/L11.Logic 1Let
-:QED=:Dx[y]=x^x(:Ln[x]+1)	#S4/L11.Logic 1Let
+:Real[x]	#S1/L2.Real 1Real: x
+:Partial[:Dx]	#S2/L1.Calculus 1Partial: :Dx
+y=x^x	#S3/L11.Logic 1Let: y
+:QED=:Dx[y]=x^x(:Ln[x]+1)	#S4/L11.Logic 1Let: :QED
 ### Derivation ###
 :Ln[y]=:Ln[x^x]	#R5/M2.Algebra,S3 Operate both sides
 :Ln[y]=x:Ln[x]	#R6/M13.Algebra,R5 Take out exponent

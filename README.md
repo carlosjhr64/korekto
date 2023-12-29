@@ -31,8 +31,8 @@ There might be V.	#L1 Let 1: There   might be .
 # /If I see (\w+), then I'll probably see (\w+).\nI see \1\nI'll probably see \2/
 If I see V, then I'll probably see W.;I see V.;I'll probably see W.	#I2 Modus ponens: If I see , then ' ll probably
 ### Argument ###
-There might be Cows.	#S3/L1 Let 1
-There might be Chickens.	#S4/L1 Let 1
+There might be Cows.	#S3/L1 Let 1: Cows
+There might be Chickens.	#S4/L1 Let 1: Chickens
 If I see Cows, then I'll probably see Chickens.	#P5
 I see Cows.	#P6
 I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens

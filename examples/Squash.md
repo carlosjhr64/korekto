@@ -79,14 +79,14 @@ In the set up section, I introduce the problem to be solve.
 From this point on, all statements are validated by the acceptance patterns.
 ```ruby
 ### Setup ###
-Real[x]	#S18/L9 Real
+Real[x]	#S18/L9 Real: x
 QED: Unsquash[Squash[x]] = x	#T19/A4 What's to be proven
 ```
 In the scratch work area, I set equivalences valid for substitutions in the derivation.
 ```ruby
 ### Scratch work ###
 Squash[x] = 1/(1 + Exp[-x])	#T20/A12 Squash
-u = 1 + Exp[-x]	#S21/L1 Assignment
+u = 1 + Exp[-x]	#S21/L1 Assignment: u
 Squash[x] = 1/u	#C22/I3,S21,T20 Substitution
 Unsquash[1/u] = Log[(1/u)/(1 - (1/u))]	#T23/A13 Unsquash
 (1/u)/(1 - (1/u)) = (1/u)(1/(1 - (1/u)))	#T24/A14 a/b = a(1/b)

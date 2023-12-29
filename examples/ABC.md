@@ -26,9 +26,9 @@ abcdefg	#D11
 Now the song in ABC notation:
 ```abc
 X:1 %	#T12/A1
-T:"Speed the Plough" %	#S13/L2
+T:"Speed the Plough" %	#S13/L2 : "Speed the Plough"
 M:4/4 %	#T14/A3
-C:"Trad." %	#S15/L4
+C:"Trad." %	#S15/L4 : "Trad."
 K:G %	#T16/A5
 |:GABc dedB|dedB dedB|c2ec B2dB|c2A2 A2BA| %	#T17/A6
   GABc dedB|dedB dedB|c2ec B2dB|A2F2 G4:| %	#T18/A7

@@ -17,7 +17,7 @@ Feature: Imports unchanged
   Scenario: Natural
     * Given option "< imports/Natural.md | grep '^-:'"
     * When we run command
-    * Then digest is "9b3b357203e368a57b86c51ca7ba5a15"
+    * Then digest is "3b7c71bfc520b47296eee75d7e9bdee4"
 
   Scenario: Integer
     * Given option "< imports/Integer.md | grep '^-:'"

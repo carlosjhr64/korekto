@@ -136,6 +136,7 @@ class Statement
     elsif undefined.empty?
       raise Error, 'nothing was undefined'
     end
+    undefined.empty? ? nil : undefined
   end
 
   # Statement type processing
@@ -162,8 +163,8 @@ class Statement
   # term as immediately validated by a matching Let rule.
   def set
     let = detect_statement('L')
-    expected_instantiations(let.title)
-    set_statement(support(let), let.title)
+    undefined = expected_instantiations(let.title)
+    set_statement(support(let), let.title, undefined: undefined)
   end
 
   # A Result is a derived true statement that follows from a Map rule and
@@ -178,8 +179,9 @@ class Statement
   # new term as a result of an Existential rule and matching true statement.
   def instantiation
     existential,s1 = heap_search('E')
-    expected_instantiations(existential.title)
-    set_statement(support(existential,s1), existential.title)
+    undefined = expected_instantiations(existential.title)
+    set_statement(support(existential,s1), existential.title,
+                  undefined: undefined)
   end
 
   # A Conclusion is a derived true statement, the result of an Inference rule

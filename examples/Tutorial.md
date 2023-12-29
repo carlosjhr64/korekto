@@ -203,7 +203,7 @@ are a consequence of an `E` existential statement, and
 must introduce at least one new symbol.
 ```korekto
 # cherry was added in context of "also good with pudding"
-:cherry :also :good :with :pudding	#X15/E14,R13 Also good with 1
+:cherry :also :good :with :pudding	#X15/E14,R13 Also good with 1: :also
 ```
 If the matching `E` statement for the `X` statement has a number in the title,
 it'll interpret it has the number of instantiations expected.
@@ -222,7 +222,7 @@ The number of symbols that can be introduced is set in the comment title.
 except that they're validated by `L` statements and
 can bring in new symbols.
 ```korekto
-:let :there :be :light	#S17/L16 Let 1
+:let :there :be :light	#S17/L16 Let 1: :light
 ```
 ### W is for Which
 

@@ -6,13 +6,13 @@ You'll find the patterns validating statements in this proof down this rabbit ho
 [Algebra](../imports/Algebra.md).
 ```korekto
 < imports/Algebra.md
-:QED=:Not[:Rat[:Sqrt[2]]]	#S1/L11.Logic 1Let
+:QED=:Not[:Rat[:Sqrt[2]]]	#S1/L11.Logic 1Let: :QED
 # Need to be able to say, "Were jumping off a building here because we can fly!"
 :ASSUMPTION=:Rat[:Sqrt[2]]	#P2
 :Rat[:Sqrt[2]]	#R3/M29.Logic,P2 By assumption
 :Rat[:Sqrt[2]]=:Exist[:Int]{i,j|(:GCF[i,j]=1)&(:Sqrt[2]=i/j)}	#T4/A2.Rational Rational numbers
 :Exist[:Int]{i,j|(:GCF[i,j]=1)&(:Sqrt[2]=i/j)}	#C5/I9.Logic,T4,R3 Equally true
-:Int[a]&:Int[b]&((:GCF[a,b]=1)&(:Sqrt[2]=a/b))	#X6/E27.Logic,C5 2Exist
+:Int[a]&:Int[b]&((:GCF[a,b]=1)&(:Sqrt[2]=a/b))	#X6/E27.Logic,C5 2Exist: a b
 :Int[a]	#R7/M21.Logic,X6 Independantly true
 :Int[b]	#R8/M22.Logic,X6 Independantly true
 :GCF[a,b]=1	#R9/M23.Logic,X6 Independantly true
@@ -27,7 +27,7 @@ a^2=2b^2	#R14/M7.Algebra,R13 Rearrangement
 :Even[a]	#R18/M11.Algebra,C17 Even[Even^Int]
 :Even[a]=:Exist[:Int]{i|a=2i}	#T19/A2.Integer Even has factor two
 :Exist[:Int]{i|a=2i}	#C20/I9.Logic,T19,R18 Equally true
-:Int[c]&(a=2c)	#X21/E26.Logic,C20 1Exist
+:Int[c]&(a=2c)	#X21/E26.Logic,C20 1Exist: c
 :Int[c]	#R22/M18.Logic,X21 Independantly true
 a=2c	#R23/M20.Logic,X21 Independantly true
 (2c)^2=2b^2	#C24/I8.Logic,R23,R14 Substitution

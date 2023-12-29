@@ -39,4 +39,4 @@ A=A #W
     * Then stdout matches /C13.I2,P7,P8.Conjunction/
     * Then stdout matches /T9.A1.Restatement/
     * Then stdout matches /!:restatement: A1/
-    * Then digest is "c9efebb70bfc1b35a09feb5ad6536024"
+    * Then digest is "9066b110bc19a31e489c14240efad500"

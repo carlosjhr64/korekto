@@ -2,35 +2,41 @@
 Feature: Examples unchanged
 
   Background:
-    * Given command "korekto --trace"
+    * Given command "korekto"
 
   Scenario: Tutorial
     * Given option "--patch < examples/Tutorial.md | grep '^-:'"
     * When we run command
-    * Then digest is "9df0ab00e86107928a5e13b3006ec9ac"
+    * Then stderr is ""
+    * Then stdout is ""
 
   Scenario: ABC
     * Given option "< examples/ABC.md | grep '^-:'"
     * When we run command
-    * Then digest is "3881ffb508b141980d3597d14044ec96"
+    * Then stderr is ""
+    * Then stdout is ""
 
   Scenario: Dxx
     * Given option "< examples/Dxx.md | grep '^-:'"
     * When we run command
-    * Then digest is "0400d8d3840067d0b1d1636e976c3da3"
+    * Then stderr is ""
+    * Then stdout is ""
 
   Scenario: Sqrt2
     * Given option "< examples/Sqrt2.md | grep '^-:'"
     * When we run command
-    * Then digest is "10b8525aa3f39fa202af672977e5cf03"
+    * Then stderr is ""
+    * Then stdout is ""
 
   Scenario: Squash
     * Given option "< examples/Squash.md | grep '^-:'"
     * When we run command
-    * Then digest is "9dd6297dddaf4ebb19df70b0c01ac6c2"
+    * Then stderr is ""
+    * Then stdout is ""
 
   Scenario: Computation
     * Given option "--patch < examples/Computation.md | grep '^-:'"
     * When we run command
-    * Then digest is "92488b70676d7ef82d73ff9fb5c3dbcb"
+    * Then stderr is ""
+    * Then stdout is "-:19:!:syntax: (is_equation?)? eval(self): true"
 
