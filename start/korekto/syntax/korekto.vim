@@ -6,9 +6,9 @@ syntax match KorektoTitle /\(#[A-Z]\d\S*\s\)\@<=[^:]\+/ contained containedin=Ko
 syntax match KorektoUndef /\(:\)\@<=.\+$/ contained containedin=KorektoType
 syntax match KorektoType  /#[A-Z]\d[^#]\+$/ contains=KorektoUnsup,KorektoSup,KorektoTitle,KorektoUndef
 " Korekto Statement
-syntax match KorektoLetter      /\a/ contained containedin=KorektoStatement
-syntax match KorektoNumber      /\d/ contained containedin=KorektoStatement
-syntax match KorektoPunctuation /\W/ contained containedin=KorektoStatement
+syntax match KorektoLetter      /[A-Za-z𝐀-𝟿]/ contained containedin=KorektoStatement
+syntax match KorektoNumber      /[0-9]/ contained containedin=KorektoStatement
+syntax match KorektoPunctuation /[^0-9A-Za-z𝐀-𝟿]/ contained containedin=KorektoStatement
 syntax match KorektoStatement   /^.\+\(\s#[A-Z]\d\)\@=/ contains=KorektoLetter,KorektoNumber,KorektoPunctuation
 " Korekto Non-Statement
 syntax match KorektoComment /^#.\+/
@@ -22,9 +22,9 @@ highlight KorektoUndef       ctermfg=red
 highlight KorektoComment     ctermfg=darkblue
 highlight KorektoPatch       ctermfg=grey
 highlight KorektoCommand     ctermfg=lightgrey
-highlight KorektoLetter 	   ctermfg=black
-highlight KorektoNumber 	   ctermfg=darkred
 highlight KorektoPunctuation ctermfg=darkgrey
+highlight KorektoNumber 	   ctermfg=darkred
+highlight KorektoLetter 	   ctermfg=black
 "### Settings ###
 setlocal tabstop=3
 map <leader><F7> :KorektoPatch<CR>
