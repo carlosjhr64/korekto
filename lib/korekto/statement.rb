@@ -7,6 +7,7 @@ class Statement
     @statement,@code,@title,@section,@statement_number,@context,@regexp =
       statement,code,title,section,statement_number,context,nil
     @statement.freeze; @section.freeze; @statement_number.freeze
+    @title = @title.split(':',2).first if @title
     syntax_check unless @statement[0]=='/' &&
                         @statement[-1]=='/' &&
                         %w[A L M E I].include?(@code[0])
@@ -137,7 +138,6 @@ class Statement
   end
 
   def undefined_in_pattern
-    @title = @title.split(':',2).first if @title
     undefined = @context.symbols.undefined(self)
     @title = "#{@title}: #{undefined.join(' ')}" unless undefined.empty?
   end
