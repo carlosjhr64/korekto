@@ -76,11 +76,12 @@ class Statement
 
   # Common helper
 
-  def set_statement(support=nil, title=nil)
+  def set_statement(support=nil, title=nil, undefined:nil)
     @code = "#{@code[0]}#{@statement_number}"
     @code += '.' + @section unless @section=='-'
     @code += "/#{support}" if support
     @title = title if (title=title&.split(':',2)&.first) && !title.empty?
+    @title = "#{@title}: #{undefined.join(' ')}" if undefined
   end
 
   def support(*s) = s.inject([]){|a,s| a.push(s.code.split('/',2)[0])}.join(',')
@@ -142,12 +143,11 @@ class Statement
   def pattern_type(nl)
     set_regexp
     newlines_count(nl)
-    undefined = @context.symbols.undefined(self)
-    @title = "#{@title}: #{undefined.join(' ')}" unless undefined.empty?
+    undefined = (_=@context.symbols.undefined(self)).empty? ? nil : _
     follows = @context.heap.to_a[0..nl].reverse
     support = @regexp.match?(follows.map(&:to_s).join("\n"))?
               support(*follows) : nil
-    set_statement(support)
+    set_statement(support, undefined: undefined)
   end
 
   # A Tautology is an accepted true statement that immediately follows from
