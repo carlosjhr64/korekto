@@ -137,23 +137,17 @@ class Statement
     end
   end
 
-  def undefined_in_pattern
-    undefined = @context.symbols.undefined(self)
-    @title = "#{@title}: #{undefined.join(' ')}" unless undefined.empty?
-  end
-
   # Statement type processing
 
   def pattern_type(nl)
     set_regexp
     newlines_count(nl)
-    undefined_in_pattern
+    undefined = @context.symbols.undefined(self)
+    @title = "#{@title}: #{undefined.join(' ')}" unless undefined.empty?
     follows = @context.heap.to_a[0..nl].reverse
-    if @regexp.match? follows.map(&:to_s).join("\n")
-      set_statement(support(*follows))
-    else
-      set_statement
-    end
+    support = @regexp.match?(follows.map(&:to_s).join("\n"))?
+              support(*follows) : nil
+    set_statement(support)
   end
 
   # A Tautology is an accepted true statement that immediately follows from

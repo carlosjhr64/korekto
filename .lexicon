@@ -192,7 +192,6 @@ type
 type_pattern
 type_variables
 undefined
-undefined_in_pattern
 unshift
 UpdateRemotePlugins
 v
