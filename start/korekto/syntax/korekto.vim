@@ -1,38 +1,31 @@
-"### Korekto syntax ###
-syntax match KorektoUnsup   /#[A-Z]\d\+\(\.\w\+\)\?/ contained containedin=KorektoType
-syntax match KorektoSup     /#[A-Z]\d\+\(\.\w\+\)\?\/\S\+/ contained containedin=KorektoType
-syntax match KorektoTitle   / [^:]\+/ contained containedin=KorektoType
-syntax match KorektoUndef   /:[^#]\+$/ contained containedin=KorektoType
-syntax match KorektoType    /#[A-Z][^#]\+$/ contains=KorektoUnsup,KorektoSup,KorektoTitle,KorektoUndef
-syntax match KorektoComment /#\+ .\+$/
-syntax match KorektoSyntax  /^[?] \S.\+$/
-syntax match KorektoPatch   /^::[A-Z]\w\+#\w\+[^=]\+=.\+$/
-syntax match KorektoImport  /^< [\/A-Za-z\_\-\.]\+$/
-syntax match KorektoSetting /^! \S.*$/
-"### Additional math syntax ###
-syntax match KorektoOperator   /[!?$&@*+-/<=>^~,.:;|(){}\[\]"'`_]/ contained containedin=KorektoStatement
-syntax match KorektoItalic     /[𝐴-𝑧𝛢-𝜛]/ contained containedin=KorektoStatement
-syntax match KorektoBold       /[𝐀-𝐳𝚨-𝛡]/ contained containedin=KorektoStatement
-syntax match KorektoBoldItalic /[𝑨-𝒛𝜜-𝝕]/ contained containedin=KorektoStatement
-syntax match KorektoMinuscule  /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/ contained containedin=KorektoStatement
-syntax match KorektoStatement  /^(?![#!?<:][: ])[^#]*/ contains=KorektoOperator,KorektoItalic,KorektoBold,KorektoBoldItalic,KorektoMinuscule
-"### Korekto highlighting ###
-highlight KorektoUnsup   ctermfg=brown
-highlight KorektoSup     ctermfg=darkgreen
-highlight KorektoTitle   ctermfg=darkblue
-highlight KorektoUndef   ctermfg=darkred
-highlight KorektoComment ctermfg=darkblue
-highlight KorektoImport  ctermfg=brown
-highlight KorektoPatch   ctermfg=darkgrey
-highlight KorektoSyntax  ctermfg=darkgrey
-highlight KorektoSetting ctermfg=darkmagenta
-"### Additional math highlighting ###
-highlight KorektoOperator   ctermfg=grey
-highlight KorektoItalic     ctermfg=darkgreen
-highlight KorektoBold       ctermfg=darkred
-highlight KorektoBoldItalic ctermfg=darkcyan
-highlight KorektoMinuscule  ctermfg=darkgrey
-"### Additional settings ###
+"### Korekto Syntax ###
+" Korekto Type
+syntax match KorektoUnsup /#[A-Z]\d\+\(\.\w\+\)\?\(\/\)\@!/ contained containedin=KorektoType
+syntax match KorektoSup   /#[A-Z]\d\+\(\.\w\+\)\?\/\S\+/ contained containedin=KorektoType
+syntax match KorektoTitle /\(#[A-Z]\d\S*\s\)\@<=[^:]\+/ contained containedin=KorektoType
+syntax match KorektoUndef /\(:\)\@<=.\+$/ contained containedin=KorektoType
+syntax match KorektoType  /#[A-Z]\d[^#]\+$/ contains=KorektoUnsup,KorektoSup,KorektoTitle,KorektoUndef
+" Korekto Statement
+syntax match KorektoLetter      /\a/ contained containedin=KorektoStatement
+syntax match KorektoNumber      /\d/ contained containedin=KorektoStatement
+syntax match KorektoPunctuation /\W/ contained containedin=KorektoStatement
+syntax match KorektoStatement   /^.\+\(\s#[A-Z]\d\)\@=/ contains=KorektoLetter,KorektoNumber,KorektoPunctuation
+" Korekto Non-Statement
+syntax match KorektoComment /^#.\+/
+syntax match KorektoPatch   /^::.\+/
+syntax match KorektoCommand /^[<!?]\s.\+/
+"### Korekto Highlighting ###
+highlight KorektoUnsup       ctermfg=brown
+highlight KorektoSup         ctermfg=darkgreen
+highlight KorektoTitle       ctermfg=blue
+highlight KorektoUndef       ctermfg=red
+highlight KorektoComment     ctermfg=darkblue
+highlight KorektoPatch       ctermfg=grey
+highlight KorektoCommand     ctermfg=lightgrey
+highlight KorektoLetter 	   ctermfg=black
+highlight KorektoNumber 	   ctermfg=darkred
+highlight KorektoPunctuation ctermfg=darkgrey
+"### Settings ###
 setlocal tabstop=3
 map <leader><F7> :KorektoPatch<CR>
 map <F7> :Korekto<CR>

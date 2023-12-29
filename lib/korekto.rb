@@ -1,7 +1,7 @@
 module Korekto
   class Error < RuntimeError; end
 
-  VERSION = '2.0.231228'
+  VERSION = '2.0.231229'
 
   def self.trace=(value)
     @@trace = value
