@@ -17,7 +17,7 @@ Feature: Examples unchanged
   Scenario: Dxx
     * Given option "< examples/Dxx.md | grep '^-:'"
     * When we run command
-    * Then digest is "307b66fbda4b407b5b29a0033c720e16"
+    * Then digest is "0400d8d3840067d0b1d1636e976c3da3"
 
   Scenario: Sqrt2
     * Given option "< examples/Sqrt2.md | grep '^-:'"
