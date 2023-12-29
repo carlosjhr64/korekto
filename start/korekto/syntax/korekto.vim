@@ -15,7 +15,7 @@ syntax match KorektoItalic     /[𝐴-𝑧𝛢-𝜛]/ contained containedin=Kore
 syntax match KorektoBold       /[𝐀-𝐳𝚨-𝛡]/ contained containedin=KorektoStatement
 syntax match KorektoBoldItalic /[𝑨-𝒛𝜜-𝝕]/ contained containedin=KorektoStatement
 syntax match KorektoMinuscule  /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/ contained containedin=KorektoStatement
-syntax match KorektoStatement  /^[^#!?<][^#]*/ contains=KorektoOperator,KorektoItalic,KorektoBold,KorektoBoldItalic,KorektoMinuscule
+syntax match KorektoStatement  /^(?![#!?<:][: ])[^#]*/ contains=KorektoOperator,KorektoItalic,KorektoBold,KorektoBoldItalic,KorektoMinuscule
 "### Korekto highlighting ###
 highlight KorektoUnsup   ctermfg=brown
 highlight KorektoSup     ctermfg=darkgreen
