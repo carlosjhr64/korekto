@@ -1,10 +1,34 @@
-# [Neuronet wiki](https://github.com/carlosjhr64/neuronet/wiki)
+# Neuronet wiki
+
+The following is a `Korekto` review of
+[Neuronet wiki](https://github.com/carlosjhr64/neuronet/wiki).
 
 Here's a quick review of the math.
 Please allow the terse notation as the algebra gets gnarly.
 
 ## Syntax
-
+```korekto
+< imports/Kernel.md
+? balanced? '(){}[]'
+? length < 66
+! scanner: '.'
+! .Newline /\n/
+! .Newline {;}
+! Glob /\S*/
+! Glob {a b c d}
+! Token /[^\w\s]/
+! Token {A B C D}
+! Scalar /[𝑎-𝑧]/
+! Scalar {v x y z}
+! Vector /[𝒂-𝒛]/
+! Vector {e f g h}
+! Tensor /[𝑨-𝒁]/
+! Tensor {V X Y Z}
+! Superscript /[⁰-ⁿ]/
+! Superscript {i j}
+! Subscript /[₀-ₜ]/
+! Subscript {k l}
+```
 Operator precedence is as in
 [ruby](https://ruby-doc.org/core-2.6.2/doc/syntax/precedence_rdoc.html):
 
@@ -12,12 +36,20 @@ Operator precedence is as in
 * *, /
 * +, -
 * =
-
+```korekto
+Operators{* / + - =}	#D1 Defined operators
+Real{𝑎 𝑏 𝑐 𝑑} #D2 Real variables
+Vectors{𝒂}	#D3
+Tensors{𝑾}	#D4
+```
 But I add spacing to create groups:
 
 * 𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑
 * 𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏) / (𝑐+𝑑)
-
+```korekto
+a A b = (a)A(b)	#A5 Space groups: ( )
+𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏)/(𝑐+𝑑)	#T6/A5 Space groups
+```
 The above spacing rule reduces the amount of symbols needed to show structure
 and makes the algebra less cluttered.
 
@@ -26,14 +58,26 @@ The product, `*`, may be implied:
 * 𝑎*𝑏 = 𝑎 𝑏 = 𝑎𝑏
 * (𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑
 * 𝑥² = 𝑥𝑥 = 𝑥*𝑥
-
+```korekto
+(x*y) = (xy)	#A7 Implied product
+(𝑎*𝑏) = (𝑎𝑏)	#T8/A7 Implied product
+```
 Definitions are set by `:=` and consequent equivalences by `=`.
-
+```korekto
+a := b;a = b	#M9 Defined equivalent: :
+1+1 := 2	#D10
+1+1 = 2	#R11/M9,D10 Defined equivalent
+```
 I may use Einstein notation.
 And once indices are shown, they may be dropped:
 
 * ∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ = 𝑾𝒂
-
+```korekto
+∑ₙ(Vₙ*eₙ) = Vⁿeₙ	#A12 Einstein notation: ∑ ₙ ⁿ
+∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ	#T13/A12 Einstein notation
+Vⁿeₙ = Ve	#A14 Context equivalence
+𝑾ⁿ𝒂ₙ = 𝑾𝒂	#T15/A14 Context equivalence
+```
 Be aware of these rules.
 
 ## Style
@@ -49,7 +93,16 @@ and
 * Bold script capital(𝓐..𝓩): operators, like 𝓓𝑥.
 * Double struck small(𝕒..𝕫): finite ordered sets.
 * Bold Fraktur small(𝖆..𝖟): derived constant parameters.
-
+```korekto
+# Note that Scalar, Vector, and Tensor(Matrix) have already been defined
+! UnaryOperator /[𝓐-𝓩]/
+! UnaryOperator {E F G H}
+! FiniteOrderedSet /[𝕒-𝕫]/
+! FiniteOrderedSet {r s t u}
+! Constant /[𝖆-𝖟]/
+! Constant {R S T U}
+Korekto stop
+```
 ## Next level unary postfix operator
 
 Consider a value in a collection of `𝒂` in level h dependent on values in
