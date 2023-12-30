@@ -108,7 +108,7 @@ It must introduce at least one new symbol.
 ```korekto
 {= &}	#D1 5 Symbols including space
 {0 1 2 3 4 5 6 7 8 9}	#D2 10 Numbers
-{:pudding :meat :good :if :then :with :cherry :let :there :be}	#D3 10 Words
+{:pudding :meat :also :good :if :then :with :let :there :be}	#D3 10 Words
 ```
 You can specify the number of symbols to be defined in the comment title,
 but it's not required.
@@ -203,7 +203,7 @@ are a consequence of an `E` existential statement, and
 must introduce at least one new symbol.
 ```korekto
 # cherry was added in context of "also good with pudding"
-:cherry :also :good :with :pudding	#X15/E14,R13 Also good with 1: :also
+:cherry :also :good :with :pudding	#X15/E14,R13 Also good with 1: :cherry
 ```
 If the matching `E` statement for the `X` statement has a number in the title,
 it'll interpret it has the number of instantiations expected.
