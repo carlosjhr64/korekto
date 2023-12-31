@@ -14,6 +14,8 @@ Please allow the terse notation as the algebra gets gnarly.
 ! scanner: '.'
 ! .Newline /\n/
 ! .Newline {;}
+! Span /[^=]+/
+! Span {P Q}
 ! Glob /\S*/
 ! Glob {a b c d}
 ! Token /[^\w\s]/
@@ -64,7 +66,7 @@ The product, `*`, may be implied:
 ```
 Definitions are set by `:=` and consequent equivalences by `=`.
 ```korekto
-a := b;a = b	#M9 Defined equivalent: :
+P:=Q;P=Q	#M9 Defined equivalent: :
 1+1 := 2	#D10
 1+1 = 2	#R11/M9,D10 Defined equivalent
 ```
@@ -101,7 +103,6 @@ and
 ! FiniteOrderedSet {r s t u}
 ! Constant /[𝖆-𝖟]/
 ! Constant {R S T U}
-Korekto stop
 ```
 ## Next level unary postfix operator
 
@@ -109,6 +110,9 @@ Consider a value in a collection of `𝒂` in level h dependent on values in
 collection of `𝒂` in level i:
 
 * `𝒂ₕ := ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))`
+```korekto
+𝒂ₕ := ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))	#D16
+```
 
 The index `ₕ` enumerates values of `𝒂` in level h, whereas `ᵢ` enumerates
 values of `𝒂` in level i.  The levels are labeled alphabetically:
@@ -121,6 +125,14 @@ Given the above, please allow:
 * `𝒂 = ⌈(𝒃 + 𝑾 𝒂')`
 * `𝒂 = ⌈ 𝒃+𝑾(𝒂')`
 * `𝒂 = ⌈ 𝒃+𝑾𝒂'`
+```korekto
+ᵢ := ₕ'	#D17
+ⱼ := ᵢ'	#D18
+ₖ := ⱼ'	#D19
+ₗ := ₖ'	#D20
+𝒂ₕ = ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))	#R21/M9,D16 Defined equivalent
+TODO: It's gnarly. Come back to it later.
+```
 
 ## Binary competition
 
