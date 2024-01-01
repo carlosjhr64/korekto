@@ -32,10 +32,10 @@ Please allow the terse notation as the algebra gets gnarly.
 ! Vector {W X Y Z}
 ! Tensor /[𝑨-𝒁]/
 ! Tensor {A B C D}
-! Superscript /[⁰-ⁿ]/
-! Superscript {l m n}
-! Subscript /[₀-ₜ]/
-! Subscript {i j k}
+! Superscript /[ʰⁱʲᵏⁿ]/
+! Superscript {ⁱ ʲ ᵏ}
+! Subscript /[ₕᵢⱼₖₙ]/
+! Subscript {ᵢ ⱼ ₖ}
 ```
 Operator precedence is as in
 [ruby](https://ruby-doc.org/core-2.6.2/doc/syntax/precedence_rdoc.html):
@@ -102,24 +102,34 @@ The product, `*`, may be implied:
 ```korekto
 (Group1)*(Group2) = (Group1)(Group2)	#A27 Implied group *
 (𝑎+𝑏)*(𝑐+𝑑) = (𝑎+𝑏)(𝑐+𝑑)	#T28/A27 Implied group *
-𝟙*𝟚 = 𝟙𝟚	#A29 Implied *
-𝑎*𝑏 = 𝑎𝑏	#T30/A29 Implied *
+𝟙 𝟚 = 𝟙𝟚	#A29 Implied *
+𝟙*𝟚 = 𝟙𝟚	#A30 Implied *
+𝑎*𝑏 = 𝑎𝑏	#T31/A30 Implied *
 ```
 Definitions are set by `:` and consequent equivalences by `=`.
 ```korekto
-1+1 : 2	#S31/L1 Equivalent: 1 2
-1+1 = 2	#R32/M3,S31 If equivalent, then equal
-stop
+1+1 : 2	#S32/L1 Equivalent: 1 2
+1+1 = 2	#R33/M3,S32 If equivalent, then equal
 ```
 I may use Einstein notation.
 And once indices are shown, they may be dropped:
 
 * ∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ = 𝑾𝒂
 ```korekto
-∑ₙ(Vₙ*eₙ) = Vⁿeₙ	#A12 Einstein notation: ∑ ₙ ⁿ
-∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ	#T13/A12 Einstein notation
-Vⁿeₙ = Ve	#A14 Context equivalence
-𝑾ⁿ𝒂ₙ = 𝑾𝒂	#T15/A14 Context equivalence
+Subscripts{ₕ ᵢ ⱼ ₖ ₙ}	#S34/L7 Named set: Subscripts ₕ ᵢ ⱼ ₖ ₙ
+Superscripts{ʰ ⁱ ʲ ᵏ ⁿ}	#S35/L7 Named set: Superscripts ʰ ⁱ ʲ ᵏ ⁿ
+Tensor[A]	#L36 Tensor variable: Tensor
+Tensor[𝑾]	#S37/L36 Tensor variable: 𝑾
+∑ₙ(Aₙ*Xₙ) : AⁿXₙ	#A38 Einstein notation: ∑
+∑ₙ(𝑾ₙ*𝒂ₙ) : 𝑾ⁿ𝒂ₙ	#T39/A38 Einstein notation
+∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ	#R40/M3,T39 If equivalent, then equal
+AⁿXₙ : A X	#A41 Context equivalence
+𝑾ⁿ𝒂ₙ : 𝑾 𝒂	#T42/A41 Context equivalence
+𝑾ⁿ𝒂ₙ = 𝑾 𝒂	#R43/M3,T42 If equivalent, then equal
+𝑾 𝒂 = 𝑾𝒂	#T44/A29 Implied *
+Span1 = Span2;Span2 = Span3;Span1 = Span3	#I45 Transitive
+𝑾ⁿ𝒂ₙ = 𝑾𝒂	#C46/I45,R43,T44 Transitive
+stop
 ```
 Be aware of these rules.
 
