@@ -11,25 +11,31 @@ Please allow the terse notation as the algebra gets gnarly.
 < imports/Kernel.md
 ? balanced? '(){}[]'
 ? length < 66
-! scanner: '.'
+! scanner: '\w+|.'
+! Token /\w+|./
+! Token {𝟙 𝟚 𝟛 𝟜}
 ! .Newline /\n/
 ! .Newline {;}
-! Span /[^=]+/
-! Span {P Q}
+! Span /[^=;]+/
+! Span {Span1 Span2 Span3 Span4}
 ! Glob /\S*/
-! Glob {a b c d}
-! Token /[^\w\s]/
-! Token {A B C D}
+! Glob {Glob1 Glob2 Glob3 Glob4}
+! Group /[^()]+/
+! Group {Group1 Group2 Group3 Group4}
+! Set /[^{}]*/
+! Set {Set1 Set2 Set3 Set4}
+! Word /\w+/
+! Word {Word1 Word2 Word3 Word4}
 ! Scalar /[𝑎-𝑧]/
-! Scalar {v x y z}
+! Scalar {a b c d}
 ! Vector /[𝒂-𝒛]/
-! Vector {e f g h}
+! Vector {W X Y Z}
 ! Tensor /[𝑨-𝒁]/
-! Tensor {V X Y Z}
+! Tensor {A B C D}
 ! Superscript /[⁰-ⁿ]/
-! Superscript {i j}
+! Superscript {l m n}
 ! Subscript /[₀-ₜ]/
-! Subscript {k l}
+! Subscript {i j k}
 ```
 Operator precedence is as in
 [ruby](https://ruby-doc.org/core-2.6.2/doc/syntax/precedence_rdoc.html):
@@ -39,18 +45,51 @@ Operator precedence is as in
 * +, -
 * =
 ```korekto
-Operators{* / + - =}	#D1 Defined operators
-Real{𝑎 𝑏 𝑐 𝑑} #D2 Real variables
-Vectors{𝒂}	#D3
-Tensors{𝑾}	#D4
+# Allow equivalent definitions:
+#     Introduce EmptySet
+Span1 : Span2	#L1 Equivalent:   :
+EmptySet : {}	#S2/L1 Equivalent: EmptySet { }
+# Equivalences are equal and reflective:
+Span1 : Span2;Span1 = Span2	#M3 If equivalent, then equal: =
+Span1 = Span2;Span2 = Span1	#M4 Reflection
+EmptySet = {}	#R5/M3,S2 If equivalent, then equal
+{} = EmptySet	#R6/M4,R5 Reflection
+# Allow introduction of sets:
+#     Introduce Operators
+Word1{Set1}	#L7 Named set
+Operator{* / + - =}	#S8/L7 Named set: Operator * / + -
+# Introduce membership:
+#     `*` is an Operator
+Word1{Set1𝟙Set2};Word1[𝟙]	#M9 Membership: [ ]
+Word1[𝟙];𝟙 ∍ Word1	#M10 Element of: ∍
+Operator[*]	#R11/M9,S8 Membership
+# Introduce type Scalar:
+#     Introduce scalars 𝑎..𝑑
+Scalar[a]	#L12 Scalar variable: Scalar
+Scalar[𝑎]	#S13/L12 Scalar variable: 𝑎
+Scalar[𝑏]	#S14/L12 Scalar variable: 𝑏
+Scalar[𝑐]	#S15/L12 Scalar variable: 𝑐
+Scalar[𝑑]	#S16/L12 Scalar variable: 𝑑
+𝑑 ∍ Scalar	#R17/M10,S16 Element of
+# Introduce type Vector:
+#     Introduce vectors 𝒂..𝐝
+Vector[X]	#L18 Vector variable: Vector
+Vector[𝒂]	#S19/L18 Vector variable: 𝒂
+Vector[𝒃]	#S20/L18 Vector variable: 𝒃
+Vector[𝒄]	#S21/L18 Vector variable: 𝒄
+Vector[𝒅]	#S22/L18 Vector variable: 𝒅
 ```
 But I add spacing to create groups:
 
 * 𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑
 * 𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏) / (𝑐+𝑑)
 ```korekto
-a A b = (a)A(b)	#A5 Space groups: ( )
-𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏)/(𝑐+𝑑)	#T6/A5 Space groups
+# Space creates groups
+Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A23 Space groups with operator: ( )
+Group1 Group2 = (Group1)(Group2)	#A24 Space groups
+𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏)/(𝑐+𝑑)	#T25/A23 Space groups with operator
+# The following line is a novelty:
+𝑎+𝑏 𝑐+𝑑 = (𝑎+𝑏)(𝑐+𝑑)	#T26/A24 Space groups
 ```
 The above spacing rule reduces the amount of symbols needed to show structure
 and makes the algebra less cluttered.
@@ -61,14 +100,16 @@ The product, `*`, may be implied:
 * (𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑
 * 𝑥² = 𝑥𝑥 = 𝑥*𝑥
 ```korekto
-(x*y) = (xy)	#A7 Implied product
-(𝑎*𝑏) = (𝑎𝑏)	#T8/A7 Implied product
+(Group1)*(Group2) = (Group1)(Group2)	#A27 Implied group *
+(𝑎+𝑏)*(𝑐+𝑑) = (𝑎+𝑏)(𝑐+𝑑)	#T28/A27 Implied group *
+𝟙*𝟚 = 𝟙𝟚	#A29 Implied *
+𝑎*𝑏 = 𝑎𝑏	#T30/A29 Implied *
 ```
-Definitions are set by `:=` and consequent equivalences by `=`.
+Definitions are set by `:` and consequent equivalences by `=`.
 ```korekto
-P:=Q;P=Q	#M9 Defined equivalent: :
-1+1 := 2	#D10
-1+1 = 2	#R11/M9,D10 Defined equivalent
+1+1 : 2	#S31/L1 Equivalent: 1 2
+1+1 = 2	#R32/M3,S31 If equivalent, then equal
+stop
 ```
 I may use Einstein notation.
 And once indices are shown, they may be dropped:
