@@ -58,7 +58,7 @@ and
 ? length < 66
 ! scanner: '\w+|.'
 ! Token /\w+|./
-! Token {𝟙 𝟚 𝟛 𝟜 𝟝 𝟞}
+! Token {𝟙 𝟚 𝟛 𝟜 𝟝 𝟞 𝟟 𝟠}
 ! .Newline /\n/
 ! .Newline {;}
 ! Span /[^=;]*/
@@ -111,28 +111,72 @@ Span1 Group1 Span2 = Span1 (Group1) Span2	#A12 Space groups
 𝟙 𝟚 = 𝟙𝟚	#A19 Implied multiplcation
 (Group1)*(Group2) = Group1 Group2	#A20 Implied multiplication
 (Group1)*(Group2) = (Group1)(Group2)	#A21 Implied multiplication
+# Next member operator
+Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M22 Next: ₊
+Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M23 Previous: ₋
+Word1{𝟙Set1};Word1.first : 𝟙	#M24 : . first
+Word1{Set1𝟙};Word1.last : 𝟙	#M25 : last
+Word1{𝟙 𝟚 𝟛 𝟜Set1};Word2{𝟝 𝟞 𝟟 𝟠Set2};𝟙⁺ : 𝟝	#I26 Raise: ⁺
+Word1{𝟙 𝟚 𝟛 𝟜Set1};Word2{𝟝 𝟞 𝟟 𝟠Set2};𝟚⁺ : 𝟞	#I27 Raise
+Word1{𝟙 𝟚 𝟛 𝟜Set1};Word2{𝟝 𝟞 𝟟 𝟠Set2};𝟛⁺ : 𝟟	#I28 Raise
+Word1{𝟙 𝟚 𝟛 𝟜Set1};Word2{𝟝 𝟞 𝟟 𝟠Set2};𝟜⁺ : 𝟠	#I29 Raise
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S22/L1 Equivalent: 2
-2+1 : 3	#S23/L1 Equivalent: 3
-3+1 : 4	#S24/L1 Equivalent: 4
-4+1 : 5	#S25/L1 Equivalent: 5
-5+1 : 6	#S26/L1 Equivalent: 6
-6+1 : 7	#S27/L1 Equivalent: 7
-7+1 : 8	#S28/L1 Equivalent: 8
-8+1 : 9	#S29/L1 Equivalent: 9
+1+1 : 2	#S30/L1 Equivalent: 2
+2+1 : 3	#S31/L1 Equivalent: 3
+3+1 : 4	#S32/L1 Equivalent: 4
+4+1 : 5	#S33/L1 Equivalent: 5
+5+1 : 6	#S34/L1 Equivalent: 6
+6+1 : 7	#S35/L1 Equivalent: 7
+7+1 : 8	#S36/L1 Equivalent: 8
+8+1 : 9	#S37/L1 Equivalent: 9
 # Types
-Scalar[𝑎]	#S30/L7 Scalar variable: 𝑎
-Scalar[𝑏]	#S31/L7 Scalar variable: 𝑏
-Scalar[𝑐]	#S32/L7 Scalar variable: 𝑐
-Scalar[𝑑]	#S33/L7 Scalar variable: 𝑑
-Vector[𝒂]	#S34/L8 Vector variable: 𝒂
-Vector[𝒃]	#S35/L8 Vector variable: 𝒃
-Vector[𝒄]	#S36/L8 Vector variable: 𝒄
-Vector[𝒅]	#S37/L8 Vector variable: 𝒅
-Tensor[𝑾]	#S38/L9 Tensor variable: 𝑾
+Scalar[𝑎]	#S38/L7 Scalar variable: 𝑎
+Scalar[𝑏]	#S39/L7 Scalar variable: 𝑏
+Scalar[𝑐]	#S40/L7 Scalar variable: 𝑐
+Scalar[𝑑]	#S41/L7 Scalar variable: 𝑑
+Vector[𝒂]	#S42/L8 Vector variable: 𝒂
+Vector[𝒃]	#S43/L8 Vector variable: 𝒃
+Vector[𝒄]	#S44/L8 Vector variable: 𝒄
+Vector[𝒅]	#S45/L8 Vector variable: 𝒅
+Tensor[𝑾]	#S46/L9 Tensor variable: 𝑾
+# Indeces
+## Superscript
+Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ}	#S47/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ
+## Subscript
+### Next
+Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ}	#S48/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ
+ₕ₊ : ᵢ	#R49/M22,S48 Next
+ᵢ₊ : ⱼ	#R50/M22,S48 Next
+ⱼ₊ : ₖ	#R51/M22,S48 Next
+### Raise
+ₕ⁺ : ʰ	#C52/I26,S48,S47 Raise
+ᵢ⁺ : ⁱ	#C53/I27,S48,S47 Raise
+ⱼ⁺ : ʲ	#C54/I28,S48,S47 Raise
+ₖ⁺ : ᵏ	#C55/I29,S48,S47 Raise
+stop
+# Test
+ₕ₊ : ᵢ	#R45/M22,S44 Next operator
+ₙ₋ : ₘ	#R46/M23,S44 Previous operator
+Sub.first : ₕ	#R47/M24,S44
+Sup.last : ⁿ	#R48/M25,S43
+stop
+## Next level
+ₕ₊ : ᵢ	#S40/L1 Equivalent: ₕ ᵢ
+ᵢ₊ : ⱼ	#S41/L1 Equivalent: ⱼ
+ⱼ₊ : ₖ	#S42/L1 Equivalent: ₖ
+## Previous level
+ᵢ₋ : ₕ	#S43/L1 Equivalent: ₋
+ⱼ₋ : ᵢ	#S40/L1 Equivalent: ⱼ
+ₖ₋	: ⱼ #S41/L1 Equivalent: ₖ
+## Raising/Lowering indeces
+ₕ⁺ : ʰ	#S42/L1 Equivalent: ⁺ ʰ
+ᵢ⁺ : ⁱ	#S43/L1 Equivalent: ⁱ
+ⱼ⁺ : ʲ	#S44/L1 Equivalent: ʲ
+ₖ⁺ : ᵏ	#S45/L1 Equivalent: ᵏ
+stop⁺
 ```
 ## Tests
 ```korekto
