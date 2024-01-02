@@ -3,8 +3,53 @@
 The following is a `Korekto` review of
 [Neuronet wiki](https://github.com/carlosjhr64/neuronet/wiki).
 
-Here's a quick review of the math.
+## Review of the math
+
 Please allow the terse notation as the algebra gets gnarly.
+Operator precedence is as in
+[ruby](https://ruby-doc.org/core-2.6.2/doc/syntax/precedence_rdoc.html):
+
+* Unary right binding operators
+* *, /
+* +, -
+* =
+
+But I add spacing to create groups:
+
+* 𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑
+* 𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏) / (𝑐+𝑑)
+
+The above spacing rule reduces the amount of symbols needed to show structure
+and makes the algebra less cluttered.
+
+The product, `*`, may be implied:
+
+* 𝑎*𝑏 = 𝑎 𝑏 = 𝑎𝑏
+* (𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑
+* 𝑥² = 𝑥𝑥 = 𝑥*𝑥
+
+Definitions are set by `:` and consequent equivalences by `=`.
+
+I may use Einstein notation.
+And once indices are shown, they may be dropped:
+
+* ∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ = 𝑾𝒂
+
+Be aware of the above rules.
+
+## Style
+
+Referencing Wikipedia's
+[Mathematical operators and symbols in Unicode](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode)
+and
+[Unicode subscripts and superscripts:](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts)
+
+* Italic small(𝑎..𝑧): scalar variables
+* Bold italic small(𝒂..𝒛): single-indexed variables, vectors.
+* Bold italic capital(𝑨..𝒁): multi-indexed variables, matrices.
+* Bold script capital(𝓐..𝓩): operators, like 𝓓𝑥.
+* Double struck small(𝕒..𝕫): finite ordered sets.
+* Bold Fraktur small(𝖆..𝖟): derived constant parameters.
 
 ## Syntax
 ```korekto
@@ -27,95 +72,71 @@ Please allow the terse notation as the algebra gets gnarly.
 ! Word /\w+/
 ! Word {Word1 Word2 Word3 Word4}
 ! Scalar /[𝑎-𝑧]/
-! Scalar {a b c d}
+! Scalar {𝑎 𝑏 𝑐 𝑑}
 ! Vector /[𝒂-𝒛]/
-! Vector {W X Y Z}
+! Vector {𝒂 𝒃 𝒄 𝒅}
 ! Tensor /[𝑨-𝒁]/
-! Tensor {A B C D}
-! Superscript /[ʰⁱʲᵏⁿ]/
-! Superscript {ⁱ ʲ ᵏ}
-! Subscript /[ₕᵢⱼₖₙ]/
-! Subscript {ᵢ ⱼ ₖ}
+! Tensor {𝑨 𝑩 𝑪 𝑫}
+! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
+! Superscript {ᵃ ᵇ ᶜ ᵈ ᵉ ᶠ ᵍ ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ ʳ ˢ ᵗ ᵘ ᵛ ʷ ˣ ʸ ᶻ}
+! Subscript /[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/
+! Subscript {ₐ ₑ ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ ᵣ ₛ ₜ ᵤ ᵥ ₓ}
 ```
-Operator precedence is as in
-[ruby](https://ruby-doc.org/core-2.6.2/doc/syntax/precedence_rdoc.html):
-
-* Unary right binding operators
-* *, /
-* +, -
-* =
+## Rules
 ```korekto
-# Allow equivalent definitions:
-#     Introduce EmptySet
+# Equivalence
 Span1 : Span2	#L1 Equivalent:   :
-EmptySet : {}	#S2/L1 Equivalent: EmptySet { }
-# Equivalences are equal and reflective:
-Span1 : Span2;Span1 = Span2	#M3 If equivalent, then equal: =
-Span1 = Span2;Span2 = Span1	#M4 Reflection
-EmptySet = {}	#R5/M3,S2 If equivalent, then equal
-{} = EmptySet	#R6/M4,R5 Reflection
-# Allow introduction of sets:
-#     Introduce Operators
-Word1{Set1}	#L7 Named set
-Operator{* / + - =}	#S8/L7 Named set: Operator * / + -
-# Introduce membership:
-#     `*` is an Operator
-Word1{Set1𝟙Set2};Word1[𝟙]	#M9 Membership: [ ]
-Word1[𝟙];𝟙 ∍ Word1	#M10 Element of: ∍
-Operator[*]	#R11/M9,S8 Membership
-# Introduce type Scalar:
-#     Introduce scalars 𝑎..𝑑
-Scalar[a]	#L12 Scalar variable: Scalar
-Scalar[𝑎]	#S13/L12 Scalar variable: 𝑎
-Scalar[𝑏]	#S14/L12 Scalar variable: 𝑏
-Scalar[𝑐]	#S15/L12 Scalar variable: 𝑐
-Scalar[𝑑]	#S16/L12 Scalar variable: 𝑑
-𝑑 ∍ Scalar	#R17/M10,S16 Element of
-# Introduce type Vector:
-#     Introduce vectors 𝒂..𝐝
-Vector[X]	#L18 Vector variable: Vector
-Vector[𝒂]	#S19/L18 Vector variable: 𝒂
-Vector[𝒃]	#S20/L18 Vector variable: 𝒃
-Vector[𝒄]	#S21/L18 Vector variable: 𝒄
-Vector[𝒅]	#S22/L18 Vector variable: 𝒅
+Span1 : Span2;Span1 = Span2	#M2 If equivalent, then equal: =
+Span1 = Span2;Span2 = Span1	#M3 Reflection
+# Sets
+Word1{Set1}	#L4 Named set: { }
+Word1{Set1𝟙Set2};Word1[𝟙]	#M5 Membership: [ ]
+Word1[𝟙];𝟙 ∍ Word1	#M6 Element of: ∍
+# Types
+Scalar[𝑎]	#L7 Scalar variable: Scalar
+Vector[𝒂]	#L8 Vector variable: Vector
+Tensor[𝑨]	#L9 Tensor variable: Tensor
+# Groups
+Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A10 Space groups with operator: ( )
+Group1 Group2 = (Group1)(Group2)	#A11 Space groups
+Span1 Group1 Span2 = Span1 (Group1) Span2	#A12 Space groups
+# Implied multiplication
+𝟙*𝟚 = 𝟙𝟚	#A13 Implied multiplication: *
+𝟙 𝟚 = 𝟙𝟚	#A14 Implied multiplcation
+(Group1)*(Group2) = Group1 Group2	#A15 Implied multiplication
+(Group1)*(Group2) = (Group1)(Group2)	#A16 Implied multiplication
+# Definitions
+𝑎² : 𝑎*𝑎	#A17 Square: ²
 ```
-But I add spacing to create groups:
-
-* 𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑
-* 𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏) / (𝑐+𝑑)
+## Introductions
 ```korekto
-# Space creates groups
-Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A23 Space groups with operator: ( )
-Group1 Group2 = (Group1)(Group2)	#A24 Space groups
-𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏)/(𝑐+𝑑)	#T25/A23 Space groups with operator
-# The following line is a novelty:
-𝑎+𝑏 𝑐+𝑑 = (𝑎+𝑏)(𝑐+𝑑)	#T26/A24 Space groups
+Operator{* / + - =}	#S18/L4 Named set: Operator / + -
+Scalar[𝑎]	#S19/L7 Scalar variable: 𝑎
+Scalar[𝑏]	#S20/L7 Scalar variable: 𝑏
+Scalar[𝑐]	#S21/L7 Scalar variable: 𝑐
+Scalar[𝑑]	#S22/L7 Scalar variable: 𝑑
+Vector[𝒂]	#S23/L8 Vector variable: 𝒂
+Vector[𝒃]	#S24/L8 Vector variable: 𝒃
+Vector[𝒄]	#S25/L8 Vector variable: 𝒄
+Vector[𝒅]	#S26/L8 Vector variable: 𝒅
+Tensor[𝑾]	#S27/L9 Tensor variable: 𝑾
 ```
-The above spacing rule reduces the amount of symbols needed to show structure
-and makes the algebra less cluttered.
-
-The product, `*`, may be implied:
-
-* 𝑎*𝑏 = 𝑎 𝑏 = 𝑎𝑏
-* (𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑
-* 𝑥² = 𝑥𝑥 = 𝑥*𝑥
+## Tests
 ```korekto
-(Group1)*(Group2) = (Group1)(Group2)	#A27 Implied group *
-(𝑎+𝑏)*(𝑐+𝑑) = (𝑎+𝑏)(𝑐+𝑑)	#T28/A27 Implied group *
-𝟙 𝟚 = 𝟙𝟚	#A29 Implied *
-𝟙*𝟚 = 𝟙𝟚	#A30 Implied *
-𝑎*𝑏 = 𝑎𝑏	#T31/A30 Implied *
-```
-Definitions are set by `:` and consequent equivalences by `=`.
-```korekto
-1+1 : 2	#S32/L1 Equivalent: 1 2
-1+1 = 2	#R33/M3,S32 If equivalent, then equal
-```
-I may use Einstein notation.
-And once indices are shown, they may be dropped:
-
-* ∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ = 𝑾𝒂
-```korekto
+𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏)/(𝑐+𝑑)	#T28/A10 Space groups with operator
+𝑎+𝑏 𝑐+𝑑 = (𝑎+𝑏)(𝑐+𝑑)	#T29/A11 Space groups
+𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑	#T30/A12 Space groups
+𝑎*𝑏 = 𝑎𝑏	#T31/A13 Implied multiplication
+(𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑	#T32/A15 Implied multiplication
+𝑎² : 𝑎*𝑎	#T33/A17 Square
+𝑎² = 𝑎*𝑎	#R34/M2,T33 If equivalent, then equal
+𝑎*𝑎 = 𝑎²	#R35/M3,R34 Reflection
+(𝑎+𝑏)*(𝑐+𝑑) = (𝑎+𝑏)(𝑐+𝑑)	#T36/A16 Implied multiplication
+𝑎*𝑏 = 𝑎𝑏	#T31/A13 Implied multiplication
+𝑎 𝑏 = 𝑎𝑏	#T37/A14 Implied multiplcation
+1+1 : 2	#S38/L1 Equivalent: 1 2
+1+1 = 2	#R39/M2,S38 If equivalent, then equal
+stop
 Subscripts{ₕ ᵢ ⱼ ₖ ₙ}	#S34/L7 Named set: Subscripts ₕ ᵢ ⱼ ₖ ₙ
 Superscripts{ʰ ⁱ ʲ ᵏ ⁿ}	#S35/L7 Named set: Superscripts ʰ ⁱ ʲ ᵏ ⁿ
 Tensor[A]	#L36 Tensor variable: Tensor
@@ -131,21 +152,7 @@ Span1 = Span2;Span2 = Span3;Span1 = Span3	#I45 Transitive
 𝑾ⁿ𝒂ₙ = 𝑾𝒂	#C46/I45,R43,T44 Transitive
 stop
 ```
-Be aware of these rules.
 
-## Style
-
-Referencing Wikipedia's
-[Mathematical operators and symbols in Unicode](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode)
-and
-[Unicode subscripts and superscripts:](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts)
-
-* Italic small(𝑎..𝑧): scalar variables
-* Bold italic small(𝒂..𝒛): single-indexed variables, vectors.
-* Bold italic capital(𝑨..𝒁): multi-indexed variables, matrices.
-* Bold script capital(𝓐..𝓩): operators, like 𝓓𝑥.
-* Double struck small(𝕒..𝕫): finite ordered sets.
-* Bold Fraktur small(𝖆..𝖟): derived constant parameters.
 ```korekto
 # Note that Scalar, Vector, and Tensor(Matrix) have already been defined
 ! UnaryOperator /[𝓐-𝓩]/
