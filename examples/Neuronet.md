@@ -58,10 +58,10 @@ and
 ? length < 66
 ! scanner: '\w+|.'
 ! Token /\w+|./
-! Token {𝟙 𝟚 𝟛 𝟜}
+! Token {𝟙 𝟚 𝟛 𝟜 𝟝 𝟞}
 ! .Newline /\n/
 ! .Newline {;}
-! Span /[^=;]+/
+! Span /[^=;]*/
 ! Span {Span1 Span2 Span3 Span4}
 ! Glob /\S*/
 ! Glob {Glob1 Glob2 Glob3 Glob4}
@@ -100,42 +100,53 @@ Tensor[𝑨]	#L9 Tensor variable: Tensor
 Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A10 Space groups with operator: ( )
 Group1 Group2 = (Group1)(Group2)	#A11 Space groups
 Span1 Group1 Span2 = Span1 (Group1) Span2	#A12 Space groups
+# Addition, Subtraction, Multiplication, Division
+𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M13 Adition-Subraction: + -
+𝟙-𝟙 = 0	#A14 Additive identity: 0
+𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M15 Adition-Subraction: * /
+𝟙/𝟙 = 1	#A16 Multiplicative identity: 1
+𝟙² : 𝟙*𝟙	#A17 Square: ²
 # Implied multiplication
-𝟙*𝟚 = 𝟙𝟚	#A13 Implied multiplication: *
-𝟙 𝟚 = 𝟙𝟚	#A14 Implied multiplcation
-(Group1)*(Group2) = Group1 Group2	#A15 Implied multiplication
-(Group1)*(Group2) = (Group1)(Group2)	#A16 Implied multiplication
-# Definitions
-𝑎² : 𝑎*𝑎	#A17 Square: ²
+𝟙*𝟚 = 𝟙𝟚	#A18 Implied multiplication
+𝟙 𝟚 = 𝟙𝟚	#A19 Implied multiplcation
+(Group1)*(Group2) = Group1 Group2	#A20 Implied multiplication
+(Group1)*(Group2) = (Group1)(Group2)	#A21 Implied multiplication
 ```
 ## Introductions
 ```korekto
-Operator{* / + - =}	#S18/L4 Named set: Operator / + -
-Scalar[𝑎]	#S19/L7 Scalar variable: 𝑎
-Scalar[𝑏]	#S20/L7 Scalar variable: 𝑏
-Scalar[𝑐]	#S21/L7 Scalar variable: 𝑐
-Scalar[𝑑]	#S22/L7 Scalar variable: 𝑑
-Vector[𝒂]	#S23/L8 Vector variable: 𝒂
-Vector[𝒃]	#S24/L8 Vector variable: 𝒃
-Vector[𝒄]	#S25/L8 Vector variable: 𝒄
-Vector[𝒅]	#S26/L8 Vector variable: 𝒅
-Tensor[𝑾]	#S27/L9 Tensor variable: 𝑾
+# Digits
+1+1 : 2	#S22/L1 Equivalent: 2
+2+1 : 3	#S23/L1 Equivalent: 3
+3+1 : 4	#S24/L1 Equivalent: 4
+4+1 : 5	#S25/L1 Equivalent: 5
+5+1 : 6	#S26/L1 Equivalent: 6
+6+1 : 7	#S27/L1 Equivalent: 7
+7+1 : 8	#S28/L1 Equivalent: 8
+8+1 : 9	#S29/L1 Equivalent: 9
+# Types
+Scalar[𝑎]	#S30/L7 Scalar variable: 𝑎
+Scalar[𝑏]	#S31/L7 Scalar variable: 𝑏
+Scalar[𝑐]	#S32/L7 Scalar variable: 𝑐
+Scalar[𝑑]	#S33/L7 Scalar variable: 𝑑
+Vector[𝒂]	#S34/L8 Vector variable: 𝒂
+Vector[𝒃]	#S35/L8 Vector variable: 𝒃
+Vector[𝒄]	#S36/L8 Vector variable: 𝒄
+Vector[𝒅]	#S37/L8 Vector variable: 𝒅
+Tensor[𝑾]	#S38/L9 Tensor variable: 𝑾
 ```
 ## Tests
 ```korekto
-𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏)/(𝑐+𝑑)	#T28/A10 Space groups with operator
-𝑎+𝑏 𝑐+𝑑 = (𝑎+𝑏)(𝑐+𝑑)	#T29/A11 Space groups
-𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑	#T30/A12 Space groups
-𝑎*𝑏 = 𝑎𝑏	#T31/A13 Implied multiplication
-(𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑	#T32/A15 Implied multiplication
-𝑎² : 𝑎*𝑎	#T33/A17 Square
-𝑎² = 𝑎*𝑎	#R34/M2,T33 If equivalent, then equal
-𝑎*𝑎 = 𝑎²	#R35/M3,R34 Reflection
-(𝑎+𝑏)*(𝑐+𝑑) = (𝑎+𝑏)(𝑐+𝑑)	#T36/A16 Implied multiplication
-𝑎*𝑏 = 𝑎𝑏	#T31/A13 Implied multiplication
-𝑎 𝑏 = 𝑎𝑏	#T37/A14 Implied multiplcation
-1+1 : 2	#S38/L1 Equivalent: 1 2
-1+1 = 2	#R39/M2,S38 If equivalent, then equal
+𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏)/(𝑐+𝑑)	#T39/A10 Space groups with operator
+𝑎+𝑏 𝑐+𝑑 = (𝑎+𝑏)(𝑐+𝑑)	#T40/A11 Space groups
+𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑	#T41/A12 Space groups
+𝑎*𝑏 = 𝑎𝑏	#T42/A18 Implied multiplication
+(𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑	#T43/A20 Implied multiplication
+𝑎² : 𝑎*𝑎	#T44/A17 Square
+𝑎² = 𝑎*𝑎	#R45/M2,T44 If equivalent, then equal
+𝑎*𝑎 = 𝑎²	#R46/M3,R45 Reflection
+(𝑎+𝑏)*(𝑐+𝑑) = (𝑎+𝑏)(𝑐+𝑑)	#T47/A21 Implied multiplication
+𝑎*𝑏 = 𝑎𝑏	#T42/A18 Implied multiplication
+𝑎 𝑏 = 𝑎𝑏	#T48/A19 Implied multiplcation
 stop
 Subscripts{ₕ ᵢ ⱼ ₖ ₙ}	#S34/L7 Named set: Subscripts ₕ ᵢ ⱼ ₖ ₙ
 Superscripts{ʰ ⁱ ʲ ᵏ ⁿ}	#S35/L7 Named set: Superscripts ʰ ⁱ ʲ ᵏ ⁿ
