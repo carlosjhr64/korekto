@@ -3,13 +3,27 @@
 The following is a `Korekto` review of
 [Neuronet wiki](https://github.com/carlosjhr64/neuronet/wiki).
 
+## Style
+
+Referencing Wikipedia's
+[Mathematical operators and symbols in Unicode](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode)
+and
+[Unicode subscripts and superscripts:](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts)
+
+* Italic small(𝑎..𝑧): scalar variables
+* Bold italic small(𝒂..𝒛): single-indexed variables, vectors.
+* Bold italic capital(𝑨..𝒁): multi-indexed variables, matrices.
+* Bold script capital(𝓐..𝓩): operators, like 𝓓𝑥.
+* Double struck small(𝕒..𝕫): finite ordered sets.
+* Bold Fraktur small(𝖆..𝖟): derived constant parameters.
+
 ## Review of the math
 
 Please allow the terse notation as the algebra gets gnarly.
 Operator precedence is as in
-[ruby](https://ruby-doc.org/core-2.6.2/doc/syntax/precedence_rdoc.html):
+[Ruby](https://ruby-doc.org/core-2.6.2/doc/syntax/precedence_rdoc.html):
 
-* Unary right binding operators
+* Unary binding operators
 * *, /
 * +, -
 * =
@@ -33,23 +47,61 @@ Definitions are set by `:` and consequent equivalences by `=`.
 I may use Einstein notation.
 And once indices are shown, they may be dropped:
 
-* ∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ = 𝑾𝒂
+* ∑ₙ(𝑾ₙ*𝒂ₙ) : 𝑾ⁿ𝒂ₙ : 𝑾𝒂
 
 Be aware of the above rules.
 
-## Style
+## Exponential, Logarithm, Squash(Sigmoid), and Unsquash(Logit)
 
-Referencing Wikipedia's
-[Mathematical operators and symbols in Unicode](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode)
-and
-[Unicode subscripts and superscripts:](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts)
+Please allow the following terse notation for the following functions:
 
-* Italic small(𝑎..𝑧): scalar variables
-* Bold italic small(𝒂..𝒛): single-indexed variables, vectors.
-* Bold italic capital(𝑨..𝒁): multi-indexed variables, matrices.
-* Bold script capital(𝓐..𝓩): operators, like 𝓓𝑥.
-* Double struck small(𝕒..𝕫): finite ordered sets.
-* Bold Fraktur small(𝖆..𝖟): derived constant parameters.
+* Exponentiation: `⌉(𝑥) : Math.exp(𝑥)`
+* Squash: `⌈(𝑥) : 1 / (1 + Math.exp(-𝑥))`
+* Logarithm: `⌊(𝑥) : Math.log(𝑥)`
+* Unsquash: `⌋(𝑥) : Math.log(𝑥 / (1 - 𝑥))`
+
+Notice that `⌊` looks like an 'L' for logarithm.
+Invert `⌊` and you get `⌉` for exponentiation.
+Reflect `⌉` and you get `⌈` for squash.
+Invert `⌈` and you get `⌋` for unsquash.
+
+Squash and unsquash contracts nicely as:
+
+* Squash: `⌈𝑥 = 1 / 1+⌉-𝑥`
+* Unsquash: `⌋𝑥 = ⌊ 𝑥/(1-𝑥)`
+
+## Binary competition
+
+In [The Math of Species Conflict - Numberphile](https://www.youtube.com/watch?v=WR3GqqWAmfw)
+the following function is referred to as "binary competition":
+
+* `𝓑(𝑥) : 𝑥 * (1 - 𝑥)`
+
+This form occurs in the derivative of the squash function, and so I'll use `𝓑`
+in it's expression.
+
+## Next level unary postfix operator, `₊` 
+
+Consider values in collection `𝒂` at level "ₕ" dependent on values in
+the collection at level "ᵢ":
+
+* `𝒂ₕ : ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))`
+
+The index `ₕ` enumerates values of `𝒂` in level "ₕ", whereas `ᵢ` enumerates
+values of `𝒂` in level "ᵢ".  The levels are labeled alphabetically:
+
+* `{⋯ ₕ ᵢ ⱼ ₖ ⋯}`
+
+I'll want to express the relation between levels without specifying the level.
+Given the above, please allow:
+
+* `𝒂 = ⌈(𝒃 + 𝑾 𝒂₊)`
+* `𝒂 = ⌈ 𝒃+𝑾(𝒂₊)`
+* `𝒂 = ⌈ 𝒃+𝑾𝒂₊`
+
+The next level operator `₊` shifts the (context)index to the next level.
+
+* `𝒂ₕ₊ : 𝒂ᵢ`
 
 ## Syntax
 ```korekto
@@ -57,8 +109,10 @@ and
 ? balanced? '(){}[]'
 ? length < 66
 ! scanner: '\w+|.'
-! Token /\w+|./
-! Token {𝟙 𝟚 𝟛 𝟜 𝟝 𝟞 𝟟 𝟠}
+! Token /\w+|\S/
+! Token {𝟙 𝟚 𝟛 𝟜}
+! .Clump /\S+/
+! .Clump {𝟘}
 ! .Newline /\n/
 ! .Newline {;}
 ! Span /[^=;]*/
@@ -103,7 +157,7 @@ Span1 Group1 Span2 = Span1 (Group1) Span2	#A12 Space groups
 # Addition, Subtraction, Multiplication, Division
 𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M13 Adition-Subraction: + -
 𝟙-𝟙 = 0	#A14 Additive identity: 0
-𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M15 Adition-Subraction: * /
+𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M15 Adition-Subraction: * 𝟞 /
 𝟙/𝟙 = 1	#A16 Multiplicative identity: 1
 𝟙² : 𝟙*𝟙	#A17 Square: ²
 # Implied multiplication
@@ -116,10 +170,10 @@ Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M22 Next: ₊
 Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M23 Previous: ₋
 Word1{𝟙Set1};Word1.first : 𝟙	#M24 : . first
 Word1{Set1𝟙};Word1.last : 𝟙	#M25 : last
-Word1{𝟙 𝟚 𝟛 𝟜Set1};Word2{𝟝 𝟞 𝟟 𝟠Set2};𝟙⁺ : 𝟝	#I26 Raise: ⁺
-Word1{𝟙 𝟚 𝟛 𝟜Set1};Word2{𝟝 𝟞 𝟟 𝟠Set2};𝟚⁺ : 𝟞	#I27 Raise
-Word1{𝟙 𝟚 𝟛 𝟜Set1};Word2{𝟝 𝟞 𝟟 𝟠Set2};𝟛⁺ : 𝟟	#I28 Raise
-Word1{𝟙 𝟚 𝟛 𝟜Set1};Word2{𝟝 𝟞 𝟟 𝟠Set2};𝟜⁺ : 𝟠	#I29 Raise
+Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I26 Raise: ⁺
+Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I27 Raise
+Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I28 Raise
+Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I29 Raise
 ```
 ## Introductions
 ```korekto
@@ -146,8 +200,8 @@ Tensor[𝑾]	#S46/L9 Tensor variable: 𝑾
 ## Superscript
 Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ}	#S47/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ
 ## Subscript
-### Next
 Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ}	#S48/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ
+### Next
 ₕ₊ : ᵢ	#R49/M22,S48 Next
 ᵢ₊ : ⱼ	#R50/M22,S48 Next
 ⱼ₊ : ₖ	#R51/M22,S48 Next
@@ -155,108 +209,8 @@ Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ}	#S48/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ 
 ₕ⁺ : ʰ	#C52/I26,S48,S47 Raise
 ᵢ⁺ : ⁱ	#C53/I27,S48,S47 Raise
 ⱼ⁺ : ʲ	#C54/I28,S48,S47 Raise
-ₖ⁺ : ᵏ	#C55/I29,S48,S47 Raise
-stop
-# Test
-ₕ₊ : ᵢ	#R45/M22,S44 Next operator
-ₙ₋ : ₘ	#R46/M23,S44 Previous operator
-Sub.first : ₕ	#R47/M24,S44
-Sup.last : ⁿ	#R48/M25,S43
-stop
-## Next level
-ₕ₊ : ᵢ	#S40/L1 Equivalent: ₕ ᵢ
-ᵢ₊ : ⱼ	#S41/L1 Equivalent: ⱼ
-ⱼ₊ : ₖ	#S42/L1 Equivalent: ₖ
-## Previous level
-ᵢ₋ : ₕ	#S43/L1 Equivalent: ₋
-ⱼ₋ : ᵢ	#S40/L1 Equivalent: ⱼ
-ₖ₋	: ⱼ #S41/L1 Equivalent: ₖ
-## Raising/Lowering indeces
-ₕ⁺ : ʰ	#S42/L1 Equivalent: ⁺ ʰ
-ᵢ⁺ : ⁱ	#S43/L1 Equivalent: ⁱ
-ⱼ⁺ : ʲ	#S44/L1 Equivalent: ʲ
-ₖ⁺ : ᵏ	#S45/L1 Equivalent: ᵏ
-stop⁺
-```
-## Tests
-```korekto
-𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏)/(𝑐+𝑑)	#T39/A10 Space groups with operator
-𝑎+𝑏 𝑐+𝑑 = (𝑎+𝑏)(𝑐+𝑑)	#T40/A11 Space groups
-𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑	#T41/A12 Space groups
-𝑎*𝑏 = 𝑎𝑏	#T42/A18 Implied multiplication
-(𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑	#T43/A20 Implied multiplication
-𝑎² : 𝑎*𝑎	#T44/A17 Square
-𝑎² = 𝑎*𝑎	#R45/M2,T44 If equivalent, then equal
-𝑎*𝑎 = 𝑎²	#R46/M3,R45 Reflection
-(𝑎+𝑏)*(𝑐+𝑑) = (𝑎+𝑏)(𝑐+𝑑)	#T47/A21 Implied multiplication
-𝑎*𝑏 = 𝑎𝑏	#T42/A18 Implied multiplication
-𝑎 𝑏 = 𝑎𝑏	#T48/A19 Implied multiplcation
-stop
-Subscripts{ₕ ᵢ ⱼ ₖ ₙ}	#S34/L7 Named set: Subscripts ₕ ᵢ ⱼ ₖ ₙ
-Superscripts{ʰ ⁱ ʲ ᵏ ⁿ}	#S35/L7 Named set: Superscripts ʰ ⁱ ʲ ᵏ ⁿ
-Tensor[A]	#L36 Tensor variable: Tensor
-Tensor[𝑾]	#S37/L36 Tensor variable: 𝑾
-∑ₙ(Aₙ*Xₙ) : AⁿXₙ	#A38 Einstein notation: ∑
-∑ₙ(𝑾ₙ*𝒂ₙ) : 𝑾ⁿ𝒂ₙ	#T39/A38 Einstein notation
-∑ₙ(𝑾ₙ*𝒂ₙ) = 𝑾ⁿ𝒂ₙ	#R40/M3,T39 If equivalent, then equal
-AⁿXₙ : A X	#A41 Context equivalence
-𝑾ⁿ𝒂ₙ : 𝑾 𝒂	#T42/A41 Context equivalence
-𝑾ⁿ𝒂ₙ = 𝑾 𝒂	#R43/M3,T42 If equivalent, then equal
-𝑾 𝒂 = 𝑾𝒂	#T44/A29 Implied *
-Span1 = Span2;Span2 = Span3;Span1 = Span3	#I45 Transitive
-𝑾ⁿ𝒂ₙ = 𝑾𝒂	#C46/I45,R43,T44 Transitive
 stop
 ```
-
-```korekto
-# Note that Scalar, Vector, and Tensor(Matrix) have already been defined
-! UnaryOperator /[𝓐-𝓩]/
-! UnaryOperator {E F G H}
-! FiniteOrderedSet /[𝕒-𝕫]/
-! FiniteOrderedSet {r s t u}
-! Constant /[𝖆-𝖟]/
-! Constant {R S T U}
-```
-## Next level unary postfix operator
-
-Consider a value in a collection of `𝒂` in level h dependent on values in
-collection of `𝒂` in level i:
-
-* `𝒂ₕ := ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))`
-```korekto
-𝒂ₕ := ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))	#D16
-```
-
-The index `ₕ` enumerates values of `𝒂` in level h, whereas `ᵢ` enumerates
-values of `𝒂` in level i.  The levels are labeled alphabetically:
-
-* `{...,ₕ,ᵢ,ⱼ,ₖ,ₗ,ₘ,ₙ,ₒ,ₚ,...}`
-
-I'll want to express the relation between levels without specifying the level.
-Given the above, please allow:
-
-* `𝒂 = ⌈(𝒃 + 𝑾 𝒂')`
-* `𝒂 = ⌈ 𝒃+𝑾(𝒂')`
-* `𝒂 = ⌈ 𝒃+𝑾𝒂'`
-```korekto
-ᵢ := ₕ'	#D17
-ⱼ := ᵢ'	#D18
-ₖ := ⱼ'	#D19
-ₗ := ₖ'	#D20
-𝒂ₕ = ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))	#R21/M9,D16 Defined equivalent
-TODO: It's gnarly. Come back to it later.
-```
-
-## Binary competition
-
-In [The Math of Species Conflict - Numberphile](https://www.youtube.com/watch?v=WR3GqqWAmfw)
-the following function is referred to as "binary competition":
-
-* `𝓑(𝑥) := 𝑥 * (1 - 𝑥)`
-
-This form occurs in the derivative of the squash function, and so I'll use `𝓑`
-in it's expression.
-
 ## Squash
 ```korekto
 # Please let:
