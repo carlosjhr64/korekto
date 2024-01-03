@@ -43,8 +43,10 @@ This is Korekto's standard math import.
 ! FiniteSet /[𝕒-𝕫]/
 ! FiniteSet {𝕒 𝕓 𝕔 𝕕}
 # About operators
-! Unary /[𝓐-𝓩]/
+! Unary /[-𝓐-𝓩⌈⌉⌊⌋]/
 ! Unary {𝓐 𝓑 𝓒 𝓓}
+! Unaries /[-𝓐-𝓩⌈⌉⌊⌋]*/
+! Unaries {𝓾}
 ! Binary /[-+*\/∧∨^√𝓪-𝔃]/
 ! Binary {𝓫}
 ! Commutative /[+*]/
@@ -114,7 +116,7 @@ Operator[𝓐]	#L20 Operator: Operator
 # Groups
 Slurp1(𝟙)Slurp2;Slurp1𝟙Slurp2	#M30 Token
 Slurp1(-𝟙)Slurp2;Slurp1-𝟙Slurp2	#M31 -Token
-Slurp1(𝟙 𝓫 Group1)Slurp2;Slurp1(𝟙𝓫Group1)Slurp2	#M32 Token*Group
+Slurp1(𝟙 𝓫 𝓾𝟚)Slurp2;Slurp1(𝟙𝓫𝓾𝟚)Slurp2	#M32 Token*Token
 Slurp1 (Group1);Slurp1 Group1	#M33 Right group
 (Group1) Slurp1;Group1 Slurp1	#M34 Left group
 ```

@@ -144,7 +144,7 @@ Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 ```
 ## Natural exponentiation function
 ```korekto
-# In Ruby, the natural exponenction funtion is:
+# In Ruby, the natural exponentiation funtion is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
 ⌉(𝑥) : 𝖊∧𝑥	#S22/L1.KorektoMath Equivalent: ⌉
@@ -163,7 +163,7 @@ Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R25/M2.KorektoMath,S24 If equivalent, then equal
 ⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R26/M30.KorektoMath,R25 Token
 ⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R27/M31.KorektoMath,R26 -Token
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R28/M32.KorektoMath,R27 Token*Group
+⌈𝑥 = 1 / (1+⌉-𝑥)	#R28/M32.KorektoMath,R27 Token*Token
 ⌈𝑥 = 1 / 1+⌉-𝑥	#R29/M33.KorektoMath,R28 Right group
 stop
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))
