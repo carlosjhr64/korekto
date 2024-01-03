@@ -131,6 +131,8 @@ The next level operator `₊` shifts the (context)index to the next level.
 ! Vector {𝒂 𝒃 𝒄 𝒅}
 ! Tensor /[𝑨-𝒁]/
 ! Tensor {𝑨 𝑩 𝑪 𝑫}
+! Operator /[𝓐-𝓩]/
+! Operator {𝓐 𝓑 𝓒 𝓓}
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
 ! Superscript {ᵃ ᵇ ᶜ ᵈ ᵉ ᶠ ᵍ ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ ʳ ˢ ᵗ ᵘ ᵛ ʷ ˣ ʸ ᶻ}
 ! Subscript /[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/
@@ -147,68 +149,69 @@ Word1{Set1}	#L4 Named set: { }
 Word1{Set1𝟙Set2};Word1[𝟙]	#M5 Membership: [ ]
 Word1[𝟙];𝟙 ∍ Word1	#M6 Element of: ∍
 # Types
-Scalar[𝑎]	#L7 Scalar variable: Scalar
-Vector[𝒂]	#L8 Vector variable: Vector
-Tensor[𝑨]	#L9 Tensor variable: Tensor
+Scalar[𝑎]	#L7 Scalar: Scalar
+Vector[𝒂]	#L8 Vector: Vector
+Tensor[𝑨]	#L9 Tensor: Tensor
+Operator[𝓐]	#L10 Operator: Operator
 # Groups
-Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A10 Space groups with operator: ( )
-Group1 Group2 = (Group1)(Group2)	#A11 Space groups
-Span1 Group1 Span2 = Span1 (Group1) Span2	#A12 Space groups
+Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A11 Space groups with operator: ( )
+Group1 Group2 = (Group1)(Group2)	#A12 Space groups
+Span1 Group1 Span2 = Span1 (Group1) Span2	#A13 Space groups
 # Addition, Subtraction, Multiplication, Division
-𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M13 Adition-Subraction: + -
-𝟙-𝟙 = 0	#A14 Additive identity: 0
-𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M15 Adition-Subraction: * 𝟞 /
-𝟙/𝟙 = 1	#A16 Multiplicative identity: 1
-𝟙² : 𝟙*𝟙	#A17 Square: ²
+𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M14 Adition-Subraction: + -
+𝟙-𝟙 = 0	#A15 Additive identity: 0
+𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M16 Adition-Subraction: * 𝟞 /
+𝟙/𝟙 = 1	#A17 Multiplicative identity: 1
+𝟙² : 𝟙*𝟙	#A18 Square: ²
 # Implied multiplication
-𝟙*𝟚 = 𝟙𝟚	#A18 Implied multiplication
-𝟙 𝟚 = 𝟙𝟚	#A19 Implied multiplcation
-(Group1)*(Group2) = Group1 Group2	#A20 Implied multiplication
-(Group1)*(Group2) = (Group1)(Group2)	#A21 Implied multiplication
+𝟙*𝟚 = 𝟙𝟚	#A19 Implied multiplication
+𝟙 𝟚 = 𝟙𝟚	#A20 Implied multiplcation
+(Group1)*(Group2) = Group1 Group2	#A21 Implied multiplication
+(Group1)*(Group2) = (Group1)(Group2)	#A22 Implied multiplication
 # Next member operator
-Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M22 Next: ₊
-Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M23 Previous: ₋
-Word1{𝟙Set1};Word1.first : 𝟙	#M24 : . first
-Word1{Set1𝟙};Word1.last : 𝟙	#M25 : last
-Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I26 Raise: ⁺
-Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I27 Raise
-Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I28 Raise
-Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I29 Raise
+Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M23 Next: ₊
+Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M24 Previous: ₋
+Word1{𝟙Set1};Word1.first : 𝟙	#M25 : . first
+Word1{Set1𝟙};Word1.last : 𝟙	#M26 : last
+Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I27 Raise: ⁺
+Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I28 Raise
+Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I29 Raise
+Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I30 Raise
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S30/L1 Equivalent: 2
-2+1 : 3	#S31/L1 Equivalent: 3
-3+1 : 4	#S32/L1 Equivalent: 4
-4+1 : 5	#S33/L1 Equivalent: 5
-5+1 : 6	#S34/L1 Equivalent: 6
-6+1 : 7	#S35/L1 Equivalent: 7
-7+1 : 8	#S36/L1 Equivalent: 8
-8+1 : 9	#S37/L1 Equivalent: 9
+1+1 : 2	#S31/L1 Equivalent: 2
+2+1 : 3	#S32/L1 Equivalent: 3
+3+1 : 4	#S33/L1 Equivalent: 4
+4+1 : 5	#S34/L1 Equivalent: 5
+5+1 : 6	#S35/L1 Equivalent: 6
+6+1 : 7	#S36/L1 Equivalent: 7
+7+1 : 8	#S37/L1 Equivalent: 8
+8+1 : 9	#S38/L1 Equivalent: 9
 # Types
-Scalar[𝑎]	#S38/L7 Scalar variable: 𝑎
-Scalar[𝑏]	#S39/L7 Scalar variable: 𝑏
-Scalar[𝑐]	#S40/L7 Scalar variable: 𝑐
-Scalar[𝑑]	#S41/L7 Scalar variable: 𝑑
-Vector[𝒂]	#S42/L8 Vector variable: 𝒂
-Vector[𝒃]	#S43/L8 Vector variable: 𝒃
-Vector[𝒄]	#S44/L8 Vector variable: 𝒄
-Vector[𝒅]	#S45/L8 Vector variable: 𝒅
-Tensor[𝑾]	#S46/L9 Tensor variable: 𝑾
+Scalar[𝑎]	#S39/L7 Scalar: 𝑎
+Scalar[𝑏]	#S40/L7 Scalar: 𝑏
+Scalar[𝑐]	#S41/L7 Scalar: 𝑐
+Scalar[𝑑]	#S42/L7 Scalar: 𝑑
+Vector[𝒂]	#S43/L8 Vector: 𝒂
+Vector[𝒃]	#S44/L8 Vector: 𝒃
+Vector[𝒄]	#S45/L8 Vector: 𝒄
+Vector[𝒅]	#S46/L8 Vector: 𝒅
+Tensor[𝑾]	#S47/L9 Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ}	#S47/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ
+Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ}	#S48/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ}	#S48/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ
+Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ}	#S49/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ
 ### Next
-ₕ₊ : ᵢ	#R49/M22,S48 Next
-ᵢ₊ : ⱼ	#R50/M22,S48 Next
-ⱼ₊ : ₖ	#R51/M22,S48 Next
+ₕ₊ : ᵢ	#R50/M23,S49 Next
+ᵢ₊ : ⱼ	#R51/M23,S49 Next
+ⱼ₊ : ₖ	#R52/M23,S49 Next
 ### Raise
-ₕ⁺ : ʰ	#C52/I26,S48,S47 Raise
-ᵢ⁺ : ⁱ	#C53/I27,S48,S47 Raise
-ⱼ⁺ : ʲ	#C54/I28,S48,S47 Raise
+ₕ⁺ : ʰ	#C53/I27,S49,S48 Raise
+ᵢ⁺ : ⁱ	#C54/I28,S49,S48 Raise
+ⱼ⁺ : ʲ	#C55/I29,S49,S48 Raise
 stop
 ```
 ## Squash
