@@ -104,161 +104,67 @@ The next level operator `₊` shifts the (context)index to the next level.
 
 * `𝒂ₕ₊ : 𝒂ᵢ`
 
-## Syntax
+## Korekto Math
+
+The following is written in `Korekto` code blocks.
+I will be importing [KorektoMath](../imports/KorektoMath.md).
+
+### Introductions
 ```korekto
-< imports/Kernel.md
-? balanced? '(){}[]'
-? length < 66
-! scanner: '\w+|.'
-! Token /\w+|\S/
-! Token {𝟙 𝟚 𝟛 𝟜 𝟝 𝟞 𝟟 𝟠 𝟡}
-! .Clump /\S+/
-! .Clump {𝟘}
-! .Newline /\n/
-! .Newline {;}
-! Span /[^=;]*/
-! Span {Span1 Span2 Span3 Span4}
-! Slurp /[^;]*/
-! Slurp {Slurp1 Slurp2 Slurp3 Slurp4}
-! Glob /\S*/
-! Glob {Glob1 Glob2 Glob3 Glob4}
-! Group /[^()]+/
-! Group {Group1 Group2 Group3 Group4}
-! Set /[^{}]*/
-! Set {Set1 Set2 Set3 Set4}
-! Word /\w+/
-! Word {Word1 Word2 Word3 Word4}
-! Constant /[𝖆-𝖟]/
-! Constant {𝖆 𝖇 𝖈 𝖉}
-! Scalar /[𝑎-𝑧]/
-! Scalar {𝑎 𝑏 𝑐 𝑑}
-! Vector /[𝒂-𝒛]/
-! Vector {𝒂 𝒃 𝒄 𝒅}
-! Tensor /[𝑨-𝒁]/
-! Tensor {𝑨 𝑩 𝑪 𝑫}
-! Operator /[𝓐-𝓩]/
-! Operator {𝓐 𝓑 𝓒 𝓓}
-! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
-! Superscript {ᵃ ᵇ ᶜ ᵈ ᵉ ᶠ ᵍ ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ ʳ ˢ ᵗ ᵘ ᵛ ʷ ˣ ʸ ᶻ}
-! Subscript /[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/
-! Subscript {ₐ ₑ ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ ᵣ ₛ ₜ ᵤ ᵥ ₓ}
-```
-## Rules
-```korekto
-# Equivalence
-Span1 : Span2	#L1 Equivalent:   :
-Span1 : Span2;Span1 = Span2	#M2 If equivalent, then equal: =
-Span1 = Span2;Span2 = Span1	#M3 Reflection
-# Sets
-Word1{Set1}	#L4 Named set: { }
-Word1{Set1𝟙Set2};Word1[𝟙]	#M5 Membership: [ ]
-Word1[𝟙];𝟙 ∍ Word1	#M6 Element of: ∍
-# Next member operator
-Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M7 Next: ₊
-Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M8 Previous: ₋
-Word1.Word2 = (Word1.Word2)	#A9 Dot binds: . ( )
-Word1{𝟙Set1};Word1.first : 𝟙	#M10 : first
-Word1{Set1𝟙};Word1.last : 𝟙	#M11 : last
-Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I12 Raise: ⁺
-Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I13 Raise
-Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I14 Raise
-Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I15 Raise
+< imports/KorektoMath.md
 # Types
-Constant[𝖆]	#L16 Constant: Constant
-Scalar[𝑎]	#L17 Scalar: Scalar
-Vector[𝒂]	#L18 Vector: Vector
-Tensor[𝑨]	#L19 Tensor: Tensor
-Operator[𝓐]	#L20 Operator: Operator
-# Addition and Subtraction
-𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M21 Adition-Subraction: + -
-𝟙-𝟙 = 0	#A22 Additive identity: 0
-# Multiplication and Division
-𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M23 Multiplication-Division: * /
-𝟙/𝟙 = 1	#A24 Multiplicative identity: 1
-𝟙² : 𝟙*𝟙	#A25 Square: ²
-# Exponentiation, Roots, and Logarithm
-𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M26 Exponentiation-Root: ∧ ∨
-𝟚² = 𝟜;√𝟜 = 𝟚	#M27 Square Root: √
-# Logarithms
-𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M28 Exponentiation-Logarithm: 𝓵
-# Implied multiplication
-𝟙*𝟚 = 𝟙𝟚	#A29 Implied multiplication
-𝟙 𝟚 = 𝟙𝟚	#A30 Implied multiplcation
-# Groups
-Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A31 Space groups with operator
-Group1 Group2 = (Group1)(Group2)	#A32 Space groups
-Span1 Group1 Span2 = Span1 (Group1) Span2	#A33 Space groups
-(Group1)*(Group2) = Group1 Group2	#A34 Implied multiplication
-(Group1)*(Group2) = (Group1)(Group2)	#A35 Implied multiplication
-Slurp1(𝟙)Slurp2;Slurp1𝟙Slurp2	#M36 Token
-Slurp1(-𝟙)Slurp2;Slurp1-𝟙Slurp2	#M37 -Token
-Slurp1(𝟙 + Group1)Slurp2;Slurp1(𝟙+Group1)Slurp2	#M38 Token+
-Slurp1 (Group1);Slurp1 Group1	#M39 Right space group
-```
-## Introductions
-```korekto
-# Digits
-1+1 : 2	#S40/L1 Equivalent: 2
-2+1 : 3	#S41/L1 Equivalent: 3
-3+1 : 4	#S42/L1 Equivalent: 4
-4+1 : 5	#S43/L1 Equivalent: 5
-5+1 : 6	#S44/L1 Equivalent: 6
-6+1 : 7	#S45/L1 Equivalent: 7
-7+1 : 8	#S46/L1 Equivalent: 8
-8+1 : 9	#S47/L1 Equivalent: 9
-# Types
-Scalar[𝑥]	#S48/L17 Scalar: 𝑥
-Scalar[𝑎]	#S49/L17 Scalar: 𝑎
-Scalar[𝑏]	#S50/L17 Scalar: 𝑏
-Scalar[𝑐]	#S51/L17 Scalar: 𝑐
-Scalar[𝑑]	#S52/L17 Scalar: 𝑑
-Vector[𝒂]	#S53/L18 Vector: 𝒂
-Vector[𝒃]	#S54/L18 Vector: 𝒃
-Vector[𝒄]	#S55/L18 Vector: 𝒄
-Vector[𝒅]	#S56/L18 Vector: 𝒅
-Tensor[𝑾]	#S57/L19 Tensor: 𝑾
+Scalar[𝑥]	#S1/L17.KorektoMath Scalar: 𝑥
+Scalar[𝑎]	#S2/L17.KorektoMath Scalar: 𝑎
+Scalar[𝑏]	#S3/L17.KorektoMath Scalar: 𝑏
+Scalar[𝑐]	#S4/L17.KorektoMath Scalar: 𝑐
+Scalar[𝑑]	#S5/L17.KorektoMath Scalar: 𝑑
+Vector[𝒂]	#S6/L18.KorektoMath Vector: 𝒂
+Vector[𝒃]	#S7/L18.KorektoMath Vector: 𝒃
+Vector[𝒄]	#S8/L18.KorektoMath Vector: 𝒄
+Vector[𝒅]	#S9/L18.KorektoMath Vector: 𝒅
+Tensor[𝑾]	#S10/L19.KorektoMath Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S58/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
+Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S11/L4.KorektoMath Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S59/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
+Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S12/L4.KorektoMath Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
 ### Next
-ₕ₊ : ᵢ	#R60/M7,S59 Next
-ᵢ₊ : ⱼ	#R61/M7,S59 Next
-ⱼ₊ : ₖ	#R62/M7,S59 Next
+ₕ₊ : ᵢ	#R13/M7.KorektoMath,S12 Next
+ᵢ₊ : ⱼ	#R14/M7.KorektoMath,S12 Next
+ⱼ₊ : ₖ	#R15/M7.KorektoMath,S12 Next
 ### Raise
-ₕ⁺ : ʰ	#C63/I12,S59,S58 Raise
-ᵢ⁺ : ⁱ	#C64/I13,S59,S58 Raise
-ⱼ⁺ : ʲ	#C65/I14,S59,S58 Raise
+ₕ⁺ : ʰ	#C16/I12.KorektoMath,S12,S11 Raise
+ᵢ⁺ : ⁱ	#C17/I13.KorektoMath,S12,S11 Raise
+ⱼ⁺ : ʲ	#C18/I14.KorektoMath,S12,S11 Raise
 # Euler's number ~ 2.718⋯
-Constant[𝖊]	#S66/L16 Constant: 𝖊
+Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 # Natural Exponentiation and Log
-𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M67 Natural log
-𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M68 Natural exponentiation
+𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M20 Natural log
+𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M21 Natural exponentiation
 ```
 ## Natural exponentiation function
 ```korekto
 # In Ruby, the natural exponenction funtion is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
-⌉(𝑥) : 𝖊∧𝑥	#S69/L1 Equivalent: ⌉
+⌉(𝑥) : 𝖊∧𝑥	#S22/L1.KorektoMath Equivalent: ⌉
 # In Ruby, the natural log funtion is:
 #     y = Math.exp(x)
 #     Math.log(y) == x #=> true
 # Here its:
-⌊(𝑥) : 𝖊𝓵𝑥	#S70/L1 Equivalent: ⌊
+⌊(𝑥) : 𝖊𝓵𝑥	#S23/L1.KorektoMath Equivalent: ⌊
 ```
 ## Squash
 ```korekto
 # The squash function in Ruby is:
 #     1 / (1 + Math.exp(-𝑥))
 # Here its:
-⌈(𝑥) : 1 / (1 + ⌉(-𝑥))	#S71/L1 Equivalent: ⌈
-⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R72/M2,S71 If equivalent, then equal
-⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R73/M36,R72 Token
-⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R74/M37,R73 -Token
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R75/M38,R74 Token+
-⌈𝑥 = 1 / 1+⌉-𝑥	#R76/M39,R75 Right space group
+⌈(𝑥) : 1 / (1 + ⌉(-𝑥))	#S24/L1.KorektoMath Equivalent: ⌈
+⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R25/M2.KorektoMath,S24 If equivalent, then equal
+⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R26/M36.KorektoMath,R25 Token
+⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R27/M37.KorektoMath,R26 -Token
+⌈𝑥 = 1 / (1+⌉-𝑥)	#R28/M38.KorektoMath,R27 Token+
+⌈𝑥 = 1 / 1+⌉-𝑥	#R29/M39.KorektoMath,R28 Right space group
 stop
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))
 ⌈𝑥 = 1 / 1+⌉-𝑥
