@@ -162,9 +162,9 @@ Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 ⌈(𝑥) : 1 / (1 + ⌉(-𝑥))	#S24/L1.KorektoMath Equivalent: ⌈
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R25/M2.KorektoMath,S24 If equivalent, then equal
 ⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R26/M30.KorektoMath,R25 Token
-⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R27/M31.KorektoMath,R26 -Token
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R28/M32.KorektoMath,R27 Token*Token
-⌈𝑥 = 1 / 1+⌉-𝑥	#R29/M33.KorektoMath,R28 Right group
+⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R27/M30.KorektoMath,R26 Token
+⌈𝑥 = 1 / (1+⌉-𝑥)	#R28/M31.KorektoMath,R27 Token*Token
+⌈𝑥 = 1 / 1+⌉-𝑥	#R29/M32.KorektoMath,R28 Right group
 stop
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))
 ⌈𝑥 = 1 / 1+⌉-𝑥

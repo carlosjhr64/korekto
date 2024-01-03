@@ -114,21 +114,20 @@ Operator[𝓐]	#L20 Operator: Operator
 # Implied multiplication
 𝑎*𝑏 = 𝑎𝑏	#A29 Implied scalar multiplication
 # Groups
-Slurp1(𝟙)Slurp2;Slurp1𝟙Slurp2	#M30 Token
-Slurp1(-𝟙)Slurp2;Slurp1-𝟙Slurp2	#M31 -Token
-Slurp1(𝟙 𝓫 𝓾𝟚)Slurp2;Slurp1(𝟙𝓫𝓾𝟚)Slurp2	#M32 Token*Token
-Slurp1 (Group1);Slurp1 Group1	#M33 Right group
-(Group1) Slurp1;Group1 Slurp1	#M34 Left group
+Slurp1(𝓾𝟙)Slurp2;Slurp1𝓾𝟙Slurp2	#M30 Token
+Slurp1(𝟙 𝓫 𝓾𝟚)Slurp2;Slurp1(𝟙𝓫𝓾𝟚)Slurp2	#M31 Token*Token
+Slurp1 (Group1);Slurp1 Group1	#M32 Right group
+(Group1) Slurp1;Group1 Slurp1	#M33 Left group
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S35/L1 Equivalent: 2
-2+1 : 3	#S36/L1 Equivalent: 3
-3+1 : 4	#S37/L1 Equivalent: 4
-4+1 : 5	#S38/L1 Equivalent: 5
-5+1 : 6	#S39/L1 Equivalent: 6
-6+1 : 7	#S40/L1 Equivalent: 7
-7+1 : 8	#S41/L1 Equivalent: 8
-8+1 : 9	#S42/L1 Equivalent: 9
+1+1 : 2	#S34/L1 Equivalent: 2
+2+1 : 3	#S35/L1 Equivalent: 3
+3+1 : 4	#S36/L1 Equivalent: 4
+4+1 : 5	#S37/L1 Equivalent: 5
+5+1 : 6	#S38/L1 Equivalent: 6
+6+1 : 7	#S39/L1 Equivalent: 7
+7+1 : 8	#S40/L1 Equivalent: 8
+8+1 : 9	#S41/L1 Equivalent: 9
 ```
