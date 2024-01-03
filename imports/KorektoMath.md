@@ -18,24 +18,20 @@ This is Korekto's standard math import.
 ? balanced? '(){}[]'
 ? length < 66
 ! scanner: '\w+|.'
+```
+## Patterns
+```korekto
+# About tokens
 ! Token /\w+|\S/
 ! Token {𝟙 𝟚 𝟛 𝟜 𝟝 𝟞 𝟟 𝟠 𝟡}
-! .Clump /\S+/
-! .Clump {𝟘}
-! .Newline /\n/
-! .Newline {;}
-! Span /[^=;]*/
-! Span {Span1 Span2 Span3 Span4}
-! Slurp /[^;]*/
-! Slurp {Slurp1 Slurp2 Slurp3 Slurp4}
-! Glob /\S*/
-! Glob {Glob1 Glob2 Glob3 Glob4}
-! Group /[^()]+/
-! Group {Group1 Group2 Group3 Group4}
-! Set /[^{}]*/
-! Set {Set1 Set2 Set3 Set4}
 ! Word /\w+/
 ! Word {Word1 Word2 Word3 Word4}
+! Symbol /[^\w\s]/
+! Symbol {𝛾 𝛿 𝜀}
+## About specific tokens
+! .Newline /\n/
+! .Newline {;}
+## About token types
 ! Constant /[𝖆-𝖟]/
 ! Constant {𝖆 𝖇 𝖈 𝖉}
 ! Scalar /[𝑎-𝑧]/
@@ -44,12 +40,34 @@ This is Korekto's standard math import.
 ! Vector {𝒂 𝒃 𝒄 𝒅}
 ! Tensor /[𝑨-𝒁]/
 ! Tensor {𝑨 𝑩 𝑪 𝑫}
-! Operator /[𝓐-𝓩]/
-! Operator {𝓐 𝓑 𝓒 𝓓}
+! Unary /[𝓐-𝓩]/
+! Unary {𝓐 𝓑 𝓒 𝓓}
+## About binary operators
+! Commutative /[+*]/
+! Commutative {⨁}
+! NonCommutative /[-\/∧∨^√𝓵]/
+! NonCommutative {⨂}
+## About superscripts and subscripts
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
 ! Superscript {ᵃ ᵇ ᶜ ᵈ ᵉ ᶠ ᵍ ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ ʳ ˢ ᵗ ᵘ ᵛ ʷ ˣ ʸ ᶻ}
 ! Subscript /[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/
 ! Subscript {ₐ ₑ ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ ᵣ ₛ ₜ ᵤ ᵥ ₓ}
+# About groups
+! Group /[^()]*/
+! Group {Group1 Group2 Group3 Group4}
+! Set /[^{}]*/
+! Set {Set1 Set2 Set3 Set4}
+! List /[^\[\]]*/
+! List {List1 List2 List3 List4}
+# About slurps
+! Slurp /[^;]*/
+! Slurp {Slurp1 Slurp2 Slurp3 Slurp4}
+! Span /[^:=;]*/
+! Span {Span1 Span2 Span3 Span4}
+! Glob /\S*/
+! Glob {Glob1 Glob2 Glob3 Glob4}
+! .Clump /\S+/
+! .Clump {𝟘}
 ```
 ## Rules
 ```korekto
