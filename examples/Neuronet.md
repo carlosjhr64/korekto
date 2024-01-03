@@ -129,9 +129,9 @@ Sup{ʰ ⁱ ʲ ᵏ}	#S11/L4.KorektoMath Named set: Sup ʰ ⁱ ʲ ᵏ
 ## Subscript
 Sub{ₕ ᵢ ⱼ ₖ}	#S12/L4.KorektoMath Named set: Sub ₕ ᵢ ⱼ ₖ
 ### Next subscript
-ₕ₊ : ᵢ	#R13/M7.KorektoMath,S12 Next
-ᵢ₊ : ⱼ	#R14/M7.KorektoMath,S12 Next
-ⱼ₊ : ₖ	#R15/M7.KorektoMath,S12 Next
+ₕ₊ : ᵢ	#R13/M8.KorektoMath,S12 Next
+ᵢ₊ : ⱼ	#R14/M8.KorektoMath,S12 Next
+ⱼ₊ : ₖ	#R15/M8.KorektoMath,S12 Next
 ### Raise subscript
 ₕ⁺ : ʰ	#C16/I12.KorektoMath,S12,S11 Raise
 ᵢ⁺ : ⁱ	#C17/I13.KorektoMath,S12,S11 Raise

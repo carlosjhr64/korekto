@@ -83,10 +83,11 @@ Span1 = Span2;Span2 = Span1	#M3 Reflection
 Word1{Elements1}	#L4 Named set: { }
 Word1{Elements1𝟙Elements2};Word1[𝟙]	#M5 Membership: [ ]
 Word1[𝟙];𝟙 ∍ Word1	#M6 Element of: ∍
-# Next member operator
-Word1{Elements1𝟙 𝟚Elements2};𝟙₊ : 𝟚	#M7 Next: ₊
-Word1{Elements1𝟙 𝟚Elements2};𝟚₋ : 𝟙	#M8 Previous: ₋
-Word1.Word2 = (Word1.Word2)	#A9 Dot binds: . ( )
+# Methods
+Word1.Word2 = (Word1.Word2)	#A7 Dot binds: . ( )
+# Member operators
+Word1{Elements1𝟙 𝟚Elements2};𝟙₊ : 𝟚	#M8 Next: ₊
+Word1{Elements1𝟙 𝟚Elements2};𝟚₋ : 𝟙	#M9 Previous: ₋
 Word1{𝟙Elements1};Word1.first : 𝟙	#M10 : first
 Word1{Elements1𝟙};Word1.last : 𝟙	#M11 : last
 Word1{𝟙Elements1};Word2{𝟚Elements2};𝟙⁺ : 𝟚	#I12 Raise: ⁺
