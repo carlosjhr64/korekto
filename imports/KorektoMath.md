@@ -55,8 +55,8 @@ This is Korekto's standard math import.
 # About groups
 ! Group /[^()]*/
 ! Group {Group1 Group2 Group3 Group4}
-! Set /[^{}]*/
-! Set {Set1 Set2 Set3 Set4}
+! Elements /[^{}]*/
+! Elements {Elements1 Elements2 Elements3 Elements4}
 ! List /[^\[\]]*/
 ! List {List1 List2 List3 List4}
 # About slurps
@@ -76,19 +76,19 @@ Span1 : Span2	#L1 Equivalent:   :
 Span1 : Span2;Span1 = Span2	#M2 If equivalent, then equal: =
 Span1 = Span2;Span2 = Span1	#M3 Reflection
 # Sets
-Word1{Set1}	#L4 Named set: { }
-Word1{Set1𝟙Set2};Word1[𝟙]	#M5 Membership: [ ]
+Word1{Elements1}	#L4 Named set: { }
+Word1{Elements1𝟙Elements2};Word1[𝟙]	#M5 Membership: [ ]
 Word1[𝟙];𝟙 ∍ Word1	#M6 Element of: ∍
 # Next member operator
-Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M7 Next: ₊
-Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M8 Previous: ₋
+Word1{Elements1𝟙 𝟚Elements2};𝟙₊ : 𝟚	#M7 Next: ₊
+Word1{Elements1𝟙 𝟚Elements2};𝟚₋ : 𝟙	#M8 Previous: ₋
 Word1.Word2 = (Word1.Word2)	#A9 Dot binds: . ( )
-Word1{𝟙Set1};Word1.first : 𝟙	#M10 : first
-Word1{Set1𝟙};Word1.last : 𝟙	#M11 : last
-Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I12 Raise: ⁺
-Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I13 Raise
-Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I14 Raise
-Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I15 Raise
+Word1{𝟙Elements1};Word1.first : 𝟙	#M10 : first
+Word1{Elements1𝟙};Word1.last : 𝟙	#M11 : last
+Word1{𝟙Elements1};Word2{𝟚Elements2};𝟙⁺ : 𝟚	#I12 Raise: ⁺
+Word1{𝟘 𝟙Elements1};Word2{𝟘 𝟚Elements2};𝟙⁺ : 𝟚	#I13 Raise
+Word1{𝟘 𝟘 𝟙Elements1};Word2{𝟘 𝟘 𝟚Elements2};𝟙⁺ : 𝟚	#I14 Raise
+Word1{𝟘 𝟘 𝟘 𝟙Elements1};Word2{𝟘 𝟘 𝟘 𝟚Elements2};𝟙⁺ : 𝟚	#I15 Raise
 # Types
 Constant[𝖆]	#L16 Constant: Constant
 Scalar[𝑎]	#L17 Scalar: Scalar
