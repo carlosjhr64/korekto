@@ -125,6 +125,8 @@ The next level operator `₊` shifts the (context)index to the next level.
 ! Set {Set1 Set2 Set3 Set4}
 ! Word /\w+/
 ! Word {Word1 Word2 Word3 Word4}
+! Constant /[𝖆-𝖟]/
+! Constant {𝖆 𝖇 𝖈 𝖉}
 ! Scalar /[𝑎-𝑧]/
 ! Scalar {𝑎 𝑏 𝑐 𝑑}
 ! Vector /[𝒂-𝒛]/
@@ -149,76 +151,81 @@ Word1{Set1}	#L4 Named set: { }
 Word1{Set1𝟙Set2};Word1[𝟙]	#M5 Membership: [ ]
 Word1[𝟙];𝟙 ∍ Word1	#M6 Element of: ∍
 # Types
-Scalar[𝑎]	#L7 Scalar: Scalar
-Vector[𝒂]	#L8 Vector: Vector
-Tensor[𝑨]	#L9 Tensor: Tensor
-Operator[𝓐]	#L10 Operator: Operator
+Constant[𝖆]	#L7 Constant: Constant
+Scalar[𝑎]	#L8 Scalar: Scalar
+Vector[𝒂]	#L9 Vector: Vector
+Tensor[𝑨]	#L10 Tensor: Tensor
+Operator[𝓐]	#L11 Operator: Operator
 # Groups
-Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A11 Space groups with operator: ( )
-Group1 Group2 = (Group1)(Group2)	#A12 Space groups
-Span1 Group1 Span2 = Span1 (Group1) Span2	#A13 Space groups
-# Addition, Subtraction, Multiplication, Division
-𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M14 Adition-Subraction: + -
-𝟙-𝟙 = 0	#A15 Additive identity: 0
-𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M16 Multiplication-Division: * /
-𝟙/𝟙 = 1	#A17 Multiplicative identity: 1
-𝟙² : 𝟙*𝟙	#A18 Square: ²
+Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A12 Space groups with operator: ( )
+Group1 Group2 = (Group1)(Group2)	#A13 Space groups
+Span1 Group1 Span2 = Span1 (Group1) Span2	#A14 Space groups
+# Addition and Subtraction
+𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M15 Adition-Subraction: + -
+𝟙-𝟙 = 0	#A16 Additive identity: 0
+# Multiplication and Division
+𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M17 Multiplication-Division: * /
+𝟙/𝟙 = 1	#A18 Multiplicative identity: 1
+# Exponentiation, Logarithm, and Roots
 # Implied multiplication
-𝟙*𝟚 = 𝟙𝟚	#A19 Implied multiplication
-𝟙 𝟚 = 𝟙𝟚	#A20 Implied multiplcation
-(Group1)*(Group2) = Group1 Group2	#A21 Implied multiplication
-(Group1)*(Group2) = (Group1)(Group2)	#A22 Implied multiplication
+𝟙² : 𝟙*𝟙	#A19 Square: ²
+𝟙*𝟚 = 𝟙𝟚	#A20 Implied multiplication
+𝟙 𝟚 = 𝟙𝟚	#A21 Implied multiplcation
+(Group1)*(Group2) = Group1 Group2	#A22 Implied multiplication
+(Group1)*(Group2) = (Group1)(Group2)	#A23 Implied multiplication
 # Next member operator
-Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M23 Next: ₊
-Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M24 Previous: ₋
-Word1.Word2 = (Word1.Word2)	#A25 Dot binds: .
-Word1{𝟙Set1};Word1.first : 𝟙	#M26 : first
-Word1{Set1𝟙};Word1.last : 𝟙	#M27 : last
-Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I28 Raise: ⁺
-Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I29 Raise
-Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I30 Raise
-Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I31 Raise
+Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M24 Next: ₊
+Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M25 Previous: ₋
+Word1.Word2 = (Word1.Word2)	#A26 Dot binds: .
+Word1{𝟙Set1};Word1.first : 𝟙	#M27 : first
+Word1{Set1𝟙};Word1.last : 𝟙	#M28 : last
+Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I29 Raise: ⁺
+Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I30 Raise
+Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I31 Raise
+Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I32 Raise
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S32/L1 Equivalent: 2
-2+1 : 3	#S33/L1 Equivalent: 3
-3+1 : 4	#S34/L1 Equivalent: 4
-4+1 : 5	#S35/L1 Equivalent: 5
-5+1 : 6	#S36/L1 Equivalent: 6
-6+1 : 7	#S37/L1 Equivalent: 7
-7+1 : 8	#S38/L1 Equivalent: 8
-8+1 : 9	#S39/L1 Equivalent: 9
+1+1 : 2	#S33/L1 Equivalent: 2
+2+1 : 3	#S34/L1 Equivalent: 3
+3+1 : 4	#S35/L1 Equivalent: 4
+4+1 : 5	#S36/L1 Equivalent: 5
+5+1 : 6	#S37/L1 Equivalent: 6
+6+1 : 7	#S38/L1 Equivalent: 7
+7+1 : 8	#S39/L1 Equivalent: 8
+8+1 : 9	#S40/L1 Equivalent: 9
 # Types
-Scalar[𝑎]	#S40/L7 Scalar: 𝑎
-Scalar[𝑏]	#S41/L7 Scalar: 𝑏
-Scalar[𝑐]	#S42/L7 Scalar: 𝑐
-Scalar[𝑑]	#S43/L7 Scalar: 𝑑
-Vector[𝒂]	#S44/L8 Vector: 𝒂
-Vector[𝒃]	#S45/L8 Vector: 𝒃
-Vector[𝒄]	#S46/L8 Vector: 𝒄
-Vector[𝒅]	#S47/L8 Vector: 𝒅
-Tensor[𝑾]	#S48/L9 Tensor: 𝑾
+Scalar[𝑎]	#S41/L8 Scalar: 𝑎
+Scalar[𝑏]	#S42/L8 Scalar: 𝑏
+Scalar[𝑐]	#S43/L8 Scalar: 𝑐
+Scalar[𝑑]	#S44/L8 Scalar: 𝑑
+Vector[𝒂]	#S45/L9 Vector: 𝒂
+Vector[𝒃]	#S46/L9 Vector: 𝒃
+Vector[𝒄]	#S47/L9 Vector: 𝒄
+Vector[𝒅]	#S48/L9 Vector: 𝒅
+Tensor[𝑾]	#S49/L10 Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S49/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
+Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S50/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S50/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
+Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S51/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
 ### Next
-ₕ₊ : ᵢ	#R51/M23,S50 Next
-ᵢ₊ : ⱼ	#R52/M23,S50 Next
-ⱼ₊ : ₖ	#R53/M23,S50 Next
+ₕ₊ : ᵢ	#R52/M24,S51 Next
+ᵢ₊ : ⱼ	#R53/M24,S51 Next
+ⱼ₊ : ₖ	#R54/M24,S51 Next
 ### Raise
-ₕ⁺ : ʰ	#C54/I28,S50,S49 Raise
-ᵢ⁺ : ⁱ	#C55/I29,S50,S49 Raise
-ⱼ⁺ : ʲ	#C56/I30,S50,S49 Raise
-stop
+ₕ⁺ : ʰ	#C55/I29,S51,S50 Raise
+ᵢ⁺ : ⁱ	#C56/I30,S51,S50 Raise
+ⱼ⁺ : ʲ	#C57/I31,S51,S50 Raise
 ```
 ## Squash
 ```korekto
 # Please let:
-⌉(𝑥) := Math.exp(𝑥)
+Scalar[𝑥]	#S58/L8 Scalar: 𝑥
+Constant[𝖊]	#S59/L7 Constant: 𝖊
+⌉(𝑥) : Math.exp(𝑥) #P
+stop
 # Define the squash function:
 ⌈(𝑥) := 1 / (1 + Math.exp(-𝑥))
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))
