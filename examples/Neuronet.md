@@ -171,47 +171,48 @@ Span1 Group1 Span2 = Span1 (Group1) Span2	#A13 Space groups
 # Next member operator
 Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M23 Next: ₊
 Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M24 Previous: ₋
-Word1{𝟙Set1};Word1.first : 𝟙	#M25 : . first
-Word1{Set1𝟙};Word1.last : 𝟙	#M26 : last
-Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I27 Raise: ⁺
-Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I28 Raise
-Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I29 Raise
-Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I30 Raise
+Word1.Word2 = (Word1.Word2)	#A25 Dot binds: .
+Word1{𝟙Set1};Word1.first : 𝟙	#M26 : first
+Word1{Set1𝟙};Word1.last : 𝟙	#M27 : last
+Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I28 Raise: ⁺
+Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I29 Raise
+Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I30 Raise
+Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I31 Raise
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S31/L1 Equivalent: 2
-2+1 : 3	#S32/L1 Equivalent: 3
-3+1 : 4	#S33/L1 Equivalent: 4
-4+1 : 5	#S34/L1 Equivalent: 5
-5+1 : 6	#S35/L1 Equivalent: 6
-6+1 : 7	#S36/L1 Equivalent: 7
-7+1 : 8	#S37/L1 Equivalent: 8
-8+1 : 9	#S38/L1 Equivalent: 9
+1+1 : 2	#S32/L1 Equivalent: 2
+2+1 : 3	#S33/L1 Equivalent: 3
+3+1 : 4	#S34/L1 Equivalent: 4
+4+1 : 5	#S35/L1 Equivalent: 5
+5+1 : 6	#S36/L1 Equivalent: 6
+6+1 : 7	#S37/L1 Equivalent: 7
+7+1 : 8	#S38/L1 Equivalent: 8
+8+1 : 9	#S39/L1 Equivalent: 9
 # Types
-Scalar[𝑎]	#S39/L7 Scalar: 𝑎
-Scalar[𝑏]	#S40/L7 Scalar: 𝑏
-Scalar[𝑐]	#S41/L7 Scalar: 𝑐
-Scalar[𝑑]	#S42/L7 Scalar: 𝑑
-Vector[𝒂]	#S43/L8 Vector: 𝒂
-Vector[𝒃]	#S44/L8 Vector: 𝒃
-Vector[𝒄]	#S45/L8 Vector: 𝒄
-Vector[𝒅]	#S46/L8 Vector: 𝒅
-Tensor[𝑾]	#S47/L9 Tensor: 𝑾
+Scalar[𝑎]	#S40/L7 Scalar: 𝑎
+Scalar[𝑏]	#S41/L7 Scalar: 𝑏
+Scalar[𝑐]	#S42/L7 Scalar: 𝑐
+Scalar[𝑑]	#S43/L7 Scalar: 𝑑
+Vector[𝒂]	#S44/L8 Vector: 𝒂
+Vector[𝒃]	#S45/L8 Vector: 𝒃
+Vector[𝒄]	#S46/L8 Vector: 𝒄
+Vector[𝒅]	#S47/L8 Vector: 𝒅
+Tensor[𝑾]	#S48/L9 Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S48/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
+Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S49/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S49/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
+Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S50/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
 ### Next
-ₕ₊ : ᵢ	#R50/M23,S49 Next
-ᵢ₊ : ⱼ	#R51/M23,S49 Next
-ⱼ₊ : ₖ	#R52/M23,S49 Next
+ₕ₊ : ᵢ	#R51/M23,S50 Next
+ᵢ₊ : ⱼ	#R52/M23,S50 Next
+ⱼ₊ : ₖ	#R53/M23,S50 Next
 ### Raise
-ₕ⁺ : ʰ	#C53/I27,S49,S48 Raise
-ᵢ⁺ : ⁱ	#C54/I28,S49,S48 Raise
-ⱼ⁺ : ʲ	#C55/I29,S49,S48 Raise
+ₕ⁺ : ʰ	#C54/I28,S50,S49 Raise
+ᵢ⁺ : ⁱ	#C55/I29,S50,S49 Raise
+ⱼ⁺ : ʲ	#C56/I30,S50,S49 Raise
 stop
 ```
 ## Squash
