@@ -110,7 +110,7 @@ The next level operator `₊` shifts the (context)index to the next level.
 ? length < 66
 ! scanner: '\w+|.'
 ! Token /\w+|\S/
-! Token {𝟙 𝟚 𝟛 𝟜}
+! Token {𝟙 𝟚 𝟛 𝟜 𝟝 𝟞 𝟟 𝟠 𝟡}
 ! .Clump /\S+/
 ! .Clump {𝟘}
 ! .Newline /\n/
@@ -160,7 +160,7 @@ Span1 Group1 Span2 = Span1 (Group1) Span2	#A13 Space groups
 # Addition, Subtraction, Multiplication, Division
 𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M14 Adition-Subraction: + -
 𝟙-𝟙 = 0	#A15 Additive identity: 0
-𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M16 Adition-Subraction: * 𝟞 /
+𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M16 Multiplication-Division: * /
 𝟙/𝟙 = 1	#A17 Multiplicative identity: 1
 𝟙² : 𝟙*𝟙	#A18 Square: ²
 # Implied multiplication
@@ -201,9 +201,9 @@ Vector[𝒅]	#S46/L8 Vector: 𝒅
 Tensor[𝑾]	#S47/L9 Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ}	#S48/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ
+Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S48/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ}	#S49/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ
+Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S49/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
 ### Next
 ₕ₊ : ᵢ	#R50/M23,S49 Next
 ᵢ₊ : ⱼ	#R51/M23,S49 Next
