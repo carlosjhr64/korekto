@@ -13,7 +13,8 @@ and
 * Italic small(𝑎..𝑧): scalar variables
 * Bold italic small(𝒂..𝒛): single-indexed variables, vectors.
 * Bold italic capital(𝑨..𝒁): multi-indexed variables, matrices.
-* Bold script capital(𝓐..𝓩): operators, like 𝓓𝑥.
+* Bold script capital(𝓐..𝓩): unary operators, like 𝓓𝑥.
+* Bold script small(𝓪..𝔃): binary operators.
 * Double struck small(𝕒..𝕫): finite ordered sets.
 * Bold Fraktur small(𝖆..𝖟): derived constant parameters.
 
@@ -166,66 +167,70 @@ Span1 Group1 Span2 = Span1 (Group1) Span2	#A14 Space groups
 # Multiplication and Division
 𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M17 Multiplication-Division: * /
 𝟙/𝟙 = 1	#A18 Multiplicative identity: 1
-# Exponentiation, Logarithm, and Roots
-# Implied multiplication
 𝟙² : 𝟙*𝟙	#A19 Square: ²
-𝟙*𝟚 = 𝟙𝟚	#A20 Implied multiplication
-𝟙 𝟚 = 𝟙𝟚	#A21 Implied multiplcation
-(Group1)*(Group2) = Group1 Group2	#A22 Implied multiplication
-(Group1)*(Group2) = (Group1)(Group2)	#A23 Implied multiplication
+# Exponentiation, Roots, and Logarithm
+𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M20 Exponentiation-Root: ∧ ∨
+𝟚² = 𝟜;√𝟜 = 𝟚	#M21 Square Root: √
+# Logarithms
+𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M22 Exponentiation-Logarithm: 𝓵
+# Implied multiplication
+𝟙*𝟚 = 𝟙𝟚	#A23 Implied multiplication
+𝟙 𝟚 = 𝟙𝟚	#A24 Implied multiplcation
+(Group1)*(Group2) = Group1 Group2	#A25 Implied multiplication
+(Group1)*(Group2) = (Group1)(Group2)	#A26 Implied multiplication
 # Next member operator
-Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M24 Next: ₊
-Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M25 Previous: ₋
-Word1.Word2 = (Word1.Word2)	#A26 Dot binds: .
-Word1{𝟙Set1};Word1.first : 𝟙	#M27 : first
-Word1{Set1𝟙};Word1.last : 𝟙	#M28 : last
-Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I29 Raise: ⁺
-Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I30 Raise
-Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I31 Raise
-Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I32 Raise
+Word1{Set1𝟙 𝟚Set2};𝟙₊ : 𝟚	#M27 Next: ₊
+Word1{Set1𝟙 𝟚Set2};𝟚₋ : 𝟙	#M28 Previous: ₋
+Word1.Word2 = (Word1.Word2)	#A29 Dot binds: .
+Word1{𝟙Set1};Word1.first : 𝟙	#M30 : first
+Word1{Set1𝟙};Word1.last : 𝟙	#M31 : last
+Word1{𝟙Set1};Word2{𝟚Set2};𝟙⁺ : 𝟚	#I32 Raise: ⁺
+Word1{𝟘 𝟙Set1};Word2{𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I33 Raise
+Word1{𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I34 Raise
+Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I35 Raise
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S33/L1 Equivalent: 2
-2+1 : 3	#S34/L1 Equivalent: 3
-3+1 : 4	#S35/L1 Equivalent: 4
-4+1 : 5	#S36/L1 Equivalent: 5
-5+1 : 6	#S37/L1 Equivalent: 6
-6+1 : 7	#S38/L1 Equivalent: 7
-7+1 : 8	#S39/L1 Equivalent: 8
-8+1 : 9	#S40/L1 Equivalent: 9
+1+1 : 2	#S36/L1 Equivalent: 2
+2+1 : 3	#S37/L1 Equivalent: 3
+3+1 : 4	#S38/L1 Equivalent: 4
+4+1 : 5	#S39/L1 Equivalent: 5
+5+1 : 6	#S40/L1 Equivalent: 6
+6+1 : 7	#S41/L1 Equivalent: 7
+7+1 : 8	#S42/L1 Equivalent: 8
+8+1 : 9	#S43/L1 Equivalent: 9
 # Types
-Scalar[𝑎]	#S41/L8 Scalar: 𝑎
-Scalar[𝑏]	#S42/L8 Scalar: 𝑏
-Scalar[𝑐]	#S43/L8 Scalar: 𝑐
-Scalar[𝑑]	#S44/L8 Scalar: 𝑑
-Vector[𝒂]	#S45/L9 Vector: 𝒂
-Vector[𝒃]	#S46/L9 Vector: 𝒃
-Vector[𝒄]	#S47/L9 Vector: 𝒄
-Vector[𝒅]	#S48/L9 Vector: 𝒅
-Tensor[𝑾]	#S49/L10 Tensor: 𝑾
+Scalar[𝑎]	#S44/L8 Scalar: 𝑎
+Scalar[𝑏]	#S45/L8 Scalar: 𝑏
+Scalar[𝑐]	#S46/L8 Scalar: 𝑐
+Scalar[𝑑]	#S47/L8 Scalar: 𝑑
+Vector[𝒂]	#S48/L9 Vector: 𝒂
+Vector[𝒃]	#S49/L9 Vector: 𝒃
+Vector[𝒄]	#S50/L9 Vector: 𝒄
+Vector[𝒅]	#S51/L9 Vector: 𝒅
+Tensor[𝑾]	#S52/L10 Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S50/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
+Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S53/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S51/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
+Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S54/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
 ### Next
-ₕ₊ : ᵢ	#R52/M24,S51 Next
-ᵢ₊ : ⱼ	#R53/M24,S51 Next
-ⱼ₊ : ₖ	#R54/M24,S51 Next
+ₕ₊ : ᵢ	#R55/M27,S54 Next
+ᵢ₊ : ⱼ	#R56/M27,S54 Next
+ⱼ₊ : ₖ	#R57/M27,S54 Next
 ### Raise
-ₕ⁺ : ʰ	#C55/I29,S51,S50 Raise
-ᵢ⁺ : ⁱ	#C56/I30,S51,S50 Raise
-ⱼ⁺ : ʲ	#C57/I31,S51,S50 Raise
+ₕ⁺ : ʰ	#C58/I32,S54,S53 Raise
+ᵢ⁺ : ⁱ	#C59/I33,S54,S53 Raise
+ⱼ⁺ : ʲ	#C60/I34,S54,S53 Raise
 ```
 ## Squash
 ```korekto
 # Please let:
-Scalar[𝑥]	#S58/L8 Scalar: 𝑥
-Constant[𝖊]	#S59/L7 Constant: 𝖊
-⌉(𝑥) : Math.exp(𝑥) #P
+Scalar[𝑥]	#S61/L8 Scalar: 𝑥
+Constant[𝖊]	#S62/L7 Constant: 𝖊
 stop
+⌉(𝑥) : Math.exp(𝑥) #P
 # Define the squash function:
 ⌈(𝑥) := 1 / (1 + Math.exp(-𝑥))
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))
