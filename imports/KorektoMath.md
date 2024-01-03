@@ -40,12 +40,13 @@ This is Korekto's standard math import.
 ! Vector {𝒂 𝒃 𝒄 𝒅}
 ! Tensor /[𝑨-𝒁]/
 ! Tensor {𝑨 𝑩 𝑪 𝑫}
-! Unary /[𝓐-𝓩]/
-! Unary {𝓐 𝓑 𝓒 𝓓}
-! Binary /[𝓪-𝔃)]/
-! Binary {𝒶 𝒷 𝒸 𝒹}
 ! FiniteSet /[𝕒-𝕫]/
 ! FiniteSet {𝕒 𝕓 𝕔 𝕕}
+# About operators
+! Unary /[𝓐-𝓩]/
+! Unary {𝓐 𝓑 𝓒 𝓓}
+! Binary /[-+*\/∧∨^√𝓪-𝔃]/
+! Binary {⨀}
 ! Commutative /[+*]/
 ! Commutative {⨁}
 ! NonCommutative /[-\/∧∨^√𝓵]/
@@ -111,28 +112,23 @@ Operator[𝓐]	#L20 Operator: Operator
 # Logarithms
 𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M28 Exponentiation-Logarithm: 𝓵
 # Implied multiplication
-𝟙*𝟚 = 𝟙𝟚	#A29 Implied multiplication
-𝟙 𝟚 = 𝟙𝟚	#A30 Implied multiplcation
+𝑎*𝑏 = 𝑎𝑏	#A29 Implied scalar multiplication
 # Groups
-Group1 𝟙 Group2 = (Group1)𝟙(Group2)	#A31 Space groups with operator
-Group1 Group2 = (Group1)(Group2)	#A32 Space groups
-Span1 Group1 Span2 = Span1 (Group1) Span2	#A33 Space groups
-(Group1)*(Group2) = Group1 Group2	#A34 Implied multiplication
-(Group1)*(Group2) = (Group1)(Group2)	#A35 Implied multiplication
-Slurp1(𝟙)Slurp2;Slurp1𝟙Slurp2	#M36 Token
-Slurp1(-𝟙)Slurp2;Slurp1-𝟙Slurp2	#M37 -Token
-Slurp1(𝟙 + Group1)Slurp2;Slurp1(𝟙+Group1)Slurp2	#M38 Token+
-Slurp1 (Group1);Slurp1 Group1	#M39 Right space group
+Slurp1(𝟙)Slurp2;Slurp1𝟙Slurp2	#M30 Token
+Slurp1(-𝟙)Slurp2;Slurp1-𝟙Slurp2	#M31 -Token
+Slurp1(𝟙 ⨀ Group1)Slurp2;Slurp1(𝟙⨀Group1)Slurp2	#M32 Token⨀Group
+Slurp1 (Group1);Slurp1 Group1	#M33 Right group
+(Group1) Slurp1;Group1 Slurp1	#M34 Left group
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S40/L1 Equivalent: 2
-2+1 : 3	#S41/L1 Equivalent: 3
-3+1 : 4	#S42/L1 Equivalent: 4
-4+1 : 5	#S43/L1 Equivalent: 5
-5+1 : 6	#S44/L1 Equivalent: 6
-6+1 : 7	#S45/L1 Equivalent: 7
-7+1 : 8	#S46/L1 Equivalent: 8
-8+1 : 9	#S47/L1 Equivalent: 9
+1+1 : 2	#S35/L1 Equivalent: 2
+2+1 : 3	#S36/L1 Equivalent: 3
+3+1 : 4	#S37/L1 Equivalent: 4
+4+1 : 5	#S38/L1 Equivalent: 5
+5+1 : 6	#S39/L1 Equivalent: 6
+6+1 : 7	#S40/L1 Equivalent: 7
+7+1 : 8	#S41/L1 Equivalent: 8
+8+1 : 9	#S42/L1 Equivalent: 9
 ```
