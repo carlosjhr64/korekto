@@ -201,34 +201,52 @@ Word1{𝟘 𝟘 𝟘 𝟙Set1};Word2{𝟘 𝟘 𝟘 𝟚Set2};𝟙⁺ : 𝟚	#I3
 7+1 : 8	#S42/L1 Equivalent: 8
 8+1 : 9	#S43/L1 Equivalent: 9
 # Types
-Scalar[𝑎]	#S44/L8 Scalar: 𝑎
-Scalar[𝑏]	#S45/L8 Scalar: 𝑏
-Scalar[𝑐]	#S46/L8 Scalar: 𝑐
-Scalar[𝑑]	#S47/L8 Scalar: 𝑑
-Vector[𝒂]	#S48/L9 Vector: 𝒂
-Vector[𝒃]	#S49/L9 Vector: 𝒃
-Vector[𝒄]	#S50/L9 Vector: 𝒄
-Vector[𝒅]	#S51/L9 Vector: 𝒅
-Tensor[𝑾]	#S52/L10 Tensor: 𝑾
+Scalar[𝑥]	#S44/L8 Scalar: 𝑥
+Scalar[𝑎]	#S45/L8 Scalar: 𝑎
+Scalar[𝑏]	#S46/L8 Scalar: 𝑏
+Scalar[𝑐]	#S47/L8 Scalar: 𝑐
+Scalar[𝑑]	#S48/L8 Scalar: 𝑑
+Vector[𝒂]	#S49/L9 Vector: 𝒂
+Vector[𝒃]	#S50/L9 Vector: 𝒃
+Vector[𝒄]	#S51/L9 Vector: 𝒄
+Vector[𝒅]	#S52/L9 Vector: 𝒅
+Tensor[𝑾]	#S53/L10 Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S53/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
+Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S54/L4 Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S54/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
+Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S55/L4 Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
 ### Next
-ₕ₊ : ᵢ	#R55/M27,S54 Next
-ᵢ₊ : ⱼ	#R56/M27,S54 Next
-ⱼ₊ : ₖ	#R57/M27,S54 Next
+ₕ₊ : ᵢ	#R56/M27,S55 Next
+ᵢ₊ : ⱼ	#R57/M27,S55 Next
+ⱼ₊ : ₖ	#R58/M27,S55 Next
 ### Raise
-ₕ⁺ : ʰ	#C58/I32,S54,S53 Raise
-ᵢ⁺ : ⁱ	#C59/I33,S54,S53 Raise
-ⱼ⁺ : ʲ	#C60/I34,S54,S53 Raise
+ₕ⁺ : ʰ	#C59/I32,S55,S54 Raise
+ᵢ⁺ : ⁱ	#C60/I33,S55,S54 Raise
+ⱼ⁺ : ʲ	#C61/I34,S55,S54 Raise
+# Euler's number ~ 2.718⋯
+Constant[𝖊]	#S62/L7 Constant: 𝖊
+# Natural Exponentiation and Log
+𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M63 Natural log
+𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M64 Natural exponentiation
+```
+## Natural exponentiation function
+```korekto
+# In Ruby, the natural exponenction funtion is:
+#     Math.exp(x) == Math::E**x #=> true
+# Here its:
+⌉(𝑥) : 𝖊∧𝑥	#S65/L1 Equivalent: ⌉
+# In Ruby, the natural log funtion is:
+#     y = Math.exp(x)
+#     Math.log(y) == x #=> true
+# Here its:
+⌊(𝑥) : 𝖊𝓵𝑥	#S66/L1 Equivalent: ⌊
+stop
 ```
 ## Squash
 ```korekto
 # Please let:
 Scalar[𝑥]	#S61/L8 Scalar: 𝑥
-Constant[𝖊]	#S62/L7 Constant: 𝖊
 stop
 ⌉(𝑥) : Math.exp(𝑥) #P
 # Define the squash function:
