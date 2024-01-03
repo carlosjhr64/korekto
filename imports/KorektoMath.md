@@ -46,11 +46,9 @@ This is Korekto's standard math import.
 ! Unary /[𝓐-𝓩]/
 ! Unary {𝓐 𝓑 𝓒 𝓓}
 ! Binary /[-+*\/∧∨^√𝓪-𝔃]/
-! Binary {⨀}
+! Binary {𝓫}
 ! Commutative /[+*]/
-! Commutative {⨁}
-! NonCommutative /[-\/∧∨^√𝓵]/
-! NonCommutative {⨂}
+! Commutative {𝓬}
 ## About superscripts and subscripts
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
 ! Superscript {ᵃ ᵇ ᶜ ᵈ ᵉ ᶠ ᵍ ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ ʳ ˢ ᵗ ᵘ ᵛ ʷ ˣ ʸ ᶻ}
@@ -116,7 +114,7 @@ Operator[𝓐]	#L20 Operator: Operator
 # Groups
 Slurp1(𝟙)Slurp2;Slurp1𝟙Slurp2	#M30 Token
 Slurp1(-𝟙)Slurp2;Slurp1-𝟙Slurp2	#M31 -Token
-Slurp1(𝟙 ⨀ Group1)Slurp2;Slurp1(𝟙⨀Group1)Slurp2	#M32 Token⨀Group
+Slurp1(𝟙 𝓫 Group1)Slurp2;Slurp1(𝟙𝓫Group1)Slurp2	#M32 Token*Group
 Slurp1 (Group1);Slurp1 Group1	#M33 Right group
 (Group1) Slurp1;Group1 Slurp1	#M34 Left group
 ```

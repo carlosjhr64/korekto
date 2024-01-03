@@ -125,14 +125,14 @@ Vector[𝒅]	#S9/L18.KorektoMath Vector: 𝒅
 Tensor[𝑾]	#S10/L19.KorektoMath Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ}	#S11/L4.KorektoMath Named set: Sup ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ
+Sup{ʰ ⁱ ʲ ᵏ}	#S11/L4.KorektoMath Named set: Sup ʰ ⁱ ʲ ᵏ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ}	#S12/L4.KorektoMath Named set: Sub ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ
-### Next
+Sub{ₕ ᵢ ⱼ ₖ}	#S12/L4.KorektoMath Named set: Sub ₕ ᵢ ⱼ ₖ
+### Next subscript
 ₕ₊ : ᵢ	#R13/M7.KorektoMath,S12 Next
 ᵢ₊ : ⱼ	#R14/M7.KorektoMath,S12 Next
 ⱼ₊ : ₖ	#R15/M7.KorektoMath,S12 Next
-### Raise
+### Raise subscript
 ₕ⁺ : ʰ	#C16/I12.KorektoMath,S12,S11 Raise
 ᵢ⁺ : ⁱ	#C17/I13.KorektoMath,S12,S11 Raise
 ⱼ⁺ : ʲ	#C18/I14.KorektoMath,S12,S11 Raise
@@ -163,7 +163,7 @@ Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R25/M2.KorektoMath,S24 If equivalent, then equal
 ⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R26/M30.KorektoMath,R25 Token
 ⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R27/M31.KorektoMath,R26 -Token
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R28/M32.KorektoMath,R27 Token⨀Group
+⌈𝑥 = 1 / (1+⌉-𝑥)	#R28/M32.KorektoMath,R27 Token*Group
 ⌈𝑥 = 1 / 1+⌉-𝑥	#R29/M33.KorektoMath,R28 Right group
 stop
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))
