@@ -42,7 +42,10 @@ This is Korekto's standard math import.
 ! Tensor {𝑨 𝑩 𝑪 𝑫}
 ! Unary /[𝓐-𝓩]/
 ! Unary {𝓐 𝓑 𝓒 𝓓}
-## About binary operators
+! Binary /[𝓪-𝔃)]/
+! Binary {𝒶 𝒷 𝒸 𝒹}
+! FiniteSet /[𝕒-𝕫]/
+! FiniteSet {𝕒 𝕓 𝕔 𝕕}
 ! Commutative /[+*]/
 ! Commutative {⨁}
 ! NonCommutative /[-\/∧∨^√𝓵]/
@@ -57,8 +60,8 @@ This is Korekto's standard math import.
 ! Group {Group1 Group2 Group3 Group4}
 ! Elements /[^{}]*/
 ! Elements {Elements1 Elements2 Elements3 Elements4}
-! List /[^\[\]]*/
-! List {List1 List2 List3 List4}
+! Parameters /[^\[\]]*/
+! Parameters {Parameters1 Parameters2 Parameters3 Parameters4}
 # About slurps
 ! Slurp /[^;]*/
 ! Slurp {Slurp1 Slurp2 Slurp3 Slurp4}
