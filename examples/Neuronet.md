@@ -137,7 +137,6 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S12/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ 
 ⱼ⁺ : ʲ	#C18/I14.KorektoMath,S12,S11 Raise
 # Euler's number ~ 2.718⋯
 Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
-stop
 # Natural Exponentiation and Log
 𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M20 Natural log
 𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M21 Natural exponentiation
@@ -149,32 +148,28 @@ stop
 # Here its:
 ⌉(𝑥) : 𝖊∧(𝑥)	#S22/L1.KorektoMath Equivalent: ⌉
 ⌉(𝑥) = 𝖊∧(𝑥)	#R23/M2.KorektoMath,S22 If equivalent, then equal
-⌉(Group1) = 𝖊∧(Group1)	#A24/R23
-⌉𝑥 = 𝖊∧(𝑥)	#R25/M32.KorektoMath,R23 Token
-⌉𝑥 = 𝖊∧𝑥	#R26/M32.KorektoMath,R25 Token
+⌉(Q1) = 𝖊∧(Q1)	#A24/R23
+⌉𝑥 = 𝖊∧(𝑥)	#R25/M36.KorektoMath,R23 Token ungroup
+⌉𝑥 = 𝖊∧𝑥	#R26/M36.KorektoMath,R25 Token ungroup
 # Prove 𝖊∧0 = 1
-𝖊∧0 = 𝖊∧0	#T27/A4.KorektoMath Reflection
-𝑥-𝑥 = 0	#T28/A23.KorektoMath Additive identity
-0 = 𝑥-𝑥	#R29/M3.KorektoMath,T28 Symetry
-𝖊∧0 = 𝖊∧(𝑥-𝑥)	#C30/I41.KorektoMath,R29,T27 Token substitutes Group
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R31/M50.KorektoMath,C30 Adding a negative
-𝖊∧0 = 𝖊∧𝑥𝖊∧-𝑥	#R32/M48.KorektoMath,R31 Adding exponents to common base
-𝖊∧0 = 𝖊∧𝑥(𝖊∧-𝑥)	#R33/M46.KorektoMath,R32 Tight binding
+𝖊∧0 = 𝖊∧0	#T27/A47.KorektoMath Reflection
+𝑥 - 𝑥 = 0	#T28/A27.KorektoMath Additive identity
+𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C29/I59.KorektoMath,T28,T27 Group substitutes token
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R30/M64.KorektoMath,C29 Adding a negative
+𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R31/M66.KorektoMath,R30 Adding exponents to common base
+𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R32/M45.KorektoMath,R31 Tight binding
+𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R33/M45.KorektoMath,R32 Tight binding
 # Just take the following as a fact:
-𝖊∧(-𝑥) = 1/𝖊∧(𝑥)	#P34
-𝖊∧(-Group1) = 1/𝖊∧(Group1)	#A35/P34 Reciprocal
-𝖊∧-𝑥 = 1/𝖊∧(𝑥)	#R36/M32.KorektoMath,P34 Token
-𝖊∧-𝑥 = 1/𝖊∧𝑥	#R37/M32.KorektoMath,R36 Token
+𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)	#P34 Equivalent reciprical
+𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R35/M36.KorektoMath,P34 Token ungroup
+𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R36/M36.KorektoMath,R35 Token ungroup
 # Then:
-𝖊∧0 = 𝖊∧𝑥(1/𝖊∧𝑥)	#C38/I43.KorektoMath,R37,R33 Group substitutes Group
-𝖊∧0 = (𝖊∧𝑥)(1/𝖊∧𝑥)	#R39/M46.KorektoMath,C38 Tight binding
-𝖊∧0 = (𝖊∧𝑥*1/𝖊∧𝑥)	#R40/M51.KorektoMath,R39 Group*Group
-𝖊∧0 = (𝖊∧𝑥*(1)/𝖊∧𝑥)	#R41/M52.KorektoMath,R40 Grouping Token
-𝖊∧0 = ((𝖊∧𝑥)*(1)/𝖊∧𝑥)	#R42/M46.KorektoMath,R41 Tight binding
-𝖊∧0 = ((𝖊∧𝑥)/𝖊∧𝑥)	#R43/M53.KorektoMath,R42 Identity
-𝖊∧0 = ((𝖊∧𝑥)/(𝖊∧𝑥))	#R44/M46.KorektoMath,R43 Tight binding
-(𝖊∧𝑥)/(𝖊∧𝑥) = 1	#T45/A26.KorektoMath a/a=1
-𝖊∧0 = 1	#C46/I44.KorektoMath,T45,R44 Token substitutes Span
+𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C37/I62.KorektoMath,R36,R33 Group substitutes group
+𝖊∧0 = (𝖊∧𝑥 / 𝖊∧𝑥)	#R38/M48.KorektoMath,C37 x*(1/y)=(x/y)
+𝖊∧𝑥 / 𝖊∧𝑥 = 1	#T39/A24.KorektoMath a/a=1
+𝖊∧0 = (1)	#C40/I62.KorektoMath,T39,R38 Group substitutes group
+𝖊∧0 = 1	#R41/M36.KorektoMath,C40 Token ungroup
+stop
 ```
 ## Natural logarithm function
 ```korekto

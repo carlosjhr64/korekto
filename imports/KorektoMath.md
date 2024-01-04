@@ -177,37 +177,40 @@ S1𝓊𝟙∧u2𝟚S2;S1(𝓊𝟙∧u2𝟚)S2	#M45 Tight binding
 N1 = N2;N2 = N1	#M46 Symetry
 N1 = N1	#A47 Reflection
 # Multiplication by one
-S1 (Q1) / (Q2);S1 𝓊𝟙(Q1) / 𝓊𝟙(Q2)	#M48 (x/x)*
-S1*1 S2;S1 S2	#M49 *one
-S1 1*S2;S1 S2	#M50 one*
-S1*1*S2;S1*S2	#M51 *one*
-S1𝟙(1)S2;S1𝟙S2	#M52 Token(one)
-S1(1)𝟙S2;S1𝟙S2	#M53 (one)Token
-S1(Q1)(1)S2;S1(Q1)S2	#M54 Group(one)
-S1(1)(Q1)S2;S1(Q1)S2	#M55 (one)Group
+S1(q1)*(1 / q2)S2;S1(q1 / q2)S2	#M48 x*(1/y)=(x/y)
+S1 (Q1) / (Q2);S1 𝓊𝟙(Q1) / 𝓊𝟙(Q2)	#M49 (x/x)*
+S1*1 S2;S1 S2	#M50 *one
+S1 1*S2;S1 S2	#M51 one*
+S1*1*S2;S1*S2	#M52 *one*
+S1𝟙(1)S2;S1𝟙S2	#M53 Token(one)
+S1(1)𝟙S2;S1𝟙S2	#M54 (one)Token
+S1(Q1)(1)S2;S1(Q1)S2	#M55 Group(one)
+S1(1)(Q1)S2;S1(Q1)S2	#M56 (one)Group
 # Distribute
-S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M56 Distribute
+S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M57 Distribute
 # Substitution
-𝓊𝟙 = N1;S1𝓊𝟙S2;S1(N1)S2	#I57 Group substitutes token
-𝓊𝟙 = N1;S1(N1)S2;S1𝓊𝟙S2	#I58 Token substitutes group
-N1 = N2;S1(N2)S2;S1(N1)S2	#I59 Group substitutes group
+𝓊𝟙 = N1;S1𝓊𝟙S2;S1(N1)S2	#I58 Group substitutes token
+N1 = 𝓊𝟙;S1𝓊𝟙S2;S1(N1)S2	#I59 Group substitutes token
+𝓊𝟙 = N1;S1(N1)S2;S1𝓊𝟙S2	#I60 Token substitutes group
+N1 = N2;S1(N2)S2;S1(N1)S2	#I61 Group substitutes group
+N1 = N2;S1(N1)S2;S1(N2)S2	#I62 Group substitutes group
 # Adding
-S1(𝟙 + -𝟚)S2;S1(𝟙 - 𝟚)S2	#M60 Adding a negative
-S1(𝟙 - 𝟚)S2;S1(𝟙 + -𝟚)S2	#M61 Adding a negative
-S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚+u3𝟛)S2	#M62 Adding exponents to common base
-S1𝓊𝟙∧(u2𝟚+u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M63 Adding exponents to common base
+S1(𝟙 + -𝟚)S2;S1(𝟙 - 𝟚)S2	#M63 Adding a negative
+S1(𝟙 - 𝟚)S2;S1(𝟙 + -𝟚)S2	#M64 Adding a negative
+S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2	#M65 Adding exponents to common base
+S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M66 Adding exponents to common base
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S64/L1 Equivalent: 2
-2+1 : 3	#S65/L1 Equivalent: 3
-3+1 : 4	#S66/L1 Equivalent: 4
-4+1 : 5	#S67/L1 Equivalent: 5
-5+1 : 6	#S68/L1 Equivalent: 6
-6+1 : 7	#S69/L1 Equivalent: 7
-7+1 : 8	#S70/L1 Equivalent: 8
-8+1 : 9	#S71/L1 Equivalent: 9
+1+1 : 2	#S67/L1 Equivalent: 2
+2+1 : 3	#S68/L1 Equivalent: 3
+3+1 : 4	#S69/L1 Equivalent: 4
+4+1 : 5	#S70/L1 Equivalent: 5
+5+1 : 6	#S71/L1 Equivalent: 6
+6+1 : 7	#S72/L1 Equivalent: 7
+7+1 : 8	#S73/L1 Equivalent: 8
+8+1 : 9	#S74/L1 Equivalent: 9
 ```
 # TODO
 
