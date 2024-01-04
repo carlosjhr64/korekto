@@ -112,6 +112,7 @@ I will be importing [KorektoMath](../imports/KorektoMath.md).
 ### Introductions
 ```korekto
 < imports/KorektoMath.md
+? length < 80
 # Types
 Scalar[𝑥]	#S1/L18.KorektoMath Scalar: 𝑥
 Scalar[𝑎]	#S2/L18.KorektoMath Scalar: 𝑎
