@@ -130,81 +130,84 @@ Scalar[𝑎]	#L17 Scalar: Scalar
 Vector[𝒂]	#L18 Vector: Vector
 Tensor[𝑨]	#L19 Tensor: Tensor
 Operator[𝓐]	#L20 Operator: Operator
-# Addition and Subtraction
-𝟙+𝟚 = 𝟛;𝟛-𝟚 = 𝟙	#M21 Adition-Subraction: + -
-𝟙-𝟙 = 0	#A22 Additive identity: 0
 # Multiplication and Division
-𝟚*𝟛 = 𝟞;𝟞/𝟛 = 𝟚	#M23 Multiplication-Division: * /
-𝟙/𝟙 = 1	#A24 Multiplicative identity: 1
-𝟙² : 𝟙*𝟙	#A25 Square: ²
+𝟚 * 𝟛 = 𝟞;𝟞 / 𝟛 = 𝟚	#M21 Multiplication-Division: * /
+𝟙 / 𝟙 = 1	#A22 Multiplicative identity: 1
+1 / 1 = 1	#T23/A22 Multiplicative identity
+q1 / q1 = 1	#A24/T23 a/a=1
+𝟙² : 𝟙 * 𝟙	#A25 Square: ²
+# Addition and Subtraction
+𝟙 + 𝟚 = 𝟛;𝟛 - 𝟚 = 𝟙	#M26 Adition-Subraction: + -
+𝟙 - 𝟙 = 0	#A27 Additive identity: 0
+1 - 1 = 0	#T28/A27 Additive identity
+q1 - q1 = 0	#A29/T28 a-a=0
 # Exponentiation, Roots, and Logarithm
-𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M26 Exponentiation-Root: ∧ ∨
-𝟚² = 𝟜;√𝟜 = 𝟚	#M27 Square Root: √
+𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M30 Exponentiation-Root: ∧ ∨
+𝟚² = 𝟜;√𝟜 = 𝟚	#M31 Square Root: √
 # Logarithms
-𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M28 Exponentiation-Logarithm: 𝓵
+𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M32 Exponentiation-Logarithm: 𝓵
 ```
 ### Implied multiplication
 ```korekto
-S1*𝓊𝟙S2;S1𝓊𝟙S2	#M29 *Token
+S1*𝓊𝟙S2;S1𝓊𝟙S2	#M33 *Token
+S1(q1)(q2)S2;S1(q1 * q2)S2	#M34 Group*Group
 ```
 ### Spacing
 ```korekto
-S1(u1𝟙 𝒷 u2𝟚)S2;S1(u1𝟙𝒷u2𝟚)S2	#M30 Token.Token
+S1(u1𝟙 𝒷 u2𝟚)S2;S1(u1𝟙𝒷u2𝟚)S2	#M35 Token.Token
 ```
 ## Groups
 ```korekto
 # Group/Space
-S1(𝓊𝟙)S2;S1𝓊𝟙S2	#M31 Token ungroup
-S1𝓊𝟙S2;S1(𝓊𝟙)S2	#M32 Token group
-S1(q1);S1 q1	#M33 Right space
-S1 q1;S1(q1)	#M34 Right group
-(q1)S1;q1 S1	#M35 Seft space
-q1 S1;(q1)S1	#M36 Seft group
-S1(q1)S2;S1 q1 S2	#M37 Context space
-S1 q1 S2;S1(q1)S2	#M38 Context group
+S1(𝓊𝟙)S2;S1𝓊𝟙S2	#M36 Token ungroup
+S1𝓊𝟙S2;S1(𝓊𝟙)S2	#M37 Token group
+S1(q1);S1 q1	#M38 Right space
+S1 q1;S1(q1)	#M39 Right group
+(q1)S1;q1 S1	#M40 Seft space
+q1 S1;(q1)S1	#M41 Seft group
+S1(q1)S2;S1 q1 S2	#M42 Context space
+S1 q1 S2;S1(q1)S2	#M43 Context group
+# Group binding
+S1(𝓊𝟙∧u2𝟚)S2;S1𝓊𝟙∧u2𝟚S2	#M44 Tight binding
+S1𝓊𝟙∧u2𝟚S2;S1(𝓊𝟙∧u2𝟚)S2	#M45 Tight binding
 ```
 ## Algebra
 ```korekto
 # Equality
-N1 = N2;N2 = N1	#M39 Symetry
-N1 = N1	#A40 Reflection
+N1 = N2;N2 = N1	#M46 Symetry
+N1 = N1	#A47 Reflection
 # Multiplication by one
-S1 (Q1) / (Q2);S1 𝓊𝟙(Q1) / 𝓊𝟙(Q2)	#M41 (x/x)*
-S1𝟙(1)S2;S1𝟙S2	#M42 Token(one)
-S1(1)𝟙S2;S1𝟙S2	#M43 (one)Token
-S1*1 S2;S1 S2	#M44 *one
-S1 1*S2;S1 S2	#M45 one*
-S1*1*S2;S1*S2	#M46 *one*
+S1 (Q1) / (Q2);S1 𝓊𝟙(Q1) / 𝓊𝟙(Q2)	#M48 (x/x)*
+S1*1 S2;S1 S2	#M49 *one
+S1 1*S2;S1 S2	#M50 one*
+S1*1*S2;S1*S2	#M51 *one*
+S1𝟙(1)S2;S1𝟙S2	#M52 Token(one)
+S1(1)𝟙S2;S1𝟙S2	#M53 (one)Token
+S1(Q1)(1)S2;S1(Q1)S2	#M54 Group(one)
+S1(1)(Q1)S2;S1(Q1)S2	#M55 (one)Group
 # Distribute
-S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M47 Distribute
+S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M56 Distribute
 # Substitution
-stop
-𝓊𝟙 = Group1;Slurp1𝓊𝟙Slurp2;Slurp1(Group1)Slurp2	#I41 Token substitutes Group
-Group1 = 𝓊𝟙;Slurp1(Group1)Slurp2;Slurp1𝓊𝟙Slurp2	#I42 Group substitutes Token
-Group1 = Group2;Slurp1(Group1)Slurp2;Slurp1(Group2)Slurp2	#I43 Group substitutes Group
-Span1 = 𝓊𝟙;Slurp1(Span1)Slurp2;Slurp1𝓊𝟙Slurp2	#I44 Token substitutes Span
-Slurp1(𝟙∧𝓊𝟚)Slurp2;Slurp1𝟙∧𝓊𝟚Slurp2	#M45 Tight binding
-Slurp1𝟙∧𝓊𝟚Slurp2;Slurp1(𝟙∧𝓊𝟚)Slurp2	#M46 Tight binding
-Slurp1𝟙∧𝟚𝟙∧𝓊𝟛Slurp2;Slurp1𝟙∧(𝟚 + 𝓊𝟛)Slurp2	#M47 Adding exponents to common base
-Slurp1𝟙∧(𝟚 + 𝓊𝟛)Slurp2;Slurp1𝟙∧𝟚𝟙∧𝓊𝟛Slurp2	#M48 Adding exponents to common base
-Slurp1(𝟙 + -𝟚)Slurp2;Slurp1(𝟙 - 𝟚)Slurp2	#M49 Adding a negative
-Slurp1(𝟙-𝟚)Slurp2;Slurp1(𝟙 + -𝟚)Slurp2	#M50 Adding a negative
-Slurp1(Group1)(Group2)Slurp2;Slurp1(Group1*Group2)Slurp2	#M51 Group*Group
-Slurp1𝓊𝟙Slurp2;Slurp1(𝓊𝟙)Slurp2	#M52 Grouping Token
-Slurp1(Group1)*(1)Slurp2;Slurp1(Group1)Slurp2	#M53 Identity
+𝓊𝟙 = N1;S1𝓊𝟙S2;S1(N1)S2	#I57 Group substitutes token
+𝓊𝟙 = N1;S1(N1)S2;S1𝓊𝟙S2	#I58 Token substitutes group
+N1 = N2;S1(N2)S2;S1(N1)S2	#I59 Group substitutes group
+# Adding
+S1(𝟙 + -𝟚)S2;S1(𝟙 - 𝟚)S2	#M60 Adding a negative
+S1(𝟙 - 𝟚)S2;S1(𝟙 + -𝟚)S2	#M61 Adding a negative
+S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚+u3𝟛)S2	#M62 Adding exponents to common base
+S1𝓊𝟙∧(u2𝟚+u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M63 Adding exponents to common base
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S54/L1 Equivalent: 2
-2+1 : 3	#S55/L1 Equivalent: 3
-3+1 : 4	#S56/L1 Equivalent: 4
-4+1 : 5	#S57/L1 Equivalent: 5
-5+1 : 6	#S58/L1 Equivalent: 6
-6+1 : 7	#S59/L1 Equivalent: 7
-7+1 : 8	#S60/L1 Equivalent: 8
-8+1 : 9	#S61/L1 Equivalent: 9
-stop
-Q1 - Q2 = 0	#A25
-Q1 / Q1 = 1	#A28 a/a=1
+1+1 : 2	#S64/L1 Equivalent: 2
+2+1 : 3	#S65/L1 Equivalent: 3
+3+1 : 4	#S66/L1 Equivalent: 4
+4+1 : 5	#S67/L1 Equivalent: 5
+5+1 : 6	#S68/L1 Equivalent: 6
+6+1 : 7	#S69/L1 Equivalent: 7
+7+1 : 8	#S70/L1 Equivalent: 8
+8+1 : 9	#S71/L1 Equivalent: 9
 ```
+# TODO
+
