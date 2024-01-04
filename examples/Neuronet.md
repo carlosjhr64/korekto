@@ -149,27 +149,26 @@ Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 ⌉(𝑥) : 𝖊∧(𝑥)	#S22/L1.KorektoMath Equivalent: ⌉
 ⌉(𝑥) = 𝖊∧(𝑥)	#R23/M2.KorektoMath,S22 If equivalent, then equal
 ⌉(Q1) = 𝖊∧(Q1)	#A24/R23
-⌉𝑥 = 𝖊∧(𝑥)	#R25/M36.KorektoMath,R23 Token ungroup
-⌉𝑥 = 𝖊∧𝑥	#R26/M36.KorektoMath,R25 Token ungroup
+⌉𝑥 = 𝖊∧(𝑥)	#R25/M49.KorektoMath,R23 Token un-groupep
+⌉𝑥 = 𝖊∧𝑥	#R26/M49.KorektoMath,R25 Token un-groupep
 # Prove 𝖊∧0 = 1
-𝖊∧0 = 𝖊∧0	#T27/A47.KorektoMath Reflection
-𝑥 - 𝑥 = 0	#T28/A27.KorektoMath Additive identity
-𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C29/I59.KorektoMath,T28,T27 Group substitutes token
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R30/M65.KorektoMath,C29 Adding a negative
-𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R31/M67.KorektoMath,R30 Adding exponents to common base
-𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R32/M45.KorektoMath,R31 Tight binding
-𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R33/M45.KorektoMath,R32 Tight binding
+𝖊∧0 = 𝖊∧0	#T27/A60.KorektoMath Reflection
+𝑥 - 𝑥 = 0	#T28/A29.KorektoMath Additive identity
+𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C29/I73.KorektoMath,T28,T27 Group substitutes token
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R30/M81.KorektoMath,C29 Adding a negative
+𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R31/M83.KorektoMath,R30 Adding exponents to common base
+𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R32/M58.KorektoMath,R31 Tight binding
+𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R33/M58.KorektoMath,R32 Tight binding
 # Just take the following as a fact:
 𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)	#P34 Equivalent reciprical
-𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R35/M36.KorektoMath,P34 Token ungroup
-𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R36/M36.KorektoMath,R35 Token ungroup
+𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R35/M49.KorektoMath,P34 Token un-groupep
+𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R36/M49.KorektoMath,R35 Token un-groupep
 # Then:
-𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C37/I63.KorektoMath,R36,R33 Group substitutes group
-𝖊∧0 = (𝖊∧𝑥 / 𝖊∧𝑥)	#R38/M48.KorektoMath,C37 x*(1/y)=(x/y)
-𝖊∧𝑥 / 𝖊∧𝑥 = 1	#T39/A24.KorektoMath a/a=1
-𝖊∧0 = (1)	#C40/I63.KorektoMath,T39,R38 Group substitutes group
-𝖊∧0 = 1	#R41/M36.KorektoMath,C40 Token ungroup
-stop
+𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C37/I77.KorektoMath,R36,R33 Group substitutes group
+𝖊∧0 = (𝖊∧𝑥 / 𝖊∧𝑥)	#R38/M62.KorektoMath,C37 x*(1/y)=(x/y)
+𝖊∧𝑥 / 𝖊∧𝑥 = 1	#T39/A25.KorektoMath a/a=1
+𝖊∧0 = (1)	#C40/I77.KorektoMath,T39,R38 Group substitutes group
+𝖊∧0 = 1	#R41/M49.KorektoMath,C40 Token un-groupep
 ```
 ## Natural logarithm function
 ```korekto
@@ -177,11 +176,34 @@ stop
 #     y = Math.exp(x)
 #     Math.log(y) == x #=> true
 # Here its:
-⌊(𝑥) : 𝖊𝓵(𝑥)	#S47/L1.KorektoMath Equivalent: ⌊
-⌊(𝑥) = 𝖊𝓵(𝑥)	#R48/M2.KorektoMath,S47 If equivalent, then equal
-⌊(Group1) = 𝖊𝓵(Group1)	#A49/R48
-⌊𝑥 = 𝖊𝓵(𝑥)	#R50/M32.KorektoMath,R48 Token
-⌊𝑥 = 𝖊𝓵𝑥	#R51/M32.KorektoMath,R50 Token
+⌊(𝑥) : 𝖊𝓵(𝑥)	#S42/L1.KorektoMath Equivalent: ⌊
+⌊(𝑥) = 𝖊𝓵(𝑥)	#R43/M2.KorektoMath,S42 If equivalent, then equal
+⌊(Q1) = 𝖊𝓵(Q1)	#A44/R43
+⌊𝑥 = 𝖊𝓵(𝑥)	#R45/M49.KorektoMath,R43 Token un-groupep
+⌊𝑥 = 𝖊𝓵𝑥	#R46/M49.KorektoMath,R45 Token un-groupep
+# If 𝖊∧0 = 1, then 𝖊𝓵1 = 0 by definition of 𝓵
+𝖊𝓵1 = 0	#R47/M42.KorektoMath,R41 Exponentiation-Logarithm
+# Prove ⌉(⌊(𝑥)) = x
+⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T48/A60.KorektoMath Reflection
+# I first contract the right side's notation
+⌉(⌊𝑥) = ⌉(⌊(𝑥))	#R49/M49.KorektoMath,T48 Token un-groupep
+⌉(⌊𝑥) = ⌉(⌊𝑥)	#T50/A60.KorektoMath Reflection
+⌉(⌊𝑥) = ⌉⌊𝑥	#R51/M49.KorektoMath,T50 Token un-groupep
+# Now I just considert the right side
+⌉⌊𝑥 = ⌉⌊𝑥	#T52/A60.KorektoMath Reflection
+# I expand the right side by definitions
+⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C53/I72.KorektoMath,R46,T52 Group substitutes token
+⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T54/A24
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C55/I79.KorektoMath,T54,C53 Group substitutes left
+⌉⌊𝑥 = (𝖊)∧(𝖊𝓵𝑥)	#R56/M50.KorektoMath,C55 Token grouped
+# OK, now I' invoke the definition of Log to get ⌉⌊𝑥
+(𝖊)∧(𝖊𝓵𝑥) = ⌉⌊𝑥	#R57/M59.KorektoMath,R56 Symetry
+(𝖊)𝓵(⌉⌊𝑥) = 𝖊𝓵𝑥	#R58/M44.KorektoMath,R57 By defintion of 𝓵
+𝖊𝓵(⌉⌊𝑥) = 𝖊𝓵𝑥	#R59/M49.KorektoMath,R58 Token un-groupep
+𝖊𝓵(⌉⌊𝑥) = 𝖊𝓵(𝑥)	#R60/M50.KorektoMath,R59 Token grouped
+# I then notice the two equivalent groups and extract them
+⌉⌊𝑥 = 𝑥	#R61/M61.KorektoMath,R60 Equivalent groups
+stop
 ```
 ## Squash
 ```korekto

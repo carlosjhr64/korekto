@@ -132,84 +132,89 @@ Tensor[𝑨]	#L19 Tensor: Tensor
 Operator[𝓐]	#L20 Operator: Operator
 # Multiplication and Division
 𝟚 * 𝟛 = 𝟞;𝟞 / 𝟛 = 𝟚	#M21 Multiplication-Division: * /
-𝟙 / 𝟙 = 1	#A22 Multiplicative identity: 1
-1 / 1 = 1	#T23/A22 Multiplicative identity
-q1 / q1 = 1	#A24/T23 a/a=1
-𝟙² : 𝟙 * 𝟙	#A25 Square: ²
+𝟞 / 𝟛 = 𝟚;𝟚 * 𝟛 = 𝟞	#M22 Multiplication-Division
+𝟙 / 𝟙 = 1	#A23 Multiplicative identity: 1
+1 / 1 = 1	#T24/A23 Multiplicative identity
+q1 / q1 = 1	#A25/T24 a/a=1
+𝟙² : 𝟙 * 𝟙	#A26 Square: ²
 # Addition and Subtraction
-𝟙 + 𝟚 = 𝟛;𝟛 - 𝟚 = 𝟙	#M26 Adition-Subraction: + -
-𝟙 - 𝟙 = 0	#A27 Additive identity: 0
-1 - 1 = 0	#T28/A27 Additive identity
-q1 - q1 = 0	#A29/T28 a-a=0
+𝟙 + 𝟚 = 𝟛;𝟛 - 𝟚 = 𝟙	#M27 Adition-Subraction: + -
+𝟛 - 𝟚 = 𝟙;𝟙 + 𝟚 = 𝟛	#M28 Adition-Subraction
+𝟙 - 𝟙 = 0	#A29 Additive identity: 0
+1 - 1 = 0	#T30/A29 Additive identity
+q1 - q1 = 0	#A31/T30 a-a=0
+# Digits
+1+1 : 2	#S32/L1 Equivalent: 2
+2+1 : 3	#S33/L1 Equivalent: 3
+3+1 : 4	#S34/L1 Equivalent: 4
+4+1 : 5	#S35/L1 Equivalent: 5
+5+1 : 6	#S36/L1 Equivalent: 6
+6+1 : 7	#S37/L1 Equivalent: 7
+7+1 : 8	#S38/L1 Equivalent: 8
+8+1 : 9	#S39/L1 Equivalent: 9
 # Exponentiation, Roots, and Logarithm
-𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M30 Exponentiation-Root: ∧ ∨
-𝟚² = 𝟜;√𝟜 = 𝟚	#M31 Square Root: √
+𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M40 Exponentiation-Root: ∧ ∨
+𝟚² = 𝟜;√𝟜 = 𝟚	#M41 Square Root: √
 # Logarithms
-𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M32 Exponentiation-Logarithm: 𝓵
+𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M42 Exponentiation-Logarithm: 𝓵
+𝟚𝓵𝟠 = 𝟛;𝟚∧𝟛 = 𝟠	#M43 Exponentiation-Logarithm
+(N1)∧(N2) = N3;(N1)𝓵(N3) = N2	#M44 By defintion of 𝓵
+(N1)𝓵(N3) = N2;(N1)∧(N2) = N3	#M45 By defintion of 𝓵
 ```
 ### Implied multiplication
 ```korekto
-S1*𝓊𝟙S2;S1𝓊𝟙S2	#M33 *Token
-S1(q1)(q2)S2;S1(q1 * q2)S2	#M34 Group*Group
+S1*𝓊𝟙S2;S1𝓊𝟙S2	#M46 *Token
+S1(q1)(q2)S2;S1(q1 * q2)S2	#M47 Group*Group
 ```
 ### Spacing
 ```korekto
-S1(u1𝟙 𝒷 u2𝟚)S2;S1(u1𝟙𝒷u2𝟚)S2	#M35 Token.Token
+S1(u1𝟙 𝒷 u2𝟚)S2;S1(u1𝟙𝒷u2𝟚)S2	#M48 Token.Token
 ```
 ## Groups
 ```korekto
 # Group/Space
-S1(𝓊𝟙)S2;S1𝓊𝟙S2	#M36 Token ungroup
-S1𝓊𝟙S2;S1(𝓊𝟙)S2	#M37 Token group
-S1(q1);S1 q1	#M38 Right space
-S1 q1;S1(q1)	#M39 Right group
-(q1)S1;q1 S1	#M40 Seft space
-q1 S1;(q1)S1	#M41 Seft group
-S1(q1)S2;S1 q1 S2	#M42 Context space
-S1 q1 S2;S1(q1)S2	#M43 Context group
+S1(𝓊𝟙)S2;S1𝓊𝟙S2	#M49 Token un-groupep
+S1𝓊𝟙S2;S1(𝓊𝟙)S2	#M50 Token grouped
+S1(q1);S1 q1	#M51 Right space
+S1 q1;S1(q1)	#M52 Right group
+(q1)S1;q1 S1	#M53 Seft space
+q1 S1;(q1)S1	#M54 Seft group
+S1(q1)S2;S1 q1 S2	#M55 Context space
+S1 q1 S2;S1(q1)S2	#M56 Context group
 # Group binding
-S1(𝓊𝟙∧u2𝟚)S2;S1𝓊𝟙∧u2𝟚S2	#M44 Tight binding
-S1𝓊𝟙∧u2𝟚S2;S1(𝓊𝟙∧u2𝟚)S2	#M45 Tight binding
+S1(𝓊𝟙∧u2𝟚)S2;S1𝓊𝟙∧u2𝟚S2	#M57 Tight binding
+S1𝓊𝟙∧u2𝟚S2;S1(𝓊𝟙∧u2𝟚)S2	#M58 Tight binding
 ```
 ## Algebra
 ```korekto
 # Equality
-N1 = N2;N2 = N1	#M46 Symetry
-N1 = N1	#A47 Reflection
+N1 = N2;N2 = N1	#M59 Symetry
+N1 = N1	#A60 Reflection
+N1(N2)N3 = N1(𝒩)N3;N2 = 𝒩	#M61 Equivalent groups
 # Multiplication by one
-S1(q1)*(1 / q2)S2;S1(q1 / q2)S2	#M48 x*(1/y)=(x/y)
-S1 (Q1) / (Q2);S1 𝓊𝟙(Q1) / 𝓊𝟙(Q2)	#M49 (x/x)*
-S1*1 S2;S1 S2	#M50 *one
-S1 1*S2;S1 S2	#M51 one*
-S1*1*S2;S1*S2	#M52 *one*
-S1𝟙(1)S2;S1𝟙S2	#M53 Token(one)
-S1(1)𝟙S2;S1𝟙S2	#M54 (one)Token
-S1(Q1)(1)S2;S1(Q1)S2	#M55 Group(one)
-S1(1)(Q1)S2;S1(Q1)S2	#M56 (one)Group
+S1(q1)*(1 / q2)S2;S1(q1 / q2)S2	#M62 x*(1/y)=(x/y)
+S1 (Q1) / (Q2);S1 𝓊𝟙(Q1) / 𝓊𝟙(Q2)	#M63 (x/x)*
+S1*1 S2;S1 S2	#M64 *one
+S1 1*S2;S1 S2	#M65 one*
+S1*1*S2;S1*S2	#M66 *one*
+S1𝟙(1)S2;S1𝟙S2	#M67 Token(one)
+S1(1)𝟙S2;S1𝟙S2	#M68 (one)Token
+S1(Q1)(1)S2;S1(Q1)S2	#M69 Group(one)
+S1(1)(Q1)S2;S1(Q1)S2	#M70 (one)Group
 # Distribute
-S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M57 Distribute
+S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M71 Distribute
 # Substitution
-𝓊𝟙 = N1;S1𝓊𝟙S2;S1(N1)S2	#I58 Group substitutes token
-N1 = 𝓊𝟙;S1𝓊𝟙S2;S1(N1)S2	#I59 Group substitutes token
-𝓊𝟙 = N1;S1(N1)S2;S1𝓊𝟙S2	#I60 Token substitutes group
-N1 = N1;S1(N1)S2;S1𝓊𝟙S2	#I61 Token substitutes group
-N1 = N2;S1(N2)S2;S1(N1)S2	#I62 Group substitutes group
-N1 = N2;S1(N1)S2;S1(N2)S2	#I63 Group substitutes group
+𝓊𝟙 = N1;S1𝓊𝟙S2;S1(N1)S2	#I72 Group substitutes token
+N1 = 𝓊𝟙;S1𝓊𝟙S2;S1(N1)S2	#I73 Group substitutes token
+𝓊𝟙 = N1;S1(N1)S2;S1𝓊𝟙S2	#I74 Token substitutes group
+N1 = 𝓊𝟙;S1(N1)S2;S1𝓊𝟙S2	#I75 Token substitutes group
+N1 = N2;S1(N2)S2;S1(N1)S2	#I76 Group substitutes group
+N2 = N1;S1(N2)S2;S1(N1)S2	#I77 Group substitutes group
+N1 = N2;S1 N2;S1 N1	#I78 Group substitutes left
+N2 = N1;S1 N2;S1 N1	#I79 Group substitutes left
 # Adding
-S1(𝟙 + -𝟚)S2;S1(𝟙 - 𝟚)S2	#M64 Adding a negative
-S1(𝟙 - 𝟚)S2;S1(𝟙 + -𝟚)S2	#M65 Adding a negative
-S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2	#M66 Adding exponents to common base
-S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M67 Adding exponents to common base
-```
-## Introductions
-```korekto
-# Digits
-1+1 : 2	#S68/L1 Equivalent: 2
-2+1 : 3	#S69/L1 Equivalent: 3
-3+1 : 4	#S70/L1 Equivalent: 4
-4+1 : 5	#S71/L1 Equivalent: 5
-5+1 : 6	#S72/L1 Equivalent: 6
-6+1 : 7	#S73/L1 Equivalent: 7
-7+1 : 8	#S74/L1 Equivalent: 8
-8+1 : 9	#S75/L1 Equivalent: 9
+S1(𝟙 + -𝟚)S2;S1(𝟙 - 𝟚)S2	#M80 Adding a negative
+S1(𝟙 - 𝟚)S2;S1(𝟙 + -𝟚)S2	#M81 Adding a negative
+S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2	#M82 Adding exponents to common base
+S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M83 Adding exponents to common base
 ```
