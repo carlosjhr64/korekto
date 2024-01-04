@@ -23,7 +23,11 @@ This is Korekto's standard math import.
 With some exceptions, there are three types of keys:
 
 * Numbered Latin ASCII keys: `W1 W2 W3`
+  * lower case will not match spaces
+  * upper case may match spaces
 * Mathematical script small Latin: `𝓌`
+  * lower case will no match spaces
+  * upper case may match spaces
 * Representative `ABC`
 
 ```korekto
@@ -40,67 +44,61 @@ With some exceptions, there are three types of keys:
 ## About token types
 ### Constant
 ! Constant /[𝖆-𝖟]/
-! Constant {C1 C2 C3 𝖆 𝖇 𝖈}
+! Constant {𝖆 𝖇 𝖈}
 ### Scalar
-#### Using R for "Real"
 ! Scalar /[𝑎-𝑧]/
-! Scalar {R1 R2 R3 𝑎 𝑏 𝑐}
+! Scalar {𝑎 𝑏 𝑐}
 ### Vector
 ! Vector /[𝒂-𝒛]/
-! Vector {V1 V2 V3 𝒂 𝒃 𝒄}
+! Vector {𝒂 𝒃 𝒄}
 ### Tensor
-#### Using M for "Matrix"
 ! Tensor /[𝑨-𝒁]/
-! Tensor {M1 M2 M3 𝑨 𝑩 𝑪}
+! Tensor {𝑨 𝑩 𝑪}
 ### Set
 ! Set /[𝕒-𝕫]/
-! Set {S1 S2 S3 𝕒 𝕓 𝕔}
+! Set {𝕒 𝕓 𝕔}
 ### Type
 ! Type /[𝔸-𝕐]/
-! Type {T1 T2 T3 𝔸 𝔹}
+! Type {𝔸 𝔹}
 ## About operators
 ### Unary
 ! Unary /[-𝓐-𝓩⌈⌉⌊⌋]/
-! Unary {U1 U2 U3 𝓐 𝓑 𝓒}
+! Unary {𝓐 𝓑 𝓒}
 ! Unaries /[-𝓐-𝓩⌈⌉⌊⌋]*/
 ! Unaries {u1 u2 u3 𝓊}
 ### Binary
 ! Binary /[-+*\/∧∨^√𝓪-𝔃]/
-! Binary {B1 B2 B3 𝒷}
+! Binary {b1 b2 b3 𝒷}
 ! Commutative /[+*]/
 ! Commutative {c1 c2 c3 𝒸}
 ## About superscripts and subscripts
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
-! Superscript {j1 j2 j3 ⁱ ʲ ᵏ}
+! Superscript {ⁱ ʲ ᵏ}
 ! Subscript /[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/
-! Subscript {i1 i2 i3 ᵢ ⱼ ₖ}
+! Subscript {ᵢ ⱼ ₖ}
 # About groups
 ## Group
-#### Using q here because g is missing
-! Group /[^()]*/
-! Group {Q1 Q2 Q3 𝓆}
+! Group /[^()]+/
+! Group {Q1 Q2 Q3 𝒬}
+! GroupGlob /[^()\s]+/
+! GroupGlob {q1 q2 q3 𝓆}
 ## Elements
-##### Using z here because e is missing
 ! Elements /[^{}]*/
-! Elements {Z1 Z2 Z3 𝓏}
+! Elements {Z1 Z2 Z3 𝒵}
 ## Parameters
-! Parameters /[^\[\]]*/
-! Parameters {P1 P2 P3 𝓅}
+! Parameters /[^\[\]]+/
+! Parameters {P1 P2 P3 𝒫}
 # About slurps
 ## Slurp
-#### Using l because s was used by Symbol
 ! Slurp /[^;]*/
-! Slurp {L1 L2 L3 𝓁}
+! Slurp {S1 S2 S3 𝒮}
 ## Span
-#### Using n because s and p was used by Symbol and Parameters
 ! Span /[^:=;]*/
-! Span {N1 N2 N3 𝓃}
+! Span {N1 N2 N3 𝒩}
 ## Glob
-#### Using x because g and o are missing, and b was used by Binary
 ! Glob /\S*/
 ! Glob {X1 X2 X3 𝓍}
 ## Clump
-#### Using m because c,l,m,p are used being used above.
 ! .Clump /\S+/
 ! .Clump {m0 𝓂}
 ```
@@ -113,8 +111,8 @@ N1 : N2;N1 = N2	#M2 If equivalent, then equal: =
 w1{Z1}	#L3 Named set: { }
 w1{Z1𝟙Z2};w1[𝟙]	#M4 Membership: [ ]
 w1[𝟙];𝟙 ∍ w1	#M5 Element of: ∍
-# Groups
-L1 Q1 L2;L1(Q1)L2	#M6 Space group: ( )
+# Group
+N1 : (N1)	#A6 Group: ( )
 # Methods
 w1.w2 = (w1.w2)	#A7 Dot binds: .
 # Member operators
@@ -145,24 +143,42 @@ Operator[𝓐]	#L20 Operator: Operator
 # Logarithms
 𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M28 Exponentiation-Logarithm: 𝓵
 ```
+### Implied multiplication
+```korekto
+S1*𝓊𝟙S2;S1𝓊𝟙S2	#M29 *Token
+```
+### Spacing
+```korekto
+S1(u1𝟙 𝒷 u2𝟚)S2;S1(u1𝟙𝒷u2𝟚)S2	#M30 Token.Token
+```
+## Groups
+```korekto
+# Group/Space
+S1(𝓊𝟙)S2;S1𝓊𝟙S2	#M31 Token ungroup
+S1𝓊𝟙S2;S1(𝓊𝟙)S2	#M32 Token group
+S1(q1);S1 q1	#M33 Right space
+S1 q1;S1(q1)	#M34 Right group
+(q1)S1;q1 S1	#M35 Seft space
+q1 S1;(q1)S1	#M36 Seft group
+S1(q1)S2;S1 q1 S2	#M37 Context space
+S1 q1 S2;S1(q1)S2	#M38 Context group
+```
 ## Algebra
 ```korekto
-N1 = N2;N2 = N1	#M29 Symetry
-N1 = N1	#A30 Reflection
+# Equality
+N1 = N2;N2 = N1	#M39 Symetry
+N1 = N1	#A40 Reflection
+# Multiplication by one
+S1 (Q1) / (Q2);S1 𝓊𝟙(Q1) / 𝓊𝟙(Q2)	#M41 (x/x)*
+S1𝟙(1)S2;S1𝟙S2	#M42 Token(one)
+S1(1)𝟙S2;S1𝟙S2	#M43 (one)Token
+S1*1 S2;S1 S2	#M44 *one
+S1 1*S2;S1 S2	#M45 one*
+S1*1*S2;S1*S2	#M46 *one*
+# Distribute
+S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M47 Distribute
+# Substitution
 stop
-# Implied multiplication
-Slurp1*𝓊𝟙Slurp2;Slurp1𝓊𝟙Slurp2	#M31 Implied multiplication
-# Groups
-Slurp1(𝓊𝟙)Slurp2;Slurp1𝓊𝟙Slurp2	#M32 Token
-Slurp1(𝟙 𝒷 𝓊𝟚)Slurp2;Slurp1(𝟙𝒷𝓊𝟚)Slurp2	#M33 Token*Token
-Slurp1 (Group1);Slurp1 Group1	#M34 Right space group
-(Group1) Slurp1;Group1 Slurp1	#M35 Left speace group
-Slurp1 Group1 Slurp2;Slurp1 (Group1) Slurp2	#M36 Group
-# Algebra
-Slurp1 (Group1) / (Group2);Slurp1 𝓊𝟙(Group1) / 𝓊𝟙(Group2)	#M37 Multiplying by x/x
-Slurp1𝟙(1)Slurp2;Slurp1𝟙Slurp2	#M38 Multiplying by one
-Slurp1*1 Slurp2;Slurp1 Slurp2	#M39 Multiplying by one
-Slurp1𝓊𝟙(Group1 + Group2)Slurp2;Slurp1(𝓊𝟙*Group1 + 𝓊𝟙*Group2)Slurp2	#M40 Distribute
 𝓊𝟙 = Group1;Slurp1𝓊𝟙Slurp2;Slurp1(Group1)Slurp2	#I41 Token substitutes Group
 Group1 = 𝓊𝟙;Slurp1(Group1)Slurp2;Slurp1𝓊𝟙Slurp2	#I42 Group substitutes Token
 Group1 = Group2;Slurp1(Group1)Slurp2;Slurp1(Group2)Slurp2	#I43 Group substitutes Group
