@@ -112,33 +112,32 @@ I will be importing [KorektoMath](../imports/KorektoMath.md).
 ### Introductions
 ```korekto
 < imports/KorektoMath.md
-? length < 80
+? length < 50
 # Types
-Scalar[𝑥]	#S1/L18.KorektoMath Scalar: 𝑥
-Scalar[𝑎]	#S2/L18.KorektoMath Scalar: 𝑎
-Scalar[𝑏]	#S3/L18.KorektoMath Scalar: 𝑏
-Scalar[𝑐]	#S4/L18.KorektoMath Scalar: 𝑐
-Scalar[𝑑]	#S5/L18.KorektoMath Scalar: 𝑑
-Vector[𝒂]	#S6/L19.KorektoMath Vector: 𝒂
-Vector[𝒃]	#S7/L19.KorektoMath Vector: 𝒃
-Vector[𝒄]	#S8/L19.KorektoMath Vector: 𝒄
-Vector[𝒅]	#S9/L19.KorektoMath Vector: 𝒅
-Tensor[𝑾]	#S10/L20.KorektoMath Tensor: 𝑾
+Scalar[𝑥]	#S1/L17.KorektoMath Scalar: 𝑥
+Scalar[𝑎]	#S2/L17.KorektoMath Scalar: 𝑎
+Scalar[𝑏]	#S3/L17.KorektoMath Scalar: 𝑏
+Scalar[𝑐]	#S4/L17.KorektoMath Scalar: 𝑐
+Scalar[𝑑]	#S5/L17.KorektoMath Scalar: 𝑑
+Vector[𝒂]	#S6/L18.KorektoMath Vector: 𝒂
+Vector[𝒃]	#S7/L18.KorektoMath Vector: 𝒃
+Vector[𝒄]	#S8/L18.KorektoMath Vector: 𝒄
+Vector[𝒅]	#S9/L18.KorektoMath Vector: 𝒅
+Tensor[𝑾]	#S10/L19.KorektoMath Tensor: 𝑾
 # Indeces
-## Superscript
-Sup{ʰ ⁱ ʲ ᵏ}	#S11/L5.KorektoMath Named set: Sup ʰ ⁱ ʲ ᵏ
-## Subscript
-Sub{ₕ ᵢ ⱼ ₖ}	#S12/L5.KorektoMath Named set: Sub ₕ ᵢ ⱼ ₖ
+Supercript{ʰ ⁱ ʲ ᵏ}	#S11/L3.KorektoMath Named set: Supercript ʰ ⁱ ʲ ᵏ
+Subscript{ₕ ᵢ ⱼ ₖ}	#S12/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ ₖ
 ### Next subscript
-ₕ₊ : ᵢ	#R13/M9.KorektoMath,S12 Next
-ᵢ₊ : ⱼ	#R14/M9.KorektoMath,S12 Next
-ⱼ₊ : ₖ	#R15/M9.KorektoMath,S12 Next
+ₕ₊ : ᵢ	#R13/M8.KorektoMath,S12 Next
+ᵢ₊ : ⱼ	#R14/M8.KorektoMath,S12 Next
+ⱼ₊ : ₖ	#R15/M8.KorektoMath,S12 Next
 ### Raise subscript
-ₕ⁺ : ʰ	#C16/I13.KorektoMath,S12,S11 Raise
-ᵢ⁺ : ⁱ	#C17/I14.KorektoMath,S12,S11 Raise
-ⱼ⁺ : ʲ	#C18/I15.KorektoMath,S12,S11 Raise
+ₕ⁺ : ʰ	#C16/I12.KorektoMath,S12,S11 Raise
+ᵢ⁺ : ⁱ	#C17/I13.KorektoMath,S12,S11 Raise
+ⱼ⁺ : ʲ	#C18/I14.KorektoMath,S12,S11 Raise
 # Euler's number ~ 2.718⋯
-Constant[𝖊]	#S19/L17.KorektoMath Constant: 𝖊
+Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
+stop
 # Natural Exponentiation and Log
 𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M20 Natural log
 𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M21 Natural exponentiation
