@@ -113,31 +113,31 @@ I will be importing [KorektoMath](../imports/KorektoMath.md).
 ```korekto
 < imports/KorektoMath.md
 # Types
-Scalar[𝑥]	#S1/L17.KorektoMath Scalar: 𝑥
-Scalar[𝑎]	#S2/L17.KorektoMath Scalar: 𝑎
-Scalar[𝑏]	#S3/L17.KorektoMath Scalar: 𝑏
-Scalar[𝑐]	#S4/L17.KorektoMath Scalar: 𝑐
-Scalar[𝑑]	#S5/L17.KorektoMath Scalar: 𝑑
-Vector[𝒂]	#S6/L18.KorektoMath Vector: 𝒂
-Vector[𝒃]	#S7/L18.KorektoMath Vector: 𝒃
-Vector[𝒄]	#S8/L18.KorektoMath Vector: 𝒄
-Vector[𝒅]	#S9/L18.KorektoMath Vector: 𝒅
-Tensor[𝑾]	#S10/L19.KorektoMath Tensor: 𝑾
+Scalar[𝑥]	#S1/L18.KorektoMath Scalar: 𝑥
+Scalar[𝑎]	#S2/L18.KorektoMath Scalar: 𝑎
+Scalar[𝑏]	#S3/L18.KorektoMath Scalar: 𝑏
+Scalar[𝑐]	#S4/L18.KorektoMath Scalar: 𝑐
+Scalar[𝑑]	#S5/L18.KorektoMath Scalar: 𝑑
+Vector[𝒂]	#S6/L19.KorektoMath Vector: 𝒂
+Vector[𝒃]	#S7/L19.KorektoMath Vector: 𝒃
+Vector[𝒄]	#S8/L19.KorektoMath Vector: 𝒄
+Vector[𝒅]	#S9/L19.KorektoMath Vector: 𝒅
+Tensor[𝑾]	#S10/L20.KorektoMath Tensor: 𝑾
 # Indeces
 ## Superscript
-Sup{ʰ ⁱ ʲ ᵏ}	#S11/L4.KorektoMath Named set: Sup ʰ ⁱ ʲ ᵏ
+Sup{ʰ ⁱ ʲ ᵏ}	#S11/L5.KorektoMath Named set: Sup ʰ ⁱ ʲ ᵏ
 ## Subscript
-Sub{ₕ ᵢ ⱼ ₖ}	#S12/L4.KorektoMath Named set: Sub ₕ ᵢ ⱼ ₖ
+Sub{ₕ ᵢ ⱼ ₖ}	#S12/L5.KorektoMath Named set: Sub ₕ ᵢ ⱼ ₖ
 ### Next subscript
-ₕ₊ : ᵢ	#R13/M8.KorektoMath,S12 Next
-ᵢ₊ : ⱼ	#R14/M8.KorektoMath,S12 Next
-ⱼ₊ : ₖ	#R15/M8.KorektoMath,S12 Next
+ₕ₊ : ᵢ	#R13/M9.KorektoMath,S12 Next
+ᵢ₊ : ⱼ	#R14/M9.KorektoMath,S12 Next
+ⱼ₊ : ₖ	#R15/M9.KorektoMath,S12 Next
 ### Raise subscript
-ₕ⁺ : ʰ	#C16/I12.KorektoMath,S12,S11 Raise
-ᵢ⁺ : ⁱ	#C17/I13.KorektoMath,S12,S11 Raise
-ⱼ⁺ : ʲ	#C18/I14.KorektoMath,S12,S11 Raise
+ₕ⁺ : ʰ	#C16/I13.KorektoMath,S12,S11 Raise
+ᵢ⁺ : ⁱ	#C17/I14.KorektoMath,S12,S11 Raise
+ⱼ⁺ : ʲ	#C18/I15.KorektoMath,S12,S11 Raise
 # Euler's number ~ 2.718⋯
-Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
+Constant[𝖊]	#S19/L17.KorektoMath Constant: 𝖊
 # Natural Exponentiation and Log
 𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M20 Natural log
 𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M21 Natural exponentiation
@@ -147,24 +147,84 @@ Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 # In Ruby, the natural exponentiation funtion is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
-⌉(𝑥) : 𝖊∧𝑥	#S22/L1.KorektoMath Equivalent: ⌉
+⌉(𝑥) : 𝖊∧(𝑥)	#S22/L1.KorektoMath Equivalent: ⌉
+⌉(𝑥) = 𝖊∧(𝑥)	#R23/M2.KorektoMath,S22 If equivalent, then equal
+⌉(Group1) = 𝖊∧(Group1)	#A24/R23
+⌉𝑥 = 𝖊∧(𝑥)	#R25/M32.KorektoMath,R23 Token
+⌉𝑥 = 𝖊∧𝑥	#R26/M32.KorektoMath,R25 Token
+# Prove 𝖊∧0 = 1
+𝖊∧0 = 𝖊∧0	#T27/A4.KorektoMath Reflection
+𝑥-𝑥 = 0	#T28/A23.KorektoMath Additive identity
+0 = 𝑥-𝑥	#R29/M3.KorektoMath,T28 Symetry
+𝖊∧0 = 𝖊∧(𝑥-𝑥)	#C30/I41.KorektoMath,R29,T27 Token substitutes Group
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R31/M50.KorektoMath,C30 Adding a negative
+𝖊∧0 = 𝖊∧𝑥𝖊∧-𝑥	#R32/M48.KorektoMath,R31 Adding exponents to common base
+𝖊∧0 = 𝖊∧𝑥(𝖊∧-𝑥)	#R33/M46.KorektoMath,R32 Tight binding
+# Just take the following as a fact:
+𝖊∧(-𝑥) = 1/𝖊∧(𝑥)	#P34
+𝖊∧(-Group1) = 1/𝖊∧(Group1)	#A35/P34 Reciprocal
+𝖊∧-𝑥 = 1/𝖊∧(𝑥)	#R36/M32.KorektoMath,P34 Token
+𝖊∧-𝑥 = 1/𝖊∧𝑥	#R37/M32.KorektoMath,R36 Token
+# Then:
+𝖊∧0 = 𝖊∧𝑥(1/𝖊∧𝑥)	#C38/I43.KorektoMath,R37,R33 Group substitutes Group
+𝖊∧0 = (𝖊∧𝑥)(1/𝖊∧𝑥)	#R39/M46.KorektoMath,C38 Tight binding
+𝖊∧0 = (𝖊∧𝑥*1/𝖊∧𝑥)	#R40/M51.KorektoMath,R39 Group*Group
+𝖊∧0 = (𝖊∧𝑥*(1)/𝖊∧𝑥)	#R41/M52.KorektoMath,R40 Grouping Token
+𝖊∧0 = ((𝖊∧𝑥)*(1)/𝖊∧𝑥)	#R42/M46.KorektoMath,R41 Tight binding
+𝖊∧0 = ((𝖊∧𝑥)/𝖊∧𝑥)	#R43/M53.KorektoMath,R42 Identity
+𝖊∧0 = ((𝖊∧𝑥)/(𝖊∧𝑥))	#R44/M46.KorektoMath,R43 Tight binding
+(𝖊∧𝑥)/(𝖊∧𝑥) = 1	#T45/A26.KorektoMath a/a=1
+𝖊∧0 = 1	#C46/I44.KorektoMath,T45,R44 Token substitutes Span
+```
+## Natural logarithm function
+```korekto
 # In Ruby, the natural log funtion is:
 #     y = Math.exp(x)
 #     Math.log(y) == x #=> true
 # Here its:
-⌊(𝑥) : 𝖊𝓵𝑥	#S23/L1.KorektoMath Equivalent: ⌊
+⌊(𝑥) : 𝖊𝓵(𝑥)	#S47/L1.KorektoMath Equivalent: ⌊
+⌊(𝑥) = 𝖊𝓵(𝑥)	#R48/M2.KorektoMath,S47 If equivalent, then equal
+⌊(Group1) = 𝖊𝓵(Group1)	#A49/R48
+⌊𝑥 = 𝖊𝓵(𝑥)	#R50/M32.KorektoMath,R48 Token
+⌊𝑥 = 𝖊𝓵𝑥	#R51/M32.KorektoMath,R50 Token
 ```
 ## Squash
 ```korekto
 # The squash function in Ruby is:
 #     1 / (1 + Math.exp(-𝑥))
 # Here its:
-⌈(𝑥) : 1 / (1 + ⌉(-𝑥))	#S24/L1.KorektoMath Equivalent: ⌈
-⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R25/M2.KorektoMath,S24 If equivalent, then equal
-⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R26/M30.KorektoMath,R25 Token
-⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R27/M30.KorektoMath,R26 Token
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R28/M31.KorektoMath,R27 Token*Token
-⌈𝑥 = 1 / 1+⌉-𝑥	#R29/M32.KorektoMath,R28 Right group
+⌈(𝑥) : 1 / (1 + ⌉(-𝑥))	#S52/L1.KorektoMath Equivalent: ⌈
+⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R53/M2.KorektoMath,S52 If equivalent, then equal
+⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R54/M32.KorektoMath,R53 Token
+⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R55/M32.KorektoMath,R54 Token
+⌈𝑥 = 1 / (1+⌉-𝑥)	#R56/M33.KorektoMath,R55 Token*Token
+# Contracted ⌈𝑥
+⌈𝑥 = 1 / 1+⌉-𝑥	#R57/M34.KorektoMath,R56 Right space group
+# Alternates
+⌈(𝑥) = (1) / (1 + ⌉(-𝑥))	#R58/M36.KorektoMath,R53 Group
+⌈(𝑥) = (1) / (1 + ⌉-𝑥)	#R59/M32.KorektoMath,R58 Token
+⌈(𝑥) = ⌉𝑥(1) / ⌉𝑥(1 + ⌉-𝑥)	#R60/M37.KorektoMath,R59 Multiplying by x/x
+⌈(𝑥) = ⌉𝑥 / ⌉𝑥(1 + ⌉-𝑥)	#R61/M38.KorektoMath,R60 Multiplying by one
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥*1 + ⌉𝑥*⌉-𝑥)	#R62/M40.KorektoMath,R61 Distribute
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R63/M39.KorektoMath,R62 Multiplying by one
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R64/M31.KorektoMath,R63 Implied multiplication
+# Consider ⌉(-𝑥)
+⌉(-𝑥) = 𝖊∧(-𝑥)	#T65/A24
+⌉-𝑥 = 𝖊∧(-𝑥)	#R66/M32.KorektoMath,T65 Token
+⌉-𝑥 = 𝖊∧-𝑥	#R67/M32.KorektoMath,R66 Token
+# And remember
+⌉𝑥 = 𝖊∧𝑥	#R26/M32.KorektoMath,R25 Token
+# Now subtitute in...
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥(𝖊∧-𝑥))	#C68/I41.KorektoMath,R67,R64 Token substitutes Group
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + (𝖊∧𝑥)(𝖊∧-𝑥))	#C69/I41.KorektoMath,R26,C68 Token substitutes Group
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧𝑥(𝖊∧-𝑥))	#R70/M45.KorektoMath,C69 Tight binding
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧𝑥𝖊∧-𝑥)	#R71/M45.KorektoMath,R70 Tight binding
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧(𝑥 + -𝑥))	#R72/M47.KorektoMath,R71 Adding exponents to common base
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧(𝑥 - 𝑥))	#R73/M49.KorektoMath,R72 Adding a negative
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧(𝑥-𝑥))	#R74/M33.KorektoMath,R73 Token*Token
+𝑥-𝑥 = 0	#T28/A23.KorektoMath Additive identity
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧0)	#C75/I42.KorektoMath,T28,R74 Group substitutes Token
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 1) #W
 stop
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))
 ⌈𝑥 = 1 / 1+⌉-𝑥
