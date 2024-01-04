@@ -192,25 +192,24 @@ S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M57 Distribute
 𝓊𝟙 = N1;S1𝓊𝟙S2;S1(N1)S2	#I58 Group substitutes token
 N1 = 𝓊𝟙;S1𝓊𝟙S2;S1(N1)S2	#I59 Group substitutes token
 𝓊𝟙 = N1;S1(N1)S2;S1𝓊𝟙S2	#I60 Token substitutes group
-N1 = N2;S1(N2)S2;S1(N1)S2	#I61 Group substitutes group
-N1 = N2;S1(N1)S2;S1(N2)S2	#I62 Group substitutes group
+N1 = N1;S1(N1)S2;S1𝓊𝟙S2	#I61 Token substitutes group
+N1 = N2;S1(N2)S2;S1(N1)S2	#I62 Group substitutes group
+N1 = N2;S1(N1)S2;S1(N2)S2	#I63 Group substitutes group
 # Adding
-S1(𝟙 + -𝟚)S2;S1(𝟙 - 𝟚)S2	#M63 Adding a negative
-S1(𝟙 - 𝟚)S2;S1(𝟙 + -𝟚)S2	#M64 Adding a negative
-S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2	#M65 Adding exponents to common base
-S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M66 Adding exponents to common base
+S1(𝟙 + -𝟚)S2;S1(𝟙 - 𝟚)S2	#M64 Adding a negative
+S1(𝟙 - 𝟚)S2;S1(𝟙 + -𝟚)S2	#M65 Adding a negative
+S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2	#M66 Adding exponents to common base
+S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M67 Adding exponents to common base
 ```
 ## Introductions
 ```korekto
 # Digits
-1+1 : 2	#S67/L1 Equivalent: 2
-2+1 : 3	#S68/L1 Equivalent: 3
-3+1 : 4	#S69/L1 Equivalent: 4
-4+1 : 5	#S70/L1 Equivalent: 5
-5+1 : 6	#S71/L1 Equivalent: 6
-6+1 : 7	#S72/L1 Equivalent: 7
-7+1 : 8	#S73/L1 Equivalent: 8
-8+1 : 9	#S74/L1 Equivalent: 9
+1+1 : 2	#S68/L1 Equivalent: 2
+2+1 : 3	#S69/L1 Equivalent: 3
+3+1 : 4	#S70/L1 Equivalent: 4
+4+1 : 5	#S71/L1 Equivalent: 5
+5+1 : 6	#S72/L1 Equivalent: 6
+6+1 : 7	#S73/L1 Equivalent: 7
+7+1 : 8	#S74/L1 Equivalent: 8
+8+1 : 9	#S75/L1 Equivalent: 9
 ```
-# TODO
-

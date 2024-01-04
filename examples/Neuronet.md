@@ -155,8 +155,8 @@ Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 𝖊∧0 = 𝖊∧0	#T27/A47.KorektoMath Reflection
 𝑥 - 𝑥 = 0	#T28/A27.KorektoMath Additive identity
 𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C29/I59.KorektoMath,T28,T27 Group substitutes token
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R30/M64.KorektoMath,C29 Adding a negative
-𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R31/M66.KorektoMath,R30 Adding exponents to common base
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R30/M65.KorektoMath,C29 Adding a negative
+𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R31/M67.KorektoMath,R30 Adding exponents to common base
 𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R32/M45.KorektoMath,R31 Tight binding
 𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R33/M45.KorektoMath,R32 Tight binding
 # Just take the following as a fact:
@@ -164,10 +164,10 @@ Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
 𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R35/M36.KorektoMath,P34 Token ungroup
 𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R36/M36.KorektoMath,R35 Token ungroup
 # Then:
-𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C37/I62.KorektoMath,R36,R33 Group substitutes group
+𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C37/I63.KorektoMath,R36,R33 Group substitutes group
 𝖊∧0 = (𝖊∧𝑥 / 𝖊∧𝑥)	#R38/M48.KorektoMath,C37 x*(1/y)=(x/y)
 𝖊∧𝑥 / 𝖊∧𝑥 = 1	#T39/A24.KorektoMath a/a=1
-𝖊∧0 = (1)	#C40/I62.KorektoMath,T39,R38 Group substitutes group
+𝖊∧0 = (1)	#C40/I63.KorektoMath,T39,R38 Group substitutes group
 𝖊∧0 = 1	#R41/M36.KorektoMath,C40 Token ungroup
 stop
 ```
