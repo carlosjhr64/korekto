@@ -215,9 +215,7 @@ S1⦆*⦅S2;S1⦆?⦅S3	#M71 Implied multiplication
 ```
 ## Algebra
 ```korekto
-# ######## 
 # Equality
-# ######## 
 N1 = N2;N2 = N1	#M72 Symmetry
 N1 = N1	#A73 Reflection
 N1(N2)N3 = N1(𝒩)N3;N2 = 𝒩	#M74 Equivalent groups
