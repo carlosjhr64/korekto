@@ -194,6 +194,7 @@ S1(u1𝟙𝒷u2𝟚)S2;S1(u1𝟙 𝒷 u2𝟚)S2	#M55 Token . Token
 ```korekto
 S1(𝓊𝟙) S2;S1𝓊𝟙 S2	#M56 Token un-groupep
 S1(𝓊𝟙);S1𝓊𝟙	#M57 Token$ un-groupep
+S1𝓊𝟙;S1(𝓊𝟙)	#M58 Token$ grouped
 S1𝓊𝟙 S2;S1(𝓊𝟙) S2	#M58 Token grouped
 S1?(q1)?S2;S1 q1 S2	#M59 Space
 S1 q1 S2;S1(q1)S2	#M60 Group

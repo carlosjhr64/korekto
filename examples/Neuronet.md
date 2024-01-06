@@ -151,11 +151,12 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ⌉(Q1) = 𝖊∧(Q1)	#A18/R17 Exp abstract
 ⌉𝑥 = 𝖊∧(𝑥)	#R19/M56.KorektoMath,R17 Token un-groupep
 ⌉𝑥 = 𝖊∧𝑥	#R20/M57.KorektoMath,R19 Token$ un-groupep
-stopped
 # Prove 𝖊∧0 = 1
-𝖊∧0 = 𝖊∧0	#T27/A60.KorektoMath Reflection
-𝑥 - 𝑥 = 0	#T28/A29.KorektoMath Additive identity
-𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C29/I73.KorektoMath,T28,T27 Group substitutes token
+𝖊∧0 = 𝖊∧0	#T21/A75.KorektoMath Reflection
+𝖊∧0 = 𝖊∧(0)	#R22/M58.KorektoMath,T21 Token$ grouped
+𝑥 - 𝑥 = 0	#T23/A22.KorektoMath Zero
+𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C24/I85.KorektoMath,T23,R22 a=b;b->a
+stopped
 𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R30/M81.KorektoMath,C29 Adding a negative
 𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R31/M83.KorektoMath,R30 Adding exponents to common base
 𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R32/M58.KorektoMath,R31 Tight binding
