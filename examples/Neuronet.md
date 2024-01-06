@@ -73,7 +73,7 @@ Squash and unsquash contracts nicely as:
 
 ## Binary competition
 
-In [The Math of Species Conflict - Numberphile](https://www.youtube.com/watch?v=WR3GqqWAmfw)
+In ["The Math of Species Conflict" by Numberphile](https://www.youtube.com/watch?v=WR3GqqWAmfw),
 the following function is referred to as "binary competition":
 
 * `𝓑(𝑥) : 𝑥 * (1 - 𝑥)`
