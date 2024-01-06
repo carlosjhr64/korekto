@@ -223,24 +223,23 @@ S1⦆*⦅S2;S1⦆?⦅S3	#M75 Implied multiplication
 N1 = N2;N2 = N1	#M76 Symmetry
 N1 = N1	#A77 Reflection
 N1 = N2;N2 = N3;N1 = N3	#I78 Transitive
-N1(N2)N3 = N1(𝒩)N3;N2 = 𝒩	#M79 Equivalent groups
 # One
-S1(𝓊𝟙?/?𝓊𝟙)S2;S1(1)S2	#M80 x/x
-S1((Q1)?/?(Q1))S2;S1(1)S2	#M81 (x)/(x)
+S1(𝓊𝟙?/?𝓊𝟙)S2;S1(1)S2	#M79 x/x
+S1((Q1)?/?(Q1))S2;S1(1)S2	#M80 (x)/(x)
 # *One*
-S1?*?1 S2;S1 S2	#M82 *one
-S1 1?*?S2;S1 S2	#M83 one*
+S1?*?1 S2;S1 S2	#M81 *one
+S1 1?*?S2;S1 S2	#M82 one*
 # (a/b)
-S1((Q1)?/?(Q2))S2;S1((Q3)*(Q1) / (Q3)*(Q2))S2	#M84 (xa)/(xb)
-S1(Q1)*(1?/?(Q2))S2;S1((Q1)?/?(Q2))S2	#M85 (x*1)/(y)
+S1((Q1)?/?(Q2))S2;S1((Q3)*(Q1) / (Q3)*(Q2))S2	#M83 (xa)/(xb)
+S1(Q1)*(1?/?(Q2))S2;S1((Q1)?/?(Q2))S2	#M84 (x*1)/(y)
 # Distribute
-S1(Q1)*((Q2)?+?(Q3))S2;S1((Q1)*(Q2)?+?(Q1)*(Q3))S2	#M86 Distribute
+S1(Q1)*((Q2)?+?(Q3))S2;S1((Q1)*(Q2)?+?(Q1)*(Q3))S2	#M85 Distribute
 # Substitution
-N1 = N2;S1(N1)S2;S1(N2)S2	#I87 a=b;a->b
-N1 = N2;S1(N2)S2;S1(N1)S2	#I88 a=b;b->a
+N1 = N2;S1(N1)S2;S1(N2)S2	#I86 a=b;a->b
+N1 = N2;S1(N2)S2;S1(N1)S2	#I87 a=b;b->a
 # Adding
-S1(u1𝟙?+?-u2𝟚)S2;S1(u1𝟙?-?u2𝟚)S2	#M89 a+-b=a-b
-S1(u1𝟙?-?u2𝟚)S2;S1(u1𝟙?+?-u2𝟚)S2	#M90 a-b=a+-b
-S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2	#M91 a^b*a^c=a^(b+c)
-S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M92 a^(b+c)=a^b*a^c
+S1(u1𝟙?+?-u2𝟚)S2;S1(u1𝟙?-?u2𝟚)S2	#M88 a+-b=a-b
+S1(u1𝟙?-?u2𝟚)S2;S1(u1𝟙?+?-u2𝟚)S2	#M89 a-b=a+-b
+S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2	#M90 a^b*a^c=a^(b+c)
+S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M91 a^(b+c)=a^b*a^c
 ```
