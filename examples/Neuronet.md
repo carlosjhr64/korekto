@@ -77,6 +77,7 @@ In ["The Math of Species Conflict" by Numberphile](https://www.youtube.com/watch
 the following function is referred to as "binary competition":
 
 * `𝓑(𝑥) : 𝑥 * (1 - 𝑥)`
+  * `𝓑𝑥 = 𝑥(1-𝑥)`
 
 This form occurs in the derivative of the squash function, and so I'll use `𝓑`
 in it's expression.
