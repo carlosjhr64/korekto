@@ -15,8 +15,12 @@ This is Korekto's standard math import.
 ```
 ## Syntax
 ```korekto
+# Must have balanced (){}[]
 ? balanced? '(){}[]'
-! scanner: '\w+|.'
+# Can't have two spaces
+? !match?(/\s\s/)
+# Scans `1.23` | `word` | `%`
+! scanner: '[\d\.]+|\w+|.'
 ```
 ## Patterns
 
@@ -29,8 +33,16 @@ With some exceptions, there are three types of keys:
   * lower case will no match spaces
   * upper case may match spaces
 * Representative `ABC`
-
 ```korekto
+## About specific tokens
+! .Newline /\n/
+! .Newline {;}
+! .SpaceMaybe /\s*/
+! .SpaceMaybe {?}
+! .Open /\(/
+! .Open {⦅}
+! .Close /\)/
+! .Close {⦆}
 # About tokens
 ! Token /\w+|\S/
 ! Token {t1 t2 t3 𝟘 𝟙 𝟚 𝟛 𝟜 𝟝 𝟞 𝟟 𝟠 𝟡}
@@ -38,9 +50,6 @@ With some exceptions, there are three types of keys:
 ! Word {w1 w2 w3 𝓌}
 ! Symbol /[^\w\s]/
 ! Symbol {s1 s2 s3 𝓈}
-## About specific tokens
-! .Newline /\n/
-! .Newline {;}
 ## About token types
 ### Constant
 ! Constant /[𝖆-𝖟]/
@@ -59,7 +68,7 @@ With some exceptions, there are three types of keys:
 ! Set {𝕒 𝕓 𝕔}
 ### Type
 ! Type /[𝔸-𝕐]/
-! Type {𝔸 𝔹}
+! Type {𝕀 𝕁 𝕂}
 ## About operators
 ### Unary
 ! Unary /[-𝓐-𝓩⌈⌉⌊⌋]/
@@ -69,8 +78,9 @@ With some exceptions, there are three types of keys:
 ### Binary
 ! Binary /[-+*\/∧∨^√𝓪-𝔃]/
 ! Binary {b1 b2 b3 𝒷}
-! Commutative /[+*]/
-! Commutative {c1 c2 c3 𝒸}
+### Tight
+! Tight /[.∧∨^𝓪-𝔃]/
+! Tight {^}
 ## About superscripts and subscripts
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
 ! Superscript {ⁱ ʲ ᵏ}
@@ -96,10 +106,10 @@ With some exceptions, there are three types of keys:
 ! Span /[^:=;]*/
 ! Span {N1 N2 N3 𝒩}
 ## Glob
-! Glob /\S*/
-! Glob {X1 X2 X3 𝓍}
+! Glob /[^\s;]*/
+! Glob {x1 x2 x3 𝓍}
 ## Clump
-! .Clump /\S+/
+! .Clump /[^\s;]+/
 ! .Clump {m0 𝓂}
 ```
 ## Definitions
@@ -113,108 +123,119 @@ w1{Z1𝟙Z2};w1[𝟙]	#M4 Membership: [ ]
 w1[𝟙];𝟙 ∍ w1	#M5 Element of: ∍
 # Group
 N1 : (N1)	#A6 Group: ( )
-# Methods
-w1.w2 = (w1.w2)	#A7 Dot binds: .
 # Member operators
-w1{Z1𝟙 𝟚Z2};𝟙₊ : 𝟚	#M8 Next: ₊
-w1{Z1𝟙 𝟚Z2};𝟚₋ : 𝟙	#M9 Previous: ₋
-w1{𝟙Z1};w1.first : 𝟙	#M10 : first
-w1{Z1𝟙};w1.last : 𝟙	#M11 : last
-w1{𝟙Z1};w2{𝟚Z2};𝟙⁺ : 𝟚	#I12 Raise: ⁺
-w1{𝓂 𝟙Z1};w2{𝓂 𝟚Z2};𝟙⁺ : 𝟚	#I13 Raise
-w1{𝓂 𝓂 𝟙Z1};w2{𝓂 𝓂 𝟚Z2};𝟙⁺ : 𝟚	#I14 Raise
-w1{𝓂 𝓂 𝓂 𝟙Z1};w2{𝓂 𝓂 𝓂 𝟚Z2};𝟙⁺ : 𝟚	#I15 Raise
+w1{Z1𝟙 𝟚Z2};𝟙₊ : 𝟚	#M7 Next: ₊
+w1{Z1𝟙 𝟚Z2};𝟚₋ : 𝟙	#M8 Previous: ₋
+# Methods on words
+w1{𝟙Z1};w1.first : 𝟙	#M9 : . first
+w1{Z1𝟙};w1.last : 𝟙	#M10 : last
+w1{𝟙Z1};w2{𝟚Z2};𝟙⁺ : 𝟚	#I11 Raise: ⁺
+w1{𝓂 𝟙Z1};w2{𝓂 𝟚Z2};𝟙⁺ : 𝟚	#I12 Raise
+w1{𝓂 𝓂 𝟙Z1};w2{𝓂 𝓂 𝟚Z2};𝟙⁺ : 𝟚	#I13 Raise
+w1{𝓂 𝓂 𝓂 𝟙Z1};w2{𝓂 𝓂 𝓂 𝟚Z2};𝟙⁺ : 𝟚	#I14 Raise
 # Types
-Constant[𝖆]	#L16 Constant: Constant
-Scalar[𝑎]	#L17 Scalar: Scalar
-Vector[𝒂]	#L18 Vector: Vector
-Tensor[𝑨]	#L19 Tensor: Tensor
-Operator[𝓐]	#L20 Operator: Operator
-# Multiplication and Division
-𝟚 * 𝟛 = 𝟞;𝟞 / 𝟛 = 𝟚	#M21 Multiplication-Division: * /
-𝟞 / 𝟛 = 𝟚;𝟚 * 𝟛 = 𝟞	#M22 Multiplication-Division
-𝟙 / 𝟙 = 1	#A23 Multiplicative identity: 1
-1 / 1 = 1	#T24/A23 Multiplicative identity
-q1 / q1 = 1	#A25/T24 a/a=1
-𝟙² : 𝟙 * 𝟙	#A26 Square: ²
+Constant[𝖆]	#L15 Constant: Constant
+Scalar[𝑎]	#L16 Scalar: Scalar
+Vector[𝒂]	#L17 Vector: Vector
+Tensor[𝑨]	#L18 Tensor: Tensor
+Operator[𝓐]	#L19 Operator: Operator
 # Addition and Subtraction
-𝟙 + 𝟚 = 𝟛;𝟛 - 𝟚 = 𝟙	#M27 Adition-Subraction: + -
-𝟛 - 𝟚 = 𝟙;𝟙 + 𝟚 = 𝟛	#M28 Adition-Subraction
-𝟙 - 𝟙 = 0	#A29 Additive identity: 0
-1 - 1 = 0	#T30/A29 Additive identity
-q1 - q1 = 0	#A31/T30 a-a=0
-# Digits
-1+1 : 2	#S32/L1 Equivalent: 2
-2+1 : 3	#S33/L1 Equivalent: 3
-3+1 : 4	#S34/L1 Equivalent: 4
-4+1 : 5	#S35/L1 Equivalent: 5
-5+1 : 6	#S36/L1 Equivalent: 6
-6+1 : 7	#S37/L1 Equivalent: 7
-7+1 : 8	#S38/L1 Equivalent: 8
-8+1 : 9	#S39/L1 Equivalent: 9
-# Exponentiation, Roots, and Logarithm
-𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M40 Exponentiation-Root: ∧ ∨
-𝟚² = 𝟜;√𝟜 = 𝟚	#M41 Square Root: √
-# Logarithms
-𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M42 Exponentiation-Logarithm: 𝓵
-𝟚𝓵𝟠 = 𝟛;𝟚∧𝟛 = 𝟠	#M43 Exponentiation-Logarithm
-(N1)∧(N2) = N3;(N1)𝓵(N3) = N2	#M44 By defintion of 𝓵
-(N1)𝓵(N3) = N2;(N1)∧(N2) = N3	#M45 By defintion of 𝓵
-```
-### Implied multiplication
-```korekto
-S1*𝓊𝟙S2;S1𝓊𝟙S2	#M46 *Token
-S1(q1)(q2)S2;S1(q1 * q2)S2	#M47 Group*Group
+𝟙 + 𝟚 = 𝟛;𝟛 - 𝟚 = 𝟙	#M20 Addition<=>Subraction: + -
+𝟛 - 𝟚 = 𝟙;𝟙 + 𝟚 = 𝟛	#M21 Subtraction<=>Addition
+𝟙 - 𝟙 = 0	#A22 Zero: 0
+𝟙 + 𝟚 = 𝟚 + 𝟙 #A23 Commute+
+# Multiplication and Division
+𝟚 * 𝟛 = 𝟞;𝟞 / 𝟛 = 𝟚	#M24 Multiplication<=>Division: * /
+𝟞 / 𝟛 = 𝟚;𝟚 * 𝟛 = 𝟞	#M25 Division<=>Multiplication
+𝟚 / 𝟚 = 1	#A26 One: 1
+𝟚 * 𝟛 = 𝟛 * 𝟚	#A27 Commute*
+# Exponentiation and Root
+𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M28 Exponentiation<=>Root: ∧ ∨
+𝟠∨𝟛 = 𝟚;𝟚∧𝟛 = 𝟠	#M29 Root<=>Exponentiation
+# There's no analogous 𝟛∨𝟛 = N
+𝟚∧1 = 𝟚	#A30 x^1=x
+𝟚∧0 = 1	#A31 X^0=1
+# Square and Square Root
+𝟚² = 𝟚 * 𝟚	#A32 Square: ²
+𝟚² = 𝟜;√𝟜 = 𝟚	#M33 Square<=>SquareRoot: √
+√𝟜 = 𝟚;𝟚² = 𝟜	#M34 SquareRoot<=>Square
+# Exponentiation and Logarithm
+𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M35 Exponentiation<=>Logarithm: 𝓵
+𝟚𝓵𝟠 = 𝟛;𝟚∧𝟛 = 𝟠	#M36 Logarithm<=>Exponentiation
+𝟚𝓵1 = 0	#A37 xl1=0
+## Digits
+1 - 1 = 0	#T38/A22 Zero
+0 + 1 = 1	#R39/M21,T38 Subtraction<=>Addition
+1 + 1 : 2	#S40/L1 Equivalent: 2
+2 + 1 : 3	#S41/L1 Equivalent: 3
+3 + 1 : 4	#S42/L1 Equivalent: 4
+4 + 1 : 5	#S43/L1 Equivalent: 5
+5 + 1 : 6	#S44/L1 Equivalent: 6
+6 + 1 : 7	#S45/L1 Equivalent: 7
+7 + 1 : 8	#S46/L1 Equivalent: 8
+8 + 1 : 9	#S47/L1 Equivalent: 9
+## Show multiplication as repeated addition
+𝟙 = t1;𝟙 * 1 = t1	#M48 Single
+𝟙 + 𝟙 = 𝟚;𝟙 * 2 = 𝟚	#M49 Double
+𝟙 + 𝟙 + 𝟙 = 𝟛;𝟙 * 3 = 𝟛	#M50 Triple
+## Show exponentiation as repeated multiplication
+𝟚 = t2;𝟚∧1 = t2	#M51 Linear
+𝟚 * 𝟚 = 𝟜;𝟚∧2 = 𝟜	#M52 Square
+𝟚 * 𝟚 * 𝟚 = 𝟠;𝟚∧3 = 𝟠	#M53 Cube
 ```
 ### Spacing
 ```korekto
-S1(u1𝟙 𝒷 u2𝟚)S2;S1(u1𝟙𝒷u2𝟚)S2	#M48 Token.Token
+S1(u1𝟙 𝒷 u2𝟚)S2;S1(u1𝟙𝒷u2𝟚)S2	#M54 Token.Token
+S1(u1𝟙𝒷u2𝟚)S2;S1(u1𝟙 𝒷 u2𝟚)S2	#M55 Token . Token
 ```
 ## Groups
 ```korekto
-# Group/Space
-S1(𝓊𝟙)S2;S1𝓊𝟙S2	#M49 Token un-groupep
-S1𝓊𝟙S2;S1(𝓊𝟙)S2	#M50 Token grouped
-S1(q1);S1 q1	#M51 Right space
-S1 q1;S1(q1)	#M52 Right group
-(q1)S1;q1 S1	#M53 Seft space
-q1 S1;(q1)S1	#M54 Seft group
-S1(q1)S2;S1 q1 S2	#M55 Context space
-S1 q1 S2;S1(q1)S2	#M56 Context group
+S1(𝓊𝟙) S2;S1𝓊𝟙 S2	#M56 Token un-groupep
+S1𝓊𝟙 S2;S1(𝓊𝟙) S2	#M57 Token grouped
+S1?(q1)?S2;S1 q1 S2	#M58 Space
+S1 q1 S2;S1(q1)S2	#M59 Group
+S1?(q1);S1 q1	#M60 Right space
+S1 q1;S1?(q1)	#M61 Right group
+(q1)?S1;q1 S1	#M62 Left space
+q1 S1;(q1)?S1	#M63 Left group
+N1 = (Q1);N1 = Q1	#M64 =Right space
+S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M65 +Space+
+S1?+?(Q1);S1 + Q1	#M66 +Space
+(Q1)?+?S1;Q1 + S1	#M67 Space+
 # Group binding
-S1(𝓊𝟙∧u2𝟚)S2;S1𝓊𝟙∧u2𝟚S2	#M57 Tight binding
-S1𝓊𝟙∧u2𝟚S2;S1(𝓊𝟙∧u2𝟚)S2	#M58 Tight binding
+S1(𝓊𝟙^u2𝟚)S2;S1𝓊𝟙^u2𝟚S2	#M68 Tight binding un-grouped
+S1𝓊𝟙^u2𝟚S2;S1(𝓊𝟙^u2𝟚)S2	#M69 Tight binding grouped
+```
+# Implied/Explicit multiplication
+```korekto
+S1⦆?⦅S2;S1⦆*⦅S3	#M70 Explicit multiplication
+S1⦆*⦅S2;S1⦆?⦅S3	#M71 Implied multiplication
 ```
 ## Algebra
 ```korekto
+# ######## 
 # Equality
-N1 = N2;N2 = N1	#M59 Symetry
-N1 = N1	#A60 Reflection
-N1(N2)N3 = N1(𝒩)N3;N2 = 𝒩	#M61 Equivalent groups
-# Multiplication by one
-S1(q1)*(1 / q2)S2;S1(q1 / q2)S2	#M62 x*(1/y)=(x/y)
-S1 (Q1) / (Q2);S1 𝓊𝟙(Q1) / 𝓊𝟙(Q2)	#M63 (x/x)*
-S1*1 S2;S1 S2	#M64 *one
-S1 1*S2;S1 S2	#M65 one*
-S1*1*S2;S1*S2	#M66 *one*
-S1𝟙(1)S2;S1𝟙S2	#M67 Token(one)
-S1(1)𝟙S2;S1𝟙S2	#M68 (one)Token
-S1(Q1)(1)S2;S1(Q1)S2	#M69 Group(one)
-S1(1)(Q1)S2;S1(Q1)S2	#M70 (one)Group
+# ######## 
+N1 = N2;N2 = N1	#M72 Symmetry
+N1 = N1	#A73 Reflection
+N1(N2)N3 = N1(𝒩)N3;N2 = 𝒩	#M74 Equivalent groups
+# One
+S1(𝓊𝟙?/?𝓊𝟙)S2;S1(1)S2	#M75 x/x
+S1((Q1)?/?(Q1))S2;S1(1)S2	#M76 (x)/(x)
+# *One*
+S1?*?1 S2;S1 S2	#M77 *one
+S1 1?*?S2;S1 S2	#M78 one*
+# (a/b)
+S1((Q1)?/?(Q2))S2;S1((Q3)*(Q1) / (Q3)*(Q2))S2	#M79 (xa)/(xb)
+S1(Q1)*(1?/?(Q2))S2;S1((Q1)?/?(Q2))S2	#M80 (x*1)/(y)
 # Distribute
-S1𝓊𝟙(X1 + X2)S2;S1(𝓊𝟙 X1 + 𝓊𝟙 X2)S2	#M71 Distribute
+S1(Q1)*((Q2)?+?(Q3))S2;S1((Q1)*(Q2)?+?(Q1)*(Q3))S2	#M81 Distribute
 # Substitution
-𝓊𝟙 = N1;S1𝓊𝟙S2;S1(N1)S2	#I72 Group substitutes token
-N1 = 𝓊𝟙;S1𝓊𝟙S2;S1(N1)S2	#I73 Group substitutes token
-𝓊𝟙 = N1;S1(N1)S2;S1𝓊𝟙S2	#I74 Token substitutes group
-N1 = 𝓊𝟙;S1(N1)S2;S1𝓊𝟙S2	#I75 Token substitutes group
-N1 = N2;S1(N2)S2;S1(N1)S2	#I76 Group substitutes group
-N2 = N1;S1(N2)S2;S1(N1)S2	#I77 Group substitutes group
-N1 = N2;S1 N2;S1 N1	#I78 Group substitutes left
-N2 = N1;S1 N2;S1 N1	#I79 Group substitutes left
+N1 = N2;S1(N1)S2;S1(N2)S2	#I82 a=b;a->b
+N1 = N2;S1(N2)S2;S1(N1)S2	#I83 a=b;b->a
 # Adding
-S1(𝟙 + -𝟚)S2;S1(𝟙 - 𝟚)S2	#M80 Adding a negative
-S1(𝟙 - 𝟚)S2;S1(𝟙 + -𝟚)S2	#M81 Adding a negative
-S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2	#M82 Adding exponents to common base
-S1𝓊𝟙∧(u2𝟚 + u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M83 Adding exponents to common base
+S1(u1𝟙?+?-u2𝟚)S2;S1(u1𝟙?-?u2𝟚)S2	#M84 a+-b=a-b
+S1(u1𝟙?-?u2𝟚)S2;S1(u1𝟙?+?-u2𝟚)S2	#M85 a-b=a+-b
+S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2	#M86 a^b*a^c=a^(b+c)
+S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M87 a^(b+c)=a^b*a^c
 ```
