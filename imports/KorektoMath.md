@@ -193,49 +193,50 @@ S1(u1𝟙𝒷u2𝟚)S2;S1(u1𝟙 𝒷 u2𝟚)S2	#M55 Token . Token
 ## Groups
 ```korekto
 S1(𝓊𝟙) S2;S1𝓊𝟙 S2	#M56 Token un-groupep
-S1𝓊𝟙 S2;S1(𝓊𝟙) S2	#M57 Token grouped
-S1?(q1)?S2;S1 q1 S2	#M58 Space
-S1 q1 S2;S1(q1)S2	#M59 Group
-S1?(q1);S1 q1	#M60 Right space
-S1 q1;S1?(q1)	#M61 Right group
-(q1)?S1;q1 S1	#M62 Left space
-q1 S1;(q1)?S1	#M63 Left group
-N1 = (Q1);N1 = Q1	#M64 =Right space
-S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M65 +Space+
-S1?+?(Q1);S1 + Q1	#M66 +Space
-(Q1)?+?S1;Q1 + S1	#M67 Space+
+S1(𝓊𝟙);S1𝓊𝟙	#M57 Token$ un-groupep
+S1𝓊𝟙 S2;S1(𝓊𝟙) S2	#M58 Token grouped
+S1?(q1)?S2;S1 q1 S2	#M59 Space
+S1 q1 S2;S1(q1)S2	#M60 Group
+S1?(q1);S1 q1	#M61 Right space
+S1 q1;S1?(q1)	#M62 Right group
+(q1)?S1;q1 S1	#M63 Left space
+q1 S1;(q1)?S1	#M64 Left group
+N1 = (Q1);N1 = Q1	#M65 =Right space
+S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M66 +Space+
+S1?+?(Q1);S1 + Q1	#M67 +Space
+(Q1)?+?S1;Q1 + S1	#M68 Space+
 # Group binding
-S1(𝓊𝟙^u2𝟚)S2;S1𝓊𝟙^u2𝟚S2	#M68 Tight binding un-grouped
-S1𝓊𝟙^u2𝟚S2;S1(𝓊𝟙^u2𝟚)S2	#M69 Tight binding grouped
+S1(𝓊𝟙^u2𝟚)S2;S1𝓊𝟙^u2𝟚S2	#M69 Tight binding un-grouped
+S1𝓊𝟙^u2𝟚S2;S1(𝓊𝟙^u2𝟚)S2	#M70 Tight binding grouped
 ```
 # Implied/Explicit multiplication
 ```korekto
-S1⦆?⦅S2;S1⦆*⦅S3	#M70 Explicit multiplication
-S1⦆*⦅S2;S1⦆?⦅S3	#M71 Implied multiplication
+S1⦆?⦅S2;S1⦆*⦅S3	#M71 Explicit multiplication
+S1⦆*⦅S2;S1⦆?⦅S3	#M72 Implied multiplication
 ```
 ## Algebra
 ```korekto
 # Equality
-N1 = N2;N2 = N1	#M72 Symmetry
-N1 = N1	#A73 Reflection
-N1(N2)N3 = N1(𝒩)N3;N2 = 𝒩	#M74 Equivalent groups
+N1 = N2;N2 = N1	#M73 Symmetry
+N1 = N1	#A74 Reflection
+N1(N2)N3 = N1(𝒩)N3;N2 = 𝒩	#M75 Equivalent groups
 # One
-S1(𝓊𝟙?/?𝓊𝟙)S2;S1(1)S2	#M75 x/x
-S1((Q1)?/?(Q1))S2;S1(1)S2	#M76 (x)/(x)
+S1(𝓊𝟙?/?𝓊𝟙)S2;S1(1)S2	#M76 x/x
+S1((Q1)?/?(Q1))S2;S1(1)S2	#M77 (x)/(x)
 # *One*
-S1?*?1 S2;S1 S2	#M77 *one
-S1 1?*?S2;S1 S2	#M78 one*
+S1?*?1 S2;S1 S2	#M78 *one
+S1 1?*?S2;S1 S2	#M79 one*
 # (a/b)
-S1((Q1)?/?(Q2))S2;S1((Q3)*(Q1) / (Q3)*(Q2))S2	#M79 (xa)/(xb)
-S1(Q1)*(1?/?(Q2))S2;S1((Q1)?/?(Q2))S2	#M80 (x*1)/(y)
+S1((Q1)?/?(Q2))S2;S1((Q3)*(Q1) / (Q3)*(Q2))S2	#M80 (xa)/(xb)
+S1(Q1)*(1?/?(Q2))S2;S1((Q1)?/?(Q2))S2	#M81 (x*1)/(y)
 # Distribute
-S1(Q1)*((Q2)?+?(Q3))S2;S1((Q1)*(Q2)?+?(Q1)*(Q3))S2	#M81 Distribute
+S1(Q1)*((Q2)?+?(Q3))S2;S1((Q1)*(Q2)?+?(Q1)*(Q3))S2	#M82 Distribute
 # Substitution
-N1 = N2;S1(N1)S2;S1(N2)S2	#I82 a=b;a->b
-N1 = N2;S1(N2)S2;S1(N1)S2	#I83 a=b;b->a
+N1 = N2;S1(N1)S2;S1(N2)S2	#I83 a=b;a->b
+N1 = N2;S1(N2)S2;S1(N1)S2	#I84 a=b;b->a
 # Adding
-S1(u1𝟙?+?-u2𝟚)S2;S1(u1𝟙?-?u2𝟚)S2	#M84 a+-b=a-b
-S1(u1𝟙?-?u2𝟚)S2;S1(u1𝟙?+?-u2𝟚)S2	#M85 a-b=a+-b
-S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2	#M86 a^b*a^c=a^(b+c)
-S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M87 a^(b+c)=a^b*a^c
+S1(u1𝟙?+?-u2𝟚)S2;S1(u1𝟙?-?u2𝟚)S2	#M85 a+-b=a-b
+S1(u1𝟙?-?u2𝟚)S2;S1(u1𝟙?+?-u2𝟚)S2	#M86 a-b=a+-b
+S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2	#M87 a^b*a^c=a^(b+c)
+S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M88 a^(b+c)=a^b*a^c
 ```

@@ -115,43 +115,43 @@ I will be importing [KorektoMath](../imports/KorektoMath.md).
 < imports/KorektoMath.md
 ? length < 50
 # Types
-Scalar[𝑥]	#S1/L17.KorektoMath Scalar: 𝑥
-Scalar[𝑎]	#S2/L17.KorektoMath Scalar: 𝑎
-Scalar[𝑏]	#S3/L17.KorektoMath Scalar: 𝑏
-Scalar[𝑐]	#S4/L17.KorektoMath Scalar: 𝑐
-Scalar[𝑑]	#S5/L17.KorektoMath Scalar: 𝑑
-Vector[𝒂]	#S6/L18.KorektoMath Vector: 𝒂
-Vector[𝒃]	#S7/L18.KorektoMath Vector: 𝒃
-Vector[𝒄]	#S8/L18.KorektoMath Vector: 𝒄
-Vector[𝒅]	#S9/L18.KorektoMath Vector: 𝒅
-Tensor[𝑾]	#S10/L19.KorektoMath Tensor: 𝑾
-# Indeces
-Supercript{ʰ ⁱ ʲ ᵏ}	#S11/L3.KorektoMath Named set: Supercript ʰ ⁱ ʲ ᵏ
-Subscript{ₕ ᵢ ⱼ ₖ}	#S12/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ ₖ
-### Next subscript
-ₕ₊ : ᵢ	#R13/M8.KorektoMath,S12 Next
-ᵢ₊ : ⱼ	#R14/M8.KorektoMath,S12 Next
-ⱼ₊ : ₖ	#R15/M8.KorektoMath,S12 Next
-### Raise subscript
-ₕ⁺ : ʰ	#C16/I12.KorektoMath,S12,S11 Raise
-ᵢ⁺ : ⁱ	#C17/I13.KorektoMath,S12,S11 Raise
-ⱼ⁺ : ʲ	#C18/I14.KorektoMath,S12,S11 Raise
-# Euler's number ~ 2.718⋯
-Constant[𝖊]	#S19/L16.KorektoMath Constant: 𝖊
-# Natural Exponentiation and Log
-𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M20 Natural log
-𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M21 Natural exponentiation
+## Euler's constant 𝖊 ~ 2.718⋯
+Constant[𝖊]	#S1/L15.KorektoMath Constant: 𝖊
+## Scalar variable 𝑥 to help define functions
+Scalar[𝑥]	#S2/L16.KorektoMath Scalar: 𝑥
+## The labeled activation layer vector 𝒂
+Vector[𝒂]	#S3/L17.KorektoMath Vector: 𝒂
+## The labeled bias vector 𝒃
+Vector[𝒃]	#S4/L17.KorektoMath Vector: 𝒃
+## The multi-labeled weights matrix 𝑾
+Tensor[𝑾]	#S5/L18.KorektoMath Tensor: 𝑾
+## Labels
+Supercript{ʰ ⁱ ʲ ᵏ}	#S6/L3.KorektoMath Named set: Supercript ʰ ⁱ ʲ ᵏ
+Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ ₖ
+## Next labels
+ₕ₊ : ᵢ	#R8/M7.KorektoMath,S7 Next
+ᵢ₊ : ⱼ	#R9/M7.KorektoMath,S7 Next
+ⱼ₊ : ₖ	#R10/M7.KorektoMath,S7 Next
+## Raised labels
+ₕ⁺ : ʰ	#C11/I11.KorektoMath,S7,S6 Raise
+ᵢ⁺ : ⁱ	#C12/I12.KorektoMath,S7,S6 Raise
+ⱼ⁺ : ʲ	#C13/I13.KorektoMath,S7,S6 Raise
+# Functions
+## Natural Exponentiation and Log
+𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M14 Natural log
+𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M15 Natural exponentiation
 ```
 ## Natural exponentiation function
 ```korekto
 # In Ruby, the natural exponentiation funtion is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
-⌉(𝑥) : 𝖊∧(𝑥)	#S22/L1.KorektoMath Equivalent: ⌉
-⌉(𝑥) = 𝖊∧(𝑥)	#R23/M2.KorektoMath,S22 If equivalent, then equal
-⌉(Q1) = 𝖊∧(Q1)	#A24/R23
-⌉𝑥 = 𝖊∧(𝑥)	#R25/M49.KorektoMath,R23 Token un-groupep
-⌉𝑥 = 𝖊∧𝑥	#R26/M49.KorektoMath,R25 Token un-groupep
+⌉(𝑥) : 𝖊∧(𝑥)	#S16/L1.KorektoMath Equivalent: ⌉
+⌉(𝑥) = 𝖊∧(𝑥)	#R17/M2.KorektoMath,S16 If equivalent, then equal
+⌉(Q1) = 𝖊∧(Q1)	#A18/R17 Exp abstract
+⌉𝑥 = 𝖊∧(𝑥)	#R19/M56.KorektoMath,R17 Token un-groupep
+⌉𝑥 = 𝖊∧𝑥	#R20/M57.KorektoMath,R19 Token$ un-groupep
+stopped
 # Prove 𝖊∧0 = 1
 𝖊∧0 = 𝖊∧0	#T27/A60.KorektoMath Reflection
 𝑥 - 𝑥 = 0	#T28/A29.KorektoMath Additive identity
