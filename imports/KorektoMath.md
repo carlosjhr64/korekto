@@ -20,7 +20,7 @@ This is Korekto's standard math import.
 # Can't have two spaces
 ? !match?(/\s\s/)
 # Scans `1.23` | `word` | `%`
-! scanner: '[\d\.]+|\w+|.'
+! scanner: '\d[\d\.]*|\w+|.'
 ```
 ## Patterns
 
@@ -44,9 +44,9 @@ With some exceptions, there are three types of keys:
 ! .Close /\)/
 ! .Close {⦆}
 # About tokens
-! Token /[\d\.]+|\w+|\S/
+! Token /\d[\d\.]*|\w+|\S/
 ! Token {t1 t2 t3 𝟘 𝟙 𝟚 𝟛 𝟜 𝟝 𝟞 𝟟 𝟠 𝟡}
-! Decimal /[\d\.]+/
+! Decimal /\d[\d\.]*/
 ! Decimal {d1 d2 d3 𝒹}
 ! Word /\w+/
 ! Word {w1 w2 w3 𝓌}
