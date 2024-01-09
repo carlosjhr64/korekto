@@ -207,7 +207,7 @@ S1 q1;S1?(q1)	#M67 Group$
 (q1)?S1;q1 S1	#M68 ^Space
 q1 S1;(q1)?S1	#M69 ^Group
 # Group
-N1 = (Q1);N1 = Q1	#M70 =Right space
+N1 =?(Q1);N1 = Q1	#M70 =Space
 S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M71 +Space+
 S1?+?(Q1);S1 + Q1	#M72 +Space
 (Q1)?+?S1;Q1 + S1	#M73 Space+
