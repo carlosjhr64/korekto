@@ -150,102 +150,107 @@ Operator[𝓐]	#L19 Operator: Operator
 𝟚 / 𝟚 = 1	#A26 One: 1
 # Note: multiplication does not commute in general
 # Exponentiation and Root
-𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M28 Exponentiation<=>Root: ∧ ∨
-𝟠∨𝟛 = 𝟚;𝟚∧𝟛 = 𝟠	#M29 Root<=>Exponentiation
+𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M27 Exponentiation<=>Root: ∧ ∨
+𝟠∨𝟛 = 𝟚;𝟚∧𝟛 = 𝟠	#M28 Root<=>Exponentiation
 # Does not commute
 # No analogous 𝟛∨𝟛 = N
-𝟚∧1 = 𝟚	#A30 x^1=x
-𝟚∧0 = 1	#A31 X^0=1
+𝟚∧1 = 𝟚	#A29 x^1=x
+𝟚∧0 = 1	#A30 X^0=1
 # Square and Square Root
-𝟚² = 𝟚 * 𝟚	#A32 Square: ²
-𝟚² = 𝟜;√𝟜 = 𝟚	#M33 Square<=>SquareRoot: √
-√𝟜 = 𝟚;𝟚² = 𝟜	#M34 SquareRoot<=>Square
+𝟚² = 𝟚 * 𝟚	#A31 Square: ²
+𝟚² = 𝟜;√𝟜 = 𝟚	#M32 Square<=>SquareRoot: √
+√𝟜 = 𝟚;𝟚² = 𝟜	#M33 SquareRoot<=>Square
 # Exponentiation and Logarithm
-𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M35 Exponentiation<=>Logarithm: 𝓵
-𝟚𝓵𝟠 = 𝟛;𝟚∧𝟛 = 𝟠	#M36 Logarithm<=>Exponentiation
-𝟚𝓵1 = 0	#A37 xl1=0
+𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M34 Exponentiation<=>Logarithm: 𝓵
+𝟚𝓵𝟠 = 𝟛;𝟚∧𝟛 = 𝟠	#M35 Logarithm<=>Exponentiation
+𝟚𝓵1 = 0	#A36 xl1=0
 ## Digits
-1 - 1 = 0	#T38/A22 Zero
-0 + 1 = 1	#R39/M21,T38 Subtraction<=>Addition
-1 + 1 : 2	#S40/L1 Equivalent: 2
-2 + 1 : 3	#S41/L1 Equivalent: 3
-3 + 1 : 4	#S42/L1 Equivalent: 4
-4 + 1 : 5	#S43/L1 Equivalent: 5
-5 + 1 : 6	#S44/L1 Equivalent: 6
-6 + 1 : 7	#S45/L1 Equivalent: 7
-7 + 1 : 8	#S46/L1 Equivalent: 8
-8 + 1 : 9	#S47/L1 Equivalent: 9
+1 - 1 = 0	#T37/A22 Zero
+0 + 1 = 1	#R38/M21,T37 Subtraction<=>Addition
+1 + 1 : 2	#S39/L1 Equivalent: 2
+2 + 1 : 3	#S40/L1 Equivalent: 3
+3 + 1 : 4	#S41/L1 Equivalent: 4
+4 + 1 : 5	#S42/L1 Equivalent: 5
+5 + 1 : 6	#S43/L1 Equivalent: 6
+6 + 1 : 7	#S44/L1 Equivalent: 7
+7 + 1 : 8	#S45/L1 Equivalent: 8
+8 + 1 : 9	#S46/L1 Equivalent: 9
 ## Show multiplication as repeated addition
-𝟙 = t1;𝟙 * 1 = t1	#M48 Single
-𝟙 + 𝟙 = 𝟚;𝟙 * 2 = 𝟚	#M49 Double
-𝟙 + 𝟙 + 𝟙 = 𝟛;𝟙 * 3 = 𝟛	#M50 Triple
+𝟙 = t1;𝟙 * 1 = t1	#M47 Single
+𝟙 + 𝟙 = 𝟚;𝟙 * 2 = 𝟚	#M48 Double
+𝟙 + 𝟙 + 𝟙 = 𝟛;𝟙 * 3 = 𝟛	#M49 Triple
 ## Show exponentiation as repeated multiplication
-𝟚 = t2;𝟚∧1 = t2	#M51 Linear
-𝟚 * 𝟚 = 𝟜;𝟚∧2 = 𝟜	#M52 Square
-𝟚 * 𝟚 * 𝟚 = 𝟠;𝟚∧3 = 𝟠	#M53 Cube
+𝟚 = t2;𝟚∧1 = t2	#M50 Linear
+𝟚 * 𝟚 = 𝟜;𝟚∧2 = 𝟜	#M51 Square
+𝟚 * 𝟚 * 𝟚 = 𝟠;𝟚∧3 = 𝟠	#M52 Cube
 ```
 ### Token Spacing
 ```korekto
-S1(u1𝟭 𝒷 u2𝟮)S2;S1(u1𝟭𝒷u2𝟮)S2	#M54 *(a + b)*->*(a+b)*
-S1(u1𝟭𝒷u2𝟮)S2;S1(u1𝟭 𝒷 u2𝟮)S2	#M55 *(a+b)*->*(a + b)*
-S1?(u1𝟭 𝒷 u2𝟮);S1 u1𝟭𝒷u2𝟮	#M56 *(a + b)$-> * a+b$
-S1 u1𝟭𝒷u2𝟮;S1?(u1𝟭 𝒷 u2𝟮)	#M57 * a+b$->*(a + b)$
-(u1𝟭 𝒷 u2𝟮)?S1;u1𝟭𝒷u2𝟮 S1	#M58 ^(a + b)*->^a+b *
-u1𝟭𝒷u2𝟮 S1;(u1𝟭 𝒷 u2𝟮)?S1	#M59 ^a+b *->^(a + b)*
-S1 u1𝟭𝒷u2𝟮 S2;S1?(u1𝟭 𝒷 u2𝟮)?S2	#M60 * a+b *->*(a + b)*
-S1?(u1𝟭 𝒷 u2𝟮)?S2;S1 u1𝟭𝒷u2𝟮 S2	#M61 *(a + b)*->* a+b *
+S1(u1𝟭 𝒷 u2𝟮)S2;S1(u1𝟭𝒷u2𝟮)S2	#M53 *(a + b)*->*(a+b)*
+S1(u1𝟭𝒷u2𝟮)S2;S1(u1𝟭 𝒷 u2𝟮)S2	#M54 *(a+b)*->*(a + b)*
+S1?(u1𝟭 𝒷 u2𝟮);S1 u1𝟭𝒷u2𝟮	#M55 *(a + b)$-> * a+b$
+S1 u1𝟭𝒷u2𝟮;S1?(u1𝟭 𝒷 u2𝟮)	#M56 * a+b$->*(a + b)$
+(u1𝟭 𝒷 u2𝟮)?S1;u1𝟭𝒷u2𝟮 S1	#M57 ^(a + b)*->^a+b *
+u1𝟭𝒷u2𝟮 S1;(u1𝟭 𝒷 u2𝟮)?S1	#M58 ^a+b *->^(a + b)*
+S1 u1𝟭𝒷u2𝟮 S2;S1?(u1𝟭 𝒷 u2𝟮)?S2	#M59 * a+b *->*(a + b)*
+S1?(u1𝟭 𝒷 u2𝟮)?S2;S1 u1𝟭𝒷u2𝟮 S2	#M60 *(a + b)*->* a+b *
 ```
 ## Grouping
 ```korekto
 # Token
-S1(𝓊𝟭)S2;S1𝓊𝟭S2	#M62 (a)->a
-S1𝓊𝟭S2;S1(𝓊𝟭)S2	#M63 a->(a)
+S1(𝓊𝟭)S2;S1𝓊𝟭S2	#M61 (a)->a
+S1𝓊𝟭S2;S1(𝓊𝟭)S2	#M62 a->(a)
 # GroupGlob
-S1?(q1)?S2;S1 q1 S2	#M64 Space
-S1 q1 S2;S1(q1)S2	#M65 Group
-S1?(q1);S1 q1	#M66 Space$
-S1 q1;S1?(q1)	#M67 Group$
-(q1)?S1;q1 S1	#M68 ^Space
-q1 S1;(q1)?S1	#M69 ^Group
+S1?(q1)?S2;S1 q1 S2	#M63 Space
+S1 q1 S2;S1(q1)S2	#M64 Group
+S1?(q1);S1 q1	#M65 Space$
+S1 q1;S1?(q1)	#M66 Group$
+(q1)?S1;q1 S1	#M67 ^Space
+q1 S1;(q1)?S1	#M68 ^Group
 # Group
-N1 =?(Q1);N1 = Q1	#M70 =Space
-S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M71 +Space+
-S1?+?(Q1);S1 + Q1	#M72 +Space
-(Q1)?+?S1;Q1 + S1	#M73 Space+
+N1 =?(Q1);N1 = Q1	#M69 =Space
+S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M70 +Space+
+S1?+?(Q1);S1 + Q1	#M71 +Space
+(Q1)?+?S1;Q1 + S1	#M72 Space+
 # Binding
-S1(𝓊𝟭^u2𝟮)S2;S1𝓊𝟭^u2𝟮S2	#M74 Tight un-grouped
-S1𝓊𝟭^u2𝟮S2;S1(𝓊𝟭^u2𝟮)S2	#M75 Tight grouped
+S1(𝓊𝟭^u2𝟮)S2;S1𝓊𝟭^u2𝟮S2	#M73 Tight un-grouped
+S1𝓊𝟭^u2𝟮S2;S1(𝓊𝟭^u2𝟮)S2	#M74 Tight grouped
 ```
 # Implied/Explicit multiplication
 ```korekto
-S1𝓊𝟭u2𝟮S2;S1𝓊𝟭*u2𝟮S2	#M76 Explicit* 
-S1𝓊𝟭*u2𝟮S2;S1𝓊𝟭u2𝟮S2	#M77 Implied*
-S1⦆?⦅S2;S1⦆?*?⦅S3	#M78 Explicit*Group
-S1⦆?*?⦅S2;S1⦆?⦅S3	#M79 Implied*Group
+S1𝓊𝟭u2𝟮S2;S1𝓊𝟭*u2𝟮S2	#M75 Explicit*
+S1𝓊𝟭*u2𝟮S2;S1𝓊𝟭u2𝟮S2	#M76 Implied*
+S1⦆?⦅S2;S1⦆?*?⦅S3	#M77 Explicit*Group
+S1⦆?*?⦅S2;S1⦆?⦅S3	#M78 Implied*Group
 ```
 ## Algebra
 ```korekto
 # Equality
-N1 = N2;N2 = N1	#M80 Symmetry
-N1 = N1	#A81 Reflection
-N1 = N2;N2 = N3;N1 = N3	#I82 Transitive
+N1 = N2;N2 = N1	#M79 Symmetry
+N1 = N1	#A80 Reflection
+N1 = N2;N2 = N3;N1 = N3	#I81 Transitive
 # One
-S1?(𝓊𝟭?/?𝓊𝟭)?S2;S1?(1)?S2	#M83 (a/a)
-S1?(q1 / q1)?S2;S1?(1)?S2	#M84 (a / a)
+S1?(𝓊𝟭?/?𝓊𝟭)?S2;S1?(1)?S2	#M82 (a/a)
+S1?(q1 / q1)?S2;S1?(1)?S2	#M83 (a / a)
 # *One*
-S1?*?1 S2;S1 S2	#M85 *one
-S1 1?*?S2;S1 S2	#M86 one*
+S1?*?1 S2;S1 S2	#M84 *one
+S1 1?*?S2;S1 S2	#M85 one*
 # (a/b)
-S1((Q1)?/?(Q2))S2;S1((Q3)*(Q1) / (Q3)*(Q2))S2	#M87 (xa)/(xb)
-S1(Q1)*(1?/?(Q2))S2;S1((Q1)?/?(Q2))S2	#M88 (x*1)/(y)
+S1(𝓊𝟭?/?u2𝟮)S2;S1(u3𝟯*𝓊𝟭 / u3𝟯*u2𝟮)S2	#M86 (xa / xb)
+S1(q1 / q2)S2;S1(𝓊𝟭*(q1) / 𝓊𝟭*(q2))S2	#M87 (x(a) / x(b))
+S1𝓊𝟭*(1?/?u2𝟮)S2;S1(𝓊𝟭?/?u2𝟮)S2	#M88 (x*1)/(y)
+S1𝓊𝟭*(1 / q1)S2;S1(𝓊𝟭 / q1)S2	#M89 x*1 /  y
 # Distribute
-S1(Q1)*((Q2)?+?(Q3))S2;S1((Q1)*(Q2)?+?(Q1)*(Q3))S2	#M89 Distribute
+S1𝓊𝟭*(u2𝟮?+?u3𝟯)S2;S1(𝓊𝟭*u2𝟮?+?𝓊𝟭*u3𝟯)S2	#M90 (xa+xb)
+S1𝓊𝟭*(q2 + q3)S2;S1(𝓊𝟭*(q2) + 𝓊𝟭*(q3))S2	#M91 (x(a) + x(b))
 # Substitution
-N1 = N2;S1(N1)S2;S1(N2)S2	#I90 a=b;a->b
-N1 = N2;S1(N2)S2;S1(N1)S2	#I91 a=b;b->a
+𝓊𝟭 = 𝟮;S1𝓊𝟭S2;S1𝟮S2	#I92 a=b;a->b
+𝓊𝟭 = N2;S1𝓊𝟭S2;S1(N2)S2	#I93 a=b;a->(b)
+N1 = N2;S1(N1)S2;S1(N2)S2	#I94 a=b;(a)->(b)
+N1 = N2;S1(N2)S2;S1(N1)S2	#I95 a=b;(b)->(a)
 # Adding
-S1(u1𝟙?+?-u2𝟚)S2;S1(u1𝟙?-?u2𝟚)S2	#M92 a+-b=a-b
-S1(u1𝟙?-?u2𝟚)S2;S1(u1𝟙?+?-u2𝟚)S2	#M93 a-b=a+-b
-S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2;S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2	#M94 a^b*a^c=a^(b+c)
-S1𝓊𝟙∧(u2𝟚?+?u3𝟛)S2;S1𝓊𝟙∧u2𝟚*𝓊𝟙∧u3𝟛S2	#M95 a^(b+c)=a^b*a^c
+S1(𝓊𝟭?+?-u2𝟮)S2;S1(𝓊𝟭?-?u2𝟮)S2	#M96 a+-b=a-b
+S1(𝓊𝟭?-?u2𝟮)S2;S1(𝓊𝟭?+?-u2𝟮)S2	#M97 a-b=a+-b
+S1𝓊𝟭∧u2𝟮*𝓊𝟭∧u3𝟯S2;S1𝓊𝟭∧(u2𝟮?+?u3𝟯)S2	#M98 a^b*a^c=a^(b+c)
+S1𝓊𝟭∧(u2𝟮?+?u3𝟯)S2;S1𝓊𝟭∧u2𝟮*𝓊𝟭∧u3𝟯S2	#M99 a^(b+c)=a^b*a^c
 ```
