@@ -212,8 +212,8 @@ S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M71 +Space+
 S1?+?(Q1);S1 + Q1	#M72 +Space
 (Q1)?+?S1;Q1 + S1	#M73 Space+
 # Binding
-S1(𝓊𝟙^u2𝟚)S2;S1𝓊𝟙^u2𝟚S2	#M74 Tight binding un-grouped
-S1𝓊𝟙^u2𝟚S2;S1(𝓊𝟙^u2𝟚)S2	#M75 Tight binding grouped
+S1(𝓊𝟭^u2𝟮)S2;S1𝓊𝟭^u2𝟮S2	#M74 Tight un-grouped
+S1𝓊𝟭^u2𝟮S2;S1(𝓊𝟭^u2𝟮)S2	#M75 Tight grouped
 ```
 # Implied/Explicit multiplication
 ```korekto
