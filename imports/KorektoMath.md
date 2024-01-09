@@ -85,9 +85,9 @@ With some exceptions, there are three types of keys:
 ! Subscript {ᵢ ⱼ ₖ}
 # About groups
 ## Group
-! Group /[^()]+/
+! Group /(?:[^()]|\([^()]*\))+/
 ! Group {Q1 Q2 Q3 𝒬}
-! GroupGlob /[^()\s]+/
+! GroupGlob /(?:[^()\s]|\([^()]*\))+/
 ! GroupGlob {q1 q2 q3 𝓆}
 ## Elements
 ! Elements /[^{}]*/
@@ -194,7 +194,7 @@ u1𝟭𝒷u2𝟮 S1;(u1𝟭 𝒷 u2𝟮)?S1	#M59 ^a+b *->^(a + b)*
 S1 u1𝟭𝒷u2𝟮 S2;S1?(u1𝟭 𝒷 u2𝟮)?S2	#M60 * a+b *->*(a + b)*
 S1?(u1𝟭 𝒷 u2𝟮)?S2;S1 u1𝟭𝒷u2𝟮 S2	#M61 *(a + b)*->* a+b *
 ```
-## Groups
+## Grouping
 ```korekto
 # Token
 S1(𝓊𝟭)S2;S1𝓊𝟭S2	#M62 (a)->a
@@ -202,10 +202,10 @@ S1𝓊𝟭S2;S1(𝓊𝟭)S2	#M63 a->(a)
 # GroupGlob
 S1?(q1)?S2;S1 q1 S2	#M64 Space
 S1 q1 S2;S1(q1)S2	#M65 Group
-S1?(q1);S1 q1	#M66 Right space
-S1 q1;S1?(q1)	#M67 Right group
-(q1)?S1;q1 S1	#M68 Left space
-q1 S1;(q1)?S1	#M69 Left group
+S1?(q1);S1 q1	#M66 Space$
+S1 q1;S1?(q1)	#M67 Group$
+(q1)?S1;q1 S1	#M68 ^Space
+q1 S1;(q1)?S1	#M69 ^Group
 # Group
 N1 = (Q1);N1 = Q1	#M70 =Right space
 S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M71 +Space+
