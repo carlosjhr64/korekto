@@ -148,11 +148,12 @@ Operator[𝓐]	#L19 Operator: Operator
 𝟚 * 𝟛 = 𝟞;𝟞 / 𝟛 = 𝟚	#M24 Multiplication<=>Division: * /
 𝟞 / 𝟛 = 𝟚;𝟚 * 𝟛 = 𝟞	#M25 Division<=>Multiplication
 𝟚 / 𝟚 = 1	#A26 One: 1
-𝟚 * 𝟛 = 𝟛 * 𝟚	#A27 Commute*
+# Note: multiplication does not commute in general
 # Exponentiation and Root
 𝟚∧𝟛 = 𝟠;𝟠∨𝟛 = 𝟚	#M28 Exponentiation<=>Root: ∧ ∨
 𝟠∨𝟛 = 𝟚;𝟚∧𝟛 = 𝟠	#M29 Root<=>Exponentiation
-# There's no analogous 𝟛∨𝟛 = N
+# Does not commute
+# No analogous 𝟛∨𝟛 = N
 𝟚∧1 = 𝟚	#A30 x^1=x
 𝟚∧0 = 1	#A31 X^0=1
 # Square and Square Root
@@ -229,8 +230,8 @@ N1 = N2;N2 = N1	#M80 Symmetry
 N1 = N1	#A81 Reflection
 N1 = N2;N2 = N3;N1 = N3	#I82 Transitive
 # One
-S1(𝓊𝟙?/?𝓊𝟙)S2;S1(1)S2	#M83 x/x
-S1((Q1)?/?(Q1))S2;S1(1)S2	#M84 (x)/(x)
+S1?(𝓊𝟭?/?𝓊𝟭)?S2;S1?(1)?S2	#M83 (a/a)
+S1?(q1 / q1)?S2;S1?(1)?S2	#M84 (a / a)
 # *One*
 S1?*?1 S2;S1 S2	#M85 *one
 S1 1?*?S2;S1 S2	#M86 one*
