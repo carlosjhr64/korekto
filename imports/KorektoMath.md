@@ -29,7 +29,7 @@ With some exceptions, there are three types of keys:
   * upper case may match spaces
 * Representative `ABC`
 ```korekto
-## About specific tokens
+# About specific tokens
 ! .Newline /\n/
 ! .Newline {;}
 ! .SpaceMaybe /\s*/
@@ -47,68 +47,51 @@ With some exceptions, there are three types of keys:
 ! Word {w1 w2 w3 𝓌}
 ! Symbol /[^\w\s]/
 ! Symbol {s1 s2 s3 𝓈}
-## About token types
-### Constant
+# About token types
 ! Constant /[𝖆-𝖟]/
 ! Constant {𝖆 𝖇 𝖈}
-### Scalar
 ! Scalar /[𝑎-𝑧]/
 ! Scalar {𝑎 𝑏 𝑐}
-### Vector
 ! Vector /[𝒂-𝒛]/
 ! Vector {𝒂 𝒃 𝒄}
-### Tensor
 ! Tensor /[𝑨-𝒁]/
 ! Tensor {𝑨 𝑩 𝑪}
-### Set
 ! Set /[𝕒-𝕫]/
 ! Set {𝕒 𝕓 𝕔}
-### Type
 ! Type /[𝔸-𝕐]/
 ! Type {𝕀 𝕁 𝕂}
-## About operators
-### Unary
+# About operators
 ! Unary /[-𝓐-𝓩⌈⌉⌊⌋]/
 ! Unary {𝓐 𝓑 𝓒}
 ! Unaries /[-𝓐-𝓩⌈⌉⌊⌋]*/
 ! Unaries {u1 u2 u3 𝓊}
-### Binary
 ! Binary /[-+*\/∧∨^√𝓪-𝔃]/
 ! Binary {b1 b2 b3 𝒷}
-### Tight
 ! Tight /[.∧∨^𝓪-𝔃]/
 ! Tight {^}
-## About superscripts and subscripts
+# About superscripts and subscripts
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
 ! Superscript {ⁱ ʲ ᵏ}
 ! Subscript /[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/
 ! Subscript {ᵢ ⱼ ₖ}
 # About groups
-## Group
 ! Group /(?:[^()]|\([^()]*\))+/
 ! Group {Q1 Q2 Q3 𝒬}
 ! GroupGlob /(?:[^()\s]|\([^()]*\))+/
 ! GroupGlob {q1 q2 q3 𝓆}
-## Elements
 ! Elements /[^{}]*/
 ! Elements {Z1 Z2 Z3 𝒵}
-## Parameters
 ! Parameters /[^\[\]]+/
 ! Parameters {P1 P2 P3 𝒫}
-# SuperToken
 ! SuperToken /\d[\d\.]*|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S/
 ! SuperToken {𝟬 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵}
 # About slurps
-## Slurp
 ! Slurp /[^;]*/
 ! Slurp {S1 S2 S3 𝒮}
-## Span
 ! Span /[^:=;]*/
 ! Span {N1 N2 N3 𝒩}
-## Glob
 ! Glob /[^\s;]*/
 ! Glob {x1 x2 x3 𝓍}
-## Clump
 ! .Clump /[^\s;]+/
 ! .Clump {m0 𝓂}
 ```
@@ -164,7 +147,7 @@ Operator[𝓐]	#L19 Operator: Operator
 𝟚∧𝟛 = 𝟠;𝟚𝓵𝟠 = 𝟛	#M34 Exponentiation<=>Logarithm: 𝓵
 𝟚𝓵𝟠 = 𝟛;𝟚∧𝟛 = 𝟠	#M35 Logarithm<=>Exponentiation
 𝟚𝓵1 = 0	#A36 xl1=0
-## Digits
+# Digits
 1 - 1 = 0	#T37/A22 Zero
 0 + 1 = 1	#R38/M21,T37 Subtraction<=>Addition
 1 + 1 : 2	#S39/L1 Equivalent: 2
@@ -175,16 +158,16 @@ Operator[𝓐]	#L19 Operator: Operator
 6 + 1 : 7	#S44/L1 Equivalent: 7
 7 + 1 : 8	#S45/L1 Equivalent: 8
 8 + 1 : 9	#S46/L1 Equivalent: 9
-## Show multiplication as repeated addition
+# Show multiplication as repeated addition
 𝟙 = t1;𝟙 * 1 = t1	#M47 Single
 𝟙 + 𝟙 = 𝟚;𝟙 * 2 = 𝟚	#M48 Double
 𝟙 + 𝟙 + 𝟙 = 𝟛;𝟙 * 3 = 𝟛	#M49 Triple
-## Show exponentiation as repeated multiplication
+# Show exponentiation as repeated multiplication
 𝟚 = t2;𝟚∧1 = t2	#M50 Linear
 𝟚 * 𝟚 = 𝟜;𝟚∧2 = 𝟜	#M51 Square
 𝟚 * 𝟚 * 𝟚 = 𝟠;𝟚∧3 = 𝟠	#M52 Cube
 ```
-### Token Spacing
+## Token Spacing
 ```korekto
 S1(u1𝟭 𝒷 u2𝟮)S2;S1(u1𝟭𝒷u2𝟮)S2	#M53 *(a + b)*->*(a+b)*
 S1(u1𝟭𝒷u2𝟮)S2;S1(u1𝟭 𝒷 u2𝟮)S2	#M54 *(a+b)*->*(a + b)*
