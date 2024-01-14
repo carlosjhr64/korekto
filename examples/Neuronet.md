@@ -152,10 +152,10 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝖊∧(𝑥) = TMP	#R19/M62.KorektoMath,R17 Token grouped
 𝖊𝓵(Q1) = Q2;𝖊∧(Q2) = Q1	#M22/R20,R19 Natural Exp abstract
 ### Exp and Log are inverses of eachother
-𝖊∧(𝖊𝓵TMP) = TMP	#C23/I95.KorektoMath,R18,R19 a=b;(b)->(a)
-𝖊∧(𝖊𝓵(TMP)) = TMP	#C24/I95.KorektoMath,R20,R19 a=b;(b)->(a)
+𝖊∧(𝖊𝓵TMP) = TMP	#C23/I97.KorektoMath,R18,R19 a=b;(b)->(a)
+𝖊∧(𝖊𝓵(TMP)) = TMP	#C24/I97.KorektoMath,R20,R19 a=b;(b)->(a)
 𝖊∧(𝖊𝓵(Q1)) = Q1	#A25/C24 Exp Log x = x
-𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#C26/I95.KorektoMath,R19,R20 a=b;(b)->(a)
+𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#C26/I97.KorektoMath,R19,R20 a=b;(b)->(a)
 𝖊𝓵(𝖊∧(Q1)) = Q1	#A27/C26 Log Exp x = x
 ```
 ## Natural exponentiation function
@@ -172,9 +172,9 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝖊∧0 = 𝖊∧0	#T33/A80.KorektoMath Reflection
 𝖊∧0 = 𝖊∧(0)	#R34/M62.KorektoMath,T33 a->(a)
 𝑥 - 𝑥 = 0	#T35/A22.KorektoMath Zero
-𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C36/I95.KorektoMath,T35,R34 a=b;(b)->(a)
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R37/M97.KorektoMath,C36 a-b=a+-b
-𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R38/M99.KorektoMath,R37 a^(b+c)=a^b*a^c
+𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C36/I97.KorektoMath,T35,R34 a=b;(b)->(a)
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R37/M99.KorektoMath,C36 a-b=a+-b
+𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R38/M101.KorektoMath,R37 a^(b+c)=a^b*a^c
 𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R39/M74.KorektoMath,R38 Tight grouped
 𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R40/M74.KorektoMath,R39 Tight grouped
 # The following line is a known fact which I won't prove here:
@@ -182,9 +182,9 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R42/M61.KorektoMath,P41 (a)->a
 𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R43/M61.KorektoMath,R42 (a)->a
 # Then:
-𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C44/I94.KorektoMath,R43,R40 a=b;(a)->(b)
+𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C44/I96.KorektoMath,R43,R40 a=b;(a)->(b)
 𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R45/M74.KorektoMath,C44 Tight grouped
-𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R46/M88.KorektoMath,R45 (x*1)/(y)
+𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R46/M90.KorektoMath,R45 (x*1)/(y)
 𝖊∧0 = (1)	#R47/M82.KorektoMath,R46 (a/a)
 𝖊∧0 = 1	#R48/M61.KorektoMath,R47 (a)->a
 ```
@@ -213,7 +213,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ⌉⌊𝑥 = ⌉⌊𝑥	#T60/A80.KorektoMath Reflection
 ⌉⌊𝑥 = ⌉(⌊𝑥)	#R61/M62.KorektoMath,T60 a->(a)
 # I expand the right side by definitions
-⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C62/I94.KorektoMath,R53,R61 a=b;(a)->(b)
+⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C62/I96.KorektoMath,R53,R61 a=b;(a)->(b)
 ⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R63/M65.KorektoMath,C62 Space$
 ⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T64/A30 Exp abstract
 ⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C65/I81.KorektoMath,C62,T64 Transitive
@@ -223,7 +223,6 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ⌉⌊𝑥 = 𝑥	#C68/I81.KorektoMath,R66,T67 Transitive
 ⌉(⌊(𝑥)) = ⌉⌊𝑥	#R59/M61.KorektoMath,R58 Token un-grouped
 ⌉(⌊(𝑥)) = 𝑥	#C69/I81.KorektoMath,R59,C68 Transitive
-STOP
 ```
 ## Squash
 ```korekto
@@ -232,19 +231,20 @@ STOP
 # Here its:
 ⌈(𝑥) : 1 / (1 + ⌉(-𝑥))	#S70/L1.KorektoMath Equivalent: ⌈
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R71/M2.KorektoMath,S70 If equivalent, then equal
-⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R72/M56.KorektoMath,R71 Token un-grouped
-⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R73/M56.KorektoMath,R72 Token un-grouped
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R74/M54.KorektoMath,R73 Token.Token
+⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R72/M61.KorektoMath,R71 (a)->a
+⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R73/M61.KorektoMath,R72 (a)->a
+⌈𝑥 = 1 / (1+⌉-𝑥)	#R74/M53.KorektoMath,R73 *(a + b)*->*(a+b)*
 # Shrunk ⌈𝑥
-⌈𝑥 = 1 / 1+⌉-𝑥	#R75/M60.KorektoMath,R74 Right space
+⌈𝑥 = 1 / 1+⌉-𝑥	#R75/M65.KorektoMath,R74 Space$
 # Alternates
-⌈(𝑥) = (1) / (1 + ⌉(-𝑥))	#R76/M57.KorektoMath,R71 Token grouped
-⌈(𝑥) = (1) / (1 + ⌉-𝑥)	#R77/M56.KorektoMath,R76 Token un-grouped
-⌈(𝑥) = ⌉𝑥(1) / ⌉𝑥(1 + ⌉-𝑥)	#R60/M37.KorektoMath,R59 Multiplying by x/x
-⌈(𝑥) = ⌉𝑥 / ⌉𝑥(1 + ⌉-𝑥)	#R61/M38.KorektoMath,R60 Multiplying by one
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥*1 + ⌉𝑥*⌉-𝑥)	#R62/M40.KorektoMath,R61 Distribute
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R63/M39.KorektoMath,R62 Multiplying by one
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R64/M31.KorektoMath,R63 Implied multiplication
+⌈(𝑥) = (1) / (1 + ⌉(-𝑥))	#R76/M62.KorektoMath,R71 a->(a)
+⌈(𝑥) = (1) / (1 + ⌉-𝑥)	#R77/M61.KorektoMath,R76 (a)->a
+⌈(𝑥) = ⌉𝑥*(1) / ⌉𝑥*(1 + ⌉-𝑥)	#R78/M87.KorektoMath,R77 x*a / x*b$
+⌈(𝑥) = ⌉𝑥 / ⌉𝑥*(1 + ⌉-𝑥)	#R79/M85.KorektoMath,R78 *(one)
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥*1 + ⌉𝑥*⌉-𝑥)	#R80/M92.KorektoMath,R79 (xa+xb)
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R81/M84.KorektoMath,R80 *one
+⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R82/M76.KorektoMath,R81 Implied*
+STOP
 # Consider ⌉(-𝑥)
 ⌉(-𝑥) = 𝖊∧(-𝑥)	#T65/A24
 ⌉-𝑥 = 𝖊∧(-𝑥)	#R66/M32.KorektoMath,T65 Token
@@ -262,7 +262,6 @@ STOP
 𝑥-𝑥 = 0	#T28/A23.KorektoMath Additive identity
 ⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧0)	#C75/I42.KorektoMath,T28,R74 Group substitutes Token
 ⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 1) #W
-stop
 ⌈(𝑥) = 1 / (1 + ⌉(-𝑥))
 ⌈𝑥 = 1 / 1+⌉-𝑥
    = ⌉𝑥 / ⌉𝑥+1
