@@ -10,13 +10,13 @@ Referencing Wikipedia's
 and
 [Unicode subscripts and superscripts:](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts)
 
-* Italic small(𝑎..𝑧): scalar variables
-* Bold italic small(𝒂..𝒛): single-labeled variables, vectors.
-* Bold italic capital(𝑨..𝒁): multi-labeled variables, matrices.
-* Bold script capital(𝓐..𝓩): unary operators, like 𝓓𝑥.
-* Bold script small(𝓪..𝔃): binary operators.
-* Double struck small(𝕒..𝕫): finite ordered sets.
-* Bold Fraktur small(𝖆..𝖟): derived constant parameters.
+* Italic small `𝑎..𝑧`: scalar variables
+* Bold italic small `𝒂..𝒛`: single-labeled variables, vectors.
+* Bold italic capital `𝑨..𝒁`: multi-labeled variables, matrices.
+* Bold script capital `𝓐..𝓩`: unary operators, like 𝓓𝑥.
+* Bold script small `𝓪..𝔃`: binary operators.
+* Double struck small `𝕒..𝕫`: finite ordered sets.
+* Bold Fraktur small `𝖆..𝖟`: derived constant parameters.
 
 ## Review of the math
 
@@ -31,24 +31,24 @@ Operator precedence is as follows:
 
 But I add spacing to create groups:
 
-* 𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑
-* 𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏) / (𝑐+𝑑)
+* `𝑎 + 𝑏/𝑐 + 𝑑 = 𝑎 + (𝑏/𝑐) + 𝑑`
+* `𝑎+𝑏 / 𝑐+𝑑 = (𝑎+𝑏) / (𝑐+𝑑)`
 
 The above spacing rule reduces the amount of symbols needed to show structure
 and makes the algebra less cluttered.
 
 The product, `*`, may be implied:
 
-* 𝑎*𝑏 = 𝑎 𝑏 = 𝑎𝑏
-* (𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑
-* 𝑥² = 𝑥𝑥 = 𝑥*𝑥
+* `𝑎*𝑏 = 𝑎 𝑏 = 𝑎𝑏`
+* `(𝑎+𝑏)*(𝑐+𝑑) = 𝑎+𝑏 𝑐+𝑑`
+* `𝑥² = 𝑥𝑥 = 𝑥*𝑥`
 
 Definitions are set by `:` and consequent equivalences by `=`.
 
 I may use "Einstein Notation".
 And once indices are shown, they may be dropped:
 
-* ∑ₙ(𝑾ₙ*𝒂ₙ) : 𝑾ⁿ𝒂ₙ : 𝑾𝒂
+* `∑ₙ(𝑾ₙ*𝒂ₙ) : 𝑾ⁿ𝒂ₙ : 𝑾𝒂`
 
 Be aware of the above rules.
 
@@ -117,7 +117,7 @@ I will be importing [KorektoMath](../imports/KorektoMath.md).
 # Types
 ## Euler's constant 𝖊 ~ 2.718⋯
 Constant[𝖊]	#S1/L15.KorektoMath Constant: 𝖊
-## Scalar variables 𝑥 and 𝑦 to help define functions
+## Scalar variable 𝑥 to help define functions
 Scalar[𝑥]	#S2/L16.KorektoMath Scalar: 𝑥
 ## The labeled activation layer vector 𝒂
 Vector[𝒂]	#S3/L17.KorektoMath Vector: 𝒂
@@ -143,19 +143,19 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ### Natural Log abstract
 𝖊∧𝑥 : TMP	#S16/L1.KorektoMath Equivalent: TMP
 𝖊∧𝑥 = TMP	#R17/M2.KorektoMath,S16 If equivalent, then equal
-𝖊𝓵TMP = 𝑥	#R18/M35.KorektoMath,R17 Exponentiation<=>Logarithm
-𝖊∧(𝑥) = TMP	#R19/M57.KorektoMath,R17 Token grouped
-𝖊𝓵(TMP) = 𝑥	#R20/M57.KorektoMath,R18 Token grouped
+𝖊𝓵TMP = 𝑥	#R18/M34.KorektoMath,R17 Exponentiation<=>Logarithm
+𝖊∧(𝑥) = TMP	#R19/M62.KorektoMath,R17 a->(a)
+𝖊𝓵(TMP) = 𝑥	#R20/M62.KorektoMath,R18 a->(a)
 𝖊∧(Q1) = Q2;𝖊𝓵(Q2) = Q1	#M21/R19,R20 Natural Log abstract
 ### Natural Exp abstract
-𝖊𝓵(TMP) = 𝑥	#R20/M57.KorektoMath,R18 Token grouped
-𝖊∧(𝑥) = TMP	#R19/M57.KorektoMath,R17 Token grouped
+𝖊𝓵(TMP) = 𝑥	#R20/M62.KorektoMath,R18 Token grouped
+𝖊∧(𝑥) = TMP	#R19/M62.KorektoMath,R17 Token grouped
 𝖊𝓵(Q1) = Q2;𝖊∧(Q2) = Q1	#M22/R20,R19 Natural Exp abstract
 ### Exp and Log are inverses of eachother
-𝖊∧(𝖊𝓵TMP) = TMP	#C23/I83.KorektoMath,R18,R19 a=b;b->a
-𝖊∧(𝖊𝓵(TMP)) = TMP	#C24/I83.KorektoMath,R20,R19 a=b;b->a
+𝖊∧(𝖊𝓵TMP) = TMP	#C23/I95.KorektoMath,R18,R19 a=b;(b)->(a)
+𝖊∧(𝖊𝓵(TMP)) = TMP	#C24/I95.KorektoMath,R20,R19 a=b;(b)->(a)
 𝖊∧(𝖊𝓵(Q1)) = Q1	#A25/C24 Exp Log x = x
-𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#C26/I83.KorektoMath,R19,R20 a=b;b->a
+𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#C26/I95.KorektoMath,R19,R20 a=b;(b)->(a)
 𝖊𝓵(𝖊∧(Q1)) = Q1	#A27/C26 Log Exp x = x
 ```
 ## Natural exponentiation function
@@ -166,27 +166,27 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ⌉(𝑥) : 𝖊∧(𝑥)	#S28/L1.KorektoMath Equivalent: ⌉
 ⌉(𝑥) = 𝖊∧(𝑥)	#R29/M2.KorektoMath,S28 If equivalent, then equal
 ⌉(Q1) = 𝖊∧(Q1)	#A30/R29 Exp abstract
-⌉𝑥 = 𝖊∧(𝑥)	#R31/M56.KorektoMath,R29 Token un-grouped
-⌉𝑥 = 𝖊∧𝑥	#R32/M56.KorektoMath,R31 Token un-grouped
+⌉𝑥 = 𝖊∧(𝑥)	#R31/M61.KorektoMath,R29 (a)->a
+⌉𝑥 = 𝖊∧𝑥	#R32/M61.KorektoMath,R31 (a)->a
 # Prove 𝖊∧0 = 1
-𝖊∧0 = 𝖊∧0	#T33/A73.KorektoMath Reflection
-𝖊∧0 = 𝖊∧(0)	#R34/M57.KorektoMath,T33 Token grouped
+𝖊∧0 = 𝖊∧0	#T33/A80.KorektoMath Reflection
+𝖊∧0 = 𝖊∧(0)	#R34/M62.KorektoMath,T33 a->(a)
 𝑥 - 𝑥 = 0	#T35/A22.KorektoMath Zero
-𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C36/I83.KorektoMath,T35,R34 a=b;b->a
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R37/M85.KorektoMath,C36 a-b=a+-b
-𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R38/M87.KorektoMath,R37 a^(b+c)=a^b*a^c
-𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R39/M69.KorektoMath,R38 Tight binding grouped
-𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R40/M69.KorektoMath,R39 Tight binding grouped
+𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C36/I95.KorektoMath,T35,R34 a=b;(b)->(a)
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R37/M97.KorektoMath,C36 a-b=a+-b
+𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R38/M99.KorektoMath,R37 a^(b+c)=a^b*a^c
+𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R39/M74.KorektoMath,R38 Tight grouped
+𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R40/M74.KorektoMath,R39 Tight grouped
 # The following line is a known fact which I won't prove here:
 𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)	#P41 Equivalent reciprical
-𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R42/M56.KorektoMath,P41 Token un-grouped
-𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R43/M56.KorektoMath,R42 Token un-grouped
+𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R42/M61.KorektoMath,P41 (a)->a
+𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R43/M61.KorektoMath,R42 (a)->a
 # Then:
-𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C44/I82.KorektoMath,R43,R40 a=b;a->b
-𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R45/M69.KorektoMath,C44 Tight binding grouped
-𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R46/M80.KorektoMath,R45 (x*1)/(y)
-𝖊∧0 = (1)	#R47/M76.KorektoMath,R46 (x)/(x)
-𝖊∧0 = 1	#R48/M56.KorektoMath,R47 Token un-grouped
+𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C44/I94.KorektoMath,R43,R40 a=b;(a)->(b)
+𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R45/M74.KorektoMath,C44 Tight grouped
+𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R46/M88.KorektoMath,R45 (x*1)/(y)
+𝖊∧0 = (1)	#R47/M82.KorektoMath,R46 (a/a)
+𝖊∧0 = 1	#R48/M61.KorektoMath,R47 (a)->a
 ```
 ## Natural logarithm function
 ```korekto
@@ -197,32 +197,32 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ⌊(𝑥) : 𝖊𝓵(𝑥)	#S49/L1.KorektoMath Equivalent: ⌊
 ⌊(𝑥) = 𝖊𝓵(𝑥)	#R50/M2.KorektoMath,S49 If equivalent, then equal
 ⌊(Q1) = 𝖊𝓵(Q1)	#A51/R50 Log abstract
-⌊𝑥 = 𝖊𝓵(𝑥)	#R52/M56.KorektoMath,R50 Token un-grouped
-⌊𝑥 = 𝖊𝓵𝑥	#R53/M56.KorektoMath,R52 Token un-grouped
+⌊𝑥 = 𝖊𝓵(𝑥)	#R52/M61.KorektoMath,R50 (a)->a
+⌊𝑥 = 𝖊𝓵𝑥	#R53/M61.KorektoMath,R52 (a)->a
 # If 𝖊∧0 = 1, then 𝖊𝓵1 = 0 by definition of 𝓵
-𝖊∧0 = 1	#R48/M56.KorektoMath,R47 Token$ un-grouped
-𝖊𝓵1 = 0	#R54/M35.KorektoMath,R48 Exponentiation<=>Logarithm
-𝖊∧(0) = 1	#R55/M57.KorektoMath,R48 Token grouped
+𝖊∧0 = 1	#R48/M61.KorektoMath,R47 Token$ un-grouped
+𝖊𝓵1 = 0	#R54/M34.KorektoMath,R48 Exponentiation<=>Logarithm
+𝖊∧(0) = 1	#R55/M62.KorektoMath,R48 a->(a)
 𝖊𝓵(1) = 0	#R56/M21,R55 Natural Log abstract
 # Prove ⌉(⌊(𝑥)) = x
-⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T57/A73.KorektoMath Reflection
+⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T57/A80.KorektoMath Reflection
 # I first shrink the right side's notation
-⌉(⌊(𝑥)) = ⌉(⌊𝑥)	#R58/M56.KorektoMath,T57 Token un-grouped
-⌉(⌊(𝑥)) = ⌉⌊𝑥	#R59/M56.KorektoMath,R58 Token un-grouped
+⌉(⌊(𝑥)) = ⌉(⌊𝑥)	#R58/M61.KorektoMath,T57 (a)->a
+⌉(⌊(𝑥)) = ⌉⌊𝑥	#R59/M61.KorektoMath,R58 (a)->a
 # Now I consider the right side
-⌉⌊𝑥 = ⌉⌊𝑥	#T60/A73.KorektoMath Reflection
-⌉⌊𝑥 = ⌉(⌊𝑥)	#R61/M57.KorektoMath,T60 Token grouped
+⌉⌊𝑥 = ⌉⌊𝑥	#T60/A80.KorektoMath Reflection
+⌉⌊𝑥 = ⌉(⌊𝑥)	#R61/M62.KorektoMath,T60 a->(a)
 # I expand the right side by definitions
-⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C62/I82.KorektoMath,R53,R61 a=b;a->b
-⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R63/M60.KorektoMath,C62 Right space
+⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C62/I94.KorektoMath,R53,R61 a=b;(a)->(b)
+⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R63/M65.KorektoMath,C62 Space$
 ⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T64/A30 Exp abstract
-⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C65/I74.KorektoMath,C62,T64 Transitive
-⌉⌊𝑥 = 𝖊∧(𝖊𝓵(𝑥))	#R66/M57.KorektoMath,C65 Token grouped
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C65/I81.KorektoMath,C62,T64 Transitive
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵(𝑥))	#R66/M62.KorektoMath,C65 a->(a)
 # I next invoke the inverse abstract axiom derived earlier
 𝖊∧(𝖊𝓵(𝑥)) = 𝑥	#T67/A25 Exp Log x = x
-⌉⌊𝑥 = 𝑥	#C68/I74.KorektoMath,R66,T67 Transitive
-⌉(⌊(𝑥)) = ⌉⌊𝑥	#R59/M56.KorektoMath,R58 Token un-grouped
-⌉(⌊(𝑥)) = 𝑥	#C69/I74.KorektoMath,R59,C68 Transitive
+⌉⌊𝑥 = 𝑥	#C68/I81.KorektoMath,R66,T67 Transitive
+⌉(⌊(𝑥)) = ⌉⌊𝑥	#R59/M61.KorektoMath,R58 Token un-grouped
+⌉(⌊(𝑥)) = 𝑥	#C69/I81.KorektoMath,R59,C68 Transitive
 STOP
 ```
 ## Squash
