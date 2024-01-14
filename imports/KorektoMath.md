@@ -69,6 +69,10 @@ With some exceptions, there are three types of keys:
 ! Binary {b1 b2 b3 𝒷}
 ! Tight /[.∧∨^𝓪-𝔃]/
 ! Tight {^}
+! Loose /[-+]/
+! Loose {𝓁}
+! .Loosey /[-+ ]/
+! .Loosey {𝓎}
 # About superscripts and subscripts
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
 ! Superscript {ⁱ ʲ ᵏ}
@@ -177,71 +181,76 @@ S1 u1𝟭𝒷u2𝟮;S1?(u1𝟭 𝒷 u2𝟮)	#M56 * a+b$->*(a + b)$
 u1𝟭𝒷u2𝟮 S1;(u1𝟭 𝒷 u2𝟮)?S1	#M58 ^a+b *->^(a + b)*
 S1 u1𝟭𝒷u2𝟮 S2;S1?(u1𝟭 𝒷 u2𝟮)?S2	#M59 * a+b *->*(a + b)*
 S1?(u1𝟭 𝒷 u2𝟮)?S2;S1 u1𝟭𝒷u2𝟮 S2	#M60 *(a + b)*->* a+b *
+S1 u1𝟭𝒷u2𝟮;S1 u1𝟭 𝒷 u2𝟮	#M61 ~a+b$->~a + b
 ```
 ## Grouping
 ```korekto
 # Token
-S1(𝓊𝟭)S2;S1𝓊𝟭S2	#M61 (a)->a
-S1𝓊𝟭S2;S1(𝓊𝟭)S2	#M62 a->(a)
+S1(𝓊𝟭)S2;S1𝓊𝟭S2	#M62 (a)->a
+S1𝓊𝟭S2;S1(𝓊𝟭)S2	#M63 a->(a)
 # GroupGlob
-S1?(q1)?S2;S1 q1 S2	#M63 Space
-S1 q1 S2;S1(q1)S2	#M64 Group
-S1?(q1);S1 q1	#M65 Space$
-S1 q1;S1?(q1)	#M66 Group$
-(q1)?S1;q1 S1	#M67 ^Space
-q1 S1;(q1)?S1	#M68 ^Group
+S1?(q1)?S2;S1 q1 S2	#M64 Space
+S1 q1 S2;S1(q1)S2	#M65 Group
+S1?(q1);S1 q1	#M66 Space$
+S1 q1;S1?(q1)	#M67 Group$
+(q1)?S1;q1 S1	#M68 ^Space
+q1 S1;(q1)?S1	#M69 ^Group
 # Group
-N1 =?(Q1);N1 = Q1	#M69 =Space
-S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M70 +Space+
-S1?+?(Q1);S1 + Q1	#M71 +Space
-(Q1)?+?S1;Q1 + S1	#M72 Space+
+N1 =?(Q1);N1 = Q1	#M70 =Space
+S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M71 +Space+
+S1?+?(Q1);S1 + Q1	#M72 +Space
+(Q1)?+?S1;Q1 + S1	#M73 Space+
 # Binding
-S1(𝓊𝟭^u2𝟮)S2;S1𝓊𝟭^u2𝟮S2	#M73 Tight un-grouped
-S1𝓊𝟭^u2𝟮S2;S1(𝓊𝟭^u2𝟮)S2	#M74 Tight grouped
+S1(𝓊𝟭^u2𝟮)S2;S1𝓊𝟭^u2𝟮S2	#M74 Tight un-grouped
+S1𝓊𝟭^u2𝟮S2;S1(𝓊𝟭^u2𝟮)S2	#M75 Tight grouped
 ```
 # Implied/Explicit multiplication
 ```korekto
-S1𝓊𝟭u2𝟮S2;S1𝓊𝟭*u2𝟮S2	#M75 Explicit*
-S1𝓊𝟭*u2𝟮S2;S1𝓊𝟭u2𝟮S2	#M76 Implied*
-S1⦆?⦅S2;S1⦆?*?⦅S3	#M77 Explicit*Group
-S1⦆?*?⦅S2;S1⦆?⦅S3	#M78 Implied*Group
+S1𝓊𝟭u2𝟮S2;S1𝓊𝟭*u2𝟮S2	#M76 Explicit*
+S1𝓊𝟭*u2𝟮S2;S1𝓊𝟭u2𝟮S2	#M77 Implied*
+S1⦆?⦅S2;S1⦆?*?⦅S3	#M78 Explicit*Group
+S1⦆?*?⦅S2;S1⦆?⦅S3	#M79 Implied*Group
 ```
 ## Algebra
 ```korekto
 # Equality
-N1 = N2;N2 = N1	#M79 Symmetry
-N1 = N1	#A80 Reflection
-N1 = N2;N2 = N3;N1 = N3	#I81 Transitive
+N1 = N2;N2 = N1	#M80 Symmetry
+N1 = N1	#A81 Reflection
+N1 = N2;N2 = N3;N1 = N3	#I82 Transitive
 # One
-S1?(𝓊𝟭?/?𝓊𝟭)?S2;S1?(1)?S2	#M82 (a/a)
-S1?(q1 / q1)?S2;S1?(1)?S2	#M83 (a / a)
+S1?(𝓊𝟭?/?𝓊𝟭)?S2;S1?(1)?S2	#M83 (a/a)
+S1?(q1 / q1)?S2;S1?(1)?S2	#M84 (a / a)
 # One
-S1?*?1 S2;S1 S2	#M84 *one
-S1?*?(1) S2;S1 S2	#M85 *(one)
-S1 1?*?S2;S1 S2	#M86 one*
+S1?*?1 S2;S1 S2	#M85 *one
+S1?*?(1) S2;S1 S2	#M86 *(one)
+S1 1?*?S2;S1 S2	#M87 one*
 # Zero
-𝒮(u1𝓊𝟭?-?u2𝟮)S2;𝒮0S2	#M87 Zero
+𝒮(u1𝓊𝟭?-?u2𝟮)S2;𝒮0S2	#M88 (Zero)
+S1𝓎𝓊𝟭-𝓊𝟭𝓎S2;S1𝓎0𝓎S2	#M89 Loosey Zero
+S1𝓎𝓊𝟭+0𝓎S2;S1𝓎𝓊𝟭𝓎S2	#M90 ~a+0~->~a~
+S1𝓎0+𝓊𝟭𝓎S2;S1𝓎𝓊𝟭𝓎S2	#M91 ~0+a~->~a~
 # (a/b)
-S1 u1𝟭?/?u2𝟮;S1 𝓊𝟯*u1𝟭 / 𝓊𝟯*u2𝟮	#M88 x*a / x*b$
-S1(𝓊𝟭?/?u2𝟮)S2;S1(u3𝟯*𝓊𝟭 / u3𝟯*u2𝟮)S2	#M89 (xa / xb)
-S1(q1 / q2)S2;S1(𝓊𝟭*(q1) / 𝓊𝟭*(q2))S2	#M90 (x(a) / x(b))
-S1𝓊𝟭*(1?/?u2𝟮)S2;S1(𝓊𝟭?/?u2𝟮)S2	#M91 (x*1)/(y)
-S1𝓊𝟭*(1 / q1)S2;S1(𝓊𝟭 / q1)S2	#M92 x*1 /  y
+S1 u1𝟭?/?u2𝟮;S1 𝓊𝟯*u1𝟭 / 𝓊𝟯*u2𝟮	#M92 x*a / x*b$
+S1(𝓊𝟭?/?u2𝟮)S2;S1(u3𝟯*𝓊𝟭 / u3𝟯*u2𝟮)S2	#M93 (xa / xb)
+S1(q1 / q2)S2;S1(𝓊𝟭*(q1) / 𝓊𝟭*(q2))S2	#M94 (x(a) / x(b))
+S1𝓊𝟭*(1?/?u2𝟮)S2;S1(𝓊𝟭?/?u2𝟮)S2	#M95 (x*1)/(y)
+S1𝓊𝟭*(1 / q1)S2;S1(𝓊𝟭 / q1)S2	#M96 x*1 /  y
+S1 1?𝓁?(𝓊𝟭?/?q2)S2;S1 (q2𝓁𝓊𝟭 / q2)S2	#M97 ~1+(a/b)->~(b+a / b)
 # Distribute
-S1𝓊𝟭*(u2𝟮?+?u3𝟯)S2;S1(𝓊𝟭*u2𝟮?+?𝓊𝟭*u3𝟯)S2	#M93 (xa+xb)
-S1𝓊𝟭*(q2 + q3)S2;S1(𝓊𝟭*(q2) + 𝓊𝟭*(q3))S2	#M94 (x(a) + x(b))
+S1𝓊𝟭*(u2𝟮?+?u3𝟯)S2;S1(𝓊𝟭*u2𝟮?+?𝓊𝟭*u3𝟯)S2	#M98 (xa+xb)
+S1𝓊𝟭*(q2 + q3)S2;S1(𝓊𝟭*(q2) + 𝓊𝟭*(q3))S2	#M99 (x(a) + x(b))
 # Substitution
-𝓊𝟭 = 𝟮;S1𝓊𝟭S2;S1𝟮S2	#I95 a=b;a->b
-𝓊𝟭 = N2;S1𝓊𝟭S2;S1(N2)S2	#I96 a=b;a->(b)
-N1 = 𝓊𝟭;S1(N1)S2;S1𝓊𝟭S2	#I97 (a)=b;(a)->b
-N1 = N2;S1(N1)S2;S1(N2)S2	#I98 a=b;(a)->(b)
-N1 = N2;S1(N2)S2;S1(N1)S2	#I99 a=b;(b)->(a)
+𝓊𝟭 = 𝟮;S1𝓊𝟭S2;S1𝟮S2	#I100 a=b;a->b
+𝓊𝟭 = N2;S1𝓊𝟭S2;S1(N2)S2	#I101 a=b;a->(b)
+N1 = 𝓊𝟭;S1(N1)S2;S1𝓊𝟭S2	#I102 (a)=b;(a)->b
+N1 = N2;S1(N1)S2;S1(N2)S2	#I103 a=b;(a)->(b)
+N1 = N2;S1(N2)S2;S1(N1)S2	#I104 a=b;(b)->(a)
 # Adding
-S1(𝓊𝟭?+?-u2𝟮)S2;S1(𝓊𝟭?-?u2𝟮)S2	#M100 a+-b=a-b
-S1(𝓊𝟭?-?u2𝟮)S2;S1(𝓊𝟭?+?-u2𝟮)S2	#M101 a-b=a+-b
-S1𝓊𝟭∧u2𝟮*𝓊𝟭∧u3𝟯S2;S1𝓊𝟭∧(u2𝟮?+?u3𝟯)S2	#M102 a^b*a^c=a^(b+c)
-S1𝓊𝟭∧u2𝟮𝓊𝟭∧u3𝟯S2;S1𝓊𝟭∧(u2𝟮?+?u3𝟯)S2	#M103 a^ba^c=a^(b+c)
-S1𝓊𝟭∧(u2𝟮?+?u3𝟯)S2;S1𝓊𝟭∧u2𝟮*𝓊𝟭∧u3𝟯S2	#M104 a^(b+c)=a^b*a^c
+S1(𝓊𝟭?+?-u2𝟮)S2;S1(𝓊𝟭?-?u2𝟮)S2	#M105 a+-b=a-b
+S1(𝓊𝟭?-?u2𝟮)S2;S1(𝓊𝟭?+?-u2𝟮)S2	#M106 a-b=a+-b
+S1𝓊𝟭∧u2𝟮*𝓊𝟭∧u3𝟯S2;S1𝓊𝟭∧(u2𝟮?+?u3𝟯)S2	#M107 a^b*a^c=a^(b+c)
+S1𝓊𝟭∧u2𝟮𝓊𝟭∧u3𝟯S2;S1𝓊𝟭∧(u2𝟮?+?u3𝟯)S2	#M108 a^ba^c=a^(b+c)
+S1𝓊𝟭∧(u2𝟮?+?u3𝟯)S2;S1𝓊𝟭∧u2𝟮*𝓊𝟭∧u3𝟯S2	#M109 a^(b+c)=a^b*a^c
 # Commute
-S1(𝓊𝟭?+?u2𝟮)S2;S1(u2𝟮?+?𝓊𝟭)S2	#M105 (a+b)->(b+a)
+S1(𝓊𝟭?+?u2𝟮)S2;S1(u2𝟮?+?𝓊𝟭)S2	#M110 (a+b)->(b+a)
 ```
