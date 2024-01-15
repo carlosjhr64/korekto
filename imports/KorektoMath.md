@@ -4,7 +4,7 @@ This is Korekto's standard math import.
 
 Quick index:
 
-* [SuperTokens](?# SuperTokens)
+* [SuperTokens](?#SuperTokens)
 
 ## Ruby patches
 
