@@ -2,7 +2,11 @@
 
 This is Korekto's standard math import.
 
-## Ruby Monkey Patches
+Quick index:
+
+* [SuperTokens](?# SuperTokens)
+
+## Ruby patches
 
 * [Kernel](../imports/Kernel.md) Provides `balanced?`
 ```korekto
@@ -24,30 +28,35 @@ With some exceptions, there are three types of keys:
 * Numbered Latin ASCII keys: `W1 W2 W3`
   * lower case will not match spaces
   * upper case may match spaces
-* Mathematical script small Latin: `𝓌`
-  * lower case will no match spaces
-  * upper case may match spaces
+* Mathematical script small Latin: `𝒶 𝒷 𝒸`
 * Representative `ABC`
+
+### About specific tokens
 ```korekto
-# About specific tokens
 ! .Newline /\n/
 ! .Newline {;}
 ! .SpaceMaybe /\s*/
 ! .SpaceMaybe {?}
+# To avoid the balanced ")(" check
 ! .Open /\(/
 ! .Open {⦅}
 ! .Close /\)/
 ! .Close {⦆}
-# About tokens
+```
+### About tokens
+```korekto
+# Token will use Mathematical Sans-Serift digits
 ! Token /\d[\d\.]*|\w+|\S/
-! Token {t1 t2 t3 𝟘 𝟙 𝟚 𝟛 𝟜 𝟝 𝟞 𝟟 𝟠 𝟡}
+! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫}
 ! Decimal /\d[\d\.]*/
-! Decimal {d1 d2 d3 𝒹}
+! Decimal {d1 d2 d3}
 ! Word /\w+/
-! Word {w1 w2 w3 𝓌}
+! Word {w1 w2 w3}
 ! Symbol /[^\w\s]/
-! Symbol {s1 s2 s3 𝓈}
-# About token types
+! Symbol {𝒶 𝒷 𝒸}
+```
+### About token types
+```korekto
 ! Constant /[𝖆-𝖟]/
 ! Constant {𝖆 𝖇 𝖈}
 ! Scalar /[𝑎-𝑧]/
@@ -60,36 +69,42 @@ With some exceptions, there are three types of keys:
 ! Set {𝕒 𝕓 𝕔}
 ! Type /[𝔸-𝕐]/
 ! Type {𝕀 𝕁 𝕂}
-# About operators
+```
+### About operators
+```korekto
 ! Unary /[-𝓐-𝓩⌈⌉⌊⌋]/
 ! Unary {𝓐 𝓑 𝓒}
 ! Unaries /[-𝓐-𝓩⌈⌉⌊⌋]*/
-! Unaries {u1 u2 u3 𝓊}
+! Unaries {𝓊 𝓋 𝓌}
 ! Binary /[-+*\/∧∨^√𝓪-𝔃]/
-! Binary {b1 b2 b3 𝒷}
+! Binary {𝓍 𝓎 𝓏}
 ! Tight /[.∧∨^𝓪-𝔃]/
-! Tight {^}
+! Tight {𝓉}
 ! Loose /[-+]/
 ! Loose {𝓁}
 ! .Loosey /[-+ ]/
-! .Loosey {𝓎}
-# About superscripts and subscripts
+! .Loosey {𝓈}
+```
+### About superscripts and subscripts
+```korekto
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
 ! Superscript {ⁱ ʲ ᵏ}
 ! Subscript /[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/
 ! Subscript {ᵢ ⱼ ₖ}
-# About groups
+```
+### About groups
+```korekto
 ! Group /(?:[^()]|\([^()]*\))+/
-! Group {Q1 Q2 Q3 𝒬}
+! Group {G1 G2 G3}
 ! GroupGlob /(?:[^()\s]|\([^()]*\))+/
-! GroupGlob {q1 q2 q3 𝓆}
+! GroupGlob {g1 g2 g3}
 ! Elements /[^{}]*/
-! Elements {Z1 Z2 Z3 𝒵}
+! Elements {E1 E2 E3}
 ! Parameters /[^\[\]]+/
-! Parameters {P1 P2 P3 𝒫}
-! SuperToken /\d[\d\.]*|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S/
-! SuperToken {𝟬 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵}
-# About slurps
+! Parameters {P1 P2 P3}
+```
+### About slurps
+```korekto
 ! Slurp /[^;]*/
 ! Slurp {S1 S2 S3 𝒮}
 ! Span /[^:=;]*/
@@ -98,6 +113,12 @@ With some exceptions, there are three types of keys:
 ! Glob {x1 x2 x3 𝓍}
 ! .Clump /[^\s;]+/
 ! .Clump {m0 𝓂}
+```
+### SuperTokens
+```korekto
+# SuperToken will use Mathematical Sans-Serift Bold digits
+! SuperToken /\d[\d\.]*|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S/
+! SuperToken {𝟬 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵}
 ```
 ## Definitions
 ```korekto
