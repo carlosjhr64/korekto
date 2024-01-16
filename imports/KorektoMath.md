@@ -1,6 +1,27 @@
 # Korekto Math
 
+## Intro
+
 This is Korekto's standard math import.
+
+### Pattern keys
+
+Several styles are used for keys:
+
+* Numbered Latin ASCII keys: `W1 W2 W3`
+  * lower case will not match spaces
+  * upper case may match spaces
+  * zero is used for non-captures
+  * used for `+` or `*` patterns
+* Representative `ABC`
+* Mathematical numbers
+  * used for general concrete objects, tokens
+  * zero is used for non-captures
+* Mathematical script small Latin: `𝒶 𝒷 𝒸`
+  * used for symbols
+  * used to provide an alternate key
+* Miscellaneous symbols
+  * used for binary operators
 
 Pattern key table:
 | Name | Match | Keys | Character type  |
@@ -11,8 +32,8 @@ Pattern key table:
 | .Open | \\( | ⦅ | Symbols-B |
 | .Close | \\) | ⦆ | Symbols-B |
 | [Token](#Token) |
-| Decimal | \d[\d\.]* | d1 d2 d3 | ASCII |
-| Word | \w+ | w1 w2 w3 | ASCII |
+| Decimal | \d[\d\.]* | d1 d2 d3 𝒹 | ASCII |
+| Word | \w+ | w1 w2 w3 𝓌 | ASCII |
 | Symbol | [^\w\s] | 𝒶 𝒷 𝒸 | Script Small |
 | Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 | Sans-Serif |
 | .Token | Decimal,Word,Symbol | 𝟢 | Sans-Serif |
@@ -25,7 +46,7 @@ Pattern key table:
 | Type | [𝔸-𝕐ℂℍℕℙℚℝℤ] | 𝔸 𝔹 ℂ | Double-Struck Capitol |
 | [Operator](#Operator) |
 | Unary | [𝓐-𝓩] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
-| Unaries | Unary* | 𝓊 𝓋 𝓌 | Script Small |
+| Unaries | Unary* | 𝓉 𝓊 𝓋 | Script Small |
 | Exponent | [^] | ♠ ♣ ♥ ♦ | Miscellaneous Symbols |
 | MultDiv | [/*] | ♟ ♞ ♝ ♜ ♛ ♚ | Miscellaneous Symbols |
 | AddSub | [-+] | ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ | Miscellaneous Symbols |
@@ -48,7 +69,10 @@ Pattern key table:
 
 ## Ruby patches
 
-* [KorektoKernel](../imports/KorektoKernel.md) Provides `balanced?` and `tight?`
+[KorektoKernel](../imports/KorektoKernel.md) provides:
+
+* `balanced?`
+* `tight?`
 ```korekto
 < imports/KorektoKernel.md
 ```
@@ -64,14 +88,6 @@ Pattern key table:
 ! scanner: '\d[\d\.]*|\w+|.'
 ```
 ## Patterns
-
-With some exceptions, there are three types of keys:
-
-* Numbered Latin ASCII keys: `W1 W2 W3`
-  * lower case will not match spaces
-  * upper case may match spaces
-* Mathematical script small Latin: `𝒶 𝒷 𝒸`
-* Representative `ABC`
 
 ### Special
 ```korekto
