@@ -2,20 +2,62 @@
 
 This is Korekto's standard math import.
 
-Quick index:
-
-* [SuperTokens](#SuperTokens)
+Pattern key table:
+| Name | Match | Keys | Character type  |
+|------|:----:|-------|-----------------|
+| [Special](#Special) |
+| .Newline | \n | ; | ASCII |
+| .SpaceMaybe | \s? | ? | ASCII |
+| .Open | \\( | ⦅ | Symbols-B |
+| .Close | \\) | ⦆ | Symbols-B |
+| [Token](#Token) |
+| Decimal | \d[\d\.]* | d1 d2 d3 | ASCII |
+| Word | \w+ | w1 w2 w3 | ASCII |
+| Symbol | [^\w\s] | 𝒶 𝒷 𝒸 | Script Small |
+| Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 | Sans-Serif |
+| .Token | Decimal,Word,Symbol | 𝟢 | Sans-Serif |
+| [Type](#Type) |
+| Constant | [𝖆-𝖟] | 𝖆 𝖇 𝖈 | Bold-Fraktur |
+| Scalar | [𝑎-𝑧]| 𝑎 𝑏 𝑐 | Italic Small |
+| Vector | [𝒂-𝒛] | 𝒂 𝒃 𝒄 | Bold Italic Small |
+| Tensor | [𝑨-𝒁] | 𝑨 𝑩 𝑪 | Bold Italic Capitol |
+| Set | [𝕒-𝕫] | 𝕒 𝕓 𝕔 | Double-Struck small |
+| Type | [𝔸-𝕐ℂℍℕℙℚℝℤ] | 𝔸 𝔹 ℂ | Double-Struck Capitol |
+| [Operator](#Operator) |
+| Unary | [𝓐-𝓩] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
+| Unaries | Unary* | 𝓊 𝓋 𝓌 | Script Small |
+| Exponent | [^] | ♠ ♣ ♥ ♦ | Miscellaneous Symbols |
+| MultDiv | [/*] | ♟ ♞ ♝ ♜ ♛ ♚ | Miscellaneous Symbols |
+| AddSub | [-+] | ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ | Miscellaneous Symbols |
+| [Label](#Label) |
+| Superscript | [ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ] | ⁱ ʲ ᵏ | Latin superscript |
+| Subscript | [ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ] | ᵢ ⱼ ₖ | Latin subscript |
+| [Group](#Group) |
+| Group | (?:[^()]\|\([^()]*\))+ | G1 G2 G3 | ASCII |
+| GroupGlob | (?:[^()\s]\|\([^()]*\))+ | g1 g2 g3 | ASCII |
+| Elements | [^{}]* | E1 E2 E3 | ASCII |
+| Parameters | [^\[\]]+ | P1 P2 P3 | ASCII |
+| [Slurp](#Slurp) |
+| Slurp | [^;]* | S1 S2 S3 | ASCII |
+| Glob | [^\s;]* | s1 s2 s3 | ASCII |
+| .Clump | [^\s;]+ | s0 | ASCII |
+| Span | [^:=;]* | N1 N2 N3 | ASCII |
+| [SuperToken](#SuperToken) |
+| SuperToken | Token,Group | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 | Sans-Serif Bold |
+| .SuperToken | Token,Group | 𝟬 | Sans-Serif Bold |
 
 ## Ruby patches
 
-* [Kernel](../imports/Kernel.md) Provides `balanced?`
+* [KorektoKernel](../imports/KorektoKernel.md) Provides `balanced?` and `tight?`
 ```korekto
-< imports/Kernel.md
+< imports/KorektoKernel.md
 ```
 ## Syntax
 ```korekto
 # Must have balanced (){}[]
 ? balanced? '(){}[]'
+# These binary operators can't be spaced
+? tight? '↑', '↓', '.'
 # Can't have two spaces
 ? !match?(/\s\s/)
 # Scans `1.23` | `word` | `%`
@@ -31,11 +73,11 @@ With some exceptions, there are three types of keys:
 * Mathematical script small Latin: `𝒶 𝒷 𝒸`
 * Representative `ABC`
 
-### About specific tokens
+### Special
 ```korekto
 ! .Newline /\n/
 ! .Newline {;}
-! .SpaceMaybe /\s*/
+! .SpaceMaybe /\s?/
 ! .SpaceMaybe {?}
 # To avoid the balanced ")(" check
 ! .Open /\(/
@@ -43,11 +85,13 @@ With some exceptions, there are three types of keys:
 ! .Close /\)/
 ! .Close {⦆}
 ```
-### About tokens
+### Token
 ```korekto
 # Token will use Mathematical Sans-Serift digits
 ! Token /\d[\d\.]*|\w+|\S/
 ! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫}
+! .Token /\d[\d\.]*|\w+|\S/
+! .Token {𝟢}
 ! Decimal /\d[\d\.]*/
 ! Decimal {d1 d2 d3}
 ! Word /\w+/
@@ -55,7 +99,7 @@ With some exceptions, there are three types of keys:
 ! Symbol /[^\w\s]/
 ! Symbol {𝒶 𝒷 𝒸}
 ```
-### About token types
+### Type
 ```korekto
 ! Constant /[𝖆-𝖟]/
 ! Constant {𝖆 𝖇 𝖈}
@@ -70,13 +114,13 @@ With some exceptions, there are three types of keys:
 ! Type /[𝔸-𝕐]/
 ! Type {𝕀 𝕁 𝕂}
 ```
-### About operators
+### Operator
 ```korekto
-! Unary /[-𝓐-𝓩⌈⌉⌊⌋]/
+! Unary /[𝓐-𝓩!¬℧∀∂∃∆∇∏∐∑√∛∜∫∬∭∮⊤⊥⌈⌉⌊⌋⨊⨋]/
 ! Unary {𝓐 𝓑 𝓒}
-! Unaries /[-𝓐-𝓩⌈⌉⌊⌋]*/
+! Unaries /[𝓐-𝓩√∛∜∫∬∭∮∏∐∑⨊⨋∂∇∆∃∀⊥⊤℧∇⟨⟩∂∂⁻⌈⌉⌊⌋∠∘]*/
 ! Unaries {𝓊 𝓋 𝓌}
-! Binary /[-+*\/∧∨^√𝓪-𝔃]/
+! Binary /[+-×÷∓∔∝≺≻⊏⊐⊑⊒⊢⊣⊧⋈⋉⋊⋋⋌⋎⋏\/]/
 ! Binary {𝓍 𝓎 𝓏}
 ! Tight /[.∧∨^𝓪-𝔃]/
 ! Tight {𝓉}
@@ -85,14 +129,14 @@ With some exceptions, there are three types of keys:
 ! .Loosey /[-+ ]/
 ! .Loosey {𝓈}
 ```
-### About superscripts and subscripts
+### Label
 ```korekto
 ! Superscript /[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]/
 ! Superscript {ⁱ ʲ ᵏ}
 ! Subscript /[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]/
 ! Subscript {ᵢ ⱼ ₖ}
 ```
-### About groups
+### Group
 ```korekto
 ! Group /(?:[^()]|\([^()]*\))+/
 ! Group {G1 G2 G3}
@@ -103,22 +147,24 @@ With some exceptions, there are three types of keys:
 ! Parameters /[^\[\]]+/
 ! Parameters {P1 P2 P3}
 ```
-### About slurps
+### Slurp
 ```korekto
 ! Slurp /[^;]*/
 ! Slurp {S1 S2 S3 𝒮}
 ! Span /[^:=;]*/
 ! Span {N1 N2 N3 𝒩}
 ! Glob /[^\s;]*/
-! Glob {x1 x2 x3 𝓍}
+! Glob {x1 x2 x3}
 ! .Clump /[^\s;]+/
 ! .Clump {m0 𝓂}
 ```
-### SuperTokens
+### SuperToken
 ```korekto
 # SuperToken will use Mathematical Sans-Serift Bold digits
 ! SuperToken /\d[\d\.]*|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S/
-! SuperToken {𝟬 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵}
+! SuperToken {𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵}
+! .SuperToken /\d[\d\.]*|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S/
+! .SuperToken {𝟬}
 ```
 ## Definitions
 ```korekto
