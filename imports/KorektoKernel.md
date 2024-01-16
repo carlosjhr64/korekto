@@ -15,4 +15,6 @@
 ```korekto
 # If it includes s, s is between non-spaces.
 ::String#tight?(*s) = s.all?{include?(_1)? match?(Regexp.new("\S#{_1}\S")) : true}
+# If it includes c, c follows a non-space.
+::String#ltight?(*s) = s.all?{include?(_1)? match?(Regexp.new("\S#{_1}")) : true}
 ```

@@ -11,19 +11,19 @@ Several styles are used for keys:
 * Numbered Latin ASCII keys: `W1 W2 W3`
   * lower case will not match spaces
   * upper case may match spaces
-  * zero is used for non-captures
   * used for `+` or `*` patterns
 * Representative `ABC`
 * Mathematical numbers
   * used for general concrete objects, tokens
-  * zero is used for non-captures
 * Mathematical script small Latin: `𝒶 𝒷 𝒸`
   * used for symbols
   * used to provide an alternate key
 * Miscellaneous symbols
   * used for binary operators
+* Non-capture only allowed on in-variants
 
 Pattern key table:
+
 | Name | Match | Keys | Character type  |
 |------|:----:|-------|-----------------|
 | [Special](#Special) |
@@ -36,7 +36,6 @@ Pattern key table:
 | Word | \w+ | w1 w2 w3 𝓌 | ASCII |
 | Symbol | [^\w\s] | 𝒶 𝒷 𝒸 | Script Small |
 | Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 | Sans-Serif |
-| .Token | Decimal,Word,Symbol | 𝟢 | Sans-Serif |
 | [Type](#Type) |
 | Constant | [𝖆-𝖟] | 𝖆 𝖇 𝖈 | Bold-Fraktur |
 | Scalar | [𝑎-𝑧]| 𝑎 𝑏 𝑐 | Italic Small |
@@ -47,9 +46,14 @@ Pattern key table:
 | [Operator](#Operator) |
 | Unary | [𝓐-𝓩] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
 | Unaries | Unary* | 𝓉 𝓊 𝓋 | Script Small |
-| Exponent | [^] | ♠ ♣ ♥ ♦ | Miscellaneous Symbols |
-| MultDiv | [/*] | ♟ ♞ ♝ ♜ ♛ ♚ | Miscellaneous Symbols |
-| AddSub | [-+] | ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ | Miscellaneous Symbols |
+| Factorial | [!] | ♥ ♦ | Miscellaneous Symbols |
+| Exponent | [^] | ♠ ♣  | Miscellaneous Symbols |
+| MultDiv | [/*] | ♛ ♚ | Miscellaneous Symbols |
+| Div | [/] | ♝ ♜ | Miscellaneous Symbols |
+| Mult | [*] | ♟ ♞ 𝓍 | Miscellaneous Symbols |
+| AddSub | [-+] | ⚄ ⚅ | Miscellaneous Symbols |
+| Sub | [-] | ⚂ ⚃ | Miscellaneous Symbols |
+| Add | [+] | ⚀ ⚁ | Miscellaneous Symbols |
 | [Label](#Label) |
 | Superscript | [ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ] | ⁱ ʲ ᵏ | Latin superscript |
 | Subscript | [ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ] | ᵢ ⱼ ₖ | Latin subscript |
@@ -61,18 +65,16 @@ Pattern key table:
 | [Slurp](#Slurp) |
 | Slurp | [^;]* | S1 S2 S3 | ASCII |
 | Glob | [^\s;]* | s1 s2 s3 | ASCII |
-| .Clump | [^\s;]+ | s0 | ASCII |
 | Span | [^:=;]* | N1 N2 N3 | ASCII |
 | [SuperToken](#SuperToken) |
 | SuperToken | Token,Group | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 | Sans-Serif Bold |
-| .SuperToken | Token,Group | 𝟬 | Sans-Serif Bold |
 
 ## Ruby patches
 
 [KorektoKernel](../imports/KorektoKernel.md) provides:
 
 * `balanced?`
-* `tight?`
+* `tight?` & `ltight?`
 ```korekto
 < imports/KorektoKernel.md
 ```
@@ -80,8 +82,6 @@ Pattern key table:
 ```korekto
 # Must have balanced (){}[]
 ? balanced? '(){}[]'
-# These binary operators can't be spaced
-? tight? '↑', '↓', '.'
 # Can't have two spaces
 ? !match?(/\s\s/)
 # Scans `1.23` | `word` | `%`
@@ -104,16 +104,16 @@ Pattern key table:
 ### Token
 ```korekto
 # Token will use Mathematical Sans-Serift digits
+! Decimal /\d[\d\.]*/
+! Decimal {d1 d2 d3 𝒹}
+! Word /\w+/
+! Word {w1 w2 w3 𝓌}
+! Symbol /[^\w\s]/
+! Symbol {𝒶 𝒷 𝒸}
 ! Token /\d[\d\.]*|\w+|\S/
 ! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫}
 ! .Token /\d[\d\.]*|\w+|\S/
 ! .Token {𝟢}
-! Decimal /\d[\d\.]*/
-! Decimal {d1 d2 d3}
-! Word /\w+/
-! Word {w1 w2 w3}
-! Symbol /[^\w\s]/
-! Symbol {𝒶 𝒷 𝒸}
 ```
 ### Type
 ```korekto
@@ -127,23 +127,31 @@ Pattern key table:
 ! Tensor {𝑨 𝑩 𝑪}
 ! Set /[𝕒-𝕫]/
 ! Set {𝕒 𝕓 𝕔}
-! Type /[𝔸-𝕐]/
+! Type /[𝔸-𝕐ℂℍℕℙℚℝℤ]/
 ! Type {𝕀 𝕁 𝕂}
 ```
 ### Operator
 ```korekto
-! Unary /[𝓐-𝓩!¬℧∀∂∃∆∇∏∐∑√∛∜∫∬∭∮⊤⊥⌈⌉⌊⌋⨊⨋]/
+! Unary /[𝓐-𝓩]/
 ! Unary {𝓐 𝓑 𝓒}
-! Unaries /[𝓐-𝓩√∛∜∫∬∭∮∏∐∑⨊⨋∂∇∆∃∀⊥⊤℧∇⟨⟩∂∂⁻⌈⌉⌊⌋∠∘]*/
-! Unaries {𝓊 𝓋 𝓌}
-! Binary /[+-×÷∓∔∝≺≻⊏⊐⊑⊒⊢⊣⊧⋈⋉⋊⋋⋌⋎⋏\/]/
-! Binary {𝓍 𝓎 𝓏}
-! Tight /[.∧∨^𝓪-𝔃]/
-! Tight {𝓉}
-! Loose /[-+]/
-! Loose {𝓁}
-! .Loosey /[-+ ]/
-! .Loosey {𝓈}
+! Unaries /[𝓐-𝓩]*/
+! Unaries {𝓉 𝓊 𝓋}
+! Factorial /[!]/
+! Factorial {♥ ♦}
+! Exponent /[^]/
+! Exponent {♠ ♣}
+! MultDiv /[/*]/
+! MultDiv {♛ ♚}
+! Div /[/]/
+! Div {♝ ♜}
+! Mult /[*]/
+! Mult {♟ ♞ 𝓍}
+! AddSub /[-+]/
+! AddSub {⚄ ⚅}
+! Sub /[-]/
+! Sub {⚂ ⚃}
+! Add /[+]/
+! Add {⚀ ⚁}
 ```
 ### Label
 ```korekto
@@ -171,8 +179,6 @@ Pattern key table:
 ! Span {N1 N2 N3 𝒩}
 ! Glob /[^\s;]*/
 ! Glob {x1 x2 x3}
-! .Clump /[^\s;]+/
-! .Clump {m0 𝓂}
 ```
 ### SuperToken
 ```korekto
