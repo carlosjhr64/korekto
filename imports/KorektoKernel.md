@@ -1,4 +1,6 @@
-# Korekto kernel
+# Korekto Kernel
+
+* Imported by [KorektoMath](KorektoMath.md)
 
 ## Ruby patches
 

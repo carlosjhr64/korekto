@@ -1,8 +1,9 @@
 # Korekto Math
 
-## Intro
+* Imports [KorektoKernel](KorektoKernel.md)
+* Imported by [Neuronet](../examples/Neuronet.md)
 
-This is Korekto's standard math import.
+## Intro
 
 ### Pattern keys
 
