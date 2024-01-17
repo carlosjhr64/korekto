@@ -19,7 +19,7 @@ Several styles are used for keys:
   * used for symbols
   * used to provide an alternate key
 * Miscellaneous symbols
-  * used for binary operators
+  * used for binary operators and space
 * And then some of the obvious keys
 
 Pattern key table:
@@ -28,8 +28,7 @@ Pattern key table:
 |------|:----:|-------|-----------------|
 | [Special](#Special) |
 | .Newline | \n | ; | ASCII |
-| TODO: capture |
-| .SpaceMaybe | \s? | ? | ASCII |
+| SpaceMaybe | \s? | ♭ ♮ ♯ | Miscellaneous Symbols |
 | .Open | \\( | ⦅ | Symbols-B |
 | .Close | \\) | ⦆ | Symbols-B |
 | [Token](#Token) |
@@ -95,7 +94,7 @@ Pattern key table:
 ! .Newline /\n/
 ! .Newline {;}
 ! .SpaceMaybe /\s?/
-! .SpaceMaybe {?}
+! .SpaceMaybe {♭ ♮ ♯}
 # To avoid the balanced ")(" check
 ! .Open /\(/
 ! .Open {⦅}
@@ -285,12 +284,12 @@ Operator[𝓐]	#L19 Operator: Operator
 ```korekto
 S1(𝟭 ♦ 𝟮)S2;S1(𝟭♦𝟮)S2	#M53 *(a + b)*->*(a+b)*
 S1(𝟭♦𝟮)S2;S1(𝟭 ♦ 𝟮)S2	#M54 *(a+b)*->*(a + b)*
-S1?(𝟭?♦?𝟮);S1 𝟭♦𝟮	#M55 *(a + b)$-> * a+b$
-S1 𝟭♦𝟮;S1?(𝟭?♦?𝟮)	#M56 * a+b$->*(a + b)$
-(𝟭?♦?𝟮)?S1;𝟭♦𝟮 S1	#M57 ^(a + b)*->^a+b *
-𝟭♦𝟮 S1;(𝟭?♦?𝟮)?S1	#M58 ^a+b *->^(a + b)*
-S1 𝟭♦𝟮 S2;S1?(𝟭?♦?𝟮)?S2	#M59 * a+b *->*(a + b)*
-S1?(𝟭?♦?𝟮)?S2;S1 𝟭♦𝟮 S2	#M60 *(a + b)*->* a+b *
+S1♮(𝟭♭♦♭𝟮);S1 𝟭♦𝟮	#M55 *(a + b)$-> * a+b$
+S1 𝟭♦𝟮;S1♮(𝟭♭♦♭𝟮)	#M56 * a+b$->*(a + b)$
+(𝟭♭♦♭𝟮)♮S1;𝟭♦𝟮 S1	#M57 ^(a + b)*->^a+b *
+𝟭♦𝟮 S1;(𝟭♭♦♭𝟮)♭S1	#M58 ^a+b *->^(a + b)*
+S1 𝟭♦𝟮 S2;S1♮(𝟭♭♦♭𝟮)♭S2	#M59 * a+b *->*(a + b)*
+S1♭(𝟭♭♦♭𝟮)♮S2;S1 𝟭♦𝟮 S2	#M60 *(a + b)*->* a+b *
 ```
 ### MultDiv spacing
 ```korekto
@@ -305,27 +304,30 @@ S1 𝟭♚𝟮 S2;S1 𝟭 ♚ 𝟮 S2	#M66 ~a*b~->~a * b~
 # MutlDiv Grouping
 ```korekto
 # MultDiv has higher precedence than AddSub
-S1♥𝟭♚𝟮♦S2;S1♥(𝟭?♚?𝟮)♦S2	#M67 +a*b+->+(a*b)+
-S1♥(𝟭?♚?𝟮)♦S2;S1♥𝟭♚𝟮♦S2	#M68 +(a*b)+->+a*b+
-S1♥𝟭♚𝟮;S1♥(𝟭?♚?𝟮)	#M69 +a*b$->+(a*b)
-S1♥(𝟭?♚?𝟮);S1♥𝟭♚𝟮	#M70 +(a*b)$->+a*b
-𝟭♚𝟮♦S2;(𝟭?♚?𝟮)♦S2	#M71 ^a*b+->(a*b)+
-(𝟭?♚?𝟮)♦S2;𝟭♚𝟮♦S2	#M72 ^(a*b)+->a*b+
+S1♥𝟭♚𝟮♦S2;S1♥(𝟭♭♚♭𝟮)♦S2	#M67 +a*b+->+(a*b)+
+S1♥(𝟭♭♚♭𝟮)♦S2;S1♥𝟭♚𝟮♦S2	#M68 +(a*b)+->+a*b+
+S1♥𝟭♚𝟮;S1♥(𝟭♭♚♭𝟮)	#M69 +a*b$->+(a*b)
+S1♥(𝟭♭♚♭𝟮);S1♥𝟭♚𝟮	#M70 +(a*b)$->+a*b
+𝟭♚𝟮♦S2;(𝟭♭♚♭𝟮)♦S2	#M71 ^a*b+->(a*b)+
+(𝟭♭♚♭𝟮)♦S2;𝟭♚𝟮♦S2	#M72 ^(a*b)+->a*b+
 ```
 ### Token grouping
 ```korekto
 S1(𝟭)S2;S1𝟭S2	#M73 (a)->a
 S1𝟭S2;S1(𝟭)S2	#M74 a->(a)
-# GroupGlob
-S1?(g1)?S2;S1 g1 S2	#M75 Space
-S1 g1 S2;S1?(g1)?S2	#M76 Group
-S1?(g1);S1 g1	#M77 Space$
-S1 g1;S1?(g1)	#M78 Group$
-(g1)?S1;g1 S1	#M79 ^Space
-g1 S1;(g1)?S1	#M80 ^Group
+```
+### GroupGlob grouping
+```korekto
+S1♭(g1)♭S2;S1 g1 S2	#M75 Space
+S1 g1 S2;S1♭(g1)♭S2	#M76 Group
+S1♭(g1);S1 g1	#M77 Space$
+S1 g1;S1♭(g1)	#M78 Group$
+(g1)♭S1;g1 S1	#M79 ^Space
+g1 S1;(g1)♭S1	#M80 ^Group
 ```
 # Group
 ```
+# ♭ ♮ ♯
 N1 =?(Q1);N1 = Q1	#M81 =Space: Q1
 S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M82 +Space+
 S1?+?(Q1);S1 + Q1	#M83 +Space
