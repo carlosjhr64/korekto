@@ -1,20 +1,34 @@
-# Kernel
+# Korekto kernel
 
 ## Ruby patches
 
 ### Balanced
+
+* `balanced?(g)`: for balanced brackets
+
+Canonical use:
+
+* `balanced?('(){}[]')`
 ```korekto
-::Array#blp(k,m) = (m==0)?self<<k:(k==last)?self[0..-2]:self<<k
-::Array#bli      = inject([]){|a,km| a.blp(*km)}
-::Array#blm(g)   = map{|c| g.index(c).divmod(2)}
-::Array#bls(g)   = select{|c| g.include?(c)}
+::Array#blp(k,m)      = (m==0)?self<<k:(k==last)?self[0..-2]:self<<k
+::Array#bli           = inject([]){|a,km| a.blp(*km)}
+::Array#blm(g)        = map{|c| g.index(c).divmod(2)}
+::Array#bls(g)        = select{|c| g.include?(c)}
 ::String#balance(g)   = chars.bls(g).blm(g).bli
 ::String#balanced?(g) = balance(g).empty?
 ```
 ### Tight
+
+* `ltight?(c)`: each c follows non-space
+* `rtight?(c)`: each c followed by non-space
+* `tight?(c)`: each c surrounded by non-space
+
+Canonical use:
+
+* Exponentiation: `tight?('^')`
+* Factorial: `ltight?('!')`
 ```korekto
-# If it includes s, s is between non-spaces.
-::String#tight?(*s) = s.all?{include?(_1)? match?(Regexp.new("\S#{_1}\S")) : true}
-# If it includes c, c follows a non-space.
-::String#ltight?(*s) = s.all?{include?(_1)? match?(Regexp.new("\S#{_1}")) : true}
+::String#ltight?(c) = !include?(' '+c)
+::String#rtight?(c) = !include?(c+' ')
+::String#tight?(c) = ltight?(c) && rtight?(c)
 ```
