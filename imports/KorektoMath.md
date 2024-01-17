@@ -46,6 +46,8 @@ Pattern key table:
 | [Operator](#Operator) |
 | Unary | [𝓐-𝓩] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
 | Unaries | Unary* | 𝓉 𝓊 𝓋 | Script Small |
+| Associative Binaries: |
+| Binary | [-+/*] | ♣ ♥ ♦ | Miscellaneous Symbols |
 | MultDiv | [/*] | ♝ ♛ ♚ | Miscellaneous Symbols |
 | AddSub | [-+] | ⚀ ⚁ ⚂ ± | Miscellaneous Symbols |
 | [Label](#Label) |
@@ -62,7 +64,7 @@ Pattern key table:
 | Span | [^:=;]* | N1 N2 N3 | ASCII |
 | .Clump | \S+ | 𝓂 | Script small|
 | [SuperToken](#SuperToken) |
-| SuperToken | Token,Group | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 | Sans-Serif Bold |
+| SuperToken | Unaries(Token,Group)!? | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 | Sans-Serif Bold |
 
 ## Ruby patches
 
@@ -132,6 +134,8 @@ Pattern key table:
 ! Unary {𝓐 𝓑 𝓒}
 ! Unaries /[𝓐-𝓩]*/
 ! Unaries {𝓉 𝓊 𝓋}
+! Binary /[-+/*]/
+! Binary {♣ ♥ ♦}
 ! MultDiv /[/*]/
 ! MultDiv {♝ ♛ ♚}
 ! AddSub /[-+]/
@@ -169,9 +173,8 @@ Pattern key table:
 ### SuperToken
 ```korekto
 # SuperToken will use Mathematical Sans-Serift Bold digits
-! SuperToken /\d[\d\.]*|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S/
+! SuperToken /[𝓐-𝓩]*(?:(?:\d[\d\.]*)|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S)!?/
 ! SuperToken {𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵}
-! .SuperToken /\d[\d\.]*|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S/
 ```
 ## Definitions
 
@@ -277,17 +280,19 @@ Operator[𝓐]	#L19 Operator: Operator
 ```
 ## Grouping
 
-### Token Spacing
-```
-S1(u1𝟭 𝒷 u2𝟮)S2;S1(u1𝟭𝒷u2𝟮)S2	#M53 *(a + b)*->*(a+b)*
-S1(u1𝟭𝒷u2𝟮)S2;S1(u1𝟭 𝒷 u2𝟮)S2	#M54 *(a+b)*->*(a + b)*
-S1?(u1𝟭 𝒷 u2𝟮);S1 u1𝟭𝒷u2𝟮	#M55 *(a + b)$-> * a+b$
-S1 u1𝟭𝒷u2𝟮;S1?(u1𝟭 𝒷 u2𝟮)	#M56 * a+b$->*(a + b)$
-(u1𝟭 𝒷 u2𝟮)?S1;u1𝟭𝒷u2𝟮 S1	#M57 ^(a + b)*->^a+b *
-u1𝟭𝒷u2𝟮 S1;(u1𝟭 𝒷 u2𝟮)?S1	#M58 ^a+b *->^(a + b)*
-S1 u1𝟭𝒷u2𝟮 S2;S1?(u1𝟭 𝒷 u2𝟮)?S2	#M59 * a+b *->*(a + b)*
-S1?(u1𝟭 𝒷 u2𝟮)?S2;S1 u1𝟭𝒷u2𝟮 S2	#M60 *(a + b)*->* a+b *
-S1 u1𝟭𝒷u2𝟮;S1 u1𝟭 𝒷 u2𝟮	#M61 ~a+b$->~a + b
+### Token spacing
+```korekto
+# ♣ ♥ ♦
+S1(𝟭 ♦ 𝟮)S2;S1(𝟭♦𝟮)S2	#M53 *(a + b)*->*(a+b)*
+S1(𝟭♦𝟮)S2;S1(𝟭 ♦ 𝟮)S2	#M54 *(a+b)*->*(a + b)*
+S1?(𝟭?♦?𝟮);S1 𝟭♦𝟮	#M55 *(a + b)$-> * a+b$
+S1 𝟭♦𝟮;S1?(𝟭?♦?𝟮)	#M56 * a+b$->*(a + b)$
+(𝟭?♦?𝟮)?S1;𝟭♦𝟮 S1	#M57 ^(a + b)*->^a+b *
+𝟭♦𝟮 S1;(𝟭?♦?𝟮)?S1	#M58 ^a+b *->^(a + b)*
+S1 𝟭♦𝟮 S2;S1?(𝟭?♦?𝟮)?S2	#M59 * a+b *->*(a + b)*
+S1?(𝟭?♦?𝟮)?S2;S1 𝟭♦𝟮 S2	#M60 *(a + b)*->* a+b *
+# Operations here become left to right:
+S1 𝟭♦𝟮;S1 𝟭 ♦ 𝟮	#M61 ~a+b$->~a + b
 ```
 ### Grouping
 ```
