@@ -46,6 +46,7 @@ Pattern key table:
 | [Operator](#Operator) |
 | Unary | [𝓐-𝓩] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
 | Unaries | Unary* | 𝓉 𝓊 𝓋 | Script Small |
+| Tight | [∨∧𝓵] | ♩ ♪ | Miscellaneous Symbols |
 | Associative Binaries: |
 | Binary | [-+/*] | ♣ ♥ ♦ | Miscellaneous Symbols |
 | MultDiv | [/*] | ♝ ♛ ♚ | Miscellaneous Symbols |
@@ -134,6 +135,8 @@ Pattern key table:
 ! Unary {𝓐 𝓑 𝓒}
 ! Unaries /[𝓐-𝓩]*/
 ! Unaries {𝓉 𝓊 𝓋}
+! Tight /[∨∧𝓵]/
+! Tight {♩ ♪}
 ! Binary /[-+/*]/
 ! Binary {♣ ♥ ♦}
 ! MultDiv /[/*]/
@@ -238,8 +241,8 @@ Operator[𝓐]	#L19 Operator: Operator
 𝟪∨𝟥 = 𝟤;𝟤∧𝟥 = 𝟪	#M28 Root=>Exponentiation
 # Does not commute
 # No analogous 𝟛∨𝟛 = N
-𝟤∧1 = 𝟤	#A29 x^1=x
-𝟤∧0 = 1	#A30 X^0=1
+𝟤∧1 = 𝟤	#A29 x∧1=x
+𝟤∧0 = 1	#A30 X∧0=1
 ```
 ### Square and Square Root
 ```korekto
@@ -301,7 +304,7 @@ S1 𝟭 ♚ 𝟮;S1 𝟭♚𝟮	#M62 ~a * b$->~a*b
 S1 𝟭 ♚ 𝟮 S2;S1 𝟭♚𝟮 S2	#M65 ~a * b~->~a*b~
 S1 𝟭♚𝟮 S2;S1 𝟭 ♚ 𝟮 S2	#M66 ~a*b~->~a * b~
 ```
-# MutlDiv Grouping
+### MutlDiv Grouping
 ```korekto
 # MultDiv has higher precedence than AddSub
 S1♥𝟭♚𝟮♦S2;S1♥(𝟭♭♚♭𝟮)♦S2	#M67 +a*b+->+(a*b)+
@@ -325,25 +328,32 @@ S1 g1;S1♭(g1)	#M78 Group$
 (g1)♭S1;g1 S1	#M79 ^Space
 g1 S1;(g1)♭S1	#M80 ^Group
 ```
-# Group
+### Group grouping
+```korekto
+N1 = (G1);N1 = G1	#M81 =Space
+N1 = G1;N1 = (G1)	#M82 =Group
+S1 + (G1) + S2;S1 + G1 + S2	#M83 +Space+
+S1 + G1 + S2;S1 + (G1) + S2	#M84 +Group+
+S1 + (G1);S1 + G1	#M85 +Space
+S1 + G1;S1 + (G1)	#M86 +Group
+(G1) + S1;G1 + S1	#M87 Space+
+G1 + S1;(G1) + S1	#M88 Group+
 ```
-# ♭ ♮ ♯
-N1 =?(Q1);N1 = Q1	#M81 =Space: Q1
-S1?+?(Q1)?+?S2;S1 + Q1 + S2	#M82 +Space+
-S1?+?(Q1);S1 + Q1	#M83 +Space
-(Q1)?+?S1;Q1 + S1	#M84 Space+
-# Binding
-S1(𝓊𝟭^u2𝟮)S2;S1𝓊𝟭^u2𝟮S2	#M85 Tight un-grouped: ^ u2
-S1𝓊𝟭^u2𝟮S2;S1(𝓊𝟭^u2𝟮)S2	#M86 Tight grouped
+### Tight grouping
+```korekto
+S1(𝟭♩𝟮)S2;S1𝟭♩𝟮S2	#M89 Tight un-grouped
+S1𝟭♩𝟮S2;S1(𝟭♩𝟮)S2	#M90 Tight grouped
 ```
+## Algebra
+
 ### Implied/Explicit multiplication
 ```
+# ♭ ♮ ♯ ♩ ♪
 S1𝓊𝟭u2𝟮S2;S1𝓊𝟭*u2𝟮S2	#M76 Explicit*
 S1𝓊𝟭*u2𝟮S2;S1𝓊𝟭u2𝟮S2	#M77 Implied*
 S1⦆?⦅S2;S1⦆?*?⦅S3	#M78 Explicit*Group
 S1⦆?*?⦅S2;S1⦆?⦅S3	#M79 Implied*Group
 ```
-## Algebra
 
 ### Equality
 ```
