@@ -88,6 +88,8 @@ Pattern key table:
 ? tight?('𝓵')
 # Factorial is left tight
 ? ltight?('!')
+# Consistent spacing around binary operators
+? !match?(%r{\S[-+/*]\s}) && !match?(%r{\s[-+/*]\S})
 ```
 ## Patterns
 
@@ -348,28 +350,31 @@ S1𝟭♩𝟮S2;S1(𝟭♩𝟮)S2	#M90 Tight grouped
 ## Algebra
 
 ### Implied/Explicit multiplication
-```
-# ♭ ♮ ♯ ♩ ♪
-S1𝓊𝟭u2𝟮S2;S1𝓊𝟭*u2𝟮S2	#M76 Explicit*
-S1𝓊𝟭*u2𝟮S2;S1𝓊𝟭u2𝟮S2	#M77 Implied*
-S1⦆?⦅S2;S1⦆?*?⦅S3	#M78 Explicit*Group
-S1⦆?*?⦅S2;S1⦆?⦅S3	#M79 Implied*Group
+```korekto
+S1𝟭♭𝟮S2;S1𝟭♮*♮𝟮S2	#M91 Explicit*
+S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M92 Implied*
 ```
 
 ### Equality
-```
-N1 = N2;N2 = N1	#M80 Symmetry
-N1 = N1	#A81 Reflection
-N1 = N2;N2 = N3;N1 = N3	#I82 Transitive
+```korekto
+N1 = N2;N2 = N1	#M93 Symmetry
+N1 = N1	#A94 Reflection
+N1 = N2;N2 = N3;N1 = N3	#I95 Transitive
 ```
 ### One
-```
-S1?(𝓊𝟭?/?𝓊𝟭)?S2;S1?(1)?S2	#M83 (a/a)
-S1?(q1 / q1)?S2;S1?(1)?S2	#M84 (a / a)
+```korekto
+# (a/a)
+S1(𝟭♭/♭𝟭)S2;S1(1)S2	#M96 (a/a)=>(1)
+S1(g1 / g1)S2;S1(1)S2	#M97 (a / a)=>(1)
 # One
-S1?*?1 S2;S1 S2	#M85 *one
-S1?*?(1) S2;S1 S2	#M86 *(one)
-S1 1?*?S2;S1 S2	#M87 one*
+S1♭*♭1 S2;S1 S2	#M98 *one~
+S1♭*♭(1) S2;S1 S2	#M99 *(one)~
+S1 1♭*♭S2;S1 S2	#M100 ~one*
+S1 (1)♭*♭S2;S1 S2	#M101 ~(one)*
+S1*1♭S2;S1♭S2	#M102 *one
+S1♭1*S2;S1♭S2	#M103 one*
+S1*(1)♭S2;S1♭S2	#M104 *(one)
+S1♭(1)*S2;S1♭S2	#M105 (one)*
 ```
 ### Zero
 ```
