@@ -71,16 +71,22 @@ Squash and unsquash shrinks nicely as:
 * Squash: `⌈𝑥 = 1 / 1+⌉-𝑥`
 * Unsquash: `⌋𝑥 = ⌊ 𝑥/(1-𝑥)`
 
-## Binary competition
+## Binary Balance function
 
-In ["The Math of Species Conflict" by Numberphile](https://www.youtube.com/watch?v=WR3GqqWAmfw),
-the following function is referred to as "binary competition":
+Consider the following function:
 
 * `𝓑(𝑥) : 𝑥 * (1 - 𝑥)`
   * `𝓑𝑥 = 𝑥(1-𝑥)`
 
-This form occurs in the derivative of the squash function, and so I'll use `𝓑`
-in it's expression.
+I'll show that the derivative of the Squash function can be written as:
+
+* `𝓓ₓ(⌈(𝑥)) = 𝓑(⌈(𝑥))`
+  * `𝓓ₓ⌈𝑥 = 𝓑⌈𝑥`
+
+The function `𝓑` also occurs in other contexts.
+For example, in ["The Math of Species Conflict" by Numberphile](https://www.youtube.com/watch?v=WR3GqqWAmfw).
+There seems to be no consensus on what to call `𝓑`, so
+my vote is "Binary Balance".
 
 ## Next level unary postfix operator, `₊` 
 
