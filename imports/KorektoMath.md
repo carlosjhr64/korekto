@@ -48,6 +48,7 @@ Pattern key table:
 | Unary | [𝓐-𝓩] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
 | Unaries | Unary* | 𝓉 𝓊 𝓋 | Script Small |
 | Tight | [∨∧𝓵] | ♩ ♪ | Miscellaneous Symbols |
+| .NotTight | (?![∨∧𝓵]) | ⚑ | Miscellaneous Symbols |
 | Associative Binaries: |
 | Binary | [-+/*] | ♣ ♥ ♦ | Miscellaneous Symbols |
 | MultDiv | [/*] | ♝ ♛ ♚ | Miscellaneous Symbols |
@@ -140,6 +141,8 @@ Pattern key table:
 ! Unaries {𝓉 𝓊 𝓋}
 ! Tight /[∨∧𝓵]/
 ! Tight {♩ ♪}
+! .NotTight /(?![∨∧𝓵])/
+! .NotTight {⚑}
 ! Binary /[-+/*]/
 ! Binary {♣ ♥ ♦}
 ! MultDiv /[/*]/
@@ -371,10 +374,10 @@ S1♭*♭1 S2;S1 S2	#M98 *one~
 S1♭*♭(1) S2;S1 S2	#M99 *(one)~
 S1 1♭*♭S2;S1 S2	#M100 ~one*
 S1 (1)♭*♭S2;S1 S2	#M101 ~(one)*
-S1*1♭S2;S1♭S2	#M102 *one
-S1♭1*S2;S1♭S2	#M103 one*
-S1*(1)♭S2;S1♭S2	#M104 *(one)
-S1♭(1)*S2;S1♭S2	#M105 (one)*
+S1*1⚑S2;S1⚑S2	#M102 *one
+S1⚑1*S2;S1⚑S2	#M103 one*
+S1*(1)⚑S2;S1⚑S2	#M104 *(one)
+S1⚑(1)*S2;S1⚑S2	#M105 (one)*
 ```
 ### Zero
 ```korekto
@@ -387,9 +390,9 @@ S1♭⚀♭0♭±♭S2;S1♭±♭S2	#M108 ±0±=>±
 S1 𝟭♭/♭𝟮;S1 𝟯*𝟭 / 𝟯*𝟮	#M109 x*a / x*b$
 S1(𝟭♭/♭𝟮)S2;S1(𝟯*𝟭 / 𝟯*𝟮)S2	#M110 (xa / xb)
 S1(g1 / g2)S2;S1(𝟭*(g1) / 𝟭*(g2))S2	#M111 (x(a) / x(b))
-S1𝟭*(1♭/♭𝟮)S2;S1(𝟭♮/♮𝟮)S2	#M112 (x*1)/(y)
-S1𝟭*(1 / g1)S2;S1(𝟭 / g1)S2	#M113 x*1 /  y
-S1 1♭±♭(𝟭 / g2)S2;S1 (g2±𝟭 / g2)S2	#M114 ~1+(a/b)->~(b+a / b)
+S1𝟭*(1♭/♭𝟮)⚑S2;S1(𝟭♮/♮𝟮)⚑S2	#M112 (x*1)/(y)
+S1𝟭*(1 / g1)⚑S2;S1(𝟭 / g1)⚑S2	#M113 x*1 /  y
+S1 1♭±♭(𝟭 / g2)⚑S2;S1 (g2±𝟭 / g2)⚑S2	#M114 ~1+(a/b)->~(b+a / b)
 ```
 ### Distribute
 ```korekto
