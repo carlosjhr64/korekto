@@ -3,6 +3,17 @@
 * Imports [KorektoKernel](KorektoKernel.md)
 * Imported by [Neuronet](../examples/Neuronet.md)
 
+## Contents
+
+* [Intro](#Intro)
+* [Ruby patches](#Ruby-patches)
+* [Syntax](#Syntax)
+* [Patterns](#Patterns)
+* [Definitions](#Defintions)
+* [Grouping](#Grouping)
+* [Algebra](#Algebra)
+* [Abstracts](#Abstracts)
+
 ## Intro
 
 ### Pattern keys
@@ -36,7 +47,7 @@ Pattern key table:
 | Decimal | \d[\d\.]* | d1 d2 d3 𝒹 | ASCII |
 | Word | \w+ | w1 w2 w3 𝓌 | ASCII |
 | Symbol | [^\w\s] | 𝒶 𝒷 𝒸 | Script Small |
-| Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 | Sans-Serif |
+| Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 𝓍 𝓎 𝓏 | Sans-Serif |
 | [Type](#Type) |
 | Constant | [𝕬-𝖟] | 𝖆 𝖇 𝖈 | Bold-Fraktur |
 | Scalar | [𝑎-𝑧]| 𝑎 𝑏 𝑐 | Italic Small |
@@ -116,7 +127,7 @@ Pattern key table:
 ! Symbol {𝒶 𝒷 𝒸}
 # Token will use Mathematical Sans-Serift digits
 ! Token /\d[\d\.]*|\w+|\S/
-! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫}
+! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 𝓍 𝓎 𝓏}
 ```
 ### Type
 ```korekto
@@ -363,7 +374,7 @@ S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M92 Implied*
 N1 = N2;N2 = N1	#M93 Symmetry
 N1 = N1	#A94 Reflection
 ```
-# Transitive
+### Transitive
 ```korekto
 N1 = N2;N2 = N3;N1 = N3	#I95 Transitive a=b;b=c;a=c
 N1 = N2;N3 = N2;N3 = N1	#I96 Linked a=b;c=b;c=a
@@ -424,3 +435,4 @@ S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M128 (a+b)->(b+a)
 ```korekto
 S1♭--𝟭♮S2;S1♭𝟭♮S2	#M129 --a->a
 ```
+## Abstracts
