@@ -427,52 +427,56 @@ N1 = 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I122 (a)=b;(a)->b
 N1 = 𝟭;S1𝟭S2;S1(N1)S2	#I123 (a)=b;b->(a)
 N1 = N2;S1(N1)S2;S1(N2)S2	#I124 a=b;(a)->(b)
 N1 = N2;S1(N2)S2;S1(N1)S2	#I125 a=b;(b)->(a)
+N1 = N2;N1 ⚍ S1;N2 ⚍ S1	#I126 a=b;a->b+
+N1 = N2;N2 ⚍ S1;N1 ⚍ S1	#I127 a=b;b->a+
+N1 = N2;S1 ⚍ N1;S1 ⚍ N2	#I128 a=b;a->+b
+N1 = N2;S1 ⚍ N2;S1 ⚍ N1	#I129 a=b;b->+a
 ```
 ### Adding
 ```korekto
-S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M126 a+-b=a-b
-S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M127 a-b=a+-b
-S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M128 a^b*a^c=a^(b+c)
-S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M129 a^ba^c=a^(b+c)
-S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M130 a^(b+c)=a^b*a^c
-S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M131 (a+b)->(b+a)
+S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M130 a+-b=a-b
+S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M131 a-b=a+-b
+S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M132 a^b*a^c=a^(b+c)
+S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M133 a^ba^c=a^(b+c)
+S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M134 a^(b+c)=a^b*a^c
+S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M135 (a+b)->(b+a)
 ```
 ### Subtracting
 ```korekto
-S1♭--𝟭♮S2;S1♭𝟭♮S2	#M132 --a->a
+S1♭--𝟭♮S2;S1♭𝟭♮S2	#M136 --a->a
 ```
 ## Abstracts
 ```korekto
 # By our definitions of the digits:
-2 + 1 = 3	#R133/M2,S40 If equivalent, then equal
+2 + 1 = 3	#R137/M2,S40 If equivalent, then equal
 # Then by our definition of subtraction:
-3 - 1 = 2	#R134/M20,R133 Addition=>Subraction
+3 - 1 = 2	#R138/M20,R137 Addition=>Subraction
 # We can group each token:
 #  (2) + (1) = (3)
 #  (3) - (1) = (2)
 # Thus, we can abstract to SuperTokens our previous definitions:
-𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M135/R133,R134 Addition=>Subtraction
+𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M139/R137,R138 Addition=>Subtraction
 # I'll just rewrite the rest:
-𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M136 Subtraction=>Addition
-𝟭 - 𝟭 = 0	#A137 Zero
-𝟭 + 𝟮 = 𝟮 + 𝟭	#A138 Commute+
-𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M139 Multiplication=>Division
-𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M140 Division=>Multiplication
-𝟮 / 𝟮 = 1	#A141 One
-𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M142 Exponentiation=>Root
-𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M143 Root=>Exponentiation
-𝟮∧1 = 𝟮	#A144 x∧1=x
-𝟮∧0 = 1	#A145 X∧0=1
-𝟮² = 𝟮 * 𝟮	#A146 Square
-𝟮² = 𝟰;√𝟰 = 𝟮	#M147 Square=>SquareRoot
-√𝟰 = 𝟮;𝟮² = 𝟰	#M148 SquareRoot=>Square
-𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M149 Exponentiation=>Logarithm
-𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M150 Logarithm=>Exponentiation
-𝟮𝓵1 = 0	#A151 xl1=0
-𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M152 Single
-𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M153 Double
-𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M154 Triple
-𝟮 = 𝟮;𝟮∧1 = 𝟮	#M155 Linear
-𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M156 Square
-𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M157 Cube
+𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M140 Subtraction=>Addition
+𝟭 - 𝟭 = 0	#A141 Zero
+𝟭 + 𝟮 = 𝟮 + 𝟭	#A142 Commute+
+𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M143 Multiplication=>Division
+𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M144 Division=>Multiplication
+𝟮 / 𝟮 = 1	#A145 One
+𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M146 Exponentiation=>Root
+𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M147 Root=>Exponentiation
+𝟮∧1 = 𝟮	#A148 x∧1=x
+𝟮∧0 = 1	#A149 X∧0=1
+𝟮² = 𝟮 * 𝟮	#A150 Square
+𝟮² = 𝟰;√𝟰 = 𝟮	#M151 Square=>SquareRoot
+√𝟰 = 𝟮;𝟮² = 𝟰	#M152 SquareRoot=>Square
+𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M153 Exponentiation=>Logarithm
+𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M154 Logarithm=>Exponentiation
+𝟮𝓵1 = 0	#A155 xl1=0
+𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M156 Single
+𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M157 Double
+𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M158 Triple
+𝟮 = 𝟮;𝟮∧1 = 𝟮	#M159 Linear
+𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M160 Square
+𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M161 Cube
 ```
