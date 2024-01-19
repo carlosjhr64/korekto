@@ -64,6 +64,7 @@ Pattern key table:
 | Binary | [-+/*] | ♣ ♥ ♦ | Miscellaneous Symbols |
 | MultDiv | [/*] | ♝ ♛ ♚ | Miscellaneous Symbols |
 | AddSub | [-+] | ⚀ ⚁ ⚂ ± | Miscellaneous Symbols |
+| Loose | [-+=\<\>] | ⚌ ⚍ ⚎ ⚏ | Miscellaneous Symbols |
 | [Label](#Label) |
 | Superscript | [ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ] | ⁱ ʲ ᵏ | Latin superscript |
 | Subscript | [ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ] | ᵢ ⱼ ₖ | Latin subscript |
@@ -73,7 +74,7 @@ Pattern key table:
 | Elements | [^{}]* | E1 E2 E3 | ASCII |
 | Parameters | [^\[\]]+ | P1 P2 P3 | ASCII |
 | [Slurp](#Slurp) |
-| Slurp | [^;]* | S1 S2 S3 | ASCII |
+| Slurp | [^;]* | S1 S2 S3 S4 | ASCII |
 | Glob | [^\s;]* | s1 s2 s3 | ASCII |
 | Span | [^:=;]* | N1 N2 N3 | ASCII |
 | .Clump | \S+ | 𝓂 | Script small|
@@ -160,6 +161,8 @@ Pattern key table:
 ! MultDiv {♝ ♛ ♚}
 ! AddSub /[-+]/
 ! AddSub {⚀ ⚁ ⚂ ±}
+! Loose /[-+=\<\>]/
+! Loose {⚌ ⚍ ⚎ ⚏}
 ```
 ### Label
 ```korekto
@@ -182,7 +185,7 @@ Pattern key table:
 ### Slurp
 ```korekto
 ! Slurp /[^;]*/
-! Slurp {S1 S2 S3}
+! Slurp {S1 S2 S3 S4}
 ! Glob /[^\s;]*/
 ! Glob {s1 s2 s3}
 ! Span /[^:=;]*/
@@ -300,139 +303,156 @@ Operator[𝓐]	#L19 Operator: Operator
 ```
 ## Grouping
 
+### Token grouping
+```korekto
+S1𝟭S2;S1(𝟭)S2	#M53 a->(a)
+S1(𝟭)S2;S1𝟭S2	#M54 (a)->a
+S1𝟭S2𝟮S3;S1(𝟭)S2(𝟮)S3	#M55 a_b->(a)_(b)
+S1(𝟭)S2(𝟮)S3;S1𝟭S2𝟮S3	#M56 (a)_(b)->a_b
+S1𝟭S2𝟮S3𝟯S4;S1(𝟭)S2(𝟮)S3(𝟯)S4	#M57 a_b_c->(a)_(b)_(c)
+S1(𝟭)S2(𝟮)S3(𝟯)S4;S1𝟭S2𝟮S3𝟯S4	#M58 (a)_(b)_(c)->a_b_c
+```
 ### Binary spacing
 ```korekto
-S1(𝟭 ♦ 𝟮)S2;S1(𝟭♦𝟮)S2	#M53 *(a + b)*->*(a+b)*
-S1(𝟭♦𝟮)S2;S1(𝟭 ♦ 𝟮)S2	#M54 *(a+b)*->*(a + b)*
-S1♮(𝟭♭♦♭𝟮);S1 𝟭♦𝟮	#M55 *(a + b)$-> * a+b$
-S1 𝟭♦𝟮;S1♮(𝟭♭♦♭𝟮)	#M56 * a+b$->*(a + b)$
-(𝟭♭♦♭𝟮)♮S1;𝟭♦𝟮 S1	#M57 ^(a + b)*->^a+b *
-𝟭♦𝟮 S1;(𝟭♭♦♭𝟮)♭S1	#M58 ^a+b *->^(a + b)*
-S1 𝟭♦𝟮 S2;S1♮(𝟭♭♦♭𝟮)♭S2	#M59 * a+b *->*(a + b)*
-S1♭(𝟭♭♦♭𝟮)♮S2;S1 𝟭♦𝟮 S2	#M60 *(a + b)*->* a+b *
+S1(𝟭 ♦ 𝟮)S2;S1(𝟭♦𝟮)S2	#M59 *(a + b)*->*(a+b)*
+S1(𝟭♦𝟮)S2;S1(𝟭 ♦ 𝟮)S2	#M60 *(a+b)*->*(a + b)*
+S1♮(𝟭♭♦♭𝟮);S1 𝟭♦𝟮	#M61 *(a + b)$-> * a+b$
+S1 𝟭♦𝟮;S1♮(𝟭♭♦♭𝟮)	#M62 * a+b$->*(a + b)$
+(𝟭♭♦♭𝟮)♮S1;𝟭♦𝟮 S1	#M63 ^(a + b)*->^a+b *
+𝟭♦𝟮 S1;(𝟭♭♦♭𝟮)♭S1	#M64 ^a+b *->^(a + b)*
+S1 𝟭♦𝟮 S2;S1♮(𝟭♭♦♭𝟮)♭S2	#M65 * a+b *->*(a + b)*
+S1♭(𝟭♭♦♭𝟮)♮S2;S1 𝟭♦𝟮 S2	#M66 *(a + b)*->* a+b *
 ```
 ### MultDiv spacing
 ```korekto
 # MultDiv has higher precedence than AddSub
-S1 𝟭♚𝟮;S1 𝟭 ♚ 𝟮	#M61 ~a*b$->~a * b
-S1 𝟭 ♚ 𝟮;S1 𝟭♚𝟮	#M62 ~a * b$->~a*b
-𝟭♚𝟮 S2;𝟭 ♚ 𝟮 S2	#M63 ^a*b~$->a * b~
-𝟭 ♚ 𝟮 S2;𝟭♚𝟮 S2	#M64 ^a * b~->a*b~
-S1 𝟭 ♚ 𝟮 S2;S1 𝟭♚𝟮 S2	#M65 ~a * b~->~a*b~
-S1 𝟭♚𝟮 S2;S1 𝟭 ♚ 𝟮 S2	#M66 ~a*b~->~a * b~
+S1 𝟭♚𝟮;S1 𝟭 ♚ 𝟮	#M67 ~a*b$->~a * b
+S1 𝟭 ♚ 𝟮;S1 𝟭♚𝟮	#M68 ~a * b$->~a*b
+𝟭♚𝟮 S2;𝟭 ♚ 𝟮 S2	#M69 ^a*b~$->a * b~
+𝟭 ♚ 𝟮 S2;𝟭♚𝟮 S2	#M70 ^a * b~->a*b~
+S1 𝟭 ♚ 𝟮 S2;S1 𝟭♚𝟮 S2	#M71 ~a * b~->~a*b~
+S1 𝟭♚𝟮 S2;S1 𝟭 ♚ 𝟮 S2	#M72 ~a*b~->~a * b~
 ```
 ### MutlDiv Grouping
 ```korekto
 # MultDiv has higher precedence than AddSub
-S1♥𝟭♚𝟮♦S2;S1♥(𝟭♭♚♭𝟮)♦S2	#M67 +a*b+->+(a*b)+
-S1♥(𝟭♭♚♭𝟮)♦S2;S1♥𝟭♚𝟮♦S2	#M68 +(a*b)+->+a*b+
-S1♥𝟭♚𝟮;S1♥(𝟭♭♚♭𝟮)	#M69 +a*b$->+(a*b)
-S1♥(𝟭♭♚♭𝟮);S1♥𝟭♚𝟮	#M70 +(a*b)$->+a*b
-𝟭♚𝟮♦S2;(𝟭♭♚♭𝟮)♦S2	#M71 ^a*b+->(a*b)+
-(𝟭♭♚♭𝟮)♦S2;𝟭♚𝟮♦S2	#M72 ^(a*b)+->a*b+
-```
-### Token grouping
-```korekto
-S1(𝟭)S2;S1𝟭S2	#M73 (a)->a
-S1𝟭S2;S1(𝟭)S2	#M74 a->(a)
+S1♥𝟭♚𝟮♦S2;S1♥(𝟭♭♚♭𝟮)♦S2	#M73 +a*b+->+(a*b)+
+S1♥(𝟭♭♚♭𝟮)♦S2;S1♥𝟭♚𝟮♦S2	#M74 +(a*b)+->+a*b+
+S1♥𝟭♚𝟮;S1♥(𝟭♭♚♭𝟮)	#M75 +a*b$->+(a*b)
+S1♥(𝟭♭♚♭𝟮);S1♥𝟭♚𝟮	#M76 +(a*b)$->+a*b
+𝟭♚𝟮♦S2;(𝟭♭♚♭𝟮)♦S2	#M77 ^a*b+->(a*b)+
+(𝟭♭♚♭𝟮)♦S2;𝟭♚𝟮♦S2	#M78 ^(a*b)+->a*b+
 ```
 ### GroupGlob grouping
 ```korekto
-S1♭(g1)♭S2;S1 g1 S2	#M75 Space
-S1 g1 S2;S1♭(g1)♭S2	#M76 Group
-S1♭(g1);S1 g1	#M77 Space$
-S1 g1;S1♭(g1)	#M78 Group$
-(g1)♭S1;g1 S1	#M79 ^Space
-g1 S1;(g1)♭S1	#M80 ^Group
+S1♭(g1)♭S2;S1 g1 S2	#M79 Space
+S1 g1 S2;S1♭(g1)♭S2	#M80 Group
+S1♭(g1);S1 g1	#M81 Space$
+S1 g1;S1♭(g1)	#M82 Group$
+(g1)♭S1;g1 S1	#M83 ^Space
+g1 S1;(g1)♭S1	#M84 ^Group
 ```
 ### Group grouping
 ```korekto
-N1 = (G1);N1 = G1	#M81 =Space
-N1 = G1;N1 = (G1)	#M82 =Group
-S1 + (G1) + S2;S1 + G1 + S2	#M83 +Space+
-S1 + G1 + S2;S1 + (G1) + S2	#M84 +Group+
-S1 + (G1);S1 + G1	#M85 +Space
-S1 + G1;S1 + (G1)	#M86 +Group
-(G1) + S1;G1 + S1	#M87 Space+
-G1 + S1;(G1) + S1	#M88 Group+
+S1 ⚍ (G1) ⚎ S2;S1 ⚍ G1 ⚎ S2	#M85 +Space+
+S1 ⚍ G1 ⚎ S2;S1 ⚍ (G1) ⚎ S2	#M86 +Group+
+S1 ⚍ (G1);S1 ⚍ G1	#M87 +Space
+S1 ⚍ G1;S1 ⚍ (G1)	#M88 +Group
+(G1) ⚍ S1;G1 ⚍ S1	#M89 Space+
+G1 ⚍ S1;(G1) ⚍ S1	#M90 Group+
 ```
 ### Tight grouping
 ```korekto
-S1(𝟭♩𝟮)S2;S1𝟭♩𝟮S2	#M89 Tight un-grouped
-S1𝟭♩𝟮S2;S1(𝟭♩𝟮)S2	#M90 Tight grouped
+S1(𝟭♩𝟮)S2;S1𝟭♩𝟮S2	#M91 Tight un-grouped
+S1𝟭♩𝟮S2;S1(𝟭♩𝟮)S2	#M92 Tight grouped
 ```
 ## Algebra
 
 ### Implied/Explicit multiplication
 ```korekto
-S1𝟭♭𝟮S2;S1𝟭♮*♮𝟮S2	#M91 Explicit*
-S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M92 Implied*
+S1𝟭♭𝟮S2;S1𝟭♮*♮𝟮S2	#M93 Explicit*
+S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M94 Implied*
 ```
 
 ### Equality
 ```korekto
-N1 = N2;N2 = N1	#M93 Symmetry
-N1 = N1	#A94 Reflection
+N1 = N2;N2 = N1	#M95 Symmetry
+N1 = N1	#A96 Reflection
 ```
 ### Transitive
 ```korekto
-N1 = N2;N2 = N3;N1 = N3	#I95 Transitive a=b;b=c;a=c
-N1 = N2;N3 = N2;N3 = N1	#I96 Linked a=b;c=b;c=a
+N1 = N2;N2 = N3;N1 = N3	#I97 Transitive a=b;b=c;a=c
+N1 = N2;N3 = N2;N3 = N1	#I98 Linked a=b;c=b;c=a
 ```
 ### One
 ```korekto
 # (a/a)
-S1(𝟭♭/♭𝟭)S2;S1(1)S2	#M97 (a/a)=>(1)
-S1(g1 / g1)S2;S1(1)S2	#M98 (a / a)=>(1)
+S1(𝟭♭/♭𝟭)S2;S1(1)S2	#M99 (a/a)=>(1)
+S1(g1 / g1)S2;S1(1)S2	#M100 (a / a)=>(1)
 # One
-S1♭*♭1 S2;S1 S2	#M99 *one~
-S1♭*♭(1) S2;S1 S2	#M100 *(one)~
-S1 1♭*♭S2;S1 S2	#M101 ~one*
-S1 (1)♭*♭S2;S1 S2	#M102 ~(one)*
-S1*1⚑S2;S1⚑S2	#M103 *one
-S1⚑1*S2;S1⚑S2	#M104 one*
-S1*(1)⚑S2;S1⚑S2	#M105 *(one)
-S1⚑(1)*S2;S1⚑S2	#M106 (one)*
+S1♭*♭1 S2;S1 S2	#M101 *one~
+S1♭*♭(1) S2;S1 S2	#M102 *(one)~
+S1 1♭*♭S2;S1 S2	#M103 ~one*
+S1 (1)♭*♭S2;S1 S2	#M104 ~(one)*
+S1*1⚑S2;S1⚑S2	#M105 *one
+S1⚑1*S2;S1⚑S2	#M106 one*
+S1*(1)⚑S2;S1⚑S2	#M107 *(one)
+S1⚑(1)*S2;S1⚑S2	#M108 (one)*
 ```
 ### Zero
 ```korekto
-S1(𝟭♭-♭𝟭)S2;S1(0)S2	#M107 (a-a)=>(0)
-S1♭⚀♭𝟭♭-♭𝟭♭±♭S2;S1♭±♭S2	#M108 ±a-a±=>±
-S1♭⚀♭0♭±♭S2;S1♭±♭S2	#M109 ±0±=>±
+S1(𝟭♭-♭𝟭)S2;S1(0)S2	#M109 (a-a)=>(0)
+S1♭⚀♭𝟭♭-♭𝟭♭±♭S2;S1♭±♭S2	#M110 ±a-a±=>±
+S1♭⚀♭0♭±♭S2;S1♭±♭S2	#M111 ±0±=>±
 ```
 ### (a/b)
 ```korekto
-S1 𝟭♭/♭𝟮;S1 𝟯*𝟭 / 𝟯*𝟮	#M110 x*a / x*b$
-S1(𝟭♭/♭𝟮)S2;S1(𝟯*𝟭 / 𝟯*𝟮)S2	#M111 (xa / xb)
-S1(g1 / g2)S2;S1(𝟭*(g1) / 𝟭*(g2))S2	#M112 (x(a) / x(b))
-S1𝟭*(1♭/♭𝟮)⚑S2;S1(𝟭♮/♮𝟮)S2	#M113 (x*1)/(y)
-S1𝟭*(1 / g1)⚑S2;S1(𝟭 / g1)S2	#M114 x*1 /  y
-S1 1♭±♭(𝟭 / g2)⚑S2;S1 (g2±𝟭 / g2)S2	#M115 ~1+(a/b)->~(b+a / b)
+S1 𝟭♭/♭𝟮;S1 𝟯*𝟭 / 𝟯*𝟮	#M112 x*a / x*b$
+S1(𝟭♭/♭𝟮)S2;S1(𝟯*𝟭 / 𝟯*𝟮)S2	#M113 (xa / xb)
+S1(g1 / g2)S2;S1(𝟭*(g1) / 𝟭*(g2))S2	#M114 (x(a) / x(b))
+S1𝟭*(1♭/♭𝟮)⚑S2;S1(𝟭♮/♮𝟮)S2	#M115 (x*1)/(y)
+S1𝟭*(1 / g1)⚑S2;S1(𝟭 / g1)S2	#M116 x*1 /  y
+S1 1♭±♭(𝟭 / g2)⚑S2;S1 (g2±𝟭 / g2)S2	#M117 ~1+(a/b)->~(b+a / b)
 ```
 ### Distribute
 ```korekto
-S1𝟭*(𝟮♭±♭𝟯)⚑S2;S1(𝟭*𝟮♮±♮𝟭*𝟯)S2	#M116 (xa±xb)
-S1𝟭*(g2 ± g3)⚑S2;S1(𝟭*(g2) ± 𝟭*(g3))S2	#M117 (x(a) ± x(b))
+S1𝟭*(𝟮♭±♭𝟯)⚑S2;S1(𝟭*𝟮♮±♮𝟭*𝟯)S2	#M118 (xa±xb)
+S1𝟭*(g2 ± g3)⚑S2;S1(𝟭*(g2) ± 𝟭*(g3))S2	#M119 (x(a) ± x(b))
 ```
 ### Substitution
 ```korekto
-𝟭 = 𝟮;S1𝟭S2;S1𝟮S2	#I118 a=b;a->b
-𝟭 = N2;S1𝟭S2;S1(N2)S2	#I119 a=b;a->(b)
-N1 = 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I120 (a)=b;(a)->b
-N1 = N2;S1(N1)S2;S1(N2)S2	#I121 a=b;(a)->(b)
-N1 = N2;S1(N2)S2;S1(N1)S2	#I122 a=b;(b)->(a)
+𝟭 = 𝟮;S1𝟭S2;S1𝟮S2	#I120 a=b;a->b
+𝟭 = N2;S1𝟭S2;S1(N2)S2	#I121 a=b;a->(b)
+N1 = 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I122 (a)=b;(a)->b
+N1 = 𝟭;S1𝟭S2;S1(N1)S2	#I123 (a)=b;b->(a)
+N1 = N2;S1(N1)S2;S1(N2)S2	#I124 a=b;(a)->(b)
+N1 = N2;S1(N2)S2;S1(N1)S2	#I125 a=b;(b)->(a)
 ```
 ### Adding
 ```korekto
-S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M123 a+-b=a-b
-S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M124 a-b=a+-b
-S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M125 a^b*a^c=a^(b+c)
-S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M126 a^ba^c=a^(b+c)
-S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M127 a^(b+c)=a^b*a^c
-S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M128 (a+b)->(b+a)
+S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M126 a+-b=a-b
+S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M127 a-b=a+-b
+S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M128 a^b*a^c=a^(b+c)
+S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M129 a^ba^c=a^(b+c)
+S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M130 a^(b+c)=a^b*a^c
+S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M131 (a+b)->(b+a)
 ```
 ### Subtracting
 ```korekto
-S1♭--𝟭♮S2;S1♭𝟭♮S2	#M129 --a->a
+S1♭--𝟭♮S2;S1♭𝟭♮S2	#M132 --a->a
 ```
 ## Abstracts
+```korekto
+# By our definition of the digits:
+#   2 + 1 = 3
+# Then by our defintion of subtraction:
+#   3 - 1 = 2
+# We can group each token:
+#  (2) + (1) = (3)
+#  (3) - (1) = (2)
+# Thus, we can abstract to SuperTokens our previous definitions.
+# I'll just write the simplest true example, and then give the abstraction.
+2 + 1 = 3	#R133/M2,S40 If equivalent, then equal
+3 - 1 = 2	#R134/M20,R133 Addition=>Subraction
+𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M135/R133,R134 Addition=>Subtraction
+```
