@@ -443,16 +443,36 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M132 --a->a
 ```
 ## Abstracts
 ```korekto
-# By our definition of the digits:
-#   2 + 1 = 3
-# Then by our defintion of subtraction:
-#   3 - 1 = 2
+# By our definitions of the digits:
+2 + 1 = 3	#R133/M2,S40 If equivalent, then equal
+# Then by our definition of subtraction:
+3 - 1 = 2	#R134/M20,R133 Addition=>Subraction
 # We can group each token:
 #  (2) + (1) = (3)
 #  (3) - (1) = (2)
-# Thus, we can abstract to SuperTokens our previous definitions.
-# I'll just write the simplest true example, and then give the abstraction.
-2 + 1 = 3	#R133/M2,S40 If equivalent, then equal
-3 - 1 = 2	#R134/M20,R133 Addition=>Subraction
+# Thus, we can abstract to SuperTokens our previous definitions:
 𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M135/R133,R134 Addition=>Subtraction
+# I'll just rewrite the rest:
+𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M136 Subtraction=>Addition
+𝟭 - 𝟭 = 0	#A137 Zero
+𝟭 + 𝟮 = 𝟮 + 𝟭	#A138 Commute+
+𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M139 Multiplication=>Division
+𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M140 Division=>Multiplication
+𝟮 / 𝟮 = 1	#A141 One
+𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M142 Exponentiation=>Root
+𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M143 Root=>Exponentiation
+𝟮∧1 = 𝟮	#A144 x∧1=x
+𝟮∧0 = 1	#A145 X∧0=1
+𝟮² = 𝟮 * 𝟮	#A146 Square
+𝟮² = 𝟰;√𝟰 = 𝟮	#M147 Square=>SquareRoot
+√𝟰 = 𝟮;𝟮² = 𝟰	#M148 SquareRoot=>Square
+𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M149 Exponentiation=>Logarithm
+𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M150 Logarithm=>Exponentiation
+𝟮𝓵1 = 0	#A151 xl1=0
+𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M152 Single
+𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M153 Double
+𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M154 Triple
+𝟮 = 𝟮;𝟮∧1 = 𝟮	#M155 Linear
+𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M156 Square
+𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M157 Cube
 ```

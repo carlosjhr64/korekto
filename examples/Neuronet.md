@@ -132,24 +132,25 @@ Vector[𝒃]	#S4/L17.KorektoMath Vector: 𝒃
 ## The multi-labeled weights matrix 𝑾
 Tensor[𝑾]	#S5/L18.KorektoMath Tensor: 𝑾
 ## Labels
-Supercript{ʰ ⁱ ʲ ᵏ}	#S6/L3.KorektoMath Named set: Supercript ʰ ⁱ ʲ ᵏ
-Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L3.KorektoMath Named set: Subscript ₕ ᵢ ⱼ ₖ
+Supercript{ʰ ⁱ ʲ ᵏ}	#S6/L4.KorektoMath Named set: Supercript ʰ ⁱ ʲ ᵏ
+Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ ₖ
 ## Next labels
 ₕ₊ : ᵢ	#R8/M7.KorektoMath,S7 Next
 ᵢ₊ : ⱼ	#R9/M7.KorektoMath,S7 Next
 ⱼ₊ : ₖ	#R10/M7.KorektoMath,S7 Next
 ## Raised labels
-ₕ⁺ : ʰ	#C11/I11.KorektoMath,S7,S6 Raise
-ᵢ⁺ : ⁱ	#C12/I12.KorektoMath,S7,S6 Raise
-ⱼ⁺ : ʲ	#C13/I13.KorektoMath,S7,S6 Raise
+ₕ⁺ : ʰ	#C11/I11.KorektoMath,S7,S6 Raise first
+ᵢ⁺ : ⁱ	#C12/I12.KorektoMath,S7,S6 Raise second
+ⱼ⁺ : ʲ	#C13/I13.KorektoMath,S7,S6 Raise third
 # Functions
 ## Natural Exponentiation and Logarythm
-𝖊∧𝟛 = 𝟠;𝖊𝓵𝟠 = 𝟛	#M14 Natural Log
-𝖊𝓵𝟠 = 𝟛;𝖊∧𝟛 = 𝟠	#M15 Natural Exp
+𝖊∧𝓍 = 𝓎;𝖊𝓵𝓎 = 𝓍	#M14 Natural Log
+𝖊𝓵𝓎 = 𝓍;𝖊∧𝓍 = 𝓎	#M15 Natural Exp
 ### Natural Log abstract
-𝖊∧𝑥 : TMP	#S16/L1.KorektoMath Equivalent: TMP
-𝖊∧𝑥 = TMP	#R17/M2.KorektoMath,S16 If equivalent, then equal
-𝖊𝓵TMP = 𝑥	#R18/M34.KorektoMath,R17 Exponentiation<=>Logarithm
+𝖊∧𝑥 : 𝖊ˣ	#S16/L1.KorektoMath Equivalent: ˣ
+𝖊∧𝑥 = 𝖊ˣ	#R17/M2.KorektoMath,S16 If equivalent, then equal
+STOP
+𝖊𝓵𝖊ˣ = 𝑥	#R18/M34.KorektoMath,R17 Exponentiation<=>Logarithm
 𝖊∧(𝑥) = TMP	#R19/M63.KorektoMath,R17 a->(a)
 𝖊𝓵(TMP) = 𝑥	#R20/M63.KorektoMath,R18 a->(a)
 𝖊∧(Q1) = Q2;𝖊𝓵(Q2) = Q1	#M21/R19,R20 Natural Log abstract
