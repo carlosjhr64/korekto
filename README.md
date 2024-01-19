@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 2.0.231231](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 2.1.240119](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -59,7 +59,7 @@ Options:
  --patch     	Allow monkey patching in stdin
  --install   	Installs the korekto neovim ruby plugin
  --readme    	Open korekto github page
- --heap=SIZE 	Set heap size (default: 13)
+ --heap=SIZE 	Set heap size (default: 60)
 Types:
   SIZE    /^\d+$/
 Exclusive:

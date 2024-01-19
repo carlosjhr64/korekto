@@ -62,6 +62,7 @@ class Main
       filename = $~[:filename].strip
       unless @imports.include? filename
         Main.new(filename, statements:@statements, imports:@imports).run
+        @statements.heap.to_a.clear
       end
     when MD_KLASS_METHOD_DEFINITION
       if @filename=='-' && !Korekto.patch?

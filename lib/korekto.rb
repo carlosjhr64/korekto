@@ -1,7 +1,7 @@
 module Korekto
   class Error < RuntimeError; end
 
-  VERSION = '2.0.231231'
+  VERSION = '2.1.240119'
 
   def self.trace=(value)
     @@trace = value
@@ -25,7 +25,7 @@ module Korekto
   def self.heap
     @@heap
   end
-  Korekto.heap = 13
+  Korekto.heap = 60
 
   def self.scrape?
     @@scrape

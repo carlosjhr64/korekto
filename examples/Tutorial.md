@@ -2,6 +2,7 @@
 
 ## Contents
 
+* [Heap](#Heap)
 * [Statement types](#Statement-types)
   * [D is for Definition](#D-is-for-Definition)
   * [P is for Postulate](#P-is-for-Postulate)
@@ -88,6 +89,12 @@ trying to create a proof assistant for your project...
 Burrowing yourself down all the way to first principles.
 CONSIDER YOURSELF WARNED!
 
+## Heap
+
+`Korekto` keeps a heap of recent (non-pattern)statements to search for matches.
+This heap is limited to a size of 60 by default and it's cleared after every imported page.
+One may re-introduce an old statement into the heap by restating(recalling) it.
+
 ## Statement types
 
 Although I tried to match the normal semantics of
@@ -138,9 +145,7 @@ two accepted statement and a third to be validated.
 Because this entails a search that grows(O[n²])
 with the size of the list of statements,
 `Korekto` requires that the correct combination
-be found in the last 13 statements(by default to be nice to the reader).
-Restatement of previous results are allowed
-so as to add old statements into the search heap(and remind the reader).
+be found in its recent statements heap.
 ```korekto
 # :if A :then B;A;B
 /^:if (:\w+) :then (:\w+)\n\1\n\2$/	#I6 Modus ponen
@@ -160,7 +165,7 @@ It cannot have any undefined symbols.
 ### C is for Conclusion
 
 `C` statements are those that matched any preceding `I` statements
-in combination with two previous statements in the heap(typically the last 13 statements).
+in combination with two previous statements in the heap.
 They must not have any undefined symbols.
 ```korekto
 :pudding	#C10/I6,P8,P9 Modus ponen
@@ -170,7 +175,7 @@ They must not have any undefined symbols.
 
 `M` statements are acceptance patterns on two statements,
 one previously accepted statement and the one being validated.
-The accepted statement must be in the heap(typically the last 13 statements).
+The accepted statement must be in the heap.
 ```korekto
 # A&B;A :good :with B
 /^(:\w+)&(:\w+)\n\1 :good :with \2$/	#M12 If A and B, then A good with B
@@ -178,7 +183,7 @@ The accepted statement must be in the heap(typically the last 13 statements).
 ### R is for Result
 
 `R` statements are those that matched any preceding `M` statements
-in combination with one previous statement in the heap(typically the last 13 statements).
+in combination with one previous statement in the heap.
 It must not have any undefined symbols.
 ```korekto
 :meat :good :with :pudding	#R13/M12,C11 If A and B, then A good with B
