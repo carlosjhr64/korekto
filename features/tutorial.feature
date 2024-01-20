@@ -2,7 +2,7 @@
 Feature: Tutorial
 
   Background:
-    * Given command "korekto --trace"
+    * Given command "./bin/korekto --trace"
 
   Scenario: Tutorial.md
     * Given option "--patch < examples/Tutorial.md"

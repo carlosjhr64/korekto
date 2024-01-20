@@ -342,141 +342,144 @@ S1♥𝟭♚𝟮;S1♥(𝟭♭♚♭𝟮)	#M75 +a*b$->+(a*b)
 S1♥(𝟭♭♚♭𝟮);S1♥𝟭♚𝟮	#M76 +(a*b)$->+a*b
 𝟭♚𝟮♦S2;(𝟭♭♚♭𝟮)♦S2	#M77 ^a*b+->(a*b)+
 (𝟭♭♚♭𝟮)♦S2;𝟭♚𝟮♦S2	#M78 ^(a*b)+->a*b+
+(𝟭♭♚♭𝟮)♮♚♮S2;𝟭♮♚♮𝟮♮♚♮S2	#M79 ^(a*b)*->a*b*
 ```
 ### GroupGlob grouping
 ```korekto
-S1♭(g1)♭S2;S1 g1 S2	#M79 Space
-S1 g1 S2;S1♭(g1)♭S2	#M80 Group
-S1♭(g1);S1 g1	#M81 Space$
-S1 g1;S1♭(g1)	#M82 Group$
-(g1)♭S1;g1 S1	#M83 ^Space
-g1 S1;(g1)♭S1	#M84 ^Group
+S1♭(g1)♭S2;S1 g1 S2	#M80 Space
+S1 g1 S2;S1♭(g1)♭S2	#M81 Group
+S1♭(g1);S1 g1	#M82 Space$
+S1 g1;S1♭(g1)	#M83 Group$
+(g1)♭S1;g1 S1	#M84 ^Space
+g1 S1;(g1)♭S1	#M85 ^Group
 ```
 ### Group grouping
 ```korekto
-S1 ⚍ (G1) ⚎ S2;S1 ⚍ G1 ⚎ S2	#M85 +Space+
-S1 ⚍ G1 ⚎ S2;S1 ⚍ (G1) ⚎ S2	#M86 +Group+
-S1 ⚍ (G1);S1 ⚍ G1	#M87 +Space
-S1 ⚍ G1;S1 ⚍ (G1)	#M88 +Group
-(G1) ⚍ S1;G1 ⚍ S1	#M89 Space+
-G1 ⚍ S1;(G1) ⚍ S1	#M90 Group+
+S1 ⚍ (G1) ⚎ S2;S1 ⚍ G1 ⚎ S2	#M86 +Space+
+S1 ⚍ G1 ⚎ S2;S1 ⚍ (G1) ⚎ S2	#M87 +Group+
+S1 ⚍ G1 ⚎ G2 ⚏ S2;S1 ⚍ (G1) ⚎ (G2) ⚏ S2	#M88 +Group+Group+
+S1 ⚍ (G1);S1 ⚍ G1	#M89 +Space
+S1 ⚍ G1;S1 ⚍ (G1)	#M90 +Group
+(G1) ⚍ S1;G1 ⚍ S1	#M91 Space+
+G1 ⚍ S1;(G1) ⚍ S1	#M92 Group+
 ```
 ### Tight grouping
 ```korekto
-S1(𝟭♩𝟮)S2;S1𝟭♩𝟮S2	#M91 Tight un-grouped
-S1𝟭♩𝟮S2;S1(𝟭♩𝟮)S2	#M92 Tight grouped
+S1(𝟭♩𝟮)S2;S1𝟭♩𝟮S2	#M93 Tight un-grouped
+S1𝟭♩𝟮S2;S1(𝟭♩𝟮)S2	#M94 Tight grouped
 ```
 ## Algebra
 
 ### Implied/Explicit multiplication
 ```korekto
-S1𝟭♭𝟮S2;S1𝟭♮*♮𝟮S2	#M93 Explicit*
-S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M94 Implied*
+S1𝟭♭𝟮S2;S1𝟭♮*♮𝟮S2	#M95 Explicit*
+S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M96 Implied*
 ```
 
 ### Equality
 ```korekto
-N1 = N2;N2 = N1	#M95 Symmetry
-N1 = N1	#A96 Reflection
+N1 = N2;N2 = N1	#M97 Symmetry
+N1 = N1	#A98 Reflection
 ```
 ### Transitive
 ```korekto
-N1 = N2;N2 = N3;N1 = N3	#I97 Transitive a=b;b=c;a=c
-N1 = N2;N3 = N2;N3 = N1	#I98 Linked a=b;c=b;c=a
+N1 = N2;N2 = N3;N1 = N3	#I99 Transitive a=b;b=c;a=c
+N1 = N2;N3 = N2;N3 = N1	#I100 Linked a=b;c=b;c=a
 ```
 ### One
 ```korekto
 # (a/a)
-S1(𝟭♭/♭𝟭)S2;S1(1)S2	#M99 (a/a)=>(1)
-S1(g1 / g1)S2;S1(1)S2	#M100 (a / a)=>(1)
+S1(𝟭♭/♭𝟭)S2;S1(1)S2	#M101 (a/a)=>(1)
+S1(g1 / g1)S2;S1(1)S2	#M102 (a / a)=>(1)
 # One
-S1♭*♭1 S2;S1 S2	#M101 *one~
-S1♭*♭(1) S2;S1 S2	#M102 *(one)~
-S1 1♭*♭S2;S1 S2	#M103 ~one*
-S1 (1)♭*♭S2;S1 S2	#M104 ~(one)*
-S1*1⚑S2;S1⚑S2	#M105 *one
-S1⚑1*S2;S1⚑S2	#M106 one*
-S1*(1)⚑S2;S1⚑S2	#M107 *(one)
-S1⚑(1)*S2;S1⚑S2	#M108 (one)*
+S1♭*♭1 S2;S1 S2	#M103 *one~
+S1♭*♭(1) S2;S1 S2	#M104 *(one)~
+S1 1♭*♭S2;S1 S2	#M105 ~one*
+S1 (1)♭*♭S2;S1 S2	#M106 ~(one)*
+S1*1⚑S2;S1⚑S2	#M107 *one
+S1⚑1*S2;S1⚑S2	#M108 one*
+S1*(1)⚑S2;S1⚑S2	#M109 *(one)
+S1⚑(1)*S2;S1⚑S2	#M110 (one)*
 ```
 ### Zero
 ```korekto
-S1(𝟭♭-♭𝟭)S2;S1(0)S2	#M109 (a-a)=>(0)
-S1♭⚀♭𝟭♭-♭𝟭♭±♭S2;S1♭±♭S2	#M110 ±a-a±=>±
-S1♭⚀♭0♭±♭S2;S1♭±♭S2	#M111 ±0±=>±
+S1(𝟭♭-♭𝟭)S2;S1(0)S2	#M111 (a-a)=>(0)
+S1♭⚀♭𝟭♭-♭𝟭♭±♭S2;S1♭±♭S2	#M112 ±a-a±=>±
+S1♭⚀♭0♭±♭S2;S1♭±♭S2	#M113 ±0±=>±
 ```
 ### (a/b)
 ```korekto
-S1 𝟭♭/♭𝟮;S1 𝟯*𝟭 / 𝟯*𝟮	#M112 x*a / x*b$
-S1(𝟭♭/♭𝟮)S2;S1(𝟯*𝟭 / 𝟯*𝟮)S2	#M113 (xa / xb)
-S1(g1 / g2)S2;S1(𝟭*(g1) / 𝟭*(g2))S2	#M114 (x(a) / x(b))
-S1𝟭*(1♭/♭𝟮)⚑S2;S1(𝟭♮/♮𝟮)S2	#M115 (x*1)/(y)
-S1𝟭*(1 / g1)⚑S2;S1(𝟭 / g1)S2	#M116 x*1 /  y
-S1 1♭±♭(𝟭 / g2)⚑S2;S1 (g2±𝟭 / g2)S2	#M117 ~1+(a/b)->~(b+a / b)
+S1 𝟭♭/♭𝟮;S1 𝟯*𝟭 / 𝟯*𝟮	#M114 x*a / x*b$
+S1(𝟭♭/♭𝟮)S2;S1(𝟯*𝟭 / 𝟯*𝟮)S2	#M115 (xa / xb)
+S1(g1 / g2)S2;S1(𝟭*(g1) / 𝟭*(g2))S2	#M116 (x(a) / x(b))
+S1𝟭*(1♭/♭𝟮)⚑S2;S1(𝟭♮/♮𝟮)S2	#M117 (x*1)/(y)
+S1𝟭*(1 / g1)⚑S2;S1(𝟭 / g1)S2	#M118 x*1 /  y
+S1 1♭±♭(𝟭 / g2)⚑S2;S1 (g2±𝟭 / g2)S2	#M119 ~1+(a/b)->~(b+a / b)
 ```
 ### Distribute
 ```korekto
-S1𝟭*(𝟮♭±♭𝟯)⚑S2;S1(𝟭*𝟮♮±♮𝟭*𝟯)S2	#M118 (xa±xb)
-S1𝟭*(g2 ± g3)⚑S2;S1(𝟭*(g2) ± 𝟭*(g3))S2	#M119 (x(a) ± x(b))
+S1𝟭*(𝟮♭±♭𝟯)⚑S2;S1(𝟭*𝟮♮±♮𝟭*𝟯)S2	#M120 (xa±xb)
+S1𝟭*(g2 ± g3)⚑S2;S1(𝟭*(g2) ± 𝟭*(g3))S2	#M121 (x(a) ± x(b))
 ```
 ### Substitution
 ```korekto
-𝟭 = 𝟮;S1𝟭S2;S1𝟮S2	#I120 a=b;a->b
-𝟭 = N2;S1𝟭S2;S1(N2)S2	#I121 a=b;a->(b)
-N1 = 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I122 (a)=b;(a)->b
-N1 = 𝟭;S1𝟭S2;S1(N1)S2	#I123 (a)=b;b->(a)
-N1 = N2;S1(N1)S2;S1(N2)S2	#I124 a=b;(a)->(b)
-N1 = N2;S1(N2)S2;S1(N1)S2	#I125 a=b;(b)->(a)
-N1 = N2;N1 ⚍ S1;N2 ⚍ S1	#I126 a=b;a->b+
-N1 = N2;N2 ⚍ S1;N1 ⚍ S1	#I127 a=b;b->a+
-N1 = N2;S1 ⚍ N1;S1 ⚍ N2	#I128 a=b;a->+b
-N1 = N2;S1 ⚍ N2;S1 ⚍ N1	#I129 a=b;b->+a
+𝟭 = 𝟮;S1𝟭S2;S1𝟮S2	#I122 a=b;a->b
+𝟭 = N2;S1𝟭S2;S1(N2)S2	#I123 a=b;a->(b)
+N1 = 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I124 (a)=b;(a)->b
+N1 = 𝟭;S1♭(N1)♭S2♭(N1)♭S3;S1♭𝟭♭S2♭𝟭♭S3	#I125 (a)=b;(a)->b,b
+N1 = 𝟭;S1𝟭S2;S1(N1)S2	#I126 (a)=b;b->(a)
+N1 = N2;S1(N1)S2;S1(N2)S2	#I127 a=b;(a)->(b)
+N1 = N2;S1(N2)S2;S1(N1)S2	#I128 a=b;(b)->(a)
+N1 = N2;N1 ⚍ S1;N2 ⚍ S1	#I129 a=b;a->b+
+N1 = N2;N2 ⚍ S1;N1 ⚍ S1	#I130 a=b;b->a+
+N1 = N2;S1 ⚍ N1;S1 ⚍ N2	#I131 a=b;a->+b
+N1 = N2;S1 ⚍ N2;S1 ⚍ N1	#I132 a=b;b->+a
 ```
 ### Adding
 ```korekto
-S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M130 a+-b=a-b
-S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M131 a-b=a+-b
-S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M132 a^b*a^c=a^(b+c)
-S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M133 a^ba^c=a^(b+c)
-S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M134 a^(b+c)=a^b*a^c
-S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M135 (a+b)->(b+a)
+S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M133 a+-b=a-b
+S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M134 a-b=a+-b
+S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M135 a^b*a^c=a^(b+c)
+S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M136 a^ba^c=a^(b+c)
+S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M137 a^(b+c)=a^b*a^c
+S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M138 (a+b)->(b+a)
 ```
 ### Subtracting
 ```korekto
-S1♭--𝟭♮S2;S1♭𝟭♮S2	#M136 --a->a
+S1♭--𝟭♮S2;S1♭𝟭♮S2	#M139 --a->a
 ```
 ## Abstracts
 ```korekto
 # By our definitions of the digits:
-2 + 1 = 3	#R137/M2,S40 If equivalent, then equal
+2 + 1 = 3	#R140/M2,S40 If equivalent, then equal
 # Then by our definition of subtraction:
-3 - 1 = 2	#R138/M20,R137 Addition=>Subraction
+3 - 1 = 2	#R141/M20,R140 Addition=>Subraction
 # We can group each token:
 #  (2) + (1) = (3)
 #  (3) - (1) = (2)
 # Thus, we can abstract to SuperTokens our previous definitions:
-𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M139/R137,R138 Addition=>Subtraction
+𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M142/R140,R141 Addition=>Subtraction
 # I'll just rewrite the rest:
-𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M140 Subtraction=>Addition
-𝟭 - 𝟭 = 0	#A141 Zero
-𝟭 + 𝟮 = 𝟮 + 𝟭	#A142 Commute+
-𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M143 Multiplication=>Division
-𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M144 Division=>Multiplication
-𝟮 / 𝟮 = 1	#A145 One
-𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M146 Exponentiation=>Root
-𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M147 Root=>Exponentiation
-𝟮∧1 = 𝟮	#A148 x∧1=x
-𝟮∧0 = 1	#A149 X∧0=1
-𝟮² = 𝟮 * 𝟮	#A150 Square
-𝟮² = 𝟰;√𝟰 = 𝟮	#M151 Square=>SquareRoot
-√𝟰 = 𝟮;𝟮² = 𝟰	#M152 SquareRoot=>Square
-𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M153 Exponentiation=>Logarithm
-𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M154 Logarithm=>Exponentiation
-𝟮𝓵1 = 0	#A155 xl1=0
-𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M156 Single
-𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M157 Double
-𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M158 Triple
-𝟮 = 𝟮;𝟮∧1 = 𝟮	#M159 Linear
-𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M160 Square
-𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M161 Cube
+𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M143 Subtraction=>Addition
+𝟭 - 𝟭 = 0	#A144 Zero
+𝟭 + 𝟮 = 𝟮 + 𝟭	#A145 Commute+
+𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M146 Multiplication=>Division
+𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M147 Division=>Multiplication
+𝟮 / 𝟮 = 1	#A148 One
+𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M149 Exponentiation=>Root
+𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M150 Root=>Exponentiation
+𝟮∧1 = 𝟮	#A151 x∧1=x
+𝟮∧0 = 1	#A152 X∧0=1
+𝟮² = 𝟮 * 𝟮	#A153 Square
+𝟮² = 𝟰;√𝟰 = 𝟮	#M154 Square=>SquareRoot
+√𝟰 = 𝟮;𝟮² = 𝟰	#M155 SquareRoot=>Square
+𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M156 Exponentiation=>Logarithm
+𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M157 Logarithm=>Exponentiation
+𝟮𝓵1 = 0	#A158 xl1=0
+𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M159 Single
+𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M160 Double
+𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M161 Triple
+𝟮 = 𝟮;𝟮∧1 = 𝟮	#M162 Linear
+𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M163 Square
+𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M164 Cube
 ```

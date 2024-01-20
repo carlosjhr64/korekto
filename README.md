@@ -45,6 +45,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 * [Dx x^x](examples/Dxx.md)
 * [Sqrt(2) is irrational! (Classic Proof)](examples/Sqrt2.md)
 * [Squash Function](examples/Squash.md)
+* [2^3=8](examples/two_cube.md)
 
 ## Help:
 ```shell
