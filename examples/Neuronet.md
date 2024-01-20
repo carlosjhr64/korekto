@@ -149,8 +149,9 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ### Natural Log abstract
 𝖊∧𝑥 : 𝖊ˣ	#S16/L1.KorektoMath Equivalent: ˣ
 𝖊∧𝑥 = 𝖊ˣ	#R17/M2.KorektoMath,S16 If equivalent, then equal
+𝖊∧𝑥 = 𝖊ˣ	#R17/M2.KorektoMath,S16 Group$
+𝖊𝓵𝖊ˣ = 𝑥	#R18/M156.KorektoMath,R17 Exponentiation=>Logarithm
 STOP
-𝖊𝓵𝖊ˣ = 𝑥	#R18/M34.KorektoMath,R17 Exponentiation<=>Logarithm
 𝖊∧(𝑥) = TMP	#R19/M63.KorektoMath,R17 a->(a)
 𝖊𝓵(TMP) = 𝑥	#R20/M63.KorektoMath,R18 a->(a)
 𝖊∧(Q1) = Q2;𝖊𝓵(Q2) = Q1	#M21/R19,R20 Natural Log abstract

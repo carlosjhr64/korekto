@@ -47,7 +47,7 @@ Pattern key table:
 | Decimal | \d[\d\.]* | d1 d2 d3 𝒹 | ASCII |
 | Word | \w+ | w1 w2 w3 𝓌 | ASCII |
 | Symbol | [^\w\s] | 𝒶 𝒷 𝒸 | Script Small |
-| Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 𝓍 𝓎 𝓏 | Sans-Serif |
+| Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 | Sans-Serif |
 | [Type](#Type) |
 | Constant | [𝕬-𝖟] | 𝖆 𝖇 𝖈 | Bold-Fraktur |
 | Scalar | [𝑎-𝑧]| 𝑎 𝑏 𝑐 | Italic Small |
@@ -79,7 +79,7 @@ Pattern key table:
 | Span | [^:=;]* | N1 N2 N3 | ASCII |
 | .Clump | \S+ | 𝓂 | Script small|
 | [SuperToken](#SuperToken) |
-| SuperToken | Unaries(Token,Group)!? | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 | Sans-Serif Bold |
+| SuperToken | Unaries(Token,Group)!? | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 𝓍 𝓎 𝓏 | Sans-Serif Bold |
 
 ## Ruby patches
 
@@ -128,7 +128,7 @@ Pattern key table:
 ! Symbol {𝒶 𝒷 𝒸}
 # Token will use Mathematical Sans-Serift digits
 ! Token /\d[\d\.]*|\w+|\S/
-! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 𝓍 𝓎 𝓏}
+! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫}
 ```
 ### Type
 ```korekto
@@ -196,8 +196,8 @@ Pattern key table:
 ### SuperToken
 ```korekto
 # SuperToken will use Mathematical Sans-Serift Bold digits
-! SuperToken /[𝓐-𝓩]*(?:(?:\d[\d\.]*)|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S)!?/
-! SuperToken {𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵}
+! SuperToken /[𝓐-𝓩]*(?:(?:\d[\d\.]*)|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S)[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]*[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]*!?/
+! SuperToken {𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 𝓍 𝓎 𝓏}
 ```
 ## Definitions
 
