@@ -243,38 +243,38 @@ Operator[𝓐]	#L19 Operator: Operator
 ```
 ### Addition and Subtraction
 ```korekto
-𝟣 + 𝟤 = 𝟥;𝟥 - 𝟤 = 𝟣	#M20 Addition=>Subraction: + -
-𝟥 - 𝟤 = 𝟣;𝟣 + 𝟤 = 𝟥	#M21 Subtraction=>Addition
-𝟣 - 𝟣 = 0	#A22 Zero: 0
-𝟣 + 𝟤 = 𝟤 + 𝟣	#A23 Commute+
+𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M142/R140,R141 Addition=>Subtraction
+𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M143 Subtraction=>Addition
+𝟭 - 𝟭 = 0	#A144 Zero
+𝟭 + 𝟮 = 𝟮 + 𝟭	#A145 Commute+
 ```
 ### Multiplication and Division
 ```korekto
-𝟤 * 𝟥 = 𝟨;𝟨 / 𝟥 = 𝟤	#M24 Multiplication=>Division: * /
-𝟨 / 𝟥 = 𝟤;𝟤 * 𝟥 = 𝟨	#M25 Division=>Multiplication
-𝟤 / 𝟤 = 1	#A26 One: 1
+𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M146 Multiplication=>Division
+𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M147 Division=>Multiplication
+𝟮 / 𝟮 = 1	#A148 One
 # Note: multiplication does not commute in general(e.g. matrices)
 ```
 ### Exponentiation and Root
 ```korekto
-𝟤∧𝟥 = 𝟪;𝟪∨𝟥 = 𝟤	#M27 Exponentiation=>Root: ∧ ∨
-𝟪∨𝟥 = 𝟤;𝟤∧𝟥 = 𝟪	#M28 Root=>Exponentiation
+𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M149 Exponentiation=>Root
+𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M150 Root=>Exponentiation
 # Does not commute
 # No analogous 𝟛∨𝟛 = N
-𝟤∧1 = 𝟤	#A29 x∧1=x
-𝟤∧0 = 1	#A30 X∧0=1
+𝟮∧1 = 𝟮	#A151 x∧1=x
+𝟮∧0 = 1	#A152 X∧0=1
 ```
 ### Square and Square Root
 ```korekto
-𝟤² = 𝟤 * 𝟤	#A31 Square: ²
-𝟤² = 𝟦;√𝟦 = 𝟤	#M32 Square=>SquareRoot: √
-√𝟦 = 𝟤;𝟤² = 𝟦	#M33 SquareRoot=>Square
+𝟮² = 𝟮 * 𝟮	#A153 Square
+𝟮² = 𝟰;√𝟰 = 𝟮	#M154 Square=>SquareRoot
+√𝟰 = 𝟮;𝟮² = 𝟰	#M155 SquareRoot=>Square
 ```
 ### Exponentiation and Logarithm
 ```korekto
-𝟤∧𝟥 = 𝟪;𝟤𝓵𝟪 = 𝟥	#M34 Exponentiation=>Logarithm: 𝓵
-𝟤𝓵𝟪 = 𝟥;𝟤∧𝟥 = 𝟪	#M35 Logarithm=>Exponentiation
-𝟤𝓵1 = 0	#A36 xl1=0
+𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M156 Exponentiation=>Logarithm
+𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M157 Logarithm=>Exponentiation
+𝟮𝓵1 = 0	#A158 xl1=0
 ```
 ### Digits
 ```korekto
@@ -291,15 +291,15 @@ Operator[𝓐]	#L19 Operator: Operator
 ```
 ### Show multiplication as repeated addition
 ```korekto
-𝟣 = 𝟣;𝟣 * 1 = 𝟣	#M47 Single
-𝟣 + 𝟣 = 𝟤;𝟣 * 2 = 𝟤	#M48 Double
-𝟣 + 𝟣 + 𝟣 = 𝟥;𝟣 * 3 = 𝟥	#M49 Triple
+𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M159 Single
+𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M160 Double
+𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M161 Triple
 ```
 ### Show exponentiation as repeated multiplication
 ```korekto
-𝟤 = 𝟤;𝟤∧1 = 𝟤	#M50 Linear
-𝟤 * 𝟤 = 𝟦;𝟤∧2 = 𝟦	#M51 Square
-𝟤 * 𝟤 * 𝟤 = 𝟪;𝟤∧3 = 𝟪	#M52 Cube
+𝟮 = 𝟮;𝟮∧1 = 𝟮	#M162 Linear
+𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M163 Square
+𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M164 Cube
 ```
 ## Grouping
 
@@ -447,39 +447,4 @@ S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M138 (a+b)->(b+a)
 ### Subtracting
 ```korekto
 S1♭--𝟭♮S2;S1♭𝟭♮S2	#M139 --a->a
-```
-## Abstracts
-```korekto
-# By our definitions of the digits:
-2 + 1 = 3	#R140/M2,S40 If equivalent, then equal
-# Then by our definition of subtraction:
-3 - 1 = 2	#R141/M20,R140 Addition=>Subraction
-# We can group each token:
-#  (2) + (1) = (3)
-#  (3) - (1) = (2)
-# Thus, we can abstract to SuperTokens our previous definitions:
-𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M142/R140,R141 Addition=>Subtraction
-# I'll just rewrite the rest:
-𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M143 Subtraction=>Addition
-𝟭 - 𝟭 = 0	#A144 Zero
-𝟭 + 𝟮 = 𝟮 + 𝟭	#A145 Commute+
-𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M146 Multiplication=>Division
-𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M147 Division=>Multiplication
-𝟮 / 𝟮 = 1	#A148 One
-𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M149 Exponentiation=>Root
-𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M150 Root=>Exponentiation
-𝟮∧1 = 𝟮	#A151 x∧1=x
-𝟮∧0 = 1	#A152 X∧0=1
-𝟮² = 𝟮 * 𝟮	#A153 Square
-𝟮² = 𝟰;√𝟰 = 𝟮	#M154 Square=>SquareRoot
-√𝟰 = 𝟮;𝟮² = 𝟰	#M155 SquareRoot=>Square
-𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M156 Exponentiation=>Logarithm
-𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M157 Logarithm=>Exponentiation
-𝟮𝓵1 = 0	#A158 xl1=0
-𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M159 Single
-𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M160 Double
-𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M161 Triple
-𝟮 = 𝟮;𝟮∧1 = 𝟮	#M162 Linear
-𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M163 Square
-𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M164 Cube
 ```

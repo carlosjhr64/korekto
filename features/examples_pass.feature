@@ -47,7 +47,7 @@ Feature: examples_no_edits
     * Then stderr is ""
 
   Scenario: TwoCube
-    * Given option "--patch < examples/Tutorial.md"
+    * Given option "< examples/two_cube.md"
     * When we run command
     * Then exit status is "0"
     * Then stdout is ""
