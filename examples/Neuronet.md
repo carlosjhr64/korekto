@@ -146,33 +146,26 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ## Natural Exponentiation and Logarythm
 𝖊∧𝓍 = 𝓎;𝖊𝓵𝓎 = 𝓍	#M14 Natural Log
 𝖊𝓵𝓎 = 𝓍;𝖊∧𝓍 = 𝓎	#M15 Natural Exp
-### Natural Log abstract
+### 𝖊ˣ
 𝖊∧𝑥 : 𝖊ˣ	#S16/L1.KorektoMath Equivalent: ˣ
 𝖊∧𝑥 = 𝖊ˣ	#R17/M2.KorektoMath,S16 If equivalent, then equal
 𝖊∧𝑥 = 𝖊ˣ	#R17/M2.KorektoMath,S16 Group$
-𝖊𝓵𝖊ˣ = 𝑥	#R18/M156.KorektoMath,R17 Exponentiation=>Logarithm
-STOP
-𝖊∧(𝑥) = TMP	#R19/M63.KorektoMath,R17 a->(a)
-𝖊𝓵(TMP) = 𝑥	#R20/M63.KorektoMath,R18 a->(a)
-𝖊∧(Q1) = Q2;𝖊𝓵(Q2) = Q1	#M21/R19,R20 Natural Log abstract
-### Natural Exp abstract
-𝖊𝓵(TMP) = 𝑥	#R20/M63.KorektoMath,R18 Token grouped
-𝖊∧(𝑥) = TMP	#R19/M63.KorektoMath,R17 Token grouped
-𝖊𝓵(Q1) = Q2;𝖊∧(Q2) = Q1	#M22/R20,R19 Natural Exp abstract
+𝖊𝓵𝖊ˣ = 𝑥	#R18/M34.KorektoMath,R17 Exponentiation=>Logarithm
 ### Exp and Log are inverses of eachother
-𝖊∧(𝖊𝓵TMP) = TMP	#C23/I105.KorektoMath,R18,R19 a=b;(b)->(a)
-𝖊∧(𝖊𝓵(TMP)) = TMP	#C24/I105.KorektoMath,R20,R19 a=b;(b)->(a)
-𝖊∧(𝖊𝓵(Q1)) = Q1	#A25/C24 Exp Log x = x
-𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#C26/I105.KorektoMath,R19,R20 a=b;(b)->(a)
-𝖊𝓵(𝖊∧(Q1)) = Q1	#A27/C26 Log Exp x = x
+𝖊𝓵(𝖊ˣ) = 𝑥	#R19/M53.KorektoMath,R18 a->(a)
+𝖊𝓵(𝖊∧𝑥) = 𝑥	#C20/I128.KorektoMath,R17,R19 a=b;(b)->(a)
+𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R21/M53.KorektoMath,C20 a->(a)
+𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A22/R21 Inverses 𝓵∧
+# Likewise:
+𝖊∧(𝖊𝓵(𝓍)) = 𝓍	#A23 Inverses ∧𝓵
 ```
 ## Natural exponentiation function
 ```korekto
 # In Ruby, the natural exponentiation function is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
-⌉(𝑥) : 𝖊∧(𝑥)	#S28/L1.KorektoMath Equivalent: ⌉
-⌉(𝑥) = 𝖊∧(𝑥)	#R29/M2.KorektoMath,S28 If equivalent, then equal
+⌉(𝑥) : 𝖊∧(𝑥)	#S24/L1.KorektoMath Equivalent: ⌉
+⌉(𝑥) = 𝖊∧(𝑥)	#R25/M2.KorektoMath,S24 If equivalent, then equal
 ⌉(Q1) = 𝖊∧(Q1)	#A30/R29 Exp abstract
 ⌉𝑥 = 𝖊∧(𝑥)	#R31/M62.KorektoMath,R29 (a)->a
 ⌉𝑥 = 𝖊∧𝑥	#R32/M62.KorektoMath,R31 (a)->a
@@ -195,6 +188,7 @@ STOP
 𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R46/M95.KorektoMath,R45 (x*1)/(y)
 𝖊∧0 = (1)	#R47/M83.KorektoMath,R46 (a/a)
 𝖊∧0 = 1	#R48/M62.KorektoMath,R47 (a)->a
+STOP
 ```
 ## Natural logarithm function
 ```korekto
