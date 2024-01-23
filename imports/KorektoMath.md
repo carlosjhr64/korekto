@@ -243,38 +243,38 @@ Operator[𝓐]	#L19 Operator: Operator
 ```
 ### Addition and Subtraction
 ```korekto
-𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M142/R140,R141 Addition=>Subtraction
-𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M143 Subtraction=>Addition
-𝟭 - 𝟭 = 0	#A144 Zero
-𝟭 + 𝟮 = 𝟮 + 𝟭	#A145 Commute+
+𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M20 Addition=>Subtraction: + -
+𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M21 Subtraction=>Addition
+𝟭 - 𝟭 = 0	#A22 Zero: 0
+𝟭 + 𝟮 = 𝟮 + 𝟭	#A23 Commute+
 ```
 ### Multiplication and Division
 ```korekto
-𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M146 Multiplication=>Division
-𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M147 Division=>Multiplication
-𝟮 / 𝟮 = 1	#A148 One
+𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M24 Multiplication=>Division: * /
+𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M25 Division=>Multiplication
+𝟮 / 𝟮 = 1	#A26 One: 1
 # Note: multiplication does not commute in general(e.g. matrices)
 ```
 ### Exponentiation and Root
 ```korekto
-𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M149 Exponentiation=>Root
-𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M150 Root=>Exponentiation
+𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M27 Exponentiation=>Root: ∧ ∨
+𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M28 Root=>Exponentiation
 # Does not commute
 # No analogous 𝟛∨𝟛 = N
-𝟮∧1 = 𝟮	#A151 x∧1=x
-𝟮∧0 = 1	#A152 X∧0=1
+𝟮∧1 = 𝟮	#A29 x∧1=x
+𝟮∧0 = 1	#A30 X∧0=1
 ```
 ### Square and Square Root
 ```korekto
-𝟮² = 𝟮 * 𝟮	#A153 Square
-𝟮² = 𝟰;√𝟰 = 𝟮	#M154 Square=>SquareRoot
-√𝟰 = 𝟮;𝟮² = 𝟰	#M155 SquareRoot=>Square
+𝟮² = 𝟮 * 𝟮	#A31 Square: ²
+𝟮² = 𝟰;√𝟰 = 𝟮	#M32 Square=>SquareRoot: √
+√𝟰 = 𝟮;𝟮² = 𝟰	#M33 SquareRoot=>Square
 ```
 ### Exponentiation and Logarithm
 ```korekto
-𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M156 Exponentiation=>Logarithm
-𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M157 Logarithm=>Exponentiation
-𝟮𝓵1 = 0	#A158 xl1=0
+𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M34 Exponentiation=>Logarithm: 𝓵
+𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M35 Logarithm=>Exponentiation
+𝟮𝓵1 = 0	#A36 xl1=0
 ```
 ### Digits
 ```korekto
@@ -291,15 +291,15 @@ Operator[𝓐]	#L19 Operator: Operator
 ```
 ### Show multiplication as repeated addition
 ```korekto
-𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M159 Single
-𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M160 Double
-𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M161 Triple
+𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M47 Single
+𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M48 Double
+𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M49 Triple
 ```
 ### Show exponentiation as repeated multiplication
 ```korekto
-𝟮 = 𝟮;𝟮∧1 = 𝟮	#M162 Linear
-𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M163 Square
-𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M164 Cube
+𝟮 = 𝟮;𝟮∧1 = 𝟮	#M50 Linear
+𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M51 Square
+𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M52 Cube
 ```
 ## Grouping
 

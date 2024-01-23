@@ -47,7 +47,7 @@ Feature: examples_no_edits
     * Then stderr is ""
 
   Scenario: TwoCube
-    * Given option "< examples/two_cube.md"
+    * Given option "< examples/TwoCube.md"
     * When we run command
     * Then exit status is "0"
     * Then stdout is ""
