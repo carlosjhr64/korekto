@@ -9,9 +9,10 @@ class Statements
     @syntax = Syntax.new
   end
 
-  def type(c) = @statements.select{_1.type==c}
-  def length  = @statements.length
-  def last    = @statements.last
+  def type(c)  = @statements.select{_1.type==c}
+  def length   = @statements.length
+  def last     = @statements.last
+  def patterns = @statements.select(&:pattern?).each{yield _1}
 
   def add(statement,code,title,filename)
     c = code[0]; w = c=='W'

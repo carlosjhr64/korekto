@@ -25,8 +25,9 @@ class Main
   end
 
   def t2p_gsub(target, replacement)
-    # Stuff
-    raise Error, "not implemented"
+    t2p = @statements.symbols.t2p
+    t2p.each_key{t2p[_1].gsub!(target, replacement)}
+    @statements.patterns{_1.set_regexp}
   end
 
   def type_pattern(type, pattern)

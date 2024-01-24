@@ -24,6 +24,10 @@ class Statement
   def pattern?          = !@regexp.nil?
   def literal_regexp?   = @statement[0]=='/' && @statement[-1]=='/'
 
+  def set_regexp
+    @regexp = @context.symbols.s2r(@statement)
+  end
+
   private
 
   def syntax_check
@@ -92,10 +96,6 @@ class Statement
     unless n==@regexp.inspect.gsub('\\\\','').scan('\\n').length
       raise Error, "expected #{n} newlines"
     end
-  end
-
-  def set_regexp
-    @regexp = @context.symbols.s2r(@statement)
   end
 
   # Searches
