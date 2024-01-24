@@ -161,6 +161,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ```
 ## Natural exponentiation function
 ```korekto
+! stop!
 # In Ruby, the natural exponentiation function is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
@@ -188,7 +189,6 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R46/M95.KorektoMath,R45 (x*1)/(y)
 𝖊∧0 = (1)	#R47/M83.KorektoMath,R46 (a/a)
 𝖊∧0 = 1	#R48/M62.KorektoMath,R47 (a)->a
-STOP
 ```
 ## Natural logarithm function
 ```korekto

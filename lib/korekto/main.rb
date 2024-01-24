@@ -8,6 +8,7 @@ class Main
   MD_TYPE_PATTERN = %r{^! (?<type>\S+)\s+/(?<pattern>.*)/$}
   MD_TYPE_VARIABLES = /^! (?<type>\S+)\s+\{(?<variables>\S+( \S+)*)\}$/
   MD_KEY_VALUE = /^! (?<key>\w+):\s+'(?<value>.*)'$/
+  MD_FUNCTION = /^! (?<function>\w+)!(?<arguments>.*)$/
   # rubocop: enable Layout/LineLength
 
   M_FENCE = /^```\s*$/
@@ -78,10 +79,21 @@ class Main
       type_variables($~[:type], $~[:variables].split)
     when MD_KEY_VALUE
       key_value($~[:key], $~[:value])
+    when MD_FUNCTION
+      function($~[:function], $~[:arguments])
     else
       return false
     end
     true
+  end
+
+  def function(function, _arguments)
+    case function
+    when 'stop'
+      raise Error, 'stopped'
+    else
+      raise Error, "Unrecognized function: #{function}"
+    end
   end
 
   def key_value(key, value)
