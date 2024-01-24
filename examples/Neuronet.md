@@ -161,6 +161,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ```
 ## Natural exponentiation function
 ```korekto
+! gsub! a b
 ! stop!
 # In Ruby, the natural exponentiation function is:
 #     Math.exp(x) == Math::E**x #=> true

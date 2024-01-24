@@ -24,10 +24,28 @@ class Main
     @m_fence_korekto = /^```korekto$/ # default fence
   end
 
+  def t2p_gsub(target, replacement)
+    # Stuff
+    raise Error, "not implemented"
+  end
+
   def type_pattern(type, pattern)
     t2p = @statements.symbols.t2p
     raise Error, "type #{type} in use" if t2p.key? type
     t2p[type] = pattern
+  end
+
+  def function(function, arguments)
+    case function
+    when 'stop'
+      raise Error, 'stopped'
+    when 'gsub'
+      target, replacement, e = arguments.split(' ')
+      raise Error, "expected 2 arguments" unless e.nil? && replacement && target
+      t2p_gsub(target, replacement)
+    else
+      raise Error, "unrecognized function: #{function}"
+    end
   end
 
   def type_variables(type, variables)
@@ -85,15 +103,6 @@ class Main
       return false
     end
     true
-  end
-
-  def function(function, _arguments)
-    case function
-    when 'stop'
-      raise Error, 'stopped'
-    else
-      raise Error, "Unrecognized function: #{function}"
-    end
   end
 
   def key_value(key, value)

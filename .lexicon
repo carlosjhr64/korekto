@@ -39,6 +39,7 @@ directory
 dirname
 do_install
 dump
+e
 each
 empty
 err
@@ -140,6 +141,7 @@ readme
 regex
 regexp
 Regexp
+replacement
 require
 restatement
 result
@@ -185,6 +187,8 @@ Syntax
 syntax_check
 system
 t2p
+t2p_gsub
+target
 tautology
 title
 to_a
