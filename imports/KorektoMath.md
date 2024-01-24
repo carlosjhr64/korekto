@@ -56,7 +56,7 @@ Pattern key table:
 | Set | [𝕒-𝕫] | 𝕒 𝕓 𝕔 | Double-Struck small |
 | Type | [𝔸-𝕐ℂℍℕℙℚℝℤ] | 𝔸 𝔹 ℂ | Double-Struck Capitol |
 | [Operator](#Operator) |
-| Unary | [𝓐-𝓩] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
+| Unary | [-𝓐-𝓩] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
 | Unaries | Unary* | 𝓉 𝓊 𝓋 | Script Small |
 | Tight | [∨∧𝓵] | ♩ ♪ | Miscellaneous Symbols |
 | .NotTight | (?![∨∧𝓵]) | ⚑ | Miscellaneous Symbols |
@@ -147,9 +147,9 @@ Pattern key table:
 ```
 ### Operator
 ```korekto
-! Unary /[𝓐-𝓩]/
+! Unary /[-𝓐-𝓩]/
 ! Unary {𝓐 𝓑 𝓒}
-! Unaries /[𝓐-𝓩]*/
+! Unaries /[-𝓐-𝓩]*/
 ! Unaries {𝓉 𝓊 𝓋}
 ! Tight /[∨∧𝓵]/
 ! Tight {♩ ♪}
@@ -196,7 +196,7 @@ Pattern key table:
 ### SuperToken
 ```korekto
 # SuperToken will use Mathematical Sans-Serift Bold digits
-! SuperToken /[𝓐-𝓩]*(?:(?:\d[\d\.]*)|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S)[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]*[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]*!?/
+! SuperToken /[-𝓐-𝓩]*(?:(?:\d[\d\.]*)|\w+|\((?:[^()]|\([^()]*\)|\([^()]*\([^()]*\)*\))*\)|\S)[ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ]*[ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ]*!?/
 ! SuperToken {𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 𝓍 𝓎 𝓏}
 ```
 ## Definitions

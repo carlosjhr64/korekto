@@ -161,35 +161,34 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ```
 ## Natural exponentiation function
 ```korekto
-! gsub! a b
-! stop!
+# Redefining my operators list to `-𝓓⌊⌉⌈⌋`:
+! gsub! [-𝓐-𝓩] [-𝓓⌊⌉⌈⌋]
 # In Ruby, the natural exponentiation function is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
 ⌉(𝑥) : 𝖊∧(𝑥)	#S24/L1.KorektoMath Equivalent: ⌉
 ⌉(𝑥) = 𝖊∧(𝑥)	#R25/M2.KorektoMath,S24 If equivalent, then equal
-⌉(Q1) = 𝖊∧(Q1)	#A30/R29 Exp abstract
-⌉𝑥 = 𝖊∧(𝑥)	#R31/M62.KorektoMath,R29 (a)->a
-⌉𝑥 = 𝖊∧𝑥	#R32/M62.KorektoMath,R31 (a)->a
+⌉𝓍 = 𝖊∧𝓍	#A26/R25
 # Prove 𝖊∧0 = 1
-𝖊∧0 = 𝖊∧0	#T33/A81.KorektoMath Reflection
-𝖊∧0 = 𝖊∧(0)	#R34/M63.KorektoMath,T33 a->(a)
-𝑥 - 𝑥 = 0	#T35/A22.KorektoMath Zero
-𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C36/I105.KorektoMath,T35,R34 a=b;(b)->(a)
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R37/M107.KorektoMath,C36 a-b=a+-b
-𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R38/M110.KorektoMath,R37 a^(b+c)=a^b*a^c
-𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R39/M75.KorektoMath,R38 Tight grouped
-𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R40/M75.KorektoMath,R39 Tight grouped
+𝖊∧0 = 𝖊∧0	#T27/A98.KorektoMath Reflection
+𝖊∧0 = 𝖊∧(0)	#R28/M53.KorektoMath,T27 a->(a)
+𝑥 - 𝑥 = 0	#T29/A22.KorektoMath Zero
+𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C30/I128.KorektoMath,T29,R28 a=b;(b)->(a)
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R31/M134.KorektoMath,C30 a-b=a+-b
+𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R32/M137.KorektoMath,R31 a^(b+c)=a^b*a^c
+𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R33/M94.KorektoMath,R32 Tight grouped
+𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R34/M94.KorektoMath,R33 Tight grouped
 # The following line is a known fact which I won't prove here:
-𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)	#P41 Equivalent reciprical
-𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R42/M62.KorektoMath,P41 (a)->a
-𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R43/M62.KorektoMath,R42 (a)->a
+𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)	#P35 Equivalent reciprical
+𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R36/M54.KorektoMath,P35 (a)->a
+𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R37/M54.KorektoMath,R36 (a)->a
 # Then:
-𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C44/I104.KorektoMath,R43,R40 a=b;(a)->(b)
-𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R45/M75.KorektoMath,C44 Tight grouped
-𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R46/M95.KorektoMath,R45 (x*1)/(y)
-𝖊∧0 = (1)	#R47/M83.KorektoMath,R46 (a/a)
-𝖊∧0 = 1	#R48/M62.KorektoMath,R47 (a)->a
+𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C38/I127.KorektoMath,R37,R34 a=b;(a)->(b)
+𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R39/M94.KorektoMath,C38 Tight grouped
+𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R40/M117.KorektoMath,R39 (x*1)/(y)
+𝖊∧0 = (1)	#R41/M101.KorektoMath,R40 (a/a)=>(1)
+𝖊∧0 = 1	#R42/M54.KorektoMath,R41 (a)->a
+! stop!
 ```
 ## Natural logarithm function
 ```korekto

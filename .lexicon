@@ -41,6 +41,7 @@ do_install
 dump
 e
 each
+each_key
 empty
 err
 Error
@@ -124,6 +125,7 @@ out
 parse
 patch
 pattern
+patterns
 pattern_type
 pop
 postulate

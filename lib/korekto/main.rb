@@ -27,7 +27,7 @@ class Main
   def t2p_gsub(target, replacement)
     t2p = @statements.symbols.t2p
     t2p.each_key{t2p[_1].gsub!(target, replacement)}
-    @statements.patterns{_1.set_regexp}
+    @statements.patterns(&:set_regexp)
   end
 
   def type_pattern(type, pattern)
@@ -41,8 +41,8 @@ class Main
     when 'stop'
       raise Error, 'stopped'
     when 'gsub'
-      target, replacement, e = arguments.split(' ')
-      raise Error, "expected 2 arguments" unless e.nil? && replacement && target
+      target, replacement, e = arguments.split
+      raise Error, 'expected 2 arguments' unless e.nil? && replacement && target
       t2p_gsub(target, replacement)
     else
       raise Error, "unrecognized function: #{function}"
