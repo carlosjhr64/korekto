@@ -168,7 +168,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 # Here its:
 ⌉(𝑥) : 𝖊∧(𝑥)	#S24/L1.KorektoMath Equivalent: ⌉
 ⌉(𝑥) = 𝖊∧(𝑥)	#R25/M2.KorektoMath,S24 If equivalent, then equal
-⌉𝓍 = 𝖊∧𝓍	#A26/R25
+⌉𝓍 = 𝖊∧𝓍	#A26/R25 Exp abstract
 # Prove 𝖊∧0 = 1
 𝖊∧0 = 𝖊∧0	#T27/A98.KorektoMath Reflection
 𝖊∧0 = 𝖊∧(0)	#R28/M53.KorektoMath,T27 a->(a)
@@ -188,7 +188,6 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R40/M117.KorektoMath,R39 (x*1)/(y)
 𝖊∧0 = (1)	#R41/M101.KorektoMath,R40 (a/a)=>(1)
 𝖊∧0 = 1	#R42/M54.KorektoMath,R41 (a)->a
-! stop!
 ```
 ## Natural logarithm function
 ```korekto
@@ -196,35 +195,32 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 #     y = Math.exp(x)
 #     Math.log(y) == x #=> true
 # Here its:
-⌊(𝑥) : 𝖊𝓵(𝑥)	#S49/L1.KorektoMath Equivalent: ⌊
-⌊(𝑥) = 𝖊𝓵(𝑥)	#R50/M2.KorektoMath,S49 If equivalent, then equal
-⌊(Q1) = 𝖊𝓵(Q1)	#A51/R50 Log abstract
-⌊𝑥 = 𝖊𝓵(𝑥)	#R52/M62.KorektoMath,R50 (a)->a
-⌊𝑥 = 𝖊𝓵𝑥	#R53/M62.KorektoMath,R52 (a)->a
+⌊(𝑥) : 𝖊𝓵(𝑥)	#S43/L1.KorektoMath Equivalent: ⌊
+⌊(𝑥) = 𝖊𝓵(𝑥)	#R44/M2.KorektoMath,S43 If equivalent, then equal
+⌊𝓍 = 𝖊𝓵𝓍	#A45/R44 Log abstract
 # If 𝖊∧0 = 1, then 𝖊𝓵1 = 0 by definition of 𝓵
-𝖊∧0 = 1	#R48/M62.KorektoMath,R47 Token$ un-grouped
-𝖊𝓵1 = 0	#R54/M34.KorektoMath,R48 Exponentiation<=>Logarithm
-𝖊∧(0) = 1	#R55/M63.KorektoMath,R48 a->(a)
-𝖊𝓵(1) = 0	#R56/M21,R55 Natural Log abstract
+𝖊∧0 = 1	#R42/M54.KorektoMath,R41 Token$ un-grouped
+𝖊𝓵1 = 0	#R46/M34.KorektoMath,R42 Exponentiation=>Logarithm
 # Prove ⌉(⌊(𝑥)) = x
-⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T57/A81.KorektoMath Reflection
+⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T47/A98.KorektoMath Reflection
 # I first shrink the right side's notation
-⌉(⌊(𝑥)) = ⌉(⌊𝑥)	#R58/M62.KorektoMath,T57 (a)->a
-⌉(⌊(𝑥)) = ⌉⌊𝑥	#R59/M62.KorektoMath,R58 (a)->a
+⌉(⌊(𝑥)) = ⌉(⌊𝑥)	#R48/M54.KorektoMath,T47 (a)->a
+⌉(⌊(𝑥)) = ⌉⌊𝑥	#R49/M54.KorektoMath,R48 (a)->a
 # Now I consider the right side
-⌉⌊𝑥 = ⌉⌊𝑥	#T60/A81.KorektoMath Reflection
-⌉⌊𝑥 = ⌉(⌊𝑥)	#R61/M63.KorektoMath,T60 a->(a)
+⌉⌊𝑥 = ⌉⌊𝑥	#T50/A98.KorektoMath Reflection
+⌉⌊𝑥 = ⌉(⌊𝑥)	#R51/M53.KorektoMath,T50 a->(a)
 # I expand the right side by definitions
-⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C62/I104.KorektoMath,R53,R61 a=b;(a)->(b)
-⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R63/M66.KorektoMath,C62 Space$
-⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T64/A30 Exp abstract
-⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C65/I82.KorektoMath,C62,T64 Transitive
-⌉⌊𝑥 = 𝖊∧(𝖊𝓵(𝑥))	#R66/M63.KorektoMath,C65 a->(a)
+⌊𝑥 = 𝖊𝓵𝑥	#T52/A45 Log abstract
+⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C53/I127.KorektoMath,T52,R51 a=b;(a)->(b)
+⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R54/M82.KorektoMath,C53 Space$
+⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T55/A26 Exp abstract
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C56/I131.KorektoMath,T55,C53 a=b;a->+b
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵(𝑥))	#R57/M53.KorektoMath,C56 a->(a)
 # I next invoke the inverse abstract axiom derived earlier
-𝖊∧(𝖊𝓵(𝑥)) = 𝑥	#T67/A25 Exp Log x = x
-⌉⌊𝑥 = 𝑥	#C68/I82.KorektoMath,R66,T67 Transitive
-⌉(⌊(𝑥)) = ⌉⌊𝑥	#R59/M62.KorektoMath,R58 Token un-grouped
-⌉(⌊(𝑥)) = 𝑥	#C69/I82.KorektoMath,R59,C68 Transitive
+𝖊∧(𝖊𝓵(𝑥)) = 𝑥	#T58/A23 Inverses ∧𝓵
+⌉⌊𝑥 = 𝑥	#C59/I131.KorektoMath,T58,R57 a=b;a->+b
+⌉(⌊(𝑥)) = 𝑥	#C60/I122.KorektoMath,C59,R49 a=b;a->b
+! stop!
 ```
 ## Squash
 ```korekto
