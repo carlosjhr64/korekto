@@ -153,7 +153,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝖊𝓵𝖊ˣ = 𝑥	#R18/M34.KorektoMath,R17 Exponentiation=>Logarithm
 ### Exp and Log are inverses of eachother
 𝖊𝓵(𝖊ˣ) = 𝑥	#R19/M53.KorektoMath,R18 a->(a)
-𝖊𝓵(𝖊∧𝑥) = 𝑥	#C20/I128.KorektoMath,R17,R19 a=b;(b)->(a)
+𝖊𝓵(𝖊∧𝑥) = 𝑥	#C20/I129.KorektoMath,R17,R19 a=b;(b)->(a)
 𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R21/M53.KorektoMath,C20 a->(a)
 𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A22/R21 Inverses 𝓵∧
 # Likewise:
@@ -170,23 +170,23 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ⌉(𝑥) = 𝖊∧(𝑥)	#R25/M2.KorektoMath,S24 If equivalent, then equal
 ⌉𝓍 = 𝖊∧𝓍	#A26/R25 Exp abstract
 # Prove 𝖊∧0 = 1
-𝖊∧0 = 𝖊∧0	#T27/A98.KorektoMath Reflection
+𝖊∧0 = 𝖊∧0	#T27/A99.KorektoMath Reflection
 𝖊∧0 = 𝖊∧(0)	#R28/M53.KorektoMath,T27 a->(a)
 𝑥 - 𝑥 = 0	#T29/A22.KorektoMath Zero
-𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C30/I128.KorektoMath,T29,R28 a=b;(b)->(a)
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R31/M134.KorektoMath,C30 a-b=a+-b
-𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R32/M137.KorektoMath,R31 a^(b+c)=a^b*a^c
-𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R33/M94.KorektoMath,R32 Tight grouped
-𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R34/M94.KorektoMath,R33 Tight grouped
+𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C30/I129.KorektoMath,T29,R28 a=b;(b)->(a)
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R31/M135.KorektoMath,C30 a-b=a+-b
+𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R32/M138.KorektoMath,R31 a^(b+c)=a^b*a^c
+𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R33/M95.KorektoMath,R32 Tight grouped
+𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R34/M95.KorektoMath,R33 Tight grouped
 # The following line is a known fact which I won't prove here:
 𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)	#P35 Equivalent reciprical
 𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R36/M54.KorektoMath,P35 (a)->a
 𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R37/M54.KorektoMath,R36 (a)->a
 # Then:
-𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C38/I127.KorektoMath,R37,R34 a=b;(a)->(b)
-𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R39/M94.KorektoMath,C38 Tight grouped
-𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R40/M117.KorektoMath,R39 (x*1)/(y)
-𝖊∧0 = (1)	#R41/M101.KorektoMath,R40 (a/a)=>(1)
+𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C38/I128.KorektoMath,R37,R34 a=b;(a)->(b)
+𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R39/M95.KorektoMath,C38 Tight grouped
+𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R40/M118.KorektoMath,R39 (x*1)/(y)
+𝖊∧0 = (1)	#R41/M102.KorektoMath,R40 (a/a)=>(1)
 𝖊∧0 = 1	#R42/M54.KorektoMath,R41 (a)->a
 ```
 ## Natural logarithm function
@@ -202,70 +202,49 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝖊∧0 = 1	#R42/M54.KorektoMath,R41 Token$ un-grouped
 𝖊𝓵1 = 0	#R46/M34.KorektoMath,R42 Exponentiation=>Logarithm
 # Prove ⌉(⌊(𝑥)) = x
-⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T47/A98.KorektoMath Reflection
+⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T47/A99.KorektoMath Reflection
 # I first shrink the right side's notation
 ⌉(⌊(𝑥)) = ⌉(⌊𝑥)	#R48/M54.KorektoMath,T47 (a)->a
 ⌉(⌊(𝑥)) = ⌉⌊𝑥	#R49/M54.KorektoMath,R48 (a)->a
 # Now I consider the right side
-⌉⌊𝑥 = ⌉⌊𝑥	#T50/A98.KorektoMath Reflection
+⌉⌊𝑥 = ⌉⌊𝑥	#T50/A99.KorektoMath Reflection
 ⌉⌊𝑥 = ⌉(⌊𝑥)	#R51/M53.KorektoMath,T50 a->(a)
 # I expand the right side by definitions
 ⌊𝑥 = 𝖊𝓵𝑥	#T52/A45 Log abstract
-⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C53/I127.KorektoMath,T52,R51 a=b;(a)->(b)
+⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C53/I128.KorektoMath,T52,R51 a=b;(a)->(b)
 ⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R54/M82.KorektoMath,C53 Space$
 ⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T55/A26 Exp abstract
-⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C56/I131.KorektoMath,T55,C53 a=b;a->+b
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C56/I132.KorektoMath,T55,C53 a=b;a->+b
 ⌉⌊𝑥 = 𝖊∧(𝖊𝓵(𝑥))	#R57/M53.KorektoMath,C56 a->(a)
 # I next invoke the inverse abstract axiom derived earlier
 𝖊∧(𝖊𝓵(𝑥)) = 𝑥	#T58/A23 Inverses ∧𝓵
-⌉⌊𝑥 = 𝑥	#C59/I131.KorektoMath,T58,R57 a=b;a->+b
-⌉(⌊(𝑥)) = 𝑥	#C60/I122.KorektoMath,C59,R49 a=b;a->b
-! stop!
+⌉⌊𝑥 = 𝑥	#C59/I132.KorektoMath,T58,R57 a=b;a->+b
+⌉(⌊(𝑥)) = 𝑥	#C60/I123.KorektoMath,C59,R49 a=b;a->b
 ```
 ## Squash
 ```korekto
 # The squash function in Ruby is:
 #     1 / (1 + Math.exp(-𝑥))
 # Here its:
-⌈(𝑥) : 1 / (1 + ⌉(-𝑥))	#S70/L1.KorektoMath Equivalent: ⌈
-⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R71/M2.KorektoMath,S70 If equivalent, then equal
-⌈𝟭 = 1 / (1 + ⌉(-𝟭))	#A72 Squash abstract
-⌈𝑥 = 1 / (1 + ⌉(-𝑥))	#R73/M62.KorektoMath,R71 (a)->a
-⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R74/M62.KorektoMath,R73 (a)->a
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R75/M53.KorektoMath,R74 *(a + b)*->*(a+b)*
+⌈(𝑥) : 1 / (1 + ⌉(-𝑥))	#S61/L1.KorektoMath Equivalent: ⌈
+⌈(𝑥) = 1 / (1 + ⌉(-𝑥))	#R62/M2.KorektoMath,S61 If equivalent, then equal
+⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R63/M56.KorektoMath,R62 (a)_(b)->a_b
 # Shrunk ⌈𝑥
-⌈𝑥 = 1 / 1+⌉-𝑥	#R76/M66.KorektoMath,R75 Space$
-# Alternates
-⌈(𝑥) = (1) / (1 + ⌉(-𝑥))	#R77/M63.KorektoMath,R71 a->(a)
-⌈(𝑥) = (1) / (1 + ⌉-𝑥)	#R78/M62.KorektoMath,R77 (a)->a
-⌈(𝑥) = ⌉𝑥*(1) / ⌉𝑥*(1 + ⌉-𝑥)	#R79/M92.KorektoMath,R78 x*a / x*b$
-⌈(𝑥) = ⌉𝑥 / ⌉𝑥*(1 + ⌉-𝑥)	#R80/M86.KorektoMath,R79 *(one)
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥*1 + ⌉𝑥*⌉-𝑥)	#R81/M98.KorektoMath,R80 (xa+xb)
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R82/M85.KorektoMath,R81 *one
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R83/M77.KorektoMath,R82 Implied*
-# Consider ⌉(-𝑥)
-⌉(-𝑥) = 𝖊∧(-𝑥)	#T84/A30 Exp abstract
-⌉-𝑥 = 𝖊∧(-𝑥)	#R85/M62.KorektoMath,T84 (a)->a
-⌉-𝑥 = 𝖊∧-𝑥	#R86/M62.KorektoMath,R85 (a)->a
-# And remember
-⌉𝑥 = 𝖊∧𝑥	#R32/M62.KorektoMath,R31 Token
-# Now subtitute in...
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + ⌉𝑥(𝖊∧-𝑥))	#C87/I101.KorektoMath,R86,R83 a=b;a->(b)
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + (𝖊∧𝑥)(𝖊∧-𝑥))	#C88/I101.KorektoMath,R32,C87 a=b;a->(b)
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧𝑥(𝖊∧-𝑥))	#R89/M74.KorektoMath,C88 Tight un-grouped
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧𝑥𝖊∧-𝑥)	#R90/M74.KorektoMath,R89 Tight un-grouped
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧(𝑥 + -𝑥))	#R91/M109.KorektoMath,R90 a^ba^c=a^(b+c)
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧(𝑥 - 𝑥))	#R92/M106.KorektoMath,R91 a+-b=a-b
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧(𝑥-𝑥))	#R93/M53.KorektoMath,R92 *(a + b)*->*(a+b)*
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 𝖊∧0)	#R94/M88.KorektoMath,R93 (Zero)
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + (𝖊∧0))	#R95/M75.KorektoMath,R94 Tight grouped
-𝖊∧0 = 1	#R48/M62.KorektoMath,R47 (a)->a
-⌈(𝑥) = ⌉𝑥 / (⌉𝑥 + 1)	#C96/I103.KorektoMath,R48,R95 (a)=b;(a)->b
-⌈𝑥 = ⌉𝑥 / (⌉𝑥 + 1)	#R97/M62.KorektoMath,C96 (a)->a
-# Alternate definition of squash
-⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R98/M112.KorektoMath,R97 (a+b)->(b+a)
-⌈𝑥 = ⌉𝑥 / (1+⌉𝑥)	#R99/M53.KorektoMath,R98 *(a + b)*->*(a+b)*
-⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R100/M66.KorektoMath,R99 Space$
+⌈𝑥 = 1 / 1+⌉-𝑥	#R64/M61.KorektoMath,R63 *(a + b)$-> * a+b$
+⌈𝓍 = 1 / 1+⌉-𝓍	#A65/R64 Squash abstract
+# Alternate
+⌈𝑥 = (1) / (1 + ⌉-𝑥)	#R66/M53.KorektoMath,R63 a->(a)
+⌈𝑥 = ⌉𝑥*(1) / ⌉𝑥*(1 + ⌉-𝑥)	#R67/M115.KorektoMath,R66 x*a / x*b$
+⌈𝑥 = ⌉𝑥 / ⌉𝑥*(1 + ⌉-𝑥)	#R68/M105.KorektoMath,R67 *(one)~
+⌈𝑥 = ⌉𝑥 / (⌉𝑥*1 + ⌉𝑥*⌉-𝑥)	#R69/M121.KorektoMath,R68 (xa±xb)
+⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R70/M104.KorektoMath,R69 *one~
+⌈𝑥 = ⌉𝑥 / (⌉𝑥 + (⌉𝑥*⌉-𝑥))	#R71/M93.KorektoMath,R70 +Group)
+# Skipping a few steps, recall: 𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)
+⌉𝑥*⌉-𝑥 = 1	#P72 a/a=1
+⌈𝑥 = ⌉𝑥 / (⌉𝑥 + 1)	#C73/I125.KorektoMath,P72,R71 (a)=b;(a)->b
+⌈𝑥 = ⌉𝑥 / ⌉𝑥+1	#R74/M61.KorektoMath,C73 *(a + b)$-> * a+b$
+⌈𝓍 = ⌉𝓍 / ⌉𝓍+1	#A75/R74 Alternate Squash abstract
+! stop! 
 # Equivalence 1-⌈𝑥 = ⌈-𝑥
 1-⌈𝑥 = 1-⌈𝑥	#T101/A81.KorektoMath Reflection
 1-⌈𝑥 = 1 - ⌈𝑥	#R102/M61.KorektoMath,T101 ~a+b$->~a + b
