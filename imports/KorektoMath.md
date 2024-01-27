@@ -93,14 +93,15 @@ Pattern key table:
 ! scanner: '(?:\d[\d\.]*)|\w+|.'
 # Must have balanced (){}[]
 ? balanced? '(){}[]'
-# Can't have two spaces or have tabs
-? !(include?('  ') || include?("\t"))
 # Exponentiation, root, and log are tight
-? tight?('∧')
-? tight?('∨')
-? tight?('𝓵')
+? tight?(['∧', '∨', '𝓵'])
 # Factorial is left tight
 ? ltight?('!')
+# Parenthesis are (l/r)tight
+? ltight?(')')
+? rtight?('(')
+# Can't have two spaces or have tabs
+? !(include?('  ') || include?("\t"))
 # Consistent spacing around binary operators
 ? !match?(%r{\S[-+/*]\s}) && !match?(%r{\s[+/*]\S})
 ```

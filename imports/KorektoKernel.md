@@ -30,7 +30,7 @@ Canonical use:
 * Exponentiation: `tight?('^')`
 * Factorial: `ltight?('!')`
 ```korekto
-::String#ltight?(c) = !include?(' '+c)
-::String#rtight?(c) = !include?(c+' ')
-::String#tight?(c) = ltight?(c) && rtight?(c)
+::String#ltight?(c) = [*c].all?{|c| !include?(' '+c)}
+::String#rtight?(c) = [*c].all?{|c| !include?(c+' ')}
+::String#tight?(c)  = [*c].all?{|c| ltight?(c) && rtight?(c)}
 ```
