@@ -94,7 +94,7 @@ Pattern key table:
 # Must have balanced (){}[]
 ? balanced? '(){}[]'
 # Exponentiation, root, and log are tight
-? tight?(['∧', '∨', '𝓵'])
+? tight?('∧', '∨', '𝓵')
 # Factorial is left tight
 ? ltight?('!')
 # Parenthesis are (l/r)tight
