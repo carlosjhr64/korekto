@@ -219,8 +219,8 @@ w1[𝟣];𝟣 ∊ w1	#M6 Element of: ∊
 ```
 ### Member operators
 ```korekto
-w1{E1𝟣 𝟤E2};𝟣₊ : 𝟤	#M7 Next: ₊
-w1{E1𝟣 𝟤E2};𝟤₋ : 𝟣	#M8 Previous: ₋
+w1{E1𝟣 𝟤E2};𝟣₊ = 𝟤	#M7 Next: ₊
+w1{E1𝟣 𝟤E2};𝟤₋ = 𝟣	#M8 Previous: ₋
 ```
 ### Methods on words
 ```korekto
@@ -229,10 +229,10 @@ w1{E1𝟣};w1.last : 𝟣	#M10 Last: last
 ```
 ### Raise
 ```korekto
-w1{𝟣E1};w2{𝟤E2};𝟣⁺ : 𝟤	#I11 Raise first: ⁺
-w1{𝓂 𝟣E1};w2{𝓂 𝟤E2};𝟣⁺ : 𝟤	#I12 Raise second
-w1{𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝟤E2};𝟣⁺ : 𝟤	#I13 Raise third
-w1{𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ : 𝟤	#I14 Raise fourth
+w1{𝟣E1};w2{𝟤E2};𝟣⁺ = 𝟤	#I11 Raise first: ⁺
+w1{𝓂 𝟣E1};w2{𝓂 𝟤E2};𝟣⁺ = 𝟤	#I12 Raise second
+w1{𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I13 Raise third
+w1{𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I14 Raise fourth
 ```
 ### Types
 ```korekto
@@ -451,4 +451,31 @@ S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M141 (a+b)->(b+a)
 ### Subtracting
 ```korekto
 S1♭--𝟭♮S2;S1♭𝟭♮S2	#M142 --a->a
+```
+## Inequalities
+```korekto
+# Inequalities
+𝓍+1 > 𝓍	#A143 Greater than: >
+𝓍 > 𝓎;𝓎 < 𝓍	#M144 Less than: <
+𝓍 > 𝓎;𝓍 ≠ 𝓎	#M145 Not equal: ≠
+# Absolute value
+𝓍 < 0;|𝓍| = -𝓍	#M146 Absolute-: |
+𝓍 > 0;|𝓍| = 𝓍	#M147 Absolute+
+𝓍 = 0;|𝓍| = 0	#M148 Absolute zero
+|𝓍| = |-𝓍|	#A149 Absolute value
+# Greater/Less than or equal
+|𝓍| ≥ 0	#A150 Greater than or equal: ≥
+0 ≤ |𝓍|	#A151 Less than or equal: ≤
+```
+## Calculus
+```korekto
+# Infinitessimal
+𝓍 ≠ 0;|𝜀| < |𝓍|	#M152 Infinitessimal: 𝜀
+𝜀 ≠ 0	#P153 First order 𝜀
+𝜀² = 0	#P154 Vanishing 𝜀
+# Differential
+𝒶⁺ = ᵢ;𝛅ᵢ𝓐(𝒶) = 𝓐(𝒶+𝜀ᵢ)-𝓐(𝒶)	#M155 Differential: 𝛅
+# Derivatives
+𝒶⁺ = ᵢ;𝓓ᵢ𝓐(𝒶) = 𝛅ᵢ𝓐(𝒶)/𝜀ᵢ	#M156 Derivative: 𝓓
+𝒶⁺ = ᵢ;𝓓ᵢ𝓐(𝒶) = 𝓐(𝒶+𝜀ᵢ)-𝓐(𝒶) / 𝜀ᵢ	#M157 Derivative
 ```

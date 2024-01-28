@@ -135,13 +135,13 @@ Tensor[𝑾]	#S5/L18.KorektoMath Tensor: 𝑾
 Supercript{ʰ ⁱ ʲ ᵏ}	#S6/L4.KorektoMath Named set: Supercript ʰ ⁱ ʲ ᵏ
 Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ ₖ
 ## Next labels
-ₕ₊ : ᵢ	#R8/M7.KorektoMath,S7 Next
-ᵢ₊ : ⱼ	#R9/M7.KorektoMath,S7 Next
-ⱼ₊ : ₖ	#R10/M7.KorektoMath,S7 Next
+ₕ₊ = ᵢ	#R8/M7.KorektoMath,S7 Next
+ᵢ₊ = ⱼ	#R9/M7.KorektoMath,S7 Next
+ⱼ₊ = ₖ	#R10/M7.KorektoMath,S7 Next
 ## Raised labels
-ₕ⁺ : ʰ	#C11/I11.KorektoMath,S7,S6 Raise first
-ᵢ⁺ : ⁱ	#C12/I12.KorektoMath,S7,S6 Raise second
-ⱼ⁺ : ʲ	#C13/I13.KorektoMath,S7,S6 Raise third
+ₕ⁺ = ʰ	#C11/I11.KorektoMath,S7,S6 Raise first
+ᵢ⁺ = ⁱ	#C12/I12.KorektoMath,S7,S6 Raise second
+ⱼ⁺ = ʲ	#C13/I13.KorektoMath,S7,S6 Raise third
 # Functions
 ## Natural Exponentiation and Logarythm
 𝖊∧𝓍 = 𝓎;𝖊𝓵𝓎 = 𝓍	#M14 Natural Log
@@ -261,8 +261,13 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 1-⌈𝓍 = ⌈-𝓍	#A87/C86 Abstract 1-⌈𝑥=⌈-𝑥
 ⌈-𝑥 = 1-⌈𝑥	#R88/M99.KorektoMath,C86 Symmetry
 ⌈-𝓍 = 1-⌈𝓍	#A89/R88 Abstract ⌈-𝑥=1-⌈𝑥
-! stop!
 # Derivative:
+# Label x
+𝑥⁺ : ₓ	#S90/L1.KorektoMath Equivalent: ₓ
+# 𝒶⁺ = ᵢ;𝓓ᵢ𝓐(𝒶) = 𝓐(𝒶+𝜀ᵢ)-𝓐(𝒶) / 𝜀ᵢ
+𝑥⁺ = ₓ	#R91/M2.KorektoMath,S90 If equivalent, then equal
+𝓓ₓ⌈(𝑥) = ⌈(𝑥+𝜀ₓ)-⌈(𝑥) / 𝜀ₓ	#R92/M157.KorektoMath,R91 Derivative
+! stop!
 𝓓ₓ(⌈(𝑥)) = 𝓓ₓ(1 / (1 + ⌉(-𝑥)))
 𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)
      = 1/(1+⌉-𝑥)² -𝓓ₓ⌉-𝑥
