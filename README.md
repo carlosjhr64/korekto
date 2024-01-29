@@ -4,20 +4,20 @@
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
-## DESCRIPTION:
+## Description
 
 A general proof checker.
 
 Works with [neovim](https://github.com/neovim/neovim).
 
-## INSTALL:
+## Install
 ```shell
 $ gem install korekto
 $ korekto --install
 $ ### And if missing:
 $ gem install neovim # Provides neovim-ruby-host
 ```
-## SYNOPSIS:
+## Synopsis
 ```korekto
 ### Patterns ###
 # 'Hello World!'.scan(/\w+|\S|\s/) #=> ["Hello", " ", "World", "!"]
@@ -47,7 +47,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 * [Squash Function](examples/Squash.md)
 * [2^3=8](examples/TwoCube.md)
 
-## Help:
+## Help
 ```shell
 $ korekto --help
 Usage:
@@ -69,7 +69,29 @@ Exclusive:
 #   cat MARKDOWN.md | korekto
 #   korekto < MARKDOWN.md
 ```
-## LICENSE:
+## Credits
+
+One can(of course) check the project's [dependencies](korekto.gemspec).
+Topmost kudos goes to [Neovim](https://neovim.io/)
+which makes this project possible in [Ruby](https://www.ruby-lang.org/en/).
+I also want to credit sources for ideas I'm using here.
+
+[An Introduction to Formal Logic](https://www.amazon.com/An-Introduction-to-Formal-Logic/dp/B01M6Z6T1E/)
+with Steve Gimbel, Ph.D. of Gettysburg College
+on Amazon's The Great Courses Signature Collection.
+
+[Insights into Mathematics](https://www.youtube.com/@njwildberger)
+with Norman Wildberger, professor of mathematics at UNSW Sydney.
+Specially his foundations videos.
+
+For anything really novel here,
+I would say that I have not seen an explicit formula
+for the propagation of errors of a sigmoid neural network
+which I give in my [Neuronet wiki](https://github.com/carlosjhr64/neuronet/wiki).
+Also, my [classification of statements](examples/Tutorial.md) without any mention of formal logic
+might be somewhat novel, although foreshadows it.
+
+## License
 
 Copyright (c) 2024 CarlosJHR64
 
