@@ -25,9 +25,10 @@ Canonical use:
 * `rtight?(c)`: each c followed by non-space
 * `tight?(c)`: each c surrounded by non-space
 
-Canonical use:
+Canonical use cases:
 
-* Exponentiation: `tight?('^')`
+* Exponentiation: `tight?('∧', '∨', '𝓵')`
+* Parenthesis: `rtight?('(')` and `ltight?(')')`
 * Factorial: `ltight?('!')`
 ```korekto
 ::String#ltight?(*c) = c.all?{|c| !include?(' '+c)}
