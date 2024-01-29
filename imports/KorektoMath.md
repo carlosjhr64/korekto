@@ -492,4 +492,7 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M142 --a->a
 # Chain Rule
 # This one is meta.  :-??
 𝓓ᵢ𝓐𝓑𝓍 = (𝓓𝓐)𝓑𝓍*(𝓓𝓑)𝓍*𝓓ᵢ𝓍	#A164 Chain rule
+# Exponential
+# TODO: Need to introduce natural log
+𝓓ᵢ(𝒶∧𝓍) = log(𝒶)𝓓ᵢ(𝓍)𝒶∧𝓍	#A165 Wut: log
 ```

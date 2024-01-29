@@ -269,7 +269,15 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝓓ₓ⌈𝑥 = 𝓓ₓ(⌈𝑥)	#R92/M53.KorektoMath,T91 a->(a)
 𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C93/I130.KorektoMath,R64,R92 a=b;(a)->(b)
 𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T94/A163.KorektoMath From quotient rule
+𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C95/I134.KorektoMath,T94,C93 a=b;a->+b
+# Consider -𝓓ₓ⌉-𝑥
+-𝓓ₓ⌉-𝑥 = -𝓓ₓ⌉-𝑥	#T96/A100.KorektoMath Reflection
+-𝓓ₓ⌉-𝑥 = -𝓓ₓ(⌉-𝑥)	#R97/M53.KorektoMath,T96 a->(a)
+⌉-𝑥 = 𝖊∧-𝑥	#T98/A26 Exp abstract
+-𝓓ₓ⌉-𝑥 = -𝓓ₓ(𝖊∧-𝑥)	#C99/I130.KorektoMath,T98,R97 a=b;(a)->(b)
+𝓓ₓ(𝖊∧-𝑥) = log(𝖊)𝓓ₓ(-𝑥)𝖊∧-𝑥	#T100/A165.KorektoMath Wut
 ! stop!
+-𝓓ₓ⌉-𝑥 = -𝓓ₓ()	#W
 𝓓ₓ(⌈(𝑥)) = 𝓓ₓ(1 / (1 + ⌉(-𝑥)))
 𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)
      = 1/(1+⌉-𝑥)² -𝓓ₓ⌉-𝑥
