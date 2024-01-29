@@ -264,9 +264,11 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 # Derivative:
 # Label x
 𝑥⁺ : ₓ	#S90/L1.KorektoMath Equivalent: ₓ
-# 𝒶⁺ = ᵢ;𝓓ᵢ𝓐(𝒶) = 𝓐(𝒶+𝜀ᵢ)-𝓐(𝒶) / 𝜀ᵢ
-𝑥⁺ = ₓ	#R91/M2.KorektoMath,S90 If equivalent, then equal
-𝓓ₓ⌈(𝑥) = ⌈(𝑥+𝜀ₓ)-⌈(𝑥) / 𝜀ₓ	#R92/M157.KorektoMath,R91 Derivative
+# 𝒶⁺ = ᵢ;𝓓ᵢ𝓐(𝒶) = ...
+𝓓ₓ⌈𝑥 = 𝓓ₓ⌈𝑥	#T91/A100.KorektoMath Reflection
+𝓓ₓ⌈𝑥 = 𝓓ₓ(⌈𝑥)	#R92/M53.KorektoMath,T91 a->(a)
+𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C93/I130.KorektoMath,R64,R92 a=b;(a)->(b)
+𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T94/A163.KorektoMath From quotient rule
 ! stop!
 𝓓ₓ(⌈(𝑥)) = 𝓓ₓ(1 / (1 + ⌉(-𝑥)))
 𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)

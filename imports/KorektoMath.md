@@ -478,4 +478,18 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M142 --a->a
 # Derivatives
 𝒶⁺ = ᵢ;𝓓ᵢ𝓐(𝒶) = 𝛅ᵢ𝓐(𝒶)/𝜀ᵢ	#M156 Derivative: 𝓓
 𝒶⁺ = ᵢ;𝓓ᵢ𝓐(𝒶) = 𝓐(𝒶+𝜀ᵢ)-𝓐(𝒶) / 𝜀ᵢ	#M157 Derivative
+# Constant Rule
+𝓓ᵢ𝒹 = 0	#A158 Constant rule
+# Power Rule
+𝓓ᵢ(𝓍∧𝒹) = 𝒹*𝓍∧(𝒹-1)	#A159 Power rule
+# Sum and Difference Rules
+𝓓ᵢ(𝓍 + 𝓎) = 𝓓ᵢ𝓍 + 𝓓ᵢ𝓎	#A160 Sum rule
+# Product Rule
+𝓓ᵢ(𝓍*𝓎) = 𝓓ᵢ𝓍*𝓎 + 𝓍*𝓓ᵢ𝓎	#A161 Product rule
+# Quotient Rule
+𝓓ᵢ(𝓍 / 𝓎) = (𝓓ᵢ(𝓍)𝓎 - 𝓍𝓓ᵢ(𝓎)) / 𝓎²	#A162 Quotient rule
+𝓓ᵢ(1 / 1+𝓍) = -𝓓ᵢ𝓍 / (1+𝓍)²	#A163 From quotient rule
+# Chain Rule
+# This one is meta.  :-??
+𝓓ᵢ𝓐𝓑𝓍 = (𝓓𝓐)𝓑𝓍*(𝓓𝓑)𝓍*𝓓ᵢ𝓍	#A164 Chain rule
 ```
