@@ -86,7 +86,7 @@ Pattern key table:
 | Binary | [-+/*] | ♣ ♥ ♦ | Miscellaneous Symbols |
 | MultDiv | [/*] | ♝ ♛ ♚ | Miscellaneous Symbols |
 | AddSub | [-+] | ⚀ ⚁ ⚂ ± | Miscellaneous Symbols |
-| Loose | [-+\<\>=≠≤≥] | ⚌ ⚍ ⚎ ⚏ | Miscellaneous Symbols |
+| Loose | [-+\<\>=≠≤≥:] | ⚌ ⚍ ⚎ ⚏ | Miscellaneous Symbols |
 | [Label](#Label) |
 | Superscript | [⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻᴬᴮᴰᴱᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾᴿᵀᵁⱽᵂᵅᵝᵞᵟᵋᶿᶥᶲᵠᵡ!] | ⁱ ʲ ᵏ | Latin superscript |
 | Subscript | [₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ] | ᵢ ⱼ ₖ | Latin subscript |
@@ -98,7 +98,7 @@ Pattern key table:
 | [Slurp](#Slurp) |
 | Slurp | [^;]* | S1 S2 S3 S4 | ASCII |
 | Glob | [^\s;]* | s1 s2 s3 | ASCII |
-| Span | [^:=;]* | N1 N2 N3 | ASCII |
+| Span | [^;\<\>=≠≤≥:]* | N1 N2 N3 | ASCII |
 | .Clump | \S+ | 𝓂 | Script small|
 | [SuperToken](#SuperToken) |
 | SuperToken | Unary*(Token|Group)Subscript*Superscript* | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 𝓍 𝓎 𝓏 | Sans-Serif Bold |
@@ -184,7 +184,7 @@ Pattern key table:
 ! MultDiv {♝ ♛ ♚}
 ! AddSub /[-+]/
 ! AddSub {⚀ ⚁ ⚂ ±}
-! Loose /[-+\<\>=≠≤≥]/
+! Loose /[-+\<\>=≠≤≥:]/
 ! Loose {⚌ ⚍ ⚎ ⚏}
 ```
 ### Label
@@ -211,7 +211,7 @@ Pattern key table:
 ! Slurp {S1 S2 S3 S4}
 ! Glob /[^\s;]*/
 ! Glob {s1 s2 s3}
-! Span /[^:=;]*/
+! Span /[^;\<\>=≠≤≥:]*/
 ! Span {N1 N2 N3}
 ! .Clump /\S+/
 ! .Clump {𝓂}
