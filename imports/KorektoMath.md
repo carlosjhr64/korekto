@@ -23,13 +23,14 @@ Several styles are used for keys:
   * lower case will not match spaces
   * upper case may match spaces
   * used for `+` or `*` patterns
-* Representative `ABC`
-* Mathematical numbers
-  * used for general concrete objects, tokens
-* Mathematical script small Latin: `𝒶 𝒷 𝒸`
-  * used for symbols
-  * used to provide an alternate key
-* Miscellaneous symbols
+* [Mathematical Unicode](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode)
+  * Representative `ABC`
+  * Mathematical numbers
+    * used for tokens
+  * Mathematical script small Latin: `𝒶 𝒷 𝒸`
+    * used for symbols
+    * used to provide an alternate key
+* [Miscellaneous Symbols](https://en.wikipedia.org/wiki/Miscellaneous_Symbols)
   * used for binary operators and space
 * And then some of the obvious keys
 
@@ -46,7 +47,7 @@ Pattern key table:
 | Decimal | \d[\d\.]* | d1 d2 d3 𝒹 | ASCII |
 | Word | \w+ | w1 w2 w3 𝓌 | ASCII |
 | Symbol | [^\w\s] | 𝒶 𝒷 𝒸 | Script Small |
-| Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 | Sans-Serif |
+| Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 𝓅 𝓆 𝓇 | Sans-Serif |
 | [Type](#Type) |
 | Constant | [𝕬-𝖟] | 𝖆 𝖇 𝖈 | Bold-Fraktur |
 | Scalar | [𝑎-𝑧]| 𝑎 𝑏 𝑐 | Italic Small |
@@ -128,7 +129,7 @@ Pattern key table:
 ! Symbol {𝒶 𝒷 𝒸}
 # Token will use Mathematical Sans-Serift digits
 ! Token /\d[\d\.]*|\w+|\S/
-! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫}
+! Token {𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 𝓅 𝓆 𝓇}
 ```
 ### Type
 ```korekto
