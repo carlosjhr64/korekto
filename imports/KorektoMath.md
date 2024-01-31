@@ -226,11 +226,14 @@ Pattern key table:
 
 ### Equivalence
 ```korekto
+# Only use `:` to define a new symbol in terms of other symbols.
+# Specifically, don't use it in an axiom.
 N1 : N2	#L1 Equivalent:   :
 N1 : N2;N1 = N2	#M2 If equivalent, then equal: =
 ```
 ### Group
 ```korekto
+# Note that I'm using `=` here and not `:` which would be poor usage.
 N1 = (N1)	#A3 Group: ( )
 ```
 ### Sets
@@ -271,22 +274,22 @@ Operator[𝓐]	#L24 Operator: Operator
 ```
 ### Addition and Subtraction
 ```korekto
-𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M25 Addition=>Subtraction: + -
-𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M26 Subtraction=>Addition
+𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M25 Addition→Subtraction: + -
+𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M26 Subtraction→Addition
 𝟭 - 𝟭 = 0	#A27 Zero: 0
 𝟭 + 𝟮 = 𝟮 + 𝟭	#A28 Commute+
 ```
 ### Multiplication and Division
 ```korekto
-𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M29 Multiplication=>Division: * /
-𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M30 Division=>Multiplication
+𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M29 Multiplication→Division: * /
+𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M30 Division→Multiplication
 𝟮 / 𝟮 = 1	#A31 One: 1
 # Note: multiplication does not commute in general(e.g. matrices)
 ```
 ### Exponentiation and Root
 ```korekto
-𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M32 Exponentiation=>Root: ∧ ∨
-𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M33 Root=>Exponentiation
+𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M32 Exponentiation→Root: ∧ ∨
+𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M33 Root→Exponentiation
 # Does not commute
 # No analogous 𝟛∨𝟛 = N
 𝟮∧1 = 𝟮	#A34 x∧1=x
@@ -295,19 +298,20 @@ Operator[𝓐]	#L24 Operator: Operator
 ### Square and Square Root
 ```korekto
 𝟮² = 𝟮 * 𝟮	#A36 Square: ²
-𝟮² = 𝟰;√𝟰 = 𝟮	#M37 Square=>SquareRoot: √
-√𝟰 = 𝟮;𝟮² = 𝟰	#M38 SquareRoot=>Square
+𝟮² = 𝟰;√𝟰 = 𝟮	#M37 Square→SquareRoot: √
+√𝟰 = 𝟮;𝟮² = 𝟰	#M38 SquareRoot→Square
 ```
 ### Exponentiation and Logarithm
 ```korekto
-𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M39 Exponentiation=>Logarithm: 𝓵
-𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M40 Logarithm=>Exponentiation
+𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M39 Exponentiation→Logarithm: 𝓵
+𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M40 Logarithm→Exponentiation
 𝟮𝓵1 = 0	#A41 xl1=0
 ```
 ### Digits
 ```korekto
 1 - 1 = 0	#T42/A27 Zero
-0 + 1 = 1	#R43/M26,T42 Subtraction=>Addition
+0 + 1 = 1	#R43/M26,T42 Subtraction→Addition
+# This is an exemplary use of `:`
 1 + 1 : 2	#S44/L1 Equivalent: 2
 2 + 1 : 3	#S45/L1 Equivalent: 3
 3 + 1 : 4	#S46/L1 Equivalent: 4
@@ -342,7 +346,14 @@ But to keep the parser simple, I'll treat `⎨` as a unary operator.
 𝓍 < 𝓎;𝓎 < 𝓏;𝓍 < 𝓏	#I61 Transitive <
 𝓍 > 𝓎;𝓍 ≠ 𝓎	#M62 ≠ if >: ≠
 𝓍 < 𝓎;𝓍 ≠ 𝓎	#M63 ≠ if <
+# After much fruitless discussion with Bard and WizardMath,
+# I've decided that infinity is just bigger than anything you throw at it.
 ∞ > 𝓍	#A64 Infinity: ∞
+# And yes, even bigger that infinity itself!
+# ∞ > ∞
+# Which mean infinity is also less that itself. :P
+# ∞ < ∞
+# SO LET'S NOT EVER TALK ABOUT INFINITY ITSELF!!!
 # Absolute value
 ⎨𝓍 = ⎨-𝓍	#A65 Absolute: ⎨
 𝓍 < 0;⎨𝓍 = -𝓍	#M66 ⎨<0
