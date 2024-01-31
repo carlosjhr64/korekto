@@ -231,7 +231,7 @@ N1 : N2;N1 = N2	#M2 If equivalent, then equal: =
 ```
 ### Group
 ```korekto
-N1 : (N1)	#A3 Group: ( )
+N1 = (N1)	#A3 Group: ( )
 ```
 ### Sets
 ```korekto
@@ -251,78 +251,83 @@ w1{E1𝟣};w1.last : 𝟣	#M10 Last: last
 ```
 ### Raise
 ```korekto
-w1{𝟣E1};w2{𝟤E2};𝟣⁺ = 𝟤	#I11 Raise first: ⁺
-w1{𝓂 𝟣E1};w2{𝓂 𝟤E2};𝟣⁺ = 𝟤	#I12 Raise second
-w1{𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I13 Raise third
-w1{𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I14 Raise fourth
+w1{𝟣E1};w2{𝟤E2};𝟣⁺ = 𝟤	#I11 Raise 1st: ⁺
+w1{𝓂 𝟣E1};w2{𝓂 𝟤E2};𝟣⁺ = 𝟤	#I12 Raise 2nd
+w1{𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I13 Raise 3rd
+w1{𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I14 Raise 4th
+w1{𝓂 𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I15 Raise 5th
+w1{𝓂 𝓂 𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I16 Raise 6th
+w1{𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I17 Raise 7th
+w1{𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I18 Raise 8th
+w1{𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝟤E2};𝟣⁺ = 𝟤	#I19 Raise 9th
 ```
 ### Types
 ```korekto
-Constant[𝖆]	#L15 Constant: Constant
-Scalar[𝑎]	#L16 Scalar: Scalar
-Vector[𝒂]	#L17 Vector: Vector
-Tensor[𝑨]	#L18 Tensor: Tensor
-Operator[𝓐]	#L19 Operator: Operator
+Constant[𝖆]	#L20 Constant: Constant
+Scalar[𝑎]	#L21 Scalar: Scalar
+Vector[𝒂]	#L22 Vector: Vector
+Tensor[𝑨]	#L23 Tensor: Tensor
+Operator[𝓐]	#L24 Operator: Operator
 ```
 ### Addition and Subtraction
 ```korekto
-𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M20 Addition=>Subtraction: + -
-𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M21 Subtraction=>Addition
-𝟭 - 𝟭 = 0	#A22 Zero: 0
-𝟭 + 𝟮 = 𝟮 + 𝟭	#A23 Commute+
+𝟭 + 𝟮 = 𝟯;𝟯 - 𝟮 = 𝟭	#M25 Addition=>Subtraction: + -
+𝟯 - 𝟮 = 𝟭;𝟭 + 𝟮 = 𝟯	#M26 Subtraction=>Addition
+𝟭 - 𝟭 = 0	#A27 Zero: 0
+𝟭 + 𝟮 = 𝟮 + 𝟭	#A28 Commute+
 ```
 ### Multiplication and Division
 ```korekto
-𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M24 Multiplication=>Division: * /
-𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M25 Division=>Multiplication
-𝟮 / 𝟮 = 1	#A26 One: 1
+𝟮 * 𝟯 = 𝟲;𝟲 / 𝟯 = 𝟮	#M29 Multiplication=>Division: * /
+𝟲 / 𝟯 = 𝟮;𝟮 * 𝟯 = 𝟲	#M30 Division=>Multiplication
+𝟮 / 𝟮 = 1	#A31 One: 1
 # Note: multiplication does not commute in general(e.g. matrices)
 ```
 ### Exponentiation and Root
 ```korekto
-𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M27 Exponentiation=>Root: ∧ ∨
-𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M28 Root=>Exponentiation
+𝟮∧𝟯 = 𝟴;𝟴∨𝟯 = 𝟮	#M32 Exponentiation=>Root: ∧ ∨
+𝟴∨𝟯 = 𝟮;𝟮∧𝟯 = 𝟴	#M33 Root=>Exponentiation
 # Does not commute
 # No analogous 𝟛∨𝟛 = N
-𝟮∧1 = 𝟮	#A29 x∧1=x
-𝟮∧0 = 1	#A30 X∧0=1
+𝟮∧1 = 𝟮	#A34 x∧1=x
+𝟮∧0 = 1	#A35 X∧0=1
 ```
 ### Square and Square Root
 ```korekto
-𝟮² = 𝟮 * 𝟮	#A31 Square: ²
-𝟮² = 𝟰;√𝟰 = 𝟮	#M32 Square=>SquareRoot: √
-√𝟰 = 𝟮;𝟮² = 𝟰	#M33 SquareRoot=>Square
+𝟮² = 𝟮 * 𝟮	#A36 Square: ²
+𝟮² = 𝟰;√𝟰 = 𝟮	#M37 Square=>SquareRoot: √
+√𝟰 = 𝟮;𝟮² = 𝟰	#M38 SquareRoot=>Square
 ```
 ### Exponentiation and Logarithm
 ```korekto
-𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M34 Exponentiation=>Logarithm: 𝓵
-𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M35 Logarithm=>Exponentiation
-𝟮𝓵1 = 0	#A36 xl1=0
+𝟮∧𝟯 = 𝟴;𝟮𝓵𝟴 = 𝟯	#M39 Exponentiation=>Logarithm: 𝓵
+𝟮𝓵𝟴 = 𝟯;𝟮∧𝟯 = 𝟴	#M40 Logarithm=>Exponentiation
+𝟮𝓵1 = 0	#A41 xl1=0
 ```
 ### Digits
 ```korekto
-1 - 1 = 0	#T37/A22 Zero
-0 + 1 = 1	#R38/M21,T37 Subtraction=>Addition
-1 + 1 : 2	#S39/L1 Equivalent: 2
-2 + 1 : 3	#S40/L1 Equivalent: 3
-3 + 1 : 4	#S41/L1 Equivalent: 4
-4 + 1 : 5	#S42/L1 Equivalent: 5
-5 + 1 : 6	#S43/L1 Equivalent: 6
-6 + 1 : 7	#S44/L1 Equivalent: 7
-7 + 1 : 8	#S45/L1 Equivalent: 8
-8 + 1 : 9	#S46/L1 Equivalent: 9
+1 - 1 = 0	#T42/A27 Zero
+0 + 1 = 1	#R43/M26,T42 Subtraction=>Addition
+1 + 1 : 2	#S44/L1 Equivalent: 2
+2 + 1 : 3	#S45/L1 Equivalent: 3
+3 + 1 : 4	#S46/L1 Equivalent: 4
+4 + 1 : 5	#S47/L1 Equivalent: 5
+5 + 1 : 6	#S48/L1 Equivalent: 6
+6 + 1 : 7	#S49/L1 Equivalent: 7
+7 + 1 : 8	#S50/L1 Equivalent: 8
+8 + 1 : 9	#S51/L1 Equivalent: 9
 ```
 ### Show multiplication as repeated addition
 ```korekto
-𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M47 Single
-𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M48 Double
-𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M49 Triple
+𝟭 = 𝟭;𝟭 * 1 = 𝟭	#M52 Single
+𝟭 + 𝟭 = 𝟮;𝟭 * 2 = 𝟮	#M53 Double
+𝟭 + 𝟭 + 𝟭 = 𝟯;𝟭 * 3 = 𝟯	#M54 Triple
 ```
 ### Show exponentiation as repeated multiplication
 ```korekto
-𝟮 = 𝟮;𝟮∧1 = 𝟮	#M50 Linear
-𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M51 Square
-𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M52 Cube
+𝟮 = 𝟮;𝟮∧1 = 𝟮	#M55 Linear
+𝟮 * 𝟮 = 𝟰;𝟮∧2 = 𝟰	#M56 Square
+𝟮 * 𝟮 * 𝟮 = 𝟴;𝟮∧3 = 𝟴	#M57 Cube
 ```
 ### Inequalities
 
@@ -331,228 +336,228 @@ This allows use of its closing symbol `⎬` in post-editing.
 But to keep the parser simple, I'll treat `⎨` as a unary operator.
 ```korekto
 # Inequalities
-𝓍+1 > 𝓍	#A53 Greater than: >
-𝓍 > 𝓎;𝓎 > 𝓏;𝓍 > 𝓏	#I54 Transitive >
-𝓍 > 𝓎;𝓎 < 𝓍	#M55 Less than: <
-𝓍 < 𝓎;𝓎 < 𝓏;𝓍 < 𝓏	#I56 Transitive <
-𝓍 > 𝓎;𝓍 ≠ 𝓎	#M57 ≠ if >: ≠
-𝓍 < 𝓎;𝓍 ≠ 𝓎	#M58 ≠ if <
-∞ > 𝓍	#A59 Infinity: ∞
+𝓍+1 > 𝓍	#A58 Greater than: >
+𝓍 > 𝓎;𝓎 > 𝓏;𝓍 > 𝓏	#I59 Transitive >
+𝓍 > 𝓎;𝓎 < 𝓍	#M60 Less than: <
+𝓍 < 𝓎;𝓎 < 𝓏;𝓍 < 𝓏	#I61 Transitive <
+𝓍 > 𝓎;𝓍 ≠ 𝓎	#M62 ≠ if >: ≠
+𝓍 < 𝓎;𝓍 ≠ 𝓎	#M63 ≠ if <
+∞ > 𝓍	#A64 Infinity: ∞
 # Absolute value
-⎨𝓍 = ⎨-𝓍	#A60 Absolute: ⎨
-𝓍 < 0;⎨𝓍 = -𝓍	#M61 ⎨<0
-𝓍 > 0;⎨𝓍 = 𝓍	#M62 ⎨>0
-𝓍 = 0;⎨𝓍 = 0	#M63 ⎨=0
+⎨𝓍 = ⎨-𝓍	#A65 Absolute: ⎨
+𝓍 < 0;⎨𝓍 = -𝓍	#M66 ⎨<0
+𝓍 > 0;⎨𝓍 = 𝓍	#M67 ⎨>0
+𝓍 = 0;⎨𝓍 = 0	#M68 ⎨=0
 # Greater/Less than or equal
-⎨𝓍 ≥ 0	#A64 Greater than or equal: ≥
-0 ≤ ⎨𝓍	#A65 Less than or equal: ≤
+⎨𝓍 ≥ 0	#A69 Greater than or equal: ≥
+0 ≤ ⎨𝓍	#A70 Less than or equal: ≤
 ```
 ### Bijection
 
 Need a way to show a connection between symbols.
 Specifically, a way to show that a label refers to a variable or value.
 ```korekto
-𝒶 ⤖ 𝓂	#L66 Bijection: ⤖
-ᴺ ⤖ 𝓝	#S67/L66 Bijection: ᴺ 𝓝
-ₙ ⤖ 𝑛	#S68/L66 Bijection: ₙ 𝑛
-ⁿ ⤖ 𝑛	#S69/L66 Bijection: ⁿ
-ᵢ ⤖ 𝑖	#S70/L66 Bijection: ᵢ 𝑖
-₀ ⤖ 0	#S71/L66 Bijection: ₀
-₁ ⤖ 1	#S72/L66 Bijection: ₁
-₌ ⤖ =	#S73/L66 Bijection: ₌
+𝒶 ⤖ 𝓂	#L71 Bijection: ⤖
+ᴺ ⤖ 𝓝	#S72/L71 Bijection: ᴺ 𝓝
+ₙ ⤖ 𝑛	#S73/L71 Bijection: ₙ 𝑛
+ⁿ ⤖ 𝑛	#S74/L71 Bijection: ⁿ
+ᵢ ⤖ 𝑖	#S75/L71 Bijection: ᵢ 𝑖
+₀ ⤖ 0	#S76/L71 Bijection: ₀
+₁ ⤖ 1	#S77/L71 Bijection: ₁
+₌ ⤖ =	#S78/L71 Bijection: ₌
 ```
 ### Sums
 ```korekto
 # I'm going to overload 𝓝.
 # It's both an operator and an arbitrary positive number.
-𝓝ᵢ : ∑ᵢ₌₁ᴺ	#S74/L1 Equivalent: ∑
+𝓝ᵢ : ∑ᵢ₌₁ᴺ	#S79/L1 Equivalent: ∑
 ```
 ### Products
 ```korekto
 # 𝑛! 
-∏𝑛 : ∏ᵢ₌₁ⁿ 𝑖	#S75/L1 Equivalent: ∏
+∏𝑛 : ∏ᵢ₌₁ⁿ 𝑖	#S80/L1 Equivalent: ∏
 ```
 ### Euler's number
 ```korekto
-𝖊 : ∑ₙ 1/𝑛!	#S76/L1 Equivalent: 𝖊 !
-⌊ : 𝖊𝓵	#S77/L1 Equivalent: ⌊
+𝖊 : ∑ₙ 1/𝑛!	#S81/L1 Equivalent: 𝖊 !
+⌊ : 𝖊𝓵	#S82/L1 Equivalent: ⌊
 ```
 ### Infinitessimals
 ```korekto
-𝓍 ≠ 0;|𝜀| < |𝓍|	#M78 Infinitessimal: | 𝜀
-𝜀 ≠ 0	#P79 First order 𝜀
-𝜀² = 0	#P80 Vanishing 𝜀
-𝛅𝓐(𝒶) = 𝓐(𝒶+𝜀)-𝓐(𝒶)	#A81 Differential: 𝛅
-𝓓𝓐(𝒶) = 𝛅𝓐(𝒶)/𝜀	#A82 Derivative: 𝓓
+𝓍 ≠ 0;|𝜀| < |𝓍|	#M83 Infinitessimal: | 𝜀
+𝜀 ≠ 0	#P84 First order 𝜀
+𝜀² = 0	#P85 Vanishing 𝜀
+𝛅𝓐(𝒶) = 𝓐(𝒶+𝜀)-𝓐(𝒶)	#A86 Differential: 𝛅
+𝓓𝓐(𝒶) = 𝛅𝓐(𝒶)/𝜀	#A87 Derivative: 𝓓
 ```
 ## Grouping
 
 ### Token grouping
 ```korekto
-S1𝟭S2;S1(𝟭)S2	#M83 a->(a)
-S1(𝟭)S2;S1𝟭S2	#M84 (a)->a
-S1𝟭S2𝟮S3;S1(𝟭)S2(𝟮)S3	#M85 a_b->(a)_(b)
-S1(𝟭)S2(𝟮)S3;S1𝟭S2𝟮S3	#M86 (a)_(b)->a_b
-S1𝟭S2𝟮S3𝟯S4;S1(𝟭)S2(𝟮)S3(𝟯)S4	#M87 a_b_c->(a)_(b)_(c)
-S1(𝟭)S2(𝟮)S3(𝟯)S4;S1𝟭S2𝟮S3𝟯S4	#M88 (a)_(b)_(c)->a_b_c
+S1𝟭S2;S1(𝟭)S2	#M88 a->(a)
+S1(𝟭)S2;S1𝟭S2	#M89 (a)->a
+S1𝟭S2𝟮S3;S1(𝟭)S2(𝟮)S3	#M90 a_b->(a)_(b)
+S1(𝟭)S2(𝟮)S3;S1𝟭S2𝟮S3	#M91 (a)_(b)->a_b
+S1𝟭S2𝟮S3𝟯S4;S1(𝟭)S2(𝟮)S3(𝟯)S4	#M92 a_b_c->(a)_(b)_(c)
+S1(𝟭)S2(𝟮)S3(𝟯)S4;S1𝟭S2𝟮S3𝟯S4	#M93 (a)_(b)_(c)->a_b_c
 ```
 ### Binary spacing
 ```korekto
-S1(𝟭 ♦ 𝟮)S2;S1(𝟭♦𝟮)S2	#M89 *(a + b)*->*(a+b)*
-S1(𝟭♦𝟮)S2;S1(𝟭 ♦ 𝟮)S2	#M90 *(a+b)*->*(a + b)*
-S1♮(𝟭♭♦♭𝟮);S1 𝟭♦𝟮	#M91 *(a + b)$-> * a+b$
-S1 𝟭♦𝟮;S1♮(𝟭♭♦♭𝟮)	#M92 * a+b$->*(a + b)$
-(𝟭♭♦♭𝟮)♮S1;𝟭♦𝟮 S1	#M93 ^(a + b)*->^a+b *
-𝟭♦𝟮 S1;(𝟭♭♦♭𝟮)♭S1	#M94 ^a+b *->^(a + b)*
-S1 𝟭♦𝟮 S2;S1♮(𝟭♭♦♭𝟮)♭S2	#M95 * a+b *->*(a + b)*
-S1♭(𝟭♭♦♭𝟮)♮S2;S1 𝟭♦𝟮 S2	#M96 *(a + b)*->* a+b *
+S1(𝟭 ♦ 𝟮)S2;S1(𝟭♦𝟮)S2	#M94 *(a + b)*->*(a+b)*
+S1(𝟭♦𝟮)S2;S1(𝟭 ♦ 𝟮)S2	#M95 *(a+b)*->*(a + b)*
+S1♮(𝟭♭♦♭𝟮);S1 𝟭♦𝟮	#M96 *(a + b)$-> * a+b$
+S1 𝟭♦𝟮;S1♮(𝟭♭♦♭𝟮)	#M97 * a+b$->*(a + b)$
+(𝟭♭♦♭𝟮)♮S1;𝟭♦𝟮 S1	#M98 ^(a + b)*->^a+b *
+𝟭♦𝟮 S1;(𝟭♭♦♭𝟮)♭S1	#M99 ^a+b *->^(a + b)*
+S1 𝟭♦𝟮 S2;S1♮(𝟭♭♦♭𝟮)♭S2	#M100 * a+b *->*(a + b)*
+S1♭(𝟭♭♦♭𝟮)♮S2;S1 𝟭♦𝟮 S2	#M101 *(a + b)*->* a+b *
 ```
 ### MultDiv spacing
 ```korekto
 # MultDiv has higher precedence than AddSub
-S1 𝟭♚𝟮;S1 𝟭 ♚ 𝟮	#M97 ~a*b$->~a * b
-S1 𝟭 ♚ 𝟮;S1 𝟭♚𝟮	#M98 ~a * b$->~a*b
-𝟭♚𝟮 S2;𝟭 ♚ 𝟮 S2	#M99 ^a*b~$->a * b~
-𝟭 ♚ 𝟮 S2;𝟭♚𝟮 S2	#M100 ^a * b~->a*b~
-S1 𝟭 ♚ 𝟮 S2;S1 𝟭♚𝟮 S2	#M101 ~a * b~->~a*b~
-S1 𝟭♚𝟮 S2;S1 𝟭 ♚ 𝟮 S2	#M102 ~a*b~->~a * b~
+S1 𝟭♚𝟮;S1 𝟭 ♚ 𝟮	#M102 ~a*b$->~a * b
+S1 𝟭 ♚ 𝟮;S1 𝟭♚𝟮	#M103 ~a * b$->~a*b
+𝟭♚𝟮 S2;𝟭 ♚ 𝟮 S2	#M104 ^a*b~$->a * b~
+𝟭 ♚ 𝟮 S2;𝟭♚𝟮 S2	#M105 ^a * b~->a*b~
+S1 𝟭 ♚ 𝟮 S2;S1 𝟭♚𝟮 S2	#M106 ~a * b~->~a*b~
+S1 𝟭♚𝟮 S2;S1 𝟭 ♚ 𝟮 S2	#M107 ~a*b~->~a * b~
 ```
 ### MutlDiv Grouping
 ```korekto
 # MultDiv has higher precedence than AddSub
-S1♥𝟭♚𝟮♦S2;S1♥(𝟭♭♚♭𝟮)♦S2	#M103 +a*b+->+(a*b)+
-S1♥(𝟭♭♚♭𝟮)♦S2;S1♥𝟭♚𝟮♦S2	#M104 +(a*b)+->+a*b+
-S1♥𝟭♚𝟮;S1♥(𝟭♭♚♭𝟮)	#M105 +a*b$->+(a*b)
-S1♥(𝟭♭♚♭𝟮);S1♥𝟭♚𝟮	#M106 +(a*b)$->+a*b
-𝟭♚𝟮♦S2;(𝟭♭♚♭𝟮)♦S2	#M107 ^a*b+->(a*b)+
-(𝟭♭♚♭𝟮)♦S2;𝟭♚𝟮♦S2	#M108 ^(a*b)+->a*b+
-(𝟭♭♚♭𝟮)♮♚♮S2;𝟭♮♚♮𝟮♮♚♮S2	#M109 ^(a*b)*->a*b*
+S1♥𝟭♚𝟮♦S2;S1♥(𝟭♭♚♭𝟮)♦S2	#M108 +a*b+->+(a*b)+
+S1♥(𝟭♭♚♭𝟮)♦S2;S1♥𝟭♚𝟮♦S2	#M109 +(a*b)+->+a*b+
+S1♥𝟭♚𝟮;S1♥(𝟭♭♚♭𝟮)	#M110 +a*b$->+(a*b)
+S1♥(𝟭♭♚♭𝟮);S1♥𝟭♚𝟮	#M111 +(a*b)$->+a*b
+𝟭♚𝟮♦S2;(𝟭♭♚♭𝟮)♦S2	#M112 ^a*b+->(a*b)+
+(𝟭♭♚♭𝟮)♦S2;𝟭♚𝟮♦S2	#M113 ^(a*b)+->a*b+
+(𝟭♭♚♭𝟮)♮♚♮S2;𝟭♮♚♮𝟮♮♚♮S2	#M114 ^(a*b)*->a*b*
 ```
 ### GroupGlob grouping
 ```korekto
-S1♭(g1)♭S2;S1 g1 S2	#M110 Space
-S1 g1 S2;S1♭(g1)♭S2	#M111 Group
-S1♭(g1);S1 g1	#M112 Space$
-S1 g1;S1♭(g1)	#M113 Group$
-(g1)♭S1;g1 S1	#M114 ^Space
-g1 S1;(g1)♭S1	#M115 ^Group
+S1♭(g1)♭S2;S1 g1 S2	#M115 Space
+S1 g1 S2;S1♭(g1)♭S2	#M116 Group
+S1♭(g1);S1 g1	#M117 Space$
+S1 g1;S1♭(g1)	#M118 Group$
+(g1)♭S1;g1 S1	#M119 ^Space
+g1 S1;(g1)♭S1	#M120 ^Group
 ```
 ### Group grouping
 ```korekto
-S1 ⚍ (G1) ⚎ S2;S1 ⚍ G1 ⚎ S2	#M116 +Space+
-S1 ⚍ G1 ⚎ S2;S1 ⚍ (G1) ⚎ S2	#M117 +Group+
-S1 ⚍ G1 ⚎ G2 ⚏ S2;S1 ⚍ (G1) ⚎ (G2) ⚏ S2	#M118 +Group+Group+
-S1 ⚍ (G1);S1 ⚍ G1	#M119 +Space
-S1 ⚍ G1;S1 ⚍ (G1)	#M120 +Group
-(G1) ⚍ S1;G1 ⚍ S1	#M121 Space+
-G1 ⚍ S1;(G1) ⚍ S1	#M122 Group+
-S1 ⚍ G1⦆;S1 ⚍ (G1)⦆	#M123 +Group)
-S1 ⚍ g1±g2;S1 ⚍ g1 ± g2	#M124 Space ~a+b
+S1 ⚍ (G1) ⚎ S2;S1 ⚍ G1 ⚎ S2	#M121 +Space+
+S1 ⚍ G1 ⚎ S2;S1 ⚍ (G1) ⚎ S2	#M122 +Group+
+S1 ⚍ G1 ⚎ G2 ⚏ S2;S1 ⚍ (G1) ⚎ (G2) ⚏ S2	#M123 +Group+Group+
+S1 ⚍ (G1);S1 ⚍ G1	#M124 +Space
+S1 ⚍ G1;S1 ⚍ (G1)	#M125 +Group
+(G1) ⚍ S1;G1 ⚍ S1	#M126 Space+
+G1 ⚍ S1;(G1) ⚍ S1	#M127 Group+
+S1 ⚍ G1⦆;S1 ⚍ (G1)⦆	#M128 +Group)
+S1 ⚍ g1±g2;S1 ⚍ g1 ± g2	#M129 Space ~a+b
 ```
 ### Tight grouping
 ```korekto
-S1(𝟭♩𝟮)S2;S1𝟭♩𝟮S2	#M125 Tight un-grouped
-S1𝟭♩𝟮S2;S1(𝟭♩𝟮)S2	#M126 Tight grouped
+S1(𝟭♩𝟮)S2;S1𝟭♩𝟮S2	#M130 Tight un-grouped
+S1𝟭♩𝟮S2;S1(𝟭♩𝟮)S2	#M131 Tight grouped
 ```
 ## Algebra
 
 ### Implied/Explicit multiplication
 ```korekto
-S1𝟭♭𝟮S2;S1𝟭♮*♮𝟮S2	#M127 Explicit*
-S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M128 Implied*
+S1𝟭♭𝟮S2;S1𝟭♮*♮𝟮S2	#M132 Explicit*
+S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M133 Implied*
 ```
 
 ### Equality
 ```korekto
-N1 = N2;N2 = N1	#M129 Symmetry
-N1 = N1	#A130 Reflection
+N1 = N2;N2 = N1	#M134 Symmetry
+N1 = N1	#A135 Reflection
 ```
 ### Transitive
 ```korekto
-N1 = N2;N2 = N3;N1 = N3	#I131 Transitive a=b;b=c;a=c
-N1 = N2;N3 = N2;N3 = N1	#I132 Linked a=b;c=b;c=a
+N1 = N2;N2 = N3;N1 = N3	#I136 Transitive a=b;b=c;a=c
+N1 = N2;N3 = N2;N3 = N1	#I137 Linked a=b;c=b;c=a
 ```
 ### One
 ```korekto
 # (a/a)
-S1(𝟭♭/♭𝟭)S2;S1(1)S2	#M133 (a/a)=>(1)
-S1(g1 / g1)S2;S1(1)S2	#M134 (a / a)=>(1)
+S1(𝟭♭/♭𝟭)S2;S1(1)S2	#M138 (a/a)=>(1)
+S1(g1 / g1)S2;S1(1)S2	#M139 (a / a)=>(1)
 # One
-S1♭*♭1 S2;S1 S2	#M135 *one~
-S1♭*♭(1) S2;S1 S2	#M136 *(one)~
-S1 1♭*♭S2;S1 S2	#M137 ~one*
-S1 (1)♭*♭S2;S1 S2	#M138 ~(one)*
-S1*1⚑S2;S1⚑S2	#M139 *one
-S1⚑1*S2;S1⚑S2	#M140 one*
-S1*(1)⚑S2;S1⚑S2	#M141 *(one)
-S1⚑(1)*S2;S1⚑S2	#M142 (one)*
+S1♭*♭1 S2;S1 S2	#M140 *one~
+S1♭*♭(1) S2;S1 S2	#M141 *(one)~
+S1 1♭*♭S2;S1 S2	#M142 ~one*
+S1 (1)♭*♭S2;S1 S2	#M143 ~(one)*
+S1*1⚑S2;S1⚑S2	#M144 *one
+S1⚑1*S2;S1⚑S2	#M145 one*
+S1*(1)⚑S2;S1⚑S2	#M146 *(one)
+S1⚑(1)*S2;S1⚑S2	#M147 (one)*
 ```
 ### Zero
 ```korekto
-S1(𝟭♭-♭𝟭)S2;S1(0)S2	#M143 (a-a)=>(0)
-S1♭⚀♭𝟭♭-♭𝟭♭±♭S2;S1♭±♭S2	#M144 ±a-a±=>±
-S1⚀𝟭-𝟭 S2;S1 S2	#M145 +a-a~
-S1♭⚀♭0♭±♭S2;S1♭±♭S2	#M146 ±0±=>±
+S1(𝟭♭-♭𝟭)S2;S1(0)S2	#M148 (a-a)=>(0)
+S1♭⚀♭𝟭♭-♭𝟭♭±♭S2;S1♭±♭S2	#M149 ±a-a±=>±
+S1⚀𝟭-𝟭 S2;S1 S2	#M150 +a-a~
+S1♭⚀♭0♭±♭S2;S1♭±♭S2	#M151 ±0±=>±
 ```
 ### (a/b)
 ```korekto
-S1 𝟭♭/♭𝟮;S1 𝟯*𝟭 / 𝟯*𝟮	#M147 x*a / x*b$
-S1(𝟭♭/♭𝟮)S2;S1(𝟯*𝟭 / 𝟯*𝟮)S2	#M148 (xa / xb)
-S1(g1 / g2)S2;S1(𝟭*(g1) / 𝟭*(g2))S2	#M149 (x(a) / x(b))
-S1𝟭*(1♭/♭𝟮)⚑S2;S1(𝟭♮/♮𝟮)S2	#M150 (x*1)/(y)
-S1𝟭*(1 / g1)⚑S2;S1(𝟭 / g1)S2	#M151 x*1 /  y
-S1 1♭±♭(𝟭 / g2)⚑S2;S1 (g2±𝟭 / g2)S2	#M152 ~1+(a/b)->~(b+a / b)
+S1 𝟭♭/♭𝟮;S1 𝟯*𝟭 / 𝟯*𝟮	#M152 x*a / x*b$
+S1(𝟭♭/♭𝟮)S2;S1(𝟯*𝟭 / 𝟯*𝟮)S2	#M153 (xa / xb)
+S1(g1 / g2)S2;S1(𝟭*(g1) / 𝟭*(g2))S2	#M154 (x(a) / x(b))
+S1𝟭*(1♭/♭𝟮)⚑S2;S1(𝟭♮/♮𝟮)S2	#M155 (x*1)/(y)
+S1𝟭*(1 / g1)⚑S2;S1(𝟭 / g1)S2	#M156 x*1 /  y
+S1 1♭±♭(𝟭 / g2)⚑S2;S1 (g2±𝟭 / g2)S2	#M157 ~1+(a/b)->~(b+a / b)
 ```
 ### Distribute
 ```korekto
-S1𝟭*(𝟮♭±♭𝟯)⚑S2;S1(𝟭*𝟮♮±♮𝟭*𝟯)S2	#M153 (xa±xb)
-S1𝟭*(g2 ± g3)⚑S2;S1(𝟭*(g2) ± 𝟭*(g3))S2	#M154 (x(a) ± x(b))
+S1𝟭*(𝟮♭±♭𝟯)⚑S2;S1(𝟭*𝟮♮±♮𝟭*𝟯)S2	#M158 (xa±xb)
+S1𝟭*(g2 ± g3)⚑S2;S1(𝟭*(g2) ± 𝟭*(g3))S2	#M159 (x(a) ± x(b))
 ```
 ### Substitution
 ```korekto
-𝟭 = 𝟮;S1𝟭S2;S1𝟮S2	#I155 a=b;a->b
-𝟭 = N2;S1𝟭S2;S1(N2)S2	#I156 a=b;a->(b)
-N1 = 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I157 (a)=b;(a)->b
-N1 = 𝟭;S1♭(N1)♭S2♭(N1)♭S3;S1♭𝟭♭S2♭𝟭♭S3	#I158 (a)=b;(a)->b,b
-N1 = 𝟭;S1𝟭S2;S1(N1)S2	#I159 (a)=b;b->(a)
-N1 = N2;S1(N1)S2;S1(N2)S2	#I160 a=b;(a)->(b)
-N1 = N2;S1(N2)S2;S1(N1)S2	#I161 a=b;(b)->(a)
-N1 = N2;N1 ⚍ S1;N2 ⚍ S1	#I162 a=b;a->b+
-N1 = N2;N2 ⚍ S1;N1 ⚍ S1	#I163 a=b;b->a+
-N1 = N2;S1 ⚍ N1;S1 ⚍ N2	#I164 a=b;a->+b
-N1 = N2;S1 ⚍ N2;S1 ⚍ N1	#I165 a=b;b->+a
+𝟭 = 𝟮;S1𝟭S2;S1𝟮S2	#I160 a=b;a->b
+𝟭 = N2;S1𝟭S2;S1(N2)S2	#I161 a=b;a->(b)
+N1 = 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I162 (a)=b;(a)->b
+N1 = 𝟭;S1♭(N1)♭S2♭(N1)♭S3;S1♭𝟭♭S2♭𝟭♭S3	#I163 (a)=b;(a)->b,b
+N1 = 𝟭;S1𝟭S2;S1(N1)S2	#I164 (a)=b;b->(a)
+N1 = N2;S1(N1)S2;S1(N2)S2	#I165 a=b;(a)->(b)
+N1 = N2;S1(N2)S2;S1(N1)S2	#I166 a=b;(b)->(a)
+N1 = N2;N1 ⚍ S1;N2 ⚍ S1	#I167 a=b;a->b+
+N1 = N2;N2 ⚍ S1;N1 ⚍ S1	#I168 a=b;b->a+
+N1 = N2;S1 ⚍ N1;S1 ⚍ N2	#I169 a=b;a->+b
+N1 = N2;S1 ⚍ N2;S1 ⚍ N1	#I170 a=b;b->+a
 ```
 ### Adding
 ```korekto
-S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M166 a+-b=a-b
-S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M167 a-b=a+-b
-S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M168 a^b*a^c=a^(b+c)
-S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M169 a^ba^c=a^(b+c)
-S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M170 a^(b+c)=a^b*a^c
-S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M171 (a+b)->(b+a)
+S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M171 a+-b=a-b
+S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M172 a-b=a+-b
+S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M173 a^b*a^c=a^(b+c)
+S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M174 a^ba^c=a^(b+c)
+S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M175 a^(b+c)=a^b*a^c
+S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M176 (a+b)->(b+a)
 ```
 ### Subtracting
 ```korekto
-S1♭--𝟭♮S2;S1♭𝟭♮S2	#M172 --a->a
+S1♭--𝟭♮S2;S1♭𝟭♮S2	#M177 --a->a
 ```
 ## Calculus
 ```korekto
 # Derivatives
 # Constant Rule
-𝓓ᵢ𝒹 = 0	#A173 Constant rule
+𝓓ᵢ𝒹 = 0	#A178 Constant rule
 # Power Rule
-𝓓ᵢ(𝓍∧𝒹) = 𝒹*𝓍∧(𝒹-1)	#A174 Power rule
+𝓓ᵢ(𝓍∧𝒹) = 𝒹*𝓍∧(𝒹-1)	#A179 Power rule
 # Sum and Difference Rules
-𝓓ᵢ(𝓍 + 𝓎) = 𝓓ᵢ𝓍 + 𝓓ᵢ𝓎	#A175 Sum rule
+𝓓ᵢ(𝓍 + 𝓎) = 𝓓ᵢ𝓍 + 𝓓ᵢ𝓎	#A180 Sum rule
 # Product Rule
-𝓓ᵢ(𝓍*𝓎) = 𝓓ᵢ𝓍*𝓎 + 𝓍*𝓓ᵢ𝓎	#A176 Product rule
+𝓓ᵢ(𝓍*𝓎) = 𝓓ᵢ𝓍*𝓎 + 𝓍*𝓓ᵢ𝓎	#A181 Product rule
 # Quotient Rule
-𝓓ᵢ(𝓍 / 𝓎) = (𝓓ᵢ(𝓍)𝓎 - 𝓍𝓓ᵢ(𝓎)) / 𝓎²	#A177 Quotient rule
-𝓓ᵢ(1 / 1+𝓍) = -𝓓ᵢ𝓍 / (1+𝓍)²	#A178 From quotient rule
+𝓓ᵢ(𝓍 / 𝓎) = (𝓓ᵢ(𝓍)𝓎 - 𝓍𝓓ᵢ(𝓎)) / 𝓎²	#A182 Quotient rule
+𝓓ᵢ(1 / 1+𝓍) = -𝓓ᵢ𝓍 / (1+𝓍)²	#A183 From quotient rule
 # Chain Rule
 # This one is meta.  :-??
-𝓓ᵢ𝓐𝓑𝓍 = (𝓓𝓐)𝓑𝓍*(𝓓𝓑)𝓍*𝓓ᵢ𝓍	#A179 Chain rule
+𝓓ᵢ𝓐𝓑𝓍 = (𝓓𝓐)𝓑𝓍*(𝓓𝓑)𝓍*𝓓ᵢ𝓍	#A184 Chain rule
 # Exponential
-𝓓ᵢ(𝑎∧𝓍) = ⌊𝑎𝓓ᵢ(𝓍)𝑎∧𝓍	#A180 D(a^x)=log(a)D(x)a^x
-𝓓ᵢ(𝖊∧𝓍) = 𝓓ᵢ(𝓍)𝖊∧𝓍	#A181 D(e^x)=D(x)e^x
+𝓓ᵢ(𝑎∧𝓍) = ⌊𝑎𝓓ᵢ(𝓍)𝑎∧𝓍	#A185 D(a^x)=log(a)D(x)a^x
+𝓓ᵢ(𝖊∧𝓍) = 𝓓ᵢ(𝓍)𝖊∧𝓍	#A186 D(e^x)=D(x)e^x
 ```
