@@ -86,7 +86,8 @@ Pattern key table:
 | Binary | [-+/*] | ♣ ♥ ♦ | Miscellaneous Symbols |
 | MultDiv | [/*] | ♝ ♛ ♚ | Miscellaneous Symbols |
 | AddSub | [-+] | ⚀ ⚁ ⚂ ± | Miscellaneous Symbols |
-| Loose | [-+\<\>=≠≤≥:] | ⚌ ⚍ ⚎ ⚏ | Miscellaneous Symbols |
+| .Equals | [:=] | ⚌ | Miscellaneous Symbols |
+| Loose | [-+\<\>=≠≤≥:] | ⚍ ⚎ ⚏ | Miscellaneous Symbols |
 | [Label](#Label) |
 | Superscript | [⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻᴬᴮᴰᴱᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾᴿᵀᵁⱽᵂᵅᵝᵞᵟᵋᶿᶥᶲᵠᵡ!] | ⁱ ʲ ᵏ | Latin superscript |
 | Subscript | [₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ] | ᵢ ⱼ ₖ | Latin subscript |
@@ -184,8 +185,10 @@ Pattern key table:
 ! MultDiv {♝ ♛ ♚}
 ! AddSub /[-+]/
 ! AddSub {⚀ ⚁ ⚂ ±}
+! .Equals /[:=]/
+! .Equals {⚌}
 ! Loose /[-+\<\>=≠≤≥:]/
-! Loose {⚌ ⚍ ⚎ ⚏}
+! Loose {⚍ ⚎ ⚏}
 ```
 ### Label
 ```korekto
@@ -227,7 +230,7 @@ Pattern key table:
 ### Equivalence
 ```korekto
 # Only use `:` to define a new symbol in terms of other symbols.
-# Specifically, don't use it in an axiom.
+# Specifically, don't use it in patterns.
 N1 : N2	#L1 Equivalent:   :
 N1 : N2;N1 = N2	#M2 If equivalent, then equal: =
 ```
@@ -249,8 +252,8 @@ w1{E1𝟣 𝟤E2};𝟤₋ = 𝟣	#M8 Previous: ₋
 ```
 ### Methods on words
 ```korekto
-w1{𝟣E1};w1.first : 𝟣	#M9 First: . first
-w1{E1𝟣};w1.last : 𝟣	#M10 Last: last
+w1{𝟣E1};w1.first = 𝟣	#M9 First: . first
+w1{E1𝟣};w1.last = 𝟣	#M10 Last: last
 ```
 ### Raise
 ```korekto
@@ -482,13 +485,13 @@ S1𝟭♮*♮𝟮S2;S1𝟭♭𝟮S2	#M136 Implied*
 
 ### Equality
 ```korekto
-N1 = N2;N2 = N1	#M137 Symmetry
+N1 ⚌ N2;N2 = N1	#M137 Symmetry
 N1 = N1	#A138 Reflection
 ```
 ### Transitive
 ```korekto
-N1 = N2;N2 = N3;N1 = N3	#I139 Transitive a=b;b=c;a=c
-N1 = N2;N3 = N2;N3 = N1	#I140 Linked a=b;c=b;c=a
+N1 ⚌ N2;N2 ⚌ N3;N1 = N3	#I139 Transitive a=b;b=c;a=c
+N1 ⚌ N2;N3 ⚌ N2;N3 = N1	#I140 Linked a=b;c=b;c=a
 ```
 ### One
 ```korekto
