@@ -397,11 +397,11 @@ Specifically, a way to show that a label refers to a variable or value.
 ```
 ### Infinitessimals
 ```korekto
-𝓍 ≠ 0;|𝜀| < |𝓍|	#M86 Infinitessimal: | 𝜀
+𝓍 ≠ 0;⎨𝜀 < ⎨𝓍	#M86 Infinitessimal: 𝜀
 𝜀 ≠ 0	#P87 First order 𝜀
 𝜀² = 0	#P88 Vanishing 𝜀
-𝛅𝓐(𝒶) = 𝓐(𝒶+𝜀)-𝓐(𝒶)	#A89 Differential: 𝛅
-𝓓𝓐(𝒶) = 𝛅𝓐(𝒶)/𝜀	#A90 Derivative: 𝓓
+𝜹𝓐(𝒶) = 𝓐(𝒶+𝜀)-𝓐(𝒶)	#A89 Differential: 𝜹
+𝓓𝓐(𝒶) = 𝜹𝓐(𝒶)/𝜀	#A90 Derivative: 𝓓
 ```
 ## Grouping
 
