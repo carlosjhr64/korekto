@@ -357,6 +357,7 @@ But to keep the parser simple, I'll treat `⎨` as a unary operator.
 # Which mean infinity is also less that itself. :P
 # ∞ < ∞
 # SO LET'S NOT EVER TALK ABOUT INFINITY ITSELF!!!
+# But seriously, just need a way to have a conditional loop not terminate.
 # Absolute value
 ⎨𝓍 = ⎨-𝓍	#A65 Absolute: ⎨
 𝓍 < 0;⎨𝓍 = -𝓍	#M66 ⎨<0
@@ -410,23 +411,24 @@ Specifically, a way to show that a label refers to a variable or value.
 
 ### Token grouping
 ```korekto
-S1𝟭S2;S1(𝟭)S2	#M91 a->(a)
-S1(𝟭)S2;S1𝟭S2	#M92 (a)->a
-S1𝟭S2𝟮S3;S1(𝟭)S2(𝟮)S3	#M93 a_b->(a)_(b)
-S1(𝟭)S2(𝟮)S3;S1𝟭S2𝟮S3	#M94 (a)_(b)->a_b
-S1𝟭S2𝟮S3𝟯S4;S1(𝟭)S2(𝟮)S3(𝟯)S4	#M95 a_b_c->(a)_(b)_(c)
-S1(𝟭)S2(𝟮)S3(𝟯)S4;S1𝟭S2𝟮S3𝟯S4	#M96 (a)_(b)_(c)->a_b_c
+S1𝟭S2;S1(𝟭)S2	#M91 a→(a)
+S1(𝟭)S2;S1𝟭S2	#M92 (a)→a
+# And the above repeated up-to 3 times:
+S1𝟭S2𝟮S3;S1(𝟭)S2(𝟮)S3	#M93 a~b→(a)~(b)
+S1(𝟭)S2(𝟮)S3;S1𝟭S2𝟮S3	#M94 (a)~(b)→a~b
+S1𝟭S2𝟮S3𝟯S4;S1(𝟭)S2(𝟮)S3(𝟯)S4	#M95 a~b~c→(a)~(b)~(c)
+S1(𝟭)S2(𝟮)S3(𝟯)S4;S1𝟭S2𝟮S3𝟯S4	#M96 (a)~(b)~(c)→a~b~c
 ```
 ### Binary spacing
 ```korekto
-S1(𝟭 ♦ 𝟮)S2;S1(𝟭♦𝟮)S2	#M97 *(a + b)*->*(a+b)*
-S1(𝟭♦𝟮)S2;S1(𝟭 ♦ 𝟮)S2	#M98 *(a+b)*->*(a + b)*
-S1♮(𝟭♭♦♭𝟮);S1 𝟭♦𝟮	#M99 *(a + b)$-> * a+b$
-S1 𝟭♦𝟮;S1♮(𝟭♭♦♭𝟮)	#M100 * a+b$->*(a + b)$
-(𝟭♭♦♭𝟮)♮S1;𝟭♦𝟮 S1	#M101 ^(a + b)*->^a+b *
-𝟭♦𝟮 S1;(𝟭♭♦♭𝟮)♭S1	#M102 ^a+b *->^(a + b)*
-S1 𝟭♦𝟮 S2;S1♮(𝟭♭♦♭𝟮)♭S2	#M103 * a+b *->*(a + b)*
-S1♭(𝟭♭♦♭𝟮)♮S2;S1 𝟭♦𝟮 S2	#M104 *(a + b)*->* a+b *
+S1(𝟭 ♦ 𝟮)S2;S1(𝟭♦𝟮)S2	#M97 (a_+_b)→(a+b)
+S1(𝟭♦𝟮)S2;S1(𝟭 ♦ 𝟮)S2	#M98 (a+b)→(a_+_b)
+S1♮(𝟭♭♦♭𝟮);S1 𝟭♦𝟮	#M99 ♭(a♭+♭b)$→_a+b$
+S1 𝟭♦𝟮;S1♮(𝟭♭♦♭𝟮)	#M100 _a+b$→♭(a♭+♭b)$
+(𝟭♭♦♭𝟮)♮S1;𝟭♦𝟮 S1	#M101 ^(a♭+♭b)♭→^a+b_
+𝟭♦𝟮 S1;(𝟭♭♦♭𝟮)♮S1	#M102 ^a+b_→^(a♭+♭b)♭
+S1 𝟭♦𝟮 S2;S1♮(𝟭♭♦♭𝟮)♮S2	#M103 _a+b_→♭(a♭+♭b)♭
+S1♮(𝟭♭♦♭𝟮)♮S2;S1 𝟭♦𝟮 S2	#M104 ♭(a♭+♭b)♭→_a+b_
 ```
 ### MultDiv spacing
 ```korekto
