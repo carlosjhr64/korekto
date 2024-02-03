@@ -40,12 +40,8 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 ## Examples
 
 * [Tutorial](examples/Tutorial.md)
-* [ABC music notation](examples/ABC.md)
-* [Computation](examples/Computation.md)
-* [Dx x^x](examples/Dxx.md)
-* [Sqrt(2) is irrational! (Classic Proof)](examples/Sqrt2.md)
-* [Squash Function](examples/Squash.md)
 * [2^3=8](examples/TwoCube.md)
+* [More...](examples/index.md)
 
 ## Help
 ```shell
