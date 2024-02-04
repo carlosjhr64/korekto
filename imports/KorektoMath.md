@@ -15,10 +15,34 @@
 
 ## Notes
 
+### Style
+
+Referencing Wikipedia's
+[Mathematical operators and symbols in Unicode](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode)
+and
+[Unicode subscripts and superscripts:](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts)
+
+* Regular ASCII: names like "sin", "cos", "log".
+* Italic capital `𝐴..𝑍`: constants.
+* Italic small `𝑎..𝑧`: scalar variables.
+* Bold italic small `𝒂..𝒛`: single-labeled variables, vectors.
+* Bold italic capital `𝑨..𝒁`: multi-labeled variables, matrices.
+* Bold script capital `𝓐..𝓩`: unary operators, like 𝓓𝑥.
+* Bold script small `𝓪..𝔃`: binary operators.
+* Double struck small `𝕒..𝕫`: finite ordered sets.
+* Bold Fraktur small `𝖆..𝖟`: transcendental constant.
+
 ### Factorial
 
 I'm treating the factorial symbol `!` like a superscript.
 I think it'll work well thought of as an exponent.
+
+### Infinity
+
+Depending on context, the infinity symbol may be treated as a superscript.
+
+* Superscript infinity: `𝖊 = ∑ₙ₌₀∞ 1/𝑛!`
+* Regular infinity: `∞ > 𝑎`
 
 ### Character classes
 
@@ -370,7 +394,7 @@ Need a way to show a connection between symbols.
 Specifically, a way to show that a label refers to a variable or value.
 ```korekto
 𝒶 → 𝓂	#L72 Map: →
-ᴺ → 𝓝	#S73/L72 Map: ᴺ 𝓝
+ᴺ → 𝑁	#S73/L72 Map: ᴺ 𝑁
 ₙ → 𝑛	#S74/L72 Map: ₙ 𝑛
 ⁿ → 𝑛	#S75/L72 Map: ⁿ
 ᵢ → 𝑖	#S76/L72 Map: ᵢ 𝑖
@@ -380,10 +404,10 @@ Specifically, a way to show that a label refers to a variable or value.
 ```
 ### Sums
 ```korekto
-# I'm going to overload 𝓝.
-# It's both an operator and an arbitrary positive number.
-𝓝ᵢ𝓍 = ∑ᵢ₌₁ᴺ𝓍	#A80 Finite sum: ∑
-𝓝 = ∑ᵢ₌₁ᴺ1	#A81 Finite number
+# Bold script capital 𝓝 is an operator.
+𝓝ᵢ𝓍 = ∑ᵢ₌₁ᴺ𝓍	#A80 Finite sum: 𝓝 ∑
+# Italic capital 𝑁 is a number.
+𝑁 = 𝓝ᵢ1	#A81 Finite number
 ∑ᵢ𝓍 = ∑ᵢ₌₀∞𝓍	#A82 Infinite sum
 ```
 ### Products
