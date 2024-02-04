@@ -24,4 +24,4 @@
 
 ## Notes
 
-* [ZF Axioms](../notes/ZF.md)
+* [Set theory](../notes/SetTheory.md)
