@@ -21,5 +21,7 @@
 * [Axiom schema of specification](https://en.wikipedia.org/wiki/Axiom_schema_of_specification)
   * `∀𝑾₁,⋯,𝑾ₙ ∀𝑨 ∃𝑩 ∀𝑿 (𝑿∈𝑩 ⇔ (𝑿∈𝑨 ∧ φ(𝑿,𝑾₁,⋯,𝑾ₙ,𝑨)))`
 
-## [Axiom of choice](https://en.wikipedia.org/wiki/Axiom_of_choice)
+## Axiom of choice
 
+* [Axiom of choice](https://en.wikipedia.org/wiki/Axiom_of_choice)
+  * `stuff`
