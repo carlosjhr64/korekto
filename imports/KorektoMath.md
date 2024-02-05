@@ -375,45 +375,45 @@ But to keep the parser simple, I'll treat `⎨` as a unary operator.
 𝓍 < 𝓎;𝓎 < 𝓏;𝓍 < 𝓏	#I61 Transitive <
 𝓍 > 𝓎;𝓍 ≠ 𝓎	#M62 >→≠: ≠
 𝓍 < 𝓎;𝓍 ≠ 𝓎	#M63 <→≠
-# Need a way to have a conditional loop not terminate...
-# Infinity is bigger than anything scalar.
-∞ > 𝑎	#A64 Infinity: ∞
-𝑎 < ∞	#A65 Infinity
 # Absolute value
-⎨𝓍 = ⎨-𝓍	#A66 Absolute: ⎨
-𝓍 < 0;⎨𝓍 = -𝓍	#M67 ⎨<0
-𝓍 > 0;⎨𝓍 = 𝓍	#M68 ⎨>0
-𝓍 = 0;⎨𝓍 = 0	#M69 ⎨=0
+⎨𝓍 = ⎨-𝓍	#A64 Absolute: ⎨
+𝓍 < 0;⎨𝓍 = -𝓍	#M65 ⎨<0
+𝓍 > 0;⎨𝓍 = 𝓍	#M66 ⎨>0
+𝓍 = 0;⎨𝓍 = 0	#M67 ⎨=0
 # Greater/Less than or equal
-⎨𝓍 ≥ 0	#A70 Greater than or equal: ≥
-0 ≤ ⎨𝓍	#A71 Less than or equal: ≤
+⎨𝓍 ≥ 0	#A68 Greater than or equal: ≥
+0 ≤ ⎨𝓍	#A69 Less than or equal: ≤
 ```
 ### Mapping
 
 Need a way to show a connection between symbols.
 Specifically, a way to show that a label refers to a variable or value.
 ```korekto
-𝒶 → 𝓂	#L72 Map: →
-ᴺ → 𝑁	#S73/L72 Map: ᴺ 𝑁
-ₙ → 𝑛	#S74/L72 Map: ₙ 𝑛
-ⁿ → 𝑛	#S75/L72 Map: ⁿ
-ᵢ → 𝑖	#S76/L72 Map: ᵢ 𝑖
-₀ → 0	#S77/L72 Map: ₀
-₁ → 1	#S78/L72 Map: ₁
-₌ → =	#S79/L72 Map: ₌
+𝒶 → 𝓂	#L70 Map: →
+ᴺ → 𝑁	#S71/L70 Map: ᴺ 𝑁
+ₙ → 𝑛	#S72/L70 Map: ₙ 𝑛
+ⁿ → 𝑛	#S73/L70 Map: ⁿ
+ᵢ → 𝑖	#S74/L70 Map: ᵢ 𝑖
+₀ → 0	#S75/L70 Map: ₀
+₁ → 1	#S76/L70 Map: ₁
+₌ → =	#S77/L70 Map: ₌
 ```
 ### Sums
 ```korekto
 # Bold script capital 𝓝 is an operator.
-𝓝ᵢ𝓍 = ∑ᵢ₌₁ᴺ𝓍	#A80 Finite sum: 𝓝 ∑
+𝓝ᵢ𝓍 = ∑ᵢ₌₁ᴺ𝓍	#A78 Finite sum: 𝓝 ∑
 # Italic capital 𝑁 is a number.
-𝑁 = 𝓝ᵢ1	#A81 Finite number
+𝑁 = 𝓝ᵢ1	#A79 Finite number
+# Need a way to have a conditional loop not terminate...
+# Infinity is bigger than any finite number.
+∞ > 𝑁	#D80 Infinity
+𝑁 < ∞	#R81/M60,D80 Less than
 ∑ᵢ𝓍 = ∑ᵢ₌₀∞𝓍	#A82 Infinite sum
 ```
 ### Products
 ```korekto
 𝒷 → 𝒶;𝒶! = ∏ᵢ₌₁𝒷𝑖	#M83 Factorial: ! ∏
-𝑛! = ∏ᵢ₌₁ⁿ𝑖	#R84/M83,S75 Factorial
+𝑛! = ∏ᵢ₌₁ⁿ𝑖	#R84/M83,S73 Factorial
 ```
 ### Euler's number
 ```korekto
