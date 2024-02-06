@@ -122,74 +122,65 @@ I will be importing [KorektoMath](../imports/KorektoMath.md).
 ? length < 50
 # Types
 ## Euler's constant 𝖊 ~ 2.718⋯
-Constant[𝖊]	#S1/L15.KorektoMath Constant: 𝖊
+𝖊 : ∑ₙ 1/𝑛!	#S86.KorektoMath/L1.KorektoMath ≝: 𝖊
 ## Scalar variable 𝑥 to help define functions
-Scalar[𝑥]	#S2/L16.KorektoMath Scalar: 𝑥
+Scalar[𝑥]	#S1/L21.KorektoMath Scalar: 𝑥
 ## The labeled activation layer vector 𝒂
-Vector[𝒂]	#S3/L17.KorektoMath Vector: 𝒂
+Vector[𝒂]	#S2/L22.KorektoMath Vector: 𝒂
 ## The labeled bias vector 𝒃
-Vector[𝒃]	#S4/L17.KorektoMath Vector: 𝒃
+Vector[𝒃]	#S3/L22.KorektoMath Vector: 𝒃
 ## The multi-labeled weights matrix 𝑾
-Tensor[𝑾]	#S5/L18.KorektoMath Tensor: 𝑾
+Tensor[𝑾]	#S4/L23.KorektoMath Tensor: 𝑾
 ## Labels
-Supercript{ʰ ⁱ ʲ ᵏ}	#S6/L4.KorektoMath Named set: Supercript ʰ ⁱ ʲ ᵏ
-Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ ₖ
+Contravariant{ʰ ⁱ ʲ ᵏ}	#S5/L4.KorektoMath Named set: Contravariant ʰ ⁱ ʲ ᵏ
+Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ## Next labels
-ₕ₊ = ᵢ	#R8/M7.KorektoMath,S7 Next
-ᵢ₊ = ⱼ	#R9/M7.KorektoMath,S7 Next
-ⱼ₊ = ₖ	#R10/M7.KorektoMath,S7 Next
+ₕ₊ = ᵢ	#R7/M7.KorektoMath,S6 Next
+ᵢ₊ = ⱼ	#R8/M7.KorektoMath,S6 Next
+ⱼ₊ = ₖ	#R9/M7.KorektoMath,S6 Next
 ## Raised labels
-ₕ⁺ = ʰ	#C11/I11.KorektoMath,S7,S6 Raise first
-ᵢ⁺ = ⁱ	#C12/I12.KorektoMath,S7,S6 Raise second
-ⱼ⁺ = ʲ	#C13/I13.KorektoMath,S7,S6 Raise third
+ₕ⁺ = ʰ	#C10/I11.KorektoMath,S6,S5 →1st
+ᵢ⁺ = ⁱ	#C11/I12.KorektoMath,S6,S5 →2nd
+ⱼ⁺ = ʲ	#C12/I13.KorektoMath,S6,S5 →3rd
+ₖ⁺ = ᵏ	#C13/I14.KorektoMath,S6,S5 →4th
 # Functions
 ## Natural Exponentiation and Logarythm
-𝖊∧𝓍 = 𝓎;𝖊𝓵𝓎 = 𝓍	#M14 Natural Log
-𝖊𝓵𝓎 = 𝓍;𝖊∧𝓍 = 𝓎	#M15 Natural Exp
 ### 𝖊ˣ
-𝖊∧𝑥 : 𝖊ˣ	#S16/L1.KorektoMath Equivalent: ˣ
-𝖊∧𝑥 = 𝖊ˣ	#R17/M2.KorektoMath,S16 If equivalent, then equal
-𝖊∧𝑥 = 𝖊ˣ	#R17/M2.KorektoMath,S16 Group$
-𝖊𝓵𝖊ˣ = 𝑥	#R18/M34.KorektoMath,R17 Exponentiation=>Logarithm
+𝖊∧𝑥 : 𝖊ˣ	#S14/L1.KorektoMath ≝: ˣ
+𝖊𝓵𝖊ˣ = 𝑥	#R15/M40.KorektoMath,S14 ∧→𝓵
 ### Exp and Log are inverses of eachother
-𝖊𝓵(𝖊ˣ) = 𝑥	#R19/M53.KorektoMath,R18 a->(a)
-𝖊𝓵(𝖊∧𝑥) = 𝑥	#C20/I131.KorektoMath,R17,R19 a=b;(b)->(a)
-𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R21/M53.KorektoMath,C20 a->(a)
-𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A22/R21 Inverses 𝓵∧
+𝖊𝓵(𝖊ˣ) = 𝑥	#R16/M93.KorektoMath,R15 a → (a)
+𝖊𝓵(𝖊∧𝑥) = 𝑥	#C17/I186.KorektoMath,S14,R16 (a)=(b),(b)→(a)
+𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R18/M93.KorektoMath,C17 a → (a)
+𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A19/R18 Inverses 𝓵∧
 # Likewise:
-𝖊∧(𝖊𝓵(𝓍)) = 𝓍	#A23 Inverses ∧𝓵
+𝖊∧(𝖊𝓵(𝓍)) = 𝓍	#A20 Inverses ∧𝓵
 ```
-## Natural exponentiation function
+### Natural exponentiation function
 ```korekto
-# Redefining my operators list to `-𝓓⌊⌉⌈⌋`:
-! gsub! [-𝓐-𝓩] [-𝓓⌊⌉⌈⌋]
 # In Ruby, the natural exponentiation function is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
-⌉(𝑥) : 𝖊∧(𝑥)	#S24/L1.KorektoMath Equivalent: ⌉
-⌉(𝑥) = 𝖊∧(𝑥)	#R25/M2.KorektoMath,S24 If equivalent, then equal
-⌉𝓍 = 𝖊∧𝓍	#A26/R25 Exp abstract
+⌉(𝑥) : 𝖊∧(𝑥)	#S21/L1.KorektoMath ≝: ⌉
+⌉𝓍 ⚌ 𝖊∧𝓍	#A22/S21 Exp abstract
 # Prove 𝖊∧0 = 1
-𝖊∧0 = 𝖊∧0	#T27/A100.KorektoMath Reflection
-𝖊∧0 = 𝖊∧(0)	#R28/M53.KorektoMath,T27 a->(a)
-𝑥 - 𝑥 = 0	#T29/A22.KorektoMath Zero
-𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C30/I131.KorektoMath,T29,R28 a=b;(b)->(a)
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R31/M137.KorektoMath,C30 a-b=a+-b
-𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R32/M140.KorektoMath,R31 a^(b+c)=a^b*a^c
-𝖊∧0 = 𝖊∧𝑥*(𝖊∧-𝑥)	#R33/M96.KorektoMath,R32 Tight grouped
-𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R34/M96.KorektoMath,R33 Tight grouped
-# The following line is a known fact which I won't prove here:
-𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)	#P35 Equivalent reciprical
-𝖊∧-𝑥 = 1 / 𝖊∧(𝑥)	#R36/M54.KorektoMath,P35 (a)->a
-𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#R37/M54.KorektoMath,R36 (a)->a
+𝖊∧0 = 𝖊∧0	#T23/A153.KorektoMath Reflection
+𝖊∧0 = 𝖊∧(0)	#R24/M93.KorektoMath,T23 a → (a)
+𝑥 - 𝑥 = 0	#T25/A27.KorektoMath Zero
+𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C26/I186.KorektoMath,T25,R24 (a)=(b),(b)→(a)
+𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R27/M192.KorektoMath,C26 a-b=a+-b
+𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R28/M195.KorektoMath,R27 a^(b+c)=a^b*a^c
+𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R29/M149.KorektoMath,R28 a^b~c^d → (a^b)~(c^c)
 # Then:
-𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C38/I130.KorektoMath,R37,R34 a=b;(a)->(b)
-𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R39/M96.KorektoMath,C38 Tight grouped
-𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R40/M120.KorektoMath,R39 (x*1)/(y)
-𝖊∧0 = (1)	#R41/M103.KorektoMath,R40 (a/a)=>(1)
-𝖊∧0 = 1	#R42/M54.KorektoMath,R41 (a)->a
+𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#T30/A36.KorektoMath Reciprical
+𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C31/I185.KorektoMath,T30,R29 (a)=(b),(a)→(b)
+𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R32/M148.KorektoMath,C31 a^b → (a^b)
+𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R33/M175.KorektoMath,R32 x*(1/y) → (x/y)
+𝖊∧0 = (1)	#R34/M158.KorektoMath,R33 (a/a)→(1)
+𝖊∧0 = 1	#R35/M94.KorektoMath,R34 (a) → a
+! stop!
 ```
-## Natural logarithm function
+### Natural logarithm function
 ```korekto
 # In Ruby, the natural log funtion is:
 #     y = Math.exp(x)
@@ -221,7 +212,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ⌉⌊𝑥 = 𝑥	#C59/I134.KorektoMath,T58,R57 a=b;a->+b
 ⌉(⌊(𝑥)) = 𝑥	#C60/I125.KorektoMath,C59,R49 a=b;a->b
 ```
-## Squash
+### Squash
 ```korekto
 # The squash function in Ruby is:
 #     1 / (1 + Math.exp(-𝑥))
@@ -292,7 +283,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝓓ₓ(⌈(𝑥)) = (1 - ⌈(𝑥)) * ⌈(𝑥)
          = 𝓑(⌈(𝑥))
 ```
-## Unsquash
+### Unsquash
 ```korekto
 # Please let:
 ⌊(𝑥) := Math.log(𝑥)
@@ -323,7 +314,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 ⌋⌈𝑥 = 𝑥
 ⌋(⌈(𝑥)) = 𝑥
 ```
-## Activation and value of a neuron
+### Activation and value of a neuron
 ```korekto
 # The activation of the h-th Neuron(in level h connecting to level i):
 𝒂ₕ := ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))
@@ -337,7 +328,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
    = 𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ)
 𝒗 = 𝒃 + 𝑾 𝒂'
 ```
-## Mirroring
+### Mirroring
 ```korekto
 # The bias and weight of a neuron that roughly mirrors the value of another:
 𝕧 := {-1, 0, 1}
@@ -377,7 +368,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝖜 = 1 / (⌈1 - ½)
 𝖜 = 1 / (⌈(1) - ½) # OK
 ```
-## Propagation of errors level 1(Perceptron)
+### Propagation of errors level 1(Perceptron)
 ```korekto
 # Value is the unsquashed activation:
 𝒗ₕ := ⌋(𝒂ₕ)
@@ -432,7 +423,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝜹ₕ ~ 𝜀 * 𝝁ₕ * 𝓑(𝒂ₕ)
    ~ 𝜀 * 𝝁ₕ * (1 - 𝒂ₕ) * 𝒂ₕ
 ```
-## Vanishing small errors
+### Vanishing small errors
 ```korekto
 # Assume 𝜀²~0
 𝜀² ~ 0
@@ -443,7 +434,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝜀𝜹 ~ 0
 𝜀 * 𝜹ₕ ~ 0
 ```
-## Propagation of errors level 2
+### Propagation of errors level 2
 ```korekto
 # Error in ouput value from errors in bias and weights and activation:
 𝒗ₕ + 𝒆ₕ := (𝒃ₕ + 𝜺ₕ) + ∑ᵢ((𝑾ₕᵢ + 𝜺ᵢ) * (𝒂ᵢ + 𝜹ᵢ))
@@ -505,7 +496,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝒆 <~ 𝜀𝑁√𝑁/8 < 𝜀𝑁²/8
 𝜀 ~> 8𝒆 / 𝑁√𝑁 > 8𝒆/𝑁²
 ```
-## Explicit propagation of errors level 2
+### Explicit propagation of errors level 2
 ```korekto
 𝒗ₕ := 𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ)
 𝒗ₕ + 𝒆ₕ := (𝒃ₕ + 𝜺ₕ) + ∑ᵢ((𝑾ₕᵢ + 𝜺ᵢ) * (𝒂ᵢ + 𝜹ᵢ))
@@ -543,7 +534,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 𝜀 ~ 𝒆ₕ / (𝝁ₕ + 𝜧ₕⁱ𝝁ᵢ)
 𝜀 ~ 𝒆 / (𝝁 + 𝜧 𝝁') # OK!
 ```
-## Explicit propagation of errors level 3
+### Explicit propagation of errors level 3
 ```korekto
 # Given:
 𝒂ₕ := ⌈(𝒗ₕ)
@@ -604,7 +595,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
 # For level three, 𝜹ₖ is zero:
 𝒆ₕ ~ 𝜀(𝝁ₕ + 𝜧ₕⁱ𝝁ᵢ + 𝜧ₕⁱ𝜧ᵢʲ𝝁ⱼ)
 ```
-## General propagation of errors
+### General propagation of errors
 ```korekto
 # The above establishes a clear pattern:
 𝒆ₕ ~ 𝜀(𝝁ₕ + 𝜧ₕⁱ𝝁ᵢ + 𝜧ₕⁱ𝜧ᵢʲ𝝁ⱼ + 𝜧ₕⁱ𝜧ᵢʲ𝜧ⱼᵏ𝝁ₖ + ...)
@@ -630,7 +621,7 @@ Subscript{ₕ ᵢ ⱼ ₖ}	#S7/L4.KorektoMath Named set: Subscript ₕ ᵢ ⱼ �
     ~ |𝜀|𝑁√𝑁 / 8 # 𝑁>>1, large 𝑁
 |𝜀| ~ 8|𝒆| / 𝑁√𝑁 # 𝑁>>1
 ```
-## Legacy
+### Legacy
 ```korekto
 # In trying to find the recursion pattern, I came across several interesting
 # expressions.  I define them all here, including the ones actually used above:
