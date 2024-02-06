@@ -95,7 +95,7 @@ Pattern key table:
 | Symbol | [^\w\s] | 𝒶 𝒷 𝒸 | Script Small |
 | Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 𝓅 𝓆 𝓇 | Sans-Serif |
 | [Type](#Type) |
-| Constant | [𝕬-𝖟] | 𝖆 𝖇 𝖈 | Bold-Fraktur |
+| Constant | Decimal,[𝐴-𝑍𝕬-𝖟] | 𝖆 𝖇 𝖈 | Bold-Fraktur |
 | Scalar | [𝑎-𝑧]| 𝑎 𝑏 𝑐 | Italic Small |
 | Vector | [𝒂-𝒛] | 𝒂 𝒃 𝒄 | Bold Italic Small |
 | Tensor | [𝑨-𝒁] | 𝑨 𝑩 𝑪 | Bold Italic Capitol |
@@ -182,7 +182,7 @@ Pattern key table:
 ```
 ### Type
 ```korekto
-! Constant /[𝕬-𝖟]/
+! Constant /\d[\d\.]*|[𝐴-𝑍𝕬-𝖟]/
 ! Constant {𝖆 𝖇 𝖈}
 ! Scalar /[𝑎-𝑧]/
 ! Scalar {𝑎 𝑏 𝑐}
@@ -598,7 +598,7 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M194 --a→a
 ```korekto
 # Derivatives
 # Constant Rule
-𝓓ᵢ𝒹 = 0	#A195 Constant rule
+𝓓ᵢ𝖆 = 0	#A195 Constant rule
 # Power Rule
 𝓓ᵢ(𝓍∧𝒹) = 𝒹*𝓍∧(𝒹-1)	#A196 Power rule
 # Sum and Difference Rules
