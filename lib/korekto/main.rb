@@ -49,10 +49,10 @@ class Main
       raise Error, 'expected 1 argument' unless e.nil? && variable
       @statements.symbols.v2t.delete variable
     when 'replace'
-      variable, replacement, e = arguments.split
-      raise Error, 'expected 2 arguments' unless e.nil? && replacement && variable
+      oldvar, newvar, e = arguments.split
+      raise Error, 'expected 2 arguments' unless e.nil? && newvar && oldvar
       v2t = @statements.symbols.v2t
-      v2t[replacement] = v2t.delete(variable)
+      v2t[newvar] = v2t.delete(oldvar) or raise "#{oldvar} not a key"
     else
       raise Error, "unrecognized function: #{function}"
     end

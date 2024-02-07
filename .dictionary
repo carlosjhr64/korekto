@@ -7,7 +7,6 @@ cows
 dirname
 documentdynamicevaldefinition
 dxsptcr
-dxx
 elsif
 evalwithlocation
 fileutils
@@ -23,7 +22,9 @@ korekto
 kudos
 mkdir
 neovim
+newvar
 njwildberger
+oldvar
 plugin
 readme
 regex

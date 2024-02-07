@@ -30,6 +30,7 @@ count
 cp_r
 define
 definition
+delete
 dest
 detach
 detect
@@ -117,9 +118,11 @@ mkdir_p
 n
 new
 newlines_count
+newvar
 nil
 nl
 Object
+oldvar
 options
 out
 parse
