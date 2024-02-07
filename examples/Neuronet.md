@@ -133,7 +133,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝖊𝓵𝖊ˣ = 𝑥	#R15/M40.KorektoMath,S14 ∧→𝓵
 ### Exp and Log are inverses of eachother
 𝖊𝓵(𝖊ˣ) = 𝑥	#R16/M94.KorektoMath,R15 a → (a)
-𝖊𝓵(𝖊∧𝑥) = 𝑥	#C17/I191.KorektoMath,S14,R16 (a)=(b),(b)→(a)
+𝖊𝓵(𝖊∧𝑥) = 𝑥	#C17/I193.KorektoMath,S14,R16 (a)=(b),(b)→(a)
 𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R18/M94.KorektoMath,C17 a → (a)
 𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A19/R18 Inverses 𝓵∧
 # Likewise:
@@ -149,13 +149,13 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌉0 = 𝖊∧0	#T22/A87.KorektoMath Exp
 ⌉0 = 𝖊∧(0)	#R23/M94.KorektoMath,T22 a → (a)
 𝑥 - 𝑥 = 0	#T24/A27.KorektoMath Zero
-⌉0 = 𝖊∧(𝑥 - 𝑥)	#C25/I191.KorektoMath,T24,R23 (a)=(b),(b)→(a)
-⌉0 = 𝖊∧(𝑥 + -𝑥)	#R26/M197.KorektoMath,C25 a-b=a+-b
-⌉0 = 𝖊∧𝑥*𝖊∧-𝑥	#R27/M200.KorektoMath,R26 a^(b+c)=a^b*a^c
+⌉0 = 𝖊∧(𝑥 - 𝑥)	#C25/I193.KorektoMath,T24,R23 (a)=(b),(b)→(a)
+⌉0 = 𝖊∧(𝑥 + -𝑥)	#R26/M199.KorektoMath,C25 a-b=a+-b
+⌉0 = 𝖊∧𝑥*𝖊∧-𝑥	#R27/M202.KorektoMath,R26 a^(b+c)=a^b*a^c
 ⌉0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R28/M150.KorektoMath,R27 a^b~c^d → (a^b)~(c^c)
 # Then:
 𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#T29/A36.KorektoMath Reciprical
-⌉0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C30/I190.KorektoMath,T29,R28 (a)=(b),(a)→(b)
+⌉0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C30/I192.KorektoMath,T29,R28 (a)=(b),(a)→(b)
 ⌉0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R31/M149.KorektoMath,C30 a^b → (a^b)
 ⌉0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R32/M176.KorektoMath,R31 x*(1/y) → (x/y)
 ⌉0 = (1)	#R33/M159.KorektoMath,R32 (a/a)→(1)
@@ -164,10 +164,10 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌉𝑥⌉-𝑥 = ⌉𝑥⌉-𝑥	#T35/A154.KorektoMath Reflection
 ⌉𝑥⌉-𝑥 = ⌉𝑥*⌉-𝑥	#R36/M151.KorektoMath,T35 Explicit*
 ⌉𝑥⌉-𝑥 = (⌉𝑥)*(⌉-𝑥)	#R37/M96.KorektoMath,R36 a~b → (a)~(b)
-⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉-𝑥)	#C38/I190.KorektoMath,T21,R37 (a)=(b),(a)→(b)
+⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉-𝑥)	#C38/I192.KorektoMath,T21,R37 (a)=(b),(a)→(b)
 ⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉(-𝑥))	#R39/M94.KorektoMath,C38 a → (a)
 ⌉(-𝑥) = 𝖊∧(-𝑥)	#T40/A87.KorektoMath Exp
-⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧(-𝑥))	#C41/I190.KorektoMath,T40,R39 (a)=(b),(a)→(b)
+⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧(-𝑥))	#C41/I192.KorektoMath,T40,R39 (a)=(b),(a)→(b)
 ⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R42/M95.KorektoMath,C41 (a) → a
 ⌉𝑥⌉-𝑥 = ⌉0	#C43/I157.KorektoMath,R42,R28 a=b;c=b;a=c
 ⌉𝑥⌉-𝑥 = 1	#C44/I155.KorektoMath,C43,R34 a=b;b=c;a=c
@@ -186,7 +186,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌊1 = 𝖊𝓵1	#T48/A88.KorektoMath Log
 𝖊∧0 = 1	#T49/A35.KorektoMath x∧0=1
 𝖊𝓵1 = 0	#R50/M40.KorektoMath,T49 ∧→𝓵
-⌊1 = 0	#C51/I194.KorektoMath,R50,T48 a=b, +_a$ → +_b$
+⌊1 = 0	#C51/I196.KorektoMath,R50,T48 a=b, +_a$ → +_b$
 # Prove ⌉(⌊(𝑥)) = x
 ⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T52/A154.KorektoMath Reflection
 # I first shrink the right side's notation
@@ -197,14 +197,14 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌉⌊𝑥 = ⌉(⌊𝑥)	#R56/M94.KorektoMath,T55 a → (a)
 # I expand the right side by definitions
 ⌊𝑥 = 𝖊𝓵𝑥	#T47/A88.KorektoMath Log abstract
-⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C57/I190.KorektoMath,T47,R56 (a)=(b),(a)→(b)
+⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C57/I192.KorektoMath,T47,R56 (a)=(b),(a)→(b)
 ⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R58/M128.KorektoMath,C57 ♭(a)$ → _a$
 ⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T59/A87.KorektoMath Exp
-⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C60/I194.KorektoMath,T59,C57 a=b, +_a$ → +_b$
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C60/I196.KorektoMath,T59,C57 a=b, +_a$ → +_b$
 ⌉⌊𝑥 = 𝖊∧(𝖊𝓵(𝑥))	#R61/M94.KorektoMath,C60 a → (a)
 # I next invoke the inverse abstract axiom derived earlier
 𝖊∧(𝖊𝓵(𝑥)) = 𝑥	#T62/A20 Inverses ∧𝓵
-⌉⌊𝑥 = 𝑥	#C63/I194.KorektoMath,T62,R61 a=b, +_a$ → +_b$
+⌉⌊𝑥 = 𝑥	#C63/I196.KorektoMath,T62,R61 a=b, +_a$ → +_b$
 # Abstract the result
 ⌉⌊𝓍 = 𝓍	#A64/C63 ⌉⌊=1
 ⌉(⌊(𝑥)) = 𝑥	#C65/I181.KorektoMath,C63,R54 a=b,a→b
@@ -225,20 +225,20 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R73/M161.KorektoMath,R72 *1_
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R74/M152.KorektoMath,R73 Implied*
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + 1)	#C75/I183.KorektoMath,C44,R74 g=a,_g)→_a)
-⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R76/M201.KorektoMath,C75 (a+b)→(b+a)
+⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R76/M203.KorektoMath,C75 (a+b)→(b+a)
 ⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R77/M102.KorektoMath,R76 ♭(a♭+♭b)$ → _a+b$
 ⌈𝓍 = ⌉𝓍 / 1+⌉𝓍	#A78/R77 Alternate Squash
 # Equivalence 1-⌈𝑥 = ⌈-𝑥
 1-⌈𝑥 = 1-⌈𝑥	#T79/A154.KorektoMath Reflection
 1-⌈𝑥 = 1 - ⌈𝑥	#R80/M144.KorektoMath,T79 +_a+b$ → +_a_+_b$
-1-⌈𝑥 = 1 - (⌉𝑥 / 1+⌉𝑥)	#C81/I186.KorektoMath,R77,R80 a=(b),a→(b)
+1-⌈𝑥 = 1 - (⌉𝑥 / 1+⌉𝑥)	#C81/I188.KorektoMath,R77,R80 a=(b),a→(b)
 1-⌈𝑥 = (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R82/M178.KorektoMath,C81 _1±(a_/_b) → (b±a / b)
 1-⌈𝑥 = 1+⌉𝑥-⌉𝑥 / 1+⌉𝑥	#R83/M136.KorektoMath,R82 +_(a)$ → +_a$
 1-⌈𝑥 = 1 / 1+⌉𝑥	#R84/M171.KorektoMath,R83 +a-a_
 # Cosider ⌈-𝑥
 ⌈-𝑥 = ⌈-𝑥	#T85/A154.KorektoMath Reflection
 ⌈-𝑥 = 1 / 1+⌉--𝑥	#T86/A66 Squash
-⌈-𝑥 = 1 / 1+⌉𝑥	#R87/M202.KorektoMath,T86 --a→a
+⌈-𝑥 = 1 / 1+⌉𝑥	#R87/M204.KorektoMath,T86 --a→a
 # Then:
 1-⌈𝑥 = ⌈-𝑥	#C88/I158.KorektoMath,R87,R84 a=b;c=b;c=a
 1-⌈𝓍 = ⌈-𝓍	#A89/C88 1-⌈𝑥=⌈-𝑥
@@ -250,19 +250,26 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 # ₓ → 𝑥;𝓓ₓ𝓐(𝑥) = ...
 𝓓ₓ⌈𝑥 = 𝓓ₓ⌈𝑥	#T93/A154.KorektoMath Reflection
 𝓓ₓ⌈𝑥 = 𝓓ₓ(⌈𝑥)	#R94/M94.KorektoMath,T93 a → (a)
-𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C95/I190.KorektoMath,T67,R94 (a)=(b),(a)→(b)
-𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T96/A208.KorektoMath From quotient rule
-𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C97/I194.KorektoMath,T96,C95 a=b, +_a$ → +_b$
+𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C95/I192.KorektoMath,T67,R94 (a)=(b),(a)→(b)
+𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T96/A211.KorektoMath From quotient rule
+𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C97/I196.KorektoMath,T96,C95 a=b, +_a$ → +_b$
 # Consider 𝓓ₓ⌉-𝑥
 𝓓ₓ⌉-𝑥 = 𝓓ₓ⌉-𝑥	#T98/A154.KorektoMath Reflection
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(⌉-𝑥)	#R99/M94.KorektoMath,T98 a → (a)
 ⌉-𝑥 = 𝖊∧-𝑥	#T100/A87.KorektoMath Exp
-𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C101/I190.KorektoMath,T100,R99 (a)=(b),(a)→(b)
-𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T102/A211.KorektoMath D(e^x)=D(x)e^x
-𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#C103/I194.KorektoMath,T102,C101 a=b, +_a$ → +_b$
+𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C101/I192.KorektoMath,T100,R99 (a)=(b),(a)→(b)
+𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T102/A214.KorektoMath D(e^x)=D(x)e^x
+𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#C103/I196.KorektoMath,T102,C101 a=b, +_a$ → +_b$
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)*𝖊∧-𝑥	#R104/M151.KorektoMath,C103 Explicit*
-𝓓ₓ(-𝑥) = -1	#R105/M214.KorektoMath,S92 𝓓ₓ-𝑥=-1
+𝓓ₓ(-𝑥) = -1	#R105/M217.KorektoMath,S92 𝓓ₓ-𝑥=-1
 𝓓ₓ⌉-𝑥 = -1*𝖊∧-𝑥	#C106/I181.KorektoMath,R105,R104 a=b,a→b
+𝓓ₓ⌉-𝑥 = -𝖊∧-𝑥	#R107/M166.KorektoMath,C106 1*
+𝓓ₓ⌉-𝑥 = -(𝖊∧-𝑥)	#R108/M149.KorektoMath,R107 a^b → (a^b)
+-𝓓ₓ⌉-𝑥 = (𝖊∧-𝑥)	#R109/M205.KorektoMath,R108 a=-b;-a=-b
+# Substituting
+𝓓ₓ⌈𝑥 = (𝖊∧-𝑥) / (1+⌉-𝑥)²	#C110/I181.KorektoMath,R109,C97 a=b,a→b
+𝓓ₓ⌈𝑥 = 𝖊∧-𝑥 / (1+⌉-𝑥)²	#R111/M126.KorektoMath,C110 ♭(a)♭ → _a_
+𝓓ₓ⌈𝑥 = ⌉-𝑥 / (1+⌉-𝑥)²	#C112/I187.KorektoMath,T100,R111 a=b,_b_→_a_
 ! stop!
 -𝓓ₓ⌉-𝑥 = -𝓓ₓ()	#W
 𝓓ₓ(⌈(𝑥)) = 𝓓ₓ(1 / (1 + ⌉(-𝑥)))
