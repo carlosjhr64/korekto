@@ -105,25 +105,26 @@ Pattern key table:
 | Unary | [-𝓐-𝓩√⎨∑∏⌊⌉⌈⌋] | 𝓐 𝓑 𝓒 | Bold Script Capitol |
 | Unaries | Unary* | 𝓉 𝓊 𝓋 | Script Small |
 | Tight | [∨∧𝓵] | ♩ ♪ | Miscellaneous Symbols |
-| .NotTight | (?![∨∧𝓵]) | ⚑ | Miscellaneous Symbols |
+| .NotTightBehind | (?&lt;![∨∧𝓵]) | ⚐ | Miscellaneous Symbols |
+| .NotTightAhead | (?![∨∧𝓵]) | ⚑ | Miscellaneous Symbols |
 | Associative Binaries: |
 | Binary | [-+/*] | ♣ ♥ ♦ | Miscellaneous Symbols |
 | MultDiv | [/*] | ♝ ♛ ♚ | Miscellaneous Symbols |
 | AddSub | [-+] | ⚀ ⚁ ⚂ ± | Miscellaneous Symbols |
 | .Equals | [:=] | ⚌ | Miscellaneous Symbols |
-| Loose | [-+\<\>=≠≤≥:] | ⚍ ⚎ ⚏ | Miscellaneous Symbols |
+| Loose | [-+&lt;&gt;=≠≤≥:] | ⚍ ⚎ ⚏ | Miscellaneous Symbols |
 | [Label](#Label) |
 | Superscript | [⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻᴬᴮᴰᴱᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾᴿᵀᵁⱽᵂᵅᵝᵞᵟᵋᶿᶥᶲᵠᵡ!∞] | ⁱ ʲ ᵏ | Latin superscript |
 | Subscript | [₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ] | ᵢ ⱼ ₖ | Latin subscript |
 | [Group](#Group) |
 | Group | (?:[^()]\|\([^()]*\))+ | G1 G2 G3 | ASCII |
-| GroupGlob | (?:[^()\s]\|\([^()]*\))+ | g1 g2 g3 | ASCII |
+| GroupGlob | (?:[^()\s]\|\([^()]*\))+ | g1 g2 g3 𝒻 | ASCII |
 | Elements | [^{}]* | E1 E2 E3 | ASCII |
 | Parameters | [^\[\]]+ | P1 P2 P3 | ASCII |
 | [Slurp](#Slurp) |
 | Slurp | [^;]* | S1 S2 S3 S4 | ASCII |
 | Glob | [^\s;]* | s1 s2 s3 | ASCII |
-| Span | [^;\<\>=≠≤≥:]* | N1 N2 N3 | ASCII |
+| Span | [^;&lt;&gt;=≠≤≥:]* | N1 N2 N3 | ASCII |
 | .Clump | \S+ | 𝓂 | Script small|
 | [SuperToken](#SuperToken) |
 | SuperToken | Unary*(Token|Group)Subscript*Superscript* | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 𝓍 𝓎 𝓏 | Sans-Serif Bold |
@@ -203,8 +204,10 @@ Pattern key table:
 ! Unaries {𝓉 𝓊 𝓋}
 ! Tight /[∨∧𝓵]/
 ! Tight {♩ ♪}
-! .NotTight /(?![∨∧𝓵])/
-! .NotTight {⚑}
+! .NotTightBehind /(?<![∨∧𝓵])/
+! .NotTightBehind {⚐}
+! .NotTightAhead /(?![∨∧𝓵])/
+! .NotTightAhead {⚑}
 ! Binary /[-+/*]/
 ! Binary {♣ ♥ ♦}
 ! MultDiv /[/*]/
@@ -213,7 +216,7 @@ Pattern key table:
 ! AddSub {⚀ ⚁ ⚂ ±}
 ! .Equals /[:=]/
 ! .Equals {⚌}
-! Loose /[-+\<\>=≠≤≥:]/
+! Loose /[-+<>=≠≤≥:]/
 ! Loose {⚍ ⚎ ⚏}
 ```
 ### Label
@@ -228,7 +231,7 @@ Pattern key table:
 ! Group /(?:[^()]|\([^()]*\))+/
 ! Group {G1 G2 G3}
 ! GroupGlob /(?:[^()\s]|\([^()]*\))+/
-! GroupGlob {g1 g2 g3}
+! GroupGlob {g1 g2 g3 𝒻}
 ! Elements /[^{}]*/
 ! Elements {E1 E2 E3}
 ! Parameters /[^\[\]]+/
@@ -240,7 +243,7 @@ Pattern key table:
 ! Slurp {S1 S2 S3 S4}
 ! Glob /[^\s;]*/
 ! Glob {s1 s2 s3}
-! Span /[^;\<\>=≠≤≥:]*/
+! Span /[^;<>=≠≤≥:]*/
 ! Span {N1 N2 N3}
 ! .Clump /\S+/
 ! .Clump {𝓂}
@@ -546,9 +549,9 @@ S1 1♭*♭S2;S1 S2	#M162 _1*
 S1♭*♭(1) S2;S1 S2	#M163 *(1)_
 S1 (1)♭*♭S2;S1 S2	#M164 _(1)*
 S1*1⚑S2;S1⚑S2	#M165 *1
-S1⚑1*S2;S1⚑S2	#M166 1*
+S1⚐1*S2;S1⚐S2	#M166 1*
 S1*(1)⚑S2;S1⚑S2	#M167 *(1)
-S1⚑(1)*S2;S1⚑S2	#M168 (1)*
+S1⚐(1)*S2;S1⚐S2	#M168 (1)*
 ```
 ### Zero
 ```korekto
@@ -574,48 +577,50 @@ S1𝟭*(g2 ± g3)⚑S2;S1(𝟭*(g2)♭±♭𝟭*(g3))S2	#M180 (x*(a)♭±♭x*(b
 ### Substitution
 ```korekto
 𝟭 ⚌ 𝟮;S1𝟭S2;S1𝟮S2	#I181 a=b,a→b
-𝟭 ⚌ N2;S1𝟭S2;S1(N2)S2	#I182 a=(b),a→(b)
-N1 ⚌ 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I183 (a)=b,(a)→b
-N1 ⚌ 𝟭;S1♭(N1)♭S2♭(N1)♭S3;S1♭𝟭♭S2♭𝟭♭S3	#I184 (a)=b,(a)→b~b
-N1 ⚌ 𝟭;S1𝟭S2;S1(N1)S2	#I185 (a)=b;b→(a)
-N1 ⚌ N2;S1(N1)S2;S1(N2)S2	#I186 (a)=(b),(a)→(b)
-N1 ⚌ N2;S1(N2)S2;S1(N1)S2	#I187 (a)=(b),(b)→(a)
-N1 ⚌ N2;N1 ⚍ S1;N2 ⚍ S1	#I188 a=b, ^a_+ → ^b_+
-N1 ⚌ N2;N2 ⚍ S1;N1 ⚍ S1	#I189 a=b, ^b_+ → ^a_+
-N1 ⚌ N2;S1 ⚍ N1;S1 ⚍ N2	#I190 a=b, +_a$ → +_b$
-N1 ⚌ N2;S1 ⚍ N2;S1 ⚍ N1	#I191 a=b, +_b$ → +_a$
+𝟭 ⚌ 𝒻;S1⚐𝒻⚑S2;S1𝟭S2	#I182 a=glob,glob→a
+𝒻 ⚌ 𝟭;S1⚐𝒻⚑S2;S1𝟭S2	#I183 glob=a,glob→a
+𝟭 ⚌ N2;S1𝟭S2;S1(N2)S2	#I184 a=(b),a→(b)
+N1 ⚌ 𝟭;S1♭(N1)♮S2;S1♭𝟭♮S2	#I185 (a)=b,(a)→b
+N1 ⚌ 𝟭;S1♭(N1)♭S2♭(N1)♭S3;S1♭𝟭♭S2♭𝟭♭S3	#I186 (a)=b,(a)→b~b
+N1 ⚌ 𝟭;S1𝟭S2;S1(N1)S2	#I187 (a)=b;b→(a)
+N1 ⚌ N2;S1(N1)S2;S1(N2)S2	#I188 (a)=(b),(a)→(b)
+N1 ⚌ N2;S1(N2)S2;S1(N1)S2	#I189 (a)=(b),(b)→(a)
+N1 ⚌ N2;N1 ⚍ S1;N2 ⚍ S1	#I190 a=b, ^a_+ → ^b_+
+N1 ⚌ N2;N2 ⚍ S1;N1 ⚍ S1	#I191 a=b, ^b_+ → ^a_+
+N1 ⚌ N2;S1 ⚍ N1;S1 ⚍ N2	#I192 a=b, +_a$ → +_b$
+N1 ⚌ N2;S1 ⚍ N2;S1 ⚍ N1	#I193 a=b, +_b$ → +_a$
 ```
 ### Adding
 ```korekto
-S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M192 a+-b=a-b
-S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M193 a-b=a+-b
-S1⚑𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M194 a^b*a^c=a^(b+c)
-S1⚑𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M195 a^ba^c=a^(b+c)
-S1⚑𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M196 a^(b+c)=a^b*a^c
-S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M197 (a+b)→(b+a)
+S1(𝟭 + -𝟮)S2;S1(𝟭♮-♮𝟮)S2	#M194 a+-b=a-b
+S1(𝟭♭-♭𝟮)S2;S1(𝟭 + -𝟮)S2	#M195 a-b=a+-b
+S1⚐𝟭∧𝟮*𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M196 a^b*a^c=a^(b+c)
+S1⚐𝟭∧𝟮𝟭∧𝟯⚑S2;S1𝟭∧(𝟮♭+♭𝟯)S2	#M197 a^ba^c=a^(b+c)
+S1⚐𝟭∧(𝟮♭+♭𝟯)⚑S2;S1𝟭∧𝟮*𝓊𝟭∧𝟯S2	#M198 a^(b+c)=a^b*a^c
+S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M199 (a+b)→(b+a)
 ```
 ### Subtracting
 ```korekto
-S1♭--𝟭♮S2;S1♭𝟭♮S2	#M198 --a→a
+S1♭--𝟭♮S2;S1♭𝟭♮S2	#M200 --a→a
 ```
 ## Calculus
 ```korekto
 # Derivatives
 # Constant Rule
-𝓓ᵢ𝖆 = 0	#A199 Constant rule
+𝓓ᵢ𝖆 = 0	#A201 Constant rule
 # Power Rule
-𝓓ᵢ(𝓍∧𝖆) = 𝒹*𝓍∧(𝖆-1)	#A200 Power rule
+𝓓ᵢ(𝓍∧𝖆) = 𝒹*𝓍∧(𝖆-1)	#A202 Power rule
 # Sum and Difference Rules
-𝓓ᵢ(𝓍 + 𝓎) = 𝓓ᵢ𝓍 + 𝓓ᵢ𝓎	#A201 Sum rule
+𝓓ᵢ(𝓍 + 𝓎) = 𝓓ᵢ𝓍 + 𝓓ᵢ𝓎	#A203 Sum rule
 # Product Rule
-𝓓ᵢ(𝓍*𝓎) = 𝓓ᵢ𝓍*𝓎 + 𝓍*𝓓ᵢ𝓎	#A202 Product rule
+𝓓ᵢ(𝓍*𝓎) = 𝓓ᵢ𝓍*𝓎 + 𝓍*𝓓ᵢ𝓎	#A204 Product rule
 # Quotient Rule
-𝓓ᵢ(𝓍 / 𝓎) = (𝓓ᵢ(𝓍)𝓎 - 𝓍𝓓ᵢ(𝓎)) / 𝓎²	#A203 Quotient rule
-𝓓ᵢ(1 / 1+𝓍) = -𝓓ᵢ𝓍 / (1+𝓍)²	#A204 From quotient rule
+𝓓ᵢ(𝓍 / 𝓎) = (𝓓ᵢ(𝓍)𝓎 - 𝓍𝓓ᵢ(𝓎)) / 𝓎²	#A205 Quotient rule
+𝓓ᵢ(1 / 1+𝓍) = -𝓓ᵢ𝓍 / (1+𝓍)²	#A206 From quotient rule
 # Chain Rule
 # This one is meta.  :-??
-𝓓ᵢ𝓐𝓑𝓍 = (𝓓𝓐)𝓑𝓍*(𝓓𝓑)𝓍*𝓓ᵢ𝓍	#A205 Chain rule
+𝓓ᵢ𝓐𝓑𝓍 = (𝓓𝓐)𝓑𝓍*(𝓓𝓑)𝓍*𝓓ᵢ𝓍	#A207 Chain rule
 # Exponential
-𝓓ᵢ(𝖆∧𝓍) = ⌊𝖆𝓓ᵢ(𝓍)𝖆∧𝓍	#A206 D(a^x)=log(a)D(x)a^x
-𝓓ᵢ(𝖊∧𝓍) = 𝓓ᵢ(𝓍)𝖊∧𝓍	#A207 D(e^x)=D(x)e^x
+𝓓ᵢ(𝖆∧𝓍) = ⌊𝖆𝓓ᵢ(𝓍)𝖆∧𝓍	#A208 D(a^x)=log(a)D(x)a^x
+𝓓ᵢ(𝖊∧𝓍) = 𝓓ᵢ(𝓍)𝖊∧𝓍	#A209 D(e^x)=D(x)e^x
 ```
