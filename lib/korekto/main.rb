@@ -44,6 +44,15 @@ class Main
       target, replacement, e = arguments.split
       raise Error, 'expected 2 arguments' unless e.nil? && replacement && target
       t2p_gsub(target, replacement)
+    when 'delete'
+      variable, e = arguments.split
+      raise Error, 'expected 1 argument' unless e.nil? && variable
+      @statements.symbols.v2t.delete variable
+    when 'replace'
+      variable, replacement, e = arguments.split
+      raise Error, 'expected 2 arguments' unless e.nil? && replacement && variable
+      v2t = @statements.symbols.v2t
+      v2t[replacement] = v2t.delete(variable)
     else
       raise Error, "unrecognized function: #{function}"
     end
