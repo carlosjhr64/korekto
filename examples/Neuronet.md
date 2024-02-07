@@ -132,9 +132,9 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝖊∧𝑥 : 𝖊ˣ	#S14/L1.KorektoMath ≝: ˣ
 𝖊𝓵𝖊ˣ = 𝑥	#R15/M40.KorektoMath,S14 ∧→𝓵
 ### Exp and Log are inverses of eachother
-𝖊𝓵(𝖊ˣ) = 𝑥	#R16/M93.KorektoMath,R15 a → (a)
-𝖊𝓵(𝖊∧𝑥) = 𝑥	#C17/I186.KorektoMath,S14,R16 (a)=(b),(b)→(a)
-𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R18/M93.KorektoMath,C17 a → (a)
+𝖊𝓵(𝖊ˣ) = 𝑥	#R16/M94.KorektoMath,R15 a → (a)
+𝖊𝓵(𝖊∧𝑥) = 𝑥	#C17/I187.KorektoMath,S14,R16 (a)=(b),(b)→(a)
+𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R18/M94.KorektoMath,C17 a → (a)
 𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A19/R18 Inverses 𝓵∧
 # Likewise:
 𝖊∧(𝖊𝓵(𝓍)) = 𝓍	#A20 Inverses ∧𝓵
@@ -144,24 +144,22 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 # In Ruby, the natural exponentiation function is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
-⌉(𝑥) : 𝖊∧(𝑥)	#S21/L1.KorektoMath ≝: ⌉
-⌉𝓍 ⚌ 𝖊∧𝓍	#A22/S21 Exp abstract
-# Prove 𝖊∧0 = 1
-𝖊∧0 = 𝖊∧0	#T23/A153.KorektoMath Reflection
-𝖊∧0 = 𝖊∧(0)	#R24/M93.KorektoMath,T23 a → (a)
-𝑥 - 𝑥 = 0	#T25/A27.KorektoMath Zero
-𝖊∧0 = 𝖊∧(𝑥 - 𝑥)	#C26/I186.KorektoMath,T25,R24 (a)=(b),(b)→(a)
-𝖊∧0 = 𝖊∧(𝑥 + -𝑥)	#R27/M192.KorektoMath,C26 a-b=a+-b
-𝖊∧0 = 𝖊∧𝑥*𝖊∧-𝑥	#R28/M195.KorektoMath,R27 a^(b+c)=a^b*a^c
-𝖊∧0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R29/M149.KorektoMath,R28 a^b~c^d → (a^b)~(c^c)
+⌉𝑥 = 𝖊∧𝑥	#T21/A87.KorektoMath Exp
+# Prove ⌉0 = 𝖊∧0 = 1
+⌉0 = 𝖊∧0	#T22/A87.KorektoMath Exp
+⌉0 = 𝖊∧(0)	#R23/M94.KorektoMath,T22 a → (a)
+𝑥 - 𝑥 = 0	#T24/A27.KorektoMath Zero
+⌉0 = 𝖊∧(𝑥 - 𝑥)	#C25/I187.KorektoMath,T24,R23 (a)=(b),(b)→(a)
+⌉0 = 𝖊∧(𝑥 + -𝑥)	#R26/M193.KorektoMath,C25 a-b=a+-b
+⌉0 = 𝖊∧𝑥*𝖊∧-𝑥	#R27/M196.KorektoMath,R26 a^(b+c)=a^b*a^c
+⌉0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R28/M150.KorektoMath,R27 a^b~c^d → (a^b)~(c^c)
 # Then:
-𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#T30/A36.KorektoMath Reciprical
-𝖊∧0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C31/I185.KorektoMath,T30,R29 (a)=(b),(a)→(b)
-𝖊∧0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R32/M148.KorektoMath,C31 a^b → (a^b)
-𝖊∧0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R33/M175.KorektoMath,R32 x*(1/y) → (x/y)
-𝖊∧0 = (1)	#R34/M158.KorektoMath,R33 (a/a)→(1)
-𝖊∧0 = 1	#R35/M94.KorektoMath,R34 (a) → a
-! stop!
+𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#T29/A36.KorektoMath Reciprical
+⌉0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C30/I186.KorektoMath,T29,R28 (a)=(b),(a)→(b)
+⌉0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R31/M149.KorektoMath,C30 a^b → (a^b)
+⌉0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R32/M176.KorektoMath,R31 x*(1/y) → (x/y)
+⌉0 = (1)	#R33/M159.KorektoMath,R32 (a/a)→(1)
+⌉0 = 1	#R34/M95.KorektoMath,R33 (a) → a
 ```
 ### Natural logarithm function
 ```korekto
@@ -169,31 +167,32 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 #     y = Math.exp(x)
 #     Math.log(y) == x #=> true
 # Here its:
-⌊(𝑥) : 𝖊𝓵(𝑥)	#S43/L1.KorektoMath Equivalent: ⌊
-⌊(𝑥) = 𝖊𝓵(𝑥)	#R44/M2.KorektoMath,S43 If equivalent, then equal
-⌊𝓍 = 𝖊𝓵𝓍	#A45/R44 Log abstract
+⌊𝑥 = 𝖊𝓵𝑥	#T35/A88.KorektoMath Log
 # If 𝖊∧0 = 1, then 𝖊𝓵1 = 0 by definition of 𝓵
-𝖊∧0 = 1	#R42/M54.KorektoMath,R41 Token$ un-grouped
-𝖊𝓵1 = 0	#R46/M34.KorektoMath,R42 Exponentiation=>Logarithm
+⌊1 = 𝖊𝓵1	#T36/A88.KorektoMath Log
+𝖊∧0 = 1	#T37/A35.KorektoMath x∧0=1
+𝖊𝓵1 = 0	#R38/M40.KorektoMath,T37 ∧→𝓵
+⌊1 = 0	#C39/I190.KorektoMath,R38,T36 a=b, +_a$ → +_b$
 # Prove ⌉(⌊(𝑥)) = x
-⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T47/A100.KorektoMath Reflection
+⌉(⌊(𝑥)) = ⌉(⌊(𝑥))	#T40/A154.KorektoMath Reflection
 # I first shrink the right side's notation
-⌉(⌊(𝑥)) = ⌉(⌊𝑥)	#R48/M54.KorektoMath,T47 (a)->a
-⌉(⌊(𝑥)) = ⌉⌊𝑥	#R49/M54.KorektoMath,R48 (a)->a
+⌉(⌊(𝑥)) = ⌉(⌊𝑥)	#R41/M95.KorektoMath,T40 (a) → a
+⌉(⌊(𝑥)) = ⌉⌊𝑥	#R42/M95.KorektoMath,R41 (a) → a
 # Now I consider the right side
-⌉⌊𝑥 = ⌉⌊𝑥	#T50/A100.KorektoMath Reflection
-⌉⌊𝑥 = ⌉(⌊𝑥)	#R51/M53.KorektoMath,T50 a->(a)
+⌉⌊𝑥 = ⌉⌊𝑥	#T43/A154.KorektoMath Reflection
+⌉⌊𝑥 = ⌉(⌊𝑥)	#R44/M94.KorektoMath,T43 a → (a)
 # I expand the right side by definitions
-⌊𝑥 = 𝖊𝓵𝑥	#T52/A45 Log abstract
-⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C53/I130.KorektoMath,T52,R51 a=b;(a)->(b)
-⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R54/M82.KorektoMath,C53 Space$
-⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T55/A26 Exp abstract
-⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C56/I134.KorektoMath,T55,C53 a=b;a->+b
-⌉⌊𝑥 = 𝖊∧(𝖊𝓵(𝑥))	#R57/M53.KorektoMath,C56 a->(a)
+⌊𝑥 = 𝖊𝓵𝑥	#T35/A88.KorektoMath Log abstract
+⌉⌊𝑥 = ⌉(𝖊𝓵𝑥)	#C45/I186.KorektoMath,T35,R44 (a)=(b),(a)→(b)
+⌉⌊𝑥 = ⌉ 𝖊𝓵𝑥	#R46/M128.KorektoMath,C45 ♭(a)$ → _a$
+⌉(𝖊𝓵𝑥) = 𝖊∧(𝖊𝓵𝑥)	#T47/A87.KorektoMath Exp
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵𝑥)	#C48/I190.KorektoMath,T47,C45 a=b, +_a$ → +_b$
+⌉⌊𝑥 = 𝖊∧(𝖊𝓵(𝑥))	#R49/M94.KorektoMath,C48 a → (a)
 # I next invoke the inverse abstract axiom derived earlier
-𝖊∧(𝖊𝓵(𝑥)) = 𝑥	#T58/A23 Inverses ∧𝓵
-⌉⌊𝑥 = 𝑥	#C59/I134.KorektoMath,T58,R57 a=b;a->+b
-⌉(⌊(𝑥)) = 𝑥	#C60/I125.KorektoMath,C59,R49 a=b;a->b
+𝖊∧(𝖊𝓵(𝑥)) = 𝑥	#T50/A20 Inverses ∧𝓵
+⌉⌊𝑥 = 𝑥	#C51/I190.KorektoMath,T50,R49 a=b, +_a$ → +_b$
+⌉(⌊(𝑥)) = 𝑥	#C52/I181.KorektoMath,C51,R42 a=b,a→b
+! stop!
 ```
 ### Squash
 ```korekto
