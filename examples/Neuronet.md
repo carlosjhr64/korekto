@@ -172,8 +172,8 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌉𝑥⌉-𝑥 = ⌉0	#C43/I157.KorektoMath,R42,R28 a=b;c=b;a=c
 ⌉𝑥⌉-𝑥 = 1	#C44/I155.KorektoMath,C43,R34 a=b;b=c;a=c
 # Abstract
-⌉𝓍⌉-𝓍 = 1	#A45/C44 ⌉x⌉-x=1
-⌉-𝓍⌉𝓍 = 1	#A46 ⌉-x⌉x=1
+⌉𝓍⌉-𝓍 = 1	#A45/C44 ⌉𝑥⌉-𝑥=1
+⌉-𝓍⌉𝓍 = 1	#A46 ⌉-𝑥⌉𝑥=1
 ```
 ### Natural logarithm function
 ```korekto
@@ -225,29 +225,26 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R73/M161.KorektoMath,R72 *1_
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R74/M152.KorektoMath,R73 Implied*
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + 1)	#C75/I183.KorektoMath,C44,R74 glob=a,glob→a
-! stop!
-# Skipping a few steps, recall: 𝖊∧(-𝑥) = 1 / 𝖊∧(𝑥)
-⌉𝑥*⌉-𝑥 = 1	#P72 a/a=1
-⌈𝑥 = ⌉𝑥 / (⌉𝑥 + 1)	#C73/I127.KorektoMath,P72,R71 (a)=b;(a)->b
-⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R74/M141.KorektoMath,C73 (a+b)->(b+a)
-⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R75/M61.KorektoMath,R74 *(a + b)$-> * a+b$
-⌈𝓍 = ⌉𝓍 / 1+⌉𝓍	#A76/R75 Alternate Squash abstract
+⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R76/M199.KorektoMath,C75 (a+b)→(b+a)
+⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R77/M102.KorektoMath,R76 ♭(a♭+♭b)$ → _a+b$
+⌈𝓍 = ⌉𝓍 / 1+⌉𝓍	#A78/R77 Alternate Squash
 # Equivalence 1-⌈𝑥 = ⌈-𝑥
-1-⌈𝑥 = 1-⌈𝑥	#T77/A100.KorektoMath Reflection
-1-⌈𝑥 = 1 - ⌈𝑥	#R78/M94.KorektoMath,T77 Space ~a+b
-1-⌈𝑥 = 1 - (⌉𝑥 / 1+⌉𝑥)	#C79/I126.KorektoMath,R75,R78 a=b;a->(b)
-1-⌈𝑥 = (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R80/M122.KorektoMath,C79 ~1+(a/b)->~(b+a / b)
-1-⌈𝑥 = 1+⌉𝑥-⌉𝑥 / 1+⌉𝑥	#R81/M89.KorektoMath,R80 +Space
-1-⌈𝑥 = 1 / 1+⌉𝑥	#R82/M115.KorektoMath,R81 +a-a~
+1-⌈𝑥 = 1-⌈𝑥	#T79/A154.KorektoMath Reflection
+1-⌈𝑥 = 1 - ⌈𝑥	#R80/M144.KorektoMath,T79 +_a+b$ → +_a_+_b$
+1-⌈𝑥 = 1 - (⌉𝑥 / 1+⌉𝑥)	#C81/I184.KorektoMath,R77,R80 a=(b),a→(b)
+1-⌈𝑥 = (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R82/M178.KorektoMath,C81 _1±(a_/_b) → (b±a / b)
+1-⌈𝑥 = 1+⌉𝑥-⌉𝑥 / 1+⌉𝑥	#R83/M136.KorektoMath,R82 +_(a)$ → +_a$
+1-⌈𝑥 = 1 / 1+⌉𝑥	#R84/M171.KorektoMath,R83 +a-a_
 # Cosider ⌈-𝑥
-⌈-𝑥 = ⌈-𝑥	#T83/A100.KorektoMath Reflection
-⌈-𝑥 = 1 / 1+⌉--𝑥	#T84/A65 Squash abstract
-⌈-𝑥 = 1 / 1+⌉𝑥	#R85/M142.KorektoMath,T84 --a->a
+⌈-𝑥 = ⌈-𝑥	#T85/A154.KorektoMath Reflection
+⌈-𝑥 = 1 / 1+⌉--𝑥	#T86/A66 Squash
+⌈-𝑥 = 1 / 1+⌉𝑥	#R87/M200.KorektoMath,T86 --a→a
 # Then:
-1-⌈𝑥 = ⌈-𝑥	#C86/I102.KorektoMath,R85,R82 Linked a=b;c=b;c=a
-1-⌈𝓍 = ⌈-𝓍	#A87/C86 Abstract 1-⌈𝑥=⌈-𝑥
-⌈-𝑥 = 1-⌈𝑥	#R88/M99.KorektoMath,C86 Symmetry
-⌈-𝓍 = 1-⌈𝓍	#A89/R88 Abstract ⌈-𝑥=1-⌈𝑥
+1-⌈𝑥 = ⌈-𝑥	#C88/I158.KorektoMath,R87,R84 a=b;c=b;c=a
+1-⌈𝓍 = ⌈-𝓍	#A89/C88 1-⌈𝑥=⌈-𝑥
+⌈-𝑥 = 1-⌈𝑥	#R90/M153.KorektoMath,C88 Symmetry
+⌈-𝓍 = 1-⌈𝓍	#A91/R90 ⌈-𝑥=1-⌈𝑥
+! stop!
 # Derivative:
 # Label x
 𝑥⁺ : ₓ	#S90/L1.KorektoMath Equivalent: ₓ
