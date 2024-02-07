@@ -3,21 +3,6 @@
 The following is a `Korekto` review of
 [Neuronet wiki](https://github.com/carlosjhr64/neuronet/wiki).
 
-## Style
-
-Referencing Wikipedia's
-[Mathematical operators and symbols in Unicode](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode)
-and
-[Unicode subscripts and superscripts:](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts)
-
-* Italic small `𝑎..𝑧`: scalar variables
-* Bold italic small `𝒂..𝒛`: single-labeled variables, vectors.
-* Bold italic capital `𝑨..𝒁`: multi-labeled variables, matrices.
-* Bold script capital `𝓐..𝓩`: unary operators, like 𝓓𝑥.
-* Bold script small `𝓪..𝔃`: binary operators.
-* Double struck small `𝕒..𝕫`: finite ordered sets.
-* Bold Fraktur small `𝖆..𝖟`: derived constant parameters.
-
 ## Review of the math
 
 Please allow the terse notation as the algebra gets gnarly.
@@ -83,8 +68,6 @@ I'll show that the derivative of the Squash function can be written as:
 * `𝓓ₓ(⌈(𝑥)) = 𝓑(⌈(𝑥))`
   * `𝓓ₓ⌈𝑥 = 𝓑⌈𝑥`
 
-The function `𝓑` also occurs in other contexts.
-For example, in ["The Math of Species Conflict" by Numberphile](https://www.youtube.com/watch?v=WR3GqqWAmfw).
 There seems to be no consensus on what to call `𝓑`, so
 my vote is "Binary Balance".
 
@@ -113,8 +96,8 @@ The next level operator `₊` shifts the (context)label to the next level.
 
 ## Korekto Math
 
-The following is written in `Korekto` code blocks.
-I will be importing [KorektoMath](../imports/KorektoMath.md).
+The following is written in [Korekto](https://github.com/carlosjhr64/korekto)
+code blocks. I will be importing [KorektoMath](../imports/KorektoMath.md).
 
 ### Introductions
 ```korekto
