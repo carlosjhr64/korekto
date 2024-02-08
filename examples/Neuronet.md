@@ -251,17 +251,17 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝓓ₓ⌈𝑥 = 𝓓ₓ⌈𝑥	#T93/A154.KorektoMath Reflection
 𝓓ₓ⌈𝑥 = 𝓓ₓ(⌈𝑥)	#R94/M94.KorektoMath,T93 a → (a)
 𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C95/I195.KorektoMath,T67,R94 (a)=(b),(a)→(b)
-𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T96/A214.KorektoMath From quotient rule
+𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T96/A215.KorektoMath From quotient rule
 𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C97/I199.KorektoMath,T96,C95 a=b, +_a$ → +_b$
 # Consider 𝓓ₓ⌉-𝑥
 𝓓ₓ⌉-𝑥 = 𝓓ₓ⌉-𝑥	#T98/A154.KorektoMath Reflection
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(⌉-𝑥)	#R99/M94.KorektoMath,T98 a → (a)
 ⌉-𝑥 = 𝖊∧-𝑥	#T100/A87.KorektoMath Exp
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C101/I195.KorektoMath,T100,R99 (a)=(b),(a)→(b)
-𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T102/A217.KorektoMath D(e^x)=D(x)e^x
+𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T102/A218.KorektoMath D(e^x)=D(x)e^x
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#C103/I189.KorektoMath,T102,C101 a=b,_a$→_b$
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)*𝖊∧-𝑥	#R104/M151.KorektoMath,C103 Explicit*
-𝓓ₓ(-𝑥) = -1	#R105/M220.KorektoMath,S92 𝓓ₓ-𝑥=-1
+𝓓ₓ(-𝑥) = -1	#R105/M221.KorektoMath,S92 𝓓ₓ-𝑥=-1
 𝓓ₓ⌉-𝑥 = -1*𝖊∧-𝑥	#C106/I182.KorektoMath,R105,R104 a=b,a→b
 𝓓ₓ⌉-𝑥 = -𝖊∧-𝑥	#R107/M166.KorektoMath,C106 1*
 𝓓ₓ⌉-𝑥 = -(𝖊∧-𝑥)	#R108/M149.KorektoMath,R107 a^b → (a^b)
@@ -282,13 +282,8 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝓓ₓ⌈𝑥 = 1-⌈𝑥 ⌈𝑥	#C122/I187.KorektoMath,R90,C121 a=b,_a_→_b_
 𝓓ₓ⌈𝑥 = (1-⌈𝑥) ⌈𝑥	#R123/M106.KorektoMath,C122 _a+b_ → ♭(a♭+♭b)♭
 𝓓ₓ⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#R124/M151.KorektoMath,R123 Explicit*
-# 𝓑 is being used as a pattern key, so I temporarily replace it:
-! replace! 𝓑 TMP
-# Now I can define 𝓑 in an axiom:
-𝓑𝓍 = (1-𝓍)*𝓍	#A125 Binary balance: 𝓑
-! replace! TMP 𝓑
-𝓑⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#T126/A125 Binary balance
-𝓓ₓ⌈𝑥 = 𝓑⌈𝑥	#C127/I158.KorektoMath,T126,R124 a=b;c=b;c=a
+𝓑⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#T125/A209.KorektoMath Binary balance
+𝓓ₓ⌈𝑥 = 𝓑⌈𝑥	#C126/I158.KorektoMath,T125,R124 a=b;c=b;c=a
 ! stop!
 ```
 ### Unsquash

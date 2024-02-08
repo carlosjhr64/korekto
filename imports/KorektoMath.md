@@ -12,6 +12,8 @@
 * [Definitions](#Defintions)
 * [Grouping](#Grouping)
 * [Algebra](#Algebra)
+* [Functions](#Functions)
+* [Calculus](#Calculus)
 
 ## Notes
 
@@ -611,28 +613,36 @@ S1(𝟭♭+♭𝟮)S2;S1(𝟮♮+♮𝟭)S2	#M206 (a+b)→(b+a)
 S1♭--𝟭♮S2;S1♭𝟭♮S2	#M207 --a→a
 𝓍 = -𝓎;-𝓍 = 𝓎	#M208 a=-b;-a=-b
 ```
+## Functions
+```korekto
+# 𝓑 is being used as a pattern key, so I temporarily replace it:
+! replace! 𝓑 TMP
+# Now I can define 𝓑 in an axiom:
+𝓑𝓍 = (1-𝓍)*𝓍	#A209 Binary balance: 𝓑
+! replace! TMP 𝓑
+```
 ## Calculus
 ```korekto
 # Derivatives
 # Constant Rule
-𝓓ᵢ𝖆 = 0	#A209 Constant rule
+𝓓ᵢ𝖆 = 0	#A210 Constant rule
 # Power Rule
-𝓓ᵢ(𝓍∧𝖆) = 𝒹*𝓍∧(𝖆-1)	#A210 Power rule
+𝓓ᵢ(𝓍∧𝖆) = 𝒹*𝓍∧(𝖆-1)	#A211 Power rule
 # Sum and Difference Rules
-𝓓ᵢ(𝓍 + 𝓎) = 𝓓ᵢ𝓍 + 𝓓ᵢ𝓎	#A211 Sum rule
+𝓓ᵢ(𝓍 + 𝓎) = 𝓓ᵢ𝓍 + 𝓓ᵢ𝓎	#A212 Sum rule
 # Product Rule
-𝓓ᵢ(𝓍*𝓎) = 𝓓ᵢ𝓍*𝓎 + 𝓍*𝓓ᵢ𝓎	#A212 Product rule
+𝓓ᵢ(𝓍*𝓎) = 𝓓ᵢ𝓍*𝓎 + 𝓍*𝓓ᵢ𝓎	#A213 Product rule
 # Quotient Rule
-𝓓ᵢ(𝓍 / 𝓎) = (𝓓ᵢ(𝓍)𝓎 - 𝓍𝓓ᵢ(𝓎)) / 𝓎²	#A213 Quotient rule
-𝓓ᵢ(1 / 1+𝓍) = -𝓓ᵢ𝓍 / (1+𝓍)²	#A214 From quotient rule
+𝓓ᵢ(𝓍 / 𝓎) = (𝓓ᵢ(𝓍)𝓎 - 𝓍𝓓ᵢ(𝓎)) / 𝓎²	#A214 Quotient rule
+𝓓ᵢ(1 / 1+𝓍) = -𝓓ᵢ𝓍 / (1+𝓍)²	#A215 From quotient rule
 # Chain Rule
 # This one is meta.  :-??
-𝓓ᵢ𝓐𝓑𝓍 = (𝓓𝓐)𝓑𝓍*(𝓓𝓑)𝓍*𝓓ᵢ𝓍	#A215 Chain rule
+𝓓ᵢ𝓐𝓑𝓍 = (𝓓𝓐)𝓑𝓍*(𝓓𝓑)𝓍*𝓓ᵢ𝓍	#A216 Chain rule
 # Exponential
-𝓓ᵢ(𝖆∧𝓍) = ⌊𝖆𝓓ᵢ(𝓍)𝖆∧𝓍	#A216 D(a^x)=log(a)D(x)a^x
-𝓓ᵢ(𝖊∧𝓍) = 𝓓ᵢ(𝓍)𝖊∧𝓍	#A217 D(e^x)=D(x)e^x
+𝓓ᵢ(𝖆∧𝓍) = ⌊𝖆𝓓ᵢ(𝓍)𝖆∧𝓍	#A217 D(a^x)=log(a)D(x)a^x
+𝓓ᵢ(𝖊∧𝓍) = 𝓓ᵢ(𝓍)𝖊∧𝓍	#A218 D(e^x)=D(x)e^x
 # Computations:
-𝓓ᵢ(-𝓍) = -𝓓ᵢ(𝓍)	#A218 𝓓ₓ(-𝑦)=-𝓓(𝑦)
-ᵢ → 𝑎;𝓓ᵢ𝑎 = 1	#M219 𝓓ₓ𝑥=1
-ᵢ → 𝑎;𝓓ᵢ(-𝑎) = -1	#M220 𝓓ₓ-𝑥=-1
+𝓓ᵢ(-𝓍) = -𝓓ᵢ(𝓍)	#A219 𝓓ₓ(-𝑦)=-𝓓(𝑦)
+ᵢ → 𝑎;𝓓ᵢ𝑎 = 1	#M220 𝓓ₓ𝑥=1
+ᵢ → 𝑎;𝓓ᵢ(-𝑎) = -1	#M221 𝓓ₓ-𝑥=-1
 ```
