@@ -17,7 +17,6 @@ blk
 c
 chomp
 class
-clear
 code
 combination
 combos
@@ -146,6 +145,7 @@ readme
 regex
 regexp
 Regexp
+replace
 replacement
 require
 restatement
@@ -172,6 +172,7 @@ set_regexp
 set_scanner
 set_statement
 shift
+slice
 sort
 spawn
 spawn_readme
@@ -196,6 +197,7 @@ t2p_gsub
 target
 tautology
 title
+tmp
 to_a
 to_i
 to_s

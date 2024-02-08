@@ -92,8 +92,8 @@ CONSIDER YOURSELF WARNED!
 ## Heap
 
 `Korekto` keeps a heap of recent (non-pattern)statements to search for matches.
-This heap is limited to a size of 60 by default and it's cleared after every imported page.
-One may re-introduce an old statement into the heap by restating(recalling) it.
+This heap is limited to a size of 60 by default and does not include imported statements.
+One may re-introduce an old/imported statement into the heap by restating(recalling) it.
 
 ## Statement types
 

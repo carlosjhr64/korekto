@@ -90,8 +90,9 @@ class Main
     when MD_FILENAME
       filename = $~[:filename].strip
       unless @imports.include? filename
+        tmp = @statements.heap.to_a.slice!(0..-1)
         Main.new(filename, statements:@statements, imports:@imports).run
-        @statements.heap.to_a.clear
+        @statements.heap.to_a.replace(tmp)
       end
     when MD_KLASS_METHOD_DEFINITION
       if @filename=='-' && !Korekto.patch?
