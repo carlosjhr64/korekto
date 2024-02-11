@@ -264,7 +264,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝓓ₓ(-𝑥) = -1	#R105/M218.KorektoMath,S92 𝓓ₓ-𝑥=-1
 𝓓ₓ⌉-𝑥 = -1*𝖊∧-𝑥	#C106/I178.KorektoMath,R105,R104 a=b,a→b
 𝓓ₓ⌉-𝑥 = -𝖊∧-𝑥	#R107/M162.KorektoMath,C106 1*
-𝓓ₓ⌉-𝑥 = -(𝖊∧-𝑥)	#R108/M145.KorektoMath,R107 a^b → (a^b)
+𝓓ₓ⌉-𝑥 = -(𝖊∧-𝑥)	#R108/M144.KorektoMath,R107 a^b → (a^b)
 -𝓓ₓ⌉-𝑥 = (𝖊∧-𝑥)	#R109/M204.KorektoMath,R108 a=-b;-a=-b
 # Substituting
 𝓓ₓ⌈𝑥 = (𝖊∧-𝑥) / (1+⌉-𝑥)²	#C110/I178.KorektoMath,R109,C97 a=b,a→b

@@ -136,8 +136,6 @@ Pattern key table:
 | Glob | [^\s;]* | s1 s2 s3 | ASCII |
 | Span | [^;&lt;&gt;=≠≤≥:]* | N1 N2 N3 | ASCII |
 | .Clump | \S+ | 𝓂 | Script small|
-| IsolateOpen | (?:[^;]*[( ])? | O1 O2 O3 | ASCII |
-| IsolateClose | (?:[ )][^;]*)? | C1 C2 C3 | ASCII |
 | [SuperToken](#SuperToken) |
 | SuperToken | (Unary+ Subscript* Superscript*)? (Token,Group) Subscript* Superscript* | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 𝓍 𝓎 𝓏 | Sans-Serif Bold |
 
@@ -263,10 +261,6 @@ Pattern key table:
 ! Span {N1 N2 N3}
 ! .Clump /\S+/
 ! .Clump {𝓂}
-! IsolateOpen /(?:[^;]*[( ])?/
-! IsolateOpen {O1 O2 O3}
-! IsolateClose /(?:[ )][^;]*)?/
-! IsolateClose {C1 C2 C3}
 ```
 ### SuperToken
 ```korekto
@@ -505,6 +499,7 @@ S1♭(g1);S1 g1	#M122 ♭(a)$ → _a$
 S1 g1;S1♭(g1)	#M123 _a$ → ♭(a)$
 (g1)♭S1;g1 S1	#M124 ^(a)♭ → ^a_
 g1 S1;(g1)♭S1	#M125 ^a_ → ^(a)♭
+# Nested groupings
 S1 g1⦆S2;S1 (g1)⦆S2	#M126 _a)→_(a))
 S1⦅g1 S2;S1⦅(g1) S2	#M127 (a_→((a)_
 ```
@@ -531,8 +526,8 @@ S1 ⚎ g1±g2 ⚍ S2;S1 ⚎ g1 ± g2 ⚍ S2	#M142 +_a+b_+ → +_a_+_b_+
 ### Tight grouping
 ```korekto
 S1(𝟭♩𝟮)⚑S2;S1𝟭♩𝟮S2	#M143 (a^b) → a^b
-S1(𝟭♩𝟮)⚑S2(𝟯♪𝟰)⚑S3;S1𝟭♩𝟮S2𝟯♪𝟰S3	#M144 (a^b)~(c^d) → a^b~c^c
-S1𝟭♩𝟮⚑S2;S1(𝟭♩𝟮)S2	#M145 a^b → (a^b)
+S1𝟭♩𝟮⚑S2;S1(𝟭♩𝟮)S2	#M144 a^b → (a^b)
+S1(𝟭♩𝟮)⚑S2(𝟯♪𝟰)⚑S3;S1𝟭♩𝟮S2𝟯♪𝟰S3	#M145 (a^b)~(c^d) → a^b~c^c
 S1𝟭♩𝟮⚑S2𝟯♪𝟰⚑S3;S1(𝟭♩𝟮)S2(𝟯♪𝟰)S3	#M146 a^b~c^d → (a^b)~(c^c)
 ```
 ## Algebra
