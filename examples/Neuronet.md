@@ -103,77 +103,74 @@ code blocks. I will be importing [KorektoMath](../imports/KorektoMath.md).
 ```korekto
 < imports/KorektoMath.md
 ? length < 50
-# Types
-## Euler's constant 𝖊 ~ 2.718⋯
-𝖊 : ∑ₙ 1/𝑛!	#S86.KorektoMath/L1.KorektoMath ≝: 𝖊
-## Scalar variable 𝑥 to help define functions
-Scalar[𝑥]	#S1/L21.KorektoMath Scalar: 𝑥
-## The labeled activation layer vector 𝒂
-Vector[𝒂]	#S2/L22.KorektoMath Vector: 𝒂
-## The labeled bias vector 𝒃
-Vector[𝒃]	#S3/L22.KorektoMath Vector: 𝒃
-## The multi-labeled weights matrix 𝑾
-Tensor[𝑾]	#S4/L23.KorektoMath Tensor: 𝑾
-## Labels
-Contravariant{ʰ ⁱ ʲ ᵏ}	#S5/L4.KorektoMath Named set: Contravariant ʰ ⁱ ʲ ᵏ
-Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
-## Next labels
-ₕ₊ = ᵢ	#R7/M7.KorektoMath,S6 Next
-ᵢ₊ = ⱼ	#R8/M7.KorektoMath,S6 Next
-ⱼ₊ = ₖ	#R9/M7.KorektoMath,S6 Next
-## Raised labels
-ₕ⁺ = ʰ	#C10/I11.KorektoMath,S6,S5 →1st
-ᵢ⁺ = ⁱ	#C11/I12.KorektoMath,S6,S5 →2nd
-ⱼ⁺ = ʲ	#C12/I13.KorektoMath,S6,S5 →3rd
-ₖ⁺ = ᵏ	#C13/I14.KorektoMath,S6,S5 →4th
-# Functions
-## Natural Exponentiation and Logarythm
-### 𝖊ˣ
-𝖊∧𝑥 : 𝖊ˣ	#S14/L1.KorektoMath ≝: ˣ
-𝖊𝓵𝖊ˣ = 𝑥	#R15/M40.KorektoMath,S14 ∧→𝓵
-### Exp and Log are inverses of eachother
-𝖊𝓵(𝖊ˣ) = 𝑥	#R16/M94.KorektoMath,R15 a → (a)
-𝖊𝓵(𝖊∧𝑥) = 𝑥	#C17/I192.KorektoMath,S14,R16 (a)=(b),(b)→(a)
-𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R18/M94.KorektoMath,C17 a → (a)
-𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A19/R18 Inverses 𝓵∧
+# Euler's constant 𝖊 ~ 2.718⋯
+𝖊 : ∑ₙ 1/𝑛!	#S90.KorektoMath/L1.KorektoMath ≝: 𝖊
+# Scalar variable 𝑥 to help define functions
+Scalar[𝑥]	#S73.KorektoMath/L21.KorektoMath Scalar: 𝑥
+# The labeled activation layer vector 𝒂
+Vector[𝒂]	#S1/L22.KorektoMath Vector: 𝒂
+# The labeled bias vector 𝒃
+Vector[𝒃]	#S2/L22.KorektoMath Vector: 𝒃
+# The multi-labeled weights matrix 𝑾
+Tensor[𝑾]	#S3/L23.KorektoMath Tensor: 𝑾
+# Labels
+Contravariant{ʰ ⁱ ʲ ᵏ}	#S4/L4.KorektoMath Named set: Contravariant ʰ ⁱ ʲ ᵏ
+Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
+# Next labels
+ₕ₊ = ᵢ	#R6/M7.KorektoMath,S5 Next
+ᵢ₊ = ⱼ	#R7/M7.KorektoMath,S5 Next
+ⱼ₊ = ₖ	#R8/M7.KorektoMath,S5 Next
+# Raised labels
+ₕ⁺ = ʰ	#C9/I11.KorektoMath,S5,S4 →1st
+ᵢ⁺ = ⁱ	#C10/I12.KorektoMath,S5,S4 →2nd
+ⱼ⁺ = ʲ	#C11/I13.KorektoMath,S5,S4 →3rd
+ₖ⁺ = ᵏ	#C12/I14.KorektoMath,S5,S4 →4th
+# Natural Exponentiation and Logarythm
+𝖊∧𝑥 : 𝖊ˣ	#S13/L1.KorektoMath ≝: ˣ
+𝖊𝓵𝖊ˣ = 𝑥	#R14/M40.KorektoMath,S13 ∧→𝓵
+# Exp and Log are inverses of eachother
+𝖊𝓵(𝖊ˣ) = 𝑥	#R15/M98.KorektoMath,R14 a → (a)
+𝖊𝓵(𝖊∧𝑥) = 𝑥	#C16/I196.KorektoMath,S13,R15 (a)=(b),(b)→(a)
+𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R17/M98.KorektoMath,C16 a → (a)
+𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A18/R17 Inverses 𝓵∧
 # Likewise:
-𝖊∧(𝖊𝓵(𝓍)) = 𝓍	#A20 Inverses ∧𝓵
+𝖊∧(𝖊𝓵(𝓍)) = 𝓍	#A19 Inverses ∧𝓵
 ```
 ### Natural exponentiation function
 ```korekto
 # In Ruby, the natural exponentiation function is:
 #     Math.exp(x) == Math::E**x #=> true
 # Here its:
-⌉𝑥 = 𝖊∧𝑥	#T21/A87.KorektoMath Exp
+⌉𝑥 = 𝖊∧𝑥	#T20/A91.KorektoMath Exp
 # Prove ⌉0 = 𝖊∧0 = 1
-⌉0 = 𝖊∧0	#T22/A87.KorektoMath Exp
-⌉0 = 𝖊∧(0)	#R23/M94.KorektoMath,T22 a → (a)
-𝑥 - 𝑥 = 0	#T24/A27.KorektoMath Zero
-⌉0 = 𝖊∧(𝑥 - 𝑥)	#C25/I192.KorektoMath,T24,R23 (a)=(b),(b)→(a)
-⌉0 = 𝖊∧(𝑥 + -𝑥)	#R26/M198.KorektoMath,C25 a-b=a+-b
-⌉0 = 𝖊∧𝑥*𝖊∧-𝑥	#R27/M201.KorektoMath,R26 a^(b+c)=a^b*a^c
-⌉0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R28/M146.KorektoMath,R27 a^b~c^d → (a^b)~(c^c)
+⌉0 = 𝖊∧0	#T21/A91.KorektoMath Exp
+⌉0 = 𝖊∧(0)	#R22/M98.KorektoMath,T21 a → (a)
+𝑥 - 𝑥 = 0	#T23/A27.KorektoMath Zero
+⌉0 = 𝖊∧(𝑥 - 𝑥)	#C24/I196.KorektoMath,T23,R22 (a)=(b),(b)→(a)
+⌉0 = 𝖊∧(𝑥 + -𝑥)	#R25/M202.KorektoMath,C24 a-b=a+-b
+⌉0 = 𝖊∧𝑥*𝖊∧-𝑥	#R26/M205.KorektoMath,R25 a^(b+c)=a^b*a^c
+⌉0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R27/M150.KorektoMath,R26 a^b~c^d → (a^b)~(c^c)
 # Then:
-𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#T29/A36.KorektoMath Reciprical
-⌉0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C30/I191.KorektoMath,T29,R28 (a)=(b),(a)→(b)
-⌉0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R31/M126.KorektoMath,C30 _a)→_(a))
-⌉0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R32/M172.KorektoMath,R31 x*(1/y) → (x/y)
-⌉0 = (1)	#R33/M155.KorektoMath,R32 (a/a)→(1)
-⌉0 = 1	#R34/M95.KorektoMath,R33 (a) → a
+𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#T28/A36.KorektoMath Reciprical
+⌉0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C29/I195.KorektoMath,T28,R27 (a)=(b),(a)→(b)
+⌉0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R30/M130.KorektoMath,C29 _a)→_(a))
+⌉0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R31/M176.KorektoMath,R30 x*(1/y) → (x/y)
+⌉0 = (1)	#R32/M159.KorektoMath,R31 (a/a)→(1)
+⌉0 = 1	#R33/M99.KorektoMath,R32 (a) → a
 # Prove ⌉𝑥⌉-𝑥 = 1
-⌉𝑥⌉-𝑥 = ⌉𝑥⌉-𝑥	#T35/A150.KorektoMath Reflection
-⌉𝑥⌉-𝑥 = ⌉𝑥*⌉-𝑥	#R36/M147.KorektoMath,T35 Explicit*
-⌉𝑥⌉-𝑥 = (⌉𝑥)*(⌉-𝑥)	#R37/M96.KorektoMath,R36 a~b → (a)~(b)
-⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉-𝑥)	#C38/I191.KorektoMath,T21,R37 (a)=(b),(a)→(b)
-⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉(-𝑥))	#R39/M94.KorektoMath,C38 a → (a)
-⌉(-𝑥) = 𝖊∧(-𝑥)	#T40/A87.KorektoMath Exp
-⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧(-𝑥))	#C41/I191.KorektoMath,T40,R39 (a)=(b),(a)→(b)
-⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R42/M95.KorektoMath,C41 (a) → a
-⌉𝑥⌉-𝑥 = ⌉0	#C43/I153.KorektoMath,R42,R28 a=b;c=b;a=c
-⌉𝑥⌉-𝑥 = 1	#C44/I151.KorektoMath,C43,R34 a=b;b=c;a=c
+⌉𝑥⌉-𝑥 = ⌉𝑥⌉-𝑥	#T34/A154.KorektoMath Reflection
+⌉𝑥⌉-𝑥 = ⌉𝑥*⌉-𝑥	#R35/M151.KorektoMath,T34 Explicit*
+⌉𝑥⌉-𝑥 = (⌉𝑥)*(⌉-𝑥)	#R36/M100.KorektoMath,R35 a~b → (a)~(b)
+⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉-𝑥)	#C37/I195.KorektoMath,T20,R36 (a)=(b),(a)→(b)
+⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉(-𝑥))	#R38/M98.KorektoMath,C37 a → (a)
+⌉(-𝑥) = 𝖊∧(-𝑥)	#T39/A91.KorektoMath Exp
+⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧(-𝑥))	#C40/I195.KorektoMath,T39,R38 (a)=(b),(a)→(b)
+⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R41/M99.KorektoMath,C40 (a) → a
+⌉𝑥⌉-𝑥 = ⌉0	#C42/I157.KorektoMath,R41,R27 a=b;c=b;a=c
+⌉𝑥⌉-𝑥 = 1	#C43/I155.KorektoMath,C42,R33 a=b;b=c;a=c
 # Abstract
-⌉𝓍⌉-𝓍 = 1	#A45/C44 ⌉𝑥⌉-𝑥=1
-⌉-𝓍⌉𝓍 = 1	#A46 ⌉-𝑥⌉𝑥=1
+⌉𝓍⌉-𝓍 = 1	#A44/C43 ⌉𝑥⌉-𝑥=1
+⌉-𝓍⌉𝓍 = 1	#A45 ⌉-𝑥⌉𝑥=1
 ```
 ### Natural logarithm function
 ```korekto
@@ -181,123 +178,122 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S6/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 #     y = Math.exp(x)
 #     Math.log(y) == x #=> true
 # Here its:
-⌊𝑥 = 𝖊𝓵𝑥	#T47/A88.KorektoMath Log
+⌊𝑥 = 𝖊𝓵𝑥	#T46/A92.KorektoMath Log
 # So we can contract the inverse relation
-𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R18/M94.KorektoMath,C17 a → (a)
-⌊(𝖊∧(𝑥)) = 𝖊𝓵(𝖊∧(𝑥))	#T48/A88.KorektoMath Log
-⌊(𝖊∧(𝑥)) = 𝑥	#C49/I151.KorektoMath,T48,R18 a=b;b=c;a=c
-⌉(𝑥) = 𝖊∧(𝑥)	#T50/A87.KorektoMath Exp
-⌊(⌉(𝑥)) = 𝑥	#C51/I192.KorektoMath,T50,C49 (a)=(b),(b)→(a)
-⌊(⌉𝑥) = 𝑥	#R52/M95.KorektoMath,C51 (a) → a
-⌊⌉𝑥 = 𝑥	#R53/M95.KorektoMath,R52 (a) → a
-⌊⌉𝓍 = 𝓍	#A54/R53 ⌊⌉=1
+𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R17/M98.KorektoMath,C16 a → (a)
+⌊(𝖊∧(𝑥)) = 𝖊𝓵(𝖊∧(𝑥))	#T47/A92.KorektoMath Log
+⌊(𝖊∧(𝑥)) = 𝑥	#C48/I155.KorektoMath,T47,R17 a=b;b=c;a=c
+⌉(𝑥) = 𝖊∧(𝑥)	#T49/A91.KorektoMath Exp
+⌊(⌉(𝑥)) = 𝑥	#C50/I196.KorektoMath,T49,C48 (a)=(b),(b)→(a)
+⌊(⌉𝑥) = 𝑥	#R51/M99.KorektoMath,C50 (a) → a
+⌊⌉𝑥 = 𝑥	#R52/M99.KorektoMath,R51 (a) → a
+⌊⌉𝓍 = 𝓍	#A53/R52 ⌊⌉=1
 # Likewise
-⌉⌊𝓍 = 𝓍	#A55 ⌉⌊=1
+⌉⌊𝓍 = 𝓍	#A54 ⌉⌊=1
 # If 𝖊∧0 = 1, then 𝖊𝓵1 = 0 by definition of 𝓵
-⌊1 = 𝖊𝓵1	#T56/A88.KorektoMath Log
-𝖊∧0 = 1	#T57/A35.KorektoMath x∧0=1
-𝖊𝓵1 = 0	#R58/M40.KorektoMath,T57 ∧→𝓵
-⌊1 = 0	#C59/I185.KorektoMath,R58,T56 a=b,_a$→_b$
+⌊1 = 𝖊𝓵1	#T55/A92.KorektoMath Log
+𝖊∧0 = 1	#T56/A35.KorektoMath x∧0=1
+𝖊𝓵1 = 0	#R57/M40.KorektoMath,T56 ∧→𝓵
+⌊1 = 0	#C58/I189.KorektoMath,R57,T55 a=b,_a$→_b$
 ```
 ### Squash
 ```korekto
 # The squash function in Ruby is:
 #     1 / (1 + Math.exp(-𝑥))
 # Here its:
-⌈𝓍 = 1 / 1+⌉-𝓍	#A60 Squash: ⌈
-⌈𝑥 = 1 / 1+⌉-𝑥	#T61/A60 Squash
-⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R62/M103.KorektoMath,T61 _a+b$ → ♭(a♭+♭b)$
+⌈𝑥 = 1 / 1+⌉-𝑥	#T59/A210.KorektoMath Squash
+⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R60/M107.KorektoMath,T59 _a+b$ → ♭(a♭+♭b)$
 # Alternate
-⌈𝑥 = (1) / (1 + ⌉-𝑥)	#R63/M94.KorektoMath,R62 a → (a)
-⌈𝑥 = ⌉𝑥*(1) / ⌉𝑥*(1 + ⌉-𝑥)	#R64/M169.KorektoMath,R63 _x*a_/_x*b$
-⌈𝑥 = ⌉𝑥 / ⌉𝑥*(1 + ⌉-𝑥)	#R65/M159.KorektoMath,R64 *(1)_
-⌈𝑥 = ⌉𝑥 / (⌉𝑥*1 + ⌉𝑥*⌉-𝑥)	#R66/M176.KorektoMath,R65 (x*a♭±♭x*b)
-⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R67/M157.KorektoMath,R66 *1_
-⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R68/M148.KorektoMath,R67 Implied*
-⌈𝑥 = ⌉𝑥 / (⌉𝑥 + 1)	#C69/I180.KorektoMath,C44,R68 g=a,_g)→_a)
-⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R70/M202.KorektoMath,C69 (a+b)→(b+a)
-⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R71/M102.KorektoMath,R70 ♭(a♭+♭b)$ → _a+b$
-⌈𝓍 = ⌉𝓍 / 1+⌉𝓍	#A72/R71 Alternate Squash
+⌈𝑥 = (1) / (1 + ⌉-𝑥)	#R61/M98.KorektoMath,R60 a → (a)
+⌈𝑥 = ⌉𝑥*(1) / ⌉𝑥*(1 + ⌉-𝑥)	#R62/M173.KorektoMath,R61 _x*a_/_x*b$
+⌈𝑥 = ⌉𝑥 / ⌉𝑥*(1 + ⌉-𝑥)	#R63/M163.KorektoMath,R62 *(1)_
+⌈𝑥 = ⌉𝑥 / (⌉𝑥*1 + ⌉𝑥*⌉-𝑥)	#R64/M180.KorektoMath,R63 (x*a♭±♭x*b)
+⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R65/M161.KorektoMath,R64 *1_
+⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R66/M152.KorektoMath,R65 Implied*
+⌈𝑥 = ⌉𝑥 / (⌉𝑥 + 1)	#C67/I184.KorektoMath,C43,R66 g=a,_g)→_a)
+⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R68/M206.KorektoMath,C67 (a+b)→(b+a)
+⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R69/M106.KorektoMath,R68 ♭(a♭+♭b)$ → _a+b$
+⌈𝓍 = ⌉𝓍 / 1+⌉𝓍	#A70/R69 Alternate Squash
 # Equivalence 1-⌈𝑥 = ⌈-𝑥
-1-⌈𝑥 = 1-⌈𝑥	#T73/A150.KorektoMath Reflection
-1-⌈𝑥 = 1 - ⌈𝑥	#R74/M140.KorektoMath,T73 +_a+b$ → +_a_+_b$
-1-⌈𝑥 = 1 - (⌉𝑥 / 1+⌉𝑥)	#C75/I187.KorektoMath,R71,R74 a=(b),a→(b)
-1-⌈𝑥 = (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R76/M174.KorektoMath,C75 _1±(a_/_b) → (b±a / b)
-1-⌈𝑥 = 1+⌉𝑥-⌉𝑥 / 1+⌉𝑥	#R77/M132.KorektoMath,R76 +_(a)$ → +_a$
-1-⌈𝑥 = 1 / 1+⌉𝑥	#R78/M167.KorektoMath,R77 +a-a_
+1-⌈𝑥 = 1-⌈𝑥	#T71/A154.KorektoMath Reflection
+1-⌈𝑥 = 1 - ⌈𝑥	#R72/M144.KorektoMath,T71 +_a+b$ → +_a_+_b$
+1-⌈𝑥 = 1 - (⌉𝑥 / 1+⌉𝑥)	#C73/I191.KorektoMath,R69,R72 a=(b),a→(b)
+1-⌈𝑥 = (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R74/M178.KorektoMath,C73 _1±(a_/_b) → (b±a / b)
+1-⌈𝑥 = 1+⌉𝑥-⌉𝑥 / 1+⌉𝑥	#R75/M136.KorektoMath,R74 +_(a)$ → +_a$
+1-⌈𝑥 = 1 / 1+⌉𝑥	#R76/M171.KorektoMath,R75 +a-a_
 # Cosider ⌈-𝑥
-⌈-𝑥 = ⌈-𝑥	#T79/A150.KorektoMath Reflection
-⌈-𝑥 = 1 / 1+⌉--𝑥	#T80/A60 Squash
-⌈-𝑥 = 1 / 1+⌉𝑥	#R81/M203.KorektoMath,T80 --a→a
+⌈-𝑥 = ⌈-𝑥	#T77/A154.KorektoMath Reflection
+⌈-𝑥 = 1 / 1+⌉--𝑥	#T78/A210.KorektoMath Squash
+⌈-𝑥 = 1 / 1+⌉𝑥	#R79/M207.KorektoMath,T78 --a→a
 # Then:
-1-⌈𝑥 = ⌈-𝑥	#C82/I154.KorektoMath,R81,R78 a=b;c=b;c=a
-1-⌈𝓍 = ⌈-𝓍	#A83/C82 1-⌈𝑥=⌈-𝑥
-⌈-𝑥 = 1-⌈𝑥	#R84/M149.KorektoMath,C82 Symmetry
-⌈-𝓍 = 1-⌈𝓍	#A85/R84 ⌈-𝑥=1-⌈𝑥
+1-⌈𝑥 = ⌈-𝑥	#C80/I158.KorektoMath,R79,R76 a=b;c=b;c=a
+1-⌈𝓍 = ⌈-𝓍	#A81/C80 1-⌈𝑥=⌈-𝑥
+⌈-𝑥 = 1-⌈𝑥	#R82/M153.KorektoMath,C80 Symmetry
+⌈-𝓍 = 1-⌈𝓍	#A83/R82 ⌈-𝑥=1-⌈𝑥
 # Derivative:
 # Label 𝑥
-ₓ → 𝑥	#S86/L71.KorektoMath Map: ₓ
+ₓ → 𝑥	#S82.KorektoMath/L74.KorektoMath Map: ₓ
 # ₓ → 𝑥;𝓓ₓ𝓐(𝑥) = ...
-𝓓ₓ⌈𝑥 = 𝓓ₓ⌈𝑥	#T87/A150.KorektoMath Reflection
-𝓓ₓ⌈𝑥 = 𝓓ₓ(⌈𝑥)	#R88/M94.KorektoMath,T87 a → (a)
-𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C89/I191.KorektoMath,T61,R88 (a)=(b),(a)→(b)
-𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T90/A212.KorektoMath From quotient rule
-𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C91/I195.KorektoMath,T90,C89 a=b, +_a$ → +_b$
+𝓓ₓ⌈𝑥 = 𝓓ₓ⌈𝑥	#T84/A154.KorektoMath Reflection
+𝓓ₓ⌈𝑥 = 𝓓ₓ(⌈𝑥)	#R85/M98.KorektoMath,T84 a → (a)
+𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C86/I195.KorektoMath,T59,R85 (a)=(b),(a)→(b)
+𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T87/A218.KorektoMath From quotient rule
+𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C88/I199.KorektoMath,T87,C86 a=b, +_a$ → +_b$
 # Consider 𝓓ₓ⌉-𝑥
-𝓓ₓ⌉-𝑥 = 𝓓ₓ⌉-𝑥	#T92/A150.KorektoMath Reflection
-𝓓ₓ⌉-𝑥 = 𝓓ₓ(⌉-𝑥)	#R93/M94.KorektoMath,T92 a → (a)
-⌉-𝑥 = 𝖊∧-𝑥	#T94/A87.KorektoMath Exp
-𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C95/I191.KorektoMath,T94,R93 (a)=(b),(a)→(b)
-𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T96/A215.KorektoMath D(e^x)=D(x)e^x
-𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#C97/I185.KorektoMath,T96,C95 a=b,_a$→_b$
-𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)*𝖊∧-𝑥	#R98/M147.KorektoMath,C97 Explicit*
-𝓓ₓ(-𝑥) = -1	#R99/M218.KorektoMath,S86 𝓓ₓ-𝑥=-1
-𝓓ₓ⌉-𝑥 = -1*𝖊∧-𝑥	#C100/I178.KorektoMath,R99,R98 a=b,a→b
-𝓓ₓ⌉-𝑥 = -𝖊∧-𝑥	#R101/M162.KorektoMath,C100 1*
-𝓓ₓ⌉-𝑥 = -(𝖊∧-𝑥)	#R102/M144.KorektoMath,R101 a^b → (a^b)
--𝓓ₓ⌉-𝑥 = (𝖊∧-𝑥)	#R103/M204.KorektoMath,R102 a=-b;-a=-b
+𝓓ₓ⌉-𝑥 = 𝓓ₓ⌉-𝑥	#T89/A154.KorektoMath Reflection
+𝓓ₓ⌉-𝑥 = 𝓓ₓ(⌉-𝑥)	#R90/M98.KorektoMath,T89 a → (a)
+⌉-𝑥 = 𝖊∧-𝑥	#T91/A91.KorektoMath Exp
+𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C92/I195.KorektoMath,T91,R90 (a)=(b),(a)→(b)
+𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T93/A221.KorektoMath D(e^x)=D(x)e^x
+𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#C94/I189.KorektoMath,T93,C92 a=b,_a$→_b$
+𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)*𝖊∧-𝑥	#R95/M151.KorektoMath,C94 Explicit*
+𝓓ₓ(-𝑥) = -1	#R96/M224.KorektoMath,S82.KorektoMath 𝓓ₓ-𝑥=-1
+𝓓ₓ⌉-𝑥 = -1*𝖊∧-𝑥	#C97/I182.KorektoMath,R96,R95 a=b,a→b
+𝓓ₓ⌉-𝑥 = -𝖊∧-𝑥	#R98/M166.KorektoMath,C97 1*
+𝓓ₓ⌉-𝑥 = -(𝖊∧-𝑥)	#R99/M148.KorektoMath,R98 a^b → (a^b)
+-𝓓ₓ⌉-𝑥 = (𝖊∧-𝑥)	#R100/M208.KorektoMath,R99 a=-b;-a=-b
 # Substituting
-𝓓ₓ⌈𝑥 = (𝖊∧-𝑥) / (1+⌉-𝑥)²	#C104/I178.KorektoMath,R103,C91 a=b,a→b
-𝓓ₓ⌈𝑥 = 𝖊∧-𝑥 / (1+⌉-𝑥)²	#R105/M120.KorektoMath,C104 ♭(a)♭ → _a_
-𝓓ₓ⌈𝑥 = ⌉-𝑥 / (1+⌉-𝑥)²	#C106/I184.KorektoMath,T94,R105 a=b,_b_→_a_
-𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥)²	#R107/M109.KorektoMath,C106 _a_*_b$ → _a*b$
-𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥) 1/(1+⌉-𝑥)	#R108/M175.KorektoMath,R107 _a/b²$→_a/b_1/b$
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R109/M100.KorektoMath,R62 (a_+_b) → (a+b)
-⌈𝑥 = 1/(1+⌉-𝑥)	#R110/M109.KorektoMath,R109 _a_*_b$ → _a*b$
-𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥) ⌈𝑥	#C111/I186.KorektoMath,R110,R108 a=b,_b$→_a$
-⌈-𝑥 = ⌉-𝑥 / 1+⌉-𝑥	#T112/A72 Alternate Squash
-⌈-𝑥 = ⌉-𝑥 / (1+⌉-𝑥)	#R113/M103.KorektoMath,T112 _a+b$ → ♭(a♭+♭b)$
-⌈-𝑥 = ⌉-𝑥/(1+⌉-𝑥)	#R114/M109.KorektoMath,R113 _a_*_b$ → _a*b$
-𝓓ₓ⌈𝑥 = ⌈-𝑥 ⌈𝑥	#C115/I184.KorektoMath,R114,C111 a=b,_b_→_a_
-𝓓ₓ⌈𝑥 = 1-⌈𝑥 ⌈𝑥	#C116/I183.KorektoMath,R84,C115 a=b,_a_→_b_
-𝓓ₓ⌈𝑥 = (1-⌈𝑥) ⌈𝑥	#R117/M106.KorektoMath,C116 _a+b_ → ♭(a♭+♭b)♭
-𝓓ₓ⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#R118/M147.KorektoMath,R117 Explicit*
-𝓑⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#T119/A206.KorektoMath Binary balance
-𝓓ₓ⌈𝑥 = 𝓑⌈𝑥	#C120/I154.KorektoMath,T119,R118 a=b;c=b;c=a
+𝓓ₓ⌈𝑥 = (𝖊∧-𝑥) / (1+⌉-𝑥)²	#C101/I182.KorektoMath,R100,C88 a=b,a→b
+𝓓ₓ⌈𝑥 = 𝖊∧-𝑥 / (1+⌉-𝑥)²	#R102/M124.KorektoMath,C101 ♭(a)♭ → _a_
+𝓓ₓ⌈𝑥 = ⌉-𝑥 / (1+⌉-𝑥)²	#C103/I188.KorektoMath,T91,R102 a=b,_b_→_a_
+𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥)²	#R104/M113.KorektoMath,C103 _a_*_b$ → _a*b$
+𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥) 1/(1+⌉-𝑥)	#R105/M179.KorektoMath,R104 _a/b²$→_a/b_1/b$
+⌈𝑥 = 1 / (1+⌉-𝑥)	#R106/M104.KorektoMath,R60 (a_+_b) → (a+b)
+⌈𝑥 = 1/(1+⌉-𝑥)	#R107/M113.KorektoMath,R106 _a_*_b$ → _a*b$
+𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥) ⌈𝑥	#C108/I190.KorektoMath,R107,R105 a=b,_b$→_a$
+⌈-𝑥 = ⌉-𝑥 / 1+⌉-𝑥	#T109/A70 Alternate Squash
+⌈-𝑥 = ⌉-𝑥 / (1+⌉-𝑥)	#R110/M107.KorektoMath,T109 _a+b$ → ♭(a♭+♭b)$
+⌈-𝑥 = ⌉-𝑥/(1+⌉-𝑥)	#R111/M113.KorektoMath,R110 _a_*_b$ → _a*b$
+𝓓ₓ⌈𝑥 = ⌈-𝑥 ⌈𝑥	#C112/I188.KorektoMath,R111,C108 a=b,_b_→_a_
+𝓓ₓ⌈𝑥 = 1-⌈𝑥 ⌈𝑥	#C113/I187.KorektoMath,R82,C112 a=b,_a_→_b_
+𝓓ₓ⌈𝑥 = (1-⌈𝑥) ⌈𝑥	#R114/M110.KorektoMath,C113 _a+b_ → ♭(a♭+♭b)♭
+𝓓ₓ⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#R115/M151.KorektoMath,R114 Explicit*
+𝓑⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#T116/A212.KorektoMath Binary balance
+𝓓ₓ⌈𝑥 = 𝓑⌈𝑥	#C117/I158.KorektoMath,T116,R115 a=b;c=b;c=a
 ```
 ### Unsquash
 ```korekto
 # The unsquash function in Ruby is:
 #   Math.log(𝑥 / (1 - 𝑥))
 # Here  its:
-⌋𝓍 = ⌊ 𝓍/(1-𝓍)	#A121 Unsquash: ⌋
-⌋𝑥 = ⌊ 𝑥/(1-𝑥)	#T122/A121 Unsquash
+⌋𝑥 = ⌊ 𝑥/(1-𝑥)	#T118/A211.KorektoMath Unsquash
 # Show that unsquash is the inverse of squash(⌋⌈=1):
-⌋⌈𝑥 = ⌊ ⌈𝑥/(1-⌈𝑥)	#T123/A121 Unsquash
-⌊ ⌈𝑥/(1-⌈𝑥) = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#T124/A205.KorektoMath ⌊(a/b)=⌊a-⌊b
-⌋⌈𝑥 = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#C125/I195.KorektoMath,T124,T123 a=b, +_a$ → +_b$
-⌋⌈𝑥 = ⌊(⌈𝑥) - ⌊(1-⌈𝑥)	#R126/M94.KorektoMath,C125 a → (a)
+⌋⌈𝑥 = ⌊ ⌈𝑥/(1-⌈𝑥)	#T119/A211.KorektoMath Unsquash
+⌊ ⌈𝑥/(1-⌈𝑥) = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#T120/A209.KorektoMath ⌊(a/b)=⌊a-⌊b
+⌋⌈𝑥 = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#C121/I199.KorektoMath,T120,T119 a=b, +_a$ → +_b$
+⌋⌈𝑥 = ⌊(⌈𝑥) - ⌊(1-⌈𝑥)	#R122/M98.KorektoMath,C121 a → (a)
 # ⌈𝑥 = ⌉𝑥 / 1+⌉𝑥
-⌋⌈𝑥 = ⌊(⌉𝑥 / 1+⌉𝑥) - ⌊(1-⌈𝑥)	#C127/I191.KorektoMath,R71,R126 (a)=(b),(a)→(b)
-⌋⌈𝑥 = ⌊(⌉𝑥 / (1+⌉𝑥)) - ⌊(1-⌈𝑥)	#R128/M126.KorektoMath,C127 _a)→_(a))
-⌋⌈𝑥 = ⌊(⌉𝑥/(1+⌉𝑥)) - ⌊(1-⌈𝑥)	#R129/M100.KorektoMath,R128 (a_+_b) → (a+b)
-⌊ ⌉𝑥/(1+⌉𝑥) = ⌊⌉𝑥 - ⌊(1+⌉𝑥)	#T130/A205.KorektoMath ⌊(a/b)=⌊a-⌊b
-⌊(⌉𝑥/(1+⌉𝑥)) = ⌊⌉𝑥 - ⌊(1+⌉𝑥)	#R131/M106.KorektoMath,T130 _a+b_ → ♭(a♭+♭b)♭
-⌋⌈𝑥 = (⌊⌉𝑥 - ⌊(1+⌉𝑥)) - ⌊(1-⌈𝑥)	#C132/I187.KorektoMath,R131,R129 a=(b),a→(b)
-⌋⌈𝑥 = ⌊⌉𝑥 - ⌊(1+⌉𝑥) - ⌊(1-⌈𝑥)	#R133/M128.KorektoMath,C132 +_(a)_+ → +_a_+
-⌊⌉𝑥 = 𝑥	#R53/M95.KorektoMath,R52 (a) → a
-⌊⌉(𝑥) = 𝑥	#R134/M94.KorektoMath,R53 a → (a)
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊(1-⌈𝑥)	#C135/I178.KorektoMath,R53,R133 a=b,a→b
+⌋⌈𝑥 = ⌊(⌉𝑥 / 1+⌉𝑥) - ⌊(1-⌈𝑥)	#C123/I195.KorektoMath,R69,R122 (a)=(b),(a)→(b)
+⌋⌈𝑥 = ⌊(⌉𝑥 / (1+⌉𝑥)) - ⌊(1-⌈𝑥)	#R124/M130.KorektoMath,C123 _a)→_(a))
+⌋⌈𝑥 = ⌊(⌉𝑥/(1+⌉𝑥)) - ⌊(1-⌈𝑥)	#R125/M104.KorektoMath,R124 (a_+_b) → (a+b)
+⌊ ⌉𝑥/(1+⌉𝑥) = ⌊⌉𝑥 - ⌊(1+⌉𝑥)	#T126/A209.KorektoMath ⌊(a/b)=⌊a-⌊b
+⌊(⌉𝑥/(1+⌉𝑥)) = ⌊⌉𝑥 - ⌊(1+⌉𝑥)	#R127/M110.KorektoMath,T126 _a+b_ → ♭(a♭+♭b)♭
+⌋⌈𝑥 = (⌊⌉𝑥 - ⌊(1+⌉𝑥)) - ⌊(1-⌈𝑥)	#C128/I191.KorektoMath,R127,R125 a=(b),a→(b)
+⌋⌈𝑥 = ⌊⌉𝑥 - ⌊(1+⌉𝑥) - ⌊(1-⌈𝑥)	#R129/M132.KorektoMath,C128 +_(a)_+ → +_a_+
+⌊⌉𝑥 = 𝑥	#R52/M99.KorektoMath,R51 (a) → a
+⌊⌉(𝑥) = 𝑥	#R130/M98.KorektoMath,R52 a → (a)
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊(1-⌈𝑥)	#C131/I182.KorektoMath,R52,R129 a=b,a→b
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊(⌈-𝑥)	#C132/I196.KorektoMath,R82,C131 (a)=(b),(b)→(a)
 ! stop!
     = ⌊ ⌉𝑥/(⌉𝑥+1) - ⌊ 1-⌈𝑥  # by alternate definition of squash.
     = ⌊⌉𝑥 - ⌊ ⌉𝑥+1 - ⌊ 1-⌈𝑥
