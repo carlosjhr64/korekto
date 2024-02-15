@@ -230,6 +230,15 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 1-⌈𝓍 = ⌈-𝓍	#A81/C80 1-⌈𝑥=⌈-𝑥
 ⌈-𝑥 = 1-⌈𝑥	#R82/M157.KorektoMath,C80 Symmetry
 ⌈-𝓍 = 1-⌈𝓍	#A83/R82 ⌈-𝑥=1-⌈𝑥
+# Corrolary: ⌈𝑥+⌈-𝑥 = 1
+⌈𝑥+⌈-𝑥 = ⌈𝑥+⌈-𝑥	#T84/A158.KorektoMath Reflection
+⌈𝑥+⌈-𝑥 = ⌈𝑥 + ⌈-𝑥	#R85/M148.KorektoMath,T84 +_a+b$ → +_a_+_b$
+⌈𝑥+⌈-𝑥 = ⌈𝑥 + 1-⌈𝑥	#C86/I196.KorektoMath,R82,R85 a=b,_a$→_b$
+⌈𝑥+⌈-𝑥 = ⌈𝑥 + 1 - ⌈𝑥	#R87/M148.KorektoMath,C86 +_a+b$ → +_a_+_b$
+⌈𝑥+⌈-𝑥 = (⌈𝑥 + 1) - ⌈𝑥	#R88/M137.KorektoMath,R87 +_a_+ → +_(a)_+
+⌈𝑥+⌈-𝑥 = (1 + ⌈𝑥) - ⌈𝑥	#R89/M215.KorektoMath,R88 (a+b)→(b+a)
+⌈𝑥+⌈-𝑥 = 1 + ⌈𝑥 - ⌈𝑥	#R90/M136.KorektoMath,R89 +_(a)_+ → +_a_+
+⌈𝑥+⌈-𝑥 = 1	#R91/M175.KorektoMath,R90 +a-a$ → $
 # Derivative:
 # Label 𝑥
 ₓ → 𝑥	#S82.KorektoMath/L74.KorektoMath Map: ₓ
