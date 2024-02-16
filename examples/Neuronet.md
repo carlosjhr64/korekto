@@ -121,10 +121,10 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ᵢ₊ = ⱼ	#R7/M7.KorektoMath,S5 Next
 ⱼ₊ = ₖ	#R8/M7.KorektoMath,S5 Next
 # Raised labels
-ₕ⁺ = ʰ	#C9/I11.KorektoMath,S5,S4 →1st
-ᵢ⁺ = ⁱ	#C10/I12.KorektoMath,S5,S4 →2nd
-ⱼ⁺ = ʲ	#C11/I13.KorektoMath,S5,S4 →3rd
-ₖ⁺ = ᵏ	#C12/I14.KorektoMath,S5,S4 →4th
+ₕ⭎ = ʰ	#C9/I11.KorektoMath,S5,S4 →1st
+ᵢ⭎ = ⁱ	#C10/I12.KorektoMath,S5,S4 →2nd
+ⱼ⭎ = ʲ	#C11/I13.KorektoMath,S5,S4 →3rd
+ₖ⭎ = ᵏ	#C12/I14.KorektoMath,S5,S4 →4th
 # Natural Exponentiation and Logarythm
 𝖊∧𝑥 : 𝖊ˣ	#S13/L1.KorektoMath ≝: ˣ
 𝖊𝓵𝖊ˣ = 𝑥	#R14/M40.KorektoMath,S13 ∧→𝓵
@@ -318,15 +318,14 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ### Activation and value of a neuron
 ```korekto
 # The activation of the h-th Neuron(in level h connecting to level i):
-𝒂ᵢ = ⌈(𝒃ᵢ + ∑ᵢ₊(𝑾ᵢᵢ₊ * 𝒂ᵢ₊))	#A150 Activation
-𝒂ₕ = ⌈(𝒃ₕ + ∑ₕ₊(𝑾ₕₕ₊ * 𝒂ₕ₊))	#T151/A150 Activation
+ᵢ₊ = ⱼ;𝒂ᵢ = ⌈ 𝒃ᵢ+∑ⱼ(𝑪ᵢⱼ𝒂ⱼ)	#M150 Activation
 ₕ₊ = ᵢ	#R6/M7.KorektoMath,S5 Next
-𝒂ₕ = ⌈(𝒃ₕ + ∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ))	#C152/I192.KorektoMath,R6,T151 a=b,3*a→b
-𝒂ₕ = ⌈ 𝒃ₕ+∑ᵢ(𝑾ₕᵢ * 𝒂ᵢ)	#R153/M106.KorektoMath,C152 ♭(a♭+♭b)$ → _a+b$
-𝒂ₕ = ⌈ 𝒃ₕ+∑ᵢ(𝑾ₕᵢ𝒂ᵢ)	#R154/M157.KorektoMath,R153 Implied*
-∑ᵢ(𝑾ₕᵢ𝒂ᵢ) = 𝑾ₕⁱ𝒂ᵢ	#T155/A238.KorektoMath Einstein notation
-𝒂ₕ = ⌈ 𝒃ₕ+(𝑾ₕⁱ𝒂ᵢ)	#C156/I201.KorektoMath,T155,R154 a=(b),a→(b)
-𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ᵢ	#R157/M128.KorektoMath,C156 *(ab) → *ab
+𝒂ₕ = ⌈ 𝒃ₕ+∑ᵢ(𝑾ₕᵢ𝒂ᵢ)	#R151/M150,R6 Activation
+ᵢ⭎ = ⁱ	#C10/I12.KorektoMath,S5,S4 →2nd
+∑ᵢ(𝑾ₕᵢ𝒂ᵢ) = 𝑾ₕⁱ𝒂ᵢ	#R152/M237.KorektoMath,C10 Einstein notation
+𝒂ₕ = ⌈ 𝒃ₕ+(𝑾ₕⁱ𝒂ᵢ)	#C153/I201.KorektoMath,R152,R151 a=(b),a→(b)
+𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ᵢ	#R154/M128.KorektoMath,C153 *(ab)$ → *ab$
+! stop!
 # The above is correct, but how to cleanly loose the labels?
 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕₕ₊⁺𝒂ₕ₊	#W
 𝒂 = ⌈ 𝒃+𝑾₊⁺𝒂₊	#W
