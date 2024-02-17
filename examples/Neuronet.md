@@ -325,12 +325,12 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ∑ᵢ(𝑾ₕᵢ𝒂ᵢ) = 𝑾ₕⁱ𝒂ᵢ	#R152/M237.KorektoMath,C10 Einstein notation
 𝒂ₕ = ⌈ 𝒃ₕ+(𝑾ₕⁱ𝒂ᵢ)	#C153/I201.KorektoMath,R152,R151 a=(b),a→(b)
 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ᵢ	#R154/M128.KorektoMath,C153 *(ab)$ → *ab$
-! stop!
-# The above is correct, but how to cleanly loose the labels?
-𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕₕ₊⁺𝒂ₕ₊	#W
-𝒂 = ⌈ 𝒃+𝑾₊⁺𝒂₊	#W
+# The above is correct. Now, how to cleanly loose the labels?
 𝒂 = ⌈ 𝒃+𝑾𝒂₊	#W
-⌋𝒂 = 𝒃+𝑾𝒂₊	#W
+! stop!
+𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕₕ₊⭎𝒂ₕ₊	#W
+𝒂 = ⌈ 𝒃+𝑾₊⭎𝒂₊	#W
+𝒂 = ⌈ 𝒃+𝑾⁺𝒂₊	#W
 ! stop!
 ⌋𝒂 = 𝒃+𝑾𝒂'
 ⌋𝒂ₕ = 𝒃ₕ+𝑾ⁱ𝒂ᵢ
