@@ -336,8 +336,11 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 # Neuron's value
 𝒗 : ⌋𝒂	#S161/L1.KorektoMath ≝: 𝒗
 # Shrunk 𝒗
+ₕ⭎ = ʰ	#C9/I11.KorektoMath,S5,S4 →1st
+ᵢ⭎ = ⁱ	#C10/I12.KorektoMath,S5,S4 →2nd
 𝒗 = 𝒃+𝑾𝒂₊	#C162/I160.KorektoMath,S161,C160 a=b;b=c;a=c
 # Explicit 𝒗
+𝒗 = 𝒃+𝑾ʰⁱ𝒂ᵢ	#H163
 𝒗ₕ = 𝒃ₕ+𝑾ʰⁱ𝒂ᵢ	#H
 ! stop!
 ```
