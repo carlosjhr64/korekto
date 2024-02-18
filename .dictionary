@@ -29,6 +29,7 @@ plugin
 readme
 regex
 regexp
+rgx
 rplugin
 rubocop
 rubygems

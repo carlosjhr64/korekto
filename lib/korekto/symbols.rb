@@ -29,10 +29,8 @@ class Symbols
 
   def define!(statement) = undefined(statement).each{|w| @set<<w}
 
-  def s2r(statement)
-    return Regexp.new statement[1..-2] if statement[0]=='/' &&
-                                          statement[-1]=='/'
-    pattern,count,seen = '\A',0,{}
+  def s2p(statement)
+    pattern,count,seen = '',0,{}
     # Build pattern from statement token by token, v.
     statement.scan(@scanner) do |v|
       if (n=seen[v])
@@ -56,9 +54,15 @@ class Symbols
         pattern << v
       end
     end
+    [pattern, count]
+  end
+
+  def s2r(statement)
+    return Regexp.new statement[1..-2] if statement[0]=='/' &&
+                                          statement[-1]=='/'
+    pattern, count = s2p(statement)
     raise Error, 'pattern with no captures' if count < 1
-    pattern << '\Z'
-    Regexp.new(pattern)
+    Regexp.new('\A'+pattern+'\Z')
   end
 end
 end

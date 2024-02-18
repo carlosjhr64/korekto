@@ -65,6 +65,8 @@ class Statement
     when 'I'
       # Inference=>Conclusion
       pattern_type(2)
+    when 'H'
+      handwave
     when 'W'
       %w[T S R X C].any? do |code|
         @code[0]=code
@@ -201,6 +203,50 @@ class Statement
   # A Postulate is an assumed true statement with all terms defined.
   def postulate
     expected_instantiations(n:0)
+    set_statement
+  end
+
+  def handwave
+    expected_instantiations(n:0)
+    heap = @context.heap.to_a.map(&:to_s)
+    antecedent = heap.first
+    consequent = nil
+    captures = []
+    gsub = lambda do |pattern|
+      captures.each_with_index do |x, i|
+        pattern.gsub!("\\$[#{i+1}]", x)
+      end
+      pattern
+    end
+    @context.handwaves.each do |handwave|
+      consequent = antecedent.dup
+      captures.clear
+      handwave.split('|').each do |step|
+        case step
+        when %r{^m/(.*)/$}
+          pattern,n = @context.symbols.s2p($1)
+          md = Regexp.new(gsub[pattern]).match(antecedent)
+          break unless md
+          1.upto(n).each{captures.push(md[_1])}
+        when %r{^g/(.*)/$}
+          pattern,n = @context.symbols.s2p($1)
+          rgx = Regexp.new(gsub[pattern])
+          md = nil
+          break unless heap.any?{(md=rgx.match _1)}
+          1.upto(n).each{captures.push(md[_1])}
+        when %r{^s/(.*?)/(.*)/g$}
+          pattern,substitute = $1,$2
+          captures.each_with_index{|x,i| pattern.gsub!("$#{i+1}", x)}
+          rgx = Regexp.new(pattern)
+          consequent.gsub!(rgx,substitute)
+        else
+          raise Error, "unrecognized handwave step: #{step}"
+        end
+      end
+      break if @statement == consequent
+      consequent = nil
+    end
+    raise Error, 'no handwaves found' unless consequent
     set_statement
   end
 end

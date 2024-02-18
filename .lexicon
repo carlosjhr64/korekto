@@ -3,6 +3,7 @@ _1
 a
 active
 add
+antecedent
 any
 arguments
 ARGV
@@ -15,14 +16,17 @@ BACKUPS
 basename
 blk
 c
+captures
 chomp
 class
+clear
 code
 combination
 combos
 compound
 conclusion
 config_nvim
+consequent
 const_get
 context
 count
@@ -39,9 +43,11 @@ directory
 dirname
 do_install
 dump
+dup
 e
 each
 each_key
+each_with_index
 empty
 err
 Error
@@ -59,6 +65,8 @@ freeze
 function
 gsub
 handle_options
+handwave
+handwaves
 heap
 Heap
 heap_combos_search
@@ -84,6 +92,7 @@ key_value
 kl
 klass
 Korekto
+lambda
 last
 length
 let
@@ -103,6 +112,7 @@ M_COMMENT_LINE
 md
 MD_FILENAME
 MD_FUNCTION
+MD_HANDWAVE
 MD_KEY_VALUE
 MD_KLASS_METHOD_DEFINITION
 MD_RULE
@@ -151,6 +161,7 @@ require
 restatement
 result
 reverse
+rgx
 Ruby33
 rule
 run
@@ -159,6 +170,7 @@ s
 s0
 s1
 s2
+s2p
 s2r
 scan
 scrape
@@ -184,7 +196,9 @@ Statement
 statement_number
 statements
 Statements
+step
 strip
+substitute
 support
 symbols
 Symbols
@@ -209,6 +223,7 @@ type_variables
 undefined
 unshift
 UpdateRemotePlugins
+upto
 v
 v2t
 value
@@ -217,3 +232,4 @@ variables
 VERSION
 w
 warn
+x

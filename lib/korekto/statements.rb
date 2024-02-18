@@ -1,12 +1,13 @@
 module Korekto
 class Statements
-  attr_reader :heap,:symbols,:syntax
+  attr_reader :heap,:symbols,:syntax,:handwaves
 
   def initialize
     @statements = []
     @heap = Heap.new Korekto.heap
     @symbols = Symbols.new
     @syntax = Syntax.new
+    @handwaves = []
   end
 
   def type(c)  = @statements.select{_1.type==c}

@@ -326,7 +326,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝒂ₕ = ⌈ 𝒃ₕ+(𝑾ₕⁱ𝒂ᵢ)	#C153/I201.KorektoMath,R152,R151 a=(b),a→(b)
 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ᵢ	#R154/M128.KorektoMath,C153 *(ab)$ → *ab$
 # The above is correct. Now, how to cleanly loose the labels?
-𝒂 = ⌈ 𝒃+𝑾𝒂₊	#W
+𝒂 = ⌈ 𝒃+𝑾𝒂₊	#H155 hide labels
 ! stop!
 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕₕ₊⭎𝒂ₕ₊	#W
 𝒂 = ⌈ 𝒃+𝑾₊⭎𝒂₊	#W

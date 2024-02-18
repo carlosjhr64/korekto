@@ -9,6 +9,7 @@ class Main
   MD_TYPE_VARIABLES = /^! (?<type>\S+)\s+\{(?<variables>\S+( \S+)*)\}$/
   MD_KEY_VALUE = /^! (?<key>\w+):\s+'(?<value>.*)'$/
   MD_FUNCTION = /^! (?<function>\w+)!(?<arguments>.*)$/
+  MD_HANDWAVE = /^! :(?<handwave>.*)$/
   # rubocop: enable Layout/LineLength
 
   M_FENCE = /^```\s*$/
@@ -110,6 +111,11 @@ class Main
       key_value($~[:key], $~[:value])
     when MD_FUNCTION
       function($~[:function], $~[:arguments])
+    when MD_HANDWAVE
+      if @statements.handwaves.include? $~[:handwave]
+        raise Error, 'duplicate handwave'
+      end
+      @statements.handwaves.unshift $~[:handwave]
     else
       return false
     end
