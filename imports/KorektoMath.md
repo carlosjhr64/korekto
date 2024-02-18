@@ -692,5 +692,5 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M219 --a→a
 # All subscripts the same and superscript linked to subscripts, so...
 # 𝒂 = ⌈ 𝒃+𝑾𝒂₊ # ...hide labels
 # ᵢ ⱼ ₖ ⁱ ʲ ᵏ
-! :m/ᵢʲ/|g/\A$1₊ = ⱼ\Z/|g/\A$3⭎ = $2\Z/|s/[$1$2]//g|s/$3/₊/g
+! :m/ᵢʲ/t|g/\A$1₊ = ⱼ\Z/t|g/\A$3⭎ = $2\Z/t|s/[$1$2]//g|s/$3/₊/g
 ```

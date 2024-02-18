@@ -224,13 +224,15 @@ class Statement
       captures.clear
       handwave.split('|').each do |step|
         case step
-        when %r{^m/(.*)/$}
-          pattern,n = @context.symbols.s2p($1, quote:false)
+        when %r{^m/(.*)/(t)?$}
+          pattern,t,n = $1,$2,0
+          pattern,n = @context.symbols.s2p($1, quote:false) if t
           md = Regexp.new(gsub[pattern]).match(antecedent)
           break unless md
           1.upto(n).each{captures.push(md[_1])}
-        when %r{^g/(.*)/$}
-          pattern,n = @context.symbols.s2p($1, quote:false)
+        when %r{^g/(.*)/(t)$}
+          pattern,t,n = $1,$2,0
+          pattern,n = @context.symbols.s2p($1, quote:false) if t
           rgx = Regexp.new(gsub[pattern])
           md = nil
           break unless heap.any?{(md=rgx.match _1)}
