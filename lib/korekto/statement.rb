@@ -231,7 +231,7 @@ class Statement
           md = Regexp.new(gsub[pattern]).match(string)
           break unless md
           1.upto(n).each{captures.push(md[_1])}
-        when %r{^g/(.*)/(t)$}
+        when %r{^g/(.*)/(t)?$}
           pattern,t,n = $1,$2,0
           pattern,n = @context.symbols.s2p($1, quote:false) if t
           rgx = Regexp.new(gsub[pattern])

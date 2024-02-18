@@ -23,6 +23,7 @@ clear
 code
 combination
 combos
+command
 compound
 conclusion
 config_nvim
@@ -199,6 +200,7 @@ statement_number
 statements
 Statements
 step
+string
 strip
 sub
 substitute

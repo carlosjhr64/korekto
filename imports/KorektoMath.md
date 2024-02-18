@@ -695,7 +695,13 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M219 --a→a
 # 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ₕ₊
 # All subscripts the same and superscript linked to subscripts, so...
 # 𝒂 = ⌈ 𝒃+𝑾𝒂₊ # ...hide labels
-# ᵢ ⱼ ₖ ⁱ ʲ ᵏ
 ! :M/ᵢʲ/t|g/\A$1₊ = ⱼ\Z/t|g/\A$3⭎ = $2\Z/t|s/[$1$2]//g|s/$3/₊/g
-! :m/𝑨ⁱʲ𝒂ⱼ/t|g/ᵢ⭎ = $2/t|g/ⱼ⭎ = $3/t|s/$1$4₊/$1$2$3$4$5/
+# 1. Check if statement has Einstein notation as 𝑨ⁱʲ𝒂ⱼ
+# 2. Verify that the summed superscript is the raised summed subscript
+# 3. Find the subscript of the unsummed superscript
+# 4. Verify that the summed subscript is the succesor of the unsummed subscript
+# 5. Add the unsummed subscript to all vectors in the antecedent
+# 6. Correct the succesor vector in the antecedent
+# 7. Antedecent should now equal the statement to pass this handwave
+! :m/𝑨ⁱʲ𝒂ⱼ/t|g/$5⭎ = $3/|g/ᵢ⭎ = $2/t|g/$6₊ = $5/|s/([𝒂-𝒛])/\1$6/g|s/$1$4$6₊/$1$2$3$4$5/
 ```
