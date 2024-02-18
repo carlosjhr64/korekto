@@ -63,6 +63,7 @@ first
 follows
 freeze
 function
+g
 gsub
 handle_options
 handwave
@@ -161,6 +162,7 @@ require
 restatement
 result
 reverse
+reverse_each
 rgx
 Ruby33
 rule
@@ -198,6 +200,7 @@ statements
 Statements
 step
 strip
+sub
 substitute
 support
 symbols

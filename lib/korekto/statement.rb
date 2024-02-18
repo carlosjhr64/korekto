@@ -213,8 +213,9 @@ class Statement
     consequent = nil
     captures = []
     gsub = lambda do |pattern|
-      captures.each_with_index do |x, i|
-        pattern.gsub!("\\$[#{i+1}]", x)
+      # Reverse allows to first gsub captures with index > 9
+      captures.each_with_index.reverse_each do |x, i|
+        pattern.gsub!("$#{i+1}", x)
       end
       pattern
     end
@@ -224,21 +225,20 @@ class Statement
       handwave.split('|').each do |step|
         case step
         when %r{^m/(.*)/$}
-          pattern,n = @context.symbols.s2p($1)
+          pattern,n = @context.symbols.s2p($1, quote:false)
           md = Regexp.new(gsub[pattern]).match(antecedent)
           break unless md
           1.upto(n).each{captures.push(md[_1])}
         when %r{^g/(.*)/$}
-          pattern,n = @context.symbols.s2p($1)
+          pattern,n = @context.symbols.s2p($1, quote:false)
           rgx = Regexp.new(gsub[pattern])
           md = nil
           break unless heap.any?{(md=rgx.match _1)}
           1.upto(n).each{captures.push(md[_1])}
-        when %r{^s/(.*?)/(.*)/g$}
-          pattern,substitute = $1,$2
-          captures.each_with_index{|x,i| pattern.gsub!("$#{i+1}", x)}
-          rgx = Regexp.new(pattern)
-          consequent.gsub!(rgx,substitute)
+        when %r{^s/(.*?)/(.*)/(g)$}
+          pattern,substitute,g = $1,$2,$3
+          rgx = Regexp.new(gsub[pattern])
+          g ? consequent.gsub!(rgx,substitute) : consequent.sub!(rgx,substitute)
         else
           raise Error, "unrecognized handwave step: #{step}"
         end

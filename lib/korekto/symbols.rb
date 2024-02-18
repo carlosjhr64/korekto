@@ -29,7 +29,7 @@ class Symbols
 
   def define!(statement) = undefined(statement).each{|w| @set<<w}
 
-  def s2p(statement)
+  def s2p(statement, quote:true)
     pattern,count,seen = '',0,{}
     # Build pattern from statement token by token, v.
     statement.scan(@scanner) do |v|
@@ -46,11 +46,13 @@ class Symbols
           pattern << '('+regex+')'
         end
       else
-        # Escape Regexp specials
-        v = Regexp.quote v
-        # To avoid collisions with back-references,
-        # isolate digit in square brackets:
-        '0123456789'.include?(_=v[0]) and v[0]='['+_+']'
+        if quote
+          # Escape Regexp specials
+          v = Regexp.quote v
+          # To avoid collisions with back-references,
+          # isolate digit in square brackets:
+          '0123456789'.include?(_=v[0]) and v[0]='['+_+']'
+        end
         pattern << v
       end
     end
