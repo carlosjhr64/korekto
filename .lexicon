@@ -209,6 +209,7 @@ syntax
 Syntax
 syntax_check
 system
+t
 t2p
 t2p_gsub
 target
