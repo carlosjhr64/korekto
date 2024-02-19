@@ -24,4 +24,4 @@
 ## Axiom of choice
 
 * [Axiom of choice](https://en.wikipedia.org/wiki/Axiom_of_choice)
-  * `∀𝑨 ((∀𝑿 (𝑿∈𝑨 ∧ 𝑿≠∅)) ⇒ ∃𝒇 (𝒇: ∀𝑿 (𝒇(𝑿)∈𝑿)))`
+  * `∀𝑨 ∀𝑿 ((𝑿∈𝑨 ∧ 𝑿≠∅) ⇒ ∃𝒇 : 𝒇[𝑿]∈𝑿)`
