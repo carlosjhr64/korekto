@@ -38,6 +38,7 @@ and
 * Bold script capital `𝓐..𝓩`: unary operators, like 𝓓𝑥.
 * Bold script small `𝓪..𝔃`: binary operators.
 * Double struck small `𝕒..𝕫`: finite ordered sets.
+* Double struck capital `𝔸..ℤ`: Types/Infinite sets.
 * Bold Fraktur small `𝖆..𝖟`: transcendental constant.
 
 ### Factorial
@@ -85,9 +86,12 @@ Several styles are used for keys:
     * used for symbols
     * used to provide an alternate key
 * [Miscellaneous Symbols](https://en.wikipedia.org/wiki/Miscellaneous_Symbols)
-  * used for binary operators and space
-* And then some of the obvious keys
+  * used for binary operators, space, and lookarounds
+* And then some obvious choices that don't fit the above, like `⦅⦆±`
 
+When the name of a pattern(listed below) is prefixed by a dot(`.`),
+it means that the pattern is a non-capture pattern.
+Note that a capturing pattern will take on the value of the first match.  
 Pattern key table:
 
 | Name | Match | Keys | Character type  |
@@ -103,7 +107,7 @@ Pattern key table:
 | Symbol | [^\w\s] | 𝒶 𝒷 𝒸 | Script Small |
 | Token | Decimal,Word,Symbol | 𝟣 𝟤 𝟥 𝟦 𝟧 𝟨 𝟩 𝟪 𝟫 𝓅 𝓆 𝓇 | Sans-Serif |
 | [Type](#Type) |
-| Constant | Decimal,[𝐴-𝑍𝕬-𝖟] | 𝖆 𝖇 𝖈 | Bold-Fraktur |
+| Constant | Decimal,[𝐴-𝑍𝕬-𝖟] | 𝐴 𝐵 𝖆 𝖇 | Italic-Capital, Bold-Fraktur |
 | Scalar | [𝑎-𝑧]| 𝑎 𝑏 𝑐 | Italic Small |
 | Vector | [𝒂-𝒛] | 𝒂 𝒃 𝒄 | Bold Italic Small |
 | Tensor | [𝑨-𝒁] | 𝑨 𝑩 𝑪 | Bold Italic Capitol |
@@ -194,7 +198,7 @@ Pattern key table:
 ### Type
 ```korekto
 ! Constant /\d[\d\.]*|[𝐴-𝑍𝕬-𝖟]/
-! Constant {𝖆 𝖇 𝖈}
+! Constant {𝐴 𝐵 𝖆 𝖇}
 ! Scalar /[𝑎-𝑧]/
 ! Scalar {𝑎 𝑏 𝑐}
 ! Vector /[𝒂-𝒛]/
@@ -285,6 +289,8 @@ N1 = (N1)	#A3 Group: ( )
 ### Sets
 ```korekto
 w1{E1}	#L4 Named set: { }
+# One can think of `{a b c}[b]` as eqivalent to `{a b c}[b] = b`.
+# A[𝓍] is "truthy" iff 𝓍∊A.
 w1{E1𝟣E2};w1[𝟣]	#M5 Membership: [ ]
 w1[𝟣];𝟣 ∊ w1	#M6 Element of: ∊
 ```
@@ -300,6 +306,8 @@ w1{E1𝟣};w1.last = 𝟣	#M10 Last: last
 ```
 ### Replace
 ```korekto
+# When semantically appropriate,
+# one can replace one label with another having the same "order value"
 w1{𝟣E1};w2{𝟤E2};𝟣⭎ = 𝟤	#I11 →1st: ⭎
 w1{𝓂 𝟣E1};w2{𝓂 𝟤E2};𝟣⭎ = 𝟤	#I12 →2nd
 w1{𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝟤E2};𝟣⭎ = 𝟤	#I13 →3rd
@@ -312,7 +320,7 @@ w1{𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝓂 𝟣E1};w2{𝓂 𝓂 𝓂 𝓂 𝓂 �
 ```
 ### Types
 ```korekto
-Constant[𝖆]	#L20 Constant: Constant
+Constant[𝐴]	#L20 Constant: Constant
 Scalar[𝑎]	#L21 Scalar: Scalar
 Vector[𝒂]	#L22 Vector: Vector
 Tensor[𝑨]	#L23 Tensor: Tensor
@@ -432,6 +440,8 @@ Scalar[𝑥]	#S73/L21 Scalar: 𝑥
 # Infinity is bigger than any finite number.
 ∞ > 𝑁	#D85 Infinity
 𝑁 < ∞	#R86/M61,D85 Less than
+# If the summation interval is not specified,
+# the default is to run the sum from zero to infinity.
 ∑ᵢ𝓍 = ∑ᵢ₌₀∞𝓍	#A87 Infinite sum
 ```
 ### Products
