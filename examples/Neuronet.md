@@ -130,7 +130,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝖊𝓵𝖊ˣ = 𝑥	#R14/M40.KorektoMath,S13 ∧→𝓵
 # Exp and Log are inverses of eachother
 𝖊𝓵(𝖊ˣ) = 𝑥	#R15/M98.KorektoMath,R14 a → (a)
-𝖊𝓵(𝖊∧𝑥) = 𝑥	#C16/I215.KorektoMath,S13,R15 G=F,(F)→(G)
+𝖊𝓵(𝖊∧𝑥) = 𝑥	#C16/I218.KorektoMath,S13,R15 G=F,(F)→(G)
 𝖊𝓵(𝖊∧(𝑥)) = 𝑥	#R17/M98.KorektoMath,C16 a → (a)
 𝖊𝓵(𝖊∧(𝓍)) = 𝓍	#A18/R17 Inverses 𝓵∧
 # Likewise:
@@ -146,13 +146,13 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌉0 = 𝖊∧0	#T21/A91.KorektoMath Exp
 ⌉0 = 𝖊∧(0)	#R22/M98.KorektoMath,T21 a → (a)
 𝑥 - 𝑥 = 0	#T23/A27.KorektoMath Zero
-⌉0 = 𝖊∧(𝑥 - 𝑥)	#C24/I215.KorektoMath,T23,R22 G=F,(F)→(G)
-⌉0 = 𝖊∧(𝑥 + -𝑥)	#R25/M223.KorektoMath,C24 a-b=a+-b
-⌉0 = 𝖊∧𝑥*𝖊∧-𝑥	#R26/M226.KorektoMath,R25 a^(b+c)=a^b*a^c
+⌉0 = 𝖊∧(𝑥 - 𝑥)	#C24/I218.KorektoMath,T23,R22 G=F,(F)→(G)
+⌉0 = 𝖊∧(𝑥 + -𝑥)	#R25/M226.KorektoMath,C24 a-b=a+-b
+⌉0 = 𝖊∧𝑥*𝖊∧-𝑥	#R26/M229.KorektoMath,R25 a^(b+c)=a^b*a^c
 ⌉0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R27/M162.KorektoMath,R26 a^b~c^d → (a^b)~(c^c)
 # Then:
 𝖊∧-𝑥 = 1 / 𝖊∧𝑥	#T28/A36.KorektoMath Reciprical
-⌉0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C29/I214.KorektoMath,T28,R27 G=F,(G)→(F)
+⌉0 = (𝖊∧𝑥)*(1 / 𝖊∧𝑥)	#C29/I217.KorektoMath,T28,R27 G=F,(G)→(F)
 ⌉0 = (𝖊∧𝑥)*(1 / (𝖊∧𝑥))	#R30/M142.KorektoMath,C29 _g)→_(g))
 ⌉0 = ((𝖊∧𝑥) / (𝖊∧𝑥))	#R31/M191.KorektoMath,R30 x*(1/y) → (x/y)
 ⌉0 = 1	#R32/M171.KorektoMath,R31 (a/a)→1
@@ -160,10 +160,10 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌉𝑥⌉-𝑥 = ⌉𝑥⌉-𝑥	#T33/A166.KorektoMath Reflection
 ⌉𝑥⌉-𝑥 = ⌉𝑥*⌉-𝑥	#R34/M163.KorektoMath,T33 Explicit*
 ⌉𝑥⌉-𝑥 = (⌉𝑥)*(⌉-𝑥)	#R35/M100.KorektoMath,R34 a~b → (a)~(b)
-⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉-𝑥)	#C36/I214.KorektoMath,T20,R35 G=F,(G)→(F)
+⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉-𝑥)	#C36/I217.KorektoMath,T20,R35 G=F,(G)→(F)
 ⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(⌉(-𝑥))	#R37/M98.KorektoMath,C36 a → (a)
 ⌉(-𝑥) = 𝖊∧(-𝑥)	#T38/A91.KorektoMath Exp
-⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧(-𝑥))	#C39/I214.KorektoMath,T38,R37 G=F,(G)→(F)
+⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧(-𝑥))	#C39/I217.KorektoMath,T38,R37 G=F,(G)→(F)
 ⌉𝑥⌉-𝑥 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R40/M99.KorektoMath,C39 (a) → a
 ⌉𝑥⌉-𝑥 = ⌉0	#C41/I169.KorektoMath,R40,R27 a=b;c=b;a=c
 ⌉𝑥⌉-𝑥 = 1	#C42/I167.KorektoMath,C41,R32 a=b;b=c;a=c
@@ -183,7 +183,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌊(𝖊∧(𝑥)) = 𝖊𝓵(𝖊∧(𝑥))	#T46/A92.KorektoMath Log
 ⌊(𝖊∧(𝑥)) = 𝑥	#C47/I167.KorektoMath,T46,R17 a=b;b=c;a=c
 ⌉(𝑥) = 𝖊∧(𝑥)	#T48/A91.KorektoMath Exp
-⌊(⌉(𝑥)) = 𝑥	#C49/I215.KorektoMath,T48,C47 G=F,(F)→(G)
+⌊(⌉(𝑥)) = 𝑥	#C49/I218.KorektoMath,T48,C47 G=F,(F)→(G)
 ⌊(⌉𝑥) = 𝑥	#R50/M99.KorektoMath,C49 (a) → a
 ⌊⌉𝑥 = 𝑥	#R51/M99.KorektoMath,R50 (a) → a
 ⌊⌉𝓍 = 𝓍	#A52/R51 ⌊⌉=1
@@ -200,7 +200,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 # The squash function in Ruby is:
 #     1 / (1 + Math.exp(-𝑥))
 # Here its:
-⌈𝑥 = 1 / 1+⌉-𝑥	#T58/A232.KorektoMath Squash
+⌈𝑥 = 1 / 1+⌉-𝑥	#T58/A235.KorektoMath Squash
 ⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R59/M107.KorektoMath,T58 _a+b$ → ♭(a♭+♭b)$
 # Alternate
 ⌈𝑥 = ⌉𝑥*1 / ⌉𝑥*(1 + ⌉-𝑥)	#R60/M186.KorektoMath,R59 _x*a_/_x*b$
@@ -209,20 +209,20 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥*⌉-𝑥)	#R63/M173.KorektoMath,R62 *1_
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + ⌉𝑥⌉-𝑥)	#R64/M164.KorektoMath,R63 Implied*
 ⌈𝑥 = ⌉𝑥 / (⌉𝑥 + 1)	#C65/I203.KorektoMath,C42,R64 g=a,_g)→_a)
-⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R66/M227.KorektoMath,C65 (a+b)→(b+a)
+⌈𝑥 = ⌉𝑥 / (1 + ⌉𝑥)	#R66/M230.KorektoMath,C65 (a+b)→(b+a)
 ⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R67/M106.KorektoMath,R66 ♭(a♭+♭b)$ → _a+b$
 ⌈𝓍 = ⌉𝓍 / 1+⌉𝓍	#A68/R67 Alternate Squash
 # Equivalence 1-⌈𝑥 = ⌈-𝑥
 1-⌈𝑥 = 1-⌈𝑥	#T69/A166.KorektoMath Reflection
 1-⌈𝑥 = 1 - ⌈𝑥	#R70/M156.KorektoMath,T69 +_g+f$ → +_g_+_f$
-1-⌈𝑥 = 1 - (⌉𝑥 / 1+⌉𝑥)	#C71/I210.KorektoMath,R67,R70 a=G,a→(G)
+1-⌈𝑥 = 1 - (⌉𝑥 / 1+⌉𝑥)	#C71/I212.KorektoMath,R67,R70 a=G,a→(G)
 1-⌈𝑥 = (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R72/M193.KorektoMath,C71 _1±(a_/_g) → (g±a / g)
 1-⌈𝑥 = 1+⌉𝑥-⌉𝑥 / 1+⌉𝑥	#R73/M148.KorektoMath,R72 +_(G)$ → +_G$
 1-⌈𝑥 = 1 / 1+⌉𝑥	#R74/M180.KorektoMath,R73 +a-a_
 # Cosider ⌈-𝑥
 ⌈-𝑥 = ⌈-𝑥	#T75/A166.KorektoMath Reflection
-⌈-𝑥 = 1 / 1+⌉--𝑥	#T76/A232.KorektoMath Squash
-⌈-𝑥 = 1 / 1+⌉𝑥	#R77/M228.KorektoMath,T76 --a→a
+⌈-𝑥 = 1 / 1+⌉--𝑥	#T76/A235.KorektoMath Squash
+⌈-𝑥 = 1 / 1+⌉𝑥	#R77/M231.KorektoMath,T76 --a→a
 # Then:
 1-⌈𝑥 = ⌈-𝑥	#C78/I170.KorektoMath,R77,R74 a=b;c=b;c=a
 1-⌈𝓍 = ⌈-𝓍	#A79/C78 1-⌈𝑥=⌈-𝑥
@@ -234,7 +234,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ⌈𝑥+⌈-𝑥 = ⌈𝑥 + 1-⌈𝑥	#C84/I208.KorektoMath,R80,R83 g=f,_g$→_f$
 ⌈𝑥+⌈-𝑥 = ⌈𝑥 + 1 - ⌈𝑥	#R85/M156.KorektoMath,C84 +_g+f$ → +_g_+_f$
 ⌈𝑥+⌈-𝑥 = (⌈𝑥 + 1) - ⌈𝑥	#R86/M145.KorektoMath,R85 +_G_+ → +_(G)_+
-⌈𝑥+⌈-𝑥 = (1 + ⌈𝑥) - ⌈𝑥	#R87/M227.KorektoMath,R86 (a+b)→(b+a)
+⌈𝑥+⌈-𝑥 = (1 + ⌈𝑥) - ⌈𝑥	#R87/M230.KorektoMath,R86 (a+b)→(b+a)
 ⌈𝑥+⌈-𝑥 = 1 + ⌈𝑥 - ⌈𝑥	#R88/M144.KorektoMath,R87 +_(G)_+ → +_G_+
 ⌈𝑥+⌈-𝑥 = 1	#R89/M178.KorektoMath,R88 +a-a$ → $
 # Derivative:
@@ -243,22 +243,22 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 # ₓ → 𝑥;𝓓ₓ𝓐(𝑥) = ...
 𝓓ₓ⌈𝑥 = 𝓓ₓ⌈𝑥	#T90/A166.KorektoMath Reflection
 𝓓ₓ⌈𝑥 = 𝓓ₓ(⌈𝑥)	#R91/M98.KorektoMath,T90 a → (a)
-𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C92/I214.KorektoMath,T58,R91 G=F,(G)→(F)
-𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T93/A240.KorektoMath From quotient rule
-𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C94/I218.KorektoMath,T93,C92 G=F, +_G$ → +_F$
+𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C92/I217.KorektoMath,T58,R91 G=F,(G)→(F)
+𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T93/A243.KorektoMath From quotient rule
+𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C94/I221.KorektoMath,T93,C92 G=F, +_G$ → +_F$
 # Consider 𝓓ₓ⌉-𝑥
 𝓓ₓ⌉-𝑥 = 𝓓ₓ⌉-𝑥	#T95/A166.KorektoMath Reflection
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(⌉-𝑥)	#R96/M98.KorektoMath,T95 a → (a)
 ⌉-𝑥 = 𝖊∧-𝑥	#T97/A91.KorektoMath Exp
-𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C98/I214.KorektoMath,T97,R96 G=F,(G)→(F)
-𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T99/A243.KorektoMath D(e^x)=D(x)e^x
+𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C98/I217.KorektoMath,T97,R96 G=F,(G)→(F)
+𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T99/A246.KorektoMath D(e^x)=D(x)e^x
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#C100/I208.KorektoMath,T99,C98 g=f,_g$→_f$
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)*𝖊∧-𝑥	#R101/M163.KorektoMath,C100 Explicit*
-𝓓ₓ(-𝑥) = -1	#R102/M246.KorektoMath,S82.KorektoMath 𝓓ₓ-𝑥=-1
+𝓓ₓ(-𝑥) = -1	#R102/M249.KorektoMath,S82.KorektoMath 𝓓ₓ-𝑥=-1
 𝓓ₓ⌉-𝑥 = -1*𝖊∧-𝑥	#C103/I199.KorektoMath,R102,R101 a=b,a→b
 𝓓ₓ⌉-𝑥 = -𝖊∧-𝑥	#R104/M174.KorektoMath,C103 _1*
 𝓓ₓ⌉-𝑥 = -(𝖊∧-𝑥)	#R105/M160.KorektoMath,R104 a^b → (a^b)
--𝓓ₓ⌉-𝑥 = (𝖊∧-𝑥)	#R106/M229.KorektoMath,R105 a=-b;-a=-b
+-𝓓ₓ⌉-𝑥 = (𝖊∧-𝑥)	#R106/M232.KorektoMath,R105 a=-b;-a=-b
 # Substituting
 𝓓ₓ⌈𝑥 = (𝖊∧-𝑥) / (1+⌉-𝑥)²	#C107/I199.KorektoMath,R106,C94 a=b,a→b
 𝓓ₓ⌈𝑥 = 𝖊∧-𝑥 / (1+⌉-𝑥)²	#R108/M136.KorektoMath,C107 ♭(g)♭ → _g_
@@ -275,7 +275,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝓓ₓ⌈𝑥 = 1-⌈𝑥 ⌈𝑥	#C119/I206.KorektoMath,R80,C118 g=f,_g_→_f_
 𝓓ₓ⌈𝑥 = (1-⌈𝑥) ⌈𝑥	#R120/M110.KorektoMath,C119 _a+b_ → ♭(a♭+♭b)♭
 𝓓ₓ⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#R121/M163.KorektoMath,R120 Explicit*
-𝓑⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#T122/A234.KorektoMath Binary balance
+𝓑⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#T122/A237.KorektoMath Binary balance
 𝓓ₓ⌈𝑥 = 𝓑⌈𝑥	#C123/I170.KorektoMath,T122,R121 a=b;c=b;c=a
 ```
 ### Unsquash
@@ -283,28 +283,28 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 # The unsquash function in Ruby is:
 #   Math.log(𝑥 / (1 - 𝑥))
 # Here  its:
-⌋𝑥 = ⌊ 𝑥/(1-𝑥)	#T124/A233.KorektoMath Unsquash
+⌋𝑥 = ⌊ 𝑥/(1-𝑥)	#T124/A236.KorektoMath Unsquash
 # Show that unsquash is the inverse of squash(⌋⌈=1):
 ⌋⌈𝑥 = ⌋⌈𝑥	#T125/A166.KorektoMath Reflection
-⌋⌈𝑥 = ⌊ ⌈𝑥/(1-⌈𝑥)	#T126/A233.KorektoMath Unsquash
-⌊ ⌈𝑥/(1-⌈𝑥) = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#T127/A231.KorektoMath ⌊(a/b)=⌊a-⌊b
-⌋⌈𝑥 = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#C128/I218.KorektoMath,T127,T126 G=F, +_G$ → +_F$
+⌋⌈𝑥 = ⌊ ⌈𝑥/(1-⌈𝑥)	#T126/A236.KorektoMath Unsquash
+⌊ ⌈𝑥/(1-⌈𝑥) = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#T127/A234.KorektoMath ⌊(a/b)=⌊a-⌊b
+⌋⌈𝑥 = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#C128/I221.KorektoMath,T127,T126 G=F, +_G$ → +_F$
 ⌋⌈𝑥 = ⌊(⌈𝑥) - ⌊(1-⌈𝑥)	#R129/M98.KorektoMath,C128 a → (a)
 ⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R67/M106.KorektoMath,R66 ♭(a♭+♭b)$ → _a+b$
-⌋⌈𝑥 = ⌊(⌉𝑥 / 1+⌉𝑥) - ⌊(1-⌈𝑥)	#C130/I214.KorektoMath,R67,R129 G=F,(G)→(F)
+⌋⌈𝑥 = ⌊(⌉𝑥 / 1+⌉𝑥) - ⌊(1-⌈𝑥)	#C130/I217.KorektoMath,R67,R129 G=F,(G)→(F)
 ⌋⌈𝑥 = ⌊ ⌉𝑥/(1+⌉𝑥) - ⌊(1-⌈𝑥)	#R131/M124.KorektoMath,C130 ♭(a_*_g)♭ → _a*(g)_
-⌊ ⌉𝑥/(1+⌉𝑥) = ⌊⌉𝑥 - ⌊(1+⌉𝑥)	#T132/A231.KorektoMath ⌊(a/b)=⌊a-⌊b
+⌊ ⌉𝑥/(1+⌉𝑥) = ⌊⌉𝑥 - ⌊(1+⌉𝑥)	#T132/A234.KorektoMath ⌊(a/b)=⌊a-⌊b
 ⌊⌉𝑥 = 𝑥	#R51/M99.KorektoMath,R50 (a) → a
 ⌊ ⌉𝑥/(1+⌉𝑥) = 𝑥 - ⌊(1+⌉𝑥)	#C133/I199.KorektoMath,R51,T132 a=b,a→b
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊(1-⌈𝑥)	#C134/I220.KorektoMath,C133,R131 G=F, +_G_+ → +_F_+
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊(1-⌈𝑥)	#C134/I223.KorektoMath,C133,R131 G=F, +_G_+ → +_F_+
 ⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-⌈𝑥	#R135/M106.KorektoMath,C134 ♭(a♭+♭b)$ → _a+b$
 ⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-(⌈𝑥)	#R136/M98.KorektoMath,R135 a → (a)
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-(⌉𝑥 / 1+⌉𝑥)	#C137/I214.KorektoMath,R67,R136 G=F,(G)→(F)
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-(⌉𝑥 / 1+⌉𝑥)	#C137/I217.KorektoMath,R67,R136 G=F,(G)→(F)
 ⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R138/M193.KorektoMath,C137 _1±(a_/_g) → (g±a / g)
 ⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ (1 / 1+⌉𝑥)	#R139/M180.KorektoMath,R138 +a-a_
 ⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1/(1+⌉𝑥)	#R140/M126.KorektoMath,R139 ♭(a_*_g)$ → _a*(g)$
-⌊ 1/(1+⌉𝑥) = ⌊1 - ⌊(1+⌉𝑥)	#T141/A231.KorektoMath ⌊(a/b)=⌊a-⌊b
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊1 - ⌊(1+⌉𝑥)	#C142/I218.KorektoMath,T141,R140 G=F, +_G$ → +_F$
+⌊ 1/(1+⌉𝑥) = ⌊1 - ⌊(1+⌉𝑥)	#T141/A234.KorektoMath ⌊(a/b)=⌊a-⌊b
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊1 - ⌊(1+⌉𝑥)	#C142/I221.KorektoMath,T141,R140 G=F, +_G$ → +_F$
 ⌊1 = 0	#C57/I208.KorektoMath,R56,T54 a=b,_a$→_b$
 ⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - 0 - ⌊(1+⌉𝑥)	#C143/I199.KorektoMath,C57,C142 a=b,a→b
 ⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) + ⌊(1+⌉𝑥)	#R144/M184.KorektoMath,C143 ±0± → +
@@ -320,17 +320,17 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ₕ₊ = ᵢ	#R6/M7.KorektoMath,S5 Next
 𝒂ₕ = ⌈ 𝒃ₕ+∑ᵢ(𝑾ₕᵢ𝒂ᵢ)	#R149/M148,R6 Activation
 ᵢ⭎ = ⁱ	#C10/I12.KorektoMath,S5,S4 →2nd
-∑ᵢ(𝑾ₕᵢ𝒂ᵢ) = 𝑾ₕⁱ𝒂ᵢ	#R150/M247.KorektoMath,C10 Einstein notation
-𝒂ₕ = ⌈ 𝒃ₕ+(𝑾ₕⁱ𝒂ᵢ)	#C151/I210.KorektoMath,R150,R149 a=G,a→(G)
+∑ᵢ(𝑾ₕᵢ𝒂ᵢ) = 𝑾ₕⁱ𝒂ᵢ	#R150/M250.KorektoMath,C10 Einstein notation
+𝒂ₕ = ⌈ 𝒃ₕ+(𝑾ₕⁱ𝒂ᵢ)	#C151/I212.KorektoMath,R150,R149 a=G,a→(G)
 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ᵢ	#R152/M132.KorektoMath,C151 *(ab)$ → *ab$
 # The above is correct. Now, how to cleanly loose the labels?
 𝒂 = ⌈ 𝒃+𝑾𝒂₊	#H153 hide labels
 # The value of the h-th Neuron is the unsquashed activation:
-⌋𝒂 = ⌋⌈ 𝒃+𝑾𝒂₊	#R154/M230.KorektoMath,H153 x_=_G_g;Fx_=_FG_g
+⌋𝒂 = ⌋⌈ 𝒃+𝑾𝒂₊	#R154/M233.KorektoMath,H153 x_=_G_g;Fx_=_FG_g
 ⌋⌈(𝒃+𝑾𝒂₊) = (𝒃+𝑾𝒂₊)	#T155/A146 Inverse
 ⌋⌈(𝒃+𝑾𝒂₊) = 𝒃+𝑾𝒂₊	#R156/M138.KorektoMath,T155 ♭(g)$ → _g$
 ⌋⌈ 𝒃+𝑾𝒂₊ = 𝒃+𝑾𝒂₊	#R157/M136.KorektoMath,R156 ♭(g)♭ → _g_
-⌋𝒂 = 𝒃+𝑾𝒂₊	#C158/I218.KorektoMath,R157,R154 G=F, +_G$ → +_F$
+⌋𝒂 = 𝒃+𝑾𝒂₊	#C158/I221.KorektoMath,R157,R154 G=F, +_G$ → +_F$
 # Neuron's value
 𝒗 : ⌋𝒂	#S159/L1.KorektoMath ≝: 𝒗
 # Shrunk 𝒗
