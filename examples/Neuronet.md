@@ -251,10 +251,10 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(⌉-𝑥)	#R96/M98.KorektoMath,T95 a → (a)
 ⌉-𝑥 = 𝖊∧-𝑥	#T97/A91.KorektoMath Exp
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C98/I217.KorektoMath,T97,R96 G=F,(G)→(F)
-𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T99/A246.KorektoMath D(e^x)=D(x)e^x
+𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T99/A245.KorektoMath D(e^x)=D(x)e^x
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#C100/I208.KorektoMath,T99,C98 g=f,_g$→_f$
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)*𝖊∧-𝑥	#R101/M163.KorektoMath,C100 Explicit*
-𝓓ₓ(-𝑥) = -1	#R102/M249.KorektoMath,S82.KorektoMath 𝓓ₓ-𝑥=-1
+𝓓ₓ(-𝑥) = -1	#R102/M248.KorektoMath,S82.KorektoMath 𝓓ₓ-𝑥=-1
 𝓓ₓ⌉-𝑥 = -1*𝖊∧-𝑥	#C103/I199.KorektoMath,R102,R101 a=b,a→b
 𝓓ₓ⌉-𝑥 = -𝖊∧-𝑥	#R104/M174.KorektoMath,C103 _1*
 𝓓ₓ⌉-𝑥 = -(𝖊∧-𝑥)	#R105/M160.KorektoMath,R104 a^b → (a^b)
@@ -320,7 +320,7 @@ Covariant{ₕ ᵢ ⱼ ₖ}	#S5/L4.KorektoMath Named set: Covariant ₕ ⱼ ₖ
 ₕ₊ = ᵢ	#R6/M7.KorektoMath,S5 Next
 𝒂ₕ = ⌈ 𝒃ₕ+∑ᵢ(𝑾ₕᵢ𝒂ᵢ)	#R149/M148,R6 Activation
 ᵢ⭎ = ⁱ	#C10/I12.KorektoMath,S5,S4 →2nd
-∑ᵢ(𝑾ₕᵢ𝒂ᵢ) = 𝑾ₕⁱ𝒂ᵢ	#R150/M250.KorektoMath,C10 Einstein notation
+∑ᵢ(𝑾ₕᵢ𝒂ᵢ) = 𝑾ₕⁱ𝒂ᵢ	#R150/M249.KorektoMath,C10 Einstein notation
 𝒂ₕ = ⌈ 𝒃ₕ+(𝑾ₕⁱ𝒂ᵢ)	#C151/I212.KorektoMath,R150,R149 a=G,a→(G)
 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ᵢ	#R152/M132.KorektoMath,C151 *(ab)$ → *ab$
 # The above is correct. Now, how to cleanly loose the labels?
