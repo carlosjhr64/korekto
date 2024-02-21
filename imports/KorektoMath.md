@@ -712,7 +712,28 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M231 --a→a
 ᵢ → 𝑎;𝓓ᵢ𝑎 = 1	#M247 𝓓ₓ𝑥=1
 ᵢ → 𝑎;𝓓ᵢ(-𝑎) = -1	#M248 𝓓ₓ-𝑥=-1
 ```
-## Einstein notation
+## Modified Einstein notation
+
+I'm going to implement the summing of repeated index convention a bit differently.
+In the classic convention, the label of the index does not matter, but the order does.
+For what I'm going to be doing, the label matters, but the order does not.  
+Classically:
+
+* `𝑴 = [[a11,a12,a13],[b21,b22,b23],[c31,c32,c33]] = [𝒂,𝒃,𝒄]`
+  * `𝑴 = 𝑴ⁱʲ`
+  * `𝑴¹² = a12; 𝑴²² = b22; 𝑴³¹ = c31`
+
+Here it's:
+
+* `𝑴 = [[a11,a12,a13],[b21,b22,b23],[c31,c32,c33]] = [𝒂,𝒃,𝒄]`
+  * `𝑴 = 𝑴ᵃᵇᶜ`
+  * `𝑴ᵃ⁼¹ = a12; 𝑴ᵇ⁼² = b22; 𝑴ᶜ⁼¹ = c31`
+
+So:
+
+* `𝑴ᵃ = 𝑴¹ʲ; 𝑴ᵇ = 𝑴²ʲ; 𝑴ᶜ = 𝑴³ʲ`
+* `𝒂∙𝒂 = 𝑴ᵃ𝑴ₐ = a11²+a12²+a13² = ∑ᵢ(𝒂ᵢ*𝒂ᵢ) = 𝑴¹ʲ𝒂ⱼ`
+
 ```korekto
 ᵢ⭎ = ⁱ;∑ᵢ(𝓍ᵢ𝓎ᵢ) = 𝓍ⁱ𝓎ᵢ	#M249 Einstein notation
 # ₕ₊ = ᵢ
