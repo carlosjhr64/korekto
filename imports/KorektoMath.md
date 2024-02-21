@@ -714,6 +714,14 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M231 --a→a
 ```
 ## Modified Einstein notation
 
+Note: `〈𝑥,𝑦,𝑧〉` is a column vector, and `[𝑥,𝑦,𝑧]` is a row vector.
+A left matrix is then written `[[a11,a12,a13],[b21,b22,b23],[c31,c32,c33]]`.
+A right matrix is written `[〈a11,b21,c31〉,〈a12,b22,c32〉,〈a13,b23,c33〉]`.
+The rows of the left matrix dots the columns of the right matrix.
+Quantum mechanics uses `⟨a11,a12,a13∣` for row vectors and `∣a11,b21,c31⟩` for column vectors.
+
+Then, `[𝑥,𝑦,𝑧]〈𝑥,𝑦,𝑧〉= ⟨𝑥,𝑦,𝑧|𝑥,𝑦,𝑧⟩ = 𝑥²+𝑦²+𝑧²`
+
 I'm going to implement the summing of repeated index convention a bit differently.
 In the classic convention, the label of the index does not matter, but the order does.
 For what I'm going to be doing, the label matters, but the order does not.  
