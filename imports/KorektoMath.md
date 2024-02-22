@@ -712,44 +712,77 @@ S1♭--𝟭♮S2;S1♭𝟭♮S2	#M231 --a→a
 ᵢ → 𝑎;𝓓ᵢ𝑎 = 1	#M247 𝓓ₓ𝑥=1
 ᵢ → 𝑎;𝓓ᵢ(-𝑎) = -1	#M248 𝓓ₓ-𝑥=-1
 ```
-## Modified Einstein notation
+## Vector notation
 
-Note: `〈𝑥,𝑦,𝑧〉` is a column vector, and `[𝑥,𝑦,𝑧]` is a row vector.
-A left matrix is then written `[[a11,a12,a13],[b21,b22,b23],[c31,c32,c33]]`.
-A right matrix is written `[〈a11,b21,c31〉,〈a12,b22,c32〉,〈a13,b23,c33〉]`.
-The rows of the left matrix dots the columns of the right matrix.
-Quantum mechanics uses `⟨a11,a12,a13∣` for row vectors and `∣a11,b21,c31⟩` for column vectors.
+Let `𝑥,𝑦,𝑧` be in `ℝ`, real numbers.
 
-Then, `[𝑥,𝑦,𝑧]〈𝑥,𝑦,𝑧〉= ⟨𝑥,𝑦,𝑧|𝑥,𝑦,𝑧⟩ = 𝑥²+𝑦²+𝑧²`
+* Column vector: `𝒗 = 〈𝑥,𝑦,𝑧〉 = |𝑥,𝑦,𝑧⟩`
+* Row vector: `𝒗ᵀ = [𝑥,𝑦,𝑧] = ⟨𝑥,𝑦,𝑧|`
+* Dot product: `𝒗∙𝒗 = 𝒗ᵀ𝒗 = [𝑥,𝑦,𝑧]〈𝑥,𝑦,𝑧〉 = ⟨𝑥,𝑦,𝑧|𝑥,𝑦,𝑧⟩ = 𝑥²+𝑦²+𝑧²`
 
-I'm going to implement the summing of repeated index convention a bit differently.
-In the classic convention, the label of the index does not matter, but the order does.
-For what I'm going to be doing, the label matters, but the order does not.  
-Classically:
+For `𝑥,𝑦,𝑧` in `ℂ`, complex numbers:
 
-* `𝑴 = [[a11,a12,a13],[b21,b22,b23],[c31,c32,c33]] = [𝒂,𝒃,𝒄]`
-  * `𝑴 = 𝑴ⁱʲ`
-  * `𝑴¹² = a12; 𝑴²² = b22; 𝑴³¹ = c31`
+* `⟨𝑥,𝑦,𝑧|𝑥,𝑦,𝑧⟩ = 𝒗†𝒗 = 𝑥*𝑥 + 𝑦*𝑦 + 𝑧*𝑧`
 
-Here it's:
+## Matrix notation
 
-* `𝑴 = [[a11,a12,a13],[b21,b22,b23],[c31,c32,c33]] = [𝒂,𝒃,𝒄]`
-  * `𝑴 = 𝑴ᵃᵇᶜ`
-  * `𝑴ᵃ⁼¹ = a12; 𝑴ᵇ⁼² = b22; 𝑴ᶜ⁼¹ = c31`
+Consider `𝒕 = 〈t11,t12,t13〉`, `𝒖 = 〈u21,u22,u23〉`, and `𝒗 = 〈v31,v32,v33〉`.
+Notice the pattern glob `t1*`, `u2*`, and `v3*` for the names of the components.
+Consider matrix `𝑴 = [𝒕ᵀ,𝒖ᵀ,𝒗ᵀ]`.
+Then `𝑴` has these equivalent representations:
 
-So:
+* Row (right) viewed: `𝑴 = [[t11,t12,t13],[u21,u22,u23],[v31,v32,v33]]`
+* Column (left) viewed: `𝑴 = [〈t11,u21,v31〉,〈t12,u22,v32〉,〈t13,u23,v33〉]`
 
-* `𝑴ᵃ = 𝑴¹ʲ; 𝑴ᵇ = 𝑴²ʲ; 𝑴ᶜ = 𝑴³ʲ`
-* `𝒂∙𝒂 = 𝑴ᵃ𝑴ₐ = a11²+a12²+a13² = ∑ᵢ(𝒂ᵢ*𝒂ᵢ) = 𝑴¹ʲ𝒂ⱼ`
+Graphically:
+```text
+    |t11 t12 t13|
+𝑴 = |u21 u22 u23|
+    |v31 v32 v33|
+```
+When a matrix is defined in the form `𝑴 = [𝒕ᵀ,𝒖ᵀ,𝒗ᵀ]`,
+I will refer to the vector components as follows:
 
+* `𝑴ᵗ = 𝒕ᵀ;𝑴ₜ = 𝒕`
+* `𝑴ᵘ = 𝒖ᵀ;𝑴ᵤ = 𝒖`
+* `𝑴ᵛ = 𝒗ᵀ;𝑴ᵥ = 𝒗`
+
+I can then refer to the component numbers of the vector as follows:
+
+* `𝑴ᵗⱼ = 𝒕ᵀⱼ = 𝒕ⱼ = 𝑴¹ⱼ`
+* `𝑴ᵘⱼ = 𝒖ᵀⱼ = 𝒖ⱼ = 𝑴²ⱼ`
+* `𝑴ᵛⱼ = 𝒗ᵀⱼ = 𝒗ⱼ = 𝑴³ⱼ`
+
+##  [Einstein notation](https://en.wikipedia.org/wiki/Einstein_notation)
+
+> ..the 𝑚-th row and 𝑛-th column of a matrix 𝑨 becomes 𝑨ᵐₙ
+
+* `𝑴[𝑖,𝑗] = 𝑴ⁱⱼ` 
+
+In context of covariant and contravariant components of a vector:
+
+* Convariant components: `𝒗ᵢ`
+* Contravariant components: `𝒗ⁱ`
+
+In context of row and column vectors:
+
+* Column vector: `𝒗ᵢ`
+* Row vector: `𝒗ⁱ`
+
+So despite the Wikipedia article(which prefers writing `𝒗ᵢ𝒗ⁱ`):
+
+* `𝒗∙𝒗 = 𝒗ᵀ𝒗 = 𝒗ⁱ𝒗ᵢ = ∑ᵢ (𝒗ᵢ)²`
 ```korekto
 ᵢ⭎ = ⁱ;∑ᵢ(𝓍ᵢ𝓎ᵢ) = 𝓍ⁱ𝓎ᵢ	#M249 Einstein notation
 # ₕ₊ = ᵢ
 # ᵢ⭎ = ⁱ
-# 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ᵢ
-# 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕⁱ𝒂ₕ₊
+## TODO: As of this writting, this is not what I have in Neuronent.md,
+## but I'm now convinced that Neuronet's notation is confused.
+# 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ⁱ𝒂ᵢ
+# 𝒂ₕ = ⌈ 𝒃ₕ+𝑾ₕ𝒂ₕ₊
 # All subscripts the same and superscript linked to subscripts, so...
 # 𝒂 = ⌈ 𝒃+𝑾𝒂₊ # ...hide labels
+## TODO: And I'll need to redo what follows:
 ! :M/ᵢʲ/t|g/\A$1₊ = ⱼ\Z/t|g/\A$3⭎ = $2\Z/t|s/[$1$2]//g|s/$3/₊/g
 # 1. Check if statement has Einstein notation as 𝑨ⁱʲ𝒂ⱼ
 # 2. Verify that the summed superscript is the raised summed subscript
