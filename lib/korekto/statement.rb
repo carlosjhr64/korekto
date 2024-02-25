@@ -150,7 +150,7 @@ class Statement
     follows = @context.heap.to_a[0..nl].reverse
     support = @regexp.match?(follows.map(&:to_s).join("\n"))?
               support(*follows) : nil
-    set_statement(support, undefined: undefined)
+    set_statement(support, undefined:)
   end
 
   # A Tautology is an accepted true statement that immediately follows from
@@ -166,7 +166,7 @@ class Statement
   def set
     let = detect_statement('L')
     undefined = expected_instantiations(let.title)
-    set_statement(support(let), let.title, undefined: undefined)
+    set_statement(support(let), let.title, undefined:)
   end
 
   # A Result is a derived true statement that follows from a Map rule and
@@ -182,8 +182,7 @@ class Statement
   def instantiation
     existential,s1 = heap_search('E')
     undefined = expected_instantiations(existential.title)
-    set_statement(support(existential,s1), existential.title,
-                  undefined: undefined)
+    set_statement(support(existential,s1), existential.title, undefined:)
   end
 
   # A Conclusion is a derived true statement, the result of an Inference rule
@@ -196,8 +195,11 @@ class Statement
 
   # A Definition is an assumed true statement that defines at least one term.
   def definition
-    expected_instantiations(@title)
-    set_statement
+    undefined = expected_instantiations(@title)
+    # With many undefined symbols in a definition,
+    # it's annoying to repeat them in the comment.
+    undefined = nil if undefined.size>2
+    set_statement(undefined:)
   end
 
   # A Postulate is an assumed true statement with all terms defined.

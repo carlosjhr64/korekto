@@ -187,6 +187,7 @@ set_regexp
 set_scanner
 set_statement
 shift
+size
 slice
 sort
 spawn
