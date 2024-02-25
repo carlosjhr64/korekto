@@ -323,8 +323,8 @@ w1{M5 𝓂 𝟣E1};w2{M5 𝓂 𝟤E2};𝟣 → 𝟤	#I17 7th
 w1{M5 𝓂 𝓂 𝟣E1};w2{M5 𝓂 𝓂 𝟤E2};𝟣 → 𝟤	#I18 8th
 w1{M5 𝓂 𝓂 𝓂 𝟣E1};w2{M5 𝓂 𝓂 𝓂 𝟤E2};𝟣 → 𝟤	#I19 9th
 w1{M5 𝓂 𝓂 𝓂 𝓂 𝟣E1};w2{M5 𝓂 𝓂 𝓂 𝓂 𝟤E2};𝟣 → 𝟤	#I20 10th
-# Allow one to define a symbol to map to another:
-𝒶 → 𝒷	#L21 Map
+# Allow one to define a symbol to replace to another:
+𝒶 → 𝒷	#L21 Replace
 ```
 ### Types
 ```korekto
@@ -427,13 +427,13 @@ SupDigits{⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹}	#S75/L4 Named set: SupDigits ⁰
 SubSymbols{₊ ₋ ₌ ₍ ₎}	#S76/L4 Named set: SubSymbols ₌ ₍ ₎
 SupSymbols{⁺ ⁻ ⁼ ⁽ ⁾}	#S77/L4 Named set: SupSymbols ⁺ ⁻ ⁼ ⁽ ⁾
 Constant[𝑁]	#S78/L22 Constant: 𝑁
-ᴺ → 𝑁	#S79/L21 Map: ᴺ
+ᴺ → 𝑁	#S79/L21 Replace: ᴺ
 Scalar[𝑛]	#S80/L23 Scalar: 𝑛
-ₙ → 𝑛	#S81/L21 Map: ₙ
-ⁿ → 𝑛	#S82/L21 Map: ⁿ
+ₙ → 𝑛	#S81/L21 Replace: ₙ
+ⁿ → 𝑛	#S82/L21 Replace: ⁿ
 Scalar[𝑖]	#S83/L23 Scalar: 𝑖
-ᵢ → 𝑖	#S84/L21 Map: ᵢ
-ⁱ → 𝑖	#S85/L21 Map: ⁱ
+ᵢ → 𝑖	#S84/L21 Replace: ᵢ
+ⁱ → 𝑖	#S85/L21 Replace: ⁱ
 ```
 ### Sums
 ```korekto
@@ -443,7 +443,7 @@ Scalar[𝑖]	#S83/L23 Scalar: 𝑖
 𝑁 = 𝓝ᵢ1	#A87 Finite number
 # Need a way to have a conditional loop not terminate...
 # Infinity is bigger than any finite number.
-∞ > 𝑁	#D88 Infinity
+∞ > 𝑁	#D88 Infinity: ∞
 𝑁 < ∞	#R89/M63,D88 Less than
 # If the summation interval is not specified,
 # the default is to run the sum from zero to infinity.
