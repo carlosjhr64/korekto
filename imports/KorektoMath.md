@@ -20,6 +20,9 @@ Imported by:
 * [Algebra](#Algebra)
 * [Functions](#Functions)
 * [Calculus](#Calculus)
+* [Vector notation](#Vector-notation)
+* [Matrix notation](#Matrix-notation)
+* [Einstein notation](#Einstein-notation)
 
 ## Notes
 
@@ -758,7 +761,9 @@ I can then refer to the component numbers of the vector as follows:
 * `𝑴ᵘⱼ = 𝒖ᵀⱼ = 𝒖ⱼ = 𝑴²ⱼ`
 * `𝑴ᵛⱼ = 𝒗ᵀⱼ = 𝒗ⱼ = 𝑴³ⱼ`
 
-##  [Einstein notation](https://en.wikipedia.org/wiki/Einstein_notation)
+## Einstein notation
+
+See the [Wikipedia page](https://en.wikipedia.org/wiki/Einstein_notation).
 
 > ..the 𝑚-th row and 𝑛-th column of a matrix 𝑨 becomes 𝑨ᵐₙ
 
