@@ -322,21 +322,18 @@ RowVectors{ʳ ˢ ᵗ ᵘ}	#S6/L4.KorektoMath Named set: RowVectors ʳ ˢ ᵗ ᵘ
 𝒂ᵣ = ⌈ 𝒃ᵣ+(𝑾ᵣˢ𝒂ₛ)	#C153/I218.KorektoMath,R152,R151 a=G,a→(G)
 𝒂ᵣ = ⌈ 𝒃ᵣ+𝑾ᵣˢ𝒂ₛ	#R154/M138.KorektoMath,C153 *(ab)$ → *ab$
 # The above is correct. Now, how to cleanly loose the labels?
-𝒂 = ⌈ 𝒃+𝑾𝒂₊	#H153 hide labels
+𝒂 = ⌈ 𝒃+𝑾𝒂₊	#H155 Hide labels
 # The value of the h-th Neuron is the unsquashed activation:
-⌋𝒂 = ⌋⌈ 𝒃+𝑾𝒂₊	#R154/M233.KorektoMath,H153 x_=_G_g;Fx_=_FG_g
-⌋⌈(𝒃+𝑾𝒂₊) = (𝒃+𝑾𝒂₊)	#T155/A146 Inverse
-⌋⌈(𝒃+𝑾𝒂₊) = 𝒃+𝑾𝒂₊	#R156/M138.KorektoMath,T155 ♭(g)$ → _g$
-⌋⌈ 𝒃+𝑾𝒂₊ = 𝒃+𝑾𝒂₊	#R157/M136.KorektoMath,R156 ♭(g)♭ → _g_
-⌋𝒂 = 𝒃+𝑾𝒂₊	#C158/I221.KorektoMath,R157,R154 G=F, +_G$ → +_F$
+⌋𝒂 = ⌋⌈ 𝒃+𝑾𝒂₊	#R156/M239.KorektoMath,H155 x_=_G_g;Fx_=_FG_g
+⌋⌈(𝒃+𝑾𝒂₊) = (𝒃+𝑾𝒂₊)	#T157/A148 Inverse
+⌋⌈(𝒃+𝑾𝒂₊) = 𝒃+𝑾𝒂₊	#R158/M144.KorektoMath,T157 ♭(g)$ → _g$
+⌋⌈ 𝒃+𝑾𝒂₊ = 𝒃+𝑾𝒂₊	#R159/M142.KorektoMath,R158 ♭(g)♭ → _g_
+⌋𝒂 = 𝒃+𝑾𝒂₊	#C160/I227.KorektoMath,R159,R156 G=F, +_G$ → +_F$
 # Neuron's value
-𝒗 : ⌋𝒂	#S159/L1.KorektoMath ≝: 𝒗
-# Shrunk 𝒗
-ᵣ⭎ = ʰ	#C9/I11.KorektoMath,S5,S4 →1st
-ₛ⭎ = ˢ	#C10/I12.KorektoMath,S5,S4 →2nd
-𝒗 = 𝒃+𝑾𝒂₊	#C160/I167.KorektoMath,S159,C158 a=b;b=c;a=c
+𝒗 : ⌋𝒂	#S161/L1.KorektoMath ≝: 𝒗
+𝒗 = 𝒃+𝑾𝒂₊	#C162/I173.KorektoMath,S161,C160 a=b;b=c;a=c
 # Explicit 𝒗
-𝒗ᵣ = 𝒃ᵣ+𝑾ʰˢ𝒂ₛ	#H161
+𝒗ᵣ = 𝒃ᵣ+𝑾ᵣˢ𝒂ₛ	#H163 Reveal labels
 ! stop!
 ```
 ### Mirroring
