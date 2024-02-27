@@ -408,21 +408,19 @@ RowVectors{ʳ ˢ ᵗ ᵘ}	#S6/L5.KorektoMath Named set: RowVectors ʳ ˢ ᵗ ᵘ
 𝖜 = 2 / 2⌈1-1	#R219/M212.KorektoMath,R202 _1_/_a+½$→_2_/_2a_1
 𝖇 = -½(2 / 2⌈1-1)	#C220/I231.KorektoMath,R219,R190 a=G,a→(G)
 𝖇 = -1 / 2⌈1-1	#R221/M213.KorektoMath,C220 _½(2_/_g)$→_1_/_g
-# TODO: Need mechanism to force the line above to be the antecedent to the
-# consequent line below.
+# TODO: Need mechanism to show that this is a confirmantion(and not a restatement).
 𝖇 = 1 / 1-2⌈1	#R206/M156.KorektoMath,R205 +_(G)$ → +_G$
-! stop!
 # Verify this works when value is negative one:
--1 = 𝖇 + (𝖜 * ⌈(-1))
--1 = 𝖇 + 𝖜⌈-1
--1 = -½𝖜 + 𝖜⌈-1
--1 = -½𝖜 + 𝖜(1-⌈1)
--1 = -½𝖜 + 𝖜 - 𝖜⌈1
--1 = ½𝖜 - 𝖜⌈1
-1 = 𝖜⌈1 - ½𝖜
-1 = 𝖜(⌈1 - ½)
-𝖜 = 1 / (⌈1 - ½)
-𝖜 = 1 / (⌈(1) - ½) # OK
+-1 = 𝖇 + 𝖜*⌈-1	#R222/M164.KorektoMath,H208 +_g+f$ → +_g_+_f$
+-1 = -½𝖜 + 𝖜*⌈-1	#C223/I234.KorektoMath,T209,C212 a=G,(G)→a
+-1 = 𝖜(-½ + ⌈-1)	#C224/I234.KorektoMath,T209,R214 a=G,(G)→a
+-1 = 𝖜(-½ + (1-⌈1))	#R214/M217.KorektoMath,R213 _Na+ab$→_a(N+b)$
+-1 = 𝖜(-½ + (1 - ⌈1))	#R215/M112.KorektoMath,R214 (a+b) → (a_+_b)
+-1 = 𝖜(-½ + 1 - ⌈1)	#R216/M161.KorektoMath,R215 +_(G))~ → +_G)~
+-1 = 𝖜(½ - ⌈1)	#R217/M211.KorektoMath,R216 (-½+1+g)→(½+g)
+𝖜 = 1/(⌈1-½)	#R218/M260.KorektoMath,R217 -1=a(b-c)→a=1/(c-b)
+# TODO: Again, restatement here should be confimation
+𝖜 = 1 / ⌈1-½	#R202/M125.KorektoMath,R201 _a/(b♭+♭c)$→_a_/_b+c$
 ! stop!
 ```
 ### Propagation of errors level 1(Perceptron)
