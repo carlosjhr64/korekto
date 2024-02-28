@@ -15,14 +15,11 @@ Here I demonstrate that `Squash` and `Unsquash` are inverse of each other by cho
 Squash[x] = 1/(1 + Exp[-x])
 Unsquash[x] = Log[x/(1 - x)]
 ```
-I import the monkey patch [Kernel](../imports/Kernel.md)
-which defines the `balanced?` method for balanced groupings.
 I set some rules on the use of spaces I want my statements to follow.
 I set the scanner to parse the statements basically by word, or otherwise single character.
 I set my patterns.
 And I switch the fence to `ruby`.
 ```korekto
-< imports/Kernel.md
 ### Syntax ###
 ? length < 66
 ? balanced? '()[]{}'

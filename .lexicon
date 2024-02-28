@@ -3,6 +3,7 @@ _1
 a
 active
 add
+all
 antecedent
 any
 arguments
@@ -13,10 +14,12 @@ b
 backtrace
 backup
 BACKUPS
+balanced
 basename
-blk
 c
 captures
+chars
+check
 chomp
 class
 clear
@@ -28,7 +31,6 @@ compound
 conclusion
 config_nvim
 consequent
-const_get
 context
 count
 cp_r
@@ -42,6 +44,7 @@ detect_statement
 __dir__
 directory
 dirname
+divmod
 do_install
 dump
 dup
@@ -52,7 +55,6 @@ each_with_index
 empty
 err
 Error
-eval
 existential
 exit
 expand_path
@@ -79,6 +81,7 @@ ij
 ij_kl
 imports
 include
+index
 inference
 initialize
 inject
@@ -89,10 +92,11 @@ instantiation
 is_a
 j
 join
+k
 key
 key_value
 kl
-klass
+km
 Korekto
 lambda
 last
@@ -104,6 +108,8 @@ lines
 literal_regexp
 load
 local_pack
+ltight
+m
 Main
 map
 mapping
@@ -116,14 +122,11 @@ MD_FILENAME
 MD_FUNCTION
 MD_HANDWAVE
 MD_KEY_VALUE
-MD_KLASS_METHOD_DEFINITION
 MD_RULE
 MD_STATEMENT_CODE_TITLE
 MD_TYPE_PATTERN
 MD_TYPE_VARIABLES
 message
-method
-method_defined
 M_FENCE
 mkdir_p
 n
@@ -132,7 +135,6 @@ newlines_count
 newvar
 nil
 nl
-Object
 oldvar
 options
 out
@@ -154,6 +156,8 @@ quote
 raise
 readlines
 readme
+refine
+Refinements
 regex
 regexp
 Regexp
@@ -165,6 +169,7 @@ result
 reverse
 reverse_each
 rgx
+rtight
 Ruby33
 rule
 run
@@ -202,6 +207,7 @@ statements
 Statements
 step
 string
+String
 strip
 sub
 substitute
@@ -210,13 +216,13 @@ symbols
 Symbols
 syntax
 Syntax
-syntax_check
 system
 t
 t2p
 t2p_gsub
 target
 tautology
+tight
 title
 tmp
 to_a
@@ -231,6 +237,7 @@ undefined
 unshift
 UpdateRemotePlugins
 upto
+using
 v
 v2t
 value
@@ -240,3 +247,4 @@ VERSION
 w
 warn
 x
+zero

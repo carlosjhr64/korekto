@@ -342,33 +342,9 @@ Lines starting with question mark `?`
 tells `Korekto` to `instance_eval` the given `ruby` code on the string.
 If the eval returns `true` it proceeds, else it's an error.
 
-## Monkey patches
+## Refinements
 
-Because Syntax rules can go beyond what a simple `Regexp` can do,
-you can monkey patch in `ruby` code your rule.
-For example, balanced parenthesis is not at all trivial.
-Here's my monkey patch and test for balanced parenthesis:
-```korekto
-# Ruby Monkey Patches
-::Array#blp(k,m) = (m==0)?self<<k:(k==last)?self[0..-2]:self<<k
-::Array#bli = inject([]){|a,km| a.blp(*km)}
-::Array#blm(g) = map{|c| g.index(c).divmod(2)}
-::Array#bls(g) = select{|c| g.include?(c)}
-::String#balance(g) = chars.bls(g).blm(g).bli
-::String#balanced?(g) = balance(g).empty?
-# Syntax
-? balanced? '(){}[]'
-```
-The `balanced?` method translates to `ruby` as:
-```ruby
-# Monkey patching String
-class String
-  # It's a ruby 3 end-less method definition
-  def balanced?(g) = balance(g).empty?
-end
-```
-It was quite a challenge to write the algorithm entirely in this form.
-Can you see how it works? Me neither, and I wrote it! LOL.
+TODO
 
 # Scanner
 

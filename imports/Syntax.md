@@ -1,7 +1,5 @@
 # Syntax
-imports: [Kernel](Kernel.md)
 ```korekto
-< imports/Kernel.md
 ### Syntax ###
 ? balanced? '(){}[]'
 ? length < 66

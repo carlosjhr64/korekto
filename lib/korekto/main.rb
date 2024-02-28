@@ -3,7 +3,6 @@ class Main
   # rubocop: disable Layout/LineLength
   MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)(\s+(?<title>[^#]+))?$}
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
-  MD_KLASS_METHOD_DEFINITION = /^(?<klass>::[A-Z]\w+)[#.](?<method>\w+)(?<definition>[^=]*=.+)$/ # patch
   MD_RULE = /^[?] (?<rule>\S.*)$/
   MD_TYPE_PATTERN = %r{^! (?<type>\S+)\s+/(?<pattern>.*)/$}
   MD_TYPE_VARIABLES = /^! (?<type>\S+)\s+\{(?<variables>\S+( \S+)*)\}$/
@@ -69,23 +68,6 @@ class Main
     end
   end
 
-  def patch(klass, method, definition)
-    if Object.const_get(klass).method_defined?(method)
-      raise Error, "overrides: #{klass}##{method}"
-    end
-    # rubocop: disable Security/Eval
-    # rubocop: disable Style/DocumentDynamicEvalDefinition
-    # rubocop: disable Style/EvalWithLocation
-    eval <<~EVAL
-      class #{klass}
-        def #{method}#{definition}
-      end
-    EVAL
-    # rubocop: enable Style/EvalWithLocation
-    # rubocop: enable Style/DocumentDynamicEvalDefinition
-    # rubocop: enable Security/Eval
-  end
-
   def preprocess?
     case @line
     when MD_FILENAME
@@ -95,12 +77,6 @@ class Main
         Main.new(filename, statements:@statements, imports:@imports).run
         @statements.heap.to_a.replace(tmp)
       end
-    when MD_KLASS_METHOD_DEFINITION
-      if @filename=='-' && !Korekto.patch?
-        # We'll trust files, but not stdin.
-        raise Error, 'monkey patching not allowed on stdin'
-      end
-      patch($~[:klass],$~[:method],$~[:definition])
     when MD_RULE
       @statements.syntax.push $~[:rule].strip
     when MD_TYPE_PATTERN
@@ -156,7 +132,7 @@ class Main
                                        md[:title],
                                        @section
                                         # Block executes if statement is new.
-                                        # Method recieves the return value.
+                                        # Method receives the return value.
                                       ){ statement_number += 1 }
           if Korekto.scrape?
             print @statements.last

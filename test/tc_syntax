@@ -3,14 +3,14 @@ require 'test/unit'
 module Korekto
   class Error < RuntimeError; end
 end
+require 'korekto/refinements'
 require 'korekto/syntax'
 
 class TestSymbols < Test::Unit::TestCase
   def test_sytax
-    a,syntax = [],Korekto::Syntax.new
+    syntax = Korekto::Syntax.new
     syntax.push 'length < 120'
-    syntax.each{a<<_1}
-    assert_equal ['length < 120'], a
+    assert_equal ['length < 120'], syntax.to_a
     error = assert_raises(Korekto::Error) do
       syntax.push 'length'
     end
@@ -20,8 +20,8 @@ class TestSymbols < Test::Unit::TestCase
     end
     assert_equal 'NameError: leNgTh < 120', error.message
     syntax.push 'is_a? String'
-    syntax.each do |test|
-      assert 'ABC'.instance_eval(test)
+    assert_nothing_raised do
+      syntax.check('ABC', 'X')
     end
   end
 end

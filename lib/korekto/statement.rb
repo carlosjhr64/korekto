@@ -8,9 +8,6 @@ class Statement
       statement,code,title,section,statement_number,context,nil
     @statement.freeze; @section.freeze; @statement_number.freeze
     @title = @title.split(':',2).first if @title
-    syntax_check unless @statement[0]=='/' &&
-                        @statement[-1]=='/' &&
-                        %w[A L M E I].include?(@code[0])
     set_acceptance_code
     @code.freeze; @title.freeze; @regexp.freeze
   end
@@ -29,16 +26,6 @@ class Statement
   end
 
   private
-
-  def syntax_check
-    @context.syntax.each do |rule|
-      next if @statement.instance_eval(rule)
-      raise Error, "syntax: #{rule}"
-    rescue StandardError
-      raise if $!.is_a? Error
-      raise Error, "#{$!.class}: #{rule}"
-    end
-  end
 
   def set_acceptance_code
     case @code[0] # type

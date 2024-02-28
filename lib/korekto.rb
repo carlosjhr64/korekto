@@ -36,6 +36,7 @@ module Korekto
   Korekto.scrape = false
 
   def self.run
+    require 'korekto/refinements'
     require 'korekto/symbols'
     require 'korekto/syntax'
     require 'korekto/heap'

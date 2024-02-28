@@ -1,9 +1,5 @@
 # Korekto Math
 
-Imports:
-
-* [KorektoKernel](KorektoKernel.md)
-
 Imported by:
 
 * [Two Cube](../examples/TwoCube.md)
@@ -12,7 +8,6 @@ Imported by:
 ## Contents
 
 * [Notes](#Notes)
-* [Ruby patches](#Ruby-patches)
 * [Syntax](#Syntax)
 * [Patterns](#Patterns)
 * [Definitions](#Defintions)
@@ -146,12 +141,6 @@ Pattern key table:
 | .Clump | \S+ | 𝓂 | Script small|
 | [SuperToken](#SuperToken) |
 | SuperToken | (Unary+ Subscript* Superscript*)? (Token,Group) Subscript* Superscript* | 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵 𝓍 𝓎 𝓏 | Sans-Serif Bold |
-
-## Ruby patches
-
-[KorektoKernel](../imports/KorektoKernel.md) provides: `balanced?`, `tight?`, `ltight?`
-```korekto
-< imports/KorektoKernel.md
 ```
 ## Syntax
 ```korekto
