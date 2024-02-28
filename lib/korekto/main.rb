@@ -14,14 +14,13 @@ class Main
   M_FENCE = /^```\s*$/
   M_COMMENT_LINE = /^\s*#/
 
-  BACKUPS = {}
-
   def initialize(filename='-', statements: Statements.new, imports: [])
     @filename,@statements,@imports = filename,statements,imports
     @imports.push @filename.freeze
     @line,@active = nil,false
     @section = File.basename(@filename,'.*')
     @m_fence_korekto = /^```korekto$/ # default fence
+    @backups = {}
   end
 
   def t2p_gsub(target, replacement)
@@ -107,9 +106,9 @@ class Main
     when 'section'
       @section = value
     when 'save'
-      BACKUPS[value] = Marshal.dump(@statements)
+      @backups[value] = Marshal.dump(@statements)
     when 'restore'
-      if (backup = BACKUPS[value])
+      if (backup = @backups[value])
         @statements = Marshal.load(backup)
       else
         raise Error, "nothing saved as '#{value}'"
