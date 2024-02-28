@@ -17,14 +17,11 @@ class Syntax
     raise Error, "#{$!.class}: #{s}"
   end
 
-  def check(statement, c)
-    return if statement[0]=='/' && statement[-1]=='/' &&
-              %w[A L M E I].include?(c)
-    @a.each do |rule|
-      next if statement.instance_eval(rule)
-      raise Error, "syntax: #{rule}"
+  def detect(statement, boolean)
+    @a.detect do |rule|
+        statement.instance_eval(rule) == boolean
     rescue StandardError
-      raise if $!.is_a? Error
+      raise if $!.is_a? Error # Why would it be this?
       raise Error, "#{$!.class}: #{rule}"
     end
   end

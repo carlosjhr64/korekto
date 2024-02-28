@@ -20,8 +20,6 @@ class TestSymbols < Test::Unit::TestCase
     end
     assert_equal 'NameError: leNgTh < 120', error.message
     syntax.push 'is_a? String'
-    assert_nothing_raised do
-      syntax.check('ABC', 'X')
-    end
+    assert_nil syntax.detect('ABC', false)
   end
 end

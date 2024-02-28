@@ -17,7 +17,12 @@ class Statements
 
   def add(statement,code,title,filename)
     c = code[0]; w = c=='W'
-    @syntax.check(statement, c)
+    unless (statement[0]=='/' &&
+            statement[-1]=='/' &&
+            %w[A L M E I].include?(c)
+           ) || (rule = @syntax.detect(statement, false)).nil?
+      raise Error, "syntax: #{rule}"
+    end
     if (restatement=@statements.detect{(w || _1.type==c) && _1.to_s==statement})
       unless 'DXSPTCRH'.include?(restatement.type)
         # Only allow heap-able statements to be restated.

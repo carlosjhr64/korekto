@@ -16,10 +16,10 @@ backup
 BACKUPS
 balanced
 basename
+boolean
 c
 captures
 chars
-check
 chomp
 class
 clear
