@@ -1,5 +1,5 @@
 module Korekto
-class Syntax
+class Rules
   def initialize = @a=[]
   def to_a = @a
 
@@ -9,7 +9,7 @@ class Syntax
     # ensure it'll eval on string and returns boolean
     b = ''.instance_eval(s)
     # rubocop: disable Style/DoubleNegation
-    raise Error, 'syntax rule must eval boolean' unless b==!!b
+    raise Error, 'rules must eval boolean' unless b==!!b
     # rubocop: enable Style/DoubleNegation
     @a.push(s)
   rescue StandardError

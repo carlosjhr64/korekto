@@ -6,7 +6,7 @@ class Statements
     @statements = []
     @heap = Heap.new Korekto.heap
     @symbols = Symbols.new
-    @syntax = Syntax.new
+    @syntax = Rules.new
     @handwaves = []
   end
 

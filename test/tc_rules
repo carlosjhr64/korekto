@@ -4,22 +4,22 @@ module Korekto
   class Error < RuntimeError; end
 end
 require 'korekto/refinements'
-require 'korekto/syntax'
+require 'korekto/rules'
 
 class TestSymbols < Test::Unit::TestCase
   def test_sytax
-    syntax = Korekto::Syntax.new
-    syntax.push 'length < 120'
-    assert_equal ['length < 120'], syntax.to_a
+    rules = Korekto::Rules.new
+    rules.push 'length < 120'
+    assert_equal ['length < 120'], rules.to_a
     error = assert_raises(Korekto::Error) do
-      syntax.push 'length'
+      rules.push 'length'
     end
-    assert_equal 'syntax rule must eval boolean', error.message
+    assert_equal 'rules must eval boolean', error.message
     error = assert_raises(Korekto::Error) do
-      syntax.push 'leNgTh < 120'
+      rules.push 'leNgTh < 120'
     end
     assert_equal 'NameError: leNgTh < 120', error.message
-    syntax.push 'is_a? String'
-    assert_nil syntax.detect('ABC', false)
+    rules.push 'is_a? String'
+    assert_nil rules.detect('ABC', false)
   end
 end

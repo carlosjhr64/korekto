@@ -38,7 +38,7 @@ module Korekto
   def self.run
     require 'korekto/refinements'
     require 'korekto/symbols'
-    require 'korekto/syntax'
+    require 'korekto/rules'
     require 'korekto/heap'
     require 'korekto/statement'
     require 'korekto/statements'

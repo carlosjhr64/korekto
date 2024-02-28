@@ -172,6 +172,7 @@ rgx
 rtight
 Ruby33
 rule
+Rules
 run
 RuntimeError
 s
@@ -215,7 +216,6 @@ support
 symbols
 Symbols
 syntax
-Syntax
 system
 t
 t2p
