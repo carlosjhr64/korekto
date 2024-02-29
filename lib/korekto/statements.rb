@@ -7,7 +7,7 @@ class Statements
     @heap = Heap.new Korekto.heap
     @symbols = Symbols.new
     @syntax = Syntax.new
-    @handwaves = []
+    @handwaves = Handwaves.new(self)
   end
 
   def type(c)  = @statements.select{_1.type==c}

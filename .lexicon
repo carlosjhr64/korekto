@@ -4,7 +4,6 @@ a
 active
 add
 all
-antecedent
 any
 arguments
 ARGV
@@ -17,8 +16,8 @@ balanced
 basename
 boolean
 c
-captures
 chars
+check
 chomp
 class
 clear
@@ -54,6 +53,7 @@ each_with_index
 empty
 err
 Error
+ex
 existential
 exit
 expand_path
@@ -70,6 +70,7 @@ gsub
 handle_options
 handwave
 handwaves
+Handwaves
 heap
 Heap
 heap_combos_search
@@ -97,7 +98,6 @@ key_value
 kl
 km
 Korekto
-lambda
 last
 length
 let
