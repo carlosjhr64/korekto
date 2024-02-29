@@ -38,7 +38,6 @@ def handle_options
      -v --version
      --scrape    \tScrape Korekto lines
      --trace     \tShow trace of each line, not just edits and errors
-     --patch     \tAllow monkey patching in stdin
      --install   \tInstalls the korekto neovim ruby plugin
      --readme    \tOpen korekto github page
      --heap=SIZE \tSet heap size (default: #{Korekto.heap})
@@ -54,7 +53,6 @@ def handle_options
   spawn_readme if options.readme?
   Korekto.scrape = options.scrape?
   Korekto.trace  = options.trace?
-  Korekto.patch  = options.patch?
   Korekto.heap   = options.heap.to_i if options.heap?
 end
 

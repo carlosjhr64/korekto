@@ -21,7 +21,6 @@
 * [Patterns](#Patterns)
 * [Support for pattern statements](#Support-for-pattern-statements)
 * [Syntax](#Syntax)
-* [Monkey patches](#Monkey-patches)
 * [Scanner](#Scanner)
 * [Fence](#Fence)
 * [Section](#Section)
@@ -42,7 +41,7 @@ I meant `Korekto` to read markdown files with `Korekto` code fenced.
 
 `Korekto` can be run on this tutorial:
 ```shell
-$ korekto --patch --trace < examples/Tutorial.md
+$ korekto --trace < examples/Tutorial.md
 -:109:D1:5 Symbols including space
 -:110:D2:10 Numbers
 -:111:D3:10 Words
@@ -71,19 +70,13 @@ It will also automate many of the statement's comments.
 You only need to give the statement type,
 `Korekto` completes the comment.
 
-On this tutorial, you'll need to run `:KorektoPatch` or press `<Leader><F7>`,
-because there's a patch in the file(Monkey Patching).
-It's just a guard rail to ensure you're aware of the patch.
-To find the patch, just press `<F7>` and it'll take you there
-with an error message(monkey patching not allowed).
-
 Keep in mind that as powerful as `Regexp` can be,
 you'll run into weaknesses in the `Regexp` engine.
 There will be times when the simple pattern generator(provided by `Korekto`)
 can't create the test you want, and you'll consider using a literal `Regexp`.
 And some tests may not be possible...
 The current consensus is that `Regexp` is not Turing Complete.
-So you may consider using the `instance_eval` and monkey patch options.
+So you may consider using the `instance_eval` and refinements options.
 You'll be going down the rabbit hole of
 trying to create a proof assistant for your project...
 Burrowing yourself down all the way to first principles.

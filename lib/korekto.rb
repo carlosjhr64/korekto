@@ -11,14 +11,6 @@ module Korekto
   end
   Korekto.trace = false
 
-  def self.patch=(value)
-    @@patch = value
-  end
-  def self.patch?
-    @@patch
-  end
-  Korekto.patch = false
-
   def self.heap=(value)
     @@heap = value
   end

@@ -12,7 +12,7 @@ Feature: examples_no_edits
     * Then stderr is ""
 
   Scenario: Computation
-    * Given option "--patch < examples/Computation.md"
+    * Given option "< examples/Computation.md"
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
@@ -40,7 +40,7 @@ Feature: examples_no_edits
     * Then stderr is ""
 
   Scenario: Tutorial
-    * Given option "--patch < examples/Tutorial.md"
+    * Given option "< examples/Tutorial.md"
     * When we run command
     * Then exit status is "0"
     * Then stdout is ""

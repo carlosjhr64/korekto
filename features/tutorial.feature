@@ -5,7 +5,7 @@ Feature: Tutorial
     * Given command "./bin/korekto --trace"
 
   Scenario: Tutorial.md
-    * Given option "--patch < examples/Tutorial.md"
+    * Given option "< examples/Tutorial.md"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
