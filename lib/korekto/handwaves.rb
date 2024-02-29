@@ -21,24 +21,27 @@ class Handwaves
     pattern
   end
 
-  def ex(command)
+  def ex(command, statement)
     @captures.clear
-    consequent = @antecedent.dup
+    symbols = @context.symbols
+    heap = @context.heap.to_a
+    antecedent = heap.first.to_s
+    consequent = antecedent.dup
     command.split('|').each do |step|
       case step
       when %r{^([mM])/(.*)/(t)?$}
         command,pattern,t,n = $1,$2,$3,0
-        pattern,n = @context.symbols.s2p(pattern, quote:false) if t
-        string = command=='M' ? @antecedent : @statement
+        pattern,n = symbols.s2p(pattern, quote:false) if t
+        string = command=='M' ? antecedent : statement
         md = Regexp.new(gsub! pattern).match(string)
         break unless md
         1.upto(n).each{@captures.push(md[_1])}
       when %r{^g/(.*)/(t)?$}
         pattern,t,n = $1,$2,0
-        pattern,n = @context.symbols.s2p($1, quote:false) if t
+        pattern,n = symbols.s2p($1, quote:false) if t
         rgx = Regexp.new(gsub! pattern)
         md = nil
-        break unless @heap.any?{(md=rgx.match _1)}
+        break unless heap.any?{(md=rgx.match _1)}
         1.upto(n).each{@captures.push(md[_1])}
       when %r{^s/(.*?)/(.*)/(g)?$}
         pattern,substitute,g = $1,$2,$3
@@ -49,17 +52,14 @@ class Handwaves
         raise Error, "unrecognized handwave step: #{step}"
       end
     end
-    @statement == consequent
+    statement == consequent
   end
 
   def check(statement)
-    @heap = @context.heap.to_a
-    @statement = statement
-    @antecedent = @heap.first.to_s
     raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
       case handwave
       when /^[:]/
-        ex(handwave[1..])
+        ex(handwave[1..], statement)
       else
         raise "unrecognized: #{handwave}"
       end
