@@ -53,9 +53,9 @@ class Handwaves
   end
 
   def check(statement)
-    @heap = @context.heap.to_a.map(&:to_s)
+    @heap = @context.heap.to_a
     @statement = statement
-    @antecedent = @heap.first
+    @antecedent = @heap.first.to_s
     raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
       case handwave
       when /^[:]/
