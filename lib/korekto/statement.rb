@@ -195,7 +195,7 @@ class Statement
     set_statement
   end
 
-  # When the above methods are unwieldy... 
+  # When the above methods are unwieldy...
   def handwave
     expected_instantiations(n:0)
     @context.handwaves.check(@statement)

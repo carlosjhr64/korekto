@@ -2,8 +2,8 @@ module KorektoPlug
   KOREKTO = `which korekto`.strip
   VERSION = `#{KOREKTO} --version`.strip
 
-  def self.korekto(nvim, options='')
-    validations = nvim.command_output("w !#{KOREKTO} #{options}")
+  def self.korekto(nvim)
+    validations = nvim.command_output("w !#{KOREKTO}")
                   .strip.split("\n").map(&:strip)
     msg = "Korekto! #{VERSION}"
     unless validations.empty?
@@ -33,6 +33,5 @@ module KorektoPlug
 
   Neovim.plugin do |plug|
     plug.command(:Korekto){|nvim| KorektoPlug.korekto(nvim)}
-    plug.command(:KorektoPatch){|nvim| KorektoPlug.korekto(nvim, '--patch')}
   end
 end
