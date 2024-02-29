@@ -3,7 +3,7 @@ class Main
   # rubocop: disable Layout/LineLength
   MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)(\s+(?<title>[^#]+))?$}
   MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
-  MD_RULE = /^[?] (?<rule>\S.*)$/
+  MD_SYNTAX = /^[?] (?<syntax>\S.*)$/
   MD_TYPE_PATTERN = %r{^! (?<type>\S+)\s+/(?<pattern>.*)/$}
   MD_TYPE_VARIABLES = /^! (?<type>\S+)\s+\{(?<variables>\S+( \S+)*)\}$/
   MD_KEY_VALUE = /^! (?<key>\w+):\s+'(?<value>.*)'$/
@@ -76,8 +76,8 @@ class Main
         Main.new(filename, statements:@statements, imports:@imports).run
         @statements.heap.to_a.replace(tmp)
       end
-    when MD_RULE
-      @statements.syntax.push $~[:rule].strip
+    when MD_SYNTAX
+      @statements.syntax.push $~[:syntax].strip
     when MD_TYPE_PATTERN
       type_pattern($~[:type], $~[:pattern])
     when MD_TYPE_VARIABLES

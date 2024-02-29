@@ -121,8 +121,8 @@ MD_FILENAME
 MD_FUNCTION
 MD_HANDWAVE
 MD_KEY_VALUE
-MD_RULE
 MD_STATEMENT_CODE_TITLE
+MD_SYNTAX
 MD_TYPE_PATTERN
 MD_TYPE_VARIABLES
 message
@@ -171,7 +171,6 @@ rgx
 rtight
 Ruby33
 rule
-Rules
 run
 RuntimeError
 s
@@ -215,6 +214,7 @@ support
 symbols
 Symbols
 syntax
+Syntax
 system
 t
 t2p

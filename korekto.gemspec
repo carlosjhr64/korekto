@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   ## INFO ##
   s.name     = 'korekto'
-  s.version  = '3.0.240228'
+  s.version  = '3.0.240229'
   s.homepage = 'https://github.com/carlosjhr64/korekto'
   s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
-  s.date     = '2024-02-28'
+  s.date     = '2024-02-29'
   s.licenses = ['MIT']
   ## DESCRIPTION ##
   s.summary  = <<~SUMMARY
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     lib/korekto.rb
     lib/korekto/heap.rb
     lib/korekto/main.rb
+    lib/korekto/refinements.rb
     lib/korekto/statement.rb
     lib/korekto/statements.rb
     lib/korekto/symbols.rb
