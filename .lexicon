@@ -107,6 +107,7 @@ line_number
 lines
 literal_regexp
 load
+LoadError
 local_pack
 ltight
 m
