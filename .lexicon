@@ -58,6 +58,7 @@ existential
 exit
 expand_path
 expected_instantiations
+extname
 File
 filename
 FileUtils

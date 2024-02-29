@@ -8,6 +8,7 @@ dirname
 divmod
 dxsptcrh
 elsif
+extname
 fileutils
 gemspec
 gettysburg
