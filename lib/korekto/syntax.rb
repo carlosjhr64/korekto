@@ -5,26 +5,26 @@ class Syntax
 
   using Refinements
 
-  def push(s)
-    raise Error, 'duplicate syntax' if @syntax.include?(s)
+  def push(rule)
+    raise Error, 'duplicate syntax' if @syntax.include?(rule)
     # ensure it'll eval on string and returns boolean
-    b = ''.instance_eval(s)
+    b = ''.instance_eval(rule)
     # rubocop: disable Style/DoubleNegation
     raise Error, 'syntax must eval boolean' unless b==!!b
     # rubocop: enable Style/DoubleNegation
-    @syntax.push(s)
+    @syntax.push(rule)
   rescue StandardError
     raise if $!.is_a? Error
-    raise Error, "#{$!.class}: #{s}"
+    raise Error, "#{$!.class}: #{rule}"
   end
 
-  def detect(statement, boolean)
-    @syntax.detect do |syntax|
-        statement.instance_eval(syntax) == boolean
+  def check(statement)
+    rule = @syntax.detect do |rule|
+      !statement.instance_eval rule
     rescue StandardError
-      raise if $!.is_a? Error # Why would it be this?
-      raise Error, "#{$!.class}: #{syntax}"
+      raise Error, "#{$!.class}: #{rule}"
     end
+    raise Error, "syntax: #{rule}" if rule
   end
 end
 end
