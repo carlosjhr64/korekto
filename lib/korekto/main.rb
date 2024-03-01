@@ -71,19 +71,19 @@ class Main
     case @line
     when MD_FILENAME
       filename = $~[:filename].strip
+      raise Error, "duplicate import: #{filename}" if @imports.include? filename
       case File.extname(filename)
       when '.rb'
         begin
           require filename
+          @imports.push filename
         rescue LoadError
           raise Error, $!.message
         end
       else
-        unless @imports.include? filename
-          tmp = @statements.heap.to_a.slice!(0..-1)
-          Main.new(filename, statements:@statements, imports:@imports).run
-          @statements.heap.to_a.replace(tmp)
-        end
+        tmp = @statements.heap.to_a.slice!(0..-1)
+        Main.new(filename, statements:@statements, imports:@imports).run
+        @statements.heap.to_a.replace(tmp)
       end
     when MD_SYNTAX
       @statements.syntax.push $~[:syntax].strip
