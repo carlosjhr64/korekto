@@ -10,7 +10,7 @@ Imported by:
 * [Notes](#Notes)
 * [Syntax](#Syntax)
 * [Patterns](#Patterns)
-* [Definitions](#Defintions)
+* [Definitions](#Definitions)
 * [Grouping](#Grouping)
 * [Algebra](#Algebra)
 * [Functions](#Functions)
