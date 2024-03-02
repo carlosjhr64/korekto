@@ -15,6 +15,7 @@ backtrace
 backup
 balanced
 basename
+bn
 c
 chars
 check
@@ -247,4 +248,5 @@ VERSION
 w
 warn
 x
+xt
 zero

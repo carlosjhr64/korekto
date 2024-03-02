@@ -16,11 +16,11 @@ class Main
 
   def initialize(filename='-', statements: Statements.new, imports: [])
     @filename,@statements,@imports = filename,statements,imports
-    @imports.push @filename.freeze
-    @line,@active = nil,false
+    @filename.freeze
     @section = File.basename(@filename,'.*')
+    @imports.push @section
     @m_fence_korekto = /^```korekto$/ # default fence
-    @backups = {}
+    @line,@active,@backups = nil,false,{}
   end
 
   def t2p_gsub(target, replacement)
@@ -71,12 +71,13 @@ class Main
     case @line
     when MD_FILENAME
       filename = $~[:filename].strip
-      raise Error, "duplicate import: #{filename}" if @imports.include? filename
-      case File.extname(filename)
+      bn,xt = File.basename(filename,'.*'),File.extname(filename)
+      raise Error, "duplicate import: #{bn}" if @imports.include? bn
+      case xt
       when '.rb'
         begin
           require filename
-          @imports.push filename
+          @imports.push bn
         rescue LoadError
           raise Error, $!.message
         end
