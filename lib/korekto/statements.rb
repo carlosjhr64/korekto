@@ -14,6 +14,7 @@ class Statements
   def type(c)  = @statements.values.select{_1.type==c}
   def length   = @statements.length
   def patterns = @statements.values.select(&:pattern?).each{yield _1}
+  def get(key) = @statements[key]
 
   def add(statement,code,title,filename)
     c = code[0]; w = c=='W'

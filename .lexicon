@@ -17,6 +17,7 @@ balanced
 basename
 bn
 c
+captures
 chars
 check
 chomp
@@ -68,6 +69,7 @@ follows
 freeze
 function
 g
+get
 gsub
 handle_options
 handwave

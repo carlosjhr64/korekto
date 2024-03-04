@@ -96,6 +96,13 @@ class Statement
   end
 
   def heap_combos_search(type)
+    if (md = %r{/([^,]+),([^,]+),([^,]+)$}.match @code)
+      inference,s1,s2 = md.captures.map{@context.get _1.to_sym}
+      if inference
+        compound = [s1,s2,@statement].join("\n")
+        return inference,s1,s2 if inference.match?(compound)
+      end
+    end
     @context.heap.combos do |s1, s2|
       compound = [s1,s2,@statement].join("\n")
       @context.type(type).each do |inference|
