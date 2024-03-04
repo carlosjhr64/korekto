@@ -1,11 +1,11 @@
 module Korekto
 class Statement
-  attr_reader :code,:title,:regexp,:section,:statement_number
+  attr_reader :code,:title,:regexp,:section,:statement_number,:key
 
   # rubocop: disable Metrics/ParameterLists
   def initialize(statement,code,title,section,statement_number,context)
-    @statement,@code,@title,@section,@statement_number,@context,@regexp =
-      statement,code,title,section,statement_number,context,nil
+    @statement,@code,@title,@section,@statement_number,@context,@regexp,@key =
+      statement,code,title,section,statement_number,context,nil,nil
     @statement.freeze; @section.freeze; @statement_number.freeze
     @title = @title.split(':',2).first if @title
     set_acceptance_code
@@ -72,6 +72,7 @@ class Statement
   def set_statement(support=nil, title=nil, undefined:nil)
     @code = "#{@code[0]}#{@statement_number}"
     @code += '.' + @section unless @section=='-'
+    @key = @code.to_sym
     @code += "/#{support}" if support
     @title = title if (title=title&.split(':',2)&.first) && !title.empty?
     @title = "#{@title}: #{undefined.join(' ')}" if undefined

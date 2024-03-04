@@ -3,7 +3,7 @@ class Statements
   attr_reader :heap,:symbols,:syntax,:handwaves,:last
 
   def initialize
-    @statements = []
+    @statements = {}
     @heap = Heap.new Korekto.heap
     @symbols = Symbols.new
     @syntax = Syntax.new
@@ -11,16 +11,19 @@ class Statements
     @last = nil
   end
 
-  def type(c)  = @statements.select{_1.type==c}
+  def type(c)  = @statements.values.select{_1.type==c}
   def length   = @statements.length
-  def patterns = @statements.select(&:pattern?).each{yield _1}
+  def patterns = @statements.values.select(&:pattern?).each{yield _1}
 
   def add(statement,code,title,filename)
     c = code[0]; w = c=='W'
     @syntax.check(statement) unless statement[0]=='/' &&
                                     statement[-1]=='/' &&
                                     %w[A L M E I].include?(c)
-    if (restatement=@statements.detect{(w || _1.type==c) && _1.to_s==statement})
+    restatement = @statements.values.detect do |restatement|
+      (w || restatement.type==c) && restatement.to_s==statement
+    end
+    if restatement
       unless 'DXSPTCRH'.include?(restatement.type)
         # Only allow heap-able statements to be restated.
         raise Error, "restatement: #{restatement.code}"
@@ -32,7 +35,7 @@ class Statements
     end
     statement_number = yield
     @last=Statement.new(statement,code,title,filename,statement_number,self)
-    @statements.push @last
+    @statements[@last.key] = @last
     @symbols.define! @last if 'AIEMLDXS'.include?(@last.type)
     @heap.add @last if 'DXSPTCRH'.include?(@last.type)
     [@last.code, @last.title]
