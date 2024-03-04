@@ -1,6 +1,6 @@
 module Korekto
 class Statements
-  attr_reader :heap,:symbols,:syntax,:handwaves
+  attr_reader :heap,:symbols,:syntax,:handwaves,:last
 
   def initialize
     @statements = []
@@ -8,11 +8,11 @@ class Statements
     @symbols = Symbols.new
     @syntax = Syntax.new
     @handwaves = Handwaves.new(self)
+    @last = nil
   end
 
   def type(c)  = @statements.select{_1.type==c}
   def length   = @statements.length
-  def last     = @statements.last
   def patterns = @statements.select(&:pattern?).each{yield _1}
 
   def add(statement,code,title,filename)
@@ -31,11 +31,11 @@ class Statements
       return code, title
     end
     statement_number = yield
-    statement=Statement.new(statement,code,title,filename,statement_number,self)
-    @statements.push statement
-    @symbols.define! statement if 'AIEMLDXS'.include?(statement.type)
-    @heap.add statement if 'DXSPTCRH'.include?(statement.type)
-    [statement.code, statement.title]
+    @last=Statement.new(statement,code,title,filename,statement_number,self)
+    @statements.push @last
+    @symbols.define! @last if 'AIEMLDXS'.include?(@last.type)
+    @heap.add @last if 'DXSPTCRH'.include?(@last.type)
+    [@last.code, @last.title]
   end
 end
 end
