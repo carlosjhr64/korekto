@@ -113,6 +113,13 @@ class Statement
   end
 
   def heap_search(type)
+    if (md = %r{/([^,]+),([^,]+)$}.match @code)
+      s0,s1 = md.captures.map{@context.get _1.to_sym}
+      if s0
+        compound = [s1,@statement].join("\n")
+        return s0,s1 if s0.match?(compound)
+      end
+    end
     @context.heap.each do |s1|
       compound = [s1,@statement].join("\n")
       @context.type(type).each do |s0|
