@@ -198,7 +198,7 @@ RowVectors : {ʳ ˢ ᵗ ᵘ}	#S6/L1.KorektoMath ≝: RowVectors ʳ ˢ ᵗ ᵘ
 # The squash function in Ruby is:
 #     1 / (1 + Math.exp(-𝑥))
 # Here its:
-⌈𝑥 = 1 / 1+⌉-𝑥	#T59/A266.KorektoMath Squash
+⌈𝑥 = 1 / 1+⌉-𝑥	#T59/A267.KorektoMath Squash
 ⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R60/M113.KorektoMath,T59 _a+b$ → ♭(a♭+♭b)$
 # Alternate
 ⌈𝑥 = ⌉𝑥*1 / ⌉𝑥*(1 + ⌉-𝑥)	#R61/M198.KorektoMath,R60 _x*a_/_x*b$
@@ -243,7 +243,7 @@ RowVectors : {ʳ ˢ ᵗ ᵘ}	#S6/L1.KorektoMath ≝: RowVectors ʳ ˢ ᵗ ᵘ
 ⌈1 = 𝖊 / 1+𝖊	#C93/I223.KorektoMath,C92,T89 a=b,2*a→b
 # Consider ⌈-𝑥
 ⌈-𝑥 = ⌈-𝑥	#T94/A178.KorektoMath Reflection
-⌈-𝑥 = 1 / 1+⌉--𝑥	#T95/A266.KorektoMath Squash
+⌈-𝑥 = 1 / 1+⌉--𝑥	#T95/A267.KorektoMath Squash
 ⌈-𝑥 = 1 / 1+⌉𝑥	#R96/M256.KorektoMath,T95 --a→a
 # Then:
 1-⌈𝑥 = ⌈-𝑥	#C97/I182.KorektoMath,R96,R75 a=b;c=b;c=a
@@ -266,161 +266,160 @@ RowVectors : {ʳ ˢ ᵗ ᵘ}	#S6/L1.KorektoMath ≝: RowVectors ʳ ˢ ᵗ ᵘ
 𝓓ₓ⌈𝑥 = 𝓓ₓ⌈𝑥	#T110/A178.KorektoMath Reflection
 𝓓ₓ⌈𝑥 = 𝓓ₓ(⌈𝑥)	#R111/M104.KorektoMath,T110 a → (a)
 𝓓ₓ⌈𝑥 = 𝓓ₓ(1 / 1+⌉-𝑥)	#C112/I240.KorektoMath,T59,R111 G=F,(G)→(F)
-𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T113/A274.KorektoMath From quotient rule
+𝓓ₓ(1 / 1+⌉-𝑥) = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#T113/A275.KorektoMath From quotient rule
 𝓓ₓ⌈𝑥 = -𝓓ₓ⌉-𝑥 / (1+⌉-𝑥)²	#C114/I244.KorektoMath,T113,C112 G=F, +_G$ → +_F$
 # Consider 𝓓ₓ⌉-𝑥
 𝓓ₓ⌉-𝑥 = 𝓓ₓ⌉-𝑥	#T115/A178.KorektoMath Reflection
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(⌉-𝑥)	#R116/M104.KorektoMath,T115 a → (a)
 ⌉-𝑥 = 𝖊∧-𝑥	#T117/A97.KorektoMath Exp
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(𝖊∧-𝑥)	#C118/I240.KorektoMath,T117,R116 G=F,(G)→(F)
-𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T119/A276.KorektoMath D(e^x)=D(x)e^x
+𝓓ₓ(𝖊∧-𝑥) = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#T119/A277.KorektoMath D(e^x)=D(x)e^x
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)𝖊∧-𝑥	#C120/I231.KorektoMath,T119,C118 g=f,_g$→_f$
 𝓓ₓ⌉-𝑥 = 𝓓ₓ(-𝑥)*𝖊∧-𝑥	#R121/M175.KorektoMath,C120 Explicit*
-𝓓ₓ(-𝑥) = -1	#R122/M279.KorektoMath,S109 𝓓ₓ-𝑥=-1
+𝓓ₓ(-𝑥) = -1	#R122/M280.KorektoMath,S109 𝓓ₓ-𝑥=-1
 𝓓ₓ⌉-𝑥 = -1*𝖊∧-𝑥	#C123/I222.KorektoMath,R122,R121 a=b,a→b
-𝓓ₓ⌉-𝑥 = -𝖊∧-𝑥	#R124/M186.KorektoMath,C123 _1*
-𝓓ₓ⌉-𝑥 = (-𝖊∧-𝑥)	#R125/M151.KorektoMath,R124 _g$ → ♭(g)$
--𝓓ₓ⌉-𝑥 = (𝖊∧-𝑥)	#R126/M257.KorektoMath,R125 a=-b;-a=-b
+𝓓ₓ⌉-𝑥 = -1*(𝖊∧-𝑥)	#R124/M172.KorektoMath,C123 a^b → (a^b)
+-𝓓ₓ⌉-𝑥 = (𝖊∧-𝑥)	#R125/M265.KorektoMath,R124 a=-1*b→-a=b
 # Substituting
-𝓓ₓ⌈𝑥 = (𝖊∧-𝑥) / (1+⌉-𝑥)²	#C127/I222.KorektoMath,R126,C114 a=b,a→b
-𝓓ₓ⌈𝑥 = 𝖊∧-𝑥 / (1+⌉-𝑥)²	#R128/M148.KorektoMath,C127 ♭(g)♭ → _g_
-𝓓ₓ⌈𝑥 = ⌉-𝑥 / (1+⌉-𝑥)²	#C129/I230.KorektoMath,T117,R128 g=f,_f_→_g_
-𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥)²	#R130/M119.KorektoMath,C129 _a_*_b$ → _a*b$
-𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥) 1/(1+⌉-𝑥)	#R131/M206.KorektoMath,R130 _a/b²$→_a/b_1/b$
+𝓓ₓ⌈𝑥 = (𝖊∧-𝑥) / (1+⌉-𝑥)²	#C126/I222.KorektoMath,R125,C114 a=b,a→b
+𝓓ₓ⌈𝑥 = 𝖊∧-𝑥 / (1+⌉-𝑥)²	#R127/M148.KorektoMath,C126 ♭(g)♭ → _g_
+𝓓ₓ⌈𝑥 = ⌉-𝑥 / (1+⌉-𝑥)²	#C128/I230.KorektoMath,T117,R127 g=f,_f_→_g_
+𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥)²	#R129/M119.KorektoMath,C128 _a_*_b$ → _a*b$
+𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥) 1/(1+⌉-𝑥)	#R130/M206.KorektoMath,R129 _a/b²$→_a/b_1/b$
 ⌈𝑥 = 1 / (1 + ⌉-𝑥)	#R60/M113.KorektoMath,T59 _a+b$ → ♭(a♭+♭b)$
-⌈𝑥 = 1 / (1+⌉-𝑥)	#R132/M110.KorektoMath,R60 (a_+_b) → (a+b)
-⌈𝑥 = 1/(1+⌉-𝑥)	#R133/M119.KorektoMath,R132 _a_*_b$ → _a*b$
-𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥) ⌈𝑥	#C134/I232.KorektoMath,R133,R131 g=f,_f$→_g$
-⌈-𝑥 = ⌉-𝑥 / 1+⌉-𝑥	#T135/A69 Alternate Squash
-⌈-𝑥 = ⌉-𝑥 / (1+⌉-𝑥)	#R136/M113.KorektoMath,T135 _a+b$ → ♭(a♭+♭b)$
-⌈-𝑥 = ⌉-𝑥/(1+⌉-𝑥)	#R137/M119.KorektoMath,R136 _a_*_b$ → _a*b$
-𝓓ₓ⌈𝑥 = ⌈-𝑥 ⌈𝑥	#C138/I230.KorektoMath,R137,C134 g=f,_f_→_g_
-𝓓ₓ⌈𝑥 = 1-⌈𝑥 ⌈𝑥	#C139/I229.KorektoMath,R99,C138 g=f,_g_→_f_
-𝓓ₓ⌈𝑥 = (1-⌈𝑥) ⌈𝑥	#R140/M116.KorektoMath,C139 _a+b_ → ♭(a♭+♭b)♭
-𝓓ₓ⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#R141/M175.KorektoMath,R140 Explicit*
-𝓑⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#T142/A268.KorektoMath Binary balance
-𝓓ₓ⌈𝑥 = 𝓑⌈𝑥	#C143/I182.KorektoMath,T142,R141 a=b;c=b;c=a
+⌈𝑥 = 1 / (1+⌉-𝑥)	#R131/M110.KorektoMath,R60 (a_+_b) → (a+b)
+⌈𝑥 = 1/(1+⌉-𝑥)	#R132/M119.KorektoMath,R131 _a_*_b$ → _a*b$
+𝓓ₓ⌈𝑥 = ⌉-𝑥/(1+⌉-𝑥) ⌈𝑥	#C133/I232.KorektoMath,R132,R130 g=f,_f$→_g$
+⌈-𝑥 = ⌉-𝑥 / 1+⌉-𝑥	#T134/A69 Alternate Squash
+⌈-𝑥 = ⌉-𝑥 / (1+⌉-𝑥)	#R135/M113.KorektoMath,T134 _a+b$ → ♭(a♭+♭b)$
+⌈-𝑥 = ⌉-𝑥/(1+⌉-𝑥)	#R136/M119.KorektoMath,R135 _a_*_b$ → _a*b$
+𝓓ₓ⌈𝑥 = ⌈-𝑥 ⌈𝑥	#C137/I230.KorektoMath,R136,C133 g=f,_f_→_g_
+𝓓ₓ⌈𝑥 = 1-⌈𝑥 ⌈𝑥	#C138/I229.KorektoMath,R99,C137 g=f,_g_→_f_
+𝓓ₓ⌈𝑥 = (1-⌈𝑥) ⌈𝑥	#R139/M116.KorektoMath,C138 _a+b_ → ♭(a♭+♭b)♭
+𝓓ₓ⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#R140/M175.KorektoMath,R139 Explicit*
+𝓑⌈𝑥 = (1-⌈𝑥)*⌈𝑥	#T141/A269.KorektoMath Binary balance
+𝓓ₓ⌈𝑥 = 𝓑⌈𝑥	#C142/I182.KorektoMath,T141,R140 a=b;c=b;c=a
 ```
 ### Unsquash
 ```korekto
 # The unsquash function in Ruby is:
 #   Math.log(𝑥 / (1 - 𝑥))
 # Here  its:
-⌋𝑥 = ⌊ 𝑥/(1-𝑥)	#T144/A267.KorektoMath Unsquash
+⌋𝑥 = ⌊ 𝑥/(1-𝑥)	#T143/A268.KorektoMath Unsquash
 # Show that unsquash is the inverse of squash(⌋⌈=1):
-⌋⌈𝑥 = ⌋⌈𝑥	#T145/A178.KorektoMath Reflection
-⌋⌈𝑥 = ⌊ ⌈𝑥/(1-⌈𝑥)	#T146/A267.KorektoMath Unsquash
-⌊ ⌈𝑥/(1-⌈𝑥) = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#T147/A265.KorektoMath ⌊(a/b)=⌊a-⌊b
-⌋⌈𝑥 = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#C148/I244.KorektoMath,T147,T146 G=F, +_G$ → +_F$
-⌋⌈𝑥 = ⌊(⌈𝑥) - ⌊(1-⌈𝑥)	#R149/M104.KorektoMath,C148 a → (a)
+⌋⌈𝑥 = ⌋⌈𝑥	#T144/A178.KorektoMath Reflection
+⌋⌈𝑥 = ⌊ ⌈𝑥/(1-⌈𝑥)	#T145/A268.KorektoMath Unsquash
+⌊ ⌈𝑥/(1-⌈𝑥) = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#T146/A266.KorektoMath ⌊(a/b)=⌊a-⌊b
+⌋⌈𝑥 = ⌊⌈𝑥 - ⌊(1-⌈𝑥)	#C147/I244.KorektoMath,T146,T145 G=F, +_G$ → +_F$
+⌋⌈𝑥 = ⌊(⌈𝑥) - ⌊(1-⌈𝑥)	#R148/M104.KorektoMath,C147 a → (a)
 ⌈𝑥 = ⌉𝑥 / 1+⌉𝑥	#R68/M112.KorektoMath,R67 ♭(a♭+♭b)$ → _a+b$
-⌋⌈𝑥 = ⌊(⌉𝑥 / 1+⌉𝑥) - ⌊(1-⌈𝑥)	#C150/I240.KorektoMath,R68,R149 G=F,(G)→(F)
-⌋⌈𝑥 = ⌊ ⌉𝑥/(1+⌉𝑥) - ⌊(1-⌈𝑥)	#R151/M136.KorektoMath,C150 ♭(a_*_g)♭ → _a*(g)_
-⌊ ⌉𝑥/(1+⌉𝑥) = ⌊⌉𝑥 - ⌊(1+⌉𝑥)	#T152/A265.KorektoMath ⌊(a/b)=⌊a-⌊b
+⌋⌈𝑥 = ⌊(⌉𝑥 / 1+⌉𝑥) - ⌊(1-⌈𝑥)	#C149/I240.KorektoMath,R68,R148 G=F,(G)→(F)
+⌋⌈𝑥 = ⌊ ⌉𝑥/(1+⌉𝑥) - ⌊(1-⌈𝑥)	#R150/M136.KorektoMath,C149 ♭(a_*_g)♭ → _a*(g)_
+⌊ ⌉𝑥/(1+⌉𝑥) = ⌊⌉𝑥 - ⌊(1+⌉𝑥)	#T151/A266.KorektoMath ⌊(a/b)=⌊a-⌊b
 ⌊⌉𝑥 = 𝑥	#R52/M105.KorektoMath,R51 (a) → a
-⌊ ⌉𝑥/(1+⌉𝑥) = 𝑥 - ⌊(1+⌉𝑥)	#C153/I222.KorektoMath,R52,T152 a=b,a→b
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊(1-⌈𝑥)	#C154/I246.KorektoMath,C153,R151 G=F, +_G_+ → +_F_+
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-⌈𝑥	#R155/M112.KorektoMath,C154 ♭(a♭+♭b)$ → _a+b$
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-(⌈𝑥)	#R156/M104.KorektoMath,R155 a → (a)
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-(⌉𝑥 / 1+⌉𝑥)	#C157/I240.KorektoMath,R68,R156 G=F,(G)→(F)
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R158/M205.KorektoMath,C157 _1±(a_/_g) → (g±a / g)
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ (1 / 1+⌉𝑥)	#R159/M192.KorektoMath,R158 +a-a_
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1/(1+⌉𝑥)	#R160/M138.KorektoMath,R159 ♭(a_*_g)$ → _a*(g)$
-⌊ 1/(1+⌉𝑥) = ⌊1 - ⌊(1+⌉𝑥)	#T161/A265.KorektoMath ⌊(a/b)=⌊a-⌊b
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊1 - ⌊(1+⌉𝑥)	#C162/I244.KorektoMath,T161,R160 G=F, +_G$ → +_F$
+⌊ ⌉𝑥/(1+⌉𝑥) = 𝑥 - ⌊(1+⌉𝑥)	#C152/I222.KorektoMath,R52,T151 a=b,a→b
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊(1-⌈𝑥)	#C153/I246.KorektoMath,C152,R150 G=F, +_G_+ → +_F_+
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-⌈𝑥	#R154/M112.KorektoMath,C153 ♭(a♭+♭b)$ → _a+b$
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-(⌈𝑥)	#R155/M104.KorektoMath,R154 a → (a)
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1-(⌉𝑥 / 1+⌉𝑥)	#C156/I240.KorektoMath,R68,R155 G=F,(G)→(F)
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ (1+⌉𝑥-⌉𝑥 / 1+⌉𝑥)	#R157/M205.KorektoMath,C156 _1±(a_/_g) → (g±a / g)
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ (1 / 1+⌉𝑥)	#R158/M192.KorektoMath,R157 +a-a_
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊ 1/(1+⌉𝑥)	#R159/M138.KorektoMath,R158 ♭(a_*_g)$ → _a*(g)$
+⌊ 1/(1+⌉𝑥) = ⌊1 - ⌊(1+⌉𝑥)	#T160/A266.KorektoMath ⌊(a/b)=⌊a-⌊b
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - ⌊1 - ⌊(1+⌉𝑥)	#C161/I244.KorektoMath,T160,R159 G=F, +_G$ → +_F$
 ⌊1 = 0	#C58/I231.KorektoMath,R57,T55 a=b,_a$→_b$
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - 0 - ⌊(1+⌉𝑥)	#C163/I222.KorektoMath,C58,C162 a=b,a→b
-⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) + ⌊(1+⌉𝑥)	#R164/M196.KorektoMath,C163 ±0± → +
-⌋⌈𝑥 = 𝑥	#R165/M191.KorektoMath,R164 -a+a$ → $
-⌋⌈𝓍 = 𝓍	#A166/R165 Inverse
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) - 0 - ⌊(1+⌉𝑥)	#C162/I222.KorektoMath,C58,C161 a=b,a→b
+⌋⌈𝑥 = 𝑥 - ⌊(1+⌉𝑥) + ⌊(1+⌉𝑥)	#R163/M196.KorektoMath,C162 ±0± → +
+⌋⌈𝑥 = 𝑥	#R164/M191.KorektoMath,R163 -a+a$ → $
+⌋⌈𝓍 = 𝓍	#A165/R164 Inverse
 # Likewise:
-⌈⌋𝓍 = 𝓍	#A167 Inverse
+⌈⌋𝓍 = 𝓍	#A166 Inverse
 ```
 ### Activation and value of a neuron
 ```korekto
 # The activation of the r-th Neuron(in level r connecting to level s): ᵢ ⱼ ˢ ʲ 
-ᵢ₊ = ⱼ;𝒂ᵢ = ⌈ 𝒃ᵢ+∑ⱼ(𝑪ᵢⱼ𝒂ⱼ)	#M168 Activation
+ᵢ₊ = ⱼ;𝒂ᵢ = ⌈ 𝒃ᵢ+∑ⱼ(𝑪ᵢⱼ𝒂ⱼ)	#M167 Activation
 ᵣ₊ = ₛ	#R7/M6.KorektoMath,S5 Next
-𝒂ᵣ = ⌈ 𝒃ᵣ+∑ₛ(𝑾ᵣₛ𝒂ₛ)	#R169/M168,R7 Activation
+𝒂ᵣ = ⌈ 𝒃ᵣ+∑ₛ(𝑾ᵣₛ𝒂ₛ)	#R168/M167,R7 Activation
 ₛ → ˢ	#C11/I11.KorektoMath,S5,S6 2nd
-∑ₛ(𝑾ᵣₛ𝒂ₛ) = 𝑾ᵣˢ𝒂ₛ	#R170/M280.KorektoMath,C11 Einstein notation
-𝒂ᵣ = ⌈ 𝒃ᵣ+(𝑾ᵣˢ𝒂ₛ)	#C171/I235.KorektoMath,R170,R169 a=G,a→(G)
-𝒂ᵣ = ⌈ 𝒃ᵣ+𝑾ᵣˢ𝒂ₛ	#R172/M144.KorektoMath,C171 *(ab)$ → *ab$
+∑ₛ(𝑾ᵣₛ𝒂ₛ) = 𝑾ᵣˢ𝒂ₛ	#R169/M281.KorektoMath,C11 Einstein notation
+𝒂ᵣ = ⌈ 𝒃ᵣ+(𝑾ᵣˢ𝒂ₛ)	#C170/I235.KorektoMath,R169,R168 a=G,a→(G)
+𝒂ᵣ = ⌈ 𝒃ᵣ+𝑾ᵣˢ𝒂ₛ	#R171/M144.KorektoMath,C170 *(ab)$ → *ab$
 # The above is correct. Now, how to cleanly loose the labels?
-𝒂 = ⌈ 𝒃+𝑾𝒂₊	#H173 Hide labels
+𝒂 = ⌈ 𝒃+𝑾𝒂₊	#H172 Hide labels
 # The value of the h-th Neuron is the unsquashed activation:
-⌋𝒂 = ⌋⌈ 𝒃+𝑾𝒂₊	#R174/M260.KorektoMath,H173 x_=_G_g;Fx_=_FG_g
-⌋⌈(𝒃+𝑾𝒂₊) = (𝒃+𝑾𝒂₊)	#T175/A166 Inverse
-⌋⌈(𝒃+𝑾𝒂₊) = 𝒃+𝑾𝒂₊	#R176/M150.KorektoMath,T175 ♭(g)$ → _g$
-⌋⌈ 𝒃+𝑾𝒂₊ = 𝒃+𝑾𝒂₊	#R177/M148.KorektoMath,R176 ♭(g)♭ → _g_
-⌋𝒂 = 𝒃+𝑾𝒂₊	#C178/I244.KorektoMath,R177,R174 G=F, +_G$ → +_F$
+⌋𝒂 = ⌋⌈ 𝒃+𝑾𝒂₊	#R173/M260.KorektoMath,H172 x_=_G_g;Fx_=_FG_g
+⌋⌈(𝒃+𝑾𝒂₊) = (𝒃+𝑾𝒂₊)	#T174/A165 Inverse
+⌋⌈(𝒃+𝑾𝒂₊) = 𝒃+𝑾𝒂₊	#R175/M150.KorektoMath,T174 ♭(g)$ → _g$
+⌋⌈ 𝒃+𝑾𝒂₊ = 𝒃+𝑾𝒂₊	#R176/M148.KorektoMath,R175 ♭(g)♭ → _g_
+⌋𝒂 = 𝒃+𝑾𝒂₊	#C177/I244.KorektoMath,R176,R173 G=F, +_G$ → +_F$
 # Neuron's value
-𝒗 : ⌋𝒂	#S179/L1.KorektoMath ≝: 𝒗
-𝒗 = 𝒃+𝑾𝒂₊	#C180/I179.KorektoMath,S179,C178 a=b;b=c;a=c
+𝒗 : ⌋𝒂	#S178/L1.KorektoMath ≝: 𝒗
+𝒗 = 𝒃+𝑾𝒂₊	#C179/I179.KorektoMath,S178,C177 a=b;b=c;a=c
 # Explicit 𝒗
-𝒗ᵣ = 𝒃ᵣ+𝑾ᵣˢ𝒂ₛ	#H181 Reveal labels
+𝒗ᵣ = 𝒃ᵣ+𝑾ᵣˢ𝒂ₛ	#H180 Reveal labels
 ```
 ### Mirroring
 ```korekto
 # The bias and weight of a neuron that roughly mirrors the value of another:
-𝕧 : {-1 0 1}	#S182/L1.KorektoMath ≝: 𝕧
-𝖇+𝖜*⌈𝕧 : 𝕧	#S183/L1.KorektoMath ≝: 𝖇 𝖜
-𝕧[0]	#R184/M4.KorektoMath,S182 Membership
-𝕧 = 𝖇+𝖜*⌈𝕧	#R185/M177.KorektoMath,S183 Symmetry
-0 = 𝖇+𝖜*⌈0	#H186 Case 0∊𝕧
+𝕧 : {-1 0 1}	#S181/L1.KorektoMath ≝: 𝕧
+𝖇+𝖜*⌈𝕧 : 𝕧	#S182/L1.KorektoMath ≝: 𝖇 𝖜
+𝕧[0]	#R183/M4.KorektoMath,S181 Membership
+𝕧 = 𝖇+𝖜*⌈𝕧	#R184/M177.KorektoMath,S182 Symmetry
+0 = 𝖇+𝖜*⌈0	#H185 Case 0∊𝕧
 ⌈0 = ½	#C87/I182.KorektoMath,S209.KorektoMath,R86 a=b;c=b;c=a
-0 = 𝖇+𝖜*½	#C187/I222.KorektoMath,C87,H186 a=b,a→b
-0 = 𝖇+½𝖜	#R188/M210.KorektoMath,C187 a*½→½a
--𝖇 = ½𝖜	#R189/M258.KorektoMath,R188 0=b+g→-b=g
-𝖇 = -½𝖜	#R190/M262.KorektoMath,R189 -a=bc→a=-bc
--½𝖜 = 𝖇	#R191/M177.KorektoMath,R190 Symmetry
-𝖜 = -2𝖇	#R192/M211.KorektoMath,R190 a=½b→b=2a
-𝕧[1]	#R193/M4.KorektoMath,S182 Membership
-𝕧 = 𝖇+𝖜*⌈𝕧	#R185/M177.KorektoMath,S183 ≝→=
-1 = 𝖇+𝖜*⌈1	#H194 Case 1∊𝕧
-1 = 𝖇 + 𝖜*⌈1	#R195/M168.KorektoMath,H194 +_g+f$ → +_g_+_f$
-1 = -½𝖜 + 𝖜*⌈1	#C196/I230.KorektoMath,R191,R195 g=f,_f_→_g_
-1 = -½𝖜 + 𝖜⌈1	#R197/M176.KorektoMath,C196 Implied*
-1 = 𝖜⌈1 + -½𝖜	#R198/M255.KorektoMath,R197 _g_+_f$→_f_+_g$
-1 = 𝖜⌈1 - ½𝖜	#R199/M251.KorektoMath,R198 _g_+_-f$→_g_-_f$
-1 = 𝖜(⌈1 - ½)	#R200/M220.KorektoMath,R199 _ab_+Na$→_a(b+N)$
-𝖜 = 1/(⌈1 - ½)	#R201/M263.KorektoMath,R200 1=ab→a=1/b
-𝖜 = 1 / ⌈1-½	#R202/M124.KorektoMath,R201 _a/(b♭+♭c)$→_a_/_b+c$
-𝖜 = -2 / 1-2⌈1	#R203/M213.KorektoMath,R202 _1_/_a-½$→_-2_/_1-2a
-𝖇 = -½𝖜	#R190/M262.KorektoMath,R189 -a=bc→a=-bc
-𝖇 = -½(-2 / 1-2⌈1)	#C204/I235.KorektoMath,R203,R190 a=G,a→(G)
-𝖇 = (1 / 1-2⌈1)	#R205/M214.KorektoMath,C204 _½(2 / g)→_(1 / g)
-𝖇 = 1 / 1-2⌈1	#R206/M160.KorektoMath,R205 +_(G)$ → +_G$
-𝕧[-1]	#R207/M4.KorektoMath,S182 Membership
-𝕧 = 𝖇+𝖜*⌈𝕧	#R185/M177.KorektoMath,S183 ≝→=
--1 = 𝖇+𝖜*⌈-1	#H208 Case -1∊𝕧
-⌈-1 = 1-⌈1	#T209/A100 ⌈-𝑥=1-⌈𝑥
--1 = 𝖇+𝖜*(1-⌈1)	#C210/I235.KorektoMath,T209,H208 a=G,a→(G)
--1 = 𝖇 + 𝖜*(1-⌈1)	#R211/M168.KorektoMath,C210 +_g+f$ → +_g_+_f$
--1 = -½𝖜 + 𝖜*(1-⌈1)	#C212/I229.KorektoMath,R190,R211 g=f,_g_→_f_
--1 = -½𝖜 + 𝖜(1-⌈1)	#R213/M176.KorektoMath,C212 Implied*
--1 = 𝖜(-½ + (1-⌈1))	#R214/M221.KorektoMath,R213 _Na+ab$→_a(N+b)$
--1 = 𝖜(-½ + (1 - ⌈1))	#R215/M111.KorektoMath,R214 (a+b) → (a_+_b)
--1 = 𝖜(-½ + 1 - ⌈1)	#R216/M165.KorektoMath,R215 +_(G))~ → +_G)~
--1 = 𝖜(½ - ⌈1)	#R217/M215.KorektoMath,R216 (-½+1+g)→(½+g)
-𝖜 = 1/(⌈1-½)	#R218/M264.KorektoMath,R217 -1=a(b-c)→a=1/(c-b)
-𝖜 = 1 / ⌈1-½	#R202/M124.KorektoMath,R201 _a/(b♭+♭c)$→_a_/_b+c$
-𝖜 = 2 / 2⌈1-1	#R219/M216.KorektoMath,R202 _1_/_a+½$→_2_/_2a_1
-𝖇 = -½(2 / 2⌈1-1)	#C220/I235.KorektoMath,R219,R190 a=G,a→(G)
-𝖇 = -1 / 2⌈1-1	#R221/M217.KorektoMath,C220 _½(2_/_g)$→_1_/_g
+0 = 𝖇+𝖜*½	#C186/I222.KorektoMath,C87,H185 a=b,a→b
+0 = 𝖇+½𝖜	#R187/M210.KorektoMath,C186 a*½→½a
+-𝖇 = ½𝖜	#R188/M258.KorektoMath,R187 0=b+g→-b=g
+𝖇 = -½𝖜	#R189/M262.KorektoMath,R188 -a=bc→a=-bc
+-½𝖜 = 𝖇	#R190/M177.KorektoMath,R189 Symmetry
+𝖜 = -2𝖇	#R191/M211.KorektoMath,R189 a=½b→b=2a
+𝕧[1]	#R192/M4.KorektoMath,S181 Membership
+𝕧 = 𝖇+𝖜*⌈𝕧	#R184/M177.KorektoMath,S182 ≝→=
+1 = 𝖇+𝖜*⌈1	#H193 Case 1∊𝕧
+1 = 𝖇 + 𝖜*⌈1	#R194/M168.KorektoMath,H193 +_g+f$ → +_g_+_f$
+1 = -½𝖜 + 𝖜*⌈1	#C195/I230.KorektoMath,R190,R194 g=f,_f_→_g_
+1 = -½𝖜 + 𝖜⌈1	#R196/M176.KorektoMath,C195 Implied*
+1 = 𝖜⌈1 + -½𝖜	#R197/M255.KorektoMath,R196 _g_+_f$→_f_+_g$
+1 = 𝖜⌈1 - ½𝖜	#R198/M251.KorektoMath,R197 _g_+_-f$→_g_-_f$
+1 = 𝖜(⌈1 - ½)	#R199/M220.KorektoMath,R198 _ab_+Na$→_a(b+N)$
+𝖜 = 1/(⌈1 - ½)	#R200/M263.KorektoMath,R199 1=ab→a=1/b
+𝖜 = 1 / ⌈1-½	#R201/M124.KorektoMath,R200 _a/(b♭+♭c)$→_a_/_b+c$
+𝖜 = -2 / 1-2⌈1	#R202/M213.KorektoMath,R201 _1_/_a-½$→_-2_/_1-2a
+𝖇 = -½𝖜	#R189/M262.KorektoMath,R188 -a=bc→a=-bc
+𝖇 = -½(-2 / 1-2⌈1)	#C203/I235.KorektoMath,R202,R189 a=G,a→(G)
+𝖇 = (1 / 1-2⌈1)	#R204/M214.KorektoMath,C203 _½(2 / g)→_(1 / g)
+𝖇 = 1 / 1-2⌈1	#R205/M160.KorektoMath,R204 +_(G)$ → +_G$
+𝕧[-1]	#R206/M4.KorektoMath,S181 Membership
+𝕧 = 𝖇+𝖜*⌈𝕧	#R184/M177.KorektoMath,S182 ≝→=
+-1 = 𝖇+𝖜*⌈-1	#H207 Case -1∊𝕧
+⌈-1 = 1-⌈1	#T208/A100 ⌈-𝑥=1-⌈𝑥
+-1 = 𝖇+𝖜*(1-⌈1)	#C209/I235.KorektoMath,T208,H207 a=G,a→(G)
+-1 = 𝖇 + 𝖜*(1-⌈1)	#R210/M168.KorektoMath,C209 +_g+f$ → +_g_+_f$
+-1 = -½𝖜 + 𝖜*(1-⌈1)	#C211/I229.KorektoMath,R189,R210 g=f,_g_→_f_
+-1 = -½𝖜 + 𝖜(1-⌈1)	#R212/M176.KorektoMath,C211 Implied*
+-1 = 𝖜(-½ + (1-⌈1))	#R213/M221.KorektoMath,R212 _Na+ab$→_a(N+b)$
+-1 = 𝖜(-½ + (1 - ⌈1))	#R214/M111.KorektoMath,R213 (a+b) → (a_+_b)
+-1 = 𝖜(-½ + 1 - ⌈1)	#R215/M165.KorektoMath,R214 +_(G))~ → +_G)~
+-1 = 𝖜(½ - ⌈1)	#R216/M215.KorektoMath,R215 (-½+1+g)→(½+g)
+𝖜 = 1/(⌈1-½)	#R217/M264.KorektoMath,R216 -1=a(b-c)→a=1/(c-b)
+𝖜 = 1 / ⌈1-½	#R201/M124.KorektoMath,R200 _a/(b♭+♭c)$→_a_/_b+c$
+𝖜 = 2 / 2⌈1-1	#R218/M216.KorektoMath,R201 _1_/_a+½$→_2_/_2a_1
+𝖇 = -½(2 / 2⌈1-1)	#C219/I235.KorektoMath,R218,R189 a=G,a→(G)
+𝖇 = -1 / 2⌈1-1	#R220/M217.KorektoMath,C219 _½(2_/_g)$→_1_/_g
 # TODO: Need mechanism to show that this is a confirmantion(and not a restatement).
-𝖇 = 1 / 1-2⌈1	#R206/M160.KorektoMath,R205 +_(G)$ → +_G$
+𝖇 = 1 / 1-2⌈1	#R205/M160.KorektoMath,R204 +_(G)$ → +_G$
 # Verify this works when value is negative one:
--1 = 𝖇 + 𝖜*⌈-1	#R222/M168.KorektoMath,H208 +_g+f$ → +_g_+_f$
--1 = -½𝖜 + 𝖜*⌈-1	#C223/I238.KorektoMath,T209,C212 a=G,(G)→a
--1 = 𝖜(-½ + ⌈-1)	#C224/I238.KorektoMath,T209,R214 a=G,(G)→a
--1 = 𝖜(-½ + (1-⌈1))	#R214/M221.KorektoMath,R213 _Na+ab$→_a(N+b)$
--1 = 𝖜(-½ + (1 - ⌈1))	#R215/M111.KorektoMath,R214 (a+b) → (a_+_b)
--1 = 𝖜(-½ + 1 - ⌈1)	#R216/M165.KorektoMath,R215 +_(G))~ → +_G)~
--1 = 𝖜(½ - ⌈1)	#R217/M215.KorektoMath,R216 (-½+1+g)→(½+g)
-𝖜 = 1/(⌈1-½)	#R218/M264.KorektoMath,R217 -1=a(b-c)→a=1/(c-b)
+-1 = 𝖇 + 𝖜*⌈-1	#R221/M168.KorektoMath,H207 +_g+f$ → +_g_+_f$
+-1 = -½𝖜 + 𝖜*⌈-1	#C222/I238.KorektoMath,T208,C211 a=G,(G)→a
+-1 = 𝖜(-½ + ⌈-1)	#C223/I238.KorektoMath,T208,R213 a=G,(G)→a
+-1 = 𝖜(-½ + (1-⌈1))	#R213/M221.KorektoMath,R212 _Na+ab$→_a(N+b)$
+-1 = 𝖜(-½ + (1 - ⌈1))	#R214/M111.KorektoMath,R213 (a+b) → (a_+_b)
+-1 = 𝖜(-½ + 1 - ⌈1)	#R215/M165.KorektoMath,R214 +_(G))~ → +_G)~
+-1 = 𝖜(½ - ⌈1)	#R216/M215.KorektoMath,R215 (-½+1+g)→(½+g)
+𝖜 = 1/(⌈1-½)	#R217/M264.KorektoMath,R216 -1=a(b-c)→a=1/(c-b)
 # TODO: Again, restatement here should be confimation
-𝖜 = 1 / ⌈1-½	#R202/M124.KorektoMath,R201 _a/(b♭+♭c)$→_a_/_b+c$
+𝖜 = 1 / ⌈1-½	#R201/M124.KorektoMath,R200 _a/(b♭+♭c)$→_a_/_b+c$
 ! stop!
 ```
 ### Propagation of errors level 1(Perceptron)
