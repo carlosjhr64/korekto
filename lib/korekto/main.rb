@@ -72,16 +72,15 @@ class Main
     when MD_FILENAME
       filename = $~[:filename].strip
       bn,xt = File.basename(filename,'.*'),File.extname(filename)
-      raise Error, "duplicate import: #{bn}" if @imports.include? bn
       case xt
       when '.rb'
         begin
-          require filename
-          @imports.push bn
+          raise Error, "already been loaded: #{bn}" unless require filename
         rescue LoadError
           raise Error, $!.message
         end
       else
+        raise Error, "duplicate import: #{bn}" if @imports.include? bn
         tmp = @statements.heap.to_a.slice!(0..-1)
         Main.new(filename, statements:@statements, imports:@imports).run
         @statements.heap.to_a.replace(tmp)
@@ -111,6 +110,8 @@ class Main
     when 'fence'
       @m_fence_korekto = Regexp.new "^```#{value}$" # user defined fence
     when 'section'
+      raise Error, "duplicate section: #{value}" if @imports.include? value
+      @imports.push value
       @section = value
     when 'save'
       @backups[value] = Marshal.dump(@statements)

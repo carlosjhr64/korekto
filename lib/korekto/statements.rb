@@ -36,6 +36,7 @@ class Statements
     end
     statement_number = yield
     @last=Statement.new(statement,code,title,filename,statement_number,self)
+    raise Error, "duplicate key: #{@last.key}" if @statements.key?(@last.key)
     @statements[@last.key] = @last
     @symbols.define! @last if 'AIEMLDXS'.include?(@last.type)
     @heap.add @last if 'DXSPTCRH'.include?(@last.type)
