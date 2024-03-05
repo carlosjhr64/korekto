@@ -91,6 +91,11 @@ class Statement
   # Searches
 
   def detect_statement(type)
+    if (md = %r{/([^,]+)$}.match @code) &&
+       (pattern = @context.get md[1].to_sym) &&
+       pattern.match?(@statement)
+      return pattern
+    end
     @context.type(type).detect{_1.match? @statement} ||
       raise(Error, "does not match any '#{type}' statement")
   end
