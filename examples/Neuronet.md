@@ -145,7 +145,7 @@ RowVectors : {ʳ ˢ ᵗ ᵘ}	#S6/L1.KorektoMath ≝: RowVectors ʳ ˢ ᵗ ᵘ
 ⌉0 = 𝖊∧(0)	#R23/M107.KorektoMath,T22 a → (a)
 𝑥 - 𝑥 = 0	#T24/A29.KorektoMath Zero
 ⌉0 = 𝖊∧(𝑥 - 𝑥)	#C25/I248.KorektoMath,T24,R23 G=F,(F)→(G)
-⌉0 = 𝖊∧(𝑥 + -𝑥)	#R26/M256.KorektoMath,C25 a-b=a+-b
+⌉0 = 𝖊∧(𝑥 + -𝑥)	#R26/M256.KorektoMath,C25 a-b→a+-b
 ⌉0 = 𝖊∧𝑥*𝖊∧-𝑥	#R27/M260.KorektoMath,R26 a^(b+c)=a^b*a^c
 ⌉0 = (𝖊∧𝑥)*(𝖊∧-𝑥)	#R28/M177.KorektoMath,R27 a^b~c^d → (a^b)~(c^c)
 # Then:

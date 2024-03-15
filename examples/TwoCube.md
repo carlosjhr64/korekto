@@ -17,7 +17,7 @@
 5 + 1 + 1 + 1 = 8	#C3/I250.KorektoMath,S52.KorektoMath,C2 G=F, ^F_± → ^G_±
 4 + 1 + 1 + 1 + 1 = 8	#C4/I250.KorektoMath,S51.KorektoMath,C3 G=F, ^F_± → ^G_±
 4 + (1 + 1) + (1 + 1) = 8	#R5/M161.KorektoMath,C4 →+_(G)_+_(F)_±
-4 + 2 + 2 = 8	#C6/I244.KorektoMath,S48.KorektoMath,R5 G=a,(G)→a~a
+4 + 2 + 2 = 8	#C6/I244.KorektoMath,S48.KorektoMath,R5 G=a,(G)~(G)→a~a
 3 + 1 = 4	#R7/M2.KorektoMath,S50.KorektoMath ≝→=
 2 + 1 + 1 = 4	#C8/I250.KorektoMath,S49.KorektoMath,R7 G=F, ^F_± → ^G_±
 2 + (1 + 1) = 4	#R9/M160.KorektoMath,C8 +_G_± → +_(G)_±
