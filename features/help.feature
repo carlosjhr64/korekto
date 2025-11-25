@@ -2,7 +2,7 @@
 Feature: Testing korekto help
 
   Background:
-    * Given command "korekto"
+    * Given command "./bin/korekto"
 
   Scenario: --help
     * Given option "--help"

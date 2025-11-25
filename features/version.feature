@@ -2,7 +2,7 @@
 Feature: Testing korekto version
 
   Background:
-    * Given command "korekto"
+    * Given command "./bin/korekto"
 
   Scenario: --version
     * Given option "--version"
