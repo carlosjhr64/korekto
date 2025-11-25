@@ -64,27 +64,7 @@ Exclusive:
 #   cat MARKDOWN.md | korekto
 #   korekto < MARKDOWN.md
 ```
-## Credits
-
-One can(of course) check the project's [dependencies](korekto.gemspec).
-Topmost kudos goes to [Neovim](https://neovim.io/)
-which makes this project possible in [Ruby](https://www.ruby-lang.org/en/).
-I also want to credit sources for ideas I'm using here.
-
-[An Introduction to Formal Logic](https://www.amazon.com/An-Introduction-to-Formal-Logic/dp/B01M6Z6T1E/)
-with Steve Gimbel, Ph.D. of Gettysburg College
-on Amazon's The Great Courses Signature Collection.
-
-[Insights into Mathematics](https://www.youtube.com/@njwildberger)
-with Norman Wildberger, professor of mathematics at UNSW Sydney.
-Specially his foundations videos.
-
-For anything really novel here,
-I would say that I have not seen an explicit formula
-for the propagation of errors of a sigmoid neural network
-which I give in my [Neuronet wiki](https://github.com/carlosjhr64/neuronet/wiki).
-Also, my [classification of statements](examples/Tutorial.md) without any mention of formal logic
-might be somewhat novel, although foreshadows it.
+## [Credits](CREDITS.md)
 
 ## License
 
