@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
-ruby '3.2.2'
+ruby '4.0.0-preview2'
 ## runtime ##
+gem 'fileutils'
 gem 'help_parser'
 ## development ##
 gem 'colorize'
