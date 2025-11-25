@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/carlosjhr64/korekto'
   s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
-  s.date     = '2024-03-05'
+  s.date     = '2025-11-25'
   s.licenses = ['MIT']
   ## DESCRIPTION ##
   s.summary  = <<~SUMMARY
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   ## FILES ##
   s.require_paths = ['lib']
   s.files = %w[
+    CREDITS.md
     README.md
     bin/korekto
     lib/korekto.rb
@@ -36,15 +37,11 @@ Gem::Specification.new do |s|
   ]
     s.executables << 'korekto'
   ## REQUIREMENTS ##
-  s.add_runtime_dependency 'help_parser', '~> 8.2', '>= 8.2.230210'
-  s.add_development_dependency 'colorize', '~> 1.1', '>= 1.1.0'
-  s.add_development_dependency 'cucumber', '~> 9.1', '>= 9.1.1'
-  s.add_development_dependency 'parser', '~> 3.3', '>= 3.3.0'
-  s.add_development_dependency 'rubocop', '~> 1.60', '>= 1.60.1'
-  s.add_development_dependency 'test-unit', '~> 3.6', '>= 3.6.1'
-  s.requirements << 'git: 2.30'
-  s.requirements << 'neovim-ruby-host: 0.9'
-  s.requirements << 'nvim: 0.9'
-  s.requirements << 'ruby: 3.3'
+  s.add_runtime_dependency 'fileutils', '~> 1.8', '>= 1.8.0'
+  s.add_runtime_dependency 'help_parser', '~> 9.0', '>= 9.0.240926'
+  s.requirements << 'neovim-ruby-host: 0.10'
+  s.requirements << 'nvim: 0.11'
+  s.required_ruby_version = '>= 4.0'
+  s.requirements << 'which: 2016'
   s.requirements << 'xdg-open: 1.1'
 end
