@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 3.0.240305](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 3.0.251125](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -88,7 +88,7 @@ might be somewhat novel, although foreshadows it.
 
 ## License
 
-Copyright (c) 2024 CarlosJHR64
+Copyright (c) 2025 CarlosJHR64
 
 Permission is hereby granted, free of charge,
 to any person obtaining a copy of this software and
