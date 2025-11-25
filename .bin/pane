@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+pane = ARGV.shift&.to_i
+unless pane
+  # rubocop: disable Lint/InterpolationCheck
+  pane_index = '"#{pane_index}"'
+  # rubocop: enable Lint/InterpolationCheck
+  pane = `tmux display-message -p #{pane_index}`.to_i
+end
+
+require 'colorize'
+
+def blue(string)
+  puts string.blue
+end
+
+def clear
+  system('clear')
+end
+
+clear
+case pane
+when 0
+  blue '# Git Diff:'
+  system('colora')
+when 1
+  blue '# Git Status:'
+  system('git status')
+when 2
+  blue '# Lexicon:'
+  system('wile lexicon --check')
+when 3
+  blue '# Dictionary:'
+  system('wile dictionary --check')
+when 4
+  blue '# Rubocop:'
+  system('rubocop bin lib')
+when 7
+  system('ncal -B 1 -A 1')
+when 8
+  system('wile nvim --list')
+when 9
+  system('wile todo')
+when 10
+  blue '# Git Log:'
+  n = -1
+  `git log --oneline --name-only -n 10`.each_line do |line|
+    if (mdt = /^([a-f0-9]{7})(.*)$/.match(line))
+      puts "#{n += 1}: ".bold + mdt[1].magenta + mdt[2].blue
+    else
+      puts line
+    end
+  end
+else
+  blue "##{pane}"
+end
