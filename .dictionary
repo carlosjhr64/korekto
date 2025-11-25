@@ -1,4 +1,5 @@
 aiemldxs
+argv
 carlosjhr
 divmod
 dxsptcrh
@@ -7,11 +8,14 @@ gsub
 https
 jhr
 korekto
+mkdir
 newvar
+njwildberger
 oldvar
 regex
 regexp
 rgx
+src
 tmp
 usr
 www
