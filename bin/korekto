@@ -28,11 +28,19 @@ def spawn_readme
   exit
 end
 
+def exec_neovim(filename)
+  exec "nvim -u ~/.config/nvim/korekto.lua #{filename}" if File.exist?(filename)
+
+  warn "File does not exist: #{filename}"
+  exit 1
+end
+
 def handle_options
   require 'help_parser'
   options = HelpParser[Korekto::VERSION, <<~HELP]
     Usage:
       korekto [:options+]
+      korekto <filename>
     Options:
      -h --help
      -v --version
@@ -49,6 +57,7 @@ def handle_options
     #   cat MARKDOWN.md | korekto
     #   korekto < MARKDOWN.md
   HELP
+  exec_neovim(options.filename) if options.filename?
   do_install if options.install?
   spawn_readme if options.readme?
   Korekto.scrape = options.scrape?
