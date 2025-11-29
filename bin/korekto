@@ -2,23 +2,23 @@
 require 'korekto'
 
 def do_install
-  local_pack = File.expand_path '~/.local/share/nvim/site/pack'
   config_nvim = File.expand_path '~/.config/nvim'
-  unless File.directory?(local_pack) && File.directory?(config_nvim)
-    warn "Expected directories:\n\t#{local_pack}\n\t#{config_nvim}"
+  unless File.directory?(config_nvim)
+    warn 'Missing directory: ~/.config/nvim'
     exit 78 # EX_CONFIG
   end
+
   require 'fileutils'
-  # pack
-  dest = File.join(local_pack, 'korekto')
-  FileUtils.mkdir_p dest
-  src = File.join File.dirname(__dir__), 'start'
-  FileUtils.cp_r src, dest
-  # rplugin
-  dest = config_nvim
-  src = File.join File.dirname(__dir__), 'rplugin'
-  FileUtils.cp_r src, dest
-  system "nvim -c ':UpdateRemotePlugins|:quit' > /dev/null"
+
+  dir = File.dirname(__dir__)
+  rplugin = File.join dir, 'rplugin'
+  syntax = File.join dir, 'syntax'
+  config = File.join dir, 'config/korekto.lua'
+  FileUtils.cp_r rplugin, config_nvim
+  FileUtils.cp_r syntax, config_nvim
+  FileUtils.cp config, config_nvim
+  system "nvim -c ':UpdateRemotePlugins|:quit'"
+
   exit
 end
 
