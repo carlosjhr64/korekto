@@ -1,65 +1,72 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'korekto'
 
-def do_install
-  config_nvim = File.expand_path '~/.config/nvim'
-  unless File.directory?(config_nvim)
-    warn 'Missing directory: ~/.config/nvim'
+HELP = <<~HELP.freeze
+  # Korekto
+  Usage:
+    korekto [:options+]
+    korekto <filename>
+  Options:
+    -h --help
+    -v --version
+    --scrape    \tScrape Korekto lines
+    --trace     \tShow trace of each line, not just edits and errors
+    --install   \tInstalls the korekto neovim ruby plugin
+    --readme    \tOpen korekto github page
+    --heap=SIZE \tSet heap size (default: #{Korekto.heap})
+  Types:
+    SIZE    /^\\d+$/
+  Exclusive:
+    scrape trace install readme
+  ## Example usage
+  * Read/Edit
+      korekto MARKDOWN.md
+  * Check/Verify
+      korekto < MARKDOWN.md
+      cat MARKDOWN.md | korekto
+HELP
+
+def nvim_config!
+  nvim_config = `nvim --headless -c 'echo stdpath("config")' -c 'qa' 2>&1`.strip
+  if nvim_config.empty? || !File.directory?(nvim_config)
+    warn 'Missing nvim config directory'
     exit 78 # EX_CONFIG
   end
+  nvim_config
+end
 
+def dir_join(name) = File.join(File.dirname(__dir__), name)
+
+def do_install!
+  nvim_config = nvim_config!
+  korekto_config = dir_join('config')
   require 'fileutils'
-
-  dir = File.dirname(__dir__)
-  rplugin = File.join dir, 'rplugin'
-  syntax = File.join dir, 'syntax'
-  config = File.join dir, 'config/korekto.lua'
-  FileUtils.cp_r rplugin, config_nvim
-  FileUtils.cp_r syntax, config_nvim
-  FileUtils.cp config, config_nvim
+  FileUtils.cp_r("#{korekto_config}/.", nvim_config)
   system "nvim -c ':UpdateRemotePlugins|:quit'"
-
   exit
 end
 
-def spawn_readme
-  Process.detach spawn('xdg-open', 'https://www.github.com/carlosjhr64/korekto',
-                       %i[out err] => '/dev/null')
-  exit
-end
-
-def exec_neovim(filename)
+def exec_neovim!(filename)
   exec "nvim -u ~/.config/nvim/korekto.lua #{filename}" if File.exist?(filename)
 
   warn "File does not exist: #{filename}"
   exit 1
 end
 
+def exec_readme! = exec_neovim!(dir_join('README.md'))
+
+def do_exitable!(options)
+  exec_neovim!(options.filename) if options.filename?
+  do_install! if options.install?
+  exec_readme! if options.readme?
+end
+
 def handle_options
   require 'help_parser'
-  options = HelpParser[Korekto::VERSION, <<~HELP]
-    Usage:
-      korekto [:options+]
-      korekto <filename>
-    Options:
-     -h --help
-     -v --version
-     --scrape    \tScrape Korekto lines
-     --trace     \tShow trace of each line, not just edits and errors
-     --install   \tInstalls the korekto neovim ruby plugin
-     --readme    \tOpen korekto github page
-     --heap=SIZE \tSet heap size (default: #{Korekto.heap})
-    Types:
-      SIZE    /^\\d+$/
-    Exclusive:
-      scrape trace install readme
-    # Example usage:
-    #   cat MARKDOWN.md | korekto
-    #   korekto < MARKDOWN.md
-  HELP
-  exec_neovim(options.filename) if options.filename?
-  do_install if options.install?
-  spawn_readme if options.readme?
+  options = HelpParser[Korekto::VERSION, HELP]
+  do_exitable!(options)
   Korekto.scrape = options.scrape?
   Korekto.trace  = options.trace?
   Korekto.heap   = options.heap.to_i if options.heap?
