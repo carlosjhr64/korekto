@@ -46,6 +46,6 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.opt_local.conceallevel = 3
     vim.opt_local.foldlevel = 3
-    vim.keymap.set('n', '<F7>', ':Korekto<CR>', { buffer = true })
+    vim.keymap.set('n', '<F9>', ':up<CR>:Korekto<CR>', { buffer = true })
   end,
 })
