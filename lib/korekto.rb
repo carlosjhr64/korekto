@@ -1,30 +1,20 @@
+# frozen_string_literal: true
+
+# Korekto namespace
 module Korekto
   class Error < RuntimeError; end
 
   VERSION = '4.0.251130'
 
-  def self.trace=(value)
-    @@trace = value
-  end
-  def self.trace?
-    @@trace
+  class << self
+    attr_writer :trace, :scrape
+    attr_accessor :heap
+
+    def trace? = @trace
+    def scrape? = @scrape
   end
   Korekto.trace = false
-
-  def self.heap=(value)
-    @@heap = value
-  end
-  def self.heap
-    @@heap
-  end
   Korekto.heap = 60
-
-  def self.scrape?
-    @@scrape
-  end
-  def self.scrape=(value)
-    @@scrape = value
-  end
   Korekto.scrape = false
 
   def self.run
@@ -44,4 +34,3 @@ end
 # `ruby`
 # `nvim`
 # `neovim-ruby-host`
-# `xdg-open`

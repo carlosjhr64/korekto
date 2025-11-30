@@ -8,14 +8,12 @@ gsub
 https
 jhr
 korekto
-mkdir
 newvar
 oldvar
 regex
 regexp
 rgx
-src
+stdpath
 tmp
 usr
 www
-xdg
