@@ -22,7 +22,7 @@ class Statement
   def literal_regexp?   = @statement[0]=='/' && @statement[-1]=='/'
 
   def set_regexp
-    @regexp = @context.symbols.s2r(@statement)
+    @regexp = @context.symbols.statement_to_regexp(@statement)
   end
 
   private

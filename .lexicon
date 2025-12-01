@@ -22,6 +22,7 @@ bn
 brackets
 c
 captures
+char
 chars
 check
 chomp
@@ -187,8 +188,6 @@ s
 s0
 s1
 s2
-s2p
-s2r
 scan
 scanner
 scrape
@@ -199,7 +198,6 @@ set
 Set
 set_acceptance_code
 set_regexp
-set_scanner
 set_statement
 shift
 size
@@ -213,6 +211,8 @@ Statement
 statement_number
 statements
 Statements
+statement_to_pattern
+statement_to_regexp
 step
 string
 String
@@ -226,7 +226,6 @@ syntax
 Syntax
 system
 t
-t2p
 t2p_gsub
 target
 tautology
@@ -241,6 +240,8 @@ to_sym
 trace
 type
 type_pattern
+type_to_pattern
+type_to_pattern_gsub
 type_variables
 undefined
 unshift
@@ -248,11 +249,11 @@ UpdateRemotePlugins
 upto
 using
 v
-v2t
 value
 values
 variable
 variables
+variable_to_type
 VERSION
 w
 warn

@@ -24,15 +24,15 @@ class Main
   end
 
   def t2p_gsub(target, replacement)
-    t2p = @statements.symbols.t2p
-    t2p.each_key{t2p[_1].gsub!(target, replacement)}
+    type_to_pattern = @statements.symbols.type_to_pattern
+    type_to_pattern.each_key{type_to_pattern[_1].gsub!(target, replacement)}
     @statements.patterns(&:set_regexp)
   end
 
   def type_pattern(type, pattern)
-    t2p = @statements.symbols.t2p
-    raise Error, "type #{type} in use" if t2p.key? type
-    t2p[type] = pattern
+    type_to_pattern = @statements.symbols.type_to_pattern
+    raise Error, "type #{type} in use" if type_to_pattern.key? type
+    type_to_pattern[type] = pattern
   end
 
   def function(function, arguments)
@@ -42,28 +42,28 @@ class Main
     when 'gsub'
       target, replacement, e = arguments.split
       raise Error, 'expected 2 arguments' unless e.nil? && replacement && target
-      t2p_gsub(target, replacement)
+      type_to_pattern_gsub(target, replacement)
     when 'delete'
       variable, e = arguments.split
       raise Error, 'expected 1 argument' unless e.nil? && variable
-      @statements.symbols.v2t.delete variable
+      @statements.symbols.variable_to_type.delete variable
     when 'replace'
       oldvar, newvar, e = arguments.split
       raise Error, 'expected 2 arguments' unless e.nil? && newvar && oldvar
-      v2t = @statements.symbols.v2t
-      v2t[newvar] = v2t.delete(oldvar) or raise "#{oldvar} not a key"
+      variable_to_type = @statements.symbols.variable_to_type
+      variable_to_type[newvar] = variable_to_type.delete(oldvar) or raise "#{oldvar} not a key"
     else
       raise Error, "unrecognized function: #{function}"
     end
   end
 
   def type_variables(type, variables)
-    v2t,t2p = @statements.symbols.v2t,@statements.symbols.t2p
-    pattern = t2p[type]
+    variable_to_type,type_to_pattern = @statements.symbols.variable_to_type,@statements.symbols.type_to_pattern
+    pattern = type_to_pattern[type]
     raise Error, "type #{type} not defined" unless pattern
     variables.each do |variable|
-      raise Error, "variable #{variable} in use" if v2t.key? variable
-      v2t[variable] = type
+      raise Error, "variable #{variable} in use" if variable_to_type.key? variable
+      variable_to_type[variable] = type
     end
   end
 
@@ -106,7 +106,7 @@ class Main
   def key_value(key, value)
     case key
     when 'scanner'
-      @statements.symbols.set_scanner value
+      @statements.symbols.scanner = value
     when 'fence'
       @m_fence_korekto = Regexp.new "^```#{value}$" # user defined fence
     when 'section'

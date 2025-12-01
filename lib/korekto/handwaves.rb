@@ -31,14 +31,14 @@ class Handwaves
       case step
       when %r{^([mM])/(.*)/(t)?$}
         command,pattern,t,n = $1,$2,$3,0
-        pattern,n = symbols.s2p(pattern, quote:false) if t
+        pattern,n = symbols.statement_to_pattern(pattern, quote:false) if t
         string = command=='M' ? antecedent : statement
         md = Regexp.new(gsub! pattern).match(string)
         break unless md
         1.upto(n).each{@captures.push(md[_1])}
       when %r{^g/(.*)/(t)?$}
         pattern,t,n = $1,$2,0
-        pattern,n = symbols.s2p($1, quote:false) if t
+        pattern,n = symbols.statement_to_pattern($1, quote:false) if t
         rgx = Regexp.new(gsub! pattern)
         md = nil
         break unless heap.any?{(md=rgx.match _1)}
