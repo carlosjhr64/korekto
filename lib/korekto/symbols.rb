@@ -19,8 +19,7 @@ module Korekto
       @scanner = Regexp.new(value)
     end
 
-    def undefined(statement)
-      set = Set.new
+    def undefined(statement, set: Set.new)
       return set if statement.pattern? && statement.literal_regexp?
 
       statement.scan(@scanner) do |w|
