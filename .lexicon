@@ -21,6 +21,7 @@ basename
 bn
 brackets
 c
+call
 captures
 char
 chars
@@ -92,6 +93,7 @@ ij
 ij_kl
 imports
 include
+increment
 index
 inference
 initialize
@@ -149,6 +151,7 @@ nvim_config
 oldvar
 options
 parse
+parts
 pattern
 patterns
 pattern_type
@@ -162,6 +165,7 @@ puts
 q
 quit
 quote
+quoted
 r
 raise
 readlines
@@ -169,6 +173,7 @@ readme
 refine
 Refinements
 regex
+regexed
 regexp
 Regexp
 replace
@@ -206,6 +211,7 @@ sort
 split
 stack
 StandardError
+start_with
 statement
 Statement
 statement_number
@@ -234,6 +240,8 @@ title
 tmp
 to_a
 to_i
+token
+token_to_pattern
 to_s
 to_str
 to_sym
@@ -248,7 +256,6 @@ unshift
 UpdateRemotePlugins
 upto
 using
-v
 value
 values
 variable

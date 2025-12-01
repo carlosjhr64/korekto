@@ -42,44 +42,46 @@ module Korekto
     end
 
     def statement_to_pattern(statement, quote: true)
-      pattern = String.new
       seen = {}
       count = 0
       increment = -> { count += 1 }
       # Build pattern from statement token by token.
-      statement.scan(@scanner) do |token|
-        append_token(pattern, increment, seen, token, quote)
+      parts = statement.scan(@scanner).map do |token|
+        token_to_pattern(increment, seen, token, quote)
       end
-      [pattern, count]
+      [parts.join, count]
     end
 
     private
 
-    def append_token(pattern, increment, seen, token, quote)
-      if (n = seen[token])
-        pattern << "\\#{n}"
+    def token_to_pattern(increment, seen, token, quote)
+      if (n = seen[token]) then "\\#{n}"
       elsif (type = @variable_to_type[token])
-        regex = @type_to_pattern[type]
-        if type.start_with?('.')
-          # No capture patterns start with '.'
-          pattern << regex
-        else
-          n = increment.call
-          seen[token] = n.to_s
-          pattern << "(#{regex})"
-        end
+        regexed(type, increment, seen, token)
+      elsif quote then quoted(token)
       else
-        return unless quote
-
-        # Escape Regexp specials
-        quoted = Regexp.quote(token)
-        # To avoid collisions with back-references,
-        # isolate digit in square brackets:
-        if '0123456789'.include?(char = quoted[0])
-          quoted[0] = "[#{char}]"
-        end
-        pattern << quoted
+        ''
       end
+    end
+
+    def regexed(type, increment, seen, token)
+      regex = @type_to_pattern[type]
+      return regex if type.start_with?('.')
+
+      n = increment.call
+      seen[token] = n.to_s
+      "(#{regex})"
+    end
+
+    def quoted(token)
+      # Escape Regexp specials
+      quoted = Regexp.quote(token)
+      # To avoid collisions with back-references,
+      # isolate digit in square brackets:
+      if '0123456789'.include?(char = quoted[0])
+        quoted[0] = "[#{char}]"
+      end
+      quoted
     end
   end
 end
