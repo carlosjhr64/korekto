@@ -47,21 +47,23 @@ module Korekto
           pattern << "\\#{n}"
         elsif (type = @variable_to_type[v])
           regex = @type_to_pattern[type]
-          if type[0] == '.'
+          if type.start_with?('.')
             # No capture patterns start with '.'
             pattern << regex
           else
             count += 1
-            seen[v] = count.to_s
+            seen[v] = String.new(count.to_s)
             pattern << "(#{regex})"
           end
         else
-          if quote
-            # Escape Regexp specials
-            v = Regexp.quote v
-            # To avoid collisions with back-references,
-            # isolate digit in square brackets:
-            '0123456789'.include?(char = v[0]) and v[0] = "[#{char}]"
+          next unless quote
+
+          # Escape Regexp specials
+          v = Regexp.quote(v)
+          # To avoid collisions with back-references,
+          # isolate digit in square brackets:
+          if '0123456789'.include?(char = v[0])
+            v[0] = "[#{char}]"
           end
           pattern << v
         end
