@@ -4,7 +4,7 @@
 module Korekto
   class Error < RuntimeError; end
 
-  VERSION = '4.0.251130'
+  VERSION = '4.0.251201'
 
   class << self
     attr_writer :trace, :scrape
