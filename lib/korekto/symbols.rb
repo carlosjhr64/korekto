@@ -20,19 +20,14 @@ module Korekto
     end
 
     def undefined(statement)
-      undefined = Set.new
-      if statement.pattern?
-        unless statement.literal_regexp?
-          statement.scan(@scanner) do |w|
-            unless @variable_to_type.include?(w) || @set.include?(w)
-              undefined << w
-            end
-          end
-        end
-      else
-        statement.scan(@scanner) { |w| undefined << w unless @set.include?(w) }
+      set = Set.new
+      return set if statement.pattern? && statement.literal_regexp?
+
+      statement.scan(@scanner) do |w|
+        set << w unless @set.include?(w) ||
+                        (statement.pattern? && @variable_to_type.include?(w))
       end
-      undefined
+      set
     end
 
     def define!(statement) = undefined(statement).each { |w| @set << w }
