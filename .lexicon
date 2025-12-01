@@ -19,6 +19,7 @@ backups
 balanced
 basename
 bn
+brackets
 c
 captures
 chars
@@ -101,11 +102,9 @@ instantiation
 is_a
 j
 join
-k
 key
 key_value
 kl
-km
 Korekto
 korekto_config
 last
@@ -119,7 +118,6 @@ literal_regexp
 load
 LoadError
 ltight
-m
 Main
 map
 mapping
@@ -160,8 +158,10 @@ print
 private
 push
 puts
+q
 quit
 quote
+r
 raise
 readlines
 readme
@@ -206,6 +206,7 @@ size
 slice
 sort
 split
+stack
 StandardError
 statement
 Statement
