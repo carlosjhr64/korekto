@@ -31,40 +31,6 @@ module Korekto
 
     def define!(statement) = undefined(statement).each { |w| @set << w }
 
-    def statement_to_pattern(statement, quote: true)
-      pattern = String.new
-      count = 0
-      seen = {}
-      # Build pattern from statement token by token, v.
-      statement.scan(@scanner) do |v|
-        if (n = seen[v])
-          pattern << "\\#{n}"
-        elsif (type = @variable_to_type[v])
-          regex = @type_to_pattern[type]
-          if type.start_with?('.')
-            # No capture patterns start with '.'
-            pattern << regex
-          else
-            count += 1
-            seen[v] = String.new(count.to_s)
-            pattern << "(#{regex})"
-          end
-        else
-          next unless quote
-
-          # Escape Regexp specials
-          v = Regexp.quote(v)
-          # To avoid collisions with back-references,
-          # isolate digit in square brackets:
-          if '0123456789'.include?(char = v[0])
-            v[0] = "[#{char}]"
-          end
-          pattern << v
-        end
-      end
-      [pattern, count]
-    end
-
     def statement_to_regexp(statement)
       return Regexp.new statement[1..-2] if statement[0] == '/' &&
                                             statement[-1] == '/'
@@ -73,6 +39,47 @@ module Korekto
       raise Error, 'pattern with no captures' if count < 1
 
       Regexp.new("\\A#{pattern}\\Z")
+    end
+
+    def statement_to_pattern(statement, quote: true)
+      pattern = String.new
+      seen = {}
+      count = 0
+      increment = -> { count += 1 }
+      # Build pattern from statement token by token.
+      statement.scan(@scanner) do |token|
+        append_token(pattern, increment, seen, token, quote)
+      end
+      [pattern, count]
+    end
+
+    private
+
+    def append_token(pattern, increment, seen, token, quote)
+      if (n = seen[token])
+        pattern << "\\#{n}"
+      elsif (type = @variable_to_type[token])
+        regex = @type_to_pattern[type]
+        if type.start_with?('.')
+          # No capture patterns start with '.'
+          pattern << regex
+        else
+          n = increment.call
+          seen[token] = n.to_s
+          pattern << "(#{regex})"
+        end
+      else
+        return unless quote
+
+        # Escape Regexp specials
+        quoted = Regexp.quote(token)
+        # To avoid collisions with back-references,
+        # isolate digit in square brackets:
+        if '0123456789'.include?(char = quoted[0])
+          quoted[0] = "[#{char}]"
+        end
+        pattern << quoted
+      end
     end
   end
 end
