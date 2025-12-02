@@ -68,6 +68,7 @@ existential
 exit
 expected_instantiations
 extname
+FalseClass
 File
 filename
 FileUtils
@@ -246,6 +247,7 @@ to_s
 to_str
 to_sym
 trace
+TrueClass
 type
 type_pattern
 type_to_pattern
