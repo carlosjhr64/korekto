@@ -18,6 +18,7 @@ module Korekto
   Korekto.scrape = false
 
   def self.run
+    require 'English'
     require 'korekto/refinements'
     require 'korekto/symbols'
     require 'korekto/syntax'
