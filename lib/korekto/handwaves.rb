@@ -29,6 +29,7 @@ module Korekto
       pattern
     end
 
+    # Verify statement satisfies a handwave
     def check(statement)
       raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
         case handwave
@@ -105,7 +106,7 @@ module Korekto
       substitute = matchdata[2]
       g = matchdata[3]
       rgx = Regexp.new(gsub!(pattern))
-      gsub!(substitute)
+      gsub!(substitute) # implement captures from prior matches
       if g then consequent.gsub!(rgx, substitute)
       else
         consequent.sub!(rgx, substitute)
