@@ -9,29 +9,25 @@ module Korekto
   # (axioms, let-rules, map-rules, inference-rules, …) and by analysing
   # which symbols are undefined in the current context.
   # The class is immutable after initialization
+  # rubocop: disable Metrics
   class Statement
     attr_reader :code, :title, :regexp, :section, :statement_number, :key
 
-    # rubocop: disable Metrics/ParameterLists
     def initialize(statement, code, title, section, statement_number, context)
-      @statement = statement
-      @code = code
-      @title = title
-      @section = section
-      @statement_number = statement_number
-      @context = context
-      @regexp = nil
-      @key = nil
-      @statement.freeze
-      @section.freeze
-      @statement_number.freeze
-      @title = @title.split(':', 2).first if @title
+      @statement        = statement.freeze
+      @code             = code
+      @title            = title
+      @section          = section.freeze
+      @statement_number = statement_number.freeze
+      @context          = context
+      @regexp           = nil
+      @key              = nil
+      @title            = @title.split(':', 2).first if @title
       set_acceptance_code
       @code.freeze
       @title.freeze
       @regexp.freeze
     end
-    # rubocop: enable Metrics/ParameterLists
 
     def type              = @code[0]
     def to_s              = @statement
@@ -90,9 +86,9 @@ module Korekto
     # Common helper
 
     def set_statement(support = nil, title = nil, undefined: nil)
-      @code = "#{@code[0]}#{@statement_number}"
+      @code  = "#{@code[0]}#{@statement_number}"
       @code += ".#{@section}" unless @section == '-'
-      @key = @code.to_sym
+      @key   = @code.to_sym
       @code += "/#{support}" if support
       @title = title if (title = title&.split(':', 2)&.first) && !title.empty?
       @title = "#{@title}: #{undefined.join(' ')}" if undefined
@@ -162,6 +158,7 @@ module Korekto
 
     # Defined/Undefined
 
+    # rubocop: disable Style/SafeNavigationChainLength
     def expected_instantiations(title = nil, instantiations: nil)
       undefined = @context.symbols.undefined(self)
       if instantiations ||= title&.match(/[1-9]\d*/)&.to_s&.to_i
@@ -174,6 +171,7 @@ module Korekto
       end
       undefined.empty? ? nil : undefined
     end
+    # rubocop: enable Style/SafeNavigationChainLength
 
     # Statement type processing
 
@@ -251,4 +249,5 @@ module Korekto
       set_statement
     end
   end
+  # rubocop: enable Metrics
 end
