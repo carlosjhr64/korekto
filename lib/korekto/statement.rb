@@ -90,18 +90,19 @@ module Korekto
       @title = "#{@title}: #{undefined.join(' ')}" if undefined
     end
 
-    def support(*s)
-      s.inject([]) do |a, s|
-        a.push(s.code.split('/', 2)[0])
+    def support(*statements)
+      statements.inject([]) do |codes, statement|
+        codes.push(statement.code.split('/', 2)[0])
       end.join(',')
     end
 
     # Pattern helpers
 
-    def newlines_count(n)
-      return if n == @regexp.inspect.gsub('\\\\', '').scan('\\n').length
+    # nlc: "\n" count
+    def newlines_count(nlc)
+      return if nlc == @regexp.inspect.gsub('\\\\', '').scan('\\n').length
 
-      raise Error, "expected #{n} newlines"
+      raise Error, "expected #{nlc} newlines"
     end
 
     # Searches
@@ -153,11 +154,12 @@ module Korekto
 
     # Defined/Undefined
 
-    def expected_instantiations(title = nil, n: nil)
+    def expected_instantiations(title = nil, instantiations: nil)
       undefined = @context.symbols.undefined(self)
-      if n ||= title&.match(/[1-9]\d*/)&.to_s&.to_i
-        unless n == undefined.length
-          raise Error, "expected #{n} undefined: #{undefined.join(' ')}"
+      if instantiations ||= title&.match(/[1-9]\d*/)&.to_s&.to_i
+        unless instantiations == undefined.length
+          raise Error,
+                "expected #{instantiations} undefined: #{undefined.join(' ')}"
         end
       elsif undefined.empty?
         raise Error, 'nothing was undefined'
@@ -167,11 +169,12 @@ module Korekto
 
     # Statement type processing
 
-    def pattern_type(nl)
+    # nlc: "\n" count
+    def pattern_type(nlc)
       set_regexp
-      newlines_count(nl)
-      undefined = (_ = @context.symbols.undefined(self)).empty? ? nil : _
-      follows = @context.heap.to_a[0..nl].reverse
+      newlines_count(nlc)
+      undefined = (u = @context.symbols.undefined(self)).empty? ? nil : u
+      follows = @context.heap.to_a[0..nlc].reverse
       support = if @regexp.match?(follows.map(&:to_s).join("\n"))
                   support(*follows)
                 end
@@ -181,13 +184,13 @@ module Korekto
     # A Tautology is an accepted true statement that immediately follows from
     # an Axiom rule. It may not have any undefined terms.
     def tautology
-      expected_instantiations(n: 0)
+      expected_instantiations(instantiations: 0)
       axiom = detect_statement('A')
       set_statement(support(axiom), axiom.title)
     end
 
-    # A Set(Assignment) is an allowed true statement that introduces at least one
-    # term as immediately validated by a matching Let rule.
+    # A Set(Assignment) is an allowed true statement that introduces
+    # at least one term as immediately validated by a matching Let rule.
     def set
       let = detect_statement('L')
       undefined = expected_instantiations(let.title)
@@ -197,7 +200,7 @@ module Korekto
     # A Result is a derived true statement that follows from a Map rule and
     # matching true statement.
     def result
-      expected_instantiations(n: 0)
+      expected_instantiations(instantiations: 0)
       mapping, s1 = heap_search('M')
       set_statement(support(mapping, s1), mapping.title)
     end
@@ -213,7 +216,7 @@ module Korekto
     # A Conclusion is a derived true statement, the result of an Inference rule
     # that follows from two true statements.
     def conclusion
-      expected_instantiations(n: 0)
+      expected_instantiations(instantiations: 0)
       inference, s1, s2 = heap_combos_search('I')
       set_statement(support(inference, s1, s2), inference.title)
     end
@@ -229,13 +232,13 @@ module Korekto
 
     # A Postulate is an assumed true statement with all terms defined.
     def postulate
-      expected_instantiations(n: 0)
+      expected_instantiations(instantiations: 0)
       set_statement
     end
 
     # When the above methods are unwieldy...
     def handwave
-      expected_instantiations(n: 0)
+      expected_instantiations(instantiations: 0)
       @context.handwaves.check(@statement)
       set_statement
     end
