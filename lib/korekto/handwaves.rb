@@ -29,6 +29,17 @@ module Korekto
       pattern
     end
 
+    def check(statement)
+      raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
+        case handwave
+        when /^:/ # Ex Handwave
+          ex(handwave[1..], statement)
+        else
+          raise "unrecognized: #{handwave}"
+        end
+      end
+    end
+
     # The "Ex Handwave" is a chain of Vim Ex-style commands (m, M, g, s)
     # prefixed with ':' and separated by '|',
     # similar to :m/pattern/|s/find/replace/.
@@ -80,17 +91,6 @@ module Korekto
         end
       end
       statement == consequent
-    end
-
-    def check(statement)
-      raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
-        case handwave
-        when /^:/ # Ex Handwave
-          ex(handwave[1..], statement)
-        else
-          raise "unrecognized: #{handwave}"
-        end
-      end
     end
   end
 end
