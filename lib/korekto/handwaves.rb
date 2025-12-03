@@ -51,52 +51,64 @@ module Korekto
       consequent = antecedent.dup
       command.split('|').each do |step|
         break unless
-          process_step?(step, statement, antecedent, consequent, symbols, heap)
+          ex_step?(step, statement, antecedent, consequent, symbols, heap)
       end
       statement == consequent
     end
 
     private
 
-    def process_step?(step, statement, antecedent, consequent, symbols, heap)
+    # rubocop: disable Metrics/ParameterLists
+    def ex_step?(step, statement, antecedent, consequent, symbols, heap)
       case step
       when %r{^([mM])/(.*)/(t)?$}
-        command = Regexp.last_match(1)
-        pattern = Regexp.last_match(2)
-        t = Regexp.last_match(3)
-        n = 0
-        pattern, n = symbols.statement_to_pattern(pattern, quote: false) if t
-        string = command == 'M' ? antecedent : statement
-        md = Regexp.new(gsub!(pattern)).match(string)
-        return false unless md
-
-        1.upto(n).each { @captures.push(md[it]) }
+        ex_match_statement?(statement, antecedent, Regexp.last_match)
       when %r{^g/(.*)/(t)?$}
-        pattern = Regexp.last_match(1)
-        t = Regexp.last_match(2)
-        n = 0
-        if t
-          pattern, n = symbols.statement_to_pattern(Regexp.last_match(1),
-                                                    quote: false)
-        end
-        rgx = Regexp.new(gsub!(pattern))
-        md = nil
-        return false unless heap.any? { (md = rgx.match it) }
-
-        1.upto(n).each { @captures.push(md[it]) }
+        ex_match_heap?(heap, symbols, Regexp.last_match)
       when %r{^s/(.*?)/(.*)/(g)?$}
-        pattern = Regexp.last_match(1)
-        substitute = Regexp.last_match(2)
-        g = Regexp.last_match(3)
-        rgx = Regexp.new(gsub!(pattern))
-        gsub!(substitute)
-        if g
-          consequent.gsub!(rgx, substitute)
-        else
-          consequent.sub!(rgx, substitute)
-        end
+        ex_gsub_consequent?(consequent, Regexp.last_match)
       else
         raise Error, "unrecognized handwave step: #{step}"
+      end
+    end
+    # rubocop: enable Metrics/ParameterLists
+
+    def ex_match_statement?(statement, antecedent, matchdata)
+      command = matchdata[1]
+      pattern = matchdata[2]
+      t = matchdata[3]
+      n = 0
+      pattern, n = symbols.statement_to_pattern(pattern, quote: false) if t
+      string = command == 'M' ? antecedent : statement
+      md = Regexp.new(gsub!(pattern)).match(string)
+      return false unless md
+
+      1.upto(n).each { @captures.push(md[it]) }
+      true
+    end
+
+    def ex_match_heap?(heap, symbols, matchdata)
+      pattern = matchdata[1]
+      t = matchdata[2]
+      n = 0
+      pattern, n = symbols.statement_to_pattern(pattern, quote: false) if t
+      rgx = Regexp.new(gsub!(pattern))
+      md = nil
+      return false unless heap.any? { (md = rgx.match it) }
+
+      1.upto(n).each { @captures.push(md[it]) }
+      true
+    end
+
+    def ex_gsub_consequent?(consequent, matchdata)
+      pattern = matchdata[1]
+      substitute = matchdata[2]
+      g = matchdata[3]
+      rgx = Regexp.new(gsub!(pattern))
+      gsub!(substitute)
+      if g then consequent.gsub!(rgx, substitute)
+      else
+        consequent.sub!(rgx, substitute)
       end
       true
     end
