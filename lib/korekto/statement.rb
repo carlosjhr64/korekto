@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 module Korekto
+  # Represents a single Korekto statement.
+  # A Statement is created from a raw line of text together with metadata
+  # (code, title, section, number, and proof context). It determines its
+  # logical role (postulate, definition, tautology, set, result, etc.)
+  # by matching against previously registered pattern statements
+  # (axioms, let-rules, map-rules, inference-rules, …) and by analysing
+  # which symbols are undefined in the current context.
+  # The class is immutable after initialization
   class Statement
     attr_reader :code, :title, :regexp, :section, :statement_number, :key
 
