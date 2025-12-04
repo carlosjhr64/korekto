@@ -9,6 +9,7 @@ module Korekto
   # (axioms, let-rules, map-rules, inference-rules, …) and by analysing
   # which symbols are undefined in the current context.
   # The class is immutable after initialization
+  # rubocop: disable Metrics
   class Statement
     attr_reader :code, :title, :regexp, :section, :statement_number, :key
 
@@ -240,4 +241,5 @@ module Korekto
       set_statement
     end
   end
+  # rubocop: enable Metrics
 end
