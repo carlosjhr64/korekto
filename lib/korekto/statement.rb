@@ -41,46 +41,45 @@ module Korekto
       @regexp = @context.symbols.statement_to_regexp(@statement)
     end
 
+    TYPE_HANDLERS = {
+      'P' => :postulate,      # Postulate
+      'D' => :definition,     # Definition
+      'C' => :conclusion,     # Conclusion
+      'X' => :instantiation,  # Instantiation
+      'R' => :result,         # Result
+      'S' => :set,            # Set
+      'T' => :tautology,      # Tautology
+      'A' => :pattern_type0,  # Axiom -> Tautology
+      'L' => :pattern_type0,  # Let -> Set
+      'M' => :pattern_type1,  # Map -> Result
+      'E' => :pattern_type1,  # Existential -> Instantiation
+      'I' => :pattern_type2,  # Inference -> Conclusion
+      'H' => :handwave,       # Handwave
+      'W' => :wild_card       # Wild Card
+    }.freeze
+    private_constant :TYPE_HANDLERS
+
     private
 
     def set_acceptance_code
-      case @code[0] # type
-      when 'P'
-        postulate
-      when 'D'
-        definition
-      when 'C'
-        conclusion
-      when 'X'
-        instantiation
-      when 'R'
-        result
-      when 'S'
-        set
-      when 'T'
-        tautology
-      when 'A', 'L'
-        # Axiom=>Tautology, Let=>Set,
-        pattern_type(0)
-      when 'M', 'E'
-        # Map=>Result, Existential=>Instantiation(X)
-        pattern_type(1)
-      when 'I'
-        # Inference=>Conclusion
-        pattern_type(2)
-      when 'H'
-        handwave
-      when 'W'
-        %w[T S R X C].any? do |code|
-          @code[0] = code
-          set_acceptance_code
-          true
-        rescue Error
-          false
-        end or raise Error, 'did not match any statement pattern'
-      else
-        raise Error, "statement type #{@code[0]} not implemented"
-      end
+      handler = TYPE_HANDLERS[@code[0]]
+      raise(Error, "type #{@code[0]} not implemented") unless handler
+
+      send(handler)
+    end
+
+    def pattern_type0 = pattern_type(0)
+    def pattern_type1 = pattern_type(1)
+    def pattern_type2 = pattern_type(2)
+
+    def wild_card
+      %w[T S R X C].any? do |code|
+        @code[0] = code
+        set_acceptance_code
+        true
+      rescue Error
+        false
+      end or raise Error, 'did not match any statement pattern'
     end
 
     # Common helper
