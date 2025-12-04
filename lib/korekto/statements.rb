@@ -68,7 +68,12 @@ module Korekto
       end
     end
 
+    # Returns the restated statement's code and title.
     def restated(restatement, title)
+      # Restatements are only allowed for heap-able statement types
+      # (D,X,S,P,T,C,R,H) because only these participate in inference.
+      # See `heap_combos_search` and `heap_search` in
+      # [Korekto::Statement](statement.rb?heap_combos_search)
       unless 'DXSPTCRH'.include?(restatement.type)
         # Only allow heap-able statements to be restated.
         raise Error, "restatement: #{restatement.code}"
