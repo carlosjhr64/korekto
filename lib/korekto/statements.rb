@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 module Korekto
+  # Central registry managing all statements processed by Korekto.
+  #
+  # Stores every statement added in a session, tracking its type code,
+  # title, source filename, and unique key. Detects and handles
+  # restatements. Integrates with:
+  # - Heap: includes inference-relevant statements (D,X,S,P,T,C,R,H)
+  # - Symbols: registers defined symbols (A,I,E,M,L,D,X,S)
+  # - Syntax: validates non-regex statements
+  # - Handwaves: manages informal justifications
+  #
+  # Offers fast key-based lookup, type-based filtering, pattern
+  # iteration, and restatement detection. The `add` method yields for
+  # the next statement number and returns `[code, title]`.
   class Statements
     attr_reader :heap, :symbols, :syntax, :handwaves, :last
 
@@ -13,40 +26,58 @@ module Korekto
       @last = nil
     end
 
-    def type(c)  = @statements.values.select { it.type == c }
-    def length   = @statements.length
-    def patterns = @statements.values.select(&:pattern?).each { yield it }
-    def get(key) = @statements[key]
+    def type(code) = @statements.values.select { it.type == code }
+    def length     = @statements.length
+    def patterns   = @statements.values.select(&:pattern?).each { yield it }
+    def get(key)   = @statements[key]
 
     def add(statement, code, title, filename)
-      c = code[0]
-      w = c == 'W'
-      @syntax.check(statement) unless statement[0] == '/' &&
-                                      statement[-1] == '/' &&
-                                      %w[A L M E I].include?(c)
-      restatement = @statements.values.detect do |restatement|
-        (w || restatement.type == c) && restatement.to_s == statement
+      syntax_check(statement, code)
+      if (restatement = find_restatement(statement, code))
+        return restated(restatement, title)
       end
-      if restatement
-        unless 'DXSPTCRH'.include?(restatement.type)
-          # Only allow heap-able statements to be restated.
-          raise Error, "restatement: #{restatement.code}"
-        end
 
-        @heap.add restatement
-        code, = restatement.code
-        title ||= restatement.title
-        return code, title
-      end
       statement_number = yield
-      @last = Statement.new(statement, code, title, filename, statement_number,
-                            self)
+      @last = Statement.new(statement, code, title, filename,
+                            statement_number, self)
+      update!
+      [@last.code, @last.title]
+    end
+
+    private
+
+    def update!
       raise Error, "duplicate key: #{@last.key}" if @statements.key?(@last.key)
 
       @statements[@last.key] = @last
       @symbols.define! @last if 'AIEMLDXS'.include?(@last.type)
       @heap.add @last if 'DXSPTCRH'.include?(@last.type)
-      [@last.code, @last.title]
+    end
+
+    def syntax_check(statement, code)
+      @syntax.check(statement) unless statement[0] == '/' &&
+                                      statement[-1] == '/' &&
+                                      %w[A L M E I].include?(code[0])
+    end
+
+    def find_restatement(statement, code)
+      c = code[0]
+      w = c == 'W'
+      @statements.values.detect do |restatement|
+        (w || restatement.type == c) && restatement.to_s == statement
+      end
+    end
+
+    def restated(restatement, title)
+      unless 'DXSPTCRH'.include?(restatement.type)
+        # Only allow heap-able statements to be restated.
+        raise Error, "restatement: #{restatement.code}"
+      end
+
+      @heap.add restatement
+      code, = restatement.code
+      title ||= restatement.title
+      [code, title]
     end
   end
 end
