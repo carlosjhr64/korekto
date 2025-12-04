@@ -9,24 +9,16 @@ module Korekto
   # (axioms, let-rules, map-rules, inference-rules, …) and by analysing
   # which symbols are undefined in the current context.
   # The class is immutable after initialization
-  # rubocop: disable Metrics
   class Statement
     attr_reader :code, :title, :regexp, :section, :statement_number, :key
 
-    def initialize(statement, code, title, section, statement_number, context)
-      @statement        = statement.freeze
-      @code             = code
-      @title            = title
-      @section          = section.freeze
-      @statement_number = statement_number.freeze
-      @context          = context
-      @regexp           = nil
-      @key              = nil
-      @title            = @title.split(':', 2).first if @title
+    def initialize(*args)
+      @statement, @code, @title, @section, @statement_number, @context = args
+      @title = @title.split(':', 2).first if @title
+      @regexp = @key = nil
       set_acceptance_code
-      @code.freeze
-      @title.freeze
-      @regexp.freeze
+      [@statement, @section, @statement_number,
+       @code,      @title,   @regexp].each(&:freeze)
     end
 
     def type              = @code[0]
@@ -248,5 +240,4 @@ module Korekto
       set_statement
     end
   end
-  # rubocop: enable Metrics
 end
