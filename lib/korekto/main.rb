@@ -92,7 +92,7 @@ module Korekto
     def preprocess?
       case @line
       when MD_FILENAME
-        filename = $~[:filename].strip
+        filename = $LAST_MATCH_INFO[:filename].strip
         bn = File.basename(filename, '.*')
         xt = File.extname(filename)
         case xt
@@ -100,7 +100,7 @@ module Korekto
           begin
             raise Error, "already been loaded: #{bn}" unless require filename
           rescue LoadError
-            raise Error, $!.message
+            raise Error, $ERROR_INFO.message
           end
         else
           raise Error, "duplicate import: #{bn}" if @imports.include? bn
@@ -110,17 +110,18 @@ module Korekto
           @statements.heap.to_a.replace(tmp)
         end
       when MD_SYNTAX
-        @statements.syntax.push $~[:syntax].strip
+        @statements.syntax.push $LAST_MATCH_INFO[:syntax].strip
       when MD_TYPE_PATTERN
-        type_pattern($~[:type], $~[:pattern])
+        type_pattern($LAST_MATCH_INFO[:type], $LAST_MATCH_INFO[:pattern])
       when MD_TYPE_VARIABLES
-        type_variables($~[:type], $~[:variables].split)
+        type_variables($LAST_MATCH_INFO[:type],
+                       $LAST_MATCH_INFO[:variables].split)
       when MD_KEY_VALUE
-        key_value($~[:key], $~[:value])
+        key_value($LAST_MATCH_INFO[:key], $LAST_MATCH_INFO[:value])
       when MD_FUNCTION
-        function($~[:function], $~[:arguments])
+        function($LAST_MATCH_INFO[:function], $LAST_MATCH_INFO[:arguments])
       when MD_HANDWAVE
-        @statements.handwaves.push $~[:handwave]
+        @statements.handwaves.push $LAST_MATCH_INFO[:handwave]
       else
         return false
       end
@@ -179,11 +180,11 @@ module Korekto
             raise Error, 'unrecognized korekto line'
           end
         rescue Error
-          puts "#{@filename}:#{line_number}:!:#{$!.message}"
+          puts "#{@filename}:#{line_number}:!:#{$ERROR_INFO.message}"
           exit 65
         rescue StandardError
-          puts "#{@filename}:#{line_number}:?:#{$!.message}"
-          warn $!.backtrace
+          puts "#{@filename}:#{line_number}:?:#{$ERROR_INFO.message}"
+          warn $ERROR_INFO.backtrace
           exit 1
         end
       end
