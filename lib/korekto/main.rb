@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Korekto
 class Main
   # rubocop: disable Layout/LineLength
@@ -134,12 +136,12 @@ class Main
         next unless active?
         next if preprocess?
         if (md = MD_STATEMENT_CODE_TITLE.match @line)
+          # Block executes if statement is new.
+          # Method receives the return value.
           code,title = @statements.add(md[:statement].strip,
                                        md[:code],
                                        md[:title],
                                        @section
-                                        # Block executes if statement is new.
-                                        # Method receives the return value.
                                       ){ statement_number += 1 }
           if Korekto.scrape?
             print @statements.last
