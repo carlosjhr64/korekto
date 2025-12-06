@@ -74,6 +74,7 @@ expected_instantiations
 ex_step
 extname
 FalseClass
+fence_open
 File
 filename
 FileUtils
@@ -141,17 +142,16 @@ matchdata
 max
 M_COMMENT_LINE
 md
-MD_FILENAME
 MD_FUNCTION
 MD_HANDWAVE
+MD_IMPORT
 MD_KEY_VALUE
 MD_STATEMENT_CODE_TITLE
 MD_SYNTAX
 MD_TYPE_PATTERN
 MD_TYPE_VARIABLES
 message
-M_FENCE
-m_fence_korekto
+M_FENCE_CLOSE
 n
 name
 new
@@ -250,7 +250,6 @@ Syntax
 syntax_check
 system
 t
-t2p_gsub
 target
 tautology
 tight

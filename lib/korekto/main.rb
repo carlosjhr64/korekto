@@ -5,6 +5,7 @@ module Korekto
   # Parses markdown-style Korekto documents, handling statements,
   # type definitions, imports, syntax rules, and fenced code blocks.
   # Supports preprocessing directives for configuration and control.
+  # rubocop: disable Metrics
   class Main
     # rubocop: disable Layout/LineLength, Lint/MixedRegexpCaptureTypes
     MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)(\s+(?<title>[^#]+))?$}
@@ -248,4 +249,5 @@ module Korekto
       end
     end
   end
+  # rubocop: enable Metrics
 end
