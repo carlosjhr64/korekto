@@ -28,7 +28,10 @@ module Korekto
     def match?(statement) = @regexp.match?(statement)
     def scan(regex, &)    = @statement.scan(regex, &)
     def pattern?          = !@regexp.nil?
-    def literal_regexp?   = @statement[0] == '/' && @statement[-1] == '/'
+
+    def literal_regexp?
+      pattern? && @statement[0] == '/' && @statement[-1] == '/'
+    end
 
     def set_regexp
       @regexp = @context.symbols.statement_to_regexp(@statement)
@@ -72,7 +75,7 @@ module Korekto
         true
       rescue Error
         false
-      end or raise Error, 'did not match any statement pattern'
+      end or raise Error, 'did not match any statement pattern(T/S/R/X/C)'
     end
 
     # Common helper

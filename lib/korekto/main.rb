@@ -54,7 +54,6 @@ module Korekto
     # Executes built-in functions (stop, gsub, delete, replace).
     # Stop the parsing of the file:
     #     ! stop!
-    # Try to avoid using the following, but...
     # Replace a variable_to_type's key with another.
     # Useful to temporally disabling it:
     #     ! replace! x TMP

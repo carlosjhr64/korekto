@@ -20,7 +20,7 @@ module Korekto
     end
 
     def undefined(statement, set: Set.new)
-      return set if statement.pattern? && statement.literal_regexp?
+      return set if statement.literal_regexp?
 
       statement.scan(@scanner) do |w|
         set << w unless @set.include?(w) ||

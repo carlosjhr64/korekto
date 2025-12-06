@@ -75,7 +75,6 @@ module Korekto
       # See `heap_combos_search` and `heap_search` in
       # [Korekto::Statement](statement.rb?heap_combos_search)
       unless 'DXSPTCRH'.include?(restatement.type)
-        # Only allow heap-able statements to be restated.
         raise Error, "restatement: #{restatement.code}"
       end
 
