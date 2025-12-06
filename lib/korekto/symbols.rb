@@ -43,33 +43,27 @@ module Korekto
 
     def statement_to_pattern(statement, quote: true)
       seen = {}
-      count = 0
-      increment = -> { count += 1 }
       # Build pattern from statement token by token.
       parts = statement.scan(@scanner).map do |token|
-        token_to_pattern(increment, seen, token, quote)
+        token_to_pattern(seen, token, quote)
       end
-      [parts.join, count]
+      [parts.join, seen.size]
     end
 
     private
 
-    def token_to_pattern(increment, seen, token, quote)
-      if (n = seen[token]) then "\\#{n}"
-      elsif (type = @variable_to_type[token])
-        regexed(type, increment, seen, token)
-      elsif quote then quoted(token)
-      else
-        ''
-      end
+    def token_to_pattern(seen, token, quote)
+      return "\\#{seen[token]}" if seen.key?(token)
+      return '' unless (type = @variable_to_type[token]) || quote
+
+      type ? regexed(type, seen, token) : quoted(token)
     end
 
-    def regexed(type, increment, seen, token)
+    def regexed(type, seen, token)
       regex = @type_to_pattern[type]
       return regex if type.start_with?('.')
 
-      n = increment.call
-      seen[token] = n.to_s
+      seen[token] = (seen.size + 1).to_s
       "(#{regex})"
     end
 
