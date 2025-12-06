@@ -105,14 +105,16 @@ module Korekto
     # Searches
 
     def detect_statement(type)
-      if (md = %r{/([^,]+)$}.match @code) &&
-         (pattern = @context.get md[1].to_sym) &&
+      # Check explicit support in @code (e.g. "/A12")
+      if (support_key = @code[%r{(?<=/)[^,]+}]) &&
+         (pattern = @context.get(support_key.to_sym)) &&
          pattern.match?(@statement)
         return pattern
       end
 
-      @context.type(type).detect { it.match? @statement } ||
-        raise(Error, "does not match any '#{type}' statement")
+      # Fallback: search all patterns of given type
+      @context.type(type).find { it.match? @statement } ||
+        raise(Error, "no matching '#{type}' pattern")
     end
 
     def heap_combos_search(type)
