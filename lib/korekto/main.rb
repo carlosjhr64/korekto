@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 module Korekto
+  # Main processor for Korekto input files.
+  # Parses markdown-style Korekto documents, handling statements,
+  # type definitions, imports, syntax rules, and fenced code blocks.
+  # Supports preprocessing directives for configuration and control.
   class Main
     # rubocop: disable Layout/LineLength, Lint/MixedRegexpCaptureTypes
     MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)(\s+(?<title>[^#]+))?$}
-    MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
+    MD_IMPORT = %r{^< (?<filename>[/\w\-.]+)$}
     MD_SYNTAX = /^[?] (?<syntax>\S.*)$/
     MD_TYPE_PATTERN = %r{^! (?<type>\S+)\s+/(?<pattern>.*)/$}
     MD_TYPE_VARIABLES = /^! (?<type>\S+)\s+\{(?<variables>\S+( \S+)*)\}$/
@@ -13,7 +17,7 @@ module Korekto
     MD_HANDWAVE = /^~ (?<handwave>.*)$/
     # rubocop: enable Layout/LineLength, Lint/MixedRegexpCaptureTypes
 
-    M_FENCE = /^```\s*$/
+    M_FENCE_CLOSE = /^```\s*$/
     M_COMMENT_LINE = /^\s*#/
 
     def initialize(filename = '-', statements: Statements.new, imports: [])
@@ -23,13 +27,13 @@ module Korekto
       @filename.freeze
       @section = File.basename(@filename, '.*')
       @imports.push @section
-      @m_fence_korekto = /^```korekto$/ # default fence
+      @fence_open = /^```korekto$/ # default fence
       @line = nil
       @active = false
       @backups = {}
     end
 
-    def t2p_gsub(target, replacement)
+    def type_to_pattern_gsub(target, replacement)
       type_to_pattern = @statements.symbols.type_to_pattern
       type_to_pattern.each_key do |type|
         type_to_pattern[type].gsub!(target, replacement)
@@ -37,6 +41,8 @@ module Korekto
       @statements.patterns(&:set_regexp)
     end
 
+    # Defines a regex pattern for a type; raises if type already exists.
+    #     ! Variable /[a-z]/
     def type_pattern(type, pattern)
       type_to_pattern = @statements.symbols.type_to_pattern
       raise Error, "type #{type} in use" if type_to_pattern.key? type
@@ -44,6 +50,18 @@ module Korekto
       type_to_pattern[type] = pattern
     end
 
+    # Executes built-in functions (stop, gsub, delete, replace).
+    # Stop the parsing of the file:
+    #     ! stop!
+    # Try to avoid using the following, but...
+    # Replace a variable_to_type's key with another.
+    # Useful to temporally disabling it:
+    #     ! replace! x TMP
+    # Delete a variable_to_type's key:
+    #     ! delete! x
+    # Globally change patterns in the type_to_pattern hash:
+    #     ! gsub: x y
+    # These features should be fully covered in the tutorial.
     def function(function, arguments)
       case function
       when 'stop'
@@ -73,6 +91,10 @@ module Korekto
       end
     end
 
+    # Assigns variables to a type; validates type exists and variables are free.
+    #     ! Variable {a b c}
+    # These variables are translated into their patterns
+    # when found in pattern statements.
     def type_variables(type, variables)
       variable_to_type = @statements.symbols.variable_to_type
       type_to_pattern = @statements.symbols.type_to_pattern
@@ -89,9 +111,12 @@ module Korekto
       end
     end
 
+    # Processes preprocessing directives (imports, types, syntax, etc.).
+    # Basically stuff that are not primary statements in the page's proof.
+    # Returns true if line was handled, false otherwise.
     def preprocess?
       case @line
-      when MD_FILENAME
+      when MD_IMPORT
         filename = $LAST_MATCH_INFO[:filename].strip
         bn = File.basename(filename, '.*')
         xt = File.extname(filename)
@@ -128,13 +153,19 @@ module Korekto
       true
     end
 
+    # Handles key-value configuration directives.
+    # Examples:
+    #     ! scanner: ':\w+|'
+    #     ! fence: 'ruby'
+    #     ! save: 'backup1'
+    #     ! restore: 'backup1'
     # Marshal is being used internally(trusted) to backup State.
     def key_value(key, value)
       case key
       when 'scanner'
         @statements.symbols.scanner = value
       when 'fence'
-        @m_fence_korekto = Regexp.new "^```#{value}$" # user defined fence
+        @fence_open = Regexp.new "^```#{value}$" # user defined fence
       when 'section'
         raise Error, "duplicate section: #{value}" if @imports.include? value
 
@@ -201,14 +232,16 @@ module Korekto
     end
 
     # Is the current line a non-comment Korekto line?
+    # Returns true if current line is inside active Korekto fence and
+    # not a comment.
     def active?
       case @line
-      when @m_fence_korekto
+      when @fence_open
         raise Error, 'unexpected fence' if @active
 
         @active = true
         false
-      when M_FENCE
+      when M_FENCE_CLOSE
         @active = false
       else
         @active && !M_COMMENT_LINE.match?(@line)
