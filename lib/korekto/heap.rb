@@ -6,15 +6,22 @@ module Korekto
   # increasing (i² + j²) to favor recent statements, reducing look-back and
   # search scope for verification.
   class Heap
+    COMBOS_FOR = Hash.new do |hash, limit|
+      hash[limit] = (0...limit).to_a
+                               .combination(2)
+                               .flat_map { |i, j| [[i, j], [j, i]] }
+                               .sort_by { |i, j| (i * i) + (j * j) }
+                               .freeze
+    end
+    private_constant :COMBOS_FOR
+
     def initialize(limit)
       @limit = limit
       @a = []
-      @combos = build_combos
+      @combos = COMBOS_FOR[@limit]
     end
 
-    def to_a
-      @a
-    end
+    def to_a = @a
 
     def add(statement)
       @a.unshift statement
@@ -30,15 +37,5 @@ module Korekto
     end
 
     def each = @a.each { yield it }
-
-    private
-
-    def build_combos
-      (0...@limit)
-        .to_a
-        .combination(2)
-        .sort { |ij, kl| (ij[0]**2) + (ij[1]**2) <=> (kl[0]**2) + (kl[1]**2) }
-        .flat_map { |i, j| [[i, j], [j, i]] }
-    end
   end
 end
