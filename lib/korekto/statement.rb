@@ -90,9 +90,7 @@ module Korekto
     end
 
     def support(*statements)
-      statements.inject([]) do |codes, statement|
-        codes.push(statement.code.split('/', 2)[0])
-      end.join(',')
+      statements.map { it.code.split('/', 2)[0] }.join(',')
     end
 
     # Pattern helpers
