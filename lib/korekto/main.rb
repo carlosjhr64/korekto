@@ -2,7 +2,7 @@
 
 module Korekto
   class Main
-    # rubocop: disable Layout/LineLength
+    # rubocop: disable Layout/LineLength, Lint/MixedRegexpCaptureTypes
     MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)(\s+(?<title>[^#]+))?$}
     MD_FILENAME = %r{^< (?<filename>[/\w\-.]+)$}
     MD_SYNTAX = /^[?] (?<syntax>\S.*)$/
@@ -11,7 +11,7 @@ module Korekto
     MD_KEY_VALUE = /^! (?<key>\w+):\s+'(?<value>.*)'$/
     MD_FUNCTION = /^! (?<function>\w+)!(?<arguments>.*)$/
     MD_HANDWAVE = /^~ (?<handwave>.*)$/
-    # rubocop: enable Layout/LineLength
+    # rubocop: enable Layout/LineLength, Lint/MixedRegexpCaptureTypes
 
     M_FENCE = /^```\s*$/
     M_COMMENT_LINE = /^\s*#/
@@ -31,8 +31,8 @@ module Korekto
 
     def t2p_gsub(target, replacement)
       type_to_pattern = @statements.symbols.type_to_pattern
-      type_to_pattern.each_key do
-        type_to_pattern[it].gsub!(target, replacement)
+      type_to_pattern.each_key do |type|
+        type_to_pattern[type].gsub!(target, replacement)
       end
       @statements.patterns(&:set_regexp)
     end
@@ -128,6 +128,7 @@ module Korekto
       true
     end
 
+    # Marshal is being used internally(trusted) to backup State.
     def key_value(key, value)
       case key
       when 'scanner'
@@ -143,7 +144,9 @@ module Korekto
         @backups[value] = Marshal.dump(@statements)
       when 'restore'
         if (backup = @backups[value])
+          # rubocop: disable Security/MarshalLoad
           @statements = Marshal.load(backup)
+          # rubocop: enable Security/MarshalLoad
         else
           raise Error, "nothing saved as '#{value}'"
         end
@@ -172,8 +175,9 @@ module Korekto
               print "\t##{code}"
               print " #{title}" unless title.nil? || title.empty?
               puts
-            elsif Korekto.trace? ||
-                  (@filename == '-' && !(md[:code] == code && md[:title] == title))
+            elsif Korekto.trace? || (@filename == '-' &&
+                                    !(md[:code] == code &&
+                                    md[:title] == title))
               puts "#{@filename}:#{line_number}:#{code}:#{title}"
             end
           else
