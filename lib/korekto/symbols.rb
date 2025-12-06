@@ -55,8 +55,9 @@ module Korekto
     def token_to_pattern(seen, token, quote)
       return "\\#{seen[token]}" if seen.key?(token)
       return '' unless (type = @variable_to_type[token]) || quote
+      return regexed(type, seen, token) if type
 
-      type ? regexed(type, seen, token) : quoted(token)
+      Regexp.quote(token).sub(/^(\d)/, '[\1]')
     end
 
     def regexed(type, seen, token)
@@ -65,17 +66,6 @@ module Korekto
 
       seen[token] = (seen.size + 1).to_s
       "(#{regex})"
-    end
-
-    def quoted(token)
-      # Escape Regexp specials
-      quoted = Regexp.quote(token)
-      # To avoid collisions with back-references,
-      # isolate digit in square brackets:
-      if '0123456789'.include?(char = quoted[0])
-        quoted[0] = "[#{char}]"
-      end
-      quoted
     end
   end
 end
