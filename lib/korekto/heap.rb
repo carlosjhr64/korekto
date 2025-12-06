@@ -22,6 +22,7 @@ module Korekto
     end
 
     def to_a = @a
+    def antecedent = @a[0].to_s
 
     def add(statement)
       @a.unshift statement

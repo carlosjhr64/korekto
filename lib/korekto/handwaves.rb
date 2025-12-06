@@ -20,15 +20,6 @@ module Korekto
       @handwaves.push(handwave)
     end
 
-    def gsub!(pattern)
-      # Reverse to replace higher-index captures ($10, $11, ...)
-      # before lower ones ($1, $2) to avoid overlap.
-      @captures.each_with_index.reverse_each do |x, i|
-        pattern.gsub!("$#{i + 1}", x)
-      end
-      pattern
-    end
-
     # Verify statement satisfies a handwave
     def check(statement)
       raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
@@ -46,41 +37,37 @@ module Korekto
     # similar to :m/pattern/|s/find/replace/.
     def ex_handwave?(command, statement)
       @captures.clear
-      symbols = @context.symbols
-      heap = @context.heap.to_a
-      antecedent = heap.first.to_s
-      consequent = antecedent.dup
+      consequent = @context.antecedent.dup
       command.split('|').each do |step|
         break unless
-          ex_step?(step, statement, antecedent, consequent, symbols, heap)
+          ex_step?(step, statement, consequent)
       end
       statement == consequent
     end
 
     private
 
-    # rubocop: disable Metrics/ParameterLists
-    def ex_step?(step, statement, antecedent, consequent, symbols, heap)
+    def ex_step?(step, statement, consequent)
       case step
       when %r{^([mM])/(.*)/(t)?$}
-        ex_match_statement?(statement, antecedent, Regexp.last_match)
+        ex_match_statement?(statement, *Regexp.last_match[1..3])
       when %r{^g/(.*)/(t)?$}
-        ex_match_heap?(heap, symbols, Regexp.last_match)
+        ex_match_heap?(*Regexp.last_match[1..2])
       when %r{^s/(.*?)/(.*)/(g)?$}
-        ex_gsub_consequent?(consequent, Regexp.last_match)
+        ex_gsub_consequent?(consequent, *Regexp.last_match[1..3])
       else
         raise Error, "unrecognized handwave step: #{step}"
       end
     end
-    # rubocop: enable Metrics/ParameterLists
 
-    def ex_match_statement?(statement, antecedent, matchdata)
-      command = matchdata[1]
-      pattern = matchdata[2]
-      t = matchdata[3]
+    def statement_to_pattern(pattern)
+      @context.symbols.statement_to_pattern(pattern, quote: false)
+    end
+
+    def ex_match_statement?(statement, command, pattern, translate)
       n = 0
-      pattern, n = symbols.statement_to_pattern(pattern, quote: false) if t
-      string = command == 'M' ? antecedent : statement
+      pattern, n = statement_to_pattern(pattern) if translate
+      string = command == 'M' ? @context.heap.antecedent : statement
       md = Regexp.new(gsub!(pattern)).match(string)
       return false unless md
 
@@ -88,11 +75,9 @@ module Korekto
       true
     end
 
-    def ex_match_heap?(heap, symbols, matchdata)
-      pattern = matchdata[1]
-      t = matchdata[2]
+    def ex_match_heap?(pattern, translate)
       n = 0
-      pattern, n = symbols.statement_to_pattern(pattern, quote: false) if t
+      pattern, n = statement_to_pattern(pattern) if translate
       rgx = Regexp.new(gsub!(pattern))
       md = nil
       return false unless heap.any? { (md = rgx.match it) }
@@ -101,17 +86,24 @@ module Korekto
       true
     end
 
-    def ex_gsub_consequent?(consequent, matchdata)
-      pattern = matchdata[1]
-      substitute = matchdata[2]
-      g = matchdata[3]
+    def ex_gsub_consequent?(consequent, pattern, substitute, global)
       rgx = Regexp.new(gsub!(pattern))
       gsub!(substitute) # implement captures from prior matches
-      if g then consequent.gsub!(rgx, substitute)
+      if global
+        consequent.gsub!(rgx, substitute)
       else
         consequent.sub!(rgx, substitute)
       end
       true
+    end
+
+    def gsub!(pattern)
+      # Reverse to replace higher-index captures ($10, $11, ...)
+      # before lower ones ($1, $2) to avoid overlap.
+      @captures.each_with_index.reverse_each do |x, i|
+        pattern.gsub!("$#{i + 1}", x)
+      end
+      pattern
     end
   end
 end
