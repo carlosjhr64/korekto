@@ -111,9 +111,12 @@ module Korekto
       end
     end
 
-    # Processes preprocessing directives (imports, types, syntax, etc.).
-    # Basically stuff that are not primary statements in the page's proof.
-    # Returns true if line was handled, false otherwise.
+    # Processes non-statement directives
+    #     < imports
+    #     ? syntax
+    #     ! types, functions
+    #     ~ handwaves
+    # Returns true if line is handled, false otherwise.
     def preprocess?
       case @line
       when MD_IMPORT
