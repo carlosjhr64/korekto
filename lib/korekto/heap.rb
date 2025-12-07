@@ -25,6 +25,7 @@ module Korekto
     def antecedent = @a[0].to_s
 
     def add(statement)
+      @a.delete statement
       @a.unshift statement
       @a.pop if @a.length > @limit
     end

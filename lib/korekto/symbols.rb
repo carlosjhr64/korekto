@@ -41,6 +41,9 @@ module Korekto
       Regexp.new("\\A#{pattern}\\Z")
     end
 
+    # Converts a statement into a regex pattern and capture count.
+    # Replaces defined variables with their type patterns, quotes literals,
+    # and assigns capture groups to variables. Returns [pattern, captures].
     def statement_to_pattern(statement, quote: true)
       seen = {}
       # Build pattern from statement token by token.

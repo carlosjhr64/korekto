@@ -68,7 +68,10 @@ module Korekto
       end
     end
 
-    # Returns the restated statement's code and title.
+    # Handles restatement of an identical prior statement.
+    # Re-adds the existing statement to the heap and returns its code/title.
+    # Restatements are restricted to heap-relevant types (D,X,S,P,T,C,R,H).
+    # Raises Error otherwise.
     def restated(restatement, title)
       # Restatements are only allowed for heap-able statement types
       # (D,X,S,P,T,C,R,H) because only these participate in inference.
