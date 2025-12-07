@@ -19,14 +19,14 @@ module Korekto
 
   def self.run
     require 'English'
-    require 'korekto/refinements'
-    require 'korekto/symbols'
-    require 'korekto/syntax'
-    require 'korekto/handwaves'
-    require 'korekto/heap'
-    require 'korekto/statement'
-    require 'korekto/statements'
-    require 'korekto/main'
+    require_relative 'korekto/refinements'
+    require_relative 'korekto/symbols'
+    require_relative 'korekto/syntax'
+    require_relative 'korekto/handwaves'
+    require_relative 'korekto/heap'
+    require_relative 'korekto/statement'
+    require_relative 'korekto/statements'
+    require_relative 'korekto/main'
     Korekto::Main.new.run
   end
 end
