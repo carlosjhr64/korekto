@@ -81,8 +81,6 @@ module Korekto
       end or raise Error, 'did not match any statement pattern(T/S/R/X/C)'
     end
 
-    # Common helper
-
     def set_statement(support = nil, title = nil, undefined: nil)
       @code  = "#{@code[0]}#{@statement_number}"
       @code += ".#{@section}" unless @section == '-'

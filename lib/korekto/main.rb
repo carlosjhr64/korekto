@@ -7,6 +7,25 @@ module Korekto
   # Supports preprocessing directives for configuration and control.
   # rubocop: disable Metrics
   class Main
+    def initialize(filename = '-', statements: Statements.new, imports: [])
+      @filename = filename
+      @statements = statements
+      @imports = imports
+      @filename.freeze
+      @section = File.basename(@filename, '.*')
+      @imports.push @section
+      @fence_open = /^```korekto$/ # default fence
+      @line = nil
+      @active = false
+      @backups = {}
+    end
+
+    def run
+      parse @filename == '-' ? $stdin.readlines(chomp: true) : File.readlines(
+        @filename, chomp: true
+      )
+    end
+
     # rubocop: disable Layout/LineLength, Lint/MixedRegexpCaptureTypes
     MD_STATEMENT_CODE_TITLE = %r{^(?<statement>.*)\s#(?<code>[A-Z](\d+(\.\w+)?(/[\w,.]+)?)?)(\s+(?<title>[^#]+))?$}
     MD_IMPORT = %r{^< (?<filename>[/\w\-.]+)$}
@@ -21,18 +40,12 @@ module Korekto
     M_FENCE_CLOSE = /^```\s*$/
     M_COMMENT_LINE = /^\s*#/
 
-    def initialize(filename = '-', statements: Statements.new, imports: [])
-      @filename = filename
-      @statements = statements
-      @imports = imports
-      @filename.freeze
-      @section = File.basename(@filename, '.*')
-      @imports.push @section
-      @fence_open = /^```korekto$/ # default fence
-      @line = nil
-      @active = false
-      @backups = {}
-    end
+    private_constant :MD_STATEMENT_CODE_TITLE, :MD_IMPORT, :MD_SYNTAX,
+                     :MD_TYPE_PATTERN, :MD_TYPE_VARIABLES, :MD_KEY_VALUE,
+                     :MD_FUNCTION, :MD_HANDWAVE, :M_FENCE_CLOSE,
+                     :M_COMMENT_LINE
+
+    private
 
     def type_to_pattern_gsub(target, replacement)
       type_to_pattern = @statements.symbols.type_to_pattern
@@ -226,12 +239,6 @@ module Korekto
           exit 1
         end
       end
-    end
-
-    def run
-      parse @filename == '-' ? $stdin.readlines(chomp: true) : File.readlines(
-        @filename, chomp: true
-      )
     end
 
     # Is the current line a non-comment Korekto line?

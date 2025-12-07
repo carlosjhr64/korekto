@@ -32,6 +32,8 @@ module Korekto
       end
     end
 
+    private
+
     # Applies a Vim Ex-style handwave transformation chain to verify that
     # `statement` can be derived from the current antecedent via a sequence
     # of match (m/M/g), translate (t), and substitution (s) steps.
@@ -47,8 +49,6 @@ module Korekto
       end
       statement == consequent
     end
-
-    private
 
     def ex_step?(step, statement, consequent)
       case step
