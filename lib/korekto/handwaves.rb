@@ -32,9 +32,12 @@ module Korekto
       end
     end
 
-    # The "Ex Handwave" is a chain of Vim Ex-style commands (m, M, g, s)
-    # prefixed with ':' and separated by '|',
-    # similar to :m/pattern/|s/find/replace/.
+    # Applies a Vim Ex-style handwave transformation chain to verify that
+    # `statement` can be derived from the current antecedent via a sequence
+    # of match (m/M/g), translate (t), and substitution (s) steps.
+    # Returns true if the final `consequent` equals `statement`;
+    # otherwise false. Captures from match steps are stored in @captures
+    # for use in substitutions.
     def ex_handwave?(command, statement)
       @captures.clear
       consequent = @context.antecedent.dup

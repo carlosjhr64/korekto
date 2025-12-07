@@ -57,6 +57,9 @@ module Korekto
 
     private
 
+    # Sets the final acceptance code, title, and key for the statement by
+    # dispatching to the appropriate type handler (tautology, definition, etc.)
+    # based on the initial code letter. Raises if type unsupported.
     def set_acceptance_code
       handler = TYPE_HANDLERS[@code[0]]
       raise(Error, "type #{@code[0]} not implemented") unless handler
