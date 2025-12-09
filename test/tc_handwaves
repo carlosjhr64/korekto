@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'test/unit'
+
+class ContextMockup; end
+class Error < RuntimeError; end
+require 'korekto/handwaves'
+# Monkey patch for testing:
+class Korekto::Handwaves
+  attr_reader :handwaves, :captures
+  def test_gsub!(pattern) = gsub!(pattern)
+end
+
+class TestHandwaves < Test::Unit::TestCase
+  # Trivial instantiating tests
+  def test_new_push
+    context = ContextMockup.new
+    handwaves = Korekto::Handwaves.new(context)
+    assert_equal handwaves.handwaves, []
+    handwaves.push(':handwave-1')
+    handwaves.push(':handwave-2')
+    assert_equal handwaves.handwaves, [':handwave-1', ':handwave-2']
+    # Attempt to push duplicate:
+    e = assert_raises(Error) { handwaves.push(':handwave-2') }
+    assert_equal e.message, 'duplicate handwave'
+    # Does not start with ':':
+    e = assert_raises(Error) { handwaves.push('handwave-3') }
+    assert_equal e.message, 'unrecognized: handwave-3'
+  end
+
+  def test_check
+    context = ContextMockup.new
+    handwaves = Korekto::Handwaves.new(context)
+    e = assert_raises(Error) { handwaves.check('statement') }
+    assert_equal e.message, 'no handwaves found'
+    handwaves.handwaves.push('bad handwave') # <= don't do this :P
+    # This is now a Runtime Error:
+    e = assert_raises(RuntimeError) { handwaves.check('statement') }
+    assert_equal e.message, 'unrecognized: bad handwave'
+  end
+
+  # TODO: Difficult to unit test.
+  # Try to cover these paths with cucumber.
+  # * ex_handwave?
+  # * ex_step?
+  # * statement_to_pattern
+  # * ex_match_statement?
+  # * ex_match_heap?
+  # * ex_gsub_consequent?
+
+  def test_gsub_bang
+    context = ContextMockup.new
+    handwaves = Korekto::Handwaves.new(context)
+    handwaves.captures.concat ['A', 'B', 'C']
+    pattern = String.new('$1 = $2 and $2 = $3, so $1 = $3')
+    string = handwaves.test_gsub!(pattern)
+    assert_equal string, 'A = B and B = C, so A = C'
+  end
+end

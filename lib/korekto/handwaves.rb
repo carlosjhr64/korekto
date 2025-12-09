@@ -12,10 +12,9 @@ module Korekto
       @captures  = []
     end
 
-    def to_a = @handwaves
-
     def push(handwave)
       raise Error, 'duplicate handwave' if @handwaves.include?(handwave)
+      raise Error, "unrecognized: #{handwave}" unless /^:/.match?(handwave)
 
       @handwaves.push(handwave)
     end
@@ -27,6 +26,7 @@ module Korekto
         when /^:/ # Ex Handwave
           ex_handwave?(handwave[1..], statement)
         else
+          # Bug: should not happen... Catch this in `push`.
           raise "unrecognized: #{handwave}"
         end
       end
