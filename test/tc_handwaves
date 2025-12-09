@@ -3,13 +3,19 @@
 
 require 'test/unit'
 
+# Mock Context for testing
+# rubocop: disable Lint
 class ContextMockup; end
+# rubocop: enable Lint
 class Error < RuntimeError; end
 require 'korekto/handwaves'
-# Monkey patch for testing:
-class Korekto::Handwaves
-  attr_reader :handwaves, :captures
-  def test_gsub!(pattern) = gsub!(pattern)
+module Korekto
+  # Monkey patch for testing:
+  class Handwaves
+    attr_reader :handwaves, :captures
+
+    def test_gsub!(pattern) = gsub!(pattern)
+  end
 end
 
 class TestHandwaves < Test::Unit::TestCase
@@ -52,7 +58,7 @@ class TestHandwaves < Test::Unit::TestCase
   def test_gsub_bang
     context = ContextMockup.new
     handwaves = Korekto::Handwaves.new(context)
-    handwaves.captures.concat ['A', 'B', 'C']
+    handwaves.captures.push('A', 'B', 'C')
     pattern = String.new('$1 = $2 and $2 = $3, so $1 = $3')
     string = handwaves.test_gsub!(pattern)
     assert_equal string, 'A = B and B = C, so A = C'
