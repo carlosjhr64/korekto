@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'test/unit'
+require 'korekto/main'
+
+class TestMain < Test::Unit::TestCase
+  # Trivial instantiating tests
+  def test_new
+    main = Korekto::Main.new(statements: nil)
+    assert main.respond_to? :run
+  end
+
+  # The rest best tested with cucumber...
+end

@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'test/unit'
+
+class TestStatement < Test::Unit::TestCase
+  # Trivial
+  def test_require
+    assert require 'korekto/statement'
+  end
+
+  # The rest best tested with cucumber...
+end
