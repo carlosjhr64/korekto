@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'test/unit'
+require 'colorize'
 require 'korekto/heap'
 
 class TestHep < Test::Unit::TestCase
@@ -69,4 +70,22 @@ class TestHep < Test::Unit::TestCase
     assert_equal '13;12', a.first
     assert_equal '1;2', a.last
   end
+
+  # No fail warnings
+  # rubocop: disable Metrics
+  def test_instance_methods_coverage
+    klass = Korekto::Heap
+    methods = klass.instance_methods(false) +
+              klass.private_instance_methods(false)
+    methods.each do |method|
+      test_method = "test_#{method}"
+      test_method.sub!(/=$/, '_set')
+      test_method.sub!(/!$/, '_bang')
+      test_method.sub!(/\?$/, '_wut')
+      next if respond_to? test_method.to_sym
+
+      puts "Missing #{self.class}##{test_method}".red
+    end
+  end
+  # rubocop: enable Metrics
 end

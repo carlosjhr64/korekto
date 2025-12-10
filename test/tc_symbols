@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'test/unit'
+require 'colorize'
 require 'korekto/symbols'
 
 # Mockups
@@ -50,6 +51,22 @@ class TestSymbols < Test::Unit::TestCase
     regexp = symbols.statement_to_regexp Korekto::Statement.new('a=a')
     assert_equal Regexp, regexp.class
     assert_equal '/\A(\w)=\1\Z/', regexp.inspect
+  end
+
+  # No fail warnings
+  def test_instance_methods_coverage
+    klass = Korekto::Symbols
+    methods = klass.instance_methods(false) +
+              klass.private_instance_methods(false)
+    methods.each do |method|
+      test_method = "test_#{method}"
+      test_method.sub!(/=$/, '_set')
+      test_method.sub!(/!$/, '_bang')
+      test_method.sub!(/\?$/, '_wut')
+      next if respond_to? test_method.to_sym
+
+      puts "Missing #{self.class}##{test_method}".red
+    end
   end
   # rubocop: enable Metrics
 end
