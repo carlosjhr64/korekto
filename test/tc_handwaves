@@ -40,7 +40,8 @@ class TestHandwaves < Test::Unit::TestCase
     handwaves = Korekto::Handwaves.new(context)
     e = assert_raises(Error) { handwaves.check('statement') }
     assert_equal e.message, 'no handwaves found'
-    handwaves.handwaves.push('bad handwave') # <= don't do this :P
+    # Don't do the following... :P
+    handwaves.handwaves.push('bad handwave')
     # This is now a Runtime Error:
     e = assert_raises(RuntimeError) { handwaves.check('statement') }
     assert_equal e.message, 'unrecognized: bad handwave'
