@@ -4,6 +4,8 @@
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
+NOTE: Looking to release version 4 soon in 2026!
+
 ## Description
 
 A general proof checker.
