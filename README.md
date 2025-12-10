@@ -11,6 +11,10 @@ A general proof checker.
 Works with [neovim](https://github.com/neovim/neovim).
 
 ## Install
+
+This current version of Korekto was tested using:
+* Ruby version: `4.0`
+* Neovim version: `0.12`
 ```shell
 $ gem install korekto
 $ korekto --install
