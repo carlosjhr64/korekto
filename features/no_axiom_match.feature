@@ -15,4 +15,4 @@ Does not get here #D
     * When we run command
     * Then exit status is "65"
     * Then stderr is ""
-    * Then stdout is "-:5:D1:\n-:6:!:does not match any 'A' statement"
+    * Then stdout is "-:5:D1:\n-:6:!:no matching 'A' pattern"
