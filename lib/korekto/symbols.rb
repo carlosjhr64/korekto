@@ -9,9 +9,10 @@ module Korekto
     attr_reader :type_to_pattern, :variable_to_type
 
     def initialize
-      @set = Set.new # Set of Korekto symbols(strings)
-      @variable_to_type = {} # Variable to Type
-      @type_to_pattern = {} # Type to Pattern
+      # Set of Korekto symbols(String tokens)
+      @set = Set.new
+      @variable_to_type = {}
+      @type_to_pattern = {}
       @scanner = /:\w+|./ # Default scanner
     end
 
@@ -22,14 +23,15 @@ module Korekto
     def undefined(statement, set: Set.new)
       return set if statement.literal_regexp?
 
-      statement.scan(@scanner) do |w|
-        set << w unless @set.include?(w) ||
-                        (statement.pattern? && @variable_to_type.include?(w))
+      statement.scan(@scanner) do |token|
+        set << token unless @set.include?(token) ||
+                            (statement.pattern? &&
+                             @variable_to_type.include?(token))
       end
       set
     end
 
-    def define!(statement) = undefined(statement).each { |w| @set << w }
+    def define!(statement) = undefined(statement).each { |token| @set << token }
 
     def statement_to_regexp(statement)
       return Regexp.new statement[1..-2] if statement[0] == '/' &&
