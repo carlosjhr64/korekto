@@ -1,21 +1,22 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'test/unit'
 require 'korekto/symbols'
 
 # Mockups
 module Korekto
-class Error < RuntimeError; end
-class Statement < String
-  def regexp
-    nil
+  class Error < RuntimeError; end
+
+  class Statement < String
+    def literal_regexp?
+      false
+    end
+
+    def pattern?
+      false
+    end
   end
-  def literal_regexp?
-    false
-  end
-  def pattern?
-    false
-  end
-end
 end
 
 class TestSymbols < Test::Unit::TestCase
@@ -28,25 +29,27 @@ class TestSymbols < Test::Unit::TestCase
     assert_equal Set[':abc'], u
   end
 
-  def test_s2r
+  # rubocop: disable Metrics
+  def test_statement_to_regexp
     symbols = Korekto::Symbols.new
 
     # literally spelling out the regexp
-    regexp = symbols.s2r Korekto::Statement.new('/\Amatch\Z/')
+    regexp = symbols.statement_to_regexp Korekto::Statement.new('/\Amatch\Z/')
     assert_equal Regexp, regexp.class
     assert_equal '/\Amatch\Z/', regexp.inspect
 
     # using variable pattern translations, straight pass
     error = assert_raises(Korekto::Error) do
-      regexp = symbols.s2r Korekto::Statement.new('a=a')
+      regexp = symbols.statement_to_regexp Korekto::Statement.new('a=a')
     end
     assert_equal 'pattern with no captures', error.message
 
     # using variable pattern translations, a => \w
-    symbols.t2p[':Variable'] = '\w'
-    symbols.v2t['a'] = ':Variable'
-    regexp = symbols.s2r Korekto::Statement.new('a=a')
+    symbols.type_to_pattern[':Variable'] = '\w'
+    symbols.variable_to_type['a'] = ':Variable'
+    regexp = symbols.statement_to_regexp Korekto::Statement.new('a=a')
     assert_equal Regexp, regexp.class
     assert_equal '/\A(\w)=\1\Z/', regexp.inspect
   end
+  # rubocop: enable Metrics
 end
