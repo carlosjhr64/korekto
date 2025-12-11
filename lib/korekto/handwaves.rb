@@ -14,13 +14,13 @@ module Korekto
 
     def push(handwave)
       raise Error, 'duplicate handwave' if @handwaves.include?(handwave)
-      raise Error, "unrecognized: #{handwave}" unless /^:/.match?(handwave)
+      raise Error, 'unrecognized handwave' unless /^:/.match?(handwave)
 
       @handwaves.push(handwave)
     end
 
     # Verify statement satisfies a handwave
-    def check(statement)
+    def check!(statement)
       raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
         case handwave
         when /^:/ # Ex Handwave

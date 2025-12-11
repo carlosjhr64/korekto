@@ -241,7 +241,7 @@ module Korekto
     # When the above methods are unwieldy...
     def handwave
       expected_instantiations(instantiations: 0)
-      @context.handwaves.check(@statement)
+      @context.handwaves.check!(@statement)
       set_statement
     end
   end

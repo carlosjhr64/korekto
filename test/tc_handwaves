@@ -3,49 +3,72 @@
 
 require 'test/unit'
 require 'colorize'
-
-# Mock Context for testing
-# rubocop: disable Lint
-class ContextMockup; end
-# rubocop: enable Lint
-class Error < RuntimeError; end
 require 'korekto/handwaves'
+require_relative 'test_module'
+
+TEST_CLASS = Korekto::Handwaves
+
+# Mockup
 module Korekto
+  class Error < RuntimeError; end
+
+  class Statements
+    attr_accessor :antecedent, :symbols, :heap
+  end
+
+  class Symbols
+    def statement_to_pattern = nil
+  end
+
   # Monkey patch for testing:
   class Handwaves
-    attr_reader :handwaves, :captures
-
+    def test_context = @context
+    def test_handwaves = @handwaves
+    def test_captures = @captures
     def test_gsub!(pattern) = gsub!(pattern)
   end
 end
 
 class TestHandwaves < Test::Unit::TestCase
-  # Trivial instantiating tests
-  def test_new_push
-    context = ContextMockup.new
-    handwaves = Korekto::Handwaves.new(context)
-    assert_equal handwaves.handwaves, []
-    handwaves.push(':handwave-1')
-    handwaves.push(':handwave-2')
-    assert_equal handwaves.handwaves, [':handwave-1', ':handwave-2']
-    # Attempt to push duplicate:
-    e = assert_raises(Error) { handwaves.push(':handwave-2') }
-    assert_equal e.message, 'duplicate handwave'
-    # Does not start with ':':
-    e = assert_raises(Error) { handwaves.push('handwave-3') }
-    assert_equal e.message, 'unrecognized: handwave-3'
+  include TestModule
+
+  def setup
+    context = Korekto::Statements.new
+    @handwaves = Korekto::Handwaves.new(context)
   end
 
-  def test_check
-    context = ContextMockup.new
-    handwaves = Korekto::Handwaves.new(context)
-    e = assert_raises(Error) { handwaves.check('statement') }
+  def test_initialize
+    assert @handwaves.test_context.is_a? Korekto::Statements
+    assert_equal [], @handwaves.test_handwaves
+    assert_equal [], @handwaves.test_captures
+  end
+
+  def test_push
+    @handwaves.push(':wut')
+    assert_equal [':wut'], @handwaves.test_handwaves
+    e = assert_raises(Korekto::Error) do
+      @handwaves.push(':wut')
+    end
+    assert_equal 'duplicate handwave', e.message
+    e = assert_raises(Korekto::Error) do
+      @handwaves.push('wut')
+    end
+    assert_equal 'unrecognized handwave', e.message
+  end
+
+  def test_check_bang
+    e = assert_raises(Korekto::Error) { @handwaves.check!('statement') }
     assert_equal e.message, 'no handwaves found'
     # Don't do the following... :P
-    handwaves.handwaves.push('bad handwave')
+    @handwaves.test_handwaves.push('bad handwave')
     # This is now a Runtime Error:
-    e = assert_raises(RuntimeError) { handwaves.check('statement') }
+    e = assert_raises(RuntimeError) { @handwaves.check!('statement') }
     assert_equal e.message, 'unrecognized: bad handwave'
+    # Monkey patch to isolate
+    def @handwaves.ex_handwave?(*_args) = true
+    @handwaves.test_handwaves.clear
+    @handwaves.push(':something')
+    assert_nil @handwaves.check!('Any now passes')
   end
 
   # TODO: Difficult to unit test.
@@ -58,29 +81,11 @@ class TestHandwaves < Test::Unit::TestCase
   # * ex_gsub_consequent?
 
   def test_gsub_bang
-    context = ContextMockup.new
+    context = Korekto::Statements.new
     handwaves = Korekto::Handwaves.new(context)
-    handwaves.captures.push('A', 'B', 'C')
+    handwaves.test_captures.push('A', 'B', 'C')
     pattern = String.new('$1 = $2 and $2 = $3, so $1 = $3')
     string = handwaves.test_gsub!(pattern)
     assert_equal string, 'A = B and B = C, so A = C'
   end
-
-  # No fail warnings
-  # rubocop: disable Metrics
-  def test_instance_methods_coverage
-    klass = Korekto::Handwaves
-    methods = klass.instance_methods(false) +
-              klass.private_instance_methods(false)
-    methods.each do |method|
-      test_method = "test_#{method}"
-      test_method.sub!(/=$/, '_set')
-      test_method.sub!(/!$/, '_bang')
-      test_method.sub!(/\?$/, '_wut')
-      next if respond_to? test_method.to_sym
-
-      puts "Missing #{self.class}##{test_method}".red
-    end
-  end
-  # rubocop: enable Metrics
 end
