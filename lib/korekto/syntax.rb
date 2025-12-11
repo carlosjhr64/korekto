@@ -5,7 +5,6 @@ module Korekto
   # evaluates on a string and returns a boolean indicating validity.
   class Syntax
     def initialize = @syntax = []
-    def to_a = @syntax
 
     using Refinements
 
