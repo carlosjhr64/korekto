@@ -4,6 +4,9 @@
 require 'test/unit'
 require 'colorize'
 require 'korekto/symbols'
+require_relative 'test_module'
+
+TEST_CLASS = Korekto::Symbols
 
 # Mockups
 module Korekto
@@ -27,6 +30,8 @@ end
 
 # rubocop: disable Metrics
 class TestSymbols < Test::Unit::TestCase
+  include TestModule
+
   def setup
     @symbols = Korekto::Symbols.new
   end
@@ -131,25 +136,6 @@ class TestSymbols < Test::Unit::TestCase
     re = @symbols.test_regexed('Y', seen, 'T')
     assert_equal '([y])', re
     assert_equal({ 'T' => '1' }, seen)
-  end
-
-  # No fail warnings
-  def test_instance_methods_coverage
-    klass = Korekto::Symbols
-    privated = klass.private_instance_methods(false)
-    methods = klass.instance_methods(false) + privated
-    methods.each do |method|
-      next if method.start_with? 'test_'
-
-      test_method = "test_#{method}"
-      test_method.sub!(/=$/, '_set')
-      test_method.sub!(/!$/, '_bang')
-      test_method.sub!(/\?$/, '_wut')
-      next if respond_to? test_method.to_sym
-
-      color = privated.include?(method) ? :magenta : :red
-      puts "Missing #{self.class}##{test_method}".colorize(color)
-    end
   end
 end
 # rubocop: enable Metrics
