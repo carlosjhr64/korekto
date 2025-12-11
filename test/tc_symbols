@@ -8,56 +8,120 @@ require 'korekto/symbols'
 # Mockups
 module Korekto
   class Error < RuntimeError; end
-
-  class Statement < String
-    def literal_regexp?
-      false
-    end
-
-    def pattern?
-      false
-    end
-  end
 end
 
+# rubocop: disable Metrics
 class TestSymbols < Test::Unit::TestCase
-  def test_symbols
-    symbols = Korekto::Symbols.new
-    symbols.define! Korekto::Statement.new('abbba abc a:xyz a')
-    u = symbols.undefined Korekto::Statement.new('abcdexyz:xyz')
-    assert_equal Set.new(%w[d e x y z]), u
-    u = symbols.undefined Korekto::Statement.new('abc:xyz:abc')
-    assert_equal Set[':abc'], u
+  def test_initialize
+    assert_nothing_raised do
+      Korekto::Symbols.new
+    end
   end
 
-  # rubocop: disable Metrics
+  def test_undefined
+    symbols = Korekto::Symbols.new
+    statement = String.new(':Wut*2=:Two:Wut')
+    # Case 1
+    def statement.literal_regexp? = false
+    def statement.pattern? = false
+    undefined = symbols.undefined(statement)
+    assert_equal undefined, Set[':Wut', '*', '2', '=', ':Two']
+    # Case 2
+    def statement.literal_regexp? = true
+    def statement.pattern? = false
+    # Case 3
+    def statement.literal_regexp? = false
+    def statement.pattern? = true
+    symbols.variable_to_type['*'] = :Operator
+    symbols.variable_to_type['='] = :Operator
+    undefined = symbols.undefined(statement)
+    assert_equal undefined, Set[':Wut', '2', ':Two']
+  end
+
+  def test_type_to_pattern
+    symbols = Korekto::Symbols.new
+    assert_equal symbols.type_to_pattern, {}
+  end
+
+  def test_variable_to_type
+    symbols = Korekto::Symbols.new
+    assert_equal symbols.variable_to_type, {}
+  end
+
+  def test_scanner_set
+    symbols = Korekto::Symbols.new
+    symbols.scanner = '\w+|.'
+    statement = String.new(':Wut*2=:Two:Wut')
+    def statement.literal_regexp? = false
+    def statement.pattern? = false
+    undefined = symbols.undefined(statement)
+    assert_equal undefined, Set[':', 'Wut', '*', '2', '=', 'Two']
+  end
+
+  def test_define_bang
+    symbols = Korekto::Symbols.new
+    statement = String.new(':Wut*2=:Two:Wut')
+    def statement.literal_regexp? = false
+    def statement.pattern? = false
+    symbols.define! statement
+    undefined = symbols.undefined(statement)
+    assert undefined.empty?
+  end
+
   def test_statement_to_regexp
     symbols = Korekto::Symbols.new
-
-    # literally spelling out the regexp
-    regexp = symbols.statement_to_regexp Korekto::Statement.new('/\Amatch\Z/')
-    assert_equal Regexp, regexp.class
-    assert_equal '/\Amatch\Z/', regexp.inspect
-
-    # using variable pattern translations, straight pass
-    error = assert_raises(Korekto::Error) do
-      regexp = symbols.statement_to_regexp Korekto::Statement.new('a=a')
+    regexp = symbols.statement_to_regexp('/wut/')
+    assert_equal regexp, /wut/
+    e = assert_raises(Korekto::Error) do
+      symbols.statement_to_regexp('No pattern here')
     end
-    assert_equal 'pattern with no captures', error.message
+    assert_equal e.message, 'pattern with no captures'
+  end
 
+  def test_statement_to_pattern
+    symbols = Korekto::Symbols.new
+    statement = String.new(':Wut*2=:Two:Wut')
+    pattern, captures = symbols.statement_to_pattern(statement)
+    # Note that '*' is escaped and '2' is isolated:
+    assert_equal pattern, ':Wut\*[2]=:Two:Wut'
+    assert_equal captures, 0
+  end
+
+  def test_token_to_pattern
+    symbols = Korekto::Symbols.new
     # using variable pattern translations, a => \w
-    symbols.type_to_pattern[':Variable'] = '\w'
-    symbols.variable_to_type['a'] = ':Variable'
-    regexp = symbols.statement_to_regexp Korekto::Statement.new('a=a')
+    symbols.type_to_pattern['Variable'] = '\w'
+    symbols.variable_to_type['a'] = 'Variable'
+    symbols.variable_to_type['b'] = 'Variable'
+    symbols.variable_to_type['c'] = 'Variable'
+    # Reaching private token_to_pattern via statement_to_regexp
+    regexp = symbols.statement_to_regexp 'a=b;b=c;a=c'
     assert_equal Regexp, regexp.class
-    assert_equal '/\A(\w)=\1\Z/', regexp.inspect
+    assert_equal '/\A(\w)=(\w);\2=(\w);\1=\3\Z/', regexp.inspect
+  end
+
+  def test_regexed
+    # Almost same as above's test_token_to_pattern
+    # but testing no-capture type that starts with '.'
+    symbols = Korekto::Symbols.new
+    # using variable pattern translations, a => \w
+    symbols.type_to_pattern['Variable'] = '\w'
+    symbols.type_to_pattern['.Equality'] = '[=~]'
+    symbols.variable_to_type['a'] = 'Variable'
+    symbols.variable_to_type['b'] = 'Variable'
+    symbols.variable_to_type['c'] = 'Variable'
+    symbols.variable_to_type['='] = '.Equality'
+    # Reaching private token_to_pattern via statement_to_regexp
+    regexp = symbols.statement_to_regexp 'a=b;b=c;a=c'
+    assert_equal Regexp, regexp.class
+    assert_equal '/\A(\w)[=~](\w);\2[=~](\w);\1[=~]\3\Z/', regexp.inspect
   end
 
   # No fail warnings
   def test_instance_methods_coverage
     klass = Korekto::Symbols
-    methods = klass.instance_methods(false) +
-              klass.private_instance_methods(false)
+    privated = klass.private_instance_methods(false)
+    methods = klass.instance_methods(false) + privated
     methods.each do |method|
       test_method = "test_#{method}"
       test_method.sub!(/=$/, '_set')
@@ -65,8 +129,9 @@ class TestSymbols < Test::Unit::TestCase
       test_method.sub!(/\?$/, '_wut')
       next if respond_to? test_method.to_sym
 
-      puts "Missing #{self.class}##{test_method}".red
+      color = privated.include?(method) ? :magenta : :red
+      puts "Missing #{self.class}##{test_method}".colorize(color)
     end
   end
-  # rubocop: enable Metrics
 end
+# rubocop: enable Metrics
