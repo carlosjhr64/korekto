@@ -78,13 +78,12 @@ module Korekto
     end
 
     def ex_match_heap?(pattern, translate)
-      n = 0
-      pattern, n = statement_to_pattern(pattern) if translate
+      pattern, = statement_to_pattern(pattern) if translate
       rgx = Regexp.new(gsub!(pattern))
       md = nil
-      return false unless heap.any? { (md = rgx.match it) }
+      return false unless @context.heap.any? { (md = rgx.match it) }
 
-      1.upto(n).each { @captures.push(md[it]) }
+      @captures.push(*md[1..])
       true
     end
 

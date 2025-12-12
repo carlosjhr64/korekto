@@ -151,12 +151,12 @@ class TestHandwaves < Test::Unit::TestCase
     @handwaves.test_captures.clear
     b = @handwaves.test_ex_match_statement?(s, 'm', p, false)
     assert_equal true, b
-    assert_equal ['A', 'B'], @handwaves.test_captures
+    assert_equal %w[A B], @handwaves.test_captures
     # Case M:
     @handwaves.test_captures.clear
     b = @handwaves.test_ex_match_statement?(s, 'M', p, false)
     assert_equal true, b
-    assert_equal ['X', 'Y'], @handwaves.test_captures
+    assert_equal %w[X Y], @handwaves.test_captures
     # Case no match:
     @handwaves.test_captures.clear
     b = @handwaves.test_ex_match_statement?(s2, 'm', p, false)
@@ -167,11 +167,34 @@ class TestHandwaves < Test::Unit::TestCase
     @handwaves.test_captures.clear
     b = @handwaves.test_ex_match_statement?(s2, 'm', p, true)
     assert_equal true, b
-    assert_equal ['u', 'v'], @handwaves.test_captures
+    assert_equal %w[u v], @handwaves.test_captures
   end
 
   def test_ex_match_heap_wut
-    # TODO
+    @handwaves.test_context.heap = ['Apples are red and delicious',
+                                    'Lemons are green and sour']
+    apples = 'Apples are (\w+) and (\w+)'
+    lemons = 'Lemons are (\w+) and (\w+)'
+    # Match nothing
+    @handwaves.test_captures.clear
+    b = @handwaves.test_ex_match_heap?('A coconut is (\w+)', false)
+    assert_equal false, b
+    # Apples
+    @handwaves.test_captures.clear
+    b = @handwaves.test_ex_match_heap?(apples, false)
+    assert_equal true, b
+    assert_equal %w[red delicious], @handwaves.test_captures
+    # Lemons
+    @handwaves.test_captures.clear
+    b = @handwaves.test_ex_match_heap?(lemons, false)
+    assert_equal true, b
+    assert_equal %w[green sour], @handwaves.test_captures
+    # Translate
+    @handwaves.test_captures.clear
+    def @handwaves.statement_to_pattern(*) = '^(.*) and sour'
+    b = @handwaves.test_ex_match_heap?('translate this', true)
+    assert_equal true, b
+    assert_equal ['Lemons are green'], @handwaves.test_captures
   end
 
   def test_ex_gsub_consequent_wut
