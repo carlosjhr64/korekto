@@ -29,6 +29,7 @@ module Korekto
     def test_ex_step?(*) = ex_step?(*)
     def test_ex_match_statement?(*) = ex_match_statement?(*)
     def test_ex_match_heap?(*) = ex_match_heap?(*)
+    def test_ex_replace?(*) = ex_replace?(*)
   end
 end
 
@@ -122,7 +123,7 @@ class TestHandwaves < Test::Unit::TestCase
     # rubocop: disable Naming/PredicateMethod
     def @handwaves.ex_match_statement?(*args) = [:A, *args]
     def @handwaves.ex_match_heap?(*args) = [:B, *args]
-    def @handwaves.ex_gsub_consequent?(*args) = [:C, *args]
+    def @handwaves.ex_replace?(*args) = [:C, *args]
     # rubocop: enable Naming/PredicateMethod
     e = assert_raises(Korekto::Error) do
       @handwaves.test_ex_step?('foo', 'wut', 'tuw')
@@ -197,8 +198,17 @@ class TestHandwaves < Test::Unit::TestCase
     assert_equal ['Lemons are green'], @handwaves.test_captures
   end
 
-  def test_ex_gsub_consequent_wut
-    # TODO
+  def test_ex_replace_wut
+    consequent = String.new('I like chocolate. I like nuts')
+    b = @handwaves.test_ex_replace?(consequent, 'I', 'We', false)
+    assert_equal true, b
+    assert_equal 'We like chocolate. I like nuts', consequent
+    b = @handwaves.test_ex_replace?(consequent, 'I|We', 'They', true)
+    assert_equal true, b
+    assert_equal 'They like chocolate. They like nuts', consequent
+    b = @handwaves.test_ex_replace?(consequent, 'I|We', 'Them', true)
+    assert_equal true, b # succeeds even with no changes
+    assert_equal 'They like chocolate. They like nuts', consequent
   end
 
   def test_gsub_bang

@@ -57,7 +57,7 @@ module Korekto
       when %r{^g/(.*)/(t)?$}
         ex_match_heap?(*Regexp.last_match[1..2])
       when %r{^s/(.*?)/(.*)/(g)?$}
-        ex_gsub_consequent?(consequent, *Regexp.last_match[1..3])
+        ex_replace?(consequent, *Regexp.last_match[1..3])
       else
         raise Error, "unrecognized handwave step: #{step}"
       end
@@ -87,7 +87,7 @@ module Korekto
       true
     end
 
-    def ex_gsub_consequent?(consequent, pattern, substitute, global)
+    def ex_replace?(consequent, pattern, substitute, global)
       rgx = Regexp.new(gsub!(pattern))
       gsub!(substitute) # implement captures from prior matches
       if global

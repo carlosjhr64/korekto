@@ -60,7 +60,6 @@ Error
 exec
 exec_neovim
 exec_readme
-ex_gsub_consequent
 ex_handwave
 exist
 existential
@@ -68,6 +67,7 @@ exit
 ex_match_heap
 ex_match_statement
 expected_instantiations
+ex_replace
 ex_step
 extname
 FalseClass
@@ -147,7 +147,6 @@ MD_TYPE_PATTERN
 MD_TYPE_VARIABLES
 message
 M_FENCE_CLOSE
-n
 name
 new
 newlines_count
@@ -271,7 +270,6 @@ undefined
 unshift
 update
 UpdateRemotePlugins
-upto
 using
 value
 values
