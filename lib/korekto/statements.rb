@@ -30,6 +30,7 @@ module Korekto
     def length     = @statements.length
     def patterns   = @statements.values.select(&:pattern?).each { yield it }
     def get(key)   = @statements[key]
+    def antecedent = @heap.antecedent
 
     def add(statement, code, title, filename)
       syntax_check(statement, code)

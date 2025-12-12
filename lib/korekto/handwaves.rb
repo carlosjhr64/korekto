@@ -68,13 +68,12 @@ module Korekto
     end
 
     def ex_match_statement?(statement, command, pattern, translate)
-      n = 0
-      pattern, n = statement_to_pattern(pattern) if translate
-      string = command == 'M' ? @context.heap.antecedent : statement
+      pattern, = statement_to_pattern(pattern) if translate
+      string = command == 'M' ? @context.antecedent : statement
       md = Regexp.new(gsub!(pattern)).match(string)
       return false unless md
 
-      1.upto(n).each { @captures.push(md[it]) }
+      @captures.push(*md[1..])
       true
     end
 

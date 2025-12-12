@@ -15,23 +15,31 @@ module Korekto
   end
 
   class Symbols
-    def statement_to_pattern = nil
+    def statement_to_pattern(*args) = args
   end
 
-  # Monkey patch for testing:
+  # Monkey patch for testing.
   class Handwaves
     def test_context = @context
     def test_handwaves = @handwaves
     def test_captures = @captures
-    def test_gsub!(pattern) = gsub!(pattern)
+    def test_gsub!(*) = gsub!(*)
+    def test_statement_to_pattern(*) = statement_to_pattern(*)
+    def test_ex_handwave?(*) = ex_handwave?(*)
+    def test_ex_step?(*) = ex_step?(*)
+    def test_ex_match_statement?(*) = ex_match_statement?(*)
+    def test_ex_match_heap?(*) = ex_match_heap?(*)
   end
 end
 
+# rubocop: disable Metrics
 class TestHandwaves < Test::Unit::TestCase
   include TestModule
 
   def setup
     context = Korekto::Statements.new
+    symbols = Korekto::Symbols.new
+    context.symbols = symbols
     @handwaves = Korekto::Handwaves.new(context)
   end
 
@@ -71,21 +79,110 @@ class TestHandwaves < Test::Unit::TestCase
     assert_nil @handwaves.check!('Any now passes')
   end
 
-  # TODO: Difficult to unit test.
-  # Try to cover these paths with cucumber.
-  # * ex_handwave?
-  # * ex_step?
-  # * statement_to_pattern
-  # * ex_match_statement?
-  # * ex_match_heap?
-  # * ex_gsub_consequent?
+  def test_statement_to_pattern
+    wut = @handwaves.test_statement_to_pattern('wut')
+    assert_equal ['wut', { quote: false }], wut
+  end
+
+  def test_ex_handwave_wut
+    @handwaves.test_context.antecedent = 'Wut'
+    b = @handwaves.test_ex_handwave?('', 'Wut')
+    assert_equal true, b
+    b = @handwaves.test_ex_handwave?('', 'wut')
+    assert_equal false, b
+    # Patch to isolate
+    def @handwaves.ex_step?(step, statement, consequent)
+      case step
+      when 'capitalize'
+        statement.capitalize!
+        true
+      when 'reverse'
+        statement.reverse!
+        true
+      when 'Reverse'
+        consequent.reverse!
+        true
+      when 'Capitalize'
+        consequent.capitalize!
+        true
+      else
+        raise Korekto::Error, "Wut? #{step}"
+      end
+    end
+    b = @handwaves.test_ex_handwave?('reverse|capitalize', String.new('tuw'))
+    assert_equal true, b
+    b = @handwaves.test_ex_handwave?('reverse|capitalize', String.new('wut'))
+    assert_equal false, b
+    b = @handwaves.test_ex_handwave?('Reverse|Capitalize', String.new('Tuw'))
+    assert_equal true, b
+  end
+
+  def test_ex_step_wut
+    # Patch to isolate
+    # rubocop: disable Naming/PredicateMethod
+    def @handwaves.ex_match_statement?(*args) = [:A, *args]
+    def @handwaves.ex_match_heap?(*args) = [:B, *args]
+    def @handwaves.ex_gsub_consequent?(*args) = [:C, *args]
+    # rubocop: enable Naming/PredicateMethod
+    e = assert_raises(Korekto::Error) do
+      @handwaves.test_ex_step?('foo', 'wut', 'tuw')
+    end
+    assert_equal 'unrecognized handwave step: foo', e.message
+    args = @handwaves.test_ex_step?('m/abc/t', 'wut', 'tuw')
+    assert_equal [:A, 'wut', 'm', 'abc', 't'], args
+    args = @handwaves.test_ex_step?('M/xyz/', 'wut', 'tuw')
+    assert_equal [:A, 'wut', 'M', 'xyz', nil], args
+    args = @handwaves.test_ex_step?('g/123/t', 'wut', 'tuw')
+    assert_equal [:B, '123', 't'], args
+    args = @handwaves.test_ex_step?('g/ABC/', 'wut', 'tuw')
+    assert_equal [:B, 'ABC', nil], args
+    args = @handwaves.test_ex_step?('s/rtx/uvw/g', 'wut', 'tuw')
+    assert_equal [:C, 'tuw', 'rtx', 'uvw', 'g'], args
+    args = @handwaves.test_ex_step?('s/()()/[]{}/', 'wut', 'tuw')
+    assert_equal [:C, 'tuw', '()()', '[]{}', nil], args
+  end
+
+  def test_ex_match_statement_wut
+    s = 'A = B'
+    s2 = 'u ~ v'
+    @handwaves.test_context.antecedent = 'X = Y'
+    p = '(\w) = (\w)'
+    # Case m:
+    @handwaves.test_captures.clear
+    b = @handwaves.test_ex_match_statement?(s, 'm', p, false)
+    assert_equal true, b
+    assert_equal ['A', 'B'], @handwaves.test_captures
+    # Case M:
+    @handwaves.test_captures.clear
+    b = @handwaves.test_ex_match_statement?(s, 'M', p, false)
+    assert_equal true, b
+    assert_equal ['X', 'Y'], @handwaves.test_captures
+    # Case no match:
+    @handwaves.test_captures.clear
+    b = @handwaves.test_ex_match_statement?(s2, 'm', p, false)
+    assert_equal false, b
+    assert_equal [], @handwaves.test_captures
+    # Case translate:
+    def @handwaves.statement_to_pattern(*) = '(\w) ~ (\w)'
+    @handwaves.test_captures.clear
+    b = @handwaves.test_ex_match_statement?(s2, 'm', p, true)
+    assert_equal true, b
+    assert_equal ['u', 'v'], @handwaves.test_captures
+  end
+
+  def test_ex_match_heap_wut
+    # TODO
+  end
+
+  def test_ex_gsub_consequent_wut
+    # TODO
+  end
 
   def test_gsub_bang
-    context = Korekto::Statements.new
-    handwaves = Korekto::Handwaves.new(context)
-    handwaves.test_captures.push('A', 'B', 'C')
+    @handwaves.test_captures.push('A', 'B', 'C')
     pattern = String.new('$1 = $2 and $2 = $3, so $1 = $3')
-    string = handwaves.test_gsub!(pattern)
+    string = @handwaves.test_gsub!(pattern)
     assert_equal string, 'A = B and B = C, so A = C'
   end
 end
+# rubocop: enable Metrics
