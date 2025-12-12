@@ -15,14 +15,14 @@ module Korekto
   end
 end
 
-TEST_CLASS = Korekto::Syntax
-
 class TestSyntax < Test::Unit::TestCase
   include TestModule
 
   def setup
     @syntax = Korekto::Syntax.new
   end
+
+  def test_coverage = coverage(@syntax)
 
   def test_initialize
     assert_equal [], @syntax.test_syntax

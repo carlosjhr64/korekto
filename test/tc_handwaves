@@ -6,8 +6,6 @@ require 'colorize'
 require 'korekto/handwaves'
 require_relative 'test_module'
 
-TEST_CLASS = Korekto::Handwaves
-
 # Mockup
 module Korekto
   class Error < RuntimeError; end
@@ -36,6 +34,8 @@ class TestHandwaves < Test::Unit::TestCase
     context = Korekto::Statements.new
     @handwaves = Korekto::Handwaves.new(context)
   end
+
+  def test_coverage = coverage(@handwaves)
 
   def test_initialize
     assert @handwaves.test_context.is_a? Korekto::Statements

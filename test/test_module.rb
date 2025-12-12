@@ -3,9 +3,9 @@
 module TestModule
   # No fail warnings
   # rubocop: disable Metrics/MethodLength
-  def test_instance_methods_coverage
-    privated = TEST_CLASS.private_instance_methods(false)
-    methods = TEST_CLASS.instance_methods(false) + privated
+  def coverage(obj)
+    privated = obj.private_methods(false)
+    methods = obj.methods(false) + privated
     methods.each do |method|
       next if method.start_with? 'test_'
 
