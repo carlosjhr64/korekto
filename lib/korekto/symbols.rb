@@ -19,7 +19,7 @@ module Korekto
     def delete_variable(var) = @variable_to_type.delete(var)
 
     def replace_variable(oldvar, newvar)
-      @variable_to_type[newvar] = @variable_to_type.delete(oldvar) 
+      @variable_to_type[newvar] = @variable_to_type.delete(oldvar)
     end
 
     def scanner=(value)
