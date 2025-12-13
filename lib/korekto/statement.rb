@@ -15,7 +15,7 @@ module Korekto
 
     def initialize(*args)
       @statement, @code, @title, @section, @statement_number, @context = args
-      @title = @title.split(':', 2).first if @title
+      @title, = @title.split(':', 2) if @title
       @regexp = @key = nil
       set_acceptance_code
       [@statement, @section, @statement_number,

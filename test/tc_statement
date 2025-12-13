@@ -6,8 +6,34 @@ require 'colorize'
 require 'korekto/statement'
 require_relative 'test_module'
 
+# Mockup
+module Korekto
+  class Error < RuntimeError; end
+
+  class StatementTest < Statement
+    def set_acceptance_code
+      @regexp = 'regexp'
+      @key = 'key'
+    end
+    attr_reader :statement, :context
+  end
+end
+
 class TestStatement < Test::Unit::TestCase
   include TestModule
 
   def test_coverage = coverage Korekto::Statement
+
+  def setup
+    args = %w[statement code title:stuff section statement_number context]
+    @statement = Korekto::StatementTest.new(*args)
+  end
+
+  def test_initialize
+    %w[statement code title section statement_number context regexp key]
+      .each do |string|
+      assert_equal string, @statement.send(string)
+      assert @statement.send(string).frozen?
+    end
+  end
 end
