@@ -40,6 +40,7 @@ cp_r
 define
 definition
 delete
+delete_variable
 detect
 detect_statement
 __dir__
@@ -185,8 +186,8 @@ regex
 regexed
 regexp
 Regexp
-replace
 replacement
+replace_variable
 require
 require_relative
 restated
@@ -217,7 +218,6 @@ set_regexp
 set_statement
 shift
 size
-slice
 sort_by
 split
 stack
@@ -238,6 +238,7 @@ sub
 substitute
 support
 support_key
+swap
 symbols
 Symbols
 syntax
@@ -273,6 +274,7 @@ UpdateRemotePlugins
 using
 value
 values
+var
 variable
 variables
 variable_to_type
