@@ -215,7 +215,7 @@ class TestHandwaves < Test::Unit::TestCase
     @handwaves.test_captures.push('A', 'B', 'C')
     pattern = String.new('$1 = $2 and $2 = $3, so $1 = $3')
     string = @handwaves.test_gsub!(pattern)
-    assert_equal string, 'A = B and B = C, so A = C'
+    assert_equal 'A = B and B = C, so A = C', string
   end
 end
 # rubocop: enable Metrics
