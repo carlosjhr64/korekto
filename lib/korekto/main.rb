@@ -146,9 +146,9 @@ module Korekto
         else
           raise Error, "duplicate import: #{bn}" if @imports.include? bn
 
-          tmp = @statements.heap.to_a.slice!(0..-1)
+          tmp = @statements.heap.swap
           Main.new(filename, statements: @statements, imports: @imports).run
-          @statements.heap.to_a.replace(tmp)
+          @statements.heap.swap(tmp)
         end
       when MD_SYNTAX
         @statements.syntax.push $LAST_MATCH_INFO[:syntax].strip

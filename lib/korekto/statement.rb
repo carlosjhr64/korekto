@@ -176,7 +176,7 @@ module Korekto
       set_regexp
       newlines_count(nlc)
       undefined = (u = @context.symbols.undefined(self)).empty? ? nil : u
-      follows = @context.heap.to_a[0..nlc].reverse
+      follows = @context.heap.follows(nlc)
       support = if @regexp.match?(follows.map(&:to_s).join("\n"))
                   support(*follows)
                 end

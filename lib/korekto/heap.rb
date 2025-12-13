@@ -21,7 +21,15 @@ module Korekto
       @combos = COMBOS_FOR[@limit]
     end
 
-    def to_a = @a
+    def swap(tmp = [])
+      @a, tmp = tmp, @a
+      tmp
+    end
+
+    def follows(nlc)
+      @a[0..nlc].reverse
+    end
+
     def antecedent = @a[0].to_s
 
     def add(statement)
