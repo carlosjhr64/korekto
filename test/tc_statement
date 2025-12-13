@@ -16,6 +16,20 @@ module Korekto
       @key = 'key'
     end
     attr_reader :statement, :context
+
+    def test_nil_regexp!
+      @regexp = nil
+    end
+
+    def test_literal_regexp!
+      @statement = '/statement/'
+    end
+
+    def test_context!
+      @context = []
+      def @context.symbols = self
+      def @context.statement_to_regexp(arg) = arg
+    end
   end
 end
 
@@ -35,5 +49,72 @@ class TestStatement < Test::Unit::TestCase
       assert_equal string, @statement.send(string)
       assert @statement.send(string).frozen?
     end
+  end
+
+  def test_to_str
+    assert_equal 'statement', @statement.to_str
+  end
+
+  def test_to_s
+    assert_equal 'statement', @statement.to_s
+  end
+
+  def test_scan
+    assert_equal ['ST', 'AT', 'NT'], @statement.scan(/\wt/).map(&:upcase)
+    @statement.scan(/\wt/) do |token|
+      assert /\wt/.match? token
+    end
+  end
+
+  def test_type
+    assert_equal 'c', @statement.type
+  end
+
+  def test_match_wut
+    assert_equal true, @statement.match?('regexp') # faked but ok
+  end
+
+  def test_key
+    assert_equal 'key', @statement.key
+  end
+
+  def test_code
+    assert_equal 'code', @statement.code
+  end
+
+  def test_regexp
+    assert_equal 'regexp', @statement.regexp
+  end
+
+  def test_statement_number
+    assert_equal 'statement_number', @statement.statement_number
+  end
+
+  def test_section
+    assert_equal 'section', @statement.section
+  end
+
+  def test_title
+    assert_equal 'title', @statement.title
+  end
+
+  def test_pattern_wut
+    assert_equal true, @statement.pattern?
+    @statement.test_nil_regexp!
+    assert_equal false, @statement.pattern?
+  end
+
+  def test_literal_regexp_wut
+    assert_equal false, @statement.literal_regexp?
+    @statement.test_literal_regexp!
+    assert_equal true, @statement.literal_regexp?
+    @statement.test_nil_regexp!
+    assert_equal false, @statement.literal_regexp?
+  end
+
+  def test_set_regexp
+    @statement.test_context!
+    @statement.set_regexp
+    assert_equal 'statement', @statement.regexp
   end
 end
