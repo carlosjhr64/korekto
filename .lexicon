@@ -57,6 +57,7 @@ each
 each_key
 each_with_index
 empty
+Enumerable
 Error
 exec
 exec_neovim
