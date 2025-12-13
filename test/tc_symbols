@@ -34,7 +34,7 @@ class TestSymbols < Test::Unit::TestCase
     @symbols = Korekto::Symbols.new
   end
 
-  def test_coverage = coverage(@symbols)
+  def test_coverage = coverage Korekto::Symbols
 
   def test_initialize
     assert_empty @symbols.type_to_pattern
