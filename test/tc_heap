@@ -39,8 +39,7 @@ class TestHeap < Test::Unit::TestCase
     # rubocop: enable Lint/UnreachableLoop
     # heap iterates through a
     @heap.test_a.push(1, 2, 3, 4)
-    a = @heap.map { it }
-    assert_equal [1, 2, 3, 4], a
+    assert_equal %w[1 2 3 4], @heap.map(&:to_s)
   end
 
   def test_antecedent

@@ -6,6 +6,8 @@ module Korekto
   # increasing (i² + j²) to favor recent statements, reducing look-back and
   # search scope for verification.
   class Heap
+    include Enumerable
+
     COMBOS_FOR = Hash.new do |hash, limit|
       hash[limit] = (0...limit).to_a
                                .combination(2)
