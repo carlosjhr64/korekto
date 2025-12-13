@@ -22,7 +22,7 @@ class TestSyntax < Test::Unit::TestCase
     @syntax = Korekto::Syntax.new
   end
 
-  def test_coverage = coverage(@syntax)
+  def test_coverage = coverage Korekto::Syntax
 
   def test_initialize
     assert_equal [], @syntax.test_syntax
