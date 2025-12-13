@@ -4,31 +4,16 @@
 require 'test/unit'
 require 'colorize'
 require 'korekto/main'
+require_relative 'test_module'
 
 class TestMain < Test::Unit::TestCase
+  include TestModule
+
+  def test_coverage = coverage Korekto::Main
+
   # Trivial instantiating tests
   def test_new
     main = Korekto::Main.new(statements: nil)
     assert main.respond_to? :run
   end
-
-  # The rest best tested with cucumber...
-
-  # No fail warnings
-  # rubocop: disable Metrics
-  def test_instance_methods_coverage
-    klass = Korekto::Main
-    methods = klass.instance_methods(false) +
-              klass.private_instance_methods(false)
-    methods.each do |method|
-      test_method = "test_#{method}"
-      test_method.sub!(/=$/, '_set')
-      test_method.sub!(/!$/, '_bang')
-      test_method.sub!(/\?$/, '_wut')
-      next if respond_to? test_method.to_sym
-
-      puts "Missing #{self.class}##{test_method}".red
-    end
-  end
-  # rubocop: enable Metrics
 end
