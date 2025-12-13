@@ -44,7 +44,7 @@ class TestHandwaves < Test::Unit::TestCase
     @handwaves = Korekto::Handwaves.new(context)
   end
 
-  def test_coverage = coverage(@handwaves)
+  def test_coverage = coverage Korekto::Handwaves
 
   def test_initialize
     assert @handwaves.test_context.is_a? Korekto::Statements
