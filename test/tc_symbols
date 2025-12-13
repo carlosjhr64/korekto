@@ -101,6 +101,21 @@ class TestSymbols < Test::Unit::TestCase
     assert_equal @symbols.variable_to_type, {}
   end
 
+  def test_delete_variable
+    @symbols.variable_to_type['a'] = 'Type'
+    assert_equal 'Type', @symbols.variable_to_type['a']
+    @symbols.delete_variable('a')
+    assert_nil @symbols.variable_to_type['a']
+  end
+
+  def test_replace_variable
+    @symbols.variable_to_type['a'] = 'Type'
+    assert_equal 'Type', @symbols.variable_to_type['a']
+    @symbols.replace_variable('a', 'b')
+    assert_nil @symbols.variable_to_type['a']
+    assert_equal 'Type', @symbols.variable_to_type['b']
+  end
+
   def test_statement_to_pattern
     # Monkey patch to isolate
     def @symbols.token_to_pattern(*_args) = 'X'
