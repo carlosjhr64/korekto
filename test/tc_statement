@@ -23,24 +23,27 @@ module Korekto
     attr_reader :statement, :context
 
     # Alias to private
-    def test_pattern_type0      = pattern_type0
-    def test_pattern_type1      = pattern_type1
-    def test_pattern_type2      = pattern_type2
-    def test_handwave           = handwave
-    def test_set_statement(...) = set_statement(...)
+    def test_pattern_type0                = pattern_type0
+    def test_pattern_type1                = pattern_type1
+    def test_pattern_type2                = pattern_type2
+    def test_handwave                     = handwave
+    def test_set_statement(...)           = set_statement(...)
+    def test_expected_instantiations(...) = expected_instantiations(...)
 
     # Testing resets
-    def test_nil_regexp!           = (@regexp = nil)
-    def test_literal_regexp!       = (@statement = '/statement/')
-    def test_set_acceptance_code   = set_acceptance_code(test: true)
-    def test_set_code!(code)       = (@code = code)
-    def test_set_context!(context) = (@context = context)
-    def test_set_section!(section) = (@section = section)
+    def test_nil_regexp!              = (@regexp = nil)
+    def test_literal_regexp!          = (@statement = '/statement/')
+    def test_set_acceptance_code      = set_acceptance_code(test: true)
+    def test_set_code!(code)          = (@code = code)
+    def test_set_context!(context)    = (@context = context)
+    def test_set_section!(section)    = (@section = section)
+    def test_set_statement!(statement) = (@statement = statement)
 
     def test_context!
       @context = @context.dup
       def @context.symbols = self
       def @context.statement_to_regexp(arg) = arg
+      def @context.undefined(statement) = statement.to_s.scan(/[A-Z]/)
     end
   end
 end
@@ -174,6 +177,31 @@ class TestStatement < Test::Unit::TestCase
     assert_equal 'cstatement_number', @statement.code
     assert_equal :cstatement_number, @statement.key
     assert_equal 'Wut', @statement.title
+  end
+
+  def test_expected_instantiations
+    @statement.test_context!
+    @statement.test_set_statement!('A is B or C')
+    undefined = @statement.test_expected_instantiations(instantiations: 3)
+    assert_equal %w[A B C], undefined
+    undefined = @statement.test_expected_instantiations('Instantiate 3')
+    assert_equal %w[A B C], undefined
+    undefined = @statement.test_expected_instantiations
+    assert_equal %w[A B C], undefined
+    e = assert_raises(Korekto::Error) do
+      @statement.test_expected_instantiations(instantiations: 2)
+    end
+    assert_equal 'expected 2 undefined: A B C', e.message
+    e = assert_raises(Korekto::Error) do
+      @statement.test_expected_instantiations('Define 5')
+    end
+    assert_equal 'expected 5 undefined: A B C', e.message
+    @statement.test_set_statement!('a is b or c')
+    assert_nil @statement.test_expected_instantiations(instantiations: 0)
+    e = assert_raises(Korekto::Error) do
+      @statement.test_expected_instantiations
+    end
+    assert_equal 'nothing was undefined', e.message
   end
   # rubocop: enable Metrics
 end
