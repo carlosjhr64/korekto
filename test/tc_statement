@@ -8,10 +8,13 @@ require_relative 'test_module'
 
 # Mockup
 module Korekto
+  # rubocop: disable Metrics
   class Error < RuntimeError; end
 
   class StatementTest < Statement
-    def set_acceptance_code
+    def set_acceptance_code(test: false)
+      return super() if test
+
       @regexp = 'regexp'
       @key = 'key'
     end
@@ -29,6 +32,26 @@ module Korekto
       @context = []
       def @context.symbols = self
       def @context.statement_to_regexp(arg) = arg
+    end
+
+    def test_pattern_type0 = pattern_type0
+    def test_pattern_type1 = pattern_type1
+    def test_pattern_type2 = pattern_type2
+    def test_set_acceptance_code = set_acceptance_code(test: true)
+
+    def test_set_code(code)
+      @code = code
+    end
+
+    def test_set_context(context)
+      @context = context
+    end
+
+    def test_handwave = handwave
+    def test_set_statement(...) = set_statement(...)
+
+    def test_set_section(section)
+      @section = section
     end
   end
 end
@@ -60,9 +83,9 @@ class TestStatement < Test::Unit::TestCase
   end
 
   def test_scan
-    assert_equal ['ST', 'AT', 'NT'], @statement.scan(/\wt/).map(&:upcase)
+    assert_equal %w[ST AT NT], @statement.scan(/\wt/).map(&:upcase)
     @statement.scan(/\wt/) do |token|
-      assert /\wt/.match? token
+      assert(/\wt/.match?(token))
     end
   end
 
@@ -117,4 +140,70 @@ class TestStatement < Test::Unit::TestCase
     @statement.set_regexp
     assert_equal 'statement', @statement.regexp
   end
+
+  def test_pattern_type0
+    def @statement.pattern_type(arg) = arg
+    assert_equal 0, @statement.test_pattern_type0
+  end
+
+  def test_pattern_type1
+    def @statement.pattern_type(arg) = arg
+    assert_equal 1, @statement.test_pattern_type1
+  end
+
+  def test_pattern_type2
+    def @statement.pattern_type(arg) = arg
+    assert_equal 2, @statement.test_pattern_type2
+  end
+
+  def test_set_acceptance_code
+    e = assert_raises(Korekto::Error) { @statement.test_set_acceptance_code }
+    assert_equal 'type c not implemented', e.message
+    @statement.test_set_code('PWUT')
+    def @statement.postulate = 'pwut'
+    assert_equal 'pwut', @statement.test_set_acceptance_code
+  end
+
+  def test_handwave
+    assert @statement.private_methods.include? :expected_instantiations
+    def @statement.expected_instantiations(instantiations:)
+      raise unless instantiations.zero?
+    end
+    context = String.new 'context'
+    def context.handwaves = self
+
+    def context.check!(statement)
+      raise unless statement == 'statement'
+    end
+    @statement.test_set_context(context)
+    assert @statement.private_methods.include? :set_statement
+    def @statement.set_statement = 'OK'
+    assert_equal 'OK', @statement.test_handwave
+  end
+
+  def test_set_statement
+    # Need to be wary of persistent changes
+    @statement.test_set_statement
+    assert_equal 'cstatement_number.section', @statement.code
+    assert_equal :'cstatement_number.section', @statement.key
+    assert_equal 'title', @statement.title
+    @statement.test_set_statement('wut')
+    assert_equal 'cstatement_number.section/wut', @statement.code
+    assert_equal :'cstatement_number.section', @statement.key
+    assert_equal 'title', @statement.title
+    @statement.test_set_statement(undefined: %w[w u t])
+    assert_equal 'cstatement_number.section', @statement.code
+    assert_equal :'cstatement_number.section', @statement.key
+    assert_equal 'title: w u t', @statement.title
+    @statement.test_set_statement('wut', 'Wut: w u t') # w u t is striped
+    assert_equal 'cstatement_number.section/wut', @statement.code
+    assert_equal :'cstatement_number.section', @statement.key
+    assert_equal 'Wut', @statement.title
+    @statement.test_set_section('-') # Section will now be omitted
+    @statement.test_set_statement # Note that title is now Wut
+    assert_equal 'cstatement_number', @statement.code
+    assert_equal :cstatement_number, @statement.key
+    assert_equal 'Wut', @statement.title
+  end
+  # rubocop: enable Metrics
 end
