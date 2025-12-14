@@ -18,40 +18,29 @@ module Korekto
       @regexp = 'regexp'
       @key = 'key'
     end
+
+    # Testing readers
     attr_reader :statement, :context
 
-    def test_nil_regexp!
-      @regexp = nil
-    end
-
-    def test_literal_regexp!
-      @statement = '/statement/'
-    end
-
-    def test_context!
-      @context = []
-      def @context.symbols = self
-      def @context.statement_to_regexp(arg) = arg
-    end
-
-    def test_pattern_type0 = pattern_type0
-    def test_pattern_type1 = pattern_type1
-    def test_pattern_type2 = pattern_type2
-    def test_set_acceptance_code = set_acceptance_code(test: true)
-
-    def test_set_code(code)
-      @code = code
-    end
-
-    def test_set_context(context)
-      @context = context
-    end
-
-    def test_handwave = handwave
+    # Alias to private
+    def test_pattern_type0      = pattern_type0
+    def test_pattern_type1      = pattern_type1
+    def test_pattern_type2      = pattern_type2
+    def test_handwave           = handwave
     def test_set_statement(...) = set_statement(...)
 
-    def test_set_section(section)
-      @section = section
+    # Testing resets
+    def test_nil_regexp!           = (@regexp = nil)
+    def test_literal_regexp!       = (@statement = '/statement/')
+    def test_set_acceptance_code   = set_acceptance_code(test: true)
+    def test_set_code!(code)       = (@code = code)
+    def test_set_context!(context) = (@context = context)
+    def test_set_section!(section) = (@section = section)
+
+    def test_context!
+      @context = @context.dup
+      def @context.symbols = self
+      def @context.statement_to_regexp(arg) = arg
     end
   end
 end
@@ -65,6 +54,13 @@ class TestStatement < Test::Unit::TestCase
     args = %w[statement code title:stuff section statement_number context]
     @statement = Korekto::StatementTest.new(*args)
   end
+
+  def test_type    = assert_equal 'c', @statement.type
+  def test_key     = assert_equal 'key', @statement.key
+  def test_code    = assert_equal 'code', @statement.code
+  def test_regexp  = assert_equal 'regexp', @statement.regexp
+  def test_section = assert_equal 'section', @statement.section
+  def test_title   = assert_equal 'title', @statement.title
 
   def test_initialize
     %w[statement code title section statement_number context regexp key]
@@ -83,48 +79,16 @@ class TestStatement < Test::Unit::TestCase
   end
 
   def test_scan
-    assert_equal %w[ST AT NT], @statement.scan(/\wt/).map(&:upcase)
-    @statement.scan(/\wt/) do |token|
-      assert(/\wt/.match?(token))
-    end
-  end
-
-  def test_type
-    assert_equal 'c', @statement.type
+    assert_equal %w[st at nt], @statement.scan(/\wt/)
+    @statement.scan(/\wt/) { |token| assert(/\wt/.match?(token)) }
   end
 
   def test_match_wut
     assert_equal true, @statement.match?('regexp') # faked but ok
   end
 
-  def test_key
-    assert_equal 'key', @statement.key
-  end
-
-  def test_code
-    assert_equal 'code', @statement.code
-  end
-
-  def test_regexp
-    assert_equal 'regexp', @statement.regexp
-  end
-
   def test_statement_number
     assert_equal 'statement_number', @statement.statement_number
-  end
-
-  def test_section
-    assert_equal 'section', @statement.section
-  end
-
-  def test_title
-    assert_equal 'title', @statement.title
-  end
-
-  def test_pattern_wut
-    assert_equal true, @statement.pattern?
-    @statement.test_nil_regexp!
-    assert_equal false, @statement.pattern?
   end
 
   def test_literal_regexp_wut
@@ -139,6 +103,12 @@ class TestStatement < Test::Unit::TestCase
     @statement.test_context!
     @statement.set_regexp
     assert_equal 'statement', @statement.regexp
+  end
+
+  def test_pattern_wut
+    assert_equal true, @statement.pattern?
+    @statement.test_nil_regexp!
+    assert_equal false, @statement.pattern?
   end
 
   def test_pattern_type0
@@ -159,7 +129,7 @@ class TestStatement < Test::Unit::TestCase
   def test_set_acceptance_code
     e = assert_raises(Korekto::Error) { @statement.test_set_acceptance_code }
     assert_equal 'type c not implemented', e.message
-    @statement.test_set_code('PWUT')
+    @statement.test_set_code!('PWUT')
     def @statement.postulate = 'pwut'
     assert_equal 'pwut', @statement.test_set_acceptance_code
   end
@@ -175,7 +145,7 @@ class TestStatement < Test::Unit::TestCase
     def context.check!(statement)
       raise unless statement == 'statement'
     end
-    @statement.test_set_context(context)
+    @statement.test_set_context!(context)
     assert @statement.private_methods.include? :set_statement
     def @statement.set_statement = 'OK'
     assert_equal 'OK', @statement.test_handwave
@@ -199,7 +169,7 @@ class TestStatement < Test::Unit::TestCase
     assert_equal 'cstatement_number.section/wut', @statement.code
     assert_equal :'cstatement_number.section', @statement.key
     assert_equal 'Wut', @statement.title
-    @statement.test_set_section('-') # Section will now be omitted
+    @statement.test_set_section!('-') # Section will now be omitted
     @statement.test_set_statement # Note that title is now Wut
     assert_equal 'cstatement_number', @statement.code
     assert_equal :cstatement_number, @statement.key
