@@ -5,6 +5,7 @@ module Korekto
   # mappings. Provides methods to scan statements, detect undefined symbols,
   # define symbols, and convert statements to regular expression patterns or
   # Regexp objects.
+  # :reek:MissingSafeMethod
   class Symbols
     attr_reader :type_to_pattern, :variable_to_type
 
@@ -49,27 +50,30 @@ module Korekto
     # and assigns capture groups to variables. Returns [pattern, captures].
     # Quoting can be toggled :reek:BooleanParameter
     def statement_to_pattern(statement, quote: true)
-      seen = {}
+      self.seen = {}
+      pattern = String.new
       # Build pattern from statement token by token.
-      parts = statement.scan(@scanner).map do |token|
-        token_to_pattern(seen, token, quote:)
+      statement.scan(@scanner).each do |token|
+        pattern << token_to_pattern(token, quote:)
       end
-      [parts.join, seen.size]
+      [pattern, seen.size]
     end
 
     private
 
+    attr_accessor :seen
+
     # Quoting can be toggled :reek:BooleanParameter :reek:ControlParameter
-    def token_to_pattern(seen, token, quote: true)
+    def token_to_pattern(token, quote: true)
       return "\\#{seen[token]}" if seen.key?(token)
       if (type = @variable_to_type[token])
-        return regexed(type, seen, token)
+        return regexed(type, token)
       end
 
       quote ? Regexp.quote(token).sub(/^(\d)/, '[\1]') : token
     end
 
-    def regexed(type, seen, token)
+    def regexed(type, token)
       regex = @type_to_pattern[type]
       return regex if type.start_with?('.')
 
