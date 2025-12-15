@@ -26,11 +26,15 @@ module Korekto
     def test_pattern_type0                = pattern_type0
     def test_pattern_type1                = pattern_type1
     def test_pattern_type2                = pattern_type2
-    def test_handwave                     = handwave
     def test_set_statement(...)           = set_statement(...)
     def test_expected_instantiations(...) = expected_instantiations(...)
     def test_pattern_type(...)            = pattern_type(...)
     def test_set_acceptance_code          = set_acceptance_code(test: true)
+    def test_newlines_count(...)          = newlines_count(...)
+    def test_support(...)                 = support(...)
+    def test_handwave                     = handwave
+    def test_postulate                    = postulate
+    def test_result                       = result
 
     # Testing resets
     def test_nil_regexp!               = (@regexp = nil)
@@ -61,13 +65,6 @@ class TestStatement < Test::Unit::TestCase
     @statement = Korekto::StatementTest.new(*args)
   end
 
-  def test_type    = assert_equal 'c', @statement.type
-  def test_key     = assert_equal 'key', @statement.key
-  def test_code    = assert_equal 'code', @statement.code
-  def test_regexp  = assert_equal 'regexp', @statement.regexp
-  def test_section = assert_equal 'section', @statement.section
-  def test_title   = assert_equal 'title', @statement.title
-
   def test_initialize
     %w[statement code title section statement_number context regexp key]
       .each do |string|
@@ -76,12 +73,21 @@ class TestStatement < Test::Unit::TestCase
     end
   end
 
-  def test_to_str
-    assert_equal 'statement', @statement.to_str
+  def test_type    = assert_equal 'c', @statement.type
+  def test_key     = assert_equal 'key', @statement.key
+  def test_code    = assert_equal 'code', @statement.code
+  def test_regexp  = assert_equal 'regexp', @statement.regexp
+  def test_section = assert_equal 'section', @statement.section
+  def test_title   = assert_equal 'title', @statement.title
+  def test_to_str  = assert_equal 'statement', @statement.to_str
+  def test_to_s    = assert_equal 'statement', @statement.to_s
+
+  def test_statement_number
+    assert_equal 'statement_number', @statement.statement_number
   end
 
-  def test_to_s
-    assert_equal 'statement', @statement.to_s
+  def test_match_wut
+    assert_equal true, @statement.match?('regexp') # faked but ok
   end
 
   def test_scan
@@ -89,12 +95,36 @@ class TestStatement < Test::Unit::TestCase
     @statement.scan(/\wt/) { |token| assert(/\wt/.match?(token)) }
   end
 
-  def test_match_wut
-    assert_equal true, @statement.match?('regexp') # faked but ok
+  def test_support
+    s1 = String.new
+    s2 = String.new
+    s3 = String.new
+    def s1.code = 'A1/Wut'
+    def s2.code = 'P2'
+    def s3.code = 'T3/OK'
+    assert_equal 'A1,P2,T3', @statement.test_support(s1, s2, s3)
   end
 
-  def test_statement_number
-    assert_equal 'statement_number', @statement.statement_number
+  def test_postulate
+    def @statement.expected_instantiations(...) = nil
+    def @statement.set_satement(*args, **keys) = [args, keys]
+    assert_nil  @statement.test_postulate
+  end
+
+  def test_result
+    def @statement.expected_instantiations(...) = nil
+    def @statement.heap_search(arg) = [self, arg]
+    def @statement.support(*args) = args
+    def @statement.set_statement(*args) = args
+    assert_equal [[@statement, 'M'], 'title'], @statement.test_result
+  end
+
+  def test_newlines_count
+    assert_nil @statement.test_newlines_count(0)
+    @statement.test_set_regexp! /A\nB/
+    assert_nil @statement.test_newlines_count(1)
+    e = assert_raises(Korekto::Error) { @statement.test_newlines_count(0) }
+    assert_equal 'expected 0 newlines', e.message
   end
 
   def test_literal_regexp_wut
