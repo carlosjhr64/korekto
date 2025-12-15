@@ -3,26 +3,25 @@
 
 require 'test/unit'
 require 'korekto/refinements'
+require_relative 'test_module'
 
 class TestRefinements < Test::Unit::TestCase
+  include TestModule
+
   using Korekto::Refinements
 
-  def test_balanced_true
+  def test_coverage = coverage(Korekto::Refinements)
+
+  def test_string_balanced_wut
     assert '[This](is){balanced}'.balanced?
     assert '[T(h)is](is){ba[lanc]ed}'.balanced?
-  end
-
-  def test_balanced_false
     refute 'This) (is not balanced'.balanced?
     refute 'This (is [not) ba]lanced'.balanced?
-  end
-
-  def test_balanced_other
     assert '<This>is balanced'.balanced?('<>')
     refute 'This is>not<balanced'.balanced?('<>')
   end
 
-  def test_ltight
+  def test_string_ltight_wut
     assert 'Factorial: 2! = 4'.ltight?('!')
     assert 'Fatorial: 2! = 4'.ltight?(':')
     refute 'Fatorial: 2! = 4'.ltight?('2')
@@ -30,7 +29,7 @@ class TestRefinements < Test::Unit::TestCase
     assert 'Fatorial: 2! = 4'.ltight?('o')
   end
 
-  def test_rtight
+  def test_string_rtight_wut
     refute 'Factorial: 2! = 4'.rtight?('!')
     refute 'Fatorial: 2! = 4'.rtight?(':')
     assert 'Fatorial: 2! = 4'.rtight?('2')
@@ -38,7 +37,7 @@ class TestRefinements < Test::Unit::TestCase
     assert 'Fatorial: 2! = 4'.rtight?('o')
   end
 
-  def test_tight
+  def test_string_tight_wut
     refute 'Factorial: 2! = 4'.tight?('!')
     refute 'Fatorial: 2! = 4'.tight?(':')
     refute 'Fatorial: 2! = 4'.tight?('2')

@@ -1,26 +1,56 @@
 # frozen_string_literal: true
 
-# rubocop: disable Metrics
+require 'colorize'
+
 module TestModule
-  # No fail warnings
-  def coverage(klass)
-    public_methods    = klass.public_instance_methods(false)
-    protected_methods = klass.protected_instance_methods(false)
-    private_methods   = klass.private_instance_methods(false)
-    (public_methods + protected_methods + private_methods).each do |method|
-      next if method.start_with? 'test_'
+  class Coverage
+    def initialize(klass, context, cl1 = :red, cl2 = :light_red, cl3 = :magenta)
+      @public_methods    = klass.public_instance_methods(false).sort
+      @protected_methods = klass.protected_instance_methods(false).sort
+      @private_methods   = klass.private_instance_methods(false).sort
+      @refinements       = klass.refinements
+      @context = context
+      @cl1 = cl1
+      @cl2 = cl2
+      @cl3 = cl3
+    end
 
-      test_method = "test_#{method}"
-      test_method.sub!(/=$/, '_set')
-      test_method.sub!(/!$/, '_bang')
-      test_method.sub!(/\?$/, '_wut')
-      next if respond_to? test_method.to_sym
+    def rename(method)
+      "test_#{method}"
+        .sub(/=$/, '_set')
+        .sub(/!$/, '_bang')
+        .sub(/\?$/, '_wut')
+    end
 
-      color = :red
-      color = :light_red if protected_methods.include?(method)
-      color = :magenta if private_methods.include?(method)
-      puts "Missing #{self.class}##{test_method}".colorize(color)
+    def test_public_methods    = @public_methods.each  { test_method it, @cl1 }
+    def test_protected_methods = @private_methods.each { test_method it, @cl2 }
+    def test_private_methods   = @private_methods.each { test_method it, @cl3 }
+
+    def test_method(method, color)
+      return if method.start_with? 'test_'
+
+      name = rename(method)
+      return if @context.respond_to? name.to_sym
+
+      puts "Missing #{@context.class}##{name}".colorize(color)
+    end
+
+    def test_refinements
+      @refinements.each do |refinement|
+        target = refinement.target
+        refinement.public_instance_methods(false).each do |method|
+          test_method("#{target}_#{method}".downcase, @cl1)
+        end
+      end
     end
   end
+
+  # No fail warnings
+  def coverage(klass)
+    coverage = Coverage.new(klass, self)
+    coverage.test_public_methods
+    coverage.test_protected_methods
+    coverage.test_private_methods
+    coverage.test_refinements
+  end
 end
-# rubocop: enable Metrics
