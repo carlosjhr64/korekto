@@ -21,6 +21,8 @@ module Korekto
     def test_scanner = @scanner
     def test_token_to_pattern(...) = token_to_pattern(...)
     def test_regexed(*) = regexed(*)
+    def test_seen = seen
+    def test_seen_set(arg) = (self.seen = arg)
   end
 end
 
@@ -33,11 +35,18 @@ class TestSymbols < Test::Unit::TestCase
   end
 
   def test_coverage = coverage Korekto::Symbols
+  def test_seen = assert_nil @symbols.test_seen
 
   def test_initialize
+    assert_empty @symbols.test_set
     assert_empty @symbols.type_to_pattern
     assert_empty @symbols.variable_to_type
     assert_equal(/:\w+|./, @symbols.test_scanner)
+  end
+
+  def test_seen_set
+    @symbols.test_seen_set({})
+    assert_equal({}, @symbols.test_seen)
   end
 
   def test_scanner_set
@@ -48,10 +57,6 @@ class TestSymbols < Test::Unit::TestCase
   def test_undefined
     # Empty statement
     statement = Korekto::Statement.new('')
-    assert_empty @symbols.undefined(statement)
-    # Literal regexp
-    statement = Korekto::Statement.new('/^foo$/')
-    statement.literal_regexp = true
     assert_empty @symbols.undefined(statement)
     # Basic default tokens
     statement = Korekto::Statement.new(':Exp(A) + B = C')
@@ -79,8 +84,6 @@ class TestSymbols < Test::Unit::TestCase
   end
 
   def test_statement_to_regexp
-    regexp = @symbols.statement_to_regexp('/wut/')
-    assert_equal regexp, /wut/
     e = assert_raises(Korekto::Error) do
       @symbols.statement_to_regexp('No pattern here')
     end
@@ -99,17 +102,17 @@ class TestSymbols < Test::Unit::TestCase
     assert_equal @symbols.variable_to_type, {}
   end
 
-  def test_delete_variable
+  def test_delete_variable_bang
     @symbols.variable_to_type['a'] = 'Type'
     assert_equal 'Type', @symbols.variable_to_type['a']
-    @symbols.delete_variable('a')
+    @symbols.delete_variable!('a')
     assert_nil @symbols.variable_to_type['a']
   end
 
-  def test_replace_variable
+  def test_replace_variable_bang
     @symbols.variable_to_type['a'] = 'Type'
     assert_equal 'Type', @symbols.variable_to_type['a']
-    @symbols.replace_variable('a', 'b')
+    @symbols.replace_variable!('a', 'b')
     assert_nil @symbols.variable_to_type['a']
     assert_equal 'Type', @symbols.variable_to_type['b']
   end
@@ -123,32 +126,32 @@ class TestSymbols < Test::Unit::TestCase
   end
 
   def test_token_to_pattern
-    seen = {}
-    seen['X'] = 1
-    pattern = @symbols.test_token_to_pattern(seen, 'X')
+    @symbols.test_seen_set({})
+    @symbols.test_seen['X'] = 1
+    pattern = @symbols.test_token_to_pattern('X')
     assert_equal '\1', pattern
-    pattern = @symbols.test_token_to_pattern(seen, 'Y', quote: false)
+    pattern = @symbols.test_token_to_pattern('Y', quote: false)
     assert_equal 'Y', pattern
-    pattern = @symbols.test_token_to_pattern(seen, '*', quote: true)
+    pattern = @symbols.test_token_to_pattern('*', quote: true)
     # gets "Quoted"
     assert_equal '\*', pattern
     # Monkey patch to isolate
     def @symbols.regexed(*_args) = 'Z'
     @symbols.variable_to_type[':x'] = :x
-    pattern = @symbols.test_token_to_pattern(seen, ':x', quote: false)
+    pattern = @symbols.test_token_to_pattern(':x', quote: false)
     assert_equal 'Z', pattern
   end
 
   def test_regexed
-    seen = {}
+    @symbols.test_seen_set({})
     @symbols.type_to_pattern['.X'] = '[x]'
     @symbols.type_to_pattern['Y'] = '[y]'
-    re = @symbols.test_regexed('.X', seen, 'S')
+    re = @symbols.test_regexed('.X', 'S')
     assert_equal '[x]', re
-    assert_empty seen
-    re = @symbols.test_regexed('Y', seen, 'T')
+    assert_empty @symbols.test_seen
+    re = @symbols.test_regexed('Y', 'T')
     assert_equal '([y])', re
-    assert_equal({ 'T' => '1' }, seen)
+    assert_equal({ 'T' => '1' }, @symbols.test_seen)
   end
 end
 # rubocop: enable Metrics
