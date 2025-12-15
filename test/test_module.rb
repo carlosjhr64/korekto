@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'test/unit'
 require 'colorize'
 
 # Test and warnings common to test files

@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'test/unit'
-require 'korekto/refinements'
 require_relative 'test_module'
+require 'korekto/refinements'
 
 class TestRefinements < Test::Unit::TestCase
   include TestModule
