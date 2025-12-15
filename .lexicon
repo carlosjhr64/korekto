@@ -159,7 +159,6 @@ nvim_config
 oldvar
 options
 parse
-parts
 pattern
 patterns
 pattern_type
@@ -267,7 +266,6 @@ type_pattern
 type_to_pattern
 type_to_pattern_gsub
 type_variables
-u
 undefined
 unshift
 update

@@ -30,11 +30,11 @@ module Korekto
     def pattern?          = !@regexp.nil?
 
     def set_regexp
-      if literal_regexp?
-        @regexp = Regexp.new @statement[1..-2]
-      else
-        @regexp = @context.symbols.statement_to_regexp(@statement)
-      end
+      @regexp = if literal_regexp?
+                  Regexp.new @statement[1..-2]
+                else
+                  @context.symbols.statement_to_regexp(@statement)
+                end
     end
 
     TYPE_HANDLERS = {
@@ -91,9 +91,9 @@ module Korekto
       @key   = @code.to_sym
       @code += "/#{support}" if support
       @title = title if (title = title&.split(':', 2)&.first) && !title.empty?
-      if undefined && !undefined.empty?
-        @title = "#{@title}: #{undefined.join(' ')}"
-      end
+      return unless undefined && !undefined.empty?
+
+      @title = "#{@title}: #{undefined.join(' ')}"
     end
 
     def support(*statements)
