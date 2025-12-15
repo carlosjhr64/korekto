@@ -19,7 +19,7 @@ module Korekto
   class Symbols
     def test_set = @set
     def test_scanner = @scanner
-    def test_token_to_pattern(*) = token_to_pattern(*)
+    def test_token_to_pattern(...) = token_to_pattern(...)
     def test_regexed(*) = regexed(*)
   end
 end
@@ -125,17 +125,17 @@ class TestSymbols < Test::Unit::TestCase
   def test_token_to_pattern
     seen = {}
     seen['X'] = 1
-    pattern = @symbols.test_token_to_pattern(seen, 'X', nil)
+    pattern = @symbols.test_token_to_pattern(seen, 'X')
     assert_equal '\1', pattern
-    pattern = @symbols.test_token_to_pattern(seen, 'Y', false)
-    assert_equal '', pattern
-    pattern = @symbols.test_token_to_pattern(seen, '*', true)
+    pattern = @symbols.test_token_to_pattern(seen, 'Y', quote: false)
+    assert_equal 'Y', pattern
+    pattern = @symbols.test_token_to_pattern(seen, '*', quote: true)
     # gets "Quoted"
     assert_equal '\*', pattern
     # Monkey patch to isolate
     def @symbols.regexed(*_args) = 'Z'
     @symbols.variable_to_type[':x'] = :x
-    pattern = @symbols.test_token_to_pattern(seen, ':x', false)
+    pattern = @symbols.test_token_to_pattern(seen, ':x', quote: false)
     assert_equal 'Z', pattern
   end
 

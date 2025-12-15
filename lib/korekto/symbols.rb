@@ -52,23 +52,26 @@ module Korekto
     # Converts a statement into a regex pattern and capture count.
     # Replaces defined variables with their type patterns, quotes literals,
     # and assigns capture groups to variables. Returns [pattern, captures].
+    # Quoting can be toggled :reek:BooleanParameter
     def statement_to_pattern(statement, quote: true)
       seen = {}
       # Build pattern from statement token by token.
       parts = statement.scan(@scanner).map do |token|
-        token_to_pattern(seen, token, quote)
+        token_to_pattern(seen, token, quote:)
       end
       [parts.join, seen.size]
     end
 
     private
 
-    def token_to_pattern(seen, token, quote)
+    # Quoting can be toggled :reek:BooleanParameter :reek:ControlParameter
+    def token_to_pattern(seen, token, quote: true)
       return "\\#{seen[token]}" if seen.key?(token)
-      return '' unless (type = @variable_to_type[token]) || quote
-      return regexed(type, seen, token) if type
+      if (type = @variable_to_type[token])
+        return regexed(type, seen, token)
+      end
 
-      Regexp.quote(token).sub(/^(\d)/, '[\1]')
+      quote ? Regexp.quote(token).sub(/^(\d)/, '[\1]') : token
     end
 
     def regexed(type, seen, token)
