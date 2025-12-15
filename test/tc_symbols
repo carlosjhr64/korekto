@@ -30,19 +30,20 @@ end
 class TestSymbols < Test::Unit::TestCase
   include TestModule
 
+  def test_coverage = coverage Korekto::Symbols
+
   def setup
     @symbols = Korekto::Symbols.new
   end
 
-  def test_coverage = coverage Korekto::Symbols
-  def test_seen = assert_nil @symbols.test_seen
-
   def test_initialize
-    assert_empty @symbols.test_set
-    assert_empty @symbols.type_to_pattern
-    assert_empty @symbols.variable_to_type
+    assert_equal Set.new, @symbols.test_set
+    assert_equal({}, @symbols.type_to_pattern)
+    assert_equal({}, @symbols.variable_to_type)
     assert_equal(/:\w+|./, @symbols.test_scanner)
   end
+
+  def test_seen = assert_nil @symbols.test_seen
 
   def test_seen_set
     @symbols.test_seen_set({})
@@ -57,7 +58,7 @@ class TestSymbols < Test::Unit::TestCase
   def test_undefined
     # Empty statement
     statement = Korekto::Statement.new('')
-    assert_empty @symbols.undefined(statement)
+    assert_equal(Set.new, @symbols.undefined(statement))
     # Basic default tokens
     statement = Korekto::Statement.new(':Exp(A) + B = C')
     undefined = @symbols.undefined(statement)
