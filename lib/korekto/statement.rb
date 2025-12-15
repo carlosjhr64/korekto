@@ -29,12 +29,12 @@ module Korekto
     def scan(regex, &)    = @statement.scan(regex, &)
     def pattern?          = !@regexp.nil?
 
-    def literal_regexp?
-      pattern? && @statement[0] == '/' && @statement[-1] == '/'
-    end
-
     def set_regexp
-      @regexp = @context.symbols.statement_to_regexp(@statement)
+      if literal_regexp?
+        @regexp = Regexp.new @statement[1..-2]
+      else
+        @regexp = @context.symbols.statement_to_regexp(@statement)
+      end
     end
 
     TYPE_HANDLERS = {
@@ -56,6 +56,10 @@ module Korekto
     private_constant :TYPE_HANDLERS
 
     private
+
+    def literal_regexp?
+      @statement[0] == '/' && @statement[-1] == '/'
+    end
 
     # Sets the final acceptance code, title, and key for the statement by
     # dispatching to the appropriate type handler (tautology, definition, etc.)

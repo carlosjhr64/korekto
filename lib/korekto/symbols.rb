@@ -38,9 +38,6 @@ module Korekto
     def define!(statement) = undefined(statement).each { |token| @set << token }
 
     def statement_to_regexp(statement)
-      return Regexp.new statement[1..-2] if statement[0] == '/' &&
-                                            statement[-1] == '/'
-
       pattern, count = statement_to_pattern(statement)
       raise Error, 'pattern with no captures' if count < 1
 
