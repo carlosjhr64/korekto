@@ -29,19 +29,22 @@ module Korekto
     def test_handwave                     = handwave
     def test_set_statement(...)           = set_statement(...)
     def test_expected_instantiations(...) = expected_instantiations(...)
+    def test_pattern_type(...)            = pattern_type(...)
+    def test_set_acceptance_code          = set_acceptance_code(test: true)
 
     # Testing resets
-    def test_nil_regexp!              = (@regexp = nil)
-    def test_literal_regexp!          = (@statement = '/statement/')
-    def test_set_acceptance_code      = set_acceptance_code(test: true)
-    def test_set_code!(code)          = (@code = code)
-    def test_set_context!(context)    = (@context = context)
-    def test_set_section!(section)    = (@section = section)
+    def test_nil_regexp!               = (@regexp = nil)
+    def test_literal_regexp!           = (@statement = '/statement/')
+    def test_set_code!(code)           = (@code = code)
+    def test_set_section!(section)     = (@section = section)
     def test_set_statement!(statement) = (@statement = statement)
+    def test_set_regexp!(regex)        = (@regexp = regex)
 
-    def test_context!
-      @context = @context.dup
+    def test_set_context!(context = @context.dup)
+      @context = context
       def @context.symbols = self
+      def @context.heap = self
+      def @context.follows(*) = self
       def @context.statement_to_regexp(arg) = arg
       def @context.undefined(statement) = statement.to_s.scan(/[A-Z]/)
     end
@@ -103,7 +106,7 @@ class TestStatement < Test::Unit::TestCase
   end
 
   def test_set_regexp
-    @statement.test_context!
+    @statement.test_set_context!
     @statement.set_regexp
     assert_equal 'statement', @statement.regexp
   end
@@ -180,7 +183,7 @@ class TestStatement < Test::Unit::TestCase
   end
 
   def test_expected_instantiations
-    @statement.test_context!
+    @statement.test_set_context!
     @statement.test_set_statement!('A is B or C')
     undefined = @statement.test_expected_instantiations(instantiations: 3)
     assert_equal %w[A B C], undefined
@@ -202,6 +205,22 @@ class TestStatement < Test::Unit::TestCase
       @statement.test_expected_instantiations
     end
     assert_equal 'nothing was undefined', e.message
+  end
+
+  def test_pattern_type
+    @statement.test_set_context!(['a','b','c'])
+    def @statement.set_regexp = nil
+    def @statement.newlines_count(*) = nil
+    def @statement.support(*args) = args
+    def @statement.set_statement(support, undefined:) =  [support, undefined]
+    wut = @statement.test_pattern_type(0)
+    assert_equal [nil, nil], wut
+    @statement.test_set_statement!('A is B or C')
+    wut = @statement.test_pattern_type(0)
+    assert_equal [nil, ['A', 'B', 'C']], wut
+    @statement.test_set_regexp!("a\nb\nc")
+    wut = @statement.test_pattern_type(0)
+    assert_equal [['a', 'b', 'c'], ['A', 'B', 'C']], wut
   end
   # rubocop: enable Metrics
 end
