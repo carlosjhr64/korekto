@@ -87,7 +87,9 @@ module Korekto
       @key   = @code.to_sym
       @code += "/#{support}" if support
       @title = title if (title = title&.split(':', 2)&.first) && !title.empty?
-      @title = "#{@title}: #{undefined.join(' ')}" if undefined
+      if undefined && !undefined.empty?
+        @title = "#{@title}: #{undefined.join(' ')}"
+      end
     end
 
     def support(*statements)
@@ -172,10 +174,10 @@ module Korekto
     # Statement type processing
 
     # nlc: "\n" count
-    def pattern_type(nlc)
+    def pattern_type(nlc, undefined = nil)
       set_regexp
       newlines_count(nlc)
-      undefined = (u = @context.symbols.undefined(self)).empty? ? nil : u
+      undefined = @context.symbols.undefined(self) unless literal_regexp?
       follows = @context.heap.follows(nlc)
       support = if @regexp.match?(follows.map(&:to_s).join("\n"))
                   support(*follows)

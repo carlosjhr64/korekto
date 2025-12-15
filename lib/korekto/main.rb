@@ -91,12 +91,12 @@ module Korekto
         variable, e = arguments.split
         raise Error, 'expected 1 argument' unless e.nil? && variable
 
-        @statements.symbols.delete_variable variable
+        @statements.symbols.delete_variable! variable
       when 'replace'
         oldvar, newvar, e = arguments.split
         raise Error, 'expected 2 arguments' unless e.nil? && newvar && oldvar
 
-        @statements.symbols.replace_variable(oldvar, newvar) or
+        @statements.symbols.replace_variable!(oldvar, newvar) or
           raise Error, "#{oldvar} not a key"
       else
         raise Error, "unrecognized function: #{function}"

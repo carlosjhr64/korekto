@@ -16,9 +16,9 @@ module Korekto
       @scanner = /:\w+|./ # Default scanner
     end
 
-    def delete_variable(var) = @variable_to_type.delete(var)
+    def delete_variable!(var) = @variable_to_type.delete(var)
 
-    def replace_variable(oldvar, newvar)
+    def replace_variable!(oldvar, newvar)
       @variable_to_type[newvar] = @variable_to_type.delete(oldvar)
     end
 
@@ -27,8 +27,6 @@ module Korekto
     end
 
     def undefined(statement, set: Set.new)
-      return set if statement.literal_regexp?
-
       statement.scan(@scanner) do |token|
         set << token unless @set.include?(token) ||
                             (statement.pattern? &&
