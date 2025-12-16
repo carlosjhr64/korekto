@@ -56,9 +56,9 @@ module Korekto
     end
 
     def syntax_check(statement, code)
-      @syntax.check(statement) unless statement[0] == '/' &&
-                                      statement[-1] == '/' &&
-                                      %w[A L M E I].include?(code[0])
+      @syntax.check!(statement) unless statement[0] == '/' &&
+                                       statement[-1] == '/' &&
+                                       %w[A L M E I].include?(code[0])
     end
 
     def find_restatement(statement, code)
