@@ -51,7 +51,7 @@ module Korekto
       raise Error, "duplicate key: #{@last.key}" if @statements.key?(@last.key)
 
       @statements[@last.key] = @last
-      @symbols.define! @last if 'AIEMLDXS'.include?(@last.type)
+      @symbols.define! @last if @last.defines_symbols?
       @heap.add @last if 'DXSPTCRH'.include?(@last.type)
     end
 

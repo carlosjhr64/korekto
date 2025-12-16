@@ -37,6 +37,12 @@ module Korekto
                 end
     end
 
+    def defines_symbols?
+      'AIEMLDXS'.include?(type) && !(pattern? && literal_regexp?)
+    end
+
+    private
+
     TYPE_HANDLERS = {
       'P' => :postulate,      # Postulate
       'D' => :definition,     # Definition
@@ -53,9 +59,8 @@ module Korekto
       'H' => :handwave,       # Handwave
       'W' => :wild_card       # Wild Card
     }.freeze
-    private_constant :TYPE_HANDLERS
 
-    private
+    private_constant :TYPE_HANDLERS
 
     def literal_regexp?
       @statement[0] == '/' && @statement[-1] == '/'
