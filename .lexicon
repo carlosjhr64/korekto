@@ -20,6 +20,7 @@ bn
 brackets
 c
 captures
+char
 chars
 check
 chomp
@@ -85,6 +86,7 @@ freeze
 function
 get
 global
+group
 gsub
 gsub_tokens
 handle_options
@@ -173,10 +175,8 @@ private
 private_constant
 push
 puts
-q
 quit
 quote
-r
 raise
 readlines
 readme
