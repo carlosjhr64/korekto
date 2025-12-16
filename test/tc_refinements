@@ -22,25 +22,35 @@ class TestRefinements < Test::Unit::TestCase
 
   def test_string_ltight_wut
     assert 'Factorial: 2! = 4'.ltight?('!')
-    assert 'Fatorial: 2! = 4'.ltight?(':')
-    refute 'Fatorial: 2! = 4'.ltight?('2')
-    refute 'Fatorial: 2! = 4'.ltight?('=')
-    assert 'Fatorial: 2! = 4'.ltight?('o')
+    assert 'Factorial: 2! = 4'.ltight?(':')
+    refute 'Factorial: 2! = 4'.ltight?('2')
+    refute 'Factorial: 2! = 4'.ltight?('=')
+    assert 'Factorial: 2! = 4'.ltight?('o')
   end
 
   def test_string_rtight_wut
     refute 'Factorial: 2! = 4'.rtight?('!')
-    refute 'Fatorial: 2! = 4'.rtight?(':')
-    assert 'Fatorial: 2! = 4'.rtight?('2')
-    refute 'Fatorial: 2! = 4'.rtight?('=')
-    assert 'Fatorial: 2! = 4'.rtight?('o')
+    refute 'Factorial: 2! = 4'.rtight?(':')
+    assert 'Factorial: 2! = 4'.rtight?('2')
+    refute 'Factorial: 2! = 4'.rtight?('=')
+    assert 'Factorial: 2! = 4'.rtight?('o')
   end
 
   def test_string_tight_wut
     refute 'Factorial: 2! = 4'.tight?('!')
-    refute 'Fatorial: 2! = 4'.tight?(':')
-    refute 'Fatorial: 2! = 4'.tight?('2')
-    refute 'Fatorial: 2! = 4'.tight?('=')
-    assert 'Fatorial: 2! = 4'.tight?('o')
+    refute 'Factorial: 2! = 4'.tight?(':')
+    refute 'Factorial: 2! = 4'.tight?('2')
+    refute 'Factorial: 2! = 4'.tight?('=')
+    assert 'Factorial: 2! = 4'.tight?('o')
+  end
+
+  def test_string_gsub_tokens_bang
+    string = String.new '$1$2$3: $4 = $5'
+    string.gsub_tokens!(['Fac', 'to', 'rial', '2!', '4'])
+    assert_equal 'Factorial: 2! = 4', string
+    string = String.new '$2, $12, $1, $11, $10, $1$2'
+    tokens = %w[One Two Three Four Five Six Seven Eight Nine Ten Eleven Twelve]
+    string.gsub_tokens!(tokens)
+    assert_equal 'Two, Twelve, One, Eleven, Ten, OneTwo', string
   end
 end
