@@ -5,7 +5,8 @@ module Korekto
   module Refinements
     refine ::String do
       # Checks if brackets are balanced
-      # :reek:FeatureEnvy :reek:TooManyStatements
+      # :reek:DuplicateMethodCall push :reek:FeatureEnvy stack
+      # :reek:TooManyStatements
       def balanced?(brackets = '()[]{}')
         stack = []
         chars.each do |char|

@@ -12,6 +12,7 @@ module Korekto
 
   class Syntax
     def test_syntax = @syntax
+    def test_validate_bang(...) = validate!(...)
   end
 end
 
@@ -32,29 +33,38 @@ class TestSyntax < Test::Unit::TestCase
   def test_push
     @syntax.push 'length < 120'
     assert_equal ['length < 120'], @syntax.test_syntax
-    error = assert_raises(Korekto::Error) do
-      @syntax.push 'length'
-    end
-    assert_equal 'syntax must eval boolean', error.message
+    @syntax.push "ltight?('!')"
+    assert_equal ['length < 120', "ltight?('!')"], @syntax.test_syntax
+    # Near duplicate test in test_validate_bang:
     error = assert_raises(Korekto::Error) do
       @syntax.push 'leNgTh < 120'
     end
     assert_equal 'NameError: leNgTh < 120', error.message
-    error = assert_raises(Korekto::Error) do
-      @syntax.push 'length < 120'
-    end
-    assert_equal 'duplicate syntax', error.message
-    @syntax.push "ltight?('!')"
-    assert_equal ['length < 120', "ltight?('!')"], @syntax.test_syntax
   end
 
-  def test_check
+  def test_validate_bang
+    error = assert_raises(Korekto::Error) do
+      @syntax.test_validate_bang 'length'
+    end
+    assert_equal 'syntax must eval boolean', error.message
+    # Near duplicate test in test_push:
+    assert_raises(NameError) do
+      @syntax.test_validate_bang 'leNgTh < 120'
+    end
+    @syntax.push 'length < 120'
+    error = assert_raises(Korekto::Error) do
+      @syntax.test_validate_bang 'length < 120'
+    end
+    assert_equal 'duplicate syntax', error.message
+  end
+
+  def test_check_bang
     @syntax.push "ltight?('!')"
     assert_nothing_raised do
-      @syntax.check('2! = 4')
+      @syntax.check!('2! = 4')
     end
     error = assert_raises(Korekto::Error) do
-      @syntax.check('2 ! = 4')
+      @syntax.check!('2 ! = 4')
     end
     assert_equal "syntax: ltight?('!')", error.message
   end
