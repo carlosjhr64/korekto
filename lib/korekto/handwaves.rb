@@ -6,6 +6,8 @@ module Korekto
   # For more complicated cases where Korekto's main mechanic of
   # Regexp pattern matching is insufficient.
   class Handwaves
+    using Korekto::Refinements
+
     def initialize(context)
       @context   = context
       @handwaves = []
@@ -69,8 +71,9 @@ module Korekto
 
     def ex_match_statement?(statement, command, pattern, translate)
       pattern, = statement_to_pattern(pattern) if translate
+      pattern.gsub_tokens!(@captures)
       string = command == 'M' ? @context.antecedent : statement
-      md = Regexp.new(gsub!(pattern)).match(string)
+      md = Regexp.new(pattern).match(string)
       return false unless md
 
       @captures.push(*md[1..])
@@ -79,7 +82,8 @@ module Korekto
 
     def ex_match_heap?(pattern, translate)
       pattern, = statement_to_pattern(pattern) if translate
-      rgx = Regexp.new(gsub!(pattern))
+      pattern.gsub_tokens!(@captures)
+      rgx = Regexp.new(pattern)
       md = nil
       return false unless @context.heap.any? { (md = rgx.match it) }
 
@@ -88,23 +92,15 @@ module Korekto
     end
 
     def ex_replace?(consequent, pattern, substitute, global)
-      rgx = Regexp.new(gsub!(pattern))
-      gsub!(substitute) # implement captures from prior matches
+      pattern.gsub_tokens!(@captures)
+      rgx = Regexp.new(pattern)
+      substitute.gsub_tokens!(@captures) # implement captures from prior matches
       if global
         consequent.gsub!(rgx, substitute)
       else
         consequent.sub!(rgx, substitute)
       end
       true
-    end
-
-    def gsub!(pattern)
-      # Reverse to replace higher-index captures ($10, $11, ...)
-      # before lower ones ($1, $2) to avoid overlap.
-      @captures.each_with_index.reverse_each do |x, i|
-        pattern.gsub!("$#{i + 1}", x)
-      end
-      pattern
     end
   end
 end

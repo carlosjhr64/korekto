@@ -27,6 +27,14 @@ module Korekto
 
       # True if all chars are both ltight and rtight.
       def tight?(*chars)   = chars.all? { |c| ltight?(c) && rtight?(c) }
+
+      def gsub_tokens!(tokens)
+        # Reverse to replace higher-index captures ($10, $11, ...)
+        # before lower ones ($1, $2) to avoid overlap.
+        tokens.each_with_index.reverse_each do |token, index|
+          gsub!("$#{index + 1}", token)
+        end
+      end
     end
   end
 end

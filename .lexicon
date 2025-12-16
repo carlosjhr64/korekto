@@ -11,7 +11,6 @@ attr_accessor
 attr_reader
 attr_writer
 axiom
-b
 backtrace
 backup
 backups
@@ -87,6 +86,7 @@ function
 get
 global
 gsub
+gsub_tokens
 handle_options
 handler
 handwave
@@ -253,6 +253,7 @@ tmp
 to_a
 to_i
 token
+tokens
 token_to_pattern
 to_s
 to_str
@@ -271,6 +272,7 @@ unshift
 update
 UpdateRemotePlugins
 using
+validate
 value
 values
 var
@@ -281,6 +283,5 @@ VERSION
 w
 warn
 wild_card
-x
 xt
 zero
