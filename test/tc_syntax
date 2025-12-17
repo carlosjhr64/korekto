@@ -6,14 +6,10 @@ require 'colorize'
 require_relative 'test_module'
 require 'korekto/refinements'
 require 'korekto/syntax'
+
 # Mockups
 module Korekto
   class Error < RuntimeError; end
-
-  class Syntax
-    def test_syntax = @syntax
-    def test_validate_bang(...) = validate!(...)
-  end
 end
 
 class TestSyntax < Test::Unit::TestCase
@@ -26,36 +22,22 @@ class TestSyntax < Test::Unit::TestCase
   def test_coverage = coverage Korekto::Syntax
 
   def test_initialize
-    assert_equal [], @syntax.test_syntax
+    inspect = @syntax.inspect
+    assert_match(/\A#<Korekto::Syntax:\S* @syntax=\[\]>\Z/, inspect)
   end
 
   # rubocop: disable Metrics
   def test_push
     @syntax.push 'length < 120'
-    assert_equal ['length < 120'], @syntax.test_syntax
+    assert_equal ['length < 120'], @syntax.instance_variable_get(:@syntax)
     @syntax.push "ltight?('!')"
-    assert_equal ['length < 120', "ltight?('!')"], @syntax.test_syntax
+    assert_equal ['length < 120', "ltight?('!')"],
+                 @syntax.instance_variable_get(:@syntax)
     # Near duplicate test in test_validate_bang:
     error = assert_raises(Korekto::Error) do
       @syntax.push 'leNgTh < 120'
     end
     assert_equal 'NameError: leNgTh < 120', error.message
-  end
-
-  def test_validate_bang
-    error = assert_raises(Korekto::Error) do
-      @syntax.test_validate_bang 'length'
-    end
-    assert_equal 'syntax must eval boolean', error.message
-    # Near duplicate test in test_push:
-    assert_raises(NameError) do
-      @syntax.test_validate_bang 'leNgTh < 120'
-    end
-    @syntax.push 'length < 120'
-    error = assert_raises(Korekto::Error) do
-      @syntax.test_validate_bang 'length < 120'
-    end
-    assert_equal 'duplicate syntax', error.message
   end
 
   def test_check_bang
@@ -67,6 +49,22 @@ class TestSyntax < Test::Unit::TestCase
       @syntax.check!('2 ! = 4')
     end
     assert_equal "syntax: ltight?('!')", error.message
+  end
+
+  def test_validate_bang
+    error = assert_raises(Korekto::Error) do
+      @syntax.send :validate!, 'length'
+    end
+    assert_equal 'syntax must eval boolean', error.message
+    # Near duplicate test in test_push:
+    assert_raises(NameError) do
+      @syntax.send :validate!, 'leNgTh < 120'
+    end
+    @syntax.push 'length < 120'
+    error = assert_raises(Korekto::Error) do
+      @syntax.send :validate!, 'length < 120'
+    end
+    assert_equal 'duplicate syntax', error.message
   end
   # rubocop: enable Metrics
 end
