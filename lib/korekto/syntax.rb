@@ -3,7 +3,7 @@
 module Korekto
   # Manages a collection of syntax rules. Each rule is a Ruby expression that
   # evaluates on a string and returns a boolean indicating validity.
-  # :reek:MissingSafeMethod
+  # :reek:MissingSafeMethod { exclude: [ check!, validate! ] }
   class Syntax
     def initialize = @syntax = []
 

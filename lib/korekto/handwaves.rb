@@ -5,6 +5,7 @@ module Korekto
   # one true statement into another true statement.
   # For more complicated cases where Korekto's main mechanic of
   # Regexp pattern matching is insufficient.
+  # :reek:MissingSafeMethod { exclude: [ check! ] }
   class Handwaves
     using Korekto::Refinements
 
@@ -52,6 +53,7 @@ module Korekto
       statement == consequent
     end
 
+    # :reek:DuplicateMethodCall { allow_calls: [ Regexp.last_match ] }
     def ex_step?(step, statement, consequent)
       case step
       when %r{^([mM])/(.*)/(t)?$}
@@ -69,6 +71,7 @@ module Korekto
       @context.symbols.statement_to_pattern(pattern, quote: false)
     end
 
+    # :reek:ControlParameter command, translate
     def ex_match_statement?(statement, command, pattern, translate)
       pattern, = statement_to_pattern(pattern) if translate
       pattern.gsub_tokens!(@captures)
@@ -80,6 +83,7 @@ module Korekto
       true
     end
 
+    # :reek:ControlParameter translate
     def ex_match_heap?(pattern, translate)
       pattern, = statement_to_pattern(pattern) if translate
       pattern.gsub_tokens!(@captures)
@@ -91,6 +95,7 @@ module Korekto
       true
     end
 
+    # :reek:ControlParameter global
     def ex_replace?(consequent, pattern, substitute, global)
       pattern.gsub_tokens!(@captures)
       rgx = Regexp.new(pattern)
