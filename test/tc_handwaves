@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require_relative 'test_module'
+require 'korekto/refinements'
 require 'korekto/handwaves'
 
 # Mockup
@@ -15,25 +16,13 @@ module Korekto
   class Symbols
     def statement_to_pattern(*args) = args
   end
-
-  # Monkey patch for testing.
-  class Handwaves
-    def test_context = @context
-    def test_handwaves = @handwaves
-    def test_captures = @captures
-    def test_gsub!(*) = gsub!(*)
-    def test_statement_to_pattern(*) = statement_to_pattern(*)
-    def test_ex_handwave?(*) = ex_handwave?(*)
-    def test_ex_step?(*) = ex_step?(*)
-    def test_ex_match_statement?(*) = ex_match_statement?(*)
-    def test_ex_match_heap?(*) = ex_match_heap?(*)
-    def test_ex_replace?(*) = ex_replace?(*)
-  end
 end
 
 # rubocop: disable Metrics
 class TestHandwaves < Test::Unit::TestCase
   include TestModule
+
+  def test_coverage = coverage Korekto::Handwaves
 
   def setup
     context = Korekto::Statements.new
@@ -42,17 +31,18 @@ class TestHandwaves < Test::Unit::TestCase
     @handwaves = Korekto::Handwaves.new(context)
   end
 
-  def test_coverage = coverage Korekto::Handwaves
-
   def test_initialize
-    assert @handwaves.test_context.is_a? Korekto::Statements
-    assert_equal [], @handwaves.test_handwaves
-    assert_equal [], @handwaves.test_captures
+    inspect = @handwaves.inspect
+    assert_match(/\A#<Korekto::Handwaves:\S* \S* \S* \S* \S*>\Z/, inspect)
+    assert_match(/@context=#<Korekto::Statements:/, inspect)
+    assert_match(/@symbols=#<Korekto::Symbols:/, inspect)
+    assert_match(/@handwaves=\[\]/, inspect)
+    assert_match(/@captures=\[\]/, inspect)
   end
 
   def test_push
     @handwaves.push(':wut')
-    assert_equal [':wut'], @handwaves.test_handwaves
+    assert_equal [':wut'], @handwaves.instance_variable_get(:@handwaves)
     e = assert_raises(Korekto::Error) do
       @handwaves.push(':wut')
     end
@@ -67,30 +57,41 @@ class TestHandwaves < Test::Unit::TestCase
     e = assert_raises(Korekto::Error) { @handwaves.check!('statement') }
     assert_equal e.message, 'no handwaves found'
     # Don't do the following... :P
-    @handwaves.test_handwaves.push('bad handwave')
+    @handwaves.instance_variable_get(:@handwaves).push('bad handwave')
     # This is now a Runtime Error:
     e = assert_raises(RuntimeError) { @handwaves.check!('statement') }
     assert_equal e.message, 'unrecognized: bad handwave'
     # Monkey patch to isolate
-    def @handwaves.ex_handwave?(*_args) = true
-    @handwaves.test_handwaves.clear
+    def @handwaves.ex_handwave?(*) = true
+    @handwaves.instance_variable_get(:@handwaves).clear
     @handwaves.push(':something')
     assert_nil @handwaves.check!('Any now passes')
   end
 
-  def test_statement_to_pattern
-    wut = @handwaves.test_statement_to_pattern('wut')
-    assert_equal ['wut', { quote: false }], wut
+  def test_statement = assert_nil @handwaves.send :statement
+
+  def test_statement_set
+    @handwaves.send :statement=, 'wut'
+    assert_equal 'wut', @handwaves.send(:statement)
+  end
+
+  def test_consequent = assert_nil @handwaves.send :consequent
+
+  def test_consequent_set
+    @handwaves.send :consequent=, 'wut'
+    assert_equal 'wut', @handwaves.send(:consequent)
   end
 
   def test_ex_handwave_wut
-    @handwaves.test_context.antecedent = 'Wut'
-    b = @handwaves.test_ex_handwave?('', 'Wut')
+    @handwaves.send :consequent=, 'Wut'
+    @handwaves.send :statement=, 'Wut'
+    b = @handwaves.send :ex_handwave?, ''
     assert_equal true, b
-    b = @handwaves.test_ex_handwave?('', 'wut')
+    @handwaves.send :statement=, 'Not Wut'
+    b = @handwaves.send :ex_handwave?, ''
     assert_equal false, b
     # Patch to isolate
-    def @handwaves.ex_step?(step, statement, consequent)
+    def @handwaves.ex_step?(step)
       case step
       when 'capitalize'
         statement.capitalize!
@@ -108,11 +109,15 @@ class TestHandwaves < Test::Unit::TestCase
         raise Korekto::Error, "Wut? #{step}"
       end
     end
-    b = @handwaves.test_ex_handwave?('reverse|capitalize', String.new('tuw'))
+    @handwaves.send :statement=, String.new('tuw')
+    b = @handwaves.send :ex_handwave?, 'reverse|capitalize'
     assert_equal true, b
-    b = @handwaves.test_ex_handwave?('reverse|capitalize', String.new('wut'))
+    @handwaves.send :statement=, String.new('wut')
+    b = @handwaves.send :ex_handwave?, 'reverse|capitalize'
     assert_equal false, b
-    b = @handwaves.test_ex_handwave?('Reverse|Capitalize', String.new('Tuw'))
+    @handwaves.send :consequent=, String.new('Wut')
+    @handwaves.send :statement=, 'Tuw'
+    b = @handwaves.send :ex_handwave?, 'Reverse|Capitalize'
     assert_equal true, b
   end
 
@@ -123,97 +128,101 @@ class TestHandwaves < Test::Unit::TestCase
     def @handwaves.ex_match_heap?(*args) = [:B, *args]
     def @handwaves.ex_replace?(*args) = [:C, *args]
     # rubocop: enable Naming/PredicateMethod
+    @handwaves.send :consequent=, 'wut'
+    @handwaves.send :statement=, 'tuw'
     e = assert_raises(Korekto::Error) do
-      @handwaves.test_ex_step?('foo', 'wut', 'tuw')
+      @handwaves.send :ex_step?, 'foo'
     end
     assert_equal 'unrecognized handwave step: foo', e.message
-    args = @handwaves.test_ex_step?('m/abc/t', 'wut', 'tuw')
-    assert_equal [:A, 'wut', 'm', 'abc', 't'], args
-    args = @handwaves.test_ex_step?('M/xyz/', 'wut', 'tuw')
-    assert_equal [:A, 'wut', 'M', 'xyz', nil], args
-    args = @handwaves.test_ex_step?('g/123/t', 'wut', 'tuw')
+    args = @handwaves.send :ex_step?, 'm/abc/t'
+    assert_equal [:A, 'm', 'abc', 't'], args
+    args = @handwaves.send :ex_step?, 'M/xyz/'
+    assert_equal [:A, 'M', 'xyz', nil], args
+    args = @handwaves.send :ex_step?, 'g/123/t'
     assert_equal [:B, '123', 't'], args
-    args = @handwaves.test_ex_step?('g/ABC/', 'wut', 'tuw')
+    args = @handwaves.send :ex_step?, 'g/ABC/'
     assert_equal [:B, 'ABC', nil], args
-    args = @handwaves.test_ex_step?('s/rtx/uvw/g', 'wut', 'tuw')
-    assert_equal [:C, 'tuw', 'rtx', 'uvw', 'g'], args
-    args = @handwaves.test_ex_step?('s/()()/[]{}/', 'wut', 'tuw')
-    assert_equal [:C, 'tuw', '()()', '[]{}', nil], args
+    args = @handwaves.send :ex_step?, 's/rtx/uvw/g'
+    assert_equal [:C, 'rtx', 'uvw', 'g'], args
+    args = @handwaves.send :ex_step?, 's/()()/[]{}/'
+    assert_equal [:C, '()()', '[]{}', nil], args
+  end
+
+  def test_statement_to_pattern
+    wut = @handwaves.send :statement_to_pattern, 'wut'
+    assert_equal ['wut', { quote: false }], wut
   end
 
   def test_ex_match_statement_wut
-    s = 'A = B'
-    s2 = 'u ~ v'
-    @handwaves.test_context.antecedent = 'X = Y'
+    context = @handwaves.instance_variable_get :@context
+    context.antecedent = 'X = Y'
+    captures = @handwaves.instance_variable_get :@captures
+    captures.clear
+    @handwaves.send :statement=, 'A = B'
     p = '(\w) = (\w)'
     # Case m:
-    @handwaves.test_captures.clear
-    b = @handwaves.test_ex_match_statement?(s, 'm', p, false)
+    b = @handwaves.send :ex_match_statement?, 'm', p, false
     assert_equal true, b
-    assert_equal %w[A B], @handwaves.test_captures
+    assert_equal %w[A B], captures
     # Case M:
-    @handwaves.test_captures.clear
-    b = @handwaves.test_ex_match_statement?(s, 'M', p, false)
+    captures.clear
+    b = @handwaves.send :ex_match_statement?, 'M', p, false
     assert_equal true, b
-    assert_equal %w[X Y], @handwaves.test_captures
+    assert_equal %w[X Y], captures
     # Case no match:
-    @handwaves.test_captures.clear
-    b = @handwaves.test_ex_match_statement?(s2, 'm', p, false)
+    captures.clear
+    @handwaves.send :statement=, 'u ~ v'
+    b = @handwaves.send :ex_match_statement?, 'm', p, false
     assert_equal false, b
-    assert_equal [], @handwaves.test_captures
+    assert_equal [], captures
     # Case translate:
     def @handwaves.statement_to_pattern(*) = '(\w) ~ (\w)'
-    @handwaves.test_captures.clear
-    b = @handwaves.test_ex_match_statement?(s2, 'm', p, true)
+    captures.clear
+    b = @handwaves.send :ex_match_statement?, 'm', p, true
     assert_equal true, b
-    assert_equal %w[u v], @handwaves.test_captures
+    assert_equal %w[u v], captures
   end
 
   def test_ex_match_heap_wut
-    @handwaves.test_context.heap = ['Apples are red and delicious',
-                                    'Lemons are green and sour']
+    context = @handwaves.instance_variable_get :@context
+    context.heap = ['Apples are red and delicious', 'Lemons are green and sour']
     apples = 'Apples are (\w+) and (\w+)'
     lemons = 'Lemons are (\w+) and (\w+)'
+    captures = @handwaves.instance_variable_get :@captures
+    captures.clear
     # Match nothing
-    @handwaves.test_captures.clear
-    b = @handwaves.test_ex_match_heap?('A coconut is (\w+)', false)
+    b = @handwaves.send :ex_match_heap?, 'A coconut is (\w+)', false
     assert_equal false, b
     # Apples
-    @handwaves.test_captures.clear
-    b = @handwaves.test_ex_match_heap?(apples, false)
+    captures.clear
+    b = @handwaves.send :ex_match_heap?, apples, false
     assert_equal true, b
-    assert_equal %w[red delicious], @handwaves.test_captures
+    assert_equal %w[red delicious], captures
     # Lemons
-    @handwaves.test_captures.clear
-    b = @handwaves.test_ex_match_heap?(lemons, false)
+    captures.clear
+    b = @handwaves.send :ex_match_heap?, lemons, false
     assert_equal true, b
-    assert_equal %w[green sour], @handwaves.test_captures
+    assert_equal %w[green sour], captures
     # Translate
-    @handwaves.test_captures.clear
+    captures.clear
     def @handwaves.statement_to_pattern(*) = '^(.*) and sour'
-    b = @handwaves.test_ex_match_heap?('translate this', true)
+    b = @handwaves.send :ex_match_heap?, 'translate this', true
     assert_equal true, b
-    assert_equal ['Lemons are green'], @handwaves.test_captures
+    assert_equal ['Lemons are green'], captures
   end
 
   def test_ex_replace_wut
     consequent = String.new('I like chocolate. I like nuts')
-    b = @handwaves.test_ex_replace?(consequent, 'I', 'We', false)
+    @handwaves.send :consequent=, consequent
+    b = @handwaves.send :ex_replace?, 'I', 'We', false
     assert_equal true, b
     assert_equal 'We like chocolate. I like nuts', consequent
-    b = @handwaves.test_ex_replace?(consequent, 'I|We', 'They', true)
+    b = @handwaves.send :ex_replace?, 'I|We', 'They', true
     assert_equal true, b
     assert_equal 'They like chocolate. They like nuts', consequent
-    b = @handwaves.test_ex_replace?(consequent, 'I|We', 'Them', true)
+    b = @handwaves.send :ex_replace?, 'I|We', 'Them', true
     assert_equal true, b # succeeds even with no changes
     assert_equal 'They like chocolate. They like nuts', consequent
-  end
-
-  def test_gsub_bang
-    @handwaves.test_captures.push('A', 'B', 'C')
-    pattern = String.new('$1 = $2 and $2 = $3, so $1 = $3')
-    string = @handwaves.test_gsub!(pattern)
-    assert_equal 'A = B and B = C, so A = C', string
   end
 end
 # rubocop: enable Metrics
