@@ -27,7 +27,9 @@ module Korekto
       raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
         case handwave
         when /^:/ # Ex Handwave
-          ex_handwave?(handwave[1..], statement)
+          self.statement = statement
+          self.consequent = @context.antecedent.dup
+          ex_handwave?(handwave[1..])
         else
           # Bug: should not happen... Catch this in `push`.
           raise "unrecognized: #{handwave}"
@@ -37,31 +39,32 @@ module Korekto
 
     private
 
+    attr_accessor :statement, :consequent
+
     # Applies a Vim Ex-style handwave transformation chain to verify that
     # `statement` can be derived from the current antecedent via a sequence
     # of match (m/M/g), translate (t), and substitution (s) steps.
     # Returns true if the final `consequent` equals `statement`;
     # otherwise false. Captures from match steps are stored in @captures
     # for use in substitutions.
-    def ex_handwave?(command, statement)
+    def ex_handwave?(command)
       @captures.clear
-      consequent = @context.antecedent.dup
       command.split('|').each do |step|
         break unless
-          ex_step?(step, statement, consequent)
+          ex_step?(step)
       end
       statement == consequent
     end
 
     # :reek:DuplicateMethodCall { allow_calls: [ Regexp.last_match ] }
-    def ex_step?(step, statement, consequent)
+    def ex_step?(step)
       case step
       when %r{^([mM])/(.*)/(t)?$}
-        ex_match_statement?(statement, *Regexp.last_match[1..3])
+        ex_match_statement?(*Regexp.last_match[1..3])
       when %r{^g/(.*)/(t)?$}
         ex_match_heap?(*Regexp.last_match[1..2])
       when %r{^s/(.*?)/(.*)/(g)?$}
-        ex_replace?(consequent, *Regexp.last_match[1..3])
+        ex_replace?(*Regexp.last_match[1..3])
       else
         raise Error, "unrecognized handwave step: #{step}"
       end
@@ -71,8 +74,9 @@ module Korekto
       @context.symbols.statement_to_pattern(pattern, quote: false)
     end
 
+    # :reek:TooManyStatements
     # :reek:ControlParameter command, translate
-    def ex_match_statement?(statement, command, pattern, translate)
+    def ex_match_statement?(command, pattern, translate)
       pattern, = statement_to_pattern(pattern) if translate
       pattern.gsub_tokens!(@captures)
       string = command == 'M' ? @context.antecedent : statement
@@ -83,6 +87,7 @@ module Korekto
       true
     end
 
+    # :reek:TooManyStatements
     # :reek:ControlParameter translate
     def ex_match_heap?(pattern, translate)
       pattern, = statement_to_pattern(pattern) if translate
@@ -95,8 +100,9 @@ module Korekto
       true
     end
 
+    # :reek:TooManyStatements
     # :reek:ControlParameter global
-    def ex_replace?(consequent, pattern, substitute, global)
+    def ex_replace?(pattern, substitute, global)
       pattern.gsub_tokens!(@captures)
       rgx = Regexp.new(pattern)
       substitute.gsub_tokens!(@captures) # implement captures from prior matches
