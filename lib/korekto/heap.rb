@@ -5,6 +5,7 @@ module Korekto
   # the most recent statements (newest first). It yields pairs in order of
   # increasing (i² + j²) to favor recent statements, reducing look-back and
   # search scope for verification.
+  # :reek:UncommunicativeVariableName { accept: [ i, j ] }
   class Heap
     include Enumerable
 
@@ -19,35 +20,35 @@ module Korekto
 
     def initialize(limit)
       @limit = limit
-      @a = []
+      @heap = []
       @combos = COMBOS_FOR[@limit]
     end
 
     def swap(tmp = [])
-      @a, tmp = tmp, @a
+      @heap, tmp = tmp, @heap
       tmp
     end
 
     def follows(nlc)
-      @a[0..nlc].reverse
+      @heap[0..nlc].reverse
     end
 
-    def antecedent = @a[0].to_s
+    def antecedent = @heap[0].to_s
 
     def add(statement)
-      @a.delete statement
-      @a.unshift statement
-      @a.pop if @a.length > @limit
+      @heap.delete statement
+      @heap.unshift statement
+      @heap.pop if @heap.length > @limit
     end
 
     def combos
       @combos.each do |i, j|
-        next if [i, j].max >= @a.length
+        next if [i, j].max >= @heap.length
 
-        yield(@a[i], @a[j])
+        yield(@heap[i], @heap[j])
       end
     end
 
-    def each = @a.each { yield it }
+    def each = @heap.each { yield it }
   end
 end

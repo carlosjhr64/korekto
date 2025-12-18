@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   ## INFO ##
   s.name     = 'korekto'
-  s.version  = '4.0.251217'
+  s.version  = '4.0.251218'
   s.homepage = 'https://github.com/carlosjhr64/korekto'
   s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
