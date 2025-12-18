@@ -1,19 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'test/unit'
-require 'colorize'
-require 'korekto/heap'
 require_relative 'test_module'
-
-# Mockup
-module Korekto
-  class Heap
-    def test_limit = @limit
-    def test_combos = @combos
-    def test_a = @a
-  end
-end
+require 'korekto/heap'
 
 # rubocop: disable Metrics
 class TestHeap < Test::Unit::TestCase
@@ -25,41 +14,58 @@ class TestHeap < Test::Unit::TestCase
     @heap = Korekto::Heap.new(3)
   end
 
+  def test_private_constant_combos_for
+    combos_for = Korekto::Heap.const_get(:COMBOS_FOR, false)
+    # 3 combos where generated at the set up, but not 4:
+    assert combos_for.key? 3
+    refute combos_for.key? 4
+    expected = @heap.instance_variable_get(:@combos)
+    # It's the same array instance:
+    assert_equal expected.object_id, combos_for[3].object_id
+    # The array values are verified in `test_initialize`.
+  end
+
   def test_initialize
-    assert_equal 0, @heap.test_a.size
-    assert_equal 3, @heap.test_limit
-    assert_equal [[0, 1], [1, 0], [0, 2], [2, 0], [1, 2], [2, 1]],
-                 @heap.test_combos
+    inspect = @heap.inspect
+    # Three instance variables:
+    assert_match(/\A#<Korekto::Heap:[^@]+@[^@]+@[^@]+@[^@]+\Z/, inspect)
+    assert_match(/ @limit=3, /, inspect)
+    assert_match(/ @heap=\[\], /, inspect)
+    assert_match(/ @combos=\[\[0, /, inspect)
+    expected = [[0, 1], [1, 0], [0, 2], [2, 0], [1, 2], [2, 1]]
+    combos = @heap.instance_variable_get(:@combos)
+    assert_equal expected, combos
   end
 
-  def test_each
-    # heap starts empty
-    # rubocop: disable Lint/UnreachableLoop
-    assert_nothing_raised { @heap.each { raise } }
-    # rubocop: enable Lint/UnreachableLoop
-    # heap iterates through a
-    @heap.test_a.push(1, 2, 3, 4)
-    assert_equal %w[1 2 3 4], @heap.map(&:to_s)
-  end
-
-  def test_antecedent
-    @heap.test_a.push(1, 2, 3, 4)
-    assert_equal '1', @heap.antecedent
+  def test_swap
+    heap = @heap.instance_variable_get(:@heap)
+    heap.push(1, 2, 3, 4)
+    tmp = @heap.swap
+    assert_equal [1, 2, 3, 4], tmp
+    assert_empty @heap.instance_variable_get :@heap
+    @heap.swap tmp
+    assert_equal [1, 2, 3, 4], @heap.instance_variable_get(:@heap)
   end
 
   def test_follows
-    @heap.test_a.push(1, 2, 3, 4)
+    heap = @heap.instance_variable_get(:@heap)
+    heap.push(1, 2, 3, 4)
     assert_equal [2, 1], @heap.follows(1)
     assert_equal [3, 2, 1], @heap.follows(2)
   end
 
-  def test_swap
-    @heap.test_a.push(1, 2, 3, 4)
-    tmp = @heap.swap
-    assert_equal [1, 2, 3, 4], tmp
-    assert_empty @heap.test_a
-    @heap.swap tmp
-    assert_equal [1, 2, 3, 4], @heap.test_a
+  def test_antecedent
+    heap = @heap.instance_variable_get(:@heap)
+    heap.push(1, 2, 3, 4)
+    assert_equal '1', @heap.antecedent
+  end
+
+  def test_add
+    @heap.add(1)
+    @heap.add(2)
+    @heap.add(3)
+    @heap.add(4)
+    assert_equal [4, 3, 2], @heap.instance_variable_get(:@heap)
   end
 
   def test_combos
@@ -102,34 +108,16 @@ class TestHeap < Test::Unit::TestCase
     assert_equal 'B;C', a[5]
   end
 
-  def test_combos4
-    a = []
-    heap = Korekto::Heap.new(4)
-    %w[A B C D].each { heap.add it }
-    heap.combos { |x, y| a << "#{x};#{y}" }
-    assert_equal 12, a.length
-    assert_equal a, a.uniq
-    assert_equal 'D;C', a.first
-    assert_equal 'A;B', a.last
-  end
-
-  def test_combos13
-    a = []
-    heap = Korekto::Heap.new(13)
-    %w[1 2 3 4 5 6 7 8 9 10 11 12 13].each { heap.add it }
-    heap.combos { |x, y| a << "#{x};#{y}" }
-    assert_equal 156, a.length
-    assert_equal a, a.uniq
-    assert_equal '13;12', a.first
-    assert_equal '1;2', a.last
-  end
-
-  def test_add
-    @heap.add(1)
-    @heap.add(2)
-    @heap.add(3)
-    @heap.add(4)
-    assert_equal [4, 3, 2], @heap.test_a
+  def test_each
+    # heap starts empty
+    # rubocop: disable Lint/UnreachableLoop
+    assert_nothing_raised { @heap.each { raise } }
+    # rubocop: enable Lint/UnreachableLoop
+    # heap iterates through a
+    heap = @heap.instance_variable_get(:@heap)
+    heap.push(1, 2, 3, 4)
+    # map enabled by Enumerable via each
+    assert_equal %w[1 2 3 4], @heap.map(&:to_s)
   end
 end
 # rubocop: enable Metrics
