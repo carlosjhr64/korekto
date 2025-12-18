@@ -9,8 +9,16 @@ module Korekto
   # (axioms, let-rules, map-rules, inference-rules, …) and by analysing
   # which symbols are undefined in the current context.
   # The class is immutable after initialization
-  # rubocop: disable Metrics
+  # :reek:UncommunicativeMethodName {
+  #   accept:
+  #     [ pattern_type0, pattern_type1, pattern_type2 ] }
+  # :reek:UncommunicativeVariableName { accept: [ s0, s1, s2 ] }
+  # :reek:TooManyInstanceVariables
+  # :reek:TooManyMethods
+  # rubocop: disable Metrics/ClassLength
   class Statement
+    using Refinements
+
     attr_reader :code, :title, :regexp, :section, :statement_number, :key
 
     def initialize(*args)
@@ -27,6 +35,7 @@ module Korekto
     def to_str            = @statement
     def match?(statement) = @regexp.match?(statement)
     def scan(regex, &)    = @statement.scan(regex, &)
+    # :reek:NilCheck
     def pattern?          = !@regexp.nil?
 
     def set_regexp
@@ -69,6 +78,7 @@ module Korekto
     # Sets the final acceptance code, title, and key for the statement by
     # dispatching to the appropriate type handler (tautology, definition, etc.)
     # based on the initial code letter. Raises if type unsupported.
+    # :reek:DuplicateMethodCall
     def set_acceptance_code
       handler = TYPE_HANDLERS[@code[0]]
       raise(Error, "type #{@code[0]} not implemented") unless handler
@@ -90,6 +100,9 @@ module Korekto
       end or raise Error, 'did not match any statement pattern(T/S/R/X/C)'
     end
 
+    # :reek:TooManyStatements
+    # rubocop: disable Metrics/CyclomaticComplexity
+    # rubocop: disable Metrics/PerceivedComplexity
     def set_statement(support = nil, title = nil, undefined: nil)
       @code  = "#{@code[0]}#{@statement_number}"
       @code += ".#{@section}" unless @section == '-'
@@ -100,6 +113,8 @@ module Korekto
 
       @title = "#{@title}: #{undefined.join(' ')}"
     end
+    # rubocop: enable Metrics/PerceivedComplexity
+    # rubocop: enable Metrics/CyclomaticComplexity
 
     def support(*statements)
       statements.map { it.code.split('/', 2)[0] }.join(',')
@@ -129,6 +144,11 @@ module Korekto
         raise(Error, "no matching '#{type}' pattern")
     end
 
+    # :reek:DuplicateMethodCall
+    # :reek:NestedIterators
+    # :reek:TooManyStatements
+    # rubocop: disable Metrics/AbcSize
+    # rubocop: disable Metrics/MethodLength
     def heap_combos_search(type)
       if (md = %r{/([^,]+),([^,]+),([^,]+)$}.match @code)
         inference, s1, s2 = md.captures.map { @context.get it.to_sym }
@@ -145,7 +165,13 @@ module Korekto
       end
       raise Error, "does not match any '#{type}' statement"
     end
+    # rubocop: enable Metrics/MethodLength
+    # rubocop: enable Metrics/AbcSize
 
+    # :reek:DuplicateMethodCall
+    # :reek:NestedIterators
+    # :reek:TooManyStatements
+    # rubocop: disable Metrics/MethodLength
     def heap_search(type)
       if (md = %r{/([^,]+),([^,]+)$}.match @code)
         s0, s1 = md.captures.map { @context.get it.to_sym }
@@ -162,13 +188,15 @@ module Korekto
       end
       raise Error, "does not match any '#{type}' statement"
     end
+    # rubocop: enable Metrics/MethodLength
 
     # Defined/Undefined
 
-    # rubocop: disable Style/SafeNavigationChainLength
+    # :reek:ControlParameter title
+    # :reek:DuplicateMethodCall { allow_calls: [ undefined.empty? ] }
     def expected_instantiations(title = nil, instantiations: nil)
       undefined = @context.symbols.undefined(self)
-      if instantiations ||= title&.match(/[1-9]\d*/)&.to_s&.to_i
+      if instantiations ||= title&.match_to_i(/[1-9]\d*/)
         unless instantiations == undefined.length
           raise Error,
                 "expected #{instantiations} undefined: #{undefined.join(' ')}"
@@ -178,11 +206,11 @@ module Korekto
       end
       undefined.empty? ? nil : undefined
     end
-    # rubocop: enable Style/SafeNavigationChainLength
 
     # Statement type processing
 
     # nlc: "\n" count
+    # :reek:TooManyStatements
     def pattern_type(nlc, undefined = nil)
       set_regexp
       newlines_count(nlc)
@@ -204,6 +232,7 @@ module Korekto
 
     # A Set(Assignment) is an allowed true statement that introduces
     # at least one term as immediately validated by a matching Let rule.
+    # :reek:DuplicateMethodCall
     def set
       let = detect_statement('L')
       undefined = expected_instantiations(let.title)
@@ -220,6 +249,7 @@ module Korekto
 
     # An Instantiation is a derived true statement that introduces at least one
     # new term as a result of an Existential rule and matching true statement.
+    # :reek:DuplicateMethodCall
     def instantiation
       existential, s1 = heap_search('E')
       undefined = expected_instantiations(existential.title)
@@ -256,5 +286,5 @@ module Korekto
       set_statement
     end
   end
-  # rubocop: enable Metrics
+  # rubocop: enable Metrics/ClassLength
 end

@@ -38,6 +38,8 @@ module Korekto
           gsub!("$#{index + 1}", token)
         end
       end
+
+      def match_to_i(regexp) = match(regexp)&.to_s&.to_i
     end
   end
 end
