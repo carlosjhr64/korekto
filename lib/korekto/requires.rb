@@ -1,0 +1,10 @@
+require 'English'
+require_relative 'refinements'
+require_relative 'symbols'
+require_relative 'syntax'
+require_relative 'handwaves'
+require_relative 'heap'
+require_relative 'statement'
+Dir.glob("#{__dir__}/statement/*.rb").each { require it }
+require_relative 'statements'
+require_relative 'main'

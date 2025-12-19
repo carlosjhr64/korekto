@@ -18,15 +18,7 @@ module Korekto
   Korekto.scrape = false
 
   def self.run
-    require 'English'
-    require_relative 'korekto/refinements'
-    require_relative 'korekto/symbols'
-    require_relative 'korekto/syntax'
-    require_relative 'korekto/handwaves'
-    require_relative 'korekto/heap'
-    require_relative 'korekto/statement'
-    require_relative 'korekto/statements'
-    require_relative 'korekto/main'
+    require_relative 'korekto/requires'
     Korekto::Main.new.run
   end
 end
