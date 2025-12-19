@@ -24,6 +24,10 @@ module Korekto
 
     private_constant :TYPE_HANDLERS
 
+    def pattern_type0 = pattern_type(0)
+    def pattern_type1 = pattern_type(1)
+    def pattern_type2 = pattern_type(2)
+
     def wild_card
       %w[T S R X C].any? do |code|
         @code[0] = code

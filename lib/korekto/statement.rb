@@ -9,14 +9,12 @@ module Korekto
   # (axioms, let-rules, map-rules, inference-rules, …) and by analysing
   # which symbols are undefined in the current context.
   # The class is immutable after initialization
-  # :reek:UncommunicativeMethodName {
-  #   accept:
-  #     [ pattern_type0, pattern_type1, pattern_type2 ] }
   # :reek:UncommunicativeVariableName { accept: [ s0, s1, s2 ] }
   # :reek:TooManyInstanceVariables
   # :reek:TooManyMethods
   # rubocop: disable Metrics/ClassLength
   class Statement
+    include StatementHandlers
     using Refinements
 
     attr_reader :code, :title, :regexp, :section, :statement_number, :key
@@ -52,25 +50,6 @@ module Korekto
 
     private
 
-    TYPE_HANDLERS = {
-      'P' => :postulate,      # Postulate
-      'D' => :definition,     # Definition
-      'C' => :conclusion,     # Conclusion
-      'X' => :instantiation,  # Instantiation
-      'R' => :result,         # Result
-      'S' => :set,            # Set
-      'T' => :tautology,      # Tautology
-      'A' => :pattern_type0,  # Axiom -> Tautology
-      'L' => :pattern_type0,  # Let -> Set
-      'M' => :pattern_type1,  # Map -> Result
-      'E' => :pattern_type1,  # Existential -> Instantiation
-      'I' => :pattern_type2,  # Inference -> Conclusion
-      'H' => :handwave,       # Handwave
-      'W' => :wild_card       # Wild Card
-    }.freeze
-
-    private_constant :TYPE_HANDLERS
-
     def literal_regexp?
       @statement[0] == '/' && @statement[-1] == '/'
     end
@@ -84,20 +63,6 @@ module Korekto
       raise(Error, "type #{@code[0]} not implemented") unless handler
 
       send(handler)
-    end
-
-    def pattern_type0 = pattern_type(0)
-    def pattern_type1 = pattern_type(1)
-    def pattern_type2 = pattern_type(2)
-
-    def wild_card
-      %w[T S R X C].any? do |code|
-        @code[0] = code
-        set_acceptance_code
-        true
-      rescue Error
-        false
-      end or raise Error, 'did not match any statement pattern(T/S/R/X/C)'
     end
 
     # :reek:TooManyStatements
@@ -209,85 +174,6 @@ module Korekto
         raise Error, 'nothing was undefined'
       end
       undefined.empty? ? nil : undefined
-    end
-
-    # Statement type processing
-
-    # nlc: "\n" count
-    # :reek:TooManyStatements
-    def pattern_type(nlc, undefined = nil)
-      set_regexp
-      newlines_count(nlc)
-      undefined = @context.symbols.undefined(self) unless literal_regexp?
-      follows = @context.heap.follows(nlc)
-      support = if @regexp.match?(follows.map(&:to_s).join("\n"))
-                  support(*follows)
-                end
-      set_statement(support, undefined:)
-    end
-
-    # A Tautology is an accepted true statement that immediately follows from
-    # an Axiom rule. It may not have any undefined terms.
-    def tautology
-      expected_instantiations(instantiations: 0)
-      axiom = detect_statement('A')
-      set_statement(support(axiom), axiom.title)
-    end
-
-    # A Set(Assignment) is an allowed true statement that introduces
-    # at least one term as immediately validated by a matching Let rule.
-    # :reek:DuplicateMethodCall
-    def set
-      let = detect_statement('L')
-      undefined = expected_instantiations(let.title)
-      set_statement(support(let), let.title, undefined:)
-    end
-
-    # A Result is a derived true statement that follows from a Map rule and
-    # matching true statement.
-    def result
-      expected_instantiations(instantiations: 0)
-      mapping, s1 = heap_search('M')
-      set_statement(support(mapping, s1), mapping.title)
-    end
-
-    # An Instantiation is a derived true statement that introduces at least one
-    # new term as a result of an Existential rule and matching true statement.
-    # :reek:DuplicateMethodCall
-    def instantiation
-      existential, s1 = heap_search('E')
-      undefined = expected_instantiations(existential.title)
-      set_statement(support(existential, s1), existential.title, undefined:)
-    end
-
-    # A Conclusion is a derived true statement, the result of an Inference rule
-    # that follows from two true statements.
-    def conclusion
-      expected_instantiations(instantiations: 0)
-      inference, s1, s2 = heap_combos_search('I')
-      set_statement(support(inference, s1, s2), inference.title)
-    end
-
-    # A Definition is an assumed true statement that defines at least one term.
-    def definition
-      undefined = expected_instantiations(@title)
-      # With many undefined symbols in a definition,
-      # it's annoying to repeat them in the comment.
-      undefined = nil if undefined.size > 2
-      set_statement(undefined:)
-    end
-
-    # A Postulate is an assumed true statement with all terms defined.
-    def postulate
-      expected_instantiations(instantiations: 0)
-      set_statement
-    end
-
-    # When the above methods are unwieldy...
-    def handwave
-      expected_instantiations(instantiations: 0)
-      @context.handwaves.check!(@statement)
-      set_statement
     end
   end
   # rubocop: enable Metrics/ClassLength
