@@ -116,6 +116,10 @@ module Korekto
     # rubocop: enable Metrics/PerceivedComplexity
     # rubocop: enable Metrics/CyclomaticComplexity
 
+    def pattern_type_support(follows)
+      support(*follows) if @regexp.match?(follows.map(&:to_s).join("\n"))
+    end
+
     def support(*statements)
       statements.map { it.code.split('/', 2)[0] }.join(',')
     end
