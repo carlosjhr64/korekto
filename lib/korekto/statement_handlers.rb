@@ -38,9 +38,8 @@ module Korekto
     def pattern_type(nlc)
       set_regexp!
       verify_newlines_count!(nlc)
-      undefined = undefined_symbols_get
-      support = pattern_type_support(follows_get(nlc))
-      set_statement!(support, undefined:)
+      set_code!(pattern_type_support(follows_get(nlc)))
+      set_title!(undefined: undefined_symbols_get)
     end
 
     def axiom       = pattern_type(0)
@@ -54,7 +53,8 @@ module Korekto
     def tautology
       expected_instantiations!(instantiations: 0)
       axiom = detect_statement('A')
-      set_statement!(support(axiom), axiom.title)
+      set_code!(support(axiom))
+      set_title!(axiom.title)
     end
 
     # A Setter(Assignment) is an allowed true statement that introduces
@@ -63,7 +63,8 @@ module Korekto
       let = detect_statement('L')
       title = let.title
       undefined = expected_instantiations!(title)
-      set_statement!(support(let), title, undefined:)
+      set_code!(support(let))
+      set_title!(title, undefined:)
     end
 
     # A Result is a derived true statement that follows from a Map rule and
@@ -71,7 +72,8 @@ module Korekto
     def result
       expected_instantiations!(instantiations: 0)
       mapping, antecedent = heap_search
-      set_statement!(support(mapping, antecedent), mapping.title)
+      set_code!(support(mapping, antecedent))
+      set_title!(mapping.title)
     end
 
     # An Instantiation is a derived true statement that introduces at least one
@@ -80,7 +82,8 @@ module Korekto
       existential, antecedent = heap_search
       title = existential.title
       undefined = expected_instantiations!(title)
-      set_statement!(support(existential, antecedent), title, undefined:)
+      set_code!(support(existential, antecedent))
+      set_title!(title, undefined:)
     end
 
     # A Conclusion is a derived true statement, the result of an Inference rule
@@ -89,7 +92,8 @@ module Korekto
       expected_instantiations!(instantiations: 0)
       inference, conditional, antecedent = heap_combos_search
       title = inference.title
-      set_statement!(support(inference, conditional, antecedent), title)
+      set_code!(support(inference, conditional, antecedent))
+      set_title!(title)
     end
 
     # A Definition is an assumed true statement that defines at least one term.
@@ -98,20 +102,23 @@ module Korekto
       # With many undefined symbols in a definition,
       # it's annoying to repeat them in the comment.
       undefined = nil if undefined.size > 2
-      set_statement!(undefined:)
+      set_code!
+      set_title!(undefined:)
     end
 
     # A Postulate is an assumed true statement with all terms defined.
     def postulate
       expected_instantiations!(instantiations: 0)
-      set_statement!
+      set_code!
+      set_title!
     end
 
     # When the above methods are unwieldy...
     def handwave
       expected_instantiations!(instantiations: 0)
       handwaves_check!
-      set_statement!
+      set_code!
+      set_title!
     end
   end
 end

@@ -229,9 +229,10 @@ send
 set
 Set
 set_acceptance_code
+set_code
 set_regexp
-set_statement
 setter
+set_title
 set_type
 shift
 size
