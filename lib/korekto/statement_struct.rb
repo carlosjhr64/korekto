@@ -10,22 +10,18 @@ module Korekto
   # Define Korekto::StatementStruct
   StatementStruct = Struct.new(*args, *more, *bool) do
     def init!
+      # These may be reset later in the struct's construction:
       self.title = title.split(':', 2) if title
+      self.type = code[0]
+      self[:pattern?] = false
+      self[:literal_regexp?] = false
     end
 
-    # rubocop: disable Metrics/AbcSize
-    # :reek:TooManyStatements
     def finalize!
-      self.type = code[0]
-      self[:pattern?] = regexp ? true : false
-      self[:literal_regexp?] = pattern? &&
-                               (statement[0] == '/') && (statement[-1] == '/')
-      self[:defines_symbols?] = 'AIEMLDXS'.include?(type) &&
-                                !(pattern? && literal_regexp?)
+      self[:defines_symbols?] = !literal_regexp? && 'AIEMLDXS'.include?(type)
       each(&:freeze)
       freeze
     end
-    # rubocop: enable Metrics/AbcSize
 
     def to_s = statement
 
