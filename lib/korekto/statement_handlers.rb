@@ -13,20 +13,16 @@ module Korekto
       'R' => :result,         # Result
       'S' => :setter,         # Setter
       'T' => :tautology,      # Tautology
-      'A' => :pattern_type0,  # Axiom -> Tautology
-      'L' => :pattern_type0,  # Let -> Set
-      'M' => :pattern_type1,  # Map -> Result
-      'E' => :pattern_type1,  # Existential -> Instantiation
-      'I' => :pattern_type2,  # Inference -> Conclusion
+      'A' => :axiom,          # Axiom -> Tautology
+      'L' => :let,            # Let -> Setter
+      'M' => :mapper,         # Mapper -> Result
+      'E' => :existential,    # Existential -> Instantiation
+      'I' => :inference,      # Inference -> Conclusion
       'H' => :handwave,       # Handwave
       'W' => :wild_card       # Wild Card
     }.freeze
 
     private_constant :TYPE_HANDLERS
-
-    def pattern_type0 = pattern_type(0)
-    def pattern_type1 = pattern_type(1)
-    def pattern_type2 = pattern_type(2)
 
     def wild_card
       %w[T S R X C].any? do |type|
@@ -35,7 +31,7 @@ module Korekto
         true
       rescue Error
         false
-      end or raise Error, 'did not match any statement pattern(T/S/R/X/C)'
+      end or raise Error, 'did not match any statement pattern(T|S|R|X|C)'
     end
 
     # nlc: "\n" count
@@ -46,6 +42,12 @@ module Korekto
       support = pattern_type_support(follows_get(nlc))
       set_statement!(support, undefined:)
     end
+
+    def axiom       = pattern_type(0)
+    def let         = pattern_type(0)
+    def mapper      = pattern_type(1)
+    def existential = pattern_type(1)
+    def inference   = pattern_type(2)
 
     # A Tautology is an accepted true statement that immediately follows from
     # an Axiom rule. It may not have any undefined terms.
@@ -68,14 +70,14 @@ module Korekto
     # matching true statement.
     def result
       expected_instantiations!(instantiations: 0)
-      mapping, antecedent = heap_search('M')
+      mapping, antecedent = heap_search
       set_statement!(support(mapping, antecedent), mapping.title)
     end
 
     # An Instantiation is a derived true statement that introduces at least one
     # new term as a result of an Existential rule and matching true statement.
     def instantiation
-      existential, antecedent = heap_search('E')
+      existential, antecedent = heap_search
       title = existential.title
       undefined = expected_instantiations!(title)
       set_statement!(support(existential, antecedent), title, undefined:)
@@ -85,7 +87,7 @@ module Korekto
     # that follows from two true statements.
     def conclusion
       expected_instantiations!(instantiations: 0)
-      inference, conditional, antecedent = heap_combos_search('I')
+      inference, conditional, antecedent = heap_combos_search
       title = inference.title
       set_statement!(support(inference, conditional, antecedent), title)
     end
