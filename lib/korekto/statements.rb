@@ -39,8 +39,8 @@ module Korekto
       end
 
       statement_number = yield
-      @last = Statement.new(statement, code, title, filename,
-                            statement_number, self)
+      @last = Statement.new(self, statement, code, title, filename,
+                            statement_number).struct
       update!
       [@last.code, @last.title]
     end
