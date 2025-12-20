@@ -9,20 +9,6 @@ module Korekto
   bool = %i[pattern? literal_regexp? defines_symbols?]
   # Define Korekto::StatementStruct
   StatementStruct = Struct.new(*args, *more, *bool) do
-    def init!
-      # These may be reset later in the struct's construction:
-      self.title = title.split(':', 2) if title
-      self.type = code[0]
-      self[:pattern?] = false
-      self[:literal_regexp?] = false
-    end
-
-    def finalize!
-      self[:defines_symbols?] = !literal_regexp? && 'AIEMLDXS'.include?(type)
-      each(&:freeze)
-      freeze
-    end
-
     def to_s = statement
 
     def respond_to_missing?(symbol, ...)
