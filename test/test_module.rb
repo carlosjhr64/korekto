@@ -22,6 +22,12 @@ module TestModule
       @context = context
     end
 
+    def test_class_methods
+      @klass.methods(false).sort.each do |method|
+        test_method method, :public, 'class_'
+      end
+    end
+
     def test_public_methods
       @klass.public_instance_methods(false).sort.each do |method|
         test_method method, :public
@@ -46,7 +52,8 @@ module TestModule
       end
     end
 
-    def test_all
+    def test_all(klass_methods)
+      test_class_methods if klass_methods
       test_public_methods
       test_protected_methods
       test_private_methods
@@ -65,10 +72,10 @@ module TestModule
 
     # Check if context has a test for the method.
     # :reek:ManualDispatch
-    def test_method(method, type)
+    def test_method(method, type, mod = '')
       return if method.start_with? 'test_'
 
-      name = RENAME[method]
+      name = RENAME["#{mod}#{method}"]
       return if name.end_with? '?_set'
       return if @context.respond_to? name.to_sym
 
@@ -83,7 +90,9 @@ module TestModule
   end
 
   # No fail warnings
-  def coverage(klass) = Coverage.new(klass, self).test_all
+  def coverage(klass, klass_methods: true)
+    Coverage.new(klass, self).test_all(klass_methods)
+  end
 
   # No fail system runs
 

@@ -1,11 +1,41 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'test/unit'
+require_relative 'test_module'
 require 'korekto'
 
 class TestKorekto < Test::Unit::TestCase
-  def test_korekto
-    # TODO
+  include TestModule
+
+  def test_coverage = coverage Korekto
+
+  def test_version_constant = assert(/\A\d+\.\d+\.\d+\Z/.match?(Korekto::VERSION))
+  def test_class_trace_wut = assert_equal(false, Korekto.trace?)
+  def test_class_heap = assert_equal(60, Korekto.heap)
+  def test_class_scrape_wut = assert_equal(false, Korekto.scrape?)
+  # Tested elsewhere:
+  def test_class_run = nil
+
+  def test_class_heap_set
+    Korekto.heap = 50
+    assert_equal(50, Korekto.heap)
+  end
+
+  def test_class_scrape_set
+    Korekto.scrape = true
+    assert_equal(true, Korekto.scrape?)
+    Korekto.scrape = false
+  end
+
+  def test_class_trace_set
+    Korekto.trace = true
+    assert_equal(true, Korekto.trace?)
+    Korekto.trace = false
+  end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto.rb'
+    rubocop(file) && reek(file) && rubocop(__FILE__)
   end
 end

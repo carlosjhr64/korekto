@@ -8,7 +8,7 @@ require 'korekto/statement_struct'
 class TestStatementStruct < Test::Unit::TestCase
   include TestModule
 
-  def test_coverage = coverage Korekto::StatementStruct
+  def test_coverage = coverage(Korekto::StatementStruct, klass_methods: false)
 
   def setup
     args = Korekto::STRUCT_ARGS + Korekto::STRUCT_MORE + Korekto::STRUCT_BOOL
@@ -86,6 +86,6 @@ class TestStatementStruct < Test::Unit::TestCase
   # Last, check rubocop and reek
   def test_rubocop_and_reek
     file = 'lib/korekto/statement_struct.rb'
-    rubocop(file) && reek(file)
+    rubocop(file) && reek(file) && rubocop(__FILE__)
   end
 end

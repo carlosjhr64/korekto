@@ -228,7 +228,7 @@ class TestHandwaves < Test::Unit::TestCase
   # Last, check rubocop and reek
   def test_rubocop_and_reek
     file = 'lib/korekto/handwaves.rb'
-    rubocop(file) && reek(file)
+    rubocop(file) && reek(file) && rubocop(__FILE__)
   end
 end
 # rubocop: enable Metrics
