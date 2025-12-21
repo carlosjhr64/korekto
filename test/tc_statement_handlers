@@ -1,0 +1,144 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative 'test_module'
+require 'korekto/statement_handlers'
+
+# Mockup
+module Korekto
+  class Error < StandardError; end
+
+  class TestStatementHandlers
+    include StatementHandlers
+
+    attr_reader :missing_calls
+
+    def initialize
+      @missing_calls = []
+    end
+
+    def method_missing(*args)
+      @missing_calls.push(args)
+      args.first
+    end
+  end
+end
+
+class TestStatementHandlers < Test::Unit::TestCase
+  include TestModule
+
+  def test_coverage = coverage Korekto::StatementHandlers
+
+  def setup
+    @test = Korekto::TestStatementHandlers.new
+  end
+
+  def test_wild_card
+    assert_nothing_raised { @test.send(:wild_card) }
+    assert_equal [[:set_type!, 'T'], [:set_acceptance_code]], @test.missing_calls
+    @test.missing_calls.clear
+    def @test.set_type!(type) = (@type = type)
+    def @test.set_acceptance_code
+      raise Korekto::Error, 'wut' unless @type == 'R'
+    end
+    assert_equal [], @test.missing_calls
+    assert_nothing_raised { @test.send(:wild_card) }
+    assert_equal 'R', @test.instance_variable_get(:@type)
+    def @test.set_acceptance_code
+      raise Korekto::Error, 'wut'
+    end
+    e = assert_raises(Korekto::Error) { @test.send(:wild_card) }
+    assert_equal 'did not match any statement pattern(T|S|R|X|C)', e.message
+  end
+
+  def expected(nlc)
+    [[:set_regexp!],
+     [:verify_newlines_count!, nlc],
+     [:follows_get, nlc],
+     [:pattern_type_support, :follows_get],
+     [:set_code!, :pattern_type_support],
+     [:undefined_symbols_get],
+     [:set_title!, {undefined: :undefined_symbols_get}]]
+  end
+
+  def test_pattern_type
+    assert_nothing_raised { @test.send(:pattern_type, 'OK') }
+    assert_equal expected('OK'), @test.missing_calls
+  end
+
+  def test_axiom
+    @test.send(:axiom)
+    assert_equal expected(0), @test.missing_calls
+  end
+
+  def test_let
+    @test.send(:let)
+    assert_equal expected(0), @test.missing_calls
+  end
+
+  def test_mapper
+    @test.send(:mapper)
+    assert_equal expected(1), @test.missing_calls
+  end
+
+  def test_existential
+    @test.send(:existential)
+    assert_equal expected(1), @test.missing_calls
+  end
+
+  def test_inference
+    @test.send(:inference)
+    assert_equal expected(2), @test.missing_calls
+  end
+
+  def test_tautology
+    def @test.detect_statement(*) = self
+    assert_nothing_raised { @test.send(:tautology) }
+    assert_equal 5, @test.missing_calls.size
+  end
+
+  def test_setter
+    def @test.detect_statement(*) = self
+    assert_nothing_raised { @test.send(:setter) }
+    assert_equal 5, @test.missing_calls.size
+  end
+
+  def test_result
+    def @test.heap_search = [self, :antecedent]
+    assert_nothing_raised { @test.send(:result) }
+    assert_equal 5, @test.missing_calls.size
+  end
+
+  def test_instantiation
+    def @test.heap_search = [self, :antecedent]
+    assert_nothing_raised { @test.send(:instantiation) }
+    assert_equal 5, @test.missing_calls.size
+  end
+
+  def test_conclusion
+    def @test.heap_combos_search = [self, :conditional, :antecedent]
+    assert_nothing_raised { @test.send(:conclusion) }
+    assert_equal 5, @test.missing_calls.size
+  end
+
+  def test_definition
+    assert_nothing_raised { @test.send(:definition) }
+    assert_equal 3, @test.missing_calls.size
+  end
+
+  def test_postulate
+    assert_nothing_raised { @test.send(:postulate) }
+    assert_equal 3, @test.missing_calls.size
+  end
+
+  def test_handwave
+    assert_nothing_raised { @test.send(:handwave) }
+    assert_equal 4, @test.missing_calls.size
+  end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/statement_handlers.rb'
+    rubocop(file) && reek(file)
+  end
+end

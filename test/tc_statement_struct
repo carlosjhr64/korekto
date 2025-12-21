@@ -5,7 +5,7 @@ require_relative 'test_module'
 require 'korekto' # Provides Korekto.trace
 require 'korekto/statement_struct'
 
-class TestHeap < Test::Unit::TestCase
+class TestStatementStruct < Test::Unit::TestCase
   include TestModule
 
   def test_coverage = coverage Korekto::StatementStruct
