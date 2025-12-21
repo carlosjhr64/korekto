@@ -88,12 +88,12 @@ module TestModule
   # No fail system runs
 
   def rubocop(file)
-    puts 'Rubocop:'.blue
+    puts "Rubocop #{file}".blue
     system("rubocop #{file}")
   end
 
   def reek(file)
-    puts 'Reek:'.blue
+    puts "Reek #{file}".blue
     system("reek #{file}")
   end
 end

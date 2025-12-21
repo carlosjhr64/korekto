@@ -53,4 +53,14 @@ class TestRefinements < Test::Unit::TestCase
     string.gsub_tokens!(tokens)
     assert_equal 'Two, Twelve, One, Eleven, Ten, OneTwo', string
   end
+
+  def test_string_match_to_i
+    assert_equal 123, 'Wut 123 is?'.match_to_i(/\d+/)
+  end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/refinements.rb'
+    rubocop(file) && reek(file)
+  end
 end
