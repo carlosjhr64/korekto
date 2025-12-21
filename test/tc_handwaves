@@ -224,5 +224,11 @@ class TestHandwaves < Test::Unit::TestCase
     assert_equal true, b # succeeds even with no changes
     assert_equal 'They like chocolate. They like nuts', consequent
   end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/handwaves.rb'
+    rubocop(file) && reek(file)
+  end
 end
 # rubocop: enable Metrics

@@ -148,5 +148,11 @@ class TestSymbols < Test::Unit::TestCase
     assert_equal '([y])', re
     assert_equal({ 'T' => '1' }, @symbols.send(:seen))
   end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/symbols.rb'
+    rubocop(file) && reek(file)
+  end
 end
 # rubocop: enable Metrics

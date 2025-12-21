@@ -119,5 +119,11 @@ class TestHeap < Test::Unit::TestCase
     # map enabled by Enumerable via each
     assert_equal %w[1 2 3 4], @heap.map(&:to_s)
   end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/heap.rb'
+    rubocop(file) && reek(file)
+  end
 end
 # rubocop: enable Metrics

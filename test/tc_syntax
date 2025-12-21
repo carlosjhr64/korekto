@@ -64,5 +64,11 @@ class TestSyntax < Test::Unit::TestCase
     end
     assert_equal 'duplicate syntax', error.message
   end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/syntax.rb'
+    rubocop(file) && reek(file)
+  end
   # rubocop: enable Metrics
 end
