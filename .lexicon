@@ -3,7 +3,6 @@ add
 all
 antecedent
 any
-args
 arguments
 ARGV
 attr_accessor
@@ -36,6 +35,7 @@ conclusion
 conditional
 consequent
 context
+ContextSearch
 count
 cp_r
 define
@@ -116,6 +116,7 @@ imports
 include
 index
 inference
+inferences
 init
 initialize
 inspect
@@ -164,7 +165,6 @@ MD_TYPE_VARIABLES
 message
 method_missing
 M_FENCE_CLOSE
-more
 name
 new
 newvar
@@ -257,6 +257,9 @@ String
 strip
 struct
 Struct
+STRUCT_ARGS
+STRUCT_BOOL
+STRUCT_MORE
 sub
 substitute
 support

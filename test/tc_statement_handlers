@@ -8,6 +8,7 @@ require 'korekto/statement_handlers'
 module Korekto
   class Error < StandardError; end
 
+  # rubocop: disable Style/MissingRespondToMissing
   class TestStatementHandlers
     include StatementHandlers
 
@@ -17,13 +18,23 @@ module Korekto
       @missing_calls = []
     end
 
+    KNOWN = Set[:set_regexp!, :set_type!, :verify_newlines_count!, :follows_get,
+                :pattern_type_support, :set_code!, :undefined_symbols_get,
+                :set_title!, :expected_instantiations!, :title, :support,
+                :handwaves_check!, :set_acceptance_code]
+
     def method_missing(*args)
+      symbol = args.first
+      raise "Unknown: #{symbol}" unless KNOWN.include?(symbol)
+
       @missing_calls.push(args)
-      args.first
+      symbol
     end
   end
+  # rubocop: enable Style/MissingRespondToMissing
 end
 
+# rubocop: disable Metrics
 class TestStatementHandlers < Test::Unit::TestCase
   include TestModule
 
@@ -35,9 +46,11 @@ class TestStatementHandlers < Test::Unit::TestCase
 
   def test_wild_card
     assert_nothing_raised { @test.send(:wild_card) }
-    assert_equal [[:set_type!, 'T'], [:set_acceptance_code]], @test.missing_calls
+    assert_equal [[:set_type!, 'T'], [:set_acceptance_code]],
+                 @test.missing_calls
     @test.missing_calls.clear
     def @test.set_type!(type) = (@type = type)
+
     def @test.set_acceptance_code
       raise Korekto::Error, 'wut' unless @type == 'R'
     end
@@ -55,10 +68,10 @@ class TestStatementHandlers < Test::Unit::TestCase
     [[:set_regexp!],
      [:verify_newlines_count!, nlc],
      [:follows_get, nlc],
-     [:pattern_type_support, :follows_get],
-     [:set_code!, :pattern_type_support],
+     %i[pattern_type_support follows_get],
+     %i[set_code! pattern_type_support],
      [:undefined_symbols_get],
-     [:set_title!, {undefined: :undefined_symbols_get}]]
+     [:set_title!, { undefined: :undefined_symbols_get }]]
   end
 
   def test_pattern_type
@@ -139,6 +152,7 @@ class TestStatementHandlers < Test::Unit::TestCase
   # Last, check rubocop and reek
   def test_rubocop_and_reek
     file = 'lib/korekto/statement_handlers.rb'
-    rubocop(file) && reek(file)
+    rubocop(file) && reek(file) && rubocop(__FILE__)
   end
 end
+# rubocop: enable Metrics
