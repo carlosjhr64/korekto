@@ -1,0 +1,91 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative 'test_module'
+require 'korekto' # Provides Korekto.trace
+require 'korekto/statement_struct'
+
+class TestHeap < Test::Unit::TestCase
+  include TestModule
+
+  def test_coverage = coverage Korekto::StatementStruct
+
+  def setup
+    args = Korekto::STRUCT_ARGS + Korekto::STRUCT_MORE + Korekto::STRUCT_BOOL
+    @struct = Korekto::StatementStruct.new(*args.map(&:to_s))
+    @struct.regexp = /#{@struct.regexp}/
+  end
+
+  def test_statement
+    # Access :statement via Struct's api:
+    assert_equal('statement', @struct.statement)
+    assert_equal('statement', @struct[:statement])
+    assert_equal('statement', @struct[0]) # was first argument
+  end
+
+  def test_regexp
+    # Access :statement via Struct's api:
+    assert_equal(/regexp/, @struct.regexp)
+    assert_equal(/regexp/, @struct[:regexp])
+    assert_equal(/regexp/, @struct[5]) # indexed 5 in args list
+  end
+
+  def test_to_s
+    # :to_s is set to :statment
+    assert_equal('statement', @struct.to_s)
+  end
+
+  def test_method_missing
+    # :regexp gets first opportunity to respond to methods
+    # not responded by Struct:
+    assert @struct.match?('wut regexp wut')
+    refute @struct.match?('wut wut wut')
+    # :statement gets second opportunity(after :regexp) to respond to methods
+    # not responded by Struct:
+    assert_equal('sTaTemenT', @struct.gsub('t', 'T'))
+  end
+
+  def test_respond_to_missing_wut
+    assert @struct.send(:respond_to_missing?, :source) # available in Regexp
+    assert @struct.send(:respond_to_missing?, :gsub) # available in String
+    refute @struct.send(:respond_to_missing?, :wut) # nope!
+  end
+
+  # The rest is trivial
+
+  def test_code = assert_equal('code', @struct.code)
+  def test_title = assert_equal('title', @struct.title)
+  def test_section = assert_equal('section', @struct.section)
+  def test_key = assert_equal('key', @struct.key)
+  def test_type = assert_equal('type', @struct.type)
+  def test_pattern_wut = assert_equal('pattern?', @struct.pattern?)
+
+  def test_statement_number
+    assert_equal('statement_number', @struct.statement_number)
+  end
+
+  def test_literal_regexp_wut
+    assert_equal('literal_regexp?', @struct.literal_regexp?)
+  end
+
+  def test_defines_symbols_wut
+    assert_equal('defines_symbols?', @struct.defines_symbols?)
+  end
+
+  # Don't need to be testing Ruby's Struct
+  def test_code_set = nil
+  def test_key_set = nil
+  def test_regexp_set = nil
+  def test_section_set = nil
+  def test_statement_set = nil
+  def test_statement_number_set = nil
+  def test_type_set = nil
+  def test_title_set = nil
+  def test_type_number_set = nil
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/statement_struct.rb'
+    rubocop(file) && reek(file)
+  end
+end

@@ -4,14 +4,15 @@
 # The struct contains the statement and its attributes.
 # Once constructed, it'll be completely frozen.
 module Korekto
-  args = %i[statement code title section statement_number]
-  more = %i[regexp key type]
-  bool = %i[pattern? literal_regexp? defines_symbols?]
+  STRUCT_ARGS = %i[statement code title section statement_number].freeze
+  STRUCT_MORE = %i[regexp key type].freeze
+  STRUCT_BOOL = %i[pattern? literal_regexp? defines_symbols?].freeze
   # Define Korekto::StatementStruct
-  StatementStruct = Struct.new(*args, *more, *bool) do
+  StatementStruct = Struct.new(*STRUCT_ARGS, *STRUCT_MORE, *STRUCT_BOOL) do
     def to_s = statement
 
-    def respond_to_missing?(symbol, ...)
+    # :reek:BooleanParameter
+    def respond_to_missing?(symbol, bool = false)
       return true if regexp&.public_methods(false)&.include?(symbol) ||
                      statement.public_methods(false).include?(symbol)
 

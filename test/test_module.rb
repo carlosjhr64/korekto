@@ -69,6 +69,7 @@ module TestModule
       return if method.start_with? 'test_'
 
       name = RENAME[method]
+      return if name.end_with? '?_set'
       return if @context.respond_to? name.to_sym
 
       puts "Missing #{@context.class}##{name}".colorize COLOR[type]
@@ -83,4 +84,16 @@ module TestModule
 
   # No fail warnings
   def coverage(klass) = Coverage.new(klass, self).test_all
+
+  # No fail system runs
+
+  def rubocop(file)
+    puts 'Rubocop:'.blue
+    system("rubocop #{file}")
+  end
+
+  def reek(file)
+    puts 'Reek:'.blue
+    system("reek #{file}")
+  end
 end
