@@ -1,57 +1,59 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'test/unit'
-require 'colorize'
-require 'korekto/statement'
 require_relative 'test_module'
 
 # Mockup
+# rubocop: disable Metrics
 module Korekto
-  # rubocop: disable Metrics
   class Error < RuntimeError; end
 
+  module MissingCalls
+    KNOWN = Set[:symbols, :statement_to_regexp, :undefined, :handwaves, :check!,
+                :size, :zero?, :match?]
+
+    def missing_calls = (@missing_calls ||= [])
+
+    # rubocop: disable Style/MissingRespondToMissing
+    def method_missing(*args)
+      symbol = args.first
+      raise "Unknown: #{symbol}" unless KNOWN.include?(symbol)
+
+      missing_calls.push(args)
+      self
+    end
+    # rubocop: enable Style/MissingRespondToMissing
+  end
+
+  class Context
+    include MissingCalls
+  end
+
+  module StatementHandlers
+    include MissingCalls
+
+    TYPE_HANDLERS = { 'K' => :ok }.freeze
+
+    def ok = 'OK'
+  end
+
+  module ContextSearch
+    include MissingCalls
+  end
+end
+
+require 'korekto'
+require 'korekto/refinements'
+require 'korekto/statement_struct'
+require 'korekto/statement'
+
+module Korekto
   class StatementTest < Statement
     def set_acceptance_code(test: false)
-      return super() if test
-
-      @regexp = 'regexp'
-      @key = 'key'
+      super() if test
     end
 
-    # Testing readers
-    attr_reader :statement, :context
-
-    # Alias to private
-    def test_pattern_type0                = pattern_type0
-    def test_pattern_type1                = pattern_type1
-    def test_pattern_type2                = pattern_type2
-    def test_set_statement(...)           = set_statement(...)
-    def test_expected_instantiations(...) = expected_instantiations(...)
-    def test_pattern_type(...)            = pattern_type(...)
-    def test_set_acceptance_code          = set_acceptance_code(test: true)
-    def test_newlines_count(...)          = newlines_count(...)
-    def test_support(...)                 = support(...)
-    def test_handwave                     = handwave
-    def test_postulate                    = postulate
-    def test_result                       = result
-
-    # Testing resets
-    def test_nil_regexp!               = (@regexp = nil)
-    def test_literal_regexp!           = (@statement = '/statement/')
-    def test_set_code!(code)           = (@code = code)
-    def test_set_section!(section)     = (@section = section)
-    def test_set_statement!(statement) = (@statement = statement)
-    def test_set_regexp!(regex)        = (@regexp = regex)
-
-    def test_set_context!(context = @context.dup)
-      @context = context
-      def @context.symbols = self
-      def @context.heap = self
-      def @context.follows(*) = self
-      def @context.statement_to_regexp(arg) = arg
-      def @context.undefined(statement) = statement.to_s.scan(/[A-Z]/)
-    end
+    def test_struct_set(struct) = (@s = struct)
   end
 end
 
@@ -61,196 +63,191 @@ class TestStatement < Test::Unit::TestCase
   def test_coverage = coverage Korekto::Statement
 
   def setup
-    args = %w[statement code title:stuff section statement_number context]
-    @statement = Korekto::StatementTest.new(*args)
+    @context = Korekto::Context.new
+    @statement = Korekto::StatementTest.new(@context, 'statement', 'code',
+                                            'title: wut', 'section', 123)
   end
 
   def test_initialize
-    %w[statement code title section statement_number context regexp key]
-      .each do |string|
-      assert_equal string, @statement.send(string)
-      assert @statement.send(string).frozen?
-    end
+    assert_equal [[:symbols]], @context.missing_calls
+    struct = @statement.struct
+    assert struct.frozen?
+    assert_equal 'statement', struct.statement
+    assert_equal 'code', struct.code
+    assert_equal 'title', struct.title
+    assert_equal 'section', struct.section
+    assert_equal 123, struct.statement_number
+    assert(%i[statement code title section].all? { struct[it].frozen? })
+    assert_nil struct.regexp
+    assert_nil struct.key # is set when live
+    assert_equal false, struct.pattern?
+    assert_equal false, struct.literal_regexp?
+    assert_equal false, struct.defines_symbols?
   end
 
-  def test_type    = assert_equal 'c', @statement.type
-  def test_key     = assert_equal 'key', @statement.key
-  def test_code    = assert_equal 'code', @statement.code
-  def test_regexp  = assert_equal 'regexp', @statement.regexp
-  def test_section = assert_equal 'section', @statement.section
-  def test_title   = assert_equal 'title', @statement.title
-  def test_to_str  = assert_equal 'statement', @statement.to_str
-  def test_to_s    = assert_equal 'statement', @statement.to_s
+  # Tested in test_init
+  def test_struct = nil
+  def test_init_bang = nil
 
-  def test_statement_number
-    assert_equal 'statement_number', @statement.statement_number
-  end
-
-  def test_match_wut
-    assert_equal true, @statement.match?('regexp') # faked but ok
-  end
-
-  def test_scan
-    assert_equal %w[st at nt], @statement.scan(/\wt/)
-    @statement.scan(/\wt/) { |token| assert(/\wt/.match?(token)) }
-  end
-
-  def test_support
-    s1 = String.new
-    s2 = String.new
-    s3 = String.new
-    def s1.code = 'A1/Wut'
-    def s2.code = 'P2'
-    def s3.code = 'T3/OK'
-    assert_equal 'A1,P2,T3', @statement.test_support(s1, s2, s3)
-  end
-
-  def test_postulate
-    def @statement.expected_instantiations(...) = nil
-    def @statement.set_satement(*args, **keys) = [args, keys]
-    assert_nil  @statement.test_postulate
-  end
-
-  def test_result
-    def @statement.expected_instantiations(...) = nil
-    def @statement.heap_search(arg) = [self, arg]
-    def @statement.support(*args) = args
-    def @statement.set_statement(*args) = args
-    assert_equal [[@statement, 'M'], 'title'], @statement.test_result
-  end
-
-  def test_newlines_count
-    assert_nil @statement.test_newlines_count(0)
-    @statement.test_set_regexp! /A\nB/
-    assert_nil @statement.test_newlines_count(1)
-    e = assert_raises(Korekto::Error) { @statement.test_newlines_count(0) }
-    assert_equal 'expected 0 newlines', e.message
-  end
-
-  def test_literal_regexp_wut
-    assert_equal false, @statement.literal_regexp?
-    @statement.test_literal_regexp!
-    assert_equal true, @statement.literal_regexp?
-    @statement.test_nil_regexp!
-    assert_equal false, @statement.literal_regexp?
-  end
-
-  def test_set_regexp
-    @statement.test_set_context!
-    @statement.set_regexp
-    assert_equal 'statement', @statement.regexp
-  end
-
-  def test_pattern_wut
-    assert_equal true, @statement.pattern?
-    @statement.test_nil_regexp!
-    assert_equal false, @statement.pattern?
-  end
-
-  def test_pattern_type0
-    def @statement.pattern_type(arg) = arg
-    assert_equal 0, @statement.test_pattern_type0
-  end
-
-  def test_pattern_type1
-    def @statement.pattern_type(arg) = arg
-    assert_equal 1, @statement.test_pattern_type1
-  end
-
-  def test_pattern_type2
-    def @statement.pattern_type(arg) = arg
-    assert_equal 2, @statement.test_pattern_type2
+  def test_finalize_bang
+    struct = @statement.struct.dup
+    struct.type = 'E'
+    @statement.test_struct_set(struct)
+    @statement.send(:finalize!)
+    assert_equal true, @statement.struct.defines_symbols?
+    struct = @statement.struct.dup
+    struct[:literal_regexp?] = true
+    @statement.test_struct_set(struct)
+    @statement.send(:finalize!)
+    assert_equal false, @statement.struct.defines_symbols?
+    assert @statement.struct.frozen?
   end
 
   def test_set_acceptance_code
-    e = assert_raises(Korekto::Error) { @statement.test_set_acceptance_code }
-    assert_equal 'type c not implemented', e.message
-    @statement.test_set_code!('PWUT')
-    def @statement.postulate = 'pwut'
-    assert_equal 'pwut', @statement.test_set_acceptance_code
+    e = assert_raises(Korekto::Error) do
+      @statement.send(:set_acceptance_code, test: true)
+    end
+    assert_equal "type 'c' not implemented", e.message
+    struct = @statement.struct.dup
+    struct.type = 'K'
+    @statement.test_struct_set(struct)
+    assert_equal 'OK', @statement.send(:set_acceptance_code, test: true)
   end
 
-  def test_handwave
-    assert @statement.private_methods.include? :expected_instantiations
-    def @statement.expected_instantiations(instantiations:)
-      raise unless instantiations.zero?
-    end
-    context = String.new 'context'
-    def context.handwaves = self
-
-    def context.check!(statement)
-      raise unless statement == 'statement'
-    end
-    @statement.test_set_context!(context)
-    assert @statement.private_methods.include? :set_statement
-    def @statement.set_statement = 'OK'
-    assert_equal 'OK', @statement.test_handwave
+  def test_set_type_bang
+    struct = @statement.struct.dup
+    struct.code = String.new('code')
+    @statement.test_struct_set(struct)
+    @statement.send(:set_type!, 'K')
+    struct = @statement.struct
+    assert_equal 'K', struct.type
+    assert_equal 'Kode', struct.code
   end
 
-  def test_set_statement
-    # Need to be wary of persistent changes
-    @statement.test_set_statement
-    assert_equal 'cstatement_number.section', @statement.code
-    assert_equal :'cstatement_number.section', @statement.key
-    assert_equal 'title', @statement.title
-    @statement.test_set_statement('wut')
-    assert_equal 'cstatement_number.section/wut', @statement.code
-    assert_equal :'cstatement_number.section', @statement.key
-    assert_equal 'title', @statement.title
-    @statement.test_set_statement(undefined: %w[w u t])
-    assert_equal 'cstatement_number.section', @statement.code
-    assert_equal :'cstatement_number.section', @statement.key
-    assert_equal 'title: w u t', @statement.title
-    @statement.test_set_statement('wut', 'Wut: w u t') # w u t is striped
-    assert_equal 'cstatement_number.section/wut', @statement.code
-    assert_equal :'cstatement_number.section', @statement.key
-    assert_equal 'Wut', @statement.title
-    @statement.test_set_section!('-') # Section will now be omitted
-    @statement.test_set_statement # Note that title is now Wut
-    assert_equal 'cstatement_number', @statement.code
-    assert_equal :cstatement_number, @statement.key
-    assert_equal 'Wut', @statement.title
+  def test_set_regexp_bang
+    struct = @statement.struct.dup
+    struct.statement = '/statement/'
+    @statement.test_struct_set(struct)
+    @statement.send(:set_regexp!)
+    assert_equal true, struct.pattern?
+    assert_equal true, struct.literal_regexp?
+    assert_equal(/statement/, struct.regexp)
+    struct[:pattern?] = false
+    struct[:literal_regexp?] = false
+    struct.statement = 'statement'
+    @statement.send(:set_regexp!)
+    assert_equal [[:symbols], [:statement_to_regexp, 'statement']],
+                 @context.missing_calls
+    assert_equal true, struct.pattern?
+    assert_equal false, struct.literal_regexp?
+    assert struct.regexp.is_a? Korekto::Context
   end
 
-  def test_expected_instantiations
-    @statement.test_set_context!
-    @statement.test_set_statement!('A is B or C')
-    undefined = @statement.test_expected_instantiations(instantiations: 3)
-    assert_equal %w[A B C], undefined
-    undefined = @statement.test_expected_instantiations('Instantiate 3')
-    assert_equal %w[A B C], undefined
-    undefined = @statement.test_expected_instantiations
-    assert_equal %w[A B C], undefined
+  def test_verify_newlines_count_bang
+    struct = @statement.struct.dup
+    struct.regexp = /wut\nwut\nwut/
+    @statement.test_struct_set(struct)
+    assert_nothing_raised { @statement.send(:verify_newlines_count!, 2) }
     e = assert_raises(Korekto::Error) do
-      @statement.test_expected_instantiations(instantiations: 2)
+      @statement.send(:verify_newlines_count!, 1)
     end
-    assert_equal 'expected 2 undefined: A B C', e.message
+    assert_equal 'expected 1 newlines', e.message
+  end
+
+  def test_undefined_symbols_get
+    struct = @statement.struct.dup
+    struct[:literal_regexp?] = true
+    @statement.test_struct_set(struct)
+    assert_nil @statement.send(:undefined_symbols_get)
+    struct[:literal_regexp?] = false
+    @context.missing_calls
+    undefined = @statement.send(:undefined_symbols_get)
+    assert undefined.is_a? Korekto::Context
+    assert_equal [[:symbols], [:undefined, struct]], undefined.missing_calls
+  end
+
+  def test_handwaves_check_bang
+    struct = @statement.struct
+    context = @statement.send(:handwaves_check!)
+    assert_equal [[:symbols], [:handwaves], [:check!, struct]],
+                 context.missing_calls
+  end
+
+  def test_set_code_bang
+    struct = @statement.struct.dup
+    @statement.test_struct_set(struct)
+    @statement.send(:set_code!, 'A1')
+    assert_equal :'c123.section', struct.key
+    assert_equal 'c123.section/A1', struct.code
+    struct.section = '-'
+    @statement.send(:set_code!)
+    assert_equal :c123, struct.key
+    assert_equal 'c123', struct.code
+  end
+
+  def test_set_title_bang
+    struct = @statement.struct.dup
+    @statement.test_struct_set(struct)
+    @statement.send(:set_title!)
+    assert_equal 'title', struct.title
+    @statement.send(:set_title!, 'TITLE:WUT')
+    assert_equal 'TITLE', struct.title
+    @statement.send(:set_title!, 'TITLE:WUT', undefined: %w[Wut wut])
+    assert_equal 'TITLE: Wut wut', struct.title
+    @statement.send(:set_title!, 'Title:WUT', undefined: [])
+    assert_equal 'Title', struct.title
+  end
+
+  def test_pattern_type_support
+    struct = @statement.struct.dup
+    struct.regexp = /A\nB/
+    @statement.test_struct_set(struct)
+    def @statement.support(*args) = args
+    assert_equal %w[A B], @statement.send(:pattern_type_support, %w[A B])
+    struct.regexp = /X\nY/
+    assert_nil @statement.send(:pattern_type_support, %w[A B])
+  end
+
+  def test_support
+    s1 = String.new 'blah'
+    def s1.code = 'X/A'
+    s2 = String.new 'Meh!'
+    def s2.code = 'Y/B'
+    assert_equal 'X,Y', @statement.send(:support, s1, s2)
+  end
+
+  def test_expected_instantiations_bang
     e = assert_raises(Korekto::Error) do
-      @statement.test_expected_instantiations('Define 5')
-    end
-    assert_equal 'expected 5 undefined: A B C', e.message
-    @statement.test_set_statement!('a is b or c')
-    assert_nil @statement.test_expected_instantiations(instantiations: 0)
-    e = assert_raises(Korekto::Error) do
-      @statement.test_expected_instantiations
+      @statement.send(:expected_instantiations!)
     end
     assert_equal 'nothing was undefined', e.message
+    assert_equal([[:symbols], [:undefined, @statement], [:size], [:zero?]],
+                 @context.missing_calls)
+    @context.missing_calls.clear
+    def @context.size = 0
+    assert_nil @statement.send(:expected_instantiations!, instantiations: 0)
+    assert_equal [[:undefined, @statement]], @context.missing_calls
+    @context.missing_calls.clear
+    def @context.size = 1
+    struct = @statement.struct.dup
+    struct.title = 'Instantiate 1'
+    @statement.test_struct_set(struct)
+    undefined = @statement.send(:expected_instantiations!)
+    assert undefined.is_a? Korekto::Context
+    assert_equal [[:undefined, @statement]], undefined.missing_calls
+    @context.missing_calls.clear
+    def @context.size = 2
+    def @context.join(*) = 'wut'
+    e = assert_raises(Korekto::Error) do
+      @statement.send(:expected_instantiations!)
+    end
+    assert_equal 'expected 1 undefined: wut', e.message
   end
 
-  def test_pattern_type
-    @statement.test_set_context!(['a','b','c'])
-    def @statement.set_regexp = nil
-    def @statement.newlines_count(*) = nil
-    def @statement.support(*args) = args
-    def @statement.set_statement(support, undefined:) =  [support, undefined]
-    wut = @statement.test_pattern_type(0)
-    assert_equal [nil, nil], wut
-    @statement.test_set_statement!('A is B or C')
-    wut = @statement.test_pattern_type(0)
-    assert_equal [nil, ['A', 'B', 'C']], wut
-    @statement.test_set_regexp!("a\nb\nc")
-    wut = @statement.test_pattern_type(0)
-    assert_equal [['a', 'b', 'c'], ['A', 'B', 'C']], wut
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/context_search.rb'
+    rubocop(file) && reek(file) && rubocop(__FILE__)
   end
-  # rubocop: enable Metrics
 end
+# rubocop: enable Metrics

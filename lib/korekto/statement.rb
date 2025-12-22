@@ -33,7 +33,7 @@ module Korekto
     def init!
       # These may be reset later:
       if (title = @s.title)
-        @s.title = title.split(':', 2)
+        @s.title = title.split(':', 2).first
       end
       @s.type = @s.code[0]
       @s[:pattern?] = false
@@ -52,7 +52,7 @@ module Korekto
     # based on the initial code letter. Raises if type unsupported.
     def set_acceptance_code(type = @s.type)
       handler = TYPE_HANDLERS[type]
-      raise(Error, "type #{type} not implemented") unless handler
+      raise(Error, "type '#{type}' not implemented") unless handler
 
       send(handler)
     end
