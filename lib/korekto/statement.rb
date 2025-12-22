@@ -32,9 +32,7 @@ module Korekto
 
     def init!
       # These may be reset later:
-      if (title = @s.title)
-        @s.title = title.split(':', 2).first
-      end
+      @s.title ||= ''
       @s.type = @s.code[0]
       @s[:pattern?] = false
       @s[:literal_regexp?] = false

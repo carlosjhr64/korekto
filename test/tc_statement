@@ -74,7 +74,7 @@ class TestStatement < Test::Unit::TestCase
     assert struct.frozen?
     assert_equal 'statement', struct.statement
     assert_equal 'code', struct.code
-    assert_equal 'title', struct.title
+    assert_equal 'title: wut', struct.title
     assert_equal 'section', struct.section
     assert_equal 123, struct.statement_number
     assert(%i[statement code title section].all? { struct[it].frozen? })
