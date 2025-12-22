@@ -1,0 +1,160 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative 'test_module'
+require 'korekto/context_search'
+
+# Mockup
+# rubocop: disable Metrics
+module Korekto
+  class Error < StandardError; end
+
+  module MissingCalls
+    KNOWN = Set[:heap, :follows, :get, :match?, :type, :find, :combos]
+
+    def missing_calls = (@missing_calls ||= [])
+
+    # rubocop: disable Style/MissingRespondToMissing
+    def method_missing(*args)
+      symbol = args.first
+      raise "Unknown: #{symbol}" unless KNOWN.include?(symbol)
+
+      missing_calls.push(args)
+      self
+    end
+    # rubocop: enable Style/MissingRespondToMissing
+  end
+
+  class Context
+    include MissingCalls
+  end
+
+  StatementStruct = Struct.new(:statement, :code, :type)
+
+  class TestContextSearch
+    include ContextSearch
+    include MissingCalls
+
+    def initialize
+      @context = Context.new
+      @s = StatementStruct.new('statement', 'code', 'type')
+    end
+
+    def s_get = @s
+  end
+end
+
+class TestContextSearch < Test::Unit::TestCase
+  include TestModule
+
+  def test_coverage = coverage(Korekto::ContextSearch)
+
+  def setup
+    @struct = Korekto::TestContextSearch.new
+    @context = @struct.instance_variable_get(:@context)
+    s = @struct.s_get
+    s.statement = 'statement'
+    s.code = 'code'
+  end
+
+  def test_follows_get
+    @struct.follows_get(2)
+    assert_equal [[:heap], [:follows, 2]], @context.missing_calls
+    assert_equal [], @struct.missing_calls
+  end
+
+  def test_detect_statement
+    # Case with support
+    @struct.s_get.code = 'T2/A1'
+    pattern = @struct.detect_statement('T')
+    assert pattern.is_a? Korekto::Context
+    assert_equal [%i[get A1], [:match?, 'statement']], @context.missing_calls
+    assert_equal [], @struct.missing_calls
+    # Case no support, no find
+    @struct.s_get.code = 'P1'
+    def @context.find = nil
+    e = assert_raises(Korekto::Error) { @struct.detect_statement('A') }
+    assert_equal "no matching 'A' pattern", e.message
+    # Case no support, but finds it
+    def @context.find = yield(/statement/)
+    pattern = @struct.detect_statement('A')
+    assert_equal true, pattern
+  end
+
+  def test_heap_combos_search_code
+    @struct.s_get.code = 'P1'
+    assert_nil @struct.heap_combos_search_code
+    @struct.s_get.code = 'C4/I1,P2,P3'
+    def @context.to_str = 'X'
+    s0, s1, s2 = @struct.heap_combos_search_code
+    refute s0.nil?
+    refute s1.nil?
+    refute s2.nil?
+    assert_equal [%i[get I1], %i[get P2], %i[get P3],
+                  [:match?, "X\nX\nstatement"]], @context.missing_calls
+    assert_equal [], @struct.missing_calls
+  end
+
+  def test_heap_combos_search_all
+    assert_nil @struct.heap_combos_search_all
+    assert_equal [[:type, 'type'], [:heap], [:combos]], @context.missing_calls
+    @context.missing_calls.clear
+    def @context.type(*) = [/s1\ns2\nstatement/]
+    def @context.combos = yield('s1', 's2')
+    s0, s1, s2 = @struct.heap_combos_search_all
+    assert_equal(/s1\ns2\nstatement/, s0)
+    assert_equal 's1', s1
+    assert_equal 's2', s2
+  end
+
+  def test_heap_combos_search
+    def @struct.heap_combos_search_code = 'A'
+    def @struct.heap_combos_search_all = 'B'
+    assert_equal 'A', @struct.heap_combos_search
+    def @struct.heap_combos_search_code = nil
+    assert_equal 'B', @struct.heap_combos_search
+    def @struct.heap_combos_search_all = nil
+    e = assert_raises(Korekto::Error) { @struct.heap_combos_search }
+    assert_equal "does not match any 'type' statement", e.message
+  end
+
+  def test_heap_search_code
+    assert_nil @struct.heap_search_code
+    @struct.s_get.code = 'C3/A1,B2'
+    def @context.get(*) = /X/
+    s1, s2 = @struct.heap_search_code
+    assert_equal(/X/, s1)
+    assert_equal(/X/, s2)
+  end
+
+  def test_heap_search_all
+    def @context.each = 'skipped'
+    assert_nil @struct.heap_search_all
+    assert_equal [[:type, 'type'], [:heap]], @context.missing_calls
+    @context.missing_calls.clear
+    def @context.each = yield('s1')
+    def @context.type(*) = [/statement/]
+    s0, s1 = @struct.heap_search_all
+    assert_equal(/statement/, s0)
+    assert_equal 's1', s1
+    assert_equal [[:heap]], @context.missing_calls
+  end
+
+  def test_heap_search
+    def @struct.heap_search_code = 'A'
+    def @struct.heap_search_all = 'B'
+    assert_equal 'A', @struct.heap_search
+    def @struct.heap_search_code = nil
+    assert_equal 'B', @struct.heap_search
+    def @struct.heap_search_all = nil
+    e = assert_raises(Korekto::Error) { @struct.heap_search }
+    assert_equal "does not match any 'type' statement", e.message
+  end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/context_search.rb'
+    rubocop(file) && reek(file) && rubocop(__FILE__)
+  end
+end
+# rubocop: enable Metrics
