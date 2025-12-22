@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative 'test_module'
+
+class TestRequires < Test::Unit::TestCase
+  include TestModule
+
+  def test_requires
+    assert_nothing_raised { require 'korekto/requires' }
+  end
+
+  # Last, check rubocop and reek
+  def test_rubocop_and_reek
+    file = 'lib/korekto/requires.rb'
+    rubocop(file) && reek(file) && rubocop(__FILE__)
+  end
+end

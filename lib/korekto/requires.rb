@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'English'
 require_relative 'refinements'
 require_relative 'symbols'
