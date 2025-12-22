@@ -109,7 +109,7 @@ module Korekto
     end
 
     def expected_instantiations!(title = @s.title, instantiations: nil)
-      empty = (size = (undefined = @symbols.undefined(self)).size).zero?
+      empty = (size = (undefined = @symbols.undefined(@s)).size).zero?
       if instantiations ||= title.match_to_i(/[1-9]\d*/)
         unless instantiations == size
           raise Error,

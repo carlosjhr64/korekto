@@ -221,20 +221,21 @@ class TestStatement < Test::Unit::TestCase
       @statement.send(:expected_instantiations!)
     end
     assert_equal 'nothing was undefined', e.message
-    assert_equal([[:symbols], [:undefined, @statement], [:size], [:zero?]],
+    struct = @statement.struct
+    assert_equal([[:symbols], [:undefined, struct], [:size], [:zero?]],
                  @context.missing_calls)
     @context.missing_calls.clear
     def @context.size = 0
     assert_nil @statement.send(:expected_instantiations!, instantiations: 0)
-    assert_equal [[:undefined, @statement]], @context.missing_calls
+    assert_equal [[:undefined, struct]], @context.missing_calls
     @context.missing_calls.clear
     def @context.size = 1
-    struct = @statement.struct.dup
+    struct = struct.dup
     struct.title = 'Instantiate 1'
     @statement.test_struct_set(struct)
     undefined = @statement.send(:expected_instantiations!)
     assert undefined.is_a? Korekto::Context
-    assert_equal [[:undefined, @statement]], undefined.missing_calls
+    assert_equal [[:undefined, struct]], undefined.missing_calls
     @context.missing_calls.clear
     def @context.size = 2
     def @context.join(*) = 'wut'
