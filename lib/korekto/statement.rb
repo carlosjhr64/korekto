@@ -92,8 +92,8 @@ module Korekto
       @s.code = code
     end
 
-    def set_title!(title = nil, undefined: nil)
-      title = (title || @s.title).split(':', 2).first
+    def set_title!(title = @s.title, undefined: nil)
+      title = title.split(':', 2).first
       title << ": #{undefined.join(' ')}" if undefined&.size&.positive?
       @s.title = title
     end
