@@ -223,7 +223,7 @@ module Korekto
               puts
             elsif Korekto.trace? || (@filename == '-' &&
                                     !(md[:code] == code &&
-                                    md[:title] == title))
+                                    md[:title].to_s == title))
               puts "#{@filename}:#{line_number}:#{code}:#{title}"
             end
           else
