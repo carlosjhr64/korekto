@@ -10,6 +10,7 @@ module Korekto
   # Define Korekto::StatementStruct
   StatementStruct = Struct.new(*STRUCT_ARGS, *STRUCT_MORE, *STRUCT_BOOL) do
     def to_s = statement
+    def to_str = statement
 
     # :reek:BooleanParameter
     def respond_to_missing?(symbol, bool = false)

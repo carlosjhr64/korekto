@@ -31,8 +31,13 @@ class TestStatementStruct < Test::Unit::TestCase
   end
 
   def test_to_s
-    # :to_s is set to :statment
+    # :to_s is set to :statement
     assert_equal('statement', @struct.to_s)
+  end
+
+  def test_to_str
+    # :to_str is set to :statement
+    assert_equal('statement', @struct.to_str)
   end
 
   def test_method_missing
