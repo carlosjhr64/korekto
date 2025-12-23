@@ -22,7 +22,7 @@ module Korekto
 
     # Try to avoid this, but:
     def method_missing(symbol, ...)
-      warn "method missing: Korekto::StatementStruc##{symbol}" if Korekto.trace?
+      warn "method missing: Korekto::StatementStruc##{symbol}" if Korekto.warn?
       if regexp&.public_methods(false)&.include?(symbol)
         regexp.send(symbol, ...)
       elsif statement.public_methods(false).include?(symbol)

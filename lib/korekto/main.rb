@@ -234,7 +234,7 @@ module Korekto
           exit 65
         rescue StandardError
           puts "#{@filename}:#{line_number}:?:#{$ERROR_INFO.message}"
-          warn $ERROR_INFO.backtrace
+          warn $ERROR_INFO.backtrace if Korekto.warn?
           exit 1
         end
       end

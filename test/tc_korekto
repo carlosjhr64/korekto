@@ -13,6 +13,7 @@ class TestKorekto < Test::Unit::TestCase
   def test_class_trace_wut = assert_equal(false, Korekto.trace?)
   def test_class_heap = assert_equal(60, Korekto.heap)
   def test_class_scrape_wut = assert_equal(false, Korekto.scrape?)
+  def test_class_warn_wut = assert_equal(false, Korekto.warn?)
   # Tested elsewhere:
   def test_class_run = nil
 
@@ -31,6 +32,12 @@ class TestKorekto < Test::Unit::TestCase
     Korekto.trace = true
     assert_equal(true, Korekto.trace?)
     Korekto.trace = false
+  end
+
+  def test_class_warn_set
+    Korekto.warn = true
+    assert_equal(true, Korekto.warn?)
+    Korekto.warn = false
   end
 
   # Last, check rubocop and reek

@@ -16,6 +16,7 @@ HELP = <<~HELP.freeze
     --install   \tInstalls the korekto neovim ruby plugin
     --readme    \tOpen korekto github page
     --heap=SIZE \tSet heap size (default: #{Korekto.heap})
+    --warn      \tShow warnings
   Types:
     SIZE    /^\\d+$/
   Exclusive:
@@ -69,6 +70,7 @@ def handle_options
   do_exitable!(options)
   Korekto.scrape = options.scrape?
   Korekto.trace  = options.trace?
+  Korekto.warn   = options.warn?
   Korekto.heap   = options.heap.to_i if options.heap?
 end
 

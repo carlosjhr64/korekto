@@ -13,16 +13,18 @@ module Korekto
 
   class << self
     # :reek:Attribute
-    attr_writer :trace, :scrape
+    attr_writer :trace, :scrape, :warn
     # :reek:Attribute
     attr_accessor :heap
 
     def trace? = @trace
     def scrape? = @scrape
+    def warn? = @warn
   end
   Korekto.trace = false
   Korekto.heap = 60
   Korekto.scrape = false
+  Korekto.warn = false
 
   def self.run
     require_relative 'korekto/requires'
