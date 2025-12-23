@@ -196,6 +196,8 @@ class TestStatement < Test::Unit::TestCase
     assert_equal 'TITLE: Wut wut', struct.title
     @statement.send(:set_title!, 'Title:WUT', undefined: [])
     assert_equal 'Title', struct.title
+    @statement.send(:set_title!, '', undefined: [])
+    assert_equal '', struct.title
   end
 
   def test_pattern_type_support
