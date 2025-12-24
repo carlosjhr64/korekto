@@ -40,7 +40,7 @@ module Korekto
 
     def finalize!
       @s[:defines_symbols?] = !@s.literal_regexp? &&
-                              'AIEMLDXS'.include?(@s.type)
+                              DEFINES.include?(@s.type)
       @s.each(&:freeze)
       @s.freeze
     end
@@ -50,7 +50,7 @@ module Korekto
     def set_regexp!
       @s[:pattern?] = true
       statement = @s.statement
-      @s.regexp = if (statement[0] == '/') && (statement[-1] == '/')
+      @s.regexp = if statement.wrapped_by?('/')
                     @s[:literal_regexp?] = true
                     Regexp.new statement[1..-2]
                   else

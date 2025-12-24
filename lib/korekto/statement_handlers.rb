@@ -3,6 +3,10 @@
 module Korekto
   # Define each statement type handler
   module StatementHandlers
+    PATTERNS = 'ALMEI'
+    HEAPABLE = 'DXSPTCRH'
+    DEFINES = 'AIEMLDXS'
+
     private
 
     TYPE_HANDLERS = {

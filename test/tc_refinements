@@ -58,6 +58,14 @@ class TestRefinements < Test::Unit::TestCase
     assert_equal 123, 'Wut 123 is?'.match_to_i(/\d+/)
   end
 
+  def test_string_wrapped_by_wut
+    assert_equal true, 'awuta'.wrapped_by?('a')
+    assert_equal false, 'awutb'.wrapped_by?('a')
+    assert_equal true, 'bb'.wrapped_by?('b')
+    assert_equal false, 'c'.wrapped_by?('c')
+    assert_equal false, ''.wrapped_by?('x')
+  end
+
   # Last, check rubocop and reek
   def test_rubocop_and_reek
     file = 'lib/korekto/refinements.rb'

@@ -32,6 +32,7 @@ module Korekto
   module StatementHandlers
     include MissingCalls
 
+    DEFINES = 'AIEMLDXS'
     TYPE_HANDLERS = { 'K' => :ok }.freeze
 
     def ok = 'OK'

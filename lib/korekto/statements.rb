@@ -15,6 +15,8 @@ module Korekto
   # iteration, and restatement detection. The `add` method yields for
   # the next statement number and returns `[code, title]`.
   class Statements
+    using Refinements
+
     attr_reader :heap, :symbols, :syntax, :handwaves, :last
 
     def initialize
@@ -33,11 +35,12 @@ module Korekto
     def antecedent = @heap.antecedent
 
     def add(statement, code, title, filename)
-      syntax_check(statement, code)
       if (restatement = find_restatement(statement, code))
         return restated(restatement, title)
       end
 
+      @syntax.check!(statement) unless Statement::PATTERNS.include?(code[0]) &&
+                                       statement.wrapped_by?('/')
       statement_number = yield
       @last = Statement.new(self, statement, code, title, filename,
                             statement_number).struct
@@ -52,13 +55,7 @@ module Korekto
 
       @statements[@last.key] = @last
       @symbols.define! @last if @last.defines_symbols?
-      @heap.add @last if 'DXSPTCRH'.include?(@last.type)
-    end
-
-    def syntax_check(statement, code)
-      @syntax.check!(statement) unless statement[0] == '/' &&
-                                       statement[-1] == '/' &&
-                                       %w[A L M E I].include?(code[0])
+      @heap.add @last if Statement::HEAPABLE.include?(@last.type)
     end
 
     def find_restatement(statement, code)
@@ -78,7 +75,7 @@ module Korekto
       # (D,X,S,P,T,C,R,H) because only these participate in inference.
       # See `heap_combos_search` and `heap_search` in
       # [Korekto::Statement](statement.rb?heap_combos_search)
-      unless 'DXSPTCRH'.include?(restatement.type)
+      unless Statement::HEAPABLE.include?(restatement.type)
         raise Error, "restatement: #{restatement.code}"
       end
 

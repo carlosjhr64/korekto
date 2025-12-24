@@ -40,6 +40,7 @@ ContextSearch
 count
 cp_r
 define
+DEFINES
 defines_symbols
 definition
 delete
@@ -104,6 +105,7 @@ hash
 Hash
 heap
 Heap
+HEAPABLE
 heap_combos_search
 heap_combos_search_all
 heap_combos_search_code
@@ -177,6 +179,7 @@ options
 parse
 pattern
 patterns
+PATTERNS
 pattern_type
 pattern_type_support
 pop
@@ -270,7 +273,6 @@ symbols
 Symbols
 syntax
 Syntax
-syntax_check
 system
 target
 tautology
@@ -312,5 +314,6 @@ VERSION
 w
 warn
 wild_card
+wrapped_by
 xt
 zero
