@@ -21,7 +21,7 @@ module Korekto
     KNOWN = Set[:set_regexp!, :set_type!, :verify_newlines_count!, :follows_get,
                 :pattern_type_support, :set_code!, :undefined_symbols_get,
                 :set_title!, :expected_instantiations!, :title, :support,
-                :handwaves_check!, :set_acceptance_code]
+                :handwaves_check!]
 
     def method_missing(*args)
       symbol = args.first
@@ -44,20 +44,25 @@ class TestStatementHandlers < Test::Unit::TestCase
     @test = Korekto::TestStatementHandlers.new
   end
 
-  def test_wild_card
-    assert_nothing_raised { @test.send(:wild_card) }
-    assert_equal [[:set_type!, 'T'], [:set_acceptance_code]],
-                 @test.missing_calls
-    @test.missing_calls.clear
-    def @test.set_type!(type) = (@type = type)
+  def test_acceptance_code_set
+    e = assert_raises(Korekto::Error) { @test.send(:acceptance_code_set, 'c') }
+    assert_equal "type 'c' not implemented", e.message
+    def @test.postulate = 'OK'
+    assert_equal 'OK', @test.send(:acceptance_code_set, 'P')
+  end
 
-    def @test.set_acceptance_code
-      raise Korekto::Error, 'wut' unless @type == 'R'
-    end
-    assert_equal [], @test.missing_calls
+  def test_wild_card
+    def @test.acceptance_code_set(_) = nil
     assert_nothing_raised { @test.send(:wild_card) }
-    assert_equal 'R', @test.instance_variable_get(:@type)
-    def @test.set_acceptance_code
+    assert_equal [[:set_type!, 'T']], @test.missing_calls
+    @test.missing_calls.clear
+    def @test.acceptance_code_set(type)
+      raise Korekto::Error, 'wut' unless type == 'R'
+    end
+    assert_nothing_raised { @test.send(:wild_card) }
+    assert_equal [[:set_type!, 'T'], [:set_type!, 'S'], [:set_type!, 'R']],
+                 @test.missing_calls
+    def @test.acceptance_code_set(_)
       raise Korekto::Error, 'wut'
     end
     e = assert_raises(Korekto::Error) { @test.send(:wild_card) }

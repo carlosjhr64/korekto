@@ -1,3 +1,4 @@
+acceptance_code_set
 active
 add
 all
@@ -228,7 +229,6 @@ select
 send
 set
 Set
-set_acceptance_code
 set_code
 set_regexp
 setter

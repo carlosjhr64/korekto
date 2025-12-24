@@ -10,7 +10,7 @@ module Korekto
 
   module MissingCalls
     KNOWN = Set[:symbols, :statement_to_regexp, :undefined, :handwaves, :check!,
-                :size, :zero?, :match?]
+                :size, :zero?, :match?, :acceptance_code_set]
 
     def missing_calls = (@missing_calls ||= [])
 
@@ -49,10 +49,6 @@ require 'korekto/statement'
 
 module Korekto
   class StatementTest < Statement
-    def set_acceptance_code(test: false)
-      super() if test
-    end
-
     def test_struct_set(struct) = (@s = struct)
   end
 end
@@ -101,17 +97,6 @@ class TestStatement < Test::Unit::TestCase
     @statement.send(:finalize!)
     assert_equal false, @statement.struct.defines_symbols?
     assert @statement.struct.frozen?
-  end
-
-  def test_set_acceptance_code
-    e = assert_raises(Korekto::Error) do
-      @statement.send(:set_acceptance_code, test: true)
-    end
-    assert_equal "type 'c' not implemented", e.message
-    struct = @statement.struct.dup
-    struct.type = 'K'
-    @statement.test_struct_set(struct)
-    assert_equal 'OK', @statement.send(:set_acceptance_code, test: true)
   end
 
   def test_set_type_bang

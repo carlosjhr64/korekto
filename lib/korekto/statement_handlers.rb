@@ -24,10 +24,20 @@ module Korekto
 
     private_constant :TYPE_HANDLERS
 
+    # Sets the final acceptance code, title, and key for the statement by
+    # dispatching to the appropriate type handler (tautology, definition, etc.)
+    # based on the initial code letter. Raises if type unsupported.
+    def acceptance_code_set(type)
+      handler = TYPE_HANDLERS[type]
+      raise(Error, "type '#{type}' not implemented") unless handler
+
+      send(handler)
+    end
+
     def wild_card
       %w[T S R X C].any? do |type|
         set_type!(type)
-        set_acceptance_code
+        acceptance_code_set(type)
         true
       rescue Error
         false

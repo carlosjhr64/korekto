@@ -22,7 +22,7 @@ module Korekto
       @symbols = context.symbols
       @s = StatementStruct.new(*)
       init!
-      set_acceptance_code
+      acceptance_code_set(@s.type)
       finalize!
     end
 
@@ -43,16 +43,6 @@ module Korekto
                               'AIEMLDXS'.include?(@s.type)
       @s.each(&:freeze)
       @s.freeze
-    end
-
-    # Sets the final acceptance code, title, and key for the statement by
-    # dispatching to the appropriate type handler (tautology, definition, etc.)
-    # based on the initial code letter. Raises if type unsupported.
-    def set_acceptance_code(type = @s.type)
-      handler = TYPE_HANDLERS[type]
-      raise(Error, "type '#{type}' not implemented") unless handler
-
-      send(handler)
     end
 
     def set_type!(type) = (@s.type = @s.code[0] = type)
