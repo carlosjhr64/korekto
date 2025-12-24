@@ -117,13 +117,13 @@ class TestStatementHandlers < Test::Unit::TestCase
   end
 
   def test_result
-    def @test.heap_search = [self, :antecedent]
+    def @test.heap_search(_) = [self, :antecedent]
     assert_nothing_raised { @test.send(:result) }
     assert_equal 5, @test.missing_calls.size
   end
 
   def test_instantiation
-    def @test.heap_search = [self, :antecedent]
+    def @test.heap_search(_) = [self, :antecedent]
     assert_nothing_raised { @test.send(:instantiation) }
     assert_equal 5, @test.missing_calls.size
   end

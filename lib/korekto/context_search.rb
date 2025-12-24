@@ -45,11 +45,11 @@ module Korekto
     def heap_combos_search
       heap_combos_search_code ||
         heap_combos_search_all or
-        raise Error, "does not match any '#{@s.type}' statement"
+        raise Error, "does not match any '#{@s.type}' statement combos in heap"
     end
 
-    def heap_search_code
-      if (md = %r{/([^,]+),([^,]+)$}.match @s.code)
+    def heap_search_code(type)
+      if (md = %r{/(#{type}[^,]+),([^,]+)$}.match @s.code)
         s0, s1 = md.captures.map { @context.get it.to_sym }
         if s0
           compound = [s1, @s.statement].join("\n")
@@ -60,8 +60,8 @@ module Korekto
     end
 
     # :reek:NestedIterators and :reek:TooManyStatements
-    def heap_search_all
-      statements = @context.type(@s.type)
+    def heap_search_all(type)
+      statements = @context.type(type)
       @context.heap.each do |s1|
         compound = [s1, @s.statement].join("\n")
         statements.each do |s0|
@@ -71,10 +71,10 @@ module Korekto
       nil
     end
 
-    def heap_search
-      heap_search_code ||
-        heap_search_all or
-        raise Error, "does not match any '#{@s.type}' statement"
+    def heap_search(type)
+      heap_search_code(type) ||
+        heap_search_all(type) or
+        raise Error, "does not match any '#{type}' statement in heap"
     end
   end
 end

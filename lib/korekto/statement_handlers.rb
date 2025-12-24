@@ -71,7 +71,7 @@ module Korekto
     # matching true statement.
     def result
       expected_instantiations!(instantiations: 0)
-      mapping, antecedent = heap_search
+      mapping, antecedent = heap_search('M')
       set_code!(support(mapping, antecedent))
       set_title!(mapping.title)
     end
@@ -79,7 +79,7 @@ module Korekto
     # An Instantiation is a derived true statement that introduces at least one
     # new term as a result of an Existential rule and matching true statement.
     def instantiation
-      existential, antecedent = heap_search
+      existential, antecedent = heap_search('E')
       title = existential.title
       undefined = expected_instantiations!(title)
       set_code!(support(existential, antecedent))
