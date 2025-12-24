@@ -90,7 +90,7 @@ module Korekto
     # that follows from two true statements.
     def conclusion
       expected_instantiations!(instantiations: 0)
-      inference, conditional, antecedent = heap_combos_search
+      inference, conditional, antecedent = heap_combos_search('I')
       title = inference.title
       set_code!(support(inference, conditional, antecedent))
       set_title!(title)

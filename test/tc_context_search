@@ -83,10 +83,10 @@ class TestContextSearch < Test::Unit::TestCase
 
   def test_heap_combos_search_code
     @struct.s_get.code = 'P1'
-    assert_nil @struct.heap_combos_search_code
+    assert_nil @struct.heap_combos_search_code('I')
     @struct.s_get.code = 'C4/I1,P2,P3'
     def @context.to_str = 'X'
-    s0, s1, s2 = @struct.heap_combos_search_code
+    s0, s1, s2 = @struct.heap_combos_search_code('I')
     refute s0.nil?
     refute s1.nil?
     refute s2.nil?
@@ -96,59 +96,59 @@ class TestContextSearch < Test::Unit::TestCase
   end
 
   def test_heap_combos_search_all
-    assert_nil @struct.heap_combos_search_all
-    assert_equal [[:type, 'type'], [:heap], [:combos]], @context.missing_calls
+    assert_nil @struct.heap_combos_search_all('I')
+    assert_equal [[:type, 'I'], [:heap], [:combos]], @context.missing_calls
     @context.missing_calls.clear
     def @context.type(*) = [/s1\ns2\nstatement/]
     def @context.combos = yield('s1', 's2')
-    s0, s1, s2 = @struct.heap_combos_search_all
+    s0, s1, s2 = @struct.heap_combos_search_all('I')
     assert_equal(/s1\ns2\nstatement/, s0)
     assert_equal 's1', s1
     assert_equal 's2', s2
   end
 
   def test_heap_combos_search
-    def @struct.heap_combos_search_code = 'A'
-    def @struct.heap_combos_search_all = 'B'
-    assert_equal 'A', @struct.heap_combos_search
-    def @struct.heap_combos_search_code = nil
-    assert_equal 'B', @struct.heap_combos_search
-    def @struct.heap_combos_search_all = nil
-    e = assert_raises(Korekto::Error) { @struct.heap_combos_search }
-    assert_equal "does not match any 'type' statement", e.message
+    def @struct.heap_combos_search_code(_) = 'A'
+    def @struct.heap_combos_search_all(_) = 'B'
+    assert_equal 'A', @struct.heap_combos_search('I')
+    def @struct.heap_combos_search_code(_) = nil
+    assert_equal 'B', @struct.heap_combos_search('I')
+    def @struct.heap_combos_search_all(_) = nil
+    e = assert_raises(Korekto::Error) { @struct.heap_combos_search('I') }
+    assert_equal "does not match any 'I' statement combos in heap", e.message
   end
 
   def test_heap_search_code
-    assert_nil @struct.heap_search_code
+    assert_nil @struct.heap_search_code('A')
     @struct.s_get.code = 'C3/A1,B2'
     def @context.get(*) = /X/
-    s1, s2 = @struct.heap_search_code
+    s1, s2 = @struct.heap_search_code('A')
     assert_equal(/X/, s1)
     assert_equal(/X/, s2)
   end
 
   def test_heap_search_all
     def @context.each = 'skipped'
-    assert_nil @struct.heap_search_all
-    assert_equal [[:type, 'type'], [:heap]], @context.missing_calls
+    assert_nil @struct.heap_search_all('E')
+    assert_equal [[:type, 'E'], [:heap]], @context.missing_calls
     @context.missing_calls.clear
     def @context.each = yield('s1')
     def @context.type(*) = [/statement/]
-    s0, s1 = @struct.heap_search_all
+    s0, s1 = @struct.heap_search_all('E')
     assert_equal(/statement/, s0)
     assert_equal 's1', s1
     assert_equal [[:heap]], @context.missing_calls
   end
 
   def test_heap_search
-    def @struct.heap_search_code = 'A'
-    def @struct.heap_search_all = 'B'
-    assert_equal 'A', @struct.heap_search
-    def @struct.heap_search_code = nil
-    assert_equal 'B', @struct.heap_search
-    def @struct.heap_search_all = nil
-    e = assert_raises(Korekto::Error) { @struct.heap_search }
-    assert_equal "does not match any 'type' statement", e.message
+    def @struct.heap_search_code(_) = 'A'
+    def @struct.heap_search_all(_) = 'B'
+    assert_equal 'A', @struct.heap_search('E')
+    def @struct.heap_search_code(_) = nil
+    assert_equal 'B', @struct.heap_search('E')
+    def @struct.heap_search_all(_) = nil
+    e = assert_raises(Korekto::Error) { @struct.heap_search('E') }
+    assert_equal "does not match any 'E' statement in heap", e.message
   end
 
   # Last, check rubocop and reek

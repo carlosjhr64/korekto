@@ -129,7 +129,7 @@ class TestStatementHandlers < Test::Unit::TestCase
   end
 
   def test_conclusion
-    def @test.heap_combos_search = [self, :conditional, :antecedent]
+    def @test.heap_combos_search(_) = [self, :conditional, :antecedent]
     assert_nothing_raised { @test.send(:conclusion) }
     assert_equal 5, @test.missing_calls.size
   end
