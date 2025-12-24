@@ -1,13 +1,16 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'test/unit'
-require 'colorize'
-require 'korekto/statements'
 require_relative 'test_module'
+require 'korekto/statements'
 
 class TestStatements < Test::Unit::TestCase
   include TestModule
 
   def test_coverage = coverage Korekto::Statements
+
+  def test_rubocop_and_reek
+    file = 'lib/korekto/statements.rb'
+    rubocop(file) && reek(file) && rubocop(__FILE__)
+  end
 end

@@ -8,11 +8,11 @@ module Korekto
     TYPE_HANDLERS = {
       'P' => :postulate,      # Postulate
       'D' => :definition,     # Definition
-      'C' => :conclusion,     # Conclusion
-      'X' => :instantiation,  # Instantiation
-      'R' => :result,         # Result
-      'S' => :setter,         # Setter
-      'T' => :tautology,      # Tautology
+      'C' => :conclusion,     # Conclusion <- Inference
+      'X' => :instantiation,  # Instantiation <- Existential
+      'R' => :result,         # Result <- Mapper
+      'S' => :setter,         # Setter <- Let
+      'T' => :tautology,      # Tautology <- Axiom
       'A' => :axiom,          # Axiom -> Tautology
       'L' => :let,            # Let -> Setter
       'M' => :mapper,         # Mapper -> Result

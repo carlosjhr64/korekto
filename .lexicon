@@ -283,6 +283,7 @@ token
 tokens
 token_to_pattern
 to_s
+to_str
 to_sym
 trace
 translate
