@@ -49,7 +49,9 @@ require 'korekto/statement_struct'
 require 'korekto/statement'
 
 module Korekto
-  class StatementTest < Statement
+  class Statement
+    HEAPABLE = 'D'
+    PATTERNS = 'A'
     def test_struct_set(struct) = (@s = struct)
   end
 end
@@ -59,10 +61,19 @@ class TestStatement < Test::Unit::TestCase
 
   def test_coverage = coverage Korekto::Statement
 
+  def test_class_literal_regexp_wut
+    assert_equal true, Korekto::Statement.literal_regexp?('/wut/', 'Awut')
+  end
+
+  def test_class_heapable_wut
+    assert_equal true, Korekto::Statement.heapable?('wut', 'Dwut')
+    assert_equal false, Korekto::Statement.heapable?('wut', 'Awut')
+  end
+
   def setup
     @context = Korekto::Context.new
-    @statement = Korekto::StatementTest.new(@context, 'statement', 'code',
-                                            'title: wut', 'section', 123)
+    @statement = Korekto::Statement.new(@context, 'statement', 'code',
+                                        'title: wut', 'section', 123)
   end
 
   def test_initialize
