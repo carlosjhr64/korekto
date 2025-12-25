@@ -15,6 +15,7 @@ module Korekto
   # iteration, and restatement detection. The `add` method yields for
   # the next statement number and returns `[code, title]`.
   # :reek:MissingSafeMethod { exclude: [ update! ] }
+  # :reek:TooManyInstanceVariables
   class Statements
     using Refinements
 
@@ -35,6 +36,7 @@ module Korekto
     def get(key)   = @statements[key]
     def antecedent = @heap.antecedent
 
+    # :reek:LongParameterList
     def add(statement, code, title, filename)
       if (restatement = find_restatement(statement, code))
         return restated(restatement, title)
@@ -75,9 +77,7 @@ module Korekto
       # (D,X,S,P,T,C,R,H) because only these participate in inference.
       # See `heap_combos_search` and `heap_search` in
       # [Korekto::Statement](statement.rb?heap_combos_search)
-      unless Statement.heapable?(restatement)
-        raise Error, "restatement: #{code}"
-      end
+      raise Error, "restatement: #{code}" unless Statement.heapable? restatement
 
       @heap.add restatement
       title ||= restatement.title
