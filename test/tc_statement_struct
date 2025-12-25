@@ -16,6 +16,12 @@ class TestStatementStruct < Test::Unit::TestCase
     @struct.regexp = /#{@struct.regexp}/
   end
 
+  def test_same_wut
+    assert_equal true, @struct.same?('statement', 'type')
+    assert_equal false, @struct.same?('statement2', 'type')
+    assert_equal false, @struct.same?('statement', 'type2')
+  end
+
   def test_statement
     # Access :statement via Struct's api:
     assert_equal('statement', @struct.statement)

@@ -8,6 +8,7 @@ module Korekto
   STRUCT_MORE = %i[regexp key type].freeze
   STRUCT_BOOL = %i[pattern? literal_regexp? defines_symbols?].freeze
   # Define Korekto::StatementStruct
+  # :reek:ControlParameter
   StatementStruct = Struct.new(*STRUCT_ARGS, *STRUCT_MORE, *STRUCT_BOOL) do
     def to_s = statement
     def to_str = statement
