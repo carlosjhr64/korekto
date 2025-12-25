@@ -16,4 +16,9 @@ class TestMain < Test::Unit::TestCase
     main = Korekto::Main.new(statements: nil)
     assert main.respond_to? :run
   end
+
+  def test_rubocop_and_reek
+    file = 'lib/korekto/main.rb'
+    rubocop(file) && reek(file) && rubocop(__FILE__)
+  end
 end

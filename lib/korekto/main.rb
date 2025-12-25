@@ -6,6 +6,8 @@ module Korekto
   # type definitions, imports, syntax rules, and fenced code blocks.
   # Supports preprocessing directives for configuration and control.
   # rubocop: disable Metrics
+  # :reek:TooManyConstants
+  # :reek:TooManyInstanceVariables :reek:TooManyStatements
   class Main
     def initialize(filename = '-', statements: Statements.new, imports: [])
       @filename = filename
@@ -75,6 +77,10 @@ module Korekto
     # Globally change patterns in the type_to_pattern hash:
     #     ! gsub: x y
     # These features should be fully covered in the tutorial.
+    # :reek:NilCheck
+    # :reek:UncommunicativeVariableName { accept: [ e ] }
+    # :reek:DuplicateMethodCall { allow_calls:
+    #   [ '@statements.symbols', 'arguments.split' ] }
     def function(function, arguments)
       case function
       when 'stop'
@@ -82,8 +88,7 @@ module Korekto
       when 'gsub'
         target, replacement, e = arguments.split
         unless e.nil? && replacement && target
-          raise Error,
-                'expected 2 arguments'
+          raise Error, 'expected 2 arguments'
         end
 
         type_to_pattern_gsub(target, replacement)
@@ -107,6 +112,7 @@ module Korekto
     #     ! Variable {a b c}
     # These variables are translated into their patterns
     # when found in pattern statements.
+    # :reek:DuplicateMethodCall { allow_calls: [ '@statements.symbols' ] }
     def type_variables(type, variables)
       variable_to_type = @statements.symbols.variable_to_type
       type_to_pattern = @statements.symbols.type_to_pattern
@@ -129,6 +135,8 @@ module Korekto
     #     ! types, functions
     #     ~ handwaves
     # Returns true if line is handled, false otherwise.
+    # :reek:DuplicateMethodCall { allow_calls:
+    #   [ 'LAST_MATCH_INFO', '@statements.heap' ] }
     def preprocess?
       case @line
       when MD_IMPORT
@@ -201,6 +209,8 @@ module Korekto
       end
     end
 
+    # :reek:NilCheck
+    # :reek:DuplicateMethodCall { allow_calls: [ 'ERROR_INFO.message', 'md' ] }
     def parse(lines)
       statement_number = line_number = 0
       while (@line = lines.shift)
