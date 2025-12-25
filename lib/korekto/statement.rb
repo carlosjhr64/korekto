@@ -17,6 +17,10 @@ module Korekto
 
     using Refinements
 
+    def self.literal_regexp?(statement, code)
+      PATTERNS.include?(code[0]) && statement.wrapped_by?('/')
+    end
+
     def initialize(context, *)
       @context = context
       @symbols = context.symbols

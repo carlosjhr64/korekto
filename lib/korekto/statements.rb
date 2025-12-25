@@ -14,6 +14,7 @@ module Korekto
   # Offers fast key-based lookup, type-based filtering, pattern
   # iteration, and restatement detection. The `add` method yields for
   # the next statement number and returns `[code, title]`.
+  # :reek:MissingSafeMethod { exclude: [ update! ] }
   class Statements
     using Refinements
 
@@ -39,13 +40,13 @@ module Korekto
         return restated(restatement, title)
       end
 
-      @syntax.check!(statement) unless Statement::PATTERNS.include?(code[0]) &&
-                                       statement.wrapped_by?('/')
+      unless Statement.literal_regexp?(statement, code)
+        @syntax.check!(statement)
+      end
       statement_number = yield
       @last = Statement.new(self, statement, code, title, filename,
                             statement_number).struct
-      update!
-      [@last.code, @last.title]
+      update! # returns code and title
     end
 
     private
@@ -56,6 +57,7 @@ module Korekto
       @statements[key] = @last
       @symbols.define! @last if @last.defines_symbols?
       @heap.add @last if Statement::HEAPABLE.include?(@last.type)
+      [@last.code, @last.title]
     end
 
     def find_restatement(statement, code)
