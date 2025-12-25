@@ -104,6 +104,7 @@ hash
 Hash
 heap
 Heap
+heapable
 HEAPABLE
 heap_combos_search
 heap_combos_search_all

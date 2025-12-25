@@ -17,8 +17,12 @@ module Korekto
 
     using Refinements
 
-    def self.literal_regexp?(statement, code)
-      PATTERNS.include?(code[0]) && statement.wrapped_by?('/')
+    def self.literal_regexp?(statement, code = statement.code, type = code[0])
+      PATTERNS.include?(type) && statement.wrapped_by?('/')
+    end
+
+    def self.heapable?(statement, code = statement.code, type = code[0])
+      HEAPABLE.include?(type)
     end
 
     def initialize(context, *)

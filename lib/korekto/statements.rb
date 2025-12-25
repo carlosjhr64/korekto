@@ -56,7 +56,7 @@ module Korekto
 
       @statements[key] = @last
       @symbols.define! @last if @last.defines_symbols?
-      @heap.add @last if Statement::HEAPABLE.include?(@last.type)
+      @heap.add @last if Statement.heapable?(@last)
       [@last.code, @last.title]
     end
 
@@ -75,7 +75,7 @@ module Korekto
       # (D,X,S,P,T,C,R,H) because only these participate in inference.
       # See `heap_combos_search` and `heap_search` in
       # [Korekto::Statement](statement.rb?heap_combos_search)
-      unless Statement::HEAPABLE.include?(restatement.type)
+      unless Statement.heapable?(restatement)
         raise Error, "restatement: #{code}"
       end
 
