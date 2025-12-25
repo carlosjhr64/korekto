@@ -50,20 +50,17 @@ module Korekto
 
     private
 
-    def update!
-      raise Error, "duplicate key: #{@last.key}" if @statements.key?(@last.key)
+    def update!(key = @last.key)
+      raise Error, "duplicate key: #{key}" if @statements.key?(key)
 
-      @statements[@last.key] = @last
+      @statements[key] = @last
       @symbols.define! @last if @last.defines_symbols?
       @heap.add @last if Statement::HEAPABLE.include?(@last.type)
     end
 
     def find_restatement(statement, code)
-      c = code[0]
-      w = c == 'W'
-      @statements.values.detect do |restatement|
-        (w || restatement.type == c) && restatement.to_s == statement
-      end
+      type = code[0]
+      @statements.values.detect { it.same?(statement, type) }
     end
 
     # Handles restatement of an identical prior statement.
@@ -71,16 +68,16 @@ module Korekto
     # Restatements are restricted to heap-relevant types (D,X,S,P,T,C,R,H).
     # Raises Error otherwise.
     def restated(restatement, title)
+      code = restatement.code
       # Restatements are only allowed for heap-able statement types
       # (D,X,S,P,T,C,R,H) because only these participate in inference.
       # See `heap_combos_search` and `heap_search` in
       # [Korekto::Statement](statement.rb?heap_combos_search)
       unless Statement::HEAPABLE.include?(restatement.type)
-        raise Error, "restatement: #{restatement.code}"
+        raise Error, "restatement: #{code}"
       end
 
       @heap.add restatement
-      code, = restatement.code
       title ||= restatement.title
       [code, title]
     end

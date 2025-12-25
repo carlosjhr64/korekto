@@ -18,7 +18,6 @@ basename
 bn
 bool
 brackets
-c
 captures
 char
 chars
@@ -223,6 +222,7 @@ s
 s0
 s1
 s2
+same
 scan
 scanner
 scrape
@@ -311,7 +311,6 @@ variables
 variable_to_type
 verify_newlines_count
 VERSION
-w
 warn
 wild_card
 wrapped_by

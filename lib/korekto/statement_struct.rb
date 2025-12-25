@@ -12,6 +12,10 @@ module Korekto
     def to_s = statement
     def to_str = statement
 
+    def same?(string, char)
+      (char == type || char == 'W') && string == statement
+    end
+
     # :reek:BooleanParameter
     def respond_to_missing?(symbol, bool = false)
       return true if regexp&.public_methods(false)&.include?(symbol) ||
