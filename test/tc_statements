@@ -5,14 +5,77 @@ require_relative 'test_module'
 require 'korekto/refinements'
 require 'korekto/statements'
 
+# Mockup
+module Korekto
+  module MissingCalls
+    KNOWN = Set[:key, :defines_symbols?, :define!, :add, :code, :title]
+
+    def missing_calls = (@missing_calls ||= [])
+
+    # rubocop: disable Style/MissingRespondToMissing
+    def method_missing(*args)
+      symbol = args.first
+      raise "Unknown: #{symbol}" unless KNOWN.include?(symbol)
+
+      missing_calls.push(args)
+      self
+    end
+    # rubocop: enable Style/MissingRespondToMissing
+  end
+
+  def self.heap = 60
+
+  class Statement
+    include MissingCalls
+
+    def self.heapable?(*args) = args
+    def self.literal_regexp?(*args) = args
+
+    def initialize(*); end
+
+    def struct = self
+  end
+
+  class Heap
+    include MissingCalls
+
+    def initialize(_); end
+  end
+
+  class Symbols
+    include MissingCalls
+  end
+
+  class Syntax
+    include MissingCalls
+  end
+
+  class Handwaves
+    include MissingCalls
+
+    def initialize(_); end
+  end
+end
+
 class TestStatements < Test::Unit::TestCase
   include TestModule
 
   def test_coverage = coverage Korekto::Statements
 
+  def setup
+    @statements = Korekto::Statements.new
+  end
+
+  def test_add
+    *out = @statements.add('statement', 'code', 'title', 'filename') do
+      'number'
+    end
+    assert_equal 2, out.size
+    assert_equal Korekto::Statement, @statements.last.class
+  end
+
   def test_rubocop_and_reek
     file = 'lib/korekto/statements.rb'
-    rubocop(file)
-    # && reek(file) && rubocop(__FILE__)
+    rubocop(file) && reek(file) && rubocop(__FILE__)
   end
 end
