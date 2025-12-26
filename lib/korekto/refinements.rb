@@ -41,7 +41,7 @@ module Korekto
 
       def match_to_i(regexp) = match(regexp)&.to_s&.to_i
 
-      def wrapped_by?(char) = size >= 2 && self[0] == char && self[-1] == char
+      def wrapped_by?(char) = size > 1 && self[0] == char && self[-1] == char
     end
   end
 end
