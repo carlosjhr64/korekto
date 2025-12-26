@@ -49,14 +49,6 @@ module Korekto
 
     private
 
-    def type_to_pattern_gsub(target, replacement)
-      type_to_pattern = @statements.symbols.type_to_pattern
-      type_to_pattern.each_key do |type|
-        type_to_pattern[type].gsub!(target, replacement)
-      end
-      @statements.patterns(&:set_regexp)
-    end
-
     # Defines a regex pattern for a type; raises if type already exists.
     #     ! Variable /[a-z]/
     def type_pattern(type, pattern)
@@ -66,37 +58,17 @@ module Korekto
       type_to_pattern[type] = pattern
     end
 
-    # Executes built-in functions (stop, gsub, delete, replace).
+    # Executes built-in functions (stop, replace).
     # Stop the parsing of the file:
     #     ! stop!
     # Replace a variable_to_type's key with another.
     # Useful to temporally disabling it:
     #     ! replace! x TMP
-    # Delete a variable_to_type's key:
-    #     ! delete! x
-    # Globally change patterns in the type_to_pattern hash:
-    #     ! gsub: x y
-    # These features should be fully covered in the tutorial.
-    # :reek:NilCheck
-    # :reek:UncommunicativeVariableName { accept: [ e ] }
-    # :reek:DuplicateMethodCall { allow_calls:
-    #   [ '@statements.symbols', 'arguments.split' ] }
+    # :reek:NilCheck :reek:UncommunicativeVariableName { accept: [ e ] }
     def function(function, arguments)
       case function
       when 'stop'
         raise Error, 'stopped'
-      when 'gsub'
-        target, replacement, e = arguments.split
-        unless e.nil? && replacement && target
-          raise Error, 'expected 2 arguments'
-        end
-
-        type_to_pattern_gsub(target, replacement)
-      when 'delete'
-        variable, e = arguments.split
-        raise Error, 'expected 1 argument' unless e.nil? && variable
-
-        @statements.symbols.delete_variable! variable
       when 'replace'
         oldvar, newvar, e = arguments.split
         raise Error, 'expected 2 arguments' unless e.nil? && newvar && oldvar
@@ -112,10 +84,9 @@ module Korekto
     #     ! Variable {a b c}
     # These variables are translated into their patterns
     # when found in pattern statements.
-    # :reek:DuplicateMethodCall { allow_calls: [ '@statements.symbols' ] }
-    def type_variables(type, variables)
-      variable_to_type = @statements.symbols.variable_to_type
-      type_to_pattern = @statements.symbols.type_to_pattern
+    def type_variables(type, variables, symbols = @statements.symbols)
+      variable_to_type = symbols.variable_to_type
+      type_to_pattern = symbols.type_to_pattern
       pattern = type_to_pattern[type]
       raise Error, "type #{type} not defined" unless pattern
 
@@ -209,7 +180,6 @@ module Korekto
       end
     end
 
-    # :reek:NilCheck
     # :reek:DuplicateMethodCall { allow_calls: [ 'ERROR_INFO.message', 'md' ] }
     def parse(lines)
       statement_number = line_number = 0
@@ -229,7 +199,7 @@ module Korekto
             if Korekto.scrape?
               print @statements.last
               print "\t##{code}"
-              print " #{title}" unless title.nil? || title.empty?
+              print " #{title}" unless title.empty?
               puts
             elsif Korekto.trace? || (@filename == '-' &&
                                     !(md[:code] == code &&

@@ -57,7 +57,6 @@ dump
 dup
 e
 each
-each_key
 each_with_index
 empty
 Enumerable
@@ -203,7 +202,6 @@ regex
 regexed
 regexp
 Regexp
-replacement
 replace_variable
 require
 require_relative
@@ -275,7 +273,6 @@ Symbols
 syntax
 Syntax
 system
-target
 tautology
 tight
 title
@@ -295,7 +292,6 @@ type
 TYPE_HANDLERS
 type_pattern
 type_to_pattern
-type_to_pattern_gsub
 type_variables
 undefined
 undefined_symbols_get
