@@ -92,8 +92,7 @@ module Korekto
 
       variables.each do |variable|
         if variable_to_type.key? variable
-          raise Error,
-                "variable #{variable} in use"
+          raise Error, "variable #{variable} in use"
         end
 
         variable_to_type[variable] = type

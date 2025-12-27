@@ -20,7 +20,7 @@ class TestMain < Test::Unit::TestCase
 
   # Trivial instantiating tests
   def setup
-    @main = Korekto::Main.new # (statements: nil)
+    @main = Korekto::Main.new
   end
 
   def test_initialize
@@ -45,6 +45,19 @@ class TestMain < Test::Unit::TestCase
     # Good enough!  :P
   end
 
+  def test_type_pattern
+    statements = @main.instance_variable_get(:@statements)
+    e = assert_raise(Korekto::Error) do
+      @main.send(:type_pattern, 'Rational', '\(\d+/\d+\)')
+    end
+    assert_equal 'type Rational in use', e.message
+    statements.missing_calls.clear
+    def statements.key?(_) = false
+    @main.send(:type_pattern, 'Rational', '\(\d+/\d+\)')
+    assert_equal [[:symbols], [:type_to_pattern],
+                  [:[]=, 'Rational', '\(\d+/\d+\)']], statements.missing_calls
+  end
+
   def test_function
     e = assert_raise(Korekto::Error) { @main.send(:function, 'stop', 'args') }
     assert_equal 'stopped', e.message
@@ -62,6 +75,94 @@ class TestMain < Test::Unit::TestCase
       @main.send(:function, 'replace', 'arg1 arg2')
     end
     assert_equal 'arg1 not a key', e.message
+  end
+
+  def test_type_variables
+    # Here, flow gets to call @statements.symbols.variable_to_type.key?
+    # That's returning a value.
+    e = assert_raises(Korekto::Error) do
+      @main.send(:type_variables, 'type', %w[a b c])
+    end
+    assert_equal 'variable a in use', e.message
+    # So mock it to be false...
+    statements = @main.instance_variable_get(:@statements)
+    def statements.key?(_) = false
+    out = @main.send(:type_variables, 'type', %w[a b c])
+    assert_equal %w[a b c], out
+    # Now trigger the remaining possible Error.
+    def statements.[](_) = nil
+    e = assert_raises(Korekto::Error) do
+      @main.send(:type_variables, 'Wut', %w[a b c])
+    end
+    assert_equal 'type Wut not defined', e.message
+  end
+
+  def test_preprocess_wut
+    # @line is initially nil, matching nothing...
+    assert_equal false, @main.send(:preprocess?)
+    # Set up a "! Type {Variables}" command
+    statements = @main.instance_variable_get(:@statements)
+    def statements.key?(_) = false
+    line = '! Var {a b c}'
+    @main.instance_variable_set(:@line, line)
+    assert_equal true, @main.send(:preprocess?)
+    # Got both the true and false values...
+    # Let this be fully tested by cucumber.
+  end
+
+  def test_key_value
+    @main.send(:key_value, 'scanner', 'pattern')
+    statements = @main.instance_variable_get(:@statements)
+    assert_equal [[:symbols], [:scanner=, 'pattern']], statements.missing_calls
+    @main.send(:key_value, 'fence', 'ruby')
+    fence_open = @main.instance_variable_get(:@fence_open)
+    assert_equal(/^```ruby$/, fence_open)
+    @main.send(:key_value, 'section', 'Algebra')
+    imports = @main.instance_variable_get(:@imports)
+    section = @main.instance_variable_get(:@section)
+    # Try to re-insert Algebra...
+    e = assert_raises(Korekto::Error) do
+      @main.send(:key_value, 'section', 'Algebra')
+    end
+    assert_equal 'duplicate section: Algebra', e.message
+    assert_equal 'Algebra', section
+    assert_equal ['-', 'Algebra'], imports
+    @main.send(:key_value, 'save', 'TMP')
+    backups = @main.instance_variable_get(:@backups)
+    assert backups.key? 'TMP'
+    e = assert_raises(Korekto::Error) do
+      @main.send(:key_value, 'caca', 'huates')
+    end
+    assert_equal "key 'caca' not implemented", e.message
+  end
+
+  def test_active_wut
+    assert_equal false, @main.send(:active?)
+    @main.instance_variable_set(:@active, true)
+    assert_equal true, @main.send(:active?)
+    # Unless in a comment line...
+    @main.instance_variable_set(:@line, '# Wut?')
+    assert_equal false, @main.send(:active?)
+    # Otherwise... still true
+    @main.instance_variable_set(:@line, '! Wut?')
+    assert_equal true, @main.send(:active?)
+    # Close fence...
+    @main.instance_variable_set(:@line, '```')
+    assert_equal false, @main.send(:active?)
+    # Open fence, true on the next...
+    @main.instance_variable_set(:@line, '```korekto')
+    assert_equal false, @main.send(:active?)
+    @main.instance_variable_set(:@line, 'now == true')
+    assert_equal true, @main.send(:active?)
+    # Error on opening already open...
+    @main.instance_variable_set(:@line, '```korekto')
+    e = assert_raises(Korekto::Error) { @main.send(:active?) }
+    assert_equal 'unexpected fence', e.message
+  end
+
+  def test_parse
+    assert_nothing_raised { @main.send(:parse, []) }
+    # Let cucumber test this one fully...
   end
 
   def test_rubocop_and_reek
