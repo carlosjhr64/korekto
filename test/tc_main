@@ -1,20 +1,67 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'test/unit'
-require 'colorize'
-require 'korekto/main'
 require_relative 'test_module'
+require 'stringio'
+require 'korekto/main'
 
+# Mockup
+module Korekto
+  class Error < StandardError; end
+
+  MockUp.create(self, :Statements)
+end
+
+# rubocop: disable Metrics
 class TestMain < Test::Unit::TestCase
   include TestModule
 
   def test_coverage = coverage Korekto::Main
 
   # Trivial instantiating tests
-  def test_new
-    main = Korekto::Main.new(statements: nil)
-    assert main.respond_to? :run
+  def setup
+    @main = Korekto::Main.new # (statements: nil)
+  end
+
+  def test_initialize
+    filename = @main.instance_variable_get(:@filename)
+    assert_equal '-', filename
+    assert filename.frozen?
+    assert @main.instance_variable_get(:@statements).is_a? Korekto::Statements
+    assert_equal '-', @main.instance_variable_get(:@section)
+    assert_equal ['-'], @main.instance_variable_get(:@imports)
+    assert_equal(/^```korekto$/, @main.instance_variable_get(:@fence_open))
+    assert_nil @main.instance_variable_get(:@line)
+    assert_equal false, @main.instance_variable_get(:@active)
+    assert_equal({}, @main.instance_variable_get(:@backups))
+  end
+
+  def test_run
+    def @main.parse(argv) = argv
+    tmp = $stdin
+    $stdin = StringIO.new("Hello\nWorld")
+    assert_equal %w[Hello World], @main.run
+    $stdin = tmp
+    # Good enough!  :P
+  end
+
+  def test_function
+    e = assert_raise(Korekto::Error) { @main.send(:function, 'stop', 'args') }
+    assert_equal 'stopped', e.message
+    e = assert_raise(Korekto::Error) { @main.send(:function, 'wut', 'args') }
+    assert_equal 'unrecognized function: wut', e.message
+    e = assert_raise(Korekto::Error) { @main.send(:function, 'replace', 'arg') }
+    assert_equal 'expected 2 arguments', e.message
+    statements = @main.send(:function, 'replace', 'arg1 arg2')
+    assert statements.is_a? Korekto::Statements # via MockUp
+    assert_equal [[:symbols], [:replace_variable!, 'arg1', 'arg2']],
+                 statements.missing_calls
+    # Simulate no key:
+    def statements.replace_variable!(*) = nil
+    e = assert_raises(Korekto::Error) do
+      @main.send(:function, 'replace', 'arg1 arg2')
+    end
+    assert_equal 'arg1 not a key', e.message
   end
 
   def test_rubocop_and_reek
@@ -22,3 +69,4 @@ class TestMain < Test::Unit::TestCase
     rubocop(file) && reek(file) && rubocop(__FILE__)
   end
 end
+# rubocop: enable Metrics
