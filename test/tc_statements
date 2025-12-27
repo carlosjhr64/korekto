@@ -7,6 +7,8 @@ require 'korekto/statements'
 
 # Mockup
 module Korekto
+  class Error < StandardError; end
+
   def self.heap = 60
   %i[Statement Heap Symbols Syntax Handwaves].each { MockUp.create(self, it) }
 end
@@ -58,13 +60,62 @@ class TestStatements < Test::Unit::TestCase
     assert_equal 3, @statements.length
   end
 
+  def test_get
+    s1 = OpenStruct.new
+    s2 = OpenStruct.new
+    s3 = OpenStruct.new
+    statements = { s1: s1, s2: s2, s3: s3 }
+    s1.type = 'A'
+    s2.type = 'B'
+    s3.type = 'C'
+    @statements.instance_variable_set(:@statements, statements)
+    assert_equal s1, @statements.get(:s1)
+    assert_equal s2, @statements.get(:s2)
+    wut = @statements.get(:s3)
+    assert_equal 'C', wut.type
+  end
+
+  def test_antecedent
+    wut = @statements.antecedent
+    # Via MockUp...
+    assert wut.is_a? Korekto::Heap
+    # Where antecedent was called.
+    assert_equal [[:antecedent]], wut.missing_calls
+  end
+
   def test_add
+    assert_equal 0, @statements.length
     *out = @statements.add('statement', 'code', 'title', 'filename') do
       'number'
     end
+    # Trace out the calls to last...
+    assert_equal [[:struct], [:key], [:defines_symbols?], [:code], [:title]],
+                 @statements.last.missing_calls
     assert_equal 2, out.size
     assert_equal Korekto::Statement, @statements.last.class
+    assert_equal 1, @statements.length
+    # Attempt at adding the same statement... as per statement and code.
+    _, title = @statements.add('statement', 'code', 'title2', 'filename2') do
+      'number2'
+    end
+    assert_equal 'title2', title
+    assert_equal 1, @statements.length
+    # @heap.add called twice. Once in update!, again in restated:
+    assert_equal %i[add add], @statements.heap.missing_calls.map(&:first)
+    # The @syntax.check! path not covered, but... :-??
   end
+
+  def test_update_bang
+    # update! mostly covered by test_add
+    statements = { s1: 'wut' }
+    @statements.instance_variable_set(:@statements, statements)
+    e = assert_raises(Korekto::Error) { @statements.send(:update!, :s1) }
+    assert_equal 'duplicate key: s1', e.message
+  end
+
+  # Paths tested in test_add
+  def test_find_restatement = nil
+  def test_restated = nil
 
   def test_rubocop_and_reek
     file = 'lib/korekto/statements.rb'
