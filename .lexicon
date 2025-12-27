@@ -177,7 +177,6 @@ oldvar
 options
 parse
 pattern
-patterns
 PATTERNS
 pattern_type
 pattern_type_support

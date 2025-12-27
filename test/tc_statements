@@ -7,56 +7,12 @@ require 'korekto/statements'
 
 # Mockup
 module Korekto
-  module MissingCalls
-    KNOWN = Set[:key, :defines_symbols?, :define!, :add, :code, :title]
-
-    def missing_calls = (@missing_calls ||= [])
-
-    # rubocop: disable Style/MissingRespondToMissing
-    def method_missing(*args)
-      symbol = args.first
-      raise "Unknown: #{symbol}" unless KNOWN.include?(symbol)
-
-      missing_calls.push(args)
-      self
-    end
-    # rubocop: enable Style/MissingRespondToMissing
-  end
-
   def self.heap = 60
-
-  class Statement
-    include MissingCalls
-
-    def self.heapable?(*args) = args
-    def self.literal_regexp?(*args) = args
-
-    def initialize(*); end
-
-    def struct = self
-  end
-
-  class Heap
-    include MissingCalls
-
-    def initialize(_); end
-  end
-
-  class Symbols
-    include MissingCalls
-  end
-
-  class Syntax
-    include MissingCalls
-  end
-
-  class Handwaves
-    include MissingCalls
-
-    def initialize(_); end
-  end
+  %i[Statement Heap Symbols Syntax Handwaves].each { MockUp.create(self, it) }
 end
 
+# rubocop: disable Metrics
+# rubocop: disable Style/OpenStructUse
 class TestStatements < Test::Unit::TestCase
   include TestModule
 
@@ -64,6 +20,42 @@ class TestStatements < Test::Unit::TestCase
 
   def setup
     @statements = Korekto::Statements.new
+  end
+
+  def test_heap    = assert_equal(Korekto::Heap, @statements.heap.class)
+  def test_symbols = assert_equal(Korekto::Symbols, @statements.symbols.class)
+  def test_syntax  = assert_equal(Korekto::Syntax, @statements.syntax.class)
+
+  def test_handwaves
+    assert_equal(Korekto::Handwaves, @statements.handwaves.class)
+  end
+
+  def test_last = assert_equal(nil, @statements.last)
+
+  def test_initialize
+    assert_equal({}, @statements.instance_variable_get(:@statements))
+    # The rest is tested via attribute readers above.
+  end
+
+  def test_type
+    # Initially, it's empty
+    assert_equal [], @statements.type('wut')
+    s1 = OpenStruct.new
+    s2 = OpenStruct.new
+    s3 = OpenStruct.new
+    statements = { s1: s1, s2: s2, s3: s3 }
+    s1.type = 'A'
+    s2.type = 'B'
+    s3.type = 'A'
+    @statements.instance_variable_set(:@statements, statements)
+    assert_equal [s2], @statements.type('B')
+    assert_equal [s1, s3], @statements.type('A')
+  end
+
+  def test_length
+    assert_equal 0, @statements.length
+    @statements.instance_variable_set(:@statements, [0, 0, 0])
+    assert_equal 3, @statements.length
   end
 
   def test_add
@@ -79,3 +71,5 @@ class TestStatements < Test::Unit::TestCase
     rubocop(file) && reek(file) && rubocop(__FILE__)
   end
 end
+# rubocop: enable Style/OpenStructUse
+# rubocop: enable Metrics

@@ -32,7 +32,6 @@ module Korekto
 
     def type(code) = @statements.values.select { it.type == code }
     def length     = @statements.length
-    def patterns   = @statements.values.select(&:pattern?).each { yield it }
     def get(key)   = @statements[key]
     def antecedent = @heap.antecedent
 
