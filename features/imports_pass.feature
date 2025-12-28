@@ -59,6 +59,3 @@ Feature: examples_pass
     * Then exit status is "0"
     * Then stdout is ""
     * Then stderr is ""
-
-
-

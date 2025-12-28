@@ -1,5 +1,5 @@
 @regexp_quote_postfix
-Feature: Regexp quoate postfix
+Feature: Regexp quote postfix
 
 ```korekto
 ! scanner: '\(\||\|\)|.'

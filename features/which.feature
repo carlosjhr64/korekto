@@ -1,6 +1,6 @@
 @which
 Feature: Which
-
+# AKA Wild-Card
 ```korekto
 ! scanner: '.'
 ! .Newline /\n/

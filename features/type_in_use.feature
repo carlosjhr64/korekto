@@ -3,7 +3,7 @@ Feature: type_in_use
 
 ```korekto
 ! P /original/
-! P /redefinition attemp/
+! P /redefinition attempt/
 Does not get here #D
 ```
 
