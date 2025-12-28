@@ -52,23 +52,29 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 ## Help
 ```shell
 $ korekto --help
+# Korekto
 Usage:
   korekto [:options+]
+  korekto <filename>
 Options:
- -h --help
- -v --version
- --scrape    	Scrape Korekto lines
- --trace     	Show trace of each line, not just edits and errors
- --install   	Installs the korekto neovim ruby plugin
- --readme    	Open korekto github page
- --heap=SIZE 	Set heap size (default: 60)
+  -h --help
+  -v --version
+  --scrape    	Scrape Korekto lines
+  --trace     	Show trace of each line, not just edits and errors
+  --install   	Installs the korekto neovim ruby plugin
+  --readme    	Open korekto github page
+  --heap=SIZE 	Set heap size (default: 60)
+  --warn      	Show warnings
 Types:
   SIZE    /^\d+$/
 Exclusive:
   scrape trace install readme
-# Example usage:
-#   cat MARKDOWN.md | korekto
-#   korekto < MARKDOWN.md
+## Example usage
+* Read/Edit
+    korekto MARKDOWN.md
+* Check/Verify
+    korekto < MARKDOWN.md
+    cat MARKDOWN.md | korekto
 ```
 ## [Credits](CREDITS.md)
 
