@@ -14,7 +14,7 @@ HELP = <<~HELP.freeze
     --scrape    \tScrape Korekto lines
     --trace     \tShow trace of each line, not just edits and errors
     --install   \tInstalls the korekto neovim ruby plugin
-    --readme    \tOpen korekto github page
+    --readme    \tOpen Korekto's README.md
     --heap=SIZE \tSet heap size (default: #{Korekto.heap})
     --warn      \tShow warnings
   Types:

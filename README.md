@@ -1,6 +1,6 @@
 # Korekto
 
-* [VERSION 4.0.251227](https://github.com/carlosjhr64/korekto/releases)
+* [VERSION 4.0.251228](https://github.com/carlosjhr64/korekto/releases)
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
@@ -62,7 +62,7 @@ Options:
   --scrape    	Scrape Korekto lines
   --trace     	Show trace of each line, not just edits and errors
   --install   	Installs the korekto neovim ruby plugin
-  --readme    	Open korekto github page
+  --readme    	Open Korekto's README.md
   --heap=SIZE 	Set heap size (default: 60)
   --warn      	Show warnings
 Types:
