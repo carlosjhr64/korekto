@@ -10,12 +10,12 @@ module Korekto
       # Check explicit support in code (e.g. "/A12")
       if (support_key = @s.code[%r{(?<=/)[^,]+}]) &&
          (pattern = @context.get(support_key.to_sym)) &&
-         pattern.match?(statement)
+         pattern.regexp.match?(statement)
         return pattern
       end
 
       # Fallback: search all patterns of given type
-      @context.type(type).find { it.match? statement } ||
+      @context.type(type).find { it.regexp.match? statement } ||
         raise(Error, "no matching '#{type}' pattern")
     end
 
@@ -24,7 +24,7 @@ module Korekto
         inference, s1, s2 = md.captures.map { @context.get it.to_sym }
         if inference
           compound = [s1, s2, @s.statement].join("\n")
-          return inference, s1, s2 if inference.match?(compound)
+          return inference, s1, s2 if inference.regexp.match?(compound)
         end
       end
       nil
@@ -36,7 +36,7 @@ module Korekto
       @context.heap.combos do |s1, s2|
         compound = [s1, s2, @s.statement].join("\n")
         inferences.each do |inference|
-          return inference, s1, s2 if inference.match?(compound)
+          return inference, s1, s2 if inference.regexp.match?(compound)
         end
       end
       nil
@@ -53,7 +53,7 @@ module Korekto
         s0, s1 = md.captures.map { @context.get it.to_sym }
         if s0
           compound = [s1, @s.statement].join("\n")
-          return s0, s1 if s0.match?(compound)
+          return s0, s1 if s0.regexp.match?(compound)
         end
       end
       nil
@@ -65,7 +65,7 @@ module Korekto
       @context.heap.each do |s1|
         compound = [s1, @s.statement].join("\n")
         statements.each do |s0|
-          return s0, s1 if s0.match?(compound)
+          return s0, s1 if s0.regexp.match?(compound)
         end
       end
       nil

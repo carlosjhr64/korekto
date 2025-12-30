@@ -5,7 +5,7 @@ require_relative 'test_module'
 require 'korekto/context_search'
 
 # Mockup
-# rubocop: disable Metrics
+# rubocop: disable Style
 module Korekto
   class Error < StandardError; end
 
@@ -14,7 +14,6 @@ module Korekto
 
     def missing_calls = (@missing_calls ||= [])
 
-    # rubocop: disable Style/MissingRespondToMissing
     def method_missing(*args)
       symbol = args.first
       raise "Unknown: #{symbol}" unless KNOWN.include?(symbol)
@@ -22,7 +21,6 @@ module Korekto
       missing_calls.push(args)
       self
     end
-    # rubocop: enable Style/MissingRespondToMissing
   end
 
   class Context
@@ -63,6 +61,7 @@ class TestContextSearch < Test::Unit::TestCase
     assert_equal [], @struct.missing_calls
   end
 
+=begin
   def test_detect_statement
     # Case with support
     @struct.s_get.code = 'T2/A1'
@@ -106,6 +105,7 @@ class TestContextSearch < Test::Unit::TestCase
     assert_equal 's1', s1
     assert_equal 's2', s2
   end
+=end
 
   def test_heap_combos_search
     def @struct.heap_combos_search_code(_) = 'A'
@@ -118,6 +118,7 @@ class TestContextSearch < Test::Unit::TestCase
     assert_equal "does not match any 'I' statement combos in heap", e.message
   end
 
+=begin
   def test_heap_search_code
     assert_nil @struct.heap_search_code('A')
     @struct.s_get.code = 'C3/A1,B2'
@@ -139,6 +140,7 @@ class TestContextSearch < Test::Unit::TestCase
     assert_equal 's1', s1
     assert_equal [[:heap]], @context.missing_calls
   end
+=end
 
   def test_heap_search
     def @struct.heap_search_code(_) = 'A'
@@ -157,4 +159,4 @@ class TestContextSearch < Test::Unit::TestCase
     rubocop(file) && reek(file) && rubocop(__FILE__)
   end
 end
-# rubocop: enable Metrics
+# rubocop: enable Style

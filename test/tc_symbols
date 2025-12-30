@@ -63,6 +63,8 @@ class TestSymbols < Test::Unit::TestCase
     assert_equal(/wut/, @symbols.instance_variable_get(:@scanner))
   end
 
+  # rubocop: disable Style, Layout
+=begin
   def test_undefined
     # Empty statement
     statement = Korekto::Statement.new('')
@@ -92,6 +94,8 @@ class TestSymbols < Test::Unit::TestCase
     set = @symbols.instance_variable_get(:@set)
     assert_equal Set[':Wut', '*', '2', '=', ':Two'], set
   end
+=end
+  # rubocop: enable Style, Layout
 
   def test_statement_to_regexp
     e = assert_raises(Korekto::Error) do

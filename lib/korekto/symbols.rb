@@ -30,7 +30,7 @@ module Korekto
     end
 
     def undefined(statement, set: Set.new)
-      statement.scan(@scanner) do |token|
+      statement.statement.scan(@scanner) do |token|
         set << token unless @set.include?(token) ||
                             (statement.pattern? &&
                              @variable_to_type.include?(token))

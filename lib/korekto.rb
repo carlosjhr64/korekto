@@ -9,7 +9,7 @@ module Korekto
   # will also rescue, but additionally give a backtrace and exit with code 1.
   class Error < RuntimeError; end
 
-  VERSION = '4.0.251228'
+  VERSION = '4.0.251229'
 
   class << self
     # :reek:Attribute
