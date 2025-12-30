@@ -8,7 +8,7 @@ module Korekto
 
     def detect_statement(type, statement = @s.statement)
       # Check explicit support in code (e.g. "/A12")
-      if (support_key = @s.code[%r{(?<=/)[^,]+}]) &&
+      if (support_key = @s.code[%r{(?<=/)[^,]+\z}]) &&
          (pattern = @context.get(support_key.to_sym)) &&
          pattern.regexp.match?(statement)
         return pattern
@@ -20,7 +20,7 @@ module Korekto
     end
 
     def heap_combos_search_code(type)
-      if (md = %r{/(#{type}[^,]+),([^,]+),([^,]+)$}.match @s.code)
+      if (md = %r{/(#{type}[^,]+),([^,]+),([^,]+)\z}.match @s.code)
         inference, s1, s2 = md.captures.map { @context.get it.to_sym }
         if inference
           compound = [s1, s2, @s.statement].join("\n")
