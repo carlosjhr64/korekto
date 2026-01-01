@@ -2,6 +2,8 @@
 
 ## Contents
 
+* [Intro](#Intro)
+* [Installation details](#Installation-details)
 * [Heap](#Heap)
 * [Statement types](#Statement-types)
   * [D is for Definition](#D-is-for-Definition)
@@ -64,7 +66,7 @@ $ korekto --trace < examples/Tutorial.md
 -:323:D20:
 -:324:A21/D20:
 ```
-Also, in `neovim` you can run the command `:Korekto` or press `<F7>`.
+Also, in `neovim` you can run the command `:Korekto` or press `<F9>`.
 It will check your work and move the cursor to the first error it finds.
 It will also automate many of the statement's comments.
 You only need to give the statement type,
@@ -81,6 +83,77 @@ You'll be going down the rabbit hole of
 trying to create a proof assistant for your project...
 Burrowing yourself down all the way to first principles.
 CONSIDER YOURSELF WARNED!
+
+## Installation details
+
+To make the install as easy as possible,
+I automated the install best I could on a typical Linux system.
+But you should know what's going on behind the scenes.
+Everything in Korekto is accessible for you to tweak and configure, but
+hopefully I'm giving you something useful right off the start.
+
+If you're my target audience, you like:
+
+* The Ruby programming language
+* The Neovim Vim-based text editor
+* Mathematics
+* Linux
+
+I have to assume that's you.
+Now, if you're not using [rbenv](https://github.com/rbenv/rbenv), you should.
+This version of Korekto was tested under Ruby version 4.0.
+Rbenv makes it very easy to create work spaces that
+will use the correct Ruby version.
+
+This version of Korekto was tested using
+[Neovim](https://github.com/neovim/neovim) version 0.12.
+In Linux, you should be able to setup your workspace to ensure
+that's the version used.
+
+Korekto may work just fine with prior versions, but
+I can't say how far back... It's untested.
+
+So this is what happens as you install step by step
+
+1. `gem install korekto`
+
+This will normally install the Korekto gem(given rbenv) somewhere in:
+
+    ~/.rbenv/versions/4.*/ruby/gems/4.*/gems/korekto-*/
+    ~/.rbenv/shims/korekto
+
+The `shims/korekto` is the executable stub.
+You should now have the `korekto` command available.
+
+2. `korekto --install`
+
+This will install the following files on your system:
+
+    ~/.config/nvim/korekto.lua
+    ~/.config/nvim/rplugin/ruby/korekto.rb
+    ~/.config/nvim/syntax/korekto.vim
+
+It then runs `nvim -c ':UpdateRemotePlugins|:quit'`.
+
+`korekto.lua` is just an alternate configuration for Neovim.
+If you run `korekto README.md`, what you're in effect running is:
+
+    nvim -u ~/.config/nvim/korekto.lua README.md
+
+This was my way to ensure you have a configuration to work with right away.
+You can review `korekto.lua` to see how to add it you your `init.lua`
+if you wish to have Korekto available when you run `nvim`, but
+it gets complicated to have a `nvim` configuration do all the things.
+As is, `korekto.lua` is pretty good for working with Markdown files.
+
+`syntax/korekto.vim` adds syntax highlighting to your "```korekto" code blocks
+in Markdown.
+
+`rplugin/ruby/korekto.rb` adds the `:Korekto` command to Neovim.
+It gets mapped to `<F9>` in `korekto.lua`.
+This will run `korekto` on the file of your current buffer
+to check your Korekto statements, and will automatically make edits to update
+your statement validation comments.
 
 ## Heap
 
@@ -339,7 +412,7 @@ If the eval returns `true` it proceeds, else it's an error.
 
 TODO
 
-# Scanner
+## Scanner
 
 The default scanner pattern is ':\w+|.'.
 This is good for mostly logographic statements such as found in mathematical formulas:
@@ -354,7 +427,7 @@ This is good for natural language:
 ```ruby
 'Hello World!'.scan(/\w+|\S|\s/).uniq #=> ["Hello", " ", "World", "!"]
 ```
-# Fence
+## Fence
 
 The default fence in a `Markdown` file is `korekto`.
 There may be situations where you'll want `Korekto` to read code fenced as another language,
@@ -363,14 +436,14 @@ You can change the fence to something else, like `abc` for example:
 ```korekto
 ! fence: 'abc'
 ```
-# Section
+## Section
 
 The default section is the basename of the file without the extension.
 You can set the section name as follows:
 ```korekto
 ! section: 'Numbers'
 ```
-# Save and Restore
+## Save and Restore
 
 There are times when you'll want to go on a side track in your proof, but
 then go back to some prior point discarding the side track...
