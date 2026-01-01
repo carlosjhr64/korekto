@@ -35,14 +35,13 @@ require("lazy").setup({
       version = '*' },
     { 'carlosjhr64/with-ruby',
       config = function()
-	vim.g.VimMarkdownMetadataPlugins = 'navigation'
+	vim.g.VimMarkdownMetadataPlugins = 'navigation fold'
       end,
       version = '*' },
   },
 })
 
 -- Markdown
-vim.g.markdown_folding = 1
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
   callback = function()
