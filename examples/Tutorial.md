@@ -90,7 +90,7 @@ To make the install as easy as possible,
 I automated the install best I could on a typical Linux system.
 But you should know what's going on behind the scenes.
 Everything in Korekto is accessible for you to tweak and configure, but
-hopefully I'm giving you something useful right off the start.
+hopefully I'm giving you something useful right from the start.
 
 If you're my target audience, you like:
 
@@ -154,6 +154,9 @@ It gets mapped to `<F9>` in `korekto.lua`.
 This will run `korekto` on the file of your current buffer
 to check your Korekto statements, and will automatically make edits to update
 your statement validation comments.
+
+I'll assume you're reading this tutorial via `korekto --readme` or something
+like `korekto /path-to/examples/Tutorial.md`.
 
 ## Heap
 
