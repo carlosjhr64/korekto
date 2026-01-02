@@ -23,6 +23,8 @@
 * [Patterns](#Patterns)
 * [Support for pattern statements](#Support-for-pattern-statements)
 * [Syntax](#Syntax)
+* [Refinements](#Refinements)
+* [Imports](#Imports)
 * [Scanner](#Scanner)
 * [Fence](#Fence)
 * [Section](#Section)
@@ -161,8 +163,10 @@ like `korekto /path-to/examples/Tutorial.md`.
 ## Heap
 
 `Korekto` keeps a heap of recent (non-pattern)statements to search for matches.
-This heap is limited to a size of 60 by default and does not include imported statements.
-One may re-introduce an old/imported statement into the heap by restating(recalling) it.
+This heap is limited to a size of 60 by default and
+does not include imported statements.
+One may re-introduce an old/imported statement into the heap
+by restating(recalling) it.
 
 ## Statement types
 
@@ -225,7 +229,8 @@ be found in its recent statements heap.
 
 ### P is for Postulate
 
-`P` statements are used to introduce new facts(not derivable from previous statements).
+`P` statements are used to introduce new facts
+(not derivable from previous statements).
 It cannot have any undefined symbols.
 ```korekto
 :if :meat :then :pudding	#P8 How can you have any pudding?
@@ -367,13 +372,15 @@ I like to use `;` for the newline pattern.
 ! .nl {;}
 ```
 The bang `!` at the start of a line tells `Korekto` it's a pattern definition.
-The period at the start of the pattern name means this pattern is not to capture.
+The period at the start of the pattern name
+means this pattern is not to capture.
 Pattern definitions have the following form:
 ```ruby
 %r{^! (?<type>\S+)\s+/(?<pattern>.*)/$}
 /^! (?<type>\S+)\s+\{(?<variables>\S+( \S+})*)\}$/
 ```
-So if you want to capture a number into pattern variables(i,j,k), you could write:
+So if you want to capture a number into pattern variables(i,j,k),
+you could write:
 ```korekto
 ! Number /\d+/
 ! Number {i j k}
@@ -382,7 +389,8 @@ A Reflection axiom like `#A3` above can then be rewritten for numbers as:
 ```korekto
 i=i	#A18 Reflection
 ```
-Although you'll probably want to make a Reflection axiom a bit more general than for just numbers.
+Although you'll probably want to make a Reflection axiom
+a bit more general than for just numbers.
 Demonstrating the use of `!:nl {;}`, map `#M12` above could be rewritten as follows:
 ```korekto
 ! KeyWord /:\w+/
@@ -391,7 +399,8 @@ A&B;A :good :with B	#M19 If A and B, then A good with B.
 ```
 ## Support for pattern statements
 
-If a pattern statement matches the immediately preceding statements(in the heap),
+If a pattern statement matchesl
+the immediately preceding statements(in the heap),
 the matched statements will be used as support for the pattern statement.
 ```korekto
 :x + :x = 2 * :x	#D20
@@ -413,12 +422,36 @@ If the eval returns `true` it proceeds, else it's an error.
 
 ## Refinements
 
-TODO
+Korekto comes with some useful String refinements to be used in syntax rules.
+
+* `balanced?(brackets = '()[]{}')`: checks for balanced brackets
+* `ltight?(*chars)`: no char given has a space on the left
+* `rtight?(*chars)`: no char given has a space on the right
+* `tight?(*chars)`: no char given has a space on either side
+
+The above methods are defined in `Korekto::Refinements`.
+See the next section, Imports, for how to add your own refinements.
+
+## Imports
+
+A Korekto file can import other Korekto files as follows:
+
+    < path-to/Import.md
+
+You'll likely want to define your patterns in the import file.
+Note that imports don't add to the heap...
+You'll need to restate on the current file any required support statement.
+
+If the imported file is a Ruby file(with an ".rb" extension),
+it will be `require`'d into the running Korekto process.
+This is a way for you to define your own String refinements.
+Just package it into `Korekto::Refinements`.
 
 ## Scanner
 
 The default scanner pattern is ':\w+|.'.
-This is good for mostly logographic statements such as found in mathematical formulas:
+This is good for mostly logographic statements
+such as found in mathematical formulas:
 ```ruby
 ':sin[x]^2+:cos[x]^2=1'.scan(/:\w+|./).uniq #=> [":sin", "[", "x", "]", "^", "2", "+", ":cos", "=", "1"]
 ```
@@ -433,7 +466,8 @@ This is good for natural language:
 ## Fence
 
 The default fence in a `Markdown` file is `korekto`.
-There may be situations where you'll want `Korekto` to read code fenced as another language,
+There may be situations where you'll want `Korekto`
+to read code fenced as another language,
 as in the [ABC music notation](ABC.md) example.
 You can change the fence to something else, like `abc` for example:
 ```korekto
@@ -458,12 +492,14 @@ You can use `! save: '<key>'` and `! restore '<key>'` to do that:
 # ...then go back the to saved point as if nothing said.
 ! restore: 'backup'
 ```
-After the `restore`, then statement numbers will continue to increment normally, but
-the statements made after the `save` are gone.
+After the `restore`, then statement numbers will continue to increment normally,
+but the statements made after the `save` are gone.
 
 # Final thoughts
 
 I hope this gives you enough to get started.
+Check out the provided examples where
+I fall into the rabbit how I warned about at the start.
 Feel free to contact me for further help.
 As you'll see in all my projects, there are no issues.
 That's because I write perfect code that never breaks,
