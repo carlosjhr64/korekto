@@ -32,7 +32,7 @@ HELP
 def nvim_config!
   nvim_config = `nvim --headless -c 'echo stdpath("config")' -c 'qa' 2>&1`.strip
   if nvim_config.empty? || !File.directory?(nvim_config)
-    warn 'Missing nvim config directory'
+    warn 'Could not get nvim config directory'
     exit 78 # EX_CONFIG
   end
   nvim_config
@@ -46,14 +46,17 @@ def do_install!
   require 'fileutils'
   FileUtils.cp_r("#{korekto_config}/.", nvim_config)
   system "nvim -c ':UpdateRemotePlugins|:quit'"
-  exit
+  exit 0 # EX_OK
 end
 
 def exec_neovim!(filename)
-  exec "nvim -u ~/.config/nvim/korekto.lua #{filename}" if File.exist?(filename)
+  unless File.exist?(filename)
+    warn "File does not exist: #{filename}"
+    exit 66 # EX_NOINPUT
+  end
 
-  warn "File does not exist: #{filename}"
-  exit 1
+  nvim_config = nvim_config!
+  exec "nvim -u #{nvim_config}/korekto.lua #{filename}"
 end
 
 def exec_readme! = exec_neovim!(dir_join('README.md'))
