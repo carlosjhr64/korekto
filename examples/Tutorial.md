@@ -148,7 +148,7 @@ if you wish to have Korekto available when you run `nvim`, but
 it gets complicated to have a `nvim` configuration do all the things.
 As is, `korekto.lua` is pretty good for working with Markdown files.
 
-`syntax/korekto.vim` adds syntax highlighting to your "```korekto" code blocks
+`syntax/korekto.vim` adds syntax highlighting to your "korekto" code blocks
 in Markdown.
 
 `rplugin/ruby/korekto.rb` adds the `:Korekto` command to Neovim.
