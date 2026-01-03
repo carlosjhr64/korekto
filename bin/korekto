@@ -29,9 +29,13 @@ HELP = <<~HELP.freeze
       cat MARKDOWN.md | korekto
 HELP
 
+def nvim_config_get
+  dir = ENV['XDG_CONFIG_HOME'] || File.expand_path('~/.config')
+  "#{dir}/nvim"
+end
+
 def nvim_config!
-  nvim_config = `nvim --headless -c 'echo stdpath("config")' -c 'qa' 2>&1`.strip
-  if nvim_config.empty? || !File.directory?(nvim_config)
+  unless File.directory?(nvim_config = nvim_config_get)
     warn 'Could not get nvim config directory'
     exit 78 # EX_CONFIG
   end

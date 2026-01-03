@@ -47,6 +47,7 @@ delete_variable
 detect
 detect_statement
 __dir__
+dir
 directory
 dir_join
 dirname
@@ -60,6 +61,7 @@ each
 each_with_index
 empty
 Enumerable
+ENV
 Error
 exec
 exec_neovim
@@ -70,6 +72,7 @@ existential
 exit
 ex_match_heap
 ex_match_statement
+expand_path
 expected_instantiations
 ex_replace
 ex_step
@@ -173,6 +176,7 @@ newvar
 nil
 nlc
 nvim_config
+nvim_config_get
 oldvar
 options
 parse
