@@ -9,7 +9,7 @@ let b:current_syntax = "korekto"
 
 " Definitions:
 syntax match korektoSyntax "^?.*$"
-syntax match korektoHandwave "^~.*$"
+syntax match korektoHandwave "^\~.*$"
 syntax match korektoDefinition "^!.*$"
 syntax match korektoImport "^<.*$"
 syntax match korektoStatement "^[^?~!#][^#]*" contains=korektoKey,korektoCase
