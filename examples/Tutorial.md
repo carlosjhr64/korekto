@@ -499,7 +499,7 @@ but the statements made after the `save` are gone.
 
 I hope this gives you enough to get started.
 Check out the provided examples where
-I fall into the rabbit how I warned about at the start.
+I fall into the rabbit that I warn about at the Intro.
 Feel free to contact me for further help.
 As you'll see in all my projects, there are no issues.
 That's because I write perfect code that never breaks,
