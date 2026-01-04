@@ -143,10 +143,11 @@ If you run `korekto README.md`, what you're in effect running is:
     nvim -u ~/.config/nvim/korekto.lua README.md
 
 This was my way to ensure you have a configuration to work with right away.
-You can review `korekto.lua` to see how to add it you your `init.lua`
+You can review `korekto.lua` to see how to add it to your `init.lua`
 if you wish to have Korekto available when you run `nvim`, but
 it gets complicated to have a `nvim` configuration do all the things.
 As is, `korekto.lua` is pretty good for working with Markdown files.
+It adds vim-wiki style [Navigation](https://github.com/carlosjhr64/with-ruby/blob/main/NAVIGATION.md).
 
 `syntax/korekto.vim` adds syntax highlighting to your "korekto" code blocks
 in Markdown.
