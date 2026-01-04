@@ -41,6 +41,15 @@ require("lazy").setup({
   },
 })
 
+-- ## Right margin
+
+vim.keymap.set('n', '<leader>m',
+                    ':setlocal colorcolumn=80<CR>',
+                    { noremap = true })
+vim.keymap.set('n', '<leader>M',
+                    ':setlocal colorcolumn=<CR>',
+                    { noremap = true })
+
 -- Markdown
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
