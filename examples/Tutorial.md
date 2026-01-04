@@ -29,6 +29,8 @@
 * [Fence](#Fence)
 * [Section](#Section)
 * [Save and Restore](#Save-and-Restore)
+* [Utilities](#Utilities)
+* [Handwaves](#Handwaves)
 
 ## Intro
 
@@ -518,6 +520,14 @@ and then replace it back:
 𝓑𝓍 = (1-𝓍)*𝓍	#A276 Binary balance: 𝓑
 ! replace! TMP 𝓑
 ```
+## Handwaves
+
+TODO: Handwaves is an advanced feature that for now
+I'm just going to point out that's available.
+It's a way to take the last statement(antecedent) read and transform it
+to the next statement(consequent) being read.
+It's best explained by examples, and I'm still working on those.
+
 # Final thoughts
 
 I hope this gives you enough to get started.
