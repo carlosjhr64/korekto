@@ -474,6 +474,10 @@ You can change the fence to something else, like `abc` for example:
 ```korekto
 ! fence: 'abc'
 ```
+Note that from here on down,
+Korekto will be looking for an "abc" fence instead of "korekto".
+So the "korekto" code blocks below will get ignored.
+
 ## Section
 
 The default section is the basename of the file without the extension.
@@ -496,6 +500,24 @@ You can use `! save: '<key>'` and `! restore '<key>'` to do that:
 After the `restore`, then statement numbers will continue to increment normally,
 but the statements made after the `save` are gone.
 
+## Utilities
+
+When working on a proof, you might want Korekto to stop proof reading at
+a particular line in the proof:
+```korekto
+! stop!
+```
+You should try to avoid variable name collisions in you patterns, but
+you may occasionally need to use a pattern variable literally.
+You can temporarily replace the variable with a dummy variable,
+and then replace it back:
+```korekto
+# 𝓑 is being used as a pattern key, so I temporarily replace it:
+! replace! 𝓑 TMP
+# Now I can define 𝓑 in an axiom:
+𝓑𝓍 = (1-𝓍)*𝓍	#A276 Binary balance: 𝓑
+! replace! TMP 𝓑
+```
 # Final thoughts
 
 I hope this gives you enough to get started.
