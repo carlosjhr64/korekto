@@ -10,7 +10,7 @@ class KorektoPlug
   def initialize(nvim)
     @nvim = nvim
     @buf = nvim.get_current_buf
-    @validations = `korekto < #{@buf.name}`.split("\n").map(&:strip)
+    @validations = `korekto -s < #{@buf.name}`.split("\n").map(&:strip)
     @msg = "Korekto! #{VERSION}"
     @filename = @line_number = @code = @title = nil # iteration variables
   end
