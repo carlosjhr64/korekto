@@ -5,7 +5,7 @@
 * [rubygems](https://rubygems.org/gems/korekto)
 
 NOTE: Looking to release version 4 soon in 2026!
-Still working on the examples to be packaged with the gems.
+Still working on the examples to be packaged with the gem.
 Otherwise, I believe the code review is done for this update.
 
 ## Description
