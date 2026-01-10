@@ -20,6 +20,7 @@ module Korekto
     def trace? = @trace
     def scrape? = @scrape
     def warn? = @warn
+    def syntax? = @syntax
   end
   Korekto.trace = false
   Korekto.heap = 60

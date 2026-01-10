@@ -8,7 +8,7 @@ Does not get here #D
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "./bin/korekto -s"
 
   Scenario: Syntax rule
     * Given option "< features/syntax_rule.feature"

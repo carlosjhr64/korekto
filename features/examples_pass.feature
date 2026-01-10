@@ -2,7 +2,7 @@
 Feature: examples_no_edits
 
   Background:
-    * Given command "./bin/korekto"
+    * Given command "./bin/korekto -s"
 
   Scenario: ABC
     * Given option "< examples/ABC.md"

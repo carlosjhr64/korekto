@@ -7,7 +7,7 @@ Feature: No syntax on literal
 ```
 
   Background:
-    * Given command "korekto --trace"
+    * Given command "korekto --trace --syntax"
 
   Scenario: No syntax on literal
     * Given option "< features/no_syntax_on_literal.feature"

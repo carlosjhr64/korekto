@@ -2,7 +2,7 @@
 Feature: examples_pass
 
   Background:
-    * Given command "./bin/korekto"
+    * Given command "./bin/korekto -s"
 
   Scenario: Syntax
     * Given option "< imports/Syntax.md"

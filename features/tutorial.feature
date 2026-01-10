@@ -2,7 +2,7 @@
 Feature: Tutorial
 
   Background:
-    * Given command "./bin/korekto --trace"
+    * Given command "./bin/korekto --trace --syntax"
 
   Scenario: Tutorial.md
     * Given option "< examples/Tutorial.md"

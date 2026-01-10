@@ -2,7 +2,7 @@
 Feature: Imports unchanged
 
   Background:
-    * Given command "korekto --trace"
+    * Given command "./bin/korekto --trace --syntax"
 
   Scenario: Syntax
     * Given option "< imports/Syntax.md | grep '^-:'"

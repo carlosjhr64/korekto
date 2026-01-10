@@ -7,7 +7,7 @@ Does not get here #D
 ```
 
   Background:
-    * Given command "korekto"
+    * Given command "./bin/korekto -s"
 
   Scenario: Boolean syntax rule
     * Given option "< features/boolean_syntax_rule.feature"

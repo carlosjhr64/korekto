@@ -128,7 +128,7 @@ module Korekto
           @statements.heap.swap(tmp)
         end
       when MD_SYNTAX
-        raise Error, 'syntax eval not allowed on STDIN' if @filename == '-'
+        raise Error, 'syntax eval not allowed on STDIN' unless Korekto.syntax? || @filename != '-'
 
         @statements.syntax.push $LAST_MATCH_INFO[:syntax].strip
       when MD_TYPE_PATTERN
