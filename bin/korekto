@@ -11,6 +11,7 @@ HELP = <<~HELP.freeze
   Options:
     -h --help
     -v --version
+    -s --syntax \tAllow syntax eval on STDIN
     --scrape    \tScrape Korekto lines
     --trace     \tShow trace of each line, not just edits and errors
     --install   \tInstalls the korekto neovim ruby plugin
@@ -75,6 +76,7 @@ def handle_options
   require 'help_parser'
   options = HelpParser[Korekto::VERSION, HELP]
   do_exitable!(options)
+  Korekto.syntax = options.syntax?
   Korekto.scrape = options.scrape?
   Korekto.trace  = options.trace?
   Korekto.warn   = options.warn?
