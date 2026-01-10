@@ -14,6 +14,7 @@ class TestKorekto < Test::Unit::TestCase
   def test_class_heap = assert_equal(60, Korekto.heap)
   def test_class_scrape_wut = assert_equal(false, Korekto.scrape?)
   def test_class_warn_wut = assert_equal(false, Korekto.warn?)
+  def test_class_syntax_wut = assert_equal(false, Korekto.syntax?)
   # Tested elsewhere:
   def test_class_run = nil
 
@@ -38,6 +39,12 @@ class TestKorekto < Test::Unit::TestCase
     Korekto.warn = true
     assert_equal(true, Korekto.warn?)
     Korekto.warn = false
+  end
+
+  def test_class_syntax_set
+    Korekto.syntax = true
+    assert_equal(true, Korekto.syntax?)
+    Korekto.syntax = false
   end
 
   # Last, check rubocop and reek
