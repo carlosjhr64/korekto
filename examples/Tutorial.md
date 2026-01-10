@@ -423,6 +423,14 @@ Lines starting with question mark `?`
 tells `Korekto` to `instance_eval` the given `ruby` code on the string.
 If the eval returns `true` it proceeds, else it's an error.
 
+Note that `instance_eval` is not safe for use on untrusted strings.
+Korekto will assume that file imports are safe, but
+will not allow syntax rules to be added from STDIN.
+If you want Korekto to allow syntax rules on the file
+you're reading from the command line,
+you'll need to give it the `--syntax` command line option.
+Note that this is already done by the Korekto plugin for use in Neovim.
+
 ## Refinements
 
 Korekto comes with some useful String refinements to be used in syntax rules.
