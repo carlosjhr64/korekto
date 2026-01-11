@@ -2,12 +2,10 @@
   (\.)           |
   (\w+\.gemspec) |
   (cucumber\.)   |
-  (examples/)    |
   (features/)    |
   (Gemfile)      |
   (History\.)    |
   (img/)         |
-  (imports/)     |
   (notes/)       |
   (sig/)         |
   (test/)        |
