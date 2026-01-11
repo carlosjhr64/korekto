@@ -25,6 +25,24 @@ Gem::Specification.new do |s|
     config/korekto.lua
     config/rplugin/ruby/korekto.rb
     config/syntax/korekto.vim
+    examples/ABC.md
+    examples/Computation.md
+    examples/Dxx.md
+    examples/Neuronet.md
+    examples/Sqrt2.md
+    examples/Squash.md
+    examples/Tutorial.md
+    examples/TwoCube.md
+    examples/index.md
+    imports/Algebra.md
+    imports/Calculus.md
+    imports/Integer.md
+    imports/KorektoMath.md
+    imports/Logic.md
+    imports/Natural.md
+    imports/Rational.md
+    imports/Real.md
+    imports/Syntax.md
     lib/korekto.rb
     lib/korekto/context_search.rb
     lib/korekto/handwaves.rb
