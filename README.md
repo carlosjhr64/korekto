@@ -61,6 +61,7 @@ Usage:
 Options:
   -h --help
   -v --version
+  -s --syntax 	Allow syntax eval on STDIN
   --scrape    	Scrape Korekto lines
   --trace     	Show trace of each line, not just edits and errors
   --install   	Installs the korekto neovim ruby plugin
