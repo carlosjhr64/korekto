@@ -9,9 +9,12 @@ We welcome contributions to this list!
 If you feel someone or something is missing,
 please submit a pull request with the suggested addition.
 
+[Duy NG's Neovim Config](https://tduyng.com/blog/neovim-markdown-notes/)
+for [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim).
+
 Some good math videos:
 
-[An Introduction to Formal Logic](https://www.amazon.com/An-Introduction-to-Formal-Logic/dp/B01M6Z6T1E/)
+[An Introduction to Formal Logic](https://www.amazon.com/gp/video/detail/B0DMNL1Y43)
 with Steve Gimbel, Ph.D. of Gettysburg College
 on Amazon's The Great Courses Signature Collection.
 
