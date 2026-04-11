@@ -1,61 +1,266 @@
--- Minimal Neovim Config for Korekto
-
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
-
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
+-- Leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Setup lazy.nvim
-require("lazy").setup({
-  spec = {
-    { 'projekt0/github-nvim-theme',
-      config = function()
-	vim.cmd.colorscheme('github_light_high_contrast')
-      end,
-      version = '*' },
-    { 'sheerun/vim-polyglot',
-      version = '*' },
-    { 'carlosjhr64/with-ruby',
-      config = function()
-	vim.g.VimMarkdownMetadataPlugins = 'navigation fold'
-      end,
-      version = '*' },
-  },
+-- Margin
+vim.keymap.set('n', "<leader>m",
+                    ":setlocal colorcolumn=80<CR>",
+                    { noremap = true })
+vim.keymap.set('n', "<leader>M",
+                    ":setlocal colorcolumn=<CR>",
+                    { noremap = true })
+
+-- Add plugins
+vim.pack.add({
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/MeanderingProgrammer/render-markdown.nvim",
+  "https://github.com/iamcco/markdown-preview.nvim",
+  "https://github.com/projekt0n/github-nvim-theme",
+  "https://github.com/carlosjhr64/with-ruby",
 })
 
--- ## Right margin
+-- Ensure language parsers used are intalled
+require("nvim-treesitter.config").setup {
+  ensured_installed = {
+    "markdown", "markdown_inline",
+    "bash", "fish",
+    "lua", "ruby",
+  },
+}
 
-vim.keymap.set('n', '<leader>m',
-                    ':setlocal colorcolumn=80<CR>',
-                    { noremap = true })
-vim.keymap.set('n', '<leader>M',
-                    ':setlocal colorcolumn=<CR>',
-                    { noremap = true })
+-- Github theme
+vim.cmd.colorscheme("github_light_high_contrast")
 
--- Markdown
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'markdown',
+-- With-Ruby builtin plugins: "vimwiki" navigation, folding
+vim.g.VimMarkdownMetadataPlugins = "navigation fold"
+
+-- Markdown conceal and fold level, and <F9> mapped to running Korekto.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
   callback = function()
     vim.opt_local.conceallevel = 3
     vim.opt_local.foldlevel = 1
-    vim.keymap.set('n', '<F9>', ':up<CR>:Korekto<CR>', { buffer = true })
+    vim.keymap.set('n', "<F9>", ":up<CR>:Korekto<CR>", { buffer = true })
   end,
 })
+
+-- Render-Markdown configuration
+local renderOpts = {
+	heading = {
+		enabled = true,
+		render_modes = true,
+		sign = true,
+		icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+		position = "overlay",
+		signs = { "󰫎 " },
+		width = "full",
+		left_margin = 0,
+		left_pad = 0,
+		right_pad = 0,
+		min_width = 0,
+		border = false,
+		border_virtual = false,
+		border_prefix = false,
+		above = "▄",
+		below = "▀",
+		backgrounds = {
+			"RenderMarkdownH1Bg",
+			"RenderMarkdownH2Bg",
+			"RenderMarkdownH3Bg",
+			"RenderMarkdownH4Bg",
+			"RenderMarkdownH5Bg",
+			"RenderMarkdownH6Bg",
+		},
+		foregrounds = {
+			"RenderMarkdownH1",
+			"RenderMarkdownH2",
+			"RenderMarkdownH3",
+			"RenderMarkdownH4",
+			"RenderMarkdownH5",
+			"RenderMarkdownH6",
+		},
+	},
+	paragraph = {
+		enabled = true,
+		render_modes = true,
+		left_margin = 0,
+		min_width = 0,
+	},
+	code = {
+		enabled = true,
+		render_modes = true,
+		sign = true,
+		style = "full",
+		position = "left",
+		language_pad = 0,
+		language_name = true,
+		disable_background = { "diff" },
+		width = "full",
+		left_margin = 0,
+		left_pad = 0,
+		right_pad = 0,
+		min_width = 0,
+		border = "thin",
+		above = "▄",
+		below = "▀",
+		highlight = "RenderMarkdownCode",
+		highlight_language = nil,
+		inline_pad = 0,
+		highlight_inline = "RenderMarkdownCodeInline",
+	},
+	dash = {
+		enabled = true,
+		render_modes = true,
+		icon = "─",
+		width = "full",
+		left_margin = 0,
+		highlight = "RenderMarkdownDash",
+	},
+	bullet = {
+		enabled = true,
+		render_modes = true,
+		-- icons = { "●", "○", "◆", "◇" },
+		-- ordered_icons = function(level, index, value)
+		--   value = vim.trim(value)
+		--   local value_index = tonumber(value:sub(1, #value - 1))
+		--   return string.format("%d.", value_index > 1 and value_index or index)
+		-- end,
+		left_pad = 0,
+		right_pad = 0,
+		highlight = "RenderMarkdownBullet",
+	},
+	checkbox = {
+		enabled = true,
+		render_modes = true,
+		position = "inline",
+		unchecked = {
+			icon = "󰄱 ",
+			highlight = "RenderMarkdownUnchecked",
+			scope_highlight = nil,
+		},
+		checked = {
+			icon = "󰱒 ",
+			highlight = "RenderMarkdownChecked",
+			scope_highlight = nil,
+		},
+		custom = {
+			todo = { raw = "[-]", rendered = "󰥔 ", highlight = "RenderMarkdownTodo", scope_highlight = nil },
+		},
+	},
+	quote = {
+		enabled = true,
+		render_modes = true,
+		icon = "▋",
+		repeat_linebreak = false,
+		highlight = "RenderMarkdownQuote",
+	},
+	pipe_table = {
+		enabled = true,
+		render_modes = true,
+		preset = "none",
+		style = "full",
+		cell = "padded",
+		padding = 1,
+		min_width = 0,
+		border = {
+			"┌",
+			"┬",
+			"┐",
+			"├",
+			"┼",
+			"┤",
+			"└",
+			"┴",
+			"┘",
+			"│",
+			"─",
+		},
+		alignment_indicator = "━",
+		head = "RenderMarkdownTableHead",
+		row = "RenderMarkdownTableRow",
+		filler = "RenderMarkdownTableFill",
+	},
+	callout = {
+		note = { raw = "[!NOTE]", rendered = "󰋽 Note", highlight = "RenderMarkdownInfo" },
+		tip = { raw = "[!TIP]", rendered = "󰌶 Tip", highlight = "RenderMarkdownSuccess" },
+		important = { raw = "[!IMPORTANT]", rendered = "󰅾 Important", highlight = "RenderMarkdownHint" },
+		warning = { raw = "[!WARNING]", rendered = "󰀪 Warning", highlight = "RenderMarkdownWarn" },
+		caution = { raw = "[!CAUTION]", rendered = "󰳦 Caution", highlight = "RenderMarkdownError" },
+		-- Obsidian: https://help.obsidian.md/Editing+and+formatting/Callouts
+		abstract = { raw = "[!ABSTRACT]", rendered = "󰨸 Abstract", highlight = "RenderMarkdownInfo" },
+		summary = { raw = "[!SUMMARY]", rendered = "󰨸 Summary", highlight = "RenderMarkdownInfo" },
+		tldr = { raw = "[!TLDR]", rendered = "󰨸 Tldr", highlight = "RenderMarkdownInfo" },
+		info = { raw = "[!INFO]", rendered = "󰋽 Info", highlight = "RenderMarkdownInfo" },
+		todo = { raw = "[!TODO]", rendered = "󰗡 Todo", highlight = "RenderMarkdownInfo" },
+		hint = { raw = "[!HINT]", rendered = "󰌶 Hint", highlight = "RenderMarkdownSuccess" },
+		success = { raw = "[!SUCCESS]", rendered = "󰄬 Success", highlight = "RenderMarkdownSuccess" },
+		check = { raw = "[!CHECK]", rendered = "󰄬 Check", highlight = "RenderMarkdownSuccess" },
+		done = { raw = "[!DONE]", rendered = "󰄬 Done", highlight = "RenderMarkdownSuccess" },
+		question = { raw = "[!QUESTION]", rendered = "󰘥 Question", highlight = "RenderMarkdownWarn" },
+		help = { raw = "[!HELP]", rendered = "󰘥 Help", highlight = "RenderMarkdownWarn" },
+		faq = { raw = "[!FAQ]", rendered = "󰘥 Faq", highlight = "RenderMarkdownWarn" },
+		attention = { raw = "[!ATTENTION]", rendered = "󰀪 Attention", highlight = "RenderMarkdownWarn" },
+		failure = { raw = "[!FAILURE]", rendered = "󰅖 Failure", highlight = "RenderMarkdownError" },
+		fail = { raw = "[!FAIL]", rendered = "󰅖 Fail", highlight = "RenderMarkdownError" },
+		missing = { raw = "[!MISSING]", rendered = "󰅖 Missing", highlight = "RenderMarkdownError" },
+		danger = { raw = "[!DANGER]", rendered = "󱐌 Danger", highlight = "RenderMarkdownError" },
+		error = { raw = "[!ERROR]", rendered = "󱐌 Error", highlight = "RenderMarkdownError" },
+		bug = { raw = "[!BUG]", rendered = "󰨰 Bug", highlight = "RenderMarkdownError" },
+		example = { raw = "[!EXAMPLE]", rendered = "󰉹 Example", highlight = "RenderMarkdownHint" },
+		quote = { raw = "[!QUOTE]", rendered = "󱆨 Quote", highlight = "RenderMarkdownQuote" },
+		cite = { raw = "[!CITE]", rendered = "󱆨 Cite", highlight = "RenderMarkdownQuote" },
+	},
+	link = {
+		enabled = true,
+		render_modes = true,
+		footnote = {
+			superscript = true,
+			prefix = "",
+			suffix = "",
+		},
+		image = "󰥶 ",
+		email = "󰀓 ",
+		hyperlink = "󰌹 ",
+		highlight = "RenderMarkdownLink",
+		wiki = { icon = "󱗖 ", highlight = "RenderMarkdownWikiLink" },
+		custom = {
+			web = { pattern = "^http", icon = "󰖟 " },
+			youtube = { pattern = "youtube%.com", icon = "󰗃 " },
+			github = { pattern = "github%.com", icon = "󰊤 " },
+			neovim = { pattern = "neovim%.io", icon = " " },
+			stackoverflow = { pattern = "stackoverflow%.com", icon = "󰓌 " },
+			discord = { pattern = "discord%.com", icon = "󰙯 " },
+			reddit = { pattern = "reddit%.com", icon = "󰑍 " },
+		},
+	},
+	sign = {
+		enabled = true,
+		highlight = "RenderMarkdownSign",
+	},
+	indent = {
+		enabled = false,
+		render_modes = false,
+		per_level = 2,
+		skip_level = 1,
+		skip_heading = false,
+	},
+}
+
+require("render-markdown").setup(renderOpts)
+
+vim.keymap.set("n", "<leader>um", function()
+	local rm = require("render-markdown")
+	local enabled = require("render-markdown.state").enabled
+	if enabled then
+		rm.disable()
+	else
+		rm.enable()
+	end
+end, { desc = "Toggle Render Markdown" })
+
+-- Markdown preview
+vim.keymap.set("n", "<leader>cp", function()
+	vim.fn["mkdp#util#install"]()
+	vim.cmd("MarkdownPreviewToggle")
+end, { desc = "Markdown preview" })
+
