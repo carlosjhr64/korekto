@@ -19,11 +19,11 @@ Works with [neovim](https://github.com/neovim/neovim).
 This current version of Korekto was tested using:
 * Ruby version: `4.0`
 * Neovim version: `0.12`
-```shell
-$ gem install korekto
-$ korekto --install
-$ ### And if missing:
-$ gem install neovim # Provides neovim-ruby-host
+```sh
+gem install korekto
+korekto --install
+### And if missing:
+gem install neovim # Provides neovim-ruby-host
 ```
 ## Synopsis
 ```korekto
@@ -52,7 +52,7 @@ I'll probably see Chickens.	#C7/I2,P5,P6 Modus ponens
 * [More...](examples/index.md)
 
 ## Help
-```shell
+```console
 $ korekto --help
 # Korekto
 Usage:
