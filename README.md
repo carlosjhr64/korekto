@@ -22,23 +22,23 @@ This current version of Korekto was tested using:
 ```sh
 gem install korekto
 korekto --install
-### And if missing:
+# And if missing:
 gem install neovim # Provides neovim-ruby-host
 ```
 ## Synopsis
 ```korekto
-### Patterns ###
-# 'Hello World!'.scan(/\w+|\S|\s/) #=> ["Hello", " ", "World", "!"]
+#> Patterns
+#> 'Hello World!'.scan(/\w+|\S|\s/) #=> ["Hello", " ", "World", "!"]
 ! scanner: '\w+|\S|\s'
 ! .Newline /\n/
 ! .Newline {;}
 ! Variables /\w+/
 ! Variables {V W}
-### Acceptance patterns ###
+#> Acceptance patterns
 There might be V.	#L1 Let 1: There   might be .
-# /If I see (\w+), then I'll probably see (\w+).\nI see \1\nI'll probably see \2/
+#> /If I see (\w+), then I'll probably see (\w+).\nI see \1\nI'll probably see \2/
 If I see V, then I'll probably see W.;I see V.;I'll probably see W.	#I2 Modus ponens: If I see , then ' ll probably
-### Argument ###
+#> Argument
 There might be Cows.	#S3/L1 Let 1: Cows
 There might be Chickens.	#S4/L1 Let 1: Chickens
 If I see Cows, then I'll probably see Chickens.	#P5

@@ -530,11 +530,9 @@ and then replace it back:
 ```
 ## Handwaves
 
-TODO: Handwaves is an advanced feature that for now
-I'm just going to point out that's available.
-It's a way to take the last statement(antecedent) read and transform it
-to the next statement(consequent) being read.
-It's best explained by examples, and I'm still working on those.
+Handwaves is an advanced feature that takes the last statement(antecedent) read
+and transform it to the next statement(consequent) being read.
+See [Handwaves](Handwaves) for details.
 
 # Final thoughts
 
