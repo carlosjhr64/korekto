@@ -402,7 +402,7 @@ A&B;A :good :with B	#M19 If A and B, then A good with B.
 ```
 ## Support for pattern statements
 
-If a pattern statement matchesl
+If a pattern statement matches
 the immediately preceding statements(in the heap),
 the matched statements will be used as support for the pattern statement.
 ```korekto
