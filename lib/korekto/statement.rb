@@ -97,7 +97,7 @@ module Korekto
     end
 
     def pattern_type_support(follows)
-      support(*follows) if @s.regexp.match?(follows.map(&:to_s).join("\n"))
+      support(*follows) if @s.regexp.match?(follows.join("\n"))
     end
 
     def support(*statements)

@@ -94,7 +94,7 @@ module Korekto
       pattern.gsub_tokens!(@captures)
       rgx = Regexp.new(pattern)
       md = nil
-      return false unless @context.heap.any? { (md = rgx.match it) }
+      return false unless @context.heap.any? { md = rgx.match it }
 
       @captures.push(*md[1..])
       true

@@ -11,10 +11,10 @@ module Korekto
 
     COMBOS_FOR = Hash.new do |hash, limit|
       hash[limit] = (0...limit).to_a
-                               .combination(2)
-                               .flat_map { |i, j| [[i, j], [j, i]] }
-                               .sort_by { |i, j| (i * i) + (j * j) }
-                               .freeze
+                    .combination(2)
+                    .flat_map { |i, j| [[i, j], [j, i]] }
+                    .sort_by { |i, j| (i * i) + (j * j) }
+                    .freeze
     end
     private_constant :COMBOS_FOR
 
