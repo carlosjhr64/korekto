@@ -27,7 +27,7 @@ module Korekto
       raise Error, 'no handwaves found' unless @handwaves.any? do |handwave|
         case handwave
         when /^:/ # Ex Handwave
-          self.statement = statement
+          self.statement = statement.to_s
           self.consequent = @context.antecedent.dup
           ex_handwave?(handwave[1..])
         else
