@@ -44,3 +44,11 @@ c = 2*π*r	#H3
 #> Replace :Alpha with α globally in the antecedent
 α^2 = α*α	#H6
 ```
+
+### Commutation
+
+```korekto
+~ :M/\((\S+) \+ (\S+)\)/|s/\($1 \+ $2\)/($2 + $1)/
+z = k*(ax + by)	#D7
+z = k*(by + ax)	#H8
+```
