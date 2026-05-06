@@ -520,9 +520,7 @@ I'm not familiar enough with the field to give proper credits.
 The explanation to support the Kelly Criterion I've seen
 are based on using logs, which is equivalent, but
 the rational seems to be different.
-The proof given here is my own work, and
-my "Kelly Added Bet" seems to go against
-[Proebsting's paradox](https://en.wikipedia.org/wiki/Proebsting%27s_paradox).
+The proof given here is my own work.
 The YouTube video that got me started on this work was:
 
 >> [Kelly Criterion:](https://www.youtube.com/watch?v=x9EuFSTnXOE)
