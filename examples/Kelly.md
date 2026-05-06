@@ -32,14 +32,15 @@ But here I distinguish among:
 * Left operand is defined as the right operand in context: `::`
 * Left operand is assigned the value of the right operand: `:=`
 
-Furthermore, `::` and `:=` can instantiate the left operand.
+Furthermore, ` and `:=` can instantiate the left operand.
+And `::` can instantiate the entire statement.
 
 ## Instantiators
 
     :Real{x}     # ℝ
     1 :: x / x
     0 :: x - x
-    :Fraction{x} :: :Real{x}{|x| 0 < x < 1 }
+    :Fraction{x} :: :Real{x}{ 0 < x < 1 }
     :Postive{x}  :: :Real{x}{ x > 0 }
     :Integer{i}  # ℤ
     :Number{i}   :: :Integer{i}{ i > 0 }
@@ -103,7 +104,7 @@ Translate prediction market's "Yes" vs "No" to `w`(and vice-versa):
 Translate money-line odds to `w`:
 
     :if l=1
-      :Real{:money}{|:money| :abs[:money] :>= 100}
+      :Real{:money}{:abs[:money] :>= 100}
       :if :Positive{:money}
         :underdog :: :money
         :total :: :underdog + 100
