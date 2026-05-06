@@ -4,6 +4,7 @@ Examining Kelly bets in excruciating detail.
 
 ## Abstract
 
+TODO: THIS CAN'T BE RIGHT... LOOKING FOR THE ERROR.
 The additional Kelly bet when odds improve is:
 
       B₊ = Bₖ - B₀(1 - w₀/w)
