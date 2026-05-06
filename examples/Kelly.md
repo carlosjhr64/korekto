@@ -37,14 +37,14 @@ And `::` can instantiate the entire statement.
 
 ## Instantiators
 
-    :Real{x}     # ℝ
+    :Real{x}     # ℝ choose x when instantiating
     1 :: x / x
     0 :: x - x
-    :Fraction{x} :: :Real{x}{ 0 < x < 1 }
-    :Postive{x}  :: :Real{x}{ x > 0 }
-    :Integer{i}  # ℤ
-    :Number{i}   :: :Integer{i}{ i > 0 }
-    :Big{i}      :: :Integer{i}{ i :>> 1 }
+    :Fraction{x} :: :Real{x : 0 < x < 1 }
+    :Postive{x}  :: :Real{x : x > 0 }
+    :Integer{i}  # ℤ choose i when instantiating
+    :Number{i}   :: :Integer{i : i > 0 }
+    :Big{i}      :: :Integer{i : i :>> 1 }
 
 ## Probabilites `p` and `q`
 
@@ -104,7 +104,7 @@ Translate prediction market's "Yes" vs "No" to `w`(and vice-versa):
 Translate money-line odds to `w`:
 
     :if l=1
-      :Real{:money}{:abs[:money] :>= 100}
+      :Real{:money : :abs[:money] :>= 100}
       :if :Positive{:money}
         :underdog :: :money
         :total :: :underdog + 100
