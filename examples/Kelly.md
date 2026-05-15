@@ -351,7 +351,6 @@ So we require `D[r,f]=0`:
 
 ## The kicker bet
 
-   
     :Positive{B₀}     # A pre-existing bet
     :Positive{B₊}     # The additional bet to be determined
     B :: B₀ + B₊      # The total bet
@@ -388,7 +387,7 @@ treat the total bet as a single bet.
       # So I asked Google's Gemini to solve for B₊! :))
       # Turns out we can actually solve for the total bet B:
 
-      B = S(p - qB/(w₀B₀ + w₊B₊))                                # Restore B
+      B = S(p - qB/(w₀B₀ + w₊B₊))   # Swap back in B instead of B₀+B₊
       B/S = p - qB/(w₀B₀ + w₊B₊)                                 # /S
       qB/(w₀B₀ + w₊B₊) = p - B/S
       (w₀B₀ + w₊B₊)/qB = 1/(p - B/S)                             # Invert
@@ -435,11 +434,86 @@ treat the total bet as a single bet.
       B = (K + √[K² - 4C])/2                                          #
       B = (Sf₊ + δB₀ + √[(Sf₊ + δB₀)² - 4SpδB₀])/2                    #
       B = (S(p - q/w₊) + (1 - w₀/w₊)B₀ +                              #
-          √[(S(p - q/w₊) + (1 - w₀/w₊)B₀)² - 4(Sp(1 - w₀/w₊)B₀)])/2   #                                                     #
+          √[(S(p - q/w₊) + (1 - w₀/w₊)B₀)² - 4(Sp(1 - w₀/w₊)B₀)])/2   #
       #################################################################
 
-      B₊ = B - B₀
+      # Given the total bet,
+      # we deduct the preexisting bet to get the additional bet
+      ###############
+      B₊ = B - B₀   #
+      ###############
     :end
+
+## Exploring the kicker bet
+
+It's obvious what happens when there's no previous bet:
+
+    :if B₀=0
+      B₊ = B - B₀ = B - 0
+         = B
+      K :: Sf₊ + δB₀ = Sf₊ + δ0
+        = Sf₊
+      C :: SpδB₀ = Spδ0
+        = 0
+      B² - KB + C = 0
+      B² - Sf₊B + 0 = 0
+      B² = Sf₊B
+      ###########
+      B = Sf₊   # B is the Kelly bet given w₊
+      ###########
+    :end
+
+Does the model say to bet extra when `w₊=w₀`!?
+
+    :if w₊=w₀
+      δ :: 1 - w₀/w₊ = 1 - 1
+        = 0
+      K :: Sf₊ + δB₀ = Sf₊ + 0B₀
+        = Sf₊
+      C :: SpδB₀ = Sp0B₀
+        = 0
+      B² - KB + C = 0
+      B² - Sf₊B + 0 = 0
+      B² = Sf₊B
+      B = Sf₊
+      B₊ = B - B₀
+      f₀ :: p - q/w₀      # The Kelly factor for w₀
+      :if B₀=Sf₀          # If B₀ was a Kelly bet of S
+          f₀ = p - q/w₊   # w₊=w₀
+          f₀ = f₊
+          B₀ = Sf₊
+             = B
+          B₊ = B - B
+          B₊ = 0
+      :end
+    :end
+
+So normally you would not increase your bet unless the odds improve.
+If after you place your bet, your bankroll increases though,
+you are justified to increase your bet accordingly.
+
+## Credits
+
+The YouTube video got me started on this overview:
+
+* [Kelly Criterion...](https://www.youtube.com/watch?v=x9EuFSTnXOE) by [Luck by Numbers](https://www.youtube.com/@LuckbyNumbers)
+
+Gemini gave valuable help in solving for `B₊`:
+
+* Google's [Gemini](https://gemini.google.com/app)
+
+The "Kelly criterion" is attributed to Larry Kelly Jr.:
+
+* [Kelly criterion](https://en.wikipedia.org/wiki/Kelly_criterion)
+
+I've spent over $100 in books trying to verify my solutions to the kicker bet,
+but was unable to see anything that made sense(or was readable) to me.
+And Gemini(Google's AI) was hallucinating sources.
+People who very likely would have worked on this:
+
+* [Edward O. Thorp](https://en.wikipedia.org/wiki/Edward_O._Thorp)
+* Edmund Noon's [Extending Kelly...](https://www.doc.ic.ac.uk/~wjk/publications/noon-2014.pdf)
+* Stewart N. Ethier.'s [The Doctrine of Chances](https://www.amazon.com/Doctrine-Chances-Probabilistic-Probability-Applications-ebook/dp/B00DWKPJRY/)
 
 ## Bloopers?
 
