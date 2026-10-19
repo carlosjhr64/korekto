@@ -4,9 +4,13 @@
 * [github](https://www.github.com/carlosjhr64/korekto)
 * [rubygems](https://rubygems.org/gems/korekto)
 
-NOTE: Looking to release version 4 soon in 2026!
-Still working on the examples to be packaged with the gem.
-Otherwise, I believe the code review is done for this update.
+NOTE: So I thought I'd have a release version in 2026...
+But I'm old and definitely slowing down.
+I believe the code is done and works.
+What's missing is a good set of patterns that are generally useful.
+In the interim, AI coding agents have become amazing and
+I'm not giving up on this project.
+Hang on...  This thing it going to be AWESOME!
 
 ## Description
 
